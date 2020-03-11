@@ -1,0 +1,8 @@
+name: 'Talent Manager for Schools'
+description: 'Custom theme made for Talent Manager for Schools'
+author: genuineq
+homepage: www.genuineq.com
+code: zanor-mdb-loaded
+require:
+    - RainLab.Pages
+    - RainLab.Blog

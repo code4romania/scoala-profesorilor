@@ -1,0 +1,12 @@
+title: Courses
+modelClass: Genuineq\Courses\Models\Course
+list: $/genuineq/courses/models/course/columns.yaml
+recordUrl: 'genuineq/courses/courses/update/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 20
+showSetup: true
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

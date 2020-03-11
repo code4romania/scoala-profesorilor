@@ -1,0 +1,154 @@
+1.0.1: 'First version of SiteSearch'
+1.0.2: 'Added experimental CMS pages results provider'
+1.0.3: 'Added missing component'
+1.0.4:
+    - 'Added support for RadiantWeb.ProBlog'
+1.0.5:
+    - 'Moved configuration to the backend'
+1.0.6:
+    - 'Fixed hardcoded url in pagination'
+1.0.7:
+    - 'Add function for getting last page number (Thanks to vojtasvoboda)'
+1.0.8:
+    - 'Add cs_CZ locale (Thanks to vojtasvoboda)'
+1.0.9:
+    - 'Added support for ArrizalAmin.Portfolio plugin'
+1.0.10:
+    - 'Removed unused component'
+1.1.0:
+    - Added support for translated contents in RainLab.Pages, ArrizalAmin.Portfolio and RadiantWeb.ProBlog
+    - Fixed bug where RainLab.Pages results were displayed twice
+    - Honor disabled plugins setting
+    - Generate absolute URLs in search results by default
+1.1.1:
+    - Added optimized siteSearchInclude component for cms pages search
+1.1.2:
+    - Fixed backend permissions
+1.1.3:
+    - Added ru_RU locale (Thanks to mokeev1995)
+1.2.1:
+    - 'Added support for Feegleweb.Octoshop (Thanks to billyzduke)'
+    - Refactored search providers and results page
+1.2.2:
+    - 'Minor bugfix in Feegleweb.Octoshop settings page translation'
+1.2.3:
+    - 'Fixed bug where the search results sometimes broke the page layout'
+1.2.4:
+    - 'Fixed bug where unavailable thumbnails lead to an error'
+1.2.5:
+    - 'Fixed bug where the provider badge is not displayed for custom search providers'
+1.2.6:
+    - 'Added support for Responsiv.Showcase (Thanks to MichiReich)'
+1.2.7:
+    - 'Fixed bug where custom url settings were ignored in search results for some providers'
+1.2.8:
+    - 'Added support for viewBag properties in RainLab.Pages'
+1.2.9:
+    - 'Added support for static page component hosts'
+1.2.10:
+    - 'Added support for multiple variables in Rainlab.Blog urls (Thanks to graker)'
+1.2.11:
+    - 'Optimized handling of multibyte strings'
+1.2.12:
+    - 'Added support for Jiri.Jkshop'
+1.2.13:
+    - 'Minor bugfixes for marked queries in search results and Rainlab.Blog provider (Thanks to graker)'
+1.2.14:
+    - 'Fixed bug in Jiri.JKShop provider'
+1.2.15:
+    - 'Added a new meta property for search results (thanks to cracki)'
+1.2.16:
+    - 'Added Persian (Farsi) translations (thanks to cracki)'
+1.2.17:
+    - 'Added support for Indikator.News (thanks to gergo85)'
+1.2.18:
+    - 'Fixed bug where titles of static pages where not searched (thanks to beenen445)'
+1.2.19:
+    - 'Added support for OFFLINE.SnipcartShop'
+1.2.20:
+    - 'Added support for VojtaSvoboda.Brands (thanks to vojtasvoboda)'
+1.2.21:
+    - 'Added Portuguese translations (thanks to ribsousa)'
+1.2.22:
+    - 'Fixed Portuguese translations'
+1.2.23:
+    - 'Fixed support for translated Rainlab.Blog contents'
+1.2.24:
+    - 'Added composer.json to allow loading plugin as dependency (thanks to adduc)'
+1.2.25:
+    - 'Fixed bug that sometimes lead to broken html in search results (thanks to graker)'
+1.2.26:
+    - 'Exclude hidden static pages from search results (thanks to plyusninva)'
+1.2.27:
+    - 'Added support for Graker.PhotoAlbums (thanks to graker)'
+1.2.28:
+    - 'Added new result.identifier property'
+1.2.29:
+    - 'Optimized thumbnail generation for Graker.PhotoAlbums results (thanks to graker)'
+1.2.30:
+    - The searchResults component's resultsCollection is now publically accessible
+1.2.31:
+    - Added model property for each search result to retreive the original model the result was generated from
+1.2.32:
+    - 'Added support for custom ResultsProvider classes'
+1.2.33:
+    - 'Fix the use of multiple custom ResultsProvider for a plugin'
+1.3.1:
+    - 'Added new searchInput component with search-as-you-type feature'
+1.3.2:
+    - 'Fixed bug in AutoCompleteComponent'
+1.3.3:
+    - !!! All results are now returned with a relative URL to prevent problems with translated contents. Make sure to pass your result.url throught the "app" filter if you are using your own search result partials
+1.3.4:
+    - Fixed undefined index error when a static page doesn't have a title set
+1.3.5:
+    - Added ability to edit the user's query before searching
+1.3.6:
+    - !!! Using RadiantWeb.ProBlog's internal settings to get the correct parent page for a blog post result. This enables support for multiple blogs on the same website. If your blog search results have wrong URLs after this update make sure to configure your default page for rendering blog posts via the ProBlog backend settings.
+1.3.7:
+    - Added the ability to add age penalties to search results. This can be used to show newer results higher up in your search results.
+1.3.8:
+    - Optimized support for multiple SearchInput components on a single page.
+1.3.9:
+    - Added Chinese language support (thanks to Ckend)
+1.3.10:
+    - Fixed link to search result in default results partial (thanks to wizzard94)
+1.3.11:
+    - Trim query before searching
+1.3.12:
+    - Stability improvements
+1.3.13:
+    - Pre-populate search query in searchInput field
+1.3.14:
+    - Include placeholders on Rainlab.Pages pages in search results
+1.3.15:
+    - Catch invalid markup errors when searching RainLab.Pages
+1.3.16:
+    - Only search RainLab.Blog contents of current locale
+1.3.17:
+    - Fixed pagination links when using RainLab.Translate
+1.3.18:
+    - Updated persian translations (thanks to @sajjad-ser)
+1.3.19:
+    - Added finnish translations (thank to @mediaclinic)
+1.3.20:
+    - Added bulgarian translations (thank to @NGavanozov)
+1.3.21:
+    - Fixed RainLab.Blog published_at date handling
+1.3.22:
+    - Fixed problem with queries that contain only spaces
+1.4.0:
+    - 'SiteSearch can now log all search queries. Enable via backend settings.'
+1.4.1:
+    - 'Minor bugfixes'
+    - create_offline_sitesearch_query_logs.php
+1.4.2:
+    - 'Added User-Agent to list view'
+1.4.3:
+    - 'Fixed bug where empty queries resulted in an Exception' 
+1.4.4:
+    - 'Optimized support for cms pages search: Your Twig markup is now completely rendered and searched!'
+1.4.5:
+    - 'Use meta_title for RainLab.Pages results if available'
+1.4.6:
+    - 'Made getAgePenalty method static so it can be re-used in simple Event providers'

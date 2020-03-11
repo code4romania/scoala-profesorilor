@@ -1,0 +1,72 @@
+title = "TMS - Categorie"
+url = "/tms-categorie/:slug/:page?"
+layout = "offline"
+is_hidden = 0
+
+[builderList categoriesList]
+modelClass = "Genuineq\Courses\Models\Category"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "name"
+noRecordsMessage = "No records found"
+detailsPage = "tms-categorie"
+detailsKeyColumn = "slug"
+detailsUrlParameter = "slug"
+recordsPerPage = 8
+pageNumber = "{{ :page }}"
+==
+<?php
+    use Genuineq\Courses\Models\Category;
+
+    function onStart()
+    {
+        /* Extract all the courses of the selected category. */
+        $this['courses'] = Category::whereSlug($this->param('slug'))->first()->courses()->paginate(12);
+    }
+?>
+==
+<!--Intro Section-->
+{% partial "carousel-half-page" %}
+<!--/.Intro Section-->
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-sm-12">
+
+            <!--Search Form-->
+            {% partial "search-form" %}
+            <!--/.Search Form-->
+
+            <!--Courses Section-->
+            <h5 class="mb-3 font-weight-bold">{{ 'category.courses.title'|_ }}</h5>
+
+            {% partial "course-grid"
+                courses=courses
+                detailsPage='tms-curs'
+                detailsKeyColumn='slug'
+                detailsUrlParameter='slug'
+                pagination=false
+                rawPagination=true
+            %}
+            <!--/.Courses Section-->
+
+            <!--Separator-->
+            <hr class="my-5 bg-dark">
+            <!--/.Separator-->
+
+            <!--Categories Section-->
+            <h5 class="mb-3 font-weight-bold">{{ 'category.categories.title'|_ }}</h5>
+
+            {% partial "category-grid"
+                categories=categoriesList.records
+                detailsPage=categoriesList.detailsPage
+                detailsKeyColumn=categoriesList.detailsKeyColumn
+                detailsUrlParameter=categoriesList.detailsUrlParameter
+                pagination=false
+                rawPagination=false
+            %}
+            <!--/.Categories Section-->
+
+        </div>
+    </div>
+</div>

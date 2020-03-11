@@ -1,0 +1,113 @@
+title = "TMS - Curs"
+url = "/tms-curs/:slug"
+layout = "offline"
+is_hidden = 0
+
+[builderDetails]
+modelClass = "Genuineq\Courses\Models\Course"
+identifierValue = "{{ :slug }}"
+modelKeyColumn = "slug"
+displayColumn = "name"
+notFoundMessage = "Record not found"
+==
+<?php
+    function onStart()
+    {
+        $this->addCss('assets/css/carousel-multiple-courses.css');
+    }
+?>
+==
+{% set course = builderDetails.record %}
+{% set supplier = builderDetails.record.supplier %}
+
+<!--Title Section-->
+<section class="py-4" style="background-color: {{ course.color }} !important;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-6" >
+                <h2 class="text-white font-weight-bold">
+                    {{ course.name }}
+                </h2>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/.Title Section-->
+
+<!--Accredited Section-->
+<section class="py-3 bg-white">
+    <div class="container">
+        <div class="row align-middle">
+            <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+                {% if 1 == course.accredited %}
+                    <p class="my-1"><img class="mr-1" src="{{ 'assets/img/svg/b-acknowledged.svg'|theme }}" alt="">  {{ 'course.acknowledged'|_ }}</p>
+                {% else %}
+                    <p class="my-1"><img class="mr-1" src="{{ 'assets/img/svg/b-unacknowledged.svg'|theme }}" alt="">  {{ 'course.unacknowledged'|_ }}</p>
+                {% endif %}
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+                <p class="my-1"><img class="mr-1 my-auto" src="{{ 'assets/img/svg/calendar.svg'|theme }}" alt=""> {{ course.startDate() }} <span class="mx-1">&ndash;</span> {{ course.endDate() }}</p>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+                <p class="my-1 font-weight-bold">{{ course.credits }} {{ 'course.credits'|_ }} <span class="mx-1">&vert;</span> {{ course.price }} {{ 'general.coin'|_ }}</p>
+            </div>
+
+            <div class="col-auto ml-auto">
+                <a href="#" class="btn btn-sm btn-success z-depth-0 rounded m-0" type="button">Sign Up</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/.Accredited Section-->
+
+<!--Description Section-->
+<section class="py-3 bg-transparent">
+    <div class="container">
+        <div class="row align-middle">
+            <div class="col-12 col-sm-12 col-md-7 col-lg-8">
+                <h4 class="mb-3 font-weight-bold">{{ 'course.description-title'|_ }}</h4>
+                <small>{{ course.description }}</small>
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-5 col-lg-4">
+                <h4 class="mb-3 pt-3 pt-md-0 pt-lg-0 font-weight-bold">{{ 'course.skills-title'|_ }}</h4>
+                <ul>
+                    {% for skill in course.skills %}
+                        <li><small>{{ skill.name }} &colon; {{ skill.description }}</small></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/.Description Section-->
+
+<!--Supplier Section-->
+<section class="py-3 bg-transparent">
+    <div class="container">
+        <div class="row align-middle">
+            <div class="col-12 col-sm-12 col-md-7 col-lg-8">
+                <h4 class="mb-3 font-weight-bold">{{ 'course.supplier-title'|_ }}</h4>
+                <p class="font-weight-bold">{{ course.supplier.name }}</p>
+                <small>{{ course.supplier.description }}</small>
+            </div>
+
+            <div class="col-12">
+                <hr class="my-5 bg-dark">
+            </div>
+
+            <div class="col-12">
+                {% partial "carousel-multiple-courses"
+                    courses=course.supplier.courses
+                    detailsPage='tms-curs'
+                    detailsKeyColumn='slug'
+                    detailsUrlParameter='slug'
+                %}
+        	</div>
+
+        </div>
+    </div>
+</section>
+<!--/.Supplier Section-->

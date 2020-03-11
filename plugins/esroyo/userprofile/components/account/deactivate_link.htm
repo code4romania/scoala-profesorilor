@@ -1,0 +1,30 @@
+<a
+    href="javascript:;"
+    onclick="$('#accountDeactivateForm').toggle()"
+    class="btn btn-warning pull-left"
+>
+    {{ _('deactivate_account') }}
+</a>
+
+<div class="clearfix"></div>
+<div id="accountDeactivateForm" style="display: none">
+    {{ form_ajax('onDeactivate') }}
+        <hr />
+        <h3>{{ _('deactivate_account_title') }}</h3>
+        <p>
+            {{ _('deactivate_account_description') }} 
+        </p>
+        <div class="form-group">
+            <label for="accountDeletePassword">{{ _('deactivate_account_password') }}</label>
+            <input name="password" type="password" class="form-control" id="accountDeletePassword" />
+        </div>
+        <button type="submit" class="btn btn-danger">
+            {{ _('deactivate_account_button') }} 
+        </button>
+        <a
+            href="javascript:;"
+            onclick="$('#accountDeactivateForm').toggle()">
+            {{ _('deactivate_account_regret') }}
+        </a>
+    {{ form_close() }}
+</div>

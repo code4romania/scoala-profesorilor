@@ -1,0 +1,94 @@
+description = "Displays a half page carousel."
+
+[viewBag]
+==
+
+{% put stypes %}
+    <script src="{{ [
+        'assets/css/carousel-half-page.css',
+    ]|theme }}"></script>
+{% endput %}
+
+<!--Carousel Wrapper-->
+<div id="carousel-half-page" class="carousel slide carousel-fade white-text" data-ride="carousel" data-interval="5000" data-touch="true">
+    <!--Indicators-->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-half-page" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-half-page" data-slide-to="1"></li>
+        <li data-target="#carousel-half-page" data-slide-to="2"></li>
+    </ol>
+    <!--/.Indicators-->
+
+    <!--Slides-->
+    <div class="carousel-inner" role="listbox">
+
+        <!-- First slide -->
+        <div class="carousel-item active view hm-black-light" style="background-image: url({{ 'carousel-slide-1.jpg'|media }}); background-repeat: no-repeat; background-size: cover; background-position: center;">
+            <!-- Caption -->
+            <div class="full-bg-img flex-center white-text">
+                <ul class="animated fadeIn col-md-12">
+                    <li>
+                        <h3 class="mt-4 mb-5 font-bold">{{ 'carousel.firstSlideTitle'|_ }}</h3>
+                    </li>
+                    <li>
+                        <a href="{{ 'talent-manager-schools'|page }}" class="btn btn-success rounded" rel="nofollow">{{ 'carousel.firstSlideBtnText'|_ }}</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.Caption -->
+
+        </div>
+        <!--/.First slide-->
+
+        <!-- Second slide -->
+        <div class="carousel-item view hm-black-light" style="background-image: url({{ 'carousel-slide-2.jpg'|media }}); background-repeat: no-repeat; background-size: cover; background-position: center;">
+
+            <!-- Caption -->
+            <div class="full-bg-img flex-center white-text">
+                <ul class="animated fadeIn col-md-12">
+                    <li>
+                        <h3 class="mt-4 mb-5 font-bold">{{ 'carousel.secondSlideTitle'|_ }}</h3>
+                    </li>
+                    <li>
+                        <a href="{{ 'despre-program'|page }}" class="btn btn-success rounded" rel="nofollow">{{ 'carousel.secondSlideBtnText'|_ }}</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.Caption -->
+
+        </div>
+        <!--/.Second slide -->
+
+        <!-- Third slide -->
+        <div class="carousel-item view hm-black-slight" style="background-image: url({{ 'carousel-slide-3.jpg'|media }}); background-repeat: no-repeat; background-size: cover; background-position: center;">
+
+            <!-- Caption -->
+            <div class="full-bg-img flex-center white-text">
+                <ul class="animated fadeIn col-md-12">
+                    <li>
+                        <h3 class="mt-4 mb-5 font-bold">{{ 'carousel.thirdSlideTitle'|_ }}</h3>
+                    </li>
+                    <li>
+                        <a href="{{ 'despre-program'|page }}" class="btn btn-success rounded" rel="nofollow">{{ 'carousel.thirdSlideBtnText'|_ }}</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.Caption -->
+
+        </div>
+        <!--/.Third slide-->
+    </div>
+    <!--/.Slides-->
+
+    <!--Controls-->
+    <a class="carousel-control-prev" href="#carousel-half-page" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">{{ 'carousel.previous'|_ }}</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel-half-page" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">{{ 'carousel.next'|_ }}</span>
+    </a>
+    <!--/.Controls-->
+</div>
+<!--/.Carousel Wrapper-->

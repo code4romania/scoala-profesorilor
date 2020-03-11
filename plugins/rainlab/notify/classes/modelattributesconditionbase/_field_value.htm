@@ -1,0 +1,107 @@
+<?php
+    $attribute = $formModel->subcondition;
+    $controlType = $formModel->getValueControlType();
+?>
+<?php if ($controlType == 'text'): ?>
+
+    <input
+        type="text"
+        name="<?= $field->getName() ?>"
+        id="<?= $field->getId() ?>"
+        value="<?= e($field->value) ?>"
+        class="form-control"
+        autocomplete="off"
+        maxlength="255"
+    />
+
+<?php elseif ($controlType == 'dropdown'): ?>
+    <?php
+        $fieldOptions = $formModel->getValueDropdownOptions();
+    ?>
+    <select
+        id="<?= $field->getId() ?>"
+        name="<?= $field->getName() ?>"
+        class="form-control custom-select">
+        <?php foreach ($fieldOptions as $value => $option): ?>
+            <option
+                <?= $field->isSelected($value) ? 'selected="selected"' : '' ?>
+                value="<?= $value ?>"><?= e(trans($option)) ?></option>
+        <?php endforeach ?>
+    </select>
+
+<?php elseif ($controlType == 'multi_value'): ?>
+    <?php
+        $selectedRecords = $formModel->listSelectedReferenceRecords();
+        $hasData = $selectedRecords->count();
+    ?>
+    <div
+        class="condition-multi-value"
+        data-control="condition-multivalue"
+        data-data-locker="#<?= $field->getId() ?>">
+
+        <div class="filter-list list-flush">
+            <?= $searchWidget->render() ?>
+            <?= $listWidget->render() ?>
+        </div>
+
+        <label>Selected Records</label>
+        <div class="added-filter-list list-preview">
+            <div class="control-list">
+                <table class="table data">
+                    <tbody data-added-records>
+                        <?php if ($hasData): ?>
+                            <?php foreach ($selectedRecords as $record): ?>
+                                <tr data-record-key="<?= e($record->getKey()) ?>">
+                                    <td style="width: 10px">
+                                        <a href="javascript:;" data-multivalue-remove-record>
+                                            <span class="list-badge badge-default">
+                                                <i class="icon-minus"></i>
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <?= e($formModel->getReferencePrimaryColumn($record)) ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
+                        <?php endif ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <input
+            type="hidden"
+            name="<?= $field->getName() ?>"
+            id="<?= $field->getId() ?>"
+            value="<?= e($field->value) ?>"
+        />
+
+        <script type="text/template" data-empty-record-template>
+            <tr class="no-data" data-no-record-data>
+                <td colspan="100" class="nolink">
+                    <p class="no-data">
+                        No records added
+                    </p>
+                </td>
+            </tr>
+        </script>
+
+        <script type="text/template" data-record-template>
+            <tr data-record-key="{{ key }}">
+                <td style="width: 10px">
+                    <a href="javascript:;" data-multivalue-remove-record>
+                        <span class="list-badge badge-default">
+                            <i class="icon-minus"></i>
+                        </span>
+                    </a>
+                </td>
+                <td>
+                    {{value}}
+                </td>
+            </tr>
+        </script>
+
+    </div>
+
+<?php endif ?>

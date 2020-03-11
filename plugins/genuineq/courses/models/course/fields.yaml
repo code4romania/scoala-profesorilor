@@ -1,0 +1,79 @@
+fields:
+    name:
+        label: 'genuineq.courses::lang.course.label.name'
+        span: left
+        type: text
+    slug:
+        label: 'genuineq.courses::lang.course.label.slug'
+        span: right
+        preset:
+            field: name
+            type: ''
+        type: text
+    start_date:
+        label: 'genuineq.courses::lang.course.label.date-start'
+        mode: datetime
+        span: left
+        type: datepicker
+    end_date:
+        label: 'genuineq.courses::lang.course.label.date-end'
+        mode: datetime
+        span: right
+        type: datepicker
+    accredited:
+        label: 'genuineq.courses::lang.course.label.accredited'
+        span: left
+        placeholder: asdasd
+        cssClass: my-auto
+        type: checkbox
+        comment: 'genuineq.courses::lang.course.comment.accredited'
+    credits:
+        label: 'genuineq.courses::lang.course.label.credits'
+        span: auto
+        disabled: 1
+        dependsOn: {  }
+        trigger:
+            action: enable
+            field: accredited
+            condition: checked
+        type: number
+    address:
+        label: 'genuineq.courses::lang.course.label.address'
+        size: small
+        span: full
+        type: richeditor
+    duration:
+        label: 'genuineq.courses::lang.course.label.duration'
+        span: left
+        type: number
+    price:
+        label: 'genuineq.courses::lang.course.label.price'
+        span: right
+        type: number
+    description:
+        label: 'genuineq.courses::lang.course.label.description'
+        size: large
+        span: full
+        type: richeditor
+    categories:
+        label: 'genuineq.courses::lang.course.label.categories'
+        nameFrom: name
+        descriptionFrom: description
+        span: left
+        type: relation
+    skills:
+        label: 'genuineq.courses::lang.course.label.skills'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+    supplier:
+        label: 'genuineq.courses::lang.course.label.supplier'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+    color:
+        label: 'genuineq.courses::lang.course.label.color'
+        span: auto
+        type: colorpicker

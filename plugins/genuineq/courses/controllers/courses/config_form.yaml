@@ -1,0 +1,10 @@
+name: Courses
+form: $/genuineq/courses/models/course/fields.yaml
+modelClass: Genuineq\Courses\Models\Course
+defaultRedirect: genuineq/courses/courses
+create:
+    redirect: 'genuineq/courses/courses/update/:id'
+    redirectClose: genuineq/courses/courses
+update:
+    redirect: genuineq/courses/courses
+    redirectClose: genuineq/courses/courses

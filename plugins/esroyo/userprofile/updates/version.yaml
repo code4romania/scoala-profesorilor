@@ -1,0 +1,16 @@
+1.0.1: First version of User Profile
+1.0.2: Fix error when no profile fields are configured (reported by Jack Schneider) 
+1.0.3: Add properties to configure account/forgot-password URLs in the Menu User Widget component
+1.0.4:
+  - Fix SQL error on user column creation (reported by Kevin Vermeulen)
+  - Add some validation for the user profile field name
+1.0.5: Fix 'menuUserWidget' component properties access
+1.0.6: Fix 'menuUserWidget' component properties access
+1.0.7: Better tab id attr creation (contributed by kamel <cracki@gmail.com>)
+1.0.8:
+  - Add required html attr to a profile field (contributed by kamel <cracki@gmail.com>)
+  - Persian translation (contributed by kamel <cracki@gmail.com>)
+1.0.9: Fix backend settings menu to the right category (reported by WebShapedBiz)
+1.0.10: Fix broken backend menu
+1.0.11: Add bootstrap v4 tab classes (reported by rustytheitgod)
+1.0.12: German translation (contributed by Lukas Dürrenberger <eXpl0it3r@sfml-dev.org>)

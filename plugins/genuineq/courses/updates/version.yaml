@@ -1,0 +1,32 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table genuineq_courses_suppliers'
+    - builder_table_create_genuineq_courses_suppliers.php
+1.0.3:
+    - 'Created table genuineq_courses_categories'
+    - builder_table_create_genuineq_courses_categories.php
+1.0.4:
+    - 'Created table genuineq_courses_skills'
+    - builder_table_create_genuineq_courses_skills.php
+1.0.5:
+    - 'Created table genuineq_courses_courses'
+    - builder_table_create_genuineq_courses_courses.php
+1.0.6:
+    - 'Created table genuineq_courses_courses_categories'
+    - builder_table_create_genuineq_courses_courses_categories.php
+1.0.7:
+    - 'Created table genuineq_courses_courses_skills'
+    - builder_table_create_genuineq_courses_courses_skills.php
+1.0.8:
+    - 'Created categories seeder'
+    - category_seeder.php
+1.0.9:
+    - 'Created skills seeder'
+    - skill_seeder.php
+1.0.10:
+    - 'Created suppliers seeder'
+    - supplier_seeder.php
+1.0.11:
+    - 'Created courses seeder'
+    - course_seeder.php

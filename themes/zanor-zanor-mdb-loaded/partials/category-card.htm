@@ -1,0 +1,32 @@
+description = "Displays a category as a card"
+
+[viewBag]
+==
+<!-- Card -->
+<div class="card">
+
+    <!-- Card image -->
+    <div class="view overlay d-flex" style="background-color: {{ category.color }} !important;height: 140px;">
+        <img class="card-img-top my-auto" src="{{ category.icon|media }}" alt="">
+        <a href="{{ detailsPage|page({ (detailsUrlParameter) : attribute(category, detailsKeyColumn)}) }}">
+            <div class="mask rgba-white-slight"></div>
+        </a>
+    </div>
+    <!-- /.Card image -->
+
+    <!-- Card content -->
+    <div class="card-body">
+
+        <!-- Title -->
+        <h5 class="card-title text-center">
+            <a class="stretched-link" href="{{ detailsPage|page({ (detailsUrlParameter) : attribute(category, detailsKeyColumn)}) }}">
+                {{ category.name }}
+            </a>
+        </h5>
+        <!-- /.Title -->
+
+    </div>
+    <!-- /.Card content -->
+
+</div>
+<!-- /.Card -->

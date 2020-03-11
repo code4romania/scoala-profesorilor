@@ -1,0 +1,26 @@
+name: main-menu
+items:
+    -
+        title: 'Despre Program'
+        nesting: '0'
+        type: static-page
+        code: ''
+        reference: despre-program
+        replace: '0'
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Cursuri
+        nesting: ''
+        type: cms-page
+        url: ''
+        code: ''
+        reference: talent-manager-schools
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'

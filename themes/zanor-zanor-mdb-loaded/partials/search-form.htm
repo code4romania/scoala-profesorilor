@@ -1,0 +1,12 @@
+description = "Displays the search form."
+
+[viewBag]
+==
+
+<form action="{{ 'search' | page }}" method="get" class="form-inline md-form">
+    <div class="w-100">
+        <i class="fa fa-search prefix"></i>
+        <input name="q" type="text" autocomplete="on" class="form-control">
+        <label for="form2">{{ 'search.placeholder'|_ }}</label>
+    </div>
+</form>

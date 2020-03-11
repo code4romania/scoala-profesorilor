@@ -1,0 +1,26 @@
+columns:
+    name:
+        label: 'genuineq.courses::lang.supplier.label.name'
+        type: text
+        searchable: true
+        sortable: true
+    slug:
+        label: 'genuineq.courses::lang.supplier.label.slug'
+        type: text
+        searchable: true
+        sortable: true
+    email:
+        label: 'genuineq.courses::lang.supplier.label.email'
+        type: text
+        searchable: true
+        sortable: true
+    phone:
+        label: 'genuineq.courses::lang.supplier.label.phone'
+        type: text
+        searchable: true
+        sortable: true
+    description:
+        label: 'genuineq.courses::lang.supplier.label.description'
+        type: text
+        searchable: true
+        sortable: false

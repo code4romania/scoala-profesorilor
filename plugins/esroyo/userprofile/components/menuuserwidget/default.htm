@@ -1,0 +1,34 @@
+<ul class="nav navbar-nav navbar-right menu-user-widget">
+    {% if user %}
+    <li class="dropdown menu-user-widget">
+        <a class="dropdown-toggle menu-user-widget-switch" style="padding: 7px 15px" href="#" data-toggle="dropdown">
+            <img class="img-circle" src="{{ user.getAvatarThumb(36, {'extension': 'png'}) }}">
+            &nbsp; {{ user.name }} <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" style="padding:17px;">
+            <li><a href="{{ accountPage|page }}"><i class="icon-cog"></i> &nbsp; {{ _('account', 'rainlab.user::lang.account') }}</a></li>
+            <li><a href="#" data-request="onLogout" data-request-data="redirect: '{{ redirect }}'"><i class="icon-signout"></i> &nbsp; {{ _('sign_out') }}</a></li>
+    </li>
+    </li>
+    {% else %}
+    <li class="dropdown menu-user-widget-signin">
+        <a class="dropdown-toggle menu-user-widget-signin-switch" href="#" data-toggle="dropdown">{{ _('sign_in', 'rainlab.user::lang.account') }} &nbsp; <i class="icon-off"></i></a>
+        <div class="dropdown-menu" style="padding: 17px">
+            <form class="menu-user-widget-sigin-form" data-request="onSignin">
+                <div class="form-group menu-user-widget-signin-login">
+                    <input name="login" type="text" placeholder="{{ loginAttributeLabel }}">
+                </div>
+                <div class="form-group menu-user-widget-signin-password">
+                    <input name="password" id="password" type="password" placeholder="{{ _('password', 'rainlab.user::lang.account') }}">
+                </div>
+                <div class="pull-right">
+                    <a class="btn btn-default" href="{{ accountPage|page }}" title="{{ _('register', 'rainlab.user::lang.account') }}"><i class="icon-pencil"></i></a> &nbsp;
+                    <a class="btn btn-default" href="{{ forgotPasswordPage|page }}" title="{{ _('reset_password', 'rainlab.user::lang.reset_password') }}"><i class="icon-question"></i></a>
+                </div>
+                <button type="submit" class="btn btn-primary menu-user-widget-signin-btn">{{ _('login', 'rainlab.user::lang.account') }}</button>
+
+            </form>
+        </div>
+    </li>
+    {% endif %}
+</ul>
