@@ -3,12 +3,6 @@ description = "Displays a carousel that has more items per page"
 [viewBag]
 ==
 
-{% put stypes %}
-    <script src="{{ [
-        'assets/css/carousel-multiple-courses.css',
-    ]|theme }}"></script>
-{% endput %}
-
 <!--Carousel Wrapper-->
 <div id="carousel-multiple-courses" class="carousel slide" data-ride="carousel" data-touch="true">
     <div class="carousel-inner row w-100 mx-auto" role="listbox">
@@ -38,9 +32,3 @@ description = "Displays a carousel that has more items per page"
     <!--/.Controls-->
 </div>
 <!--/.Carousel Wrapper-->
-
-{% put scripts %}
-    <script src="{{ [
-        'assets/js/carousel-multiple-courses.js',
-    ]|theme }}"></script>
-{% endput %}

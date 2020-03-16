@@ -11,6 +11,9 @@ default = 0
     {
         /* Extract the latest 3 courses. */
         $this['courses'] = Course::orderBy('created_at', 'desc')->take(3)->get();
+
+        /* Assets for carousel-half-page partial. */
+        $this->addCss('assets/css/carousel-half-page.css');
     }
 ?>
 ==

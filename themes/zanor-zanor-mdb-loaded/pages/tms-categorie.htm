@@ -22,6 +22,9 @@ pageNumber = "{{ :page }}"
     {
         /* Extract all the courses of the selected category. */
         $this['courses'] = Category::whereSlug($this->param('slug'))->first()->courses()->paginate(12);
+
+        /* Assets for carousel-half-page partial. */
+        $this->addCss('assets/css/carousel-half-page.css');
     }
 ?>
 ==

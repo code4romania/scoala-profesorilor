@@ -13,8 +13,7 @@ $('#carousel-multiple-courses').on('slide.bs.carousel', function (e) {
             // append slides to end
             if (e.direction=="left") {
                 $('.carousel-item').eq(i).appendTo('.carousel-inner');
-            }
-            else {
+            } else {
                 $('.carousel-item').eq(0).appendTo('.carousel-inner');
             }
         }
