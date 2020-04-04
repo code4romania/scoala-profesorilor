@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+// Bootstrap
+@import "core/bootstrap/functions";
+@import "core/bootstrap/variables";
+@import "core/bootstrap/rfs";
+
+// CORE
+@import "core/mixins";
+// Your custom variables
+@import "custom-variables";
+@import "core/colors";
+@import "core/variables";
+@import "core/global";
+@import "core/helpers";
+@import "core/typography";
+@import "core/masks";
+@import "core/waves";
+
+// MDB
+@import "mdb/animations-basic";
+@import "mdb/modules/animations-extended/module";
+@import "mdb/buttons";
+@import "mdb/cards";
+@import "mdb/dropdowns";
+@import "mdb/input-group";
+@import "mdb/navbars";
+@import "mdb/pagination";
+@import "mdb/badges";
+@import "mdb/modals";
+@import "mdb/carousels";
+@import "mdb/forms";
+@import "mdb/msc";
+@import "mdb/footers";
+@import "mdb/list-group";
+@import "mdb/tables";
+@import "mdb/depreciated";
+@import "mdb/steppers";
+@import "mdb/loader";
+@import "mdb/treeview";
+// Free addons
+// @import "addons/datatables";
+// @import "addons/datatables-select";
+// @import "addons/directives";
+// @import "addons/hierarchical-display";
+// @import "addons/flag";
+// @import "addons/rating";
+
+// Your custom styles
+@import "custom-styles";

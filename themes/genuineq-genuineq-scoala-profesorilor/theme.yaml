@@ -1,0 +1,8 @@
+name: 'Scoala Profesorilor'
+description: 'Custom theme made for Scoala Profesorilor'
+author: genuineq
+homepage: https://www.genuineq.com
+code: genuineq-scoala-profesorilor
+require:
+    - RainLab.Pages
+    - RainLab.Blog

@@ -1,0 +1,208 @@
+// Typography
+
+//Titillium-Web FONT
+@font-face {
+  font-family: "TitilliumWeb-ExtraLight";
+  src: url("#{$titillium-web-font-path}TitilliumWeb-ExtraLight.eot"); /* IE9 Compat Modes */
+  src: url("#{$titillium-web-font-path}TitilliumWeb-ExtraLight.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("#{$titillium-web-font-path}TitilliumWeb-ExtraLight.otf") format("opentype"), /* Open Type Font */
+    url("#{$titillium-web-font-path}TitilliumWeb-ExtraLight.svg") format("svg"), /* Legacy iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-ExtraLight.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-ExtraLight.woff") format("woff"), /* Modern Browsers */
+    url("#{$titillium-web-font-path}TitilliumWeb-ExtraLight.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TitilliumWeb-ExtraLightItalic";
+  src: url("#{$titillium-web-font-path}TitilliumWeb-ExtraLightItalic.eot"); /* IE9 Compat Modes */
+  src: url("#{$titillium-web-font-path}TitilliumWeb-ExtraLightItalic.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("#{$titillium-web-font-path}TitilliumWeb-ExtraLightItalic.otf") format("opentype"), /* Open Type Font */
+    url("#{$titillium-web-font-path}TitilliumWeb-ExtraLightItalic.svg") format("svg"), /* Legacy iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-ExtraLightItalic.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-ExtraLightItalic.woff") format("woff"), /* Modern Browsers */
+    url("#{$titillium-web-font-path}TitilliumWeb-ExtraLightItalic.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TitilliumWeb-Light";
+  src: url("#{$titillium-web-font-path}TitilliumWeb-Light.eot"); /* IE9 Compat Modes */
+  src: url("#{$titillium-web-font-path}TitilliumWeb-Light.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("#{$titillium-web-font-path}TitilliumWeb-Light.otf") format("opentype"), /* Open Type Font */
+    url("#{$titillium-web-font-path}TitilliumWeb-Light.svg") format("svg"), /* Legacy iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-Light.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-Light.woff") format("woff"), /* Modern Browsers */
+    url("#{$titillium-web-font-path}TitilliumWeb-Light.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TitilliumWeb-LightItalic";
+  src: url("#{$titillium-web-font-path}TitilliumWeb-LightItalic.eot"); /* IE9 Compat Modes */
+  src: url("#{$titillium-web-font-path}TitilliumWeb-LightItalic.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("#{$titillium-web-font-path}TitilliumWeb-LightItalic.otf") format("opentype"), /* Open Type Font */
+    url("#{$titillium-web-font-path}TitilliumWeb-LightItalic.svg") format("svg"), /* Legacy iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-LightItalic.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-LightItalic.woff") format("woff"), /* Modern Browsers */
+    url("#{$titillium-web-font-path}TitilliumWeb-LightItalic.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TitilliumWeb-Regular";
+  src: url("#{$titillium-web-font-path}TitilliumWeb-Regular.eot"); /* IE9 Compat Modes */
+  src: url("#{$titillium-web-font-path}TitilliumWeb-Regular.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("#{$titillium-web-font-path}TitilliumWeb-Regular.otf") format("opentype"), /* Open Type Font */
+    url("#{$titillium-web-font-path}TitilliumWeb-Regular.svg") format("svg"), /* Legacy iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-Regular.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-Regular.woff") format("woff"), /* Modern Browsers */
+    url("#{$titillium-web-font-path}TitilliumWeb-Regular.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TitilliumWeb-Italic";
+  src: url("#{$titillium-web-font-path}TitilliumWeb-Italic.eot"); /* IE9 Compat Modes */
+  src: url("#{$titillium-web-font-path}TitilliumWeb-Italic.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("#{$titillium-web-font-path}TitilliumWeb-Italic.otf") format("opentype"), /* Open Type Font */
+    url("#{$titillium-web-font-path}TitilliumWeb-Italic.svg") format("svg"), /* Legacy iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-Italic.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-Italic.woff") format("woff"), /* Modern Browsers */
+    url("#{$titillium-web-font-path}TitilliumWeb-Italic.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TitilliumWeb-SemiBold";
+  src: url("#{$titillium-web-font-path}TitilliumWeb-SemiBold.eot"); /* IE9 Compat Modes */
+  src: url("#{$titillium-web-font-path}TitilliumWeb-SemiBold.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("#{$titillium-web-font-path}TitilliumWeb-SemiBold.otf") format("opentype"), /* Open Type Font */
+    url("#{$titillium-web-font-path}TitilliumWeb-SemiBold.svg") format("svg"), /* Legacy iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-SemiBold.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-SemiBold.woff") format("woff"), /* Modern Browsers */
+    url("#{$titillium-web-font-path}TitilliumWeb-SemiBold.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TitilliumWeb-SemiBoldItalic";
+  src: url("#{$titillium-web-font-path}TitilliumWeb-SemiBoldItalic.eot"); /* IE9 Compat Modes */
+  src: url("#{$titillium-web-font-path}TitilliumWeb-SemiBoldItalic.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("#{$titillium-web-font-path}TitilliumWeb-SemiBoldItalic.otf") format("opentype"), /* Open Type Font */
+    url("#{$titillium-web-font-path}TitilliumWeb-SemiBoldItalic.svg") format("svg"), /* Legacy iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-SemiBoldItalic.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-SemiBoldItalic.woff") format("woff"), /* Modern Browsers */
+    url("#{$titillium-web-font-path}TitilliumWeb-SemiBoldItalic.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TitilliumWeb-Bold";
+  src: url("#{$titillium-web-font-path}TitilliumWeb-Bold.eot"); /* IE9 Compat Modes */
+  src: url("#{$titillium-web-font-path}TitilliumWeb-Bold.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("#{$titillium-web-font-path}TitilliumWeb-Bold.otf") format("opentype"), /* Open Type Font */
+    url("#{$titillium-web-font-path}TitilliumWeb-Bold.svg") format("svg"), /* Legacy iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-Bold.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-Bold.woff") format("woff"), /* Modern Browsers */
+    url("#{$titillium-web-font-path}TitilliumWeb-Bold.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TitilliumWeb-BoldItalic";
+  src: url("#{$titillium-web-font-path}TitilliumWeb-BoldItalic.eot"); /* IE9 Compat Modes */
+  src: url("#{$titillium-web-font-path}TitilliumWeb-BoldItalic.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("#{$titillium-web-font-path}TitilliumWeb-BoldItalic.otf") format("opentype"), /* Open Type Font */
+    url("#{$titillium-web-font-path}TitilliumWeb-BoldItalic.svg") format("svg"), /* Legacy iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-BoldItalic.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-BoldItalic.woff") format("woff"), /* Modern Browsers */
+    url("#{$titillium-web-font-path}TitilliumWeb-BoldItalic.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TitilliumWeb-Black";
+  src: url("#{$titillium-web-font-path}TitilliumWeb-Black.eot"); /* IE9 Compat Modes */
+  src: url("#{$titillium-web-font-path}TitilliumWeb-Black.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("#{$titillium-web-font-path}TitilliumWeb-Black.otf") format("opentype"), /* Open Type Font */
+    url("#{$titillium-web-font-path}TitilliumWeb-Black.svg") format("svg"), /* Legacy iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-Black.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("#{$titillium-web-font-path}TitilliumWeb-Black.woff") format("woff"), /* Modern Browsers */
+    url("#{$titillium-web-font-path}TitilliumWeb-Black.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+// General properties
+body {
+  font-family: $mdb-font-family;
+  font-weight: $font-weight-light;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: $font-weight-light;
+}
+
+// Blockquote
+.blockquote {
+  padding: $blockquote-padding-y $blockquote-padding-x;
+  border-left: .25rem solid #eceeef;
+  &.text-right {
+    border-right: .25rem solid #eceeef;
+    border-left: none;
+  }
+  .bq-title {
+    margin-bottom: 0;
+    font-size: $font-size-large;
+    font-weight: 400;
+  }
+  p {
+    padding: $blockquote-p-padding-y 0;
+    font-size: $blockquote-p-font-size;
+  }
+}
+
+@each $name, $color in $basic {
+  .bq-#{$name} {
+    border-left: 3px solid $color !important;
+    .bq-title {
+      color: $color !important;
+    }
+  }
+}
+
+// Responsive headings
+@each $key, $val in $grid-breakpoints {
+  @include media-breakpoint-up($key) {
+    $y: map-get($responsive-headings, $key);
+    @each $name, $value in $y {
+      .#{$name}-responsive {
+        font-size: $value;
+      }
+    }
+  }
+}
+
+@each $name, $color in $basic-mdb-colors {
+  @include text-emphasis-variant(".text-#{$name}", $color);
+}
+
+.font-small {
+  font-size: $font-size-small;
+}
+
+strong {
+  font-weight: 500;
+}

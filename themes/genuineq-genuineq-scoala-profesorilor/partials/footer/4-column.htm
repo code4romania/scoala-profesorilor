@@ -1,0 +1,80 @@
+;;
+description = "4 Column Footer"
+
+[viewBag]
+
+[staticMenu]
+code = "main-menu"
+==
+<!--Footer-->
+<footer class="page-footer bg-primary">
+
+    <!--Footer links-->
+    <div class="container text-center text-md-left py-3">
+        <div class="row">
+
+            <!--First column-->
+            <div class="col-lg-3 col-md-6">
+                <a href="#">
+                    <img src="{{ 'assets/img/svg/logo-white.svg'|theme }}" height="70" alt="logo">
+                </a>
+            </div>
+            <!--/.First column-->
+
+            <hr class="w-100 clearfix d-sm-none">
+
+            <!--Second column-->
+            <div class="col-lg-3 col-md-6 ml-auto">
+                {% if staticMenu.totalItems %}
+                    <!-- Links -->
+                    <ul class="list-unstyled">
+                        {% for menuItem in staticMenu.menuItems %}
+                            <li><a href="{{ menuItem.url }} "><span style="font-size: 12px;">{{ menuItem.title }}</span></a></li>
+                        {% endfor %}
+                    </ul>
+                    <!-- Links -->
+                {% endif %}
+            </div>
+            <!--/.Second column-->
+
+            <hr class="w-100 clearfix d-sm-none">
+
+            <!--Third column-->
+            <div class="col-lg-3 col-md-6 ml-auto">
+                {% content 'footer/column3.htm' %}
+            </div>
+            <!--/.Third column-->
+
+            <hr class="w-100 clearfix d-sm-none">
+
+            <!--Fourth column-->
+            <div class="col-lg-3 col-md-6 ml-auto">
+                {% content 'footer/column4.htm' %}
+                <ul class="list-unstyled">
+                    <li>
+                        <i class="fa fa-facebook mr-1" aria-hidden="true"></i>
+                        <i class="fa fa-twitter mr-1" aria-hidden="true"></i>
+                        <i class="fa fa-linkedin mr-1" aria-hidden="true"></i>
+                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                    </li>
+                    <li>
+                        <a href="#" class="btn btn-sm btn-success z-depth-0 rounded" type="button">{{ 'footer.call-to-action'|_ }}</a>
+                    </li>
+                </ul>
+            </div>
+            <!--/.Fourth column-->
+
+        </div>
+    </div>
+    <!--/.Footer links-->
+
+    <!--Copyright-->
+    <div class="footer-copyright text-center primary-color-dark">
+        <div class="container-fluid py-3">
+            <a href="https://www.civiclabs.ro">© {{ 'now'|date('Y') }} {{ 'footer.copyright'|_ }}</a>
+        </div>
+    </div>
+    <!--/.Copyright-->
+
+</footer>
+<!--/.Footer-->

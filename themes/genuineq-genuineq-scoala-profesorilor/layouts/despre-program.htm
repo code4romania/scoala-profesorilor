@@ -1,0 +1,104 @@
+description = "despre-program page layout"
+
+[staticPage]
+useContent = 0
+default = 0
+==
+<?php
+    use Genuineq\Courses\Models\Course;
+
+    function onStart()
+    {
+        /* Extract the latest 3 courses. */
+        $this['courses'] = Course::orderBy('created_at', 'desc')->take(3)->get();
+
+        /* Assets for carousel-half-page partial. */
+        $this->addCss('assets/css/carousel-half-page.css');
+    }
+?>
+==
+{% partial 'head' %}
+{% partial 'navbar' %}
+
+<!--Intro Section-->
+{% partial "carousel-half-page" %}
+<!--/.Intro Section-->
+
+<!--About Program-->
+{variable name="programTitle" label="Title" tab="About program" type="text"}{/variable}
+{variable name="programContent" label="Content" tab="About program" type="richeditor"}{/variable}
+{variable name="programImage" label="Image" tab="About program" type="mediafinder" mode="image"}{/variable}
+
+<section class="bg-primary py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                <h3 class="mb-3 wow fadeInLeft font-bold text-white">{{ programTitle }}</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                <small class="text-white wow fadeInLeft">{{ programContent|raw }}</small>
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                <img src="{{ programImage|media }}" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+<!--/.About Program-->
+
+<!--About Us-->
+{variable name="usTitle" label="Title" tab="About us" type="text"}{/variable}
+{variable name="usContent" label="Content" tab="About us" type="richeditor"}{/variable}
+{variable name="usImageLabel" label="Image text" tab="About us" type="text"}{/variable}
+{variable name="usImage" label="Image" tab="About us" type="mediafinder" mode="image"}{/variable}
+
+<section class="bg-white py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h4 class="mb-3 wow fadeInLeft font-bold">{{ usTitle }}</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                <small class=" wow fadeInLeft">{{ usContent|raw }}</small>
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-center">
+                <p class="wow fadeInRight font-bold text-uppercase">{{ usImageLabel }}</p>
+                <img src="{{ usImage|media }}" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+<!--/.About Us-->
+
+<!--Latest Courses-->
+{variable name="coursesTitle" label="Title" tab="Latest Courses" type="text"}{/variable}
+
+<section class="bg-transparent py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h5 class="mb-3 font-weight-bold">{{ coursesTitle }}</h5>
+
+                {% partial "course-grid"
+                    courses=courses
+                    recordsPerPage=''
+                    detailsPage='tms-curs'
+                    detailsKeyColumn='slug'
+                    detailsUrlParameter='slug'
+                    pagination=false
+                %}
+            </div>
+        </div>
+    </div>
+</section>
+<!--/.Latest Courses-->
+
+{% partial 'footer' %}

@@ -1,0 +1,11 @@
+// Your custom styles
+
+::selection {
+    color: $white;
+    background: $primary-color-dark;
+}
+/* For Mozilla Firefox */
+::-moz-selection {
+    color: $white;
+    background: $primary-color-dark;
+}
