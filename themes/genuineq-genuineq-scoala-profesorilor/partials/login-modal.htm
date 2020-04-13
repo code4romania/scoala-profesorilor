@@ -1,0 +1,78 @@
+[Esroyo\UserProfile\Components\Account account]
+paramCode = "code"
+forceSecure = 0
+
+[viewBag]
+==
+
+<!-- Central Modal Small -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true">
+
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title w-100" id="login-modal">{{ 'login-modal.title'|_ }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+
+                        {{ form_ajax('onSignin') }}
+
+                            <div class="form-group">
+                                <div class="md-form">
+                                    <input name="login" type="text" id="userSigninLogin" class="form-control">
+                                    <label for="userSigninLogin">{{ 'login-modal.email'|_ }}</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="md-form">
+                                    <input name="password" type="password" id="userSigninPassword" class="form-control">
+                                    <label for="userSigninPassword">{{ 'login-modal.password'|_ }}</label>
+                                </div>
+                            </div>
+
+                            {% if rememberLoginMode == 'ask' %}
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                    <label><input name="remember" type="checkbox" value="1">Stay logged in</label>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            <div class="form-row">
+                                <div class="col-12">
+                                    <div class="md-form m-0">
+                                        <button type="submit" class="btn btl-lg btn-block btn-secondary rounded m-0">{{'auth.login-label'|_ }}</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {{ form_close() }}
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="row w-100">
+                    <div class="col-12 text-center">
+                        <p class="m-0">
+                            {{ ('login-modal.footer.signup'|_)|raw }}
+                            <a data-dismiss="modal" data-toggle="modal" href="#signup-modal" data-target="#signup-modal">{{'auth.signup-label'|_ }}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!-- Central Modal Small -->

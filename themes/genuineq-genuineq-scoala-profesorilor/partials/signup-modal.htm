@@ -1,0 +1,87 @@
+[viewBag]
+
+[RainLab\User\Components\Account account]
+paramCode = "code"
+forceSecure = 0
+==
+
+<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="signup-modal" aria-hidden="true">
+
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title w-100" id="signup-modal">{{ 'signup-modal.title'|_ }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+
+                        {{ form_ajax('onRegister') }}
+                            <div class="form-group">
+                                <div class="md-form">
+                                    <input name="name" type="text" id="registerName" class="form-control">
+                                    <label for="registerName">{{ 'signup-modal.name'|_ }}</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="md-form">
+                                    <input name="email" type="email" id="registerEmail" class="form-control">
+                                    <label for="registerEmail">{{ 'signup-modal.email'|_ }}</label>
+                                </div>
+                            </div>
+
+                            {% if loginAttribute == "username" %}
+                                <div class="form-group">
+                                    <div class="md-form">
+                                        <input name="username" type="text" id="registerUsername" class="form-control">
+                                        <label for="registerUsername">{{ 'signup-modal.username'|_ }}</label>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            <div class="form-group">
+                                <div class="md-form">
+                                    <input name="password" type="password" id="registerPassword" class="form-control">
+                                    <label for="registerPassword">{{ 'signup-modal.password'|_ }}</label>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-12">
+                                    <div class="md-form m-0">
+                                        <button type="submit" class="btn btl-lg btn-block btn-secondary rounded m-0">{{'auth.signup-label'|_ }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        {{ form_close() }}
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-12">
+                        <small>{{ ('signup-modal.footer.terms'|_)|raw }}</small>
+                    </div>
+
+                    <div class="col-12 pt-3 text-center">
+                        <p class="m-0">
+                            {{ ('signup-modal.footer.login'|_)|raw }}
+                            <a data-dismiss="modal" data-toggle="modal" href="#login-select-modal" data-target="#login-select-modal">{{'auth.login-label'|_ }}</a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
