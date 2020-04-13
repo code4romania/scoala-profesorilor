@@ -21,7 +21,6 @@ class BuilderTableCreateGenuineqCoursesCourses extends Migration
             $table->smallInteger('accredited')->default(0)->comment = "Is the course accredited: 0-no, 1-yes";
             $table->integer('credits')->default(0)->comment = "If number of credits this course has.";
             $table->double('price', 10, 2)->comment = "The total price of the course.";
-            $table->string('color')->comment = "The color of the course.";
             $table->text('description')->comment = "The description of the course.";
             $table->smallInteger('status')->default(1)->comment = "The status of the course: 0-disabled, 1-enabled";
             $table->timestamp('deleted_at')->nullable();

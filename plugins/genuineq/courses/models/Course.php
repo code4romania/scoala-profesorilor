@@ -71,4 +71,28 @@ class Course extends Model
         $date = new DateTime($this->end_date);
         return $date->format('d.m.Y');
     }
+
+
+    /**
+     * Function that calculates the color of a course
+     *  by extractig the average color of the categories.
+     */
+    public function getColor()
+    {
+        /** Set a default color. */
+        $color = "#4C025E";
+
+        /** Extract the colors of the course categories. */
+        $colors = $this->categories->pluck('color');
+        if ($colors) {
+            $sum = 0;
+            foreach ($colors as $color) {
+                $sum += hexdec($color);
+            }
+
+            $color = '#' . dechex($sum / count($colors));
+        }
+
+        return $color;
+    }
 }

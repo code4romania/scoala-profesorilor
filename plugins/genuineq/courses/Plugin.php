@@ -8,6 +8,16 @@ class Plugin extends PluginBase
     {
     }
 
+    public function registerFormWidgets()
+    {
+        return [
+            'Genuineq\Courses\FormWidgets\CategoryTagRelation' => [
+                'label' => 'Category Tag Relation field',
+                'code' => 'categorytagrelation'
+            ]
+        ];
+    }
+
     public function registerSettings()
     {
     }

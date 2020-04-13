@@ -36,7 +36,6 @@ class CourseSeeder extends Seeder
                 'accredited' => $accredited,
                 'credits' => $credits,
                 'address' => $faker->address(),
-                'color' => $faker->hexcolor(),
                 'duration' => $faker->randomFloat($nbMaxDecimals = 1, $min = 1, $max = 100),
                 'price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 100, $max = 3000),
                 'start_date' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+6 months', $timezone = null),

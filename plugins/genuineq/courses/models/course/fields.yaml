@@ -60,6 +60,12 @@ fields:
         nameFrom: name
         descriptionFrom: description
         span: left
+        type: categorytagrelation
+    supplier:
+        label: 'genuineq.courses::lang.course.label.supplier'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
         type: relation
     skills:
         label: 'genuineq.courses::lang.course.label.skills'
@@ -67,13 +73,3 @@ fields:
         descriptionFrom: description
         span: auto
         type: relation
-    supplier:
-        label: 'genuineq.courses::lang.course.label.supplier'
-        nameFrom: name
-        descriptionFrom: description
-        span: auto
-        type: relation
-    color:
-        label: 'genuineq.courses::lang.course.label.color'
-        span: auto
-        type: colorpicker
