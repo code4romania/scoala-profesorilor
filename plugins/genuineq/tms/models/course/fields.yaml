@@ -1,0 +1,75 @@
+fields:
+    name:
+        label: 'genuineq.tms::lang.course.label.name'
+        span: left
+        type: text
+    slug:
+        label: 'genuineq.tms::lang.course.label.slug'
+        span: right
+        preset:
+            field: name
+            type: ''
+        type: text
+    start_date:
+        label: 'genuineq.tms::lang.course.label.date-start'
+        mode: datetime
+        span: left
+        type: datepicker
+    end_date:
+        label: 'genuineq.tms::lang.course.label.date-end'
+        mode: datetime
+        span: right
+        type: datepicker
+    accredited:
+        label: 'genuineq.tms::lang.course.label.accredited'
+        span: left
+        placeholder: asdasd
+        cssClass: my-auto
+        type: checkbox
+        comment: 'genuineq.tms::lang.course.comment.accredited'
+    credits:
+        label: 'genuineq.tms::lang.course.label.credits'
+        span: auto
+        disabled: 1
+        dependsOn: {  }
+        trigger:
+            action: enable
+            field: accredited
+            condition: checked
+        type: number
+    address:
+        label: 'genuineq.tms::lang.course.label.address'
+        size: small
+        span: full
+        type: richeditor
+    duration:
+        label: 'genuineq.tms::lang.course.label.duration'
+        span: left
+        type: number
+    price:
+        label: 'genuineq.tms::lang.course.label.price'
+        span: right
+        type: number
+    description:
+        label: 'genuineq.tms::lang.course.label.description'
+        size: large
+        span: full
+        type: richeditor
+    categories:
+        label: 'genuineq.tms::lang.course.label.categories'
+        nameFrom: name
+        descriptionFrom: description
+        span: left
+        type: categorytagrelation
+    supplier:
+        label: 'genuineq.tms::lang.course.label.supplier'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+    skills:
+        label: 'genuineq.tms::lang.course.label.skills'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation

@@ -1,0 +1,17 @@
+fields:
+    name:
+        label: 'genuineq.tms::lang.skill.label.name'
+        span: left
+        type: text
+    slug:
+        label: 'genuineq.tms::lang.skill.label.slug'
+        span: right
+        preset:
+            field: name
+            type: ''
+        type: text
+    description:
+        label: 'genuineq.tms::lang.skill.label.description'
+        size: small
+        span: full
+        type: richeditor

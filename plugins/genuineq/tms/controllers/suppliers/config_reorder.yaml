@@ -1,0 +1,4 @@
+title: Suppliers
+modelClass: Genuineq\Tms\Models\Supplier
+toolbar:
+    buttons: reorder_toolbar

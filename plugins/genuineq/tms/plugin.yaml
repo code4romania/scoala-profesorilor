@@ -1,0 +1,28 @@
+plugin:
+    name: 'genuineq.tms::lang.plugin.name'
+    description: 'genuineq.tms::lang.plugin.description'
+    author: genuineq
+    icon: oc-icon-book
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: 'genuineq.tms::lang.plugin.name'
+        url: genuineq/tms/courses
+        icon: icon-book
+        sideMenu:
+            side-menu-item:
+                label: 'genuineq.tms::lang.course.backend-menu'
+                url: genuineq/tms/courses
+                icon: icon-book
+            side-menu-item2:
+                label: 'genuineq.tms::lang.category.backend-menu'
+                url: genuineq/tms/categories
+                icon: icon-tag
+            side-menu-item3:
+                label: 'genuineq.tms::lang.supplier.backend-menu'
+                url: genuineq/tms/suppliers
+                icon: icon-building
+            side-menu-item4:
+                label: 'genuineq.tms::lang.skill.backend-menu'
+                url: genuineq/tms/skills
+                icon: icon-tag

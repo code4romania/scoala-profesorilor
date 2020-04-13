@@ -1,0 +1,10 @@
+name: Categories
+form: $/genuineq/tms/models/category/fields.yaml
+modelClass: Genuineq\Tms\Models\Category
+defaultRedirect: genuineq/tms/categories
+create:
+    redirect: 'genuineq/tms/categories/update/:id'
+    redirectClose: genuineq/tms/categories
+update:
+    redirect: genuineq/tms/categories
+    redirectClose: genuineq/tms/categories

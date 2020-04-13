@@ -1,4 +1,0 @@
-title: Suppliers
-modelClass: Genuineq\Courses\Models\Supplier
-toolbar:
-    buttons: reorder_toolbar

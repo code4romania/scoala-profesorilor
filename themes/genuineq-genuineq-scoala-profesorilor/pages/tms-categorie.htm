@@ -4,7 +4,7 @@ layout = "offline"
 is_hidden = 0
 
 [builderList categoriesList]
-modelClass = "Genuineq\Courses\Models\Category"
+modelClass = "Genuineq\Tms\Models\Category"
 scope = "-"
 scopeValue = "{{ :scope }}"
 displayColumn = "name"
@@ -16,7 +16,7 @@ recordsPerPage = 8
 pageNumber = "{{ :page }}"
 ==
 <?php
-    use Genuineq\Courses\Models\Category;
+    use Genuineq\Tms\Models\Category;
 
     function onStart()
     {

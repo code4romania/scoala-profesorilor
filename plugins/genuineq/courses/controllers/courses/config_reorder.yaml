@@ -1,4 +1,0 @@
-title: Courses
-modelClass: Genuineq\Courses\Models\Course
-toolbar:
-    buttons: reorder_toolbar

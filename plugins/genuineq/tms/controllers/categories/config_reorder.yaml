@@ -1,0 +1,4 @@
+title: Categories
+modelClass: Genuineq\Tms\Models\Category
+toolbar:
+    buttons: reorder_toolbar

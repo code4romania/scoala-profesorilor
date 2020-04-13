@@ -1,0 +1,10 @@
+name: Suppliers
+form: $/genuineq/tms/models/supplier/fields.yaml
+modelClass: Genuineq\Tms\Models\Supplier
+defaultRedirect: genuineq/tms/suppliers
+create:
+    redirect: 'genuineq/tms/suppliers/update/:id'
+    redirectClose: genuineq/tms/suppliers
+update:
+    redirect: genuineq/tms/suppliers
+    redirectClose: genuineq/tms/suppliers

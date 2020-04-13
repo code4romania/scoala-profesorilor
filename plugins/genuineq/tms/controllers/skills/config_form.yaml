@@ -1,0 +1,10 @@
+name: Skills
+form: $/genuineq/tms/models/skill/fields.yaml
+modelClass: Genuineq\Tms\Models\Skill
+defaultRedirect: genuineq/tms/skills
+create:
+    redirect: 'genuineq/tms/skills/update/:id'
+    redirectClose: genuineq/tms/skills
+update:
+    redirect: genuineq/tms/skills
+    redirectClose: genuineq/tms/skills
