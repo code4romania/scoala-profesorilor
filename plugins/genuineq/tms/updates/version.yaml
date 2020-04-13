@@ -30,3 +30,9 @@
 1.0.11:
     - 'Created courses seeder'
     - course_seeder.php
+1.0.12:
+    - 'Created table genuineq_tms_addresses'
+    - builder_table_create_genuineq_tms_addresses.php
+1.0.13:
+    - 'Created addresses seeder'
+    - address_seeder.php

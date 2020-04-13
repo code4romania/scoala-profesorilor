@@ -63,4 +63,19 @@
 
         'backend-menu' => 'Suppliers',
     ],
+
+    'address' => [
+        'label' => [
+            'name' => 'Name',
+            'diacritic' => 'Diacritics',
+            'county' => 'County',
+            'auto' => 'Auto',
+            'zip' => 'Zip',
+            'population' => 'Population',
+            'latitude' => 'Latitude',
+            'longitude' => 'Longitude',
+        ],
+
+        'backend-menu' => 'Addresses',
+    ],
 ];

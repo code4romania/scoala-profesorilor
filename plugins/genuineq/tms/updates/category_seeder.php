@@ -1,6 +1,4 @@
-<?php
-
-namespace Genuineq\Tms\Updates;
+<?php namespace Genuineq\Tms\Updates;
 
 use Genuineq\Tms\Models\Category;
 use October\Rain\Database\Updates\Seeder;

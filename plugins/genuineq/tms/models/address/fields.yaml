@@ -1,0 +1,36 @@
+fields:
+    name:
+        label: 'genuineq.tms::lang.address.label.name'
+        span: auto
+        required: 1
+        type: text
+    diacritic:
+        label: 'genuineq.tms::lang.address.label.diacritic'
+        span: auto
+        type: text
+    county:
+        label: 'genuineq.tms::lang.address.label.county'
+        span: auto
+        required: 1
+        type: text
+    auto:
+        label: 'genuineq.tms::lang.address.label.auto'
+        span: auto
+        type: text
+    zip:
+        label: 'genuineq.tms::lang.address.label.zip'
+        span: auto
+        type: text
+    population:
+        label: 'genuineq.tms::lang.address.label.population'
+        span: auto
+        type: number
+    latitude:
+        label: 'genuineq.tms::lang.address.label.latitude'
+        span: auto
+        type: number
+    longitude:
+        label: 'genuineq.tms::lang.address.label.longitude'
+        span: auto
+        required: 0
+        type: number

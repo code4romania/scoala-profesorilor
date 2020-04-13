@@ -1,0 +1,4 @@
+title: Addresses
+modelClass: Genuineq\Tms\Models\Address
+toolbar:
+    buttons: reorder_toolbar

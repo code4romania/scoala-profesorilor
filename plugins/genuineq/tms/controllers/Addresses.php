@@ -3,7 +3,7 @@
 use Backend\Classes\Controller;
 use BackendMenu;
 
-class Skills extends Controller
+class Addresses extends Controller
 {
     public $implement = [
         'Backend\Behaviors\ListController',
@@ -18,6 +18,6 @@ class Skills extends Controller
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('Genuineq.Tms', 'main-menu-item', 'side-menu-item4');
+        BackendMenu::setContext('Genuineq.Tms', 'main-menu-item', 'side-menu-item5');
     }
 }

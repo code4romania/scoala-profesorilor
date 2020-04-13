@@ -17,7 +17,7 @@ navigation:
             side-menu-item2:
                 label: 'genuineq.tms::lang.category.backend-menu'
                 url: genuineq/tms/categories
-                icon: icon-tag
+                icon: icon-tags
             side-menu-item3:
                 label: 'genuineq.tms::lang.supplier.backend-menu'
                 url: genuineq/tms/suppliers
@@ -25,4 +25,8 @@ navigation:
             side-menu-item4:
                 label: 'genuineq.tms::lang.skill.backend-menu'
                 url: genuineq/tms/skills
-                icon: icon-tag
+                icon: icon-check-square
+            side-menu-item5:
+                label: 'genuineq.tms::lang.address.backend-menu'
+                url: genuineq/tms/addresses
+                icon: icon-map-marker

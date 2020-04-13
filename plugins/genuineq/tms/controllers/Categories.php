@@ -5,12 +5,8 @@ use BackendMenu;
 
 class Categories extends Controller
 {
-    public $implement = [
-        'Backend\Behaviors\ListController',
-        'Backend\Behaviors\FormController',
-        'Backend\Behaviors\ReorderController'
-    ];
-
+    public $implement = [        'Backend\Behaviors\ListController',        'Backend\Behaviors\FormController',        'Backend\Behaviors\ReorderController'    ];
+    
     public $listConfig = 'config_list.yaml';
     public $formConfig = 'config_form.yaml';
     public $reorderConfig = 'config_reorder.yaml';
@@ -18,6 +14,6 @@ class Categories extends Controller
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('Genuineq.Courses', 'main-menu-item', 'side-menu-item');
+        BackendMenu::setContext('Genuineq.Tms', 'main-menu-item', 'side-menu-item2');
     }
 }

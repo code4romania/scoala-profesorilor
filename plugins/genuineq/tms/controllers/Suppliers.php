@@ -18,6 +18,6 @@ class Suppliers extends Controller
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('Genuineq.Courses', 'main-menu-item', 'side-menu-item2');
+        BackendMenu::setContext('Genuineq.Tms', 'main-menu-item', 'side-menu-item3');
     }
 }

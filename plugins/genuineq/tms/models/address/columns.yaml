@@ -1,0 +1,36 @@
+columns:
+    name:
+        label: 'genuineq.tms::lang.address.label.name'
+        type: text
+        searchable: true
+        sortable: true
+    diacritic:
+        label: 'genuineq.tms::lang.address.label.diacritic'
+        type: text
+        searchable: true
+        sortable: true
+    county:
+        label: 'genuineq.tms::lang.address.label.county'
+        type: text
+        searchable: true
+        sortable: true
+    zip:
+        label: 'genuineq.tms::lang.address.label.zip'
+        type: text
+        searchable: true
+        sortable: true
+    population:
+        label: 'genuineq.tms::lang.address.label.population'
+        type: number
+        searchable: true
+        sortable: true
+    latitude:
+        label: 'genuineq.tms::lang.address.label.latitude'
+        type: number
+        searchable: true
+        sortable: true
+    longitude:
+        label: 'genuineq.tms::lang.address.label.longitude'
+        type: number
+        searchable: true
+        sortable: true

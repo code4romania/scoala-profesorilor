@@ -1,0 +1,10 @@
+name: Addresses
+form: $/genuineq/tms/models/address/fields.yaml
+modelClass: Genuineq\Tms\Models\Address
+defaultRedirect: genuineq/tms/addresses
+create:
+    redirect: 'genuineq/tms/addresses/update/:id'
+    redirectClose: genuineq/tms/addresses
+update:
+    redirect: genuineq/tms/addresses
+    redirectClose: genuineq/tms/addresses
