@@ -11,16 +11,30 @@ displayColumn = "name"
 notFoundMessage = "Record not found"
 ==
 <?php
+    use Genuineq\Courses\Models\Category;
+    use Genuineq\Courses\Models\Course;
+    use October\Rain\Support\Collection;
+
     function onStart()
     {
         /* Assets for carousel-multiple-courses partial. */
         $this->addCss('assets/css/carousel-multiple-courses.css');
-        $this->addJs('assets/js/carousel-multiple-courses.js');
+
+        /* Extract all the course categories. */
+        $categories = Course::whereSlug($this->param('slug'))->first()->categories;
+        /* Extract all the categories of the selected Course. */
+        $this['similarCourses'] = new Collection([]);
+        foreach ($categories as $key => $category) {
+            $this['similarCourses'] = $this['similarCourses']->merge($category->courses);
+        }
     }
 ?>
 ==
 {% set course = builderDetails.record %}
 {% set supplier = builderDetails.record.supplier %}
+{% set categoryPage = "tms-categorie" %}
+{% set categoryKeyColumn = "slug" %}
+{% set categoryUrlParameter = "slug" %}
 
 <!--Title Section-->
 <section class="py-4" style="background-color: {{ course.color }} !important;">
@@ -70,16 +84,29 @@ notFoundMessage = "Record not found"
         <div class="row align-middle">
             <div class="col-12 col-sm-12 col-md-7 col-lg-8">
                 <h4 class="mb-3 font-weight-bold">{{ 'course.description-title'|_ }}</h4>
-                <small>{{ course.description }}</small>
+                <p>{{ course.description }}</p>
             </div>
 
             <div class="col-12 col-sm-12 col-md-5 col-lg-4">
                 <h4 class="mb-3 pt-3 pt-md-0 pt-lg-0 font-weight-bold">{{ 'course.skills-title'|_ }}</h4>
                 <ul>
                     {% for skill in course.skills %}
-                        <li><small>{{ skill.name }} &colon; {{ skill.description }}</small></li>
+                        <li><p>{{ skill.name }} &colon; {{ skill.description }}</p></li>
                     {% endfor %}
                 </ul>
+
+                <div class="row justify-content-center">
+                    {% for category in course.categories %}
+                        <div class="col-10 mb-4">
+                            {% partial "category-card"
+                                category=category
+                                detailsPage=categoryPage
+                                detailsKeyColumn=categoryKeyColumn
+                                detailsUrlParameter=categoryUrlParameter
+                            %}
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
@@ -91,9 +118,9 @@ notFoundMessage = "Record not found"
     <div class="container">
         <div class="row align-middle">
             <div class="col-12 col-sm-12 col-md-7 col-lg-8">
-                <h4 class="mb-3 font-weight-bold">{{ 'course.supplier-title'|_ }}</h4>
+                <h4 class="mb-3 font-weight-bold">{{ 'course.supplier.title'|_ }}</h4>
                 <p class="font-weight-bold">{{ course.supplier.name }}</p>
-                <small>{{ course.supplier.description }}</small>
+                <p>{{ course.supplier.description }}</p>
             </div>
 
             <div class="col-12">
@@ -101,7 +128,9 @@ notFoundMessage = "Record not found"
             </div>
 
             <div class="col-12">
+                <h5 class="mb-3 font-weight-bold">{{ 'course.supplier.courses.title'|_ }}</h5>
                 {% partial "carousel-multiple-courses"
+                    id='supplier-courses'
                     courses=course.supplier.courses
                     detailsPage='tms-curs'
                     detailsKeyColumn='slug'
@@ -113,3 +142,27 @@ notFoundMessage = "Record not found"
     </div>
 </section>
 <!--/.Supplier Section-->
+
+<!--Courses Section-->
+<section class="py-3 bg-transparent">
+    <div class="container">
+        <div class="row align-middle">
+            <div class="col-12">
+                <hr class="my-5 bg-dark">
+            </div>
+
+            <div class="col-12">
+                <h5 class="mb-3 font-weight-bold">{{ 'course.courses.title'|_ }}</h5>
+                {% partial "carousel-multiple-courses"
+                    id='similar-courses'
+                    courses=similarCourses
+                    detailsPage='tms-curs'
+                    detailsKeyColumn='slug'
+                    detailsUrlParameter='slug'
+                %}
+        	</div>
+
+        </div>
+    </div>
+</section>
+<!--/.Courses Section-->

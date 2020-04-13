@@ -9,3 +9,11 @@
     color: $white;
     background: $primary-color-dark;
 }
+
+
+.modal{
+    overflow:hidden;
+}
+.modal-body{
+    overflow:auto;
+}
