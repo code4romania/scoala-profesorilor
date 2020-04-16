@@ -18,6 +18,6 @@ class Addresses extends Controller
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('Genuineq.Tms', 'main-menu-item', 'side-menu-item5');
+        BackendMenu::setContext('Genuineq.Tms', 'main-menu-item2', 'side-menu-item');
     }
 }

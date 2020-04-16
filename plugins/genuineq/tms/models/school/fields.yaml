@@ -1,0 +1,58 @@
+fields:
+    name:
+        label: 'genuineq.tms::lang.school.label.name'
+        span: auto
+        required: 1
+        type: text
+    slug:
+        label: 'genuineq.tms::lang.school.label.slug'
+        span: auto
+        defaultFrom: name
+        type: text
+    phone:
+        label: 'genuineq.tms::lang.school.label.phone'
+        span: auto
+        required: 1
+        type: number
+    email:
+        label: 'genuineq.tms::lang.school.label.email'
+        span: auto
+        required: 1
+        type: text
+    principal:
+        label: 'genuineq.tms::lang.school.label.principal'
+        span: auto
+        required: 1
+        type: text
+    avatar:
+        label: 'genuineq.tms::lang.school.label.avatar'
+        mode: image
+        imageWidth: '200'
+        span: auto
+        required: 0
+        type: mediafinder
+    description:
+        label: 'genuineq.tms::lang.school.label.description'
+        size: large
+        span: full
+        type: richeditor
+    contact_name:
+        label: 'genuineq.tms::lang.school.label.contact_name'
+        span: auto
+        required: 1
+        type: text
+    contact_role:
+        label: 'genuineq.tms::lang.school.label.contact_role'
+        span: auto
+        required: 1
+        type: text
+    contact_phone:
+        label: 'genuineq.tms::lang.school.label.contact_phone'
+        span: auto
+        required: 1
+        type: text
+    contact_email:
+        label: 'genuineq.tms::lang.school.label.contact_email'
+        span: auto
+        required: 1
+        type: text

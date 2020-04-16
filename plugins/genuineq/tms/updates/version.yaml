@@ -36,3 +36,30 @@
 1.0.13:
     - 'Created addresses seeder'
     - address_seeder.php
+1.0.14:
+    - 'Created table genuineq_tms_teachers'
+    - builder_table_create_genuineq_tms_teachers.php
+1.0.15:
+    - 'Created table genuineq_tms_inspectorates'
+    - builder_table_create_genuineq_tms_inspectorates.php
+1.0.16:
+    - 'Created table genuineq_tms_schools'
+    - builder_table_create_genuineq_tms_schools.php
+1.0.17:
+    - 'Created table genuineq_tms_learning_plans'
+    - builder_table_create_genuineq_tms_learning_plans.php
+1.0.18:
+    - 'Created table genuineq_tms_learning_plans_courses'
+    - builder_table_create_genuineq_tms_learning_plans_courses.php
+1.0.19:
+    - 'Created table genuineq_tms_specializations'
+    - builder_table_create_genuineq_tms_specializations.php
+1.0.20:
+    - 'Created table genuineq_tms_grades'
+    - builder_table_create_genuineq_tms_grades.php
+1.0.21:
+    - 'Created table genuineq_tms_teachers_specializations'
+    - builder_table_create_genuineq_tms_teachers_specializations.php
+1.0.22:
+    - 'Created table genuineq_tms_teachers_grades'
+    - builder_table_create_genuineq_tms_teachers_grades.php

@@ -12,6 +12,6 @@ fields:
         type: text
     description:
         label: 'genuineq.tms::lang.skill.label.description'
-        size: small
+        size: large
         span: full
         type: richeditor

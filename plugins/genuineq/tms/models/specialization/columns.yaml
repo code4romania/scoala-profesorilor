@@ -1,0 +1,11 @@
+columns:
+    name:
+        label: 'genuineq.tms::lang.specialization.label.name'
+        type: text
+        searchable: true
+        sortable: true
+    slug:
+        label: 'genuineq.tms::lang.specialization.label.slug'
+        type: text
+        searchable: true
+        sortable: true

@@ -11,9 +11,9 @@ class BuilderTableCreateGenuineqTmsCategories extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
-            $table->string('name')->comment = "The name of the category.";
-            $table->string('slug')->comment = "The slug of the category.";
-            $table->string('color')->comment = "The color of the category.";
+            $table->string('name', 75)->comment = "The name of the category.";
+            $table->string('slug', 75)->comment = "The slug of the category.";
+            $table->string('color', 10)->comment = "The color of the category.";
             $table->string('icon')->nullable()->comment = "The icon of the category.";
             $table->text('description')->nullable()->comment = "The description of the category.";
             $table->timestamp('deleted_at')->nullable();

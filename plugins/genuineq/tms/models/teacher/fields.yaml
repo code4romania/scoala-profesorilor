@@ -1,0 +1,29 @@
+fields:
+    name:
+        label: 'genuineq.tms::lang.teacher.label.name'
+        span: auto
+        required: 1
+        type: text
+    slug:
+        label: 'genuineq.tms::lang.teacher.label.slug'
+        span: auto
+        required: 1
+        defaultFrom: name
+        type: text
+    phone:
+        label: 'genuineq.tms::lang.teacher.label.phone'
+        span: auto
+        required: 1
+        type: number
+    birth_date:
+        label: 'genuineq.tms::lang.teacher.label.birth_date'
+        mode: date
+        span: auto
+        required: 1
+        type: datepicker
+    avatar:
+        label: 'genuineq.tms::lang.teacher.label.avatar'
+        mode: image
+        imageWidth: '200'
+        span: auto
+        type: mediafinder

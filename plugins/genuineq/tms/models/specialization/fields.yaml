@@ -1,0 +1,15 @@
+fields:
+    name:
+        label: 'genuineq.tms::lang.specialization.label.name'
+        span: auto
+        type: text
+    slug:
+        label: 'genuineq.tms::lang.specialization.label.slug'
+        span: auto
+        defaultFrom: name
+        type: text
+    description:
+        label: 'genuineq.tms::lang.specialization.label.description'
+        size: large
+        span: full
+        type: richeditor

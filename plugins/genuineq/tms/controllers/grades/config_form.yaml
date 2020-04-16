@@ -1,0 +1,10 @@
+name: Grades
+form: $/genuineq/tms/models/grade/fields.yaml
+modelClass: Genuineq\Tms\Models\Grade
+defaultRedirect: genuineq/tms/grades
+create:
+    redirect: 'genuineq/tms/grades/update/:id'
+    redirectClose: genuineq/tms/grades
+update:
+    redirect: genuineq/tms/grades
+    redirectClose: genuineq/tms/grades

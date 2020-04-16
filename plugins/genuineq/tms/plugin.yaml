@@ -6,7 +6,7 @@ plugin:
     homepage: ''
 navigation:
     main-menu-item:
-        label: 'genuineq.tms::lang.plugin.name'
+        label: 'genuineq.tms::lang.plugin.backend-menu.dynamic'
         url: genuineq/tms/courses
         icon: icon-book
         sideMenu:
@@ -27,6 +27,35 @@ navigation:
                 url: genuineq/tms/skills
                 icon: icon-check-square
             side-menu-item5:
+                label: 'genuineq.tms::lang.teacher.backend-menu'
+                url: genuineq/tms/teachers
+                icon: icon-users
+            side-menu-item6:
+                label: 'genuineq.tms::lang.school.backend-menu'
+                url: genuineq/tms/schools
+                icon: icon-building-o
+            side-menu-item7:
+                label: 'genuineq.tms::lang.learning-plan.backend-menu'
+                url: genuineq/tms/learningplans
+                icon: icon-line-chart
+    main-menu-item2:
+        label: 'genuineq.tms::lang.plugin.backend-menu.static'
+        url: genuineq/tms/addresses
+        icon: icon-database
+        sideMenu:
+            side-menu-item:
                 label: 'genuineq.tms::lang.address.backend-menu'
                 url: genuineq/tms/addresses
                 icon: icon-map-marker
+            side-menu-item2:
+                label: 'genuineq.tms::lang.inspectotate.backend-menu'
+                url: genuineq/tms/inspectotate
+                icon: icon-institution
+            side-menu-item3:
+                label: 'genuineq.tms::lang.specialization.backend-menu'
+                url: genuineq/tms/specializations
+                icon: icon-tags
+            side-menu-item4:
+                label: 'genuineq.tms::lang.grade.backend-menu'
+                url: genuineq/tms/grades
+                icon: icon-graduation-cap

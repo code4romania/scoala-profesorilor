@@ -1,0 +1,4 @@
+title: Inspectotate
+modelClass: Genuineq\Tms\Models\Inspectorate
+toolbar:
+    buttons: reorder_toolbar

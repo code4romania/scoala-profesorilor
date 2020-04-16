@@ -1,0 +1,15 @@
+fields:
+    year:
+        label: 'genuineq.tms::lang.learning-plan.label.year'
+        span: auto
+        type: number
+    semester:
+        label: 'genuineq.tms::lang.learning-plan.label.semester'
+        span: auto
+        type: number
+    courses:
+        label: 'genuineq.tms::lang.learning-plan.label.courses'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation

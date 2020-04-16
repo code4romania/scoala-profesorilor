@@ -1,0 +1,14 @@
+fields:
+    name:
+        label: 'genuineq.tms::lang.inspectotate.label.name'
+        span: auto
+        type: text
+    slug:
+        label: 'genuineq.tms::lang.inspectotate.label.slug'
+        span: auto
+        type: text
+    description:
+        label: 'genuineq.tms::lang.inspectotate.label.description'
+        size: large
+        span: full
+        type: richeditor

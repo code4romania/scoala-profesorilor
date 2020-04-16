@@ -1,0 +1,10 @@
+name: Specializations
+form: $/genuineq/tms/models/specialization/fields.yaml
+modelClass: Genuineq\Tms\Models\Specialization
+defaultRedirect: genuineq/tms/specializations
+create:
+    redirect: 'genuineq/tms/specializations/update/:id'
+    redirectClose: genuineq/tms/specializations
+update:
+    redirect: genuineq/tms/specializations
+    redirectClose: genuineq/tms/specializations

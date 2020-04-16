@@ -1,0 +1,10 @@
+name: LearningPlans
+form: $/genuineq/tms/models/learningplan/fields.yaml
+modelClass: Genuineq\Tms\Models\LearningPlan
+defaultRedirect: genuineq/tms/learningplans
+create:
+    redirect: 'genuineq/tms/learningplans/update/:id'
+    redirectClose: genuineq/tms/learningplans
+update:
+    redirect: genuineq/tms/learningplans
+    redirectClose: genuineq/tms/learningplans

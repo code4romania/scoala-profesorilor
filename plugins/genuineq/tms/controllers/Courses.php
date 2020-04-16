@@ -18,6 +18,6 @@ class Courses extends Controller
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('Genuineq.Tms', 'main-menu-item');
+        BackendMenu::setContext('Genuineq.Tms', 'main-menu-item', 'side-menu-item');
     }
 }

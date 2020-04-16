@@ -1,0 +1,10 @@
+name: Teachers
+form: $/genuineq/tms/models/teacher/fields.yaml
+modelClass: Genuineq\Tms\Models\Teacher
+defaultRedirect: genuineq/tms/teachers
+create:
+    redirect: 'genuineq/tms/teachers/update/:id'
+    redirectClose: genuineq/tms/teachers
+update:
+    redirect: genuineq/tms/teachers
+    redirectClose: genuineq/tms/teachers

@@ -3,7 +3,7 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class BuilderTableCreateGenuineqCoursesTmsSkills extends Migration
+class BuilderTableCreateGenuineqTmsCoursesSkills extends Migration
 {
     public function up()
     {
@@ -12,7 +12,7 @@ class BuilderTableCreateGenuineqCoursesTmsSkills extends Migration
             $table->engine = 'InnoDB';
             $table->integer('course_id');
             $table->integer('skill_id');
-            $table->primary(['course_id','skill_id'], 'genuineq_tms_courses_skills_course_id');
+            $table->primary(['course_id','skill_id'], 'genuineq_tms_courses_skills_id');
         });
     }
 
