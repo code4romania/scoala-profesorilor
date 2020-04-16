@@ -15,17 +15,19 @@ class SkillSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create();
+        if (App::environment(['local', 'development'])) {
+            $faker = Faker\Factory::create();
 
-        for ($i=0; $i < 30; $i++) {
+            for ($i=0; $i < 30; $i++) {
 
-            $name = $faker->sentence($nbWords = 6, $variableNbWords = true);
+                $name = $faker->sentence($nbWords = 6, $variableNbWords = true);
 
-            Skill::create([
-                'name' => $name,
-                'slug' => str_slug($name, '-'),
-                'description' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
-            ]);
+                Skill::create([
+                    'name' => $name,
+                    'slug' => str_slug($name, '-'),
+                    'description' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
+                ]);
+            }
         }
     }
 }

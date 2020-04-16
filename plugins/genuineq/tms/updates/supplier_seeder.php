@@ -15,19 +15,21 @@ class SupplierSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create('ro_RO');
+        if (App::environment(['local', 'development'])) {
+            $faker = Faker\Factory::create('ro_RO');
 
-        for ($i=0; $i < 10; $i++) {
+            for ($i=0; $i < 10; $i++) {
 
-            $name = $faker->sentence($nbWords = 6, $variableNbWords = true);
+                $name = $faker->sentence($nbWords = 6, $variableNbWords = true);
 
-            Supplier::create([
-                'name' => $name,
-                'slug' => str_slug($name, '-'),
-                'description' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
-                'phone' => $faker->tollFreePhoneNumber(),
-                'email' => $faker->companyEmail(),
-            ]);
+                Supplier::create([
+                    'name' => $name,
+                    'slug' => str_slug($name, '-'),
+                    'description' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
+                    'phone' => $faker->tollFreePhoneNumber(),
+                    'email' => $faker->companyEmail(),
+                ]);
+            }
         }
     }
 }

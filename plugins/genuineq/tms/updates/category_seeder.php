@@ -13,18 +13,21 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create();
+        /* Check if the environment is either local OR development. */
+        if (App::environment(['local', 'development'])) {
+            $faker = Faker\Factory::create();
 
-        for ($i=0; $i < 12; $i++) {
+            for ($i=0; $i < 12; $i++) {
 
-            $name = $faker->sentence($nbWords = 6, $variableNbWords = true);
+                $name = $faker->sentence($nbWords = 6, $variableNbWords = true);
 
-            Category::create([
-                'name' => $name,
-                'slug' => str_slug($name, '-'),
-                'color' => $faker->hexcolor(),
-                'description' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
-            ]);
+                Category::create([
+                    'name' => $name,
+                    'slug' => str_slug($name, '-'),
+                    'color' => $faker->hexcolor(),
+                    'description' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
+                ]);
+            }
         }
     }
 }
