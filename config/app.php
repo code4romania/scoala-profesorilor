@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'debug' => true,
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'url' => 'tms.test',
+    'url' => env('APP_URL', 'tms.test'),
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +101,7 @@ return [
     |
     */
 
-    'key' => 'EVkxpudGSl8QkVVgg6DGXgbz92AbAAkg',
+    'key' => env('APP_KEY', ''),
 
     'cipher' => 'AES-256-CBC',
 
