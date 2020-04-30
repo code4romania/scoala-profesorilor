@@ -1,0 +1,80 @@
+title = "Dashboard Scoala"
+url = "/tms-dashboard-scoala"
+layout = "tms-non-static"
+is_hidden = 0
+
+[builderList categoriesList]
+modelClass = "Genuineq\Tms\Models\Category"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "name"
+noRecordsMessage = "Nu exista inregistrari"
+detailsPage = "tms-categorie"
+detailsKeyColumn = "slug"
+detailsUrlParameter = "slug"
+pageNumber = "{{ :page }}"
+
+[builderList coursesList]
+modelClass = "Genuineq\Tms\Models\Course"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "name"
+noRecordsMessage = "Nu exista inregistrari"
+detailsPage = "tms-curs"
+detailsKeyColumn = "slug"
+detailsUrlParameter = "slug"
+recordsPerPage = 12
+pageNumber = "{{ :page }}"
+==
+<div class="container-fluid bg-secondary">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 py-4">
+
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <img class="img-thumbnail mx-auto d-block rounded-circle wow fadeInRight" src="{{ 'assets/img/svg/school.svg'|theme }}" alt="" style="background-color: {{ category.color }} !important;">
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto">
+                        <h4 class="font-weight-bold wow fadeInRight">{{ 'school.dashboard.title'|_ }}</h4>
+
+                        <p class="wow fadeInRight">{{ 'school.dashboard.description'|_ }}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-sm-12">
+
+            <h5 class="mb-3 font-weight-bold">{{ 'home.categories.title'|_ }}</h5>
+
+            {% partial "category-grid"
+                categories=categoriesList.records
+                detailsPage=categoriesList.detailsPage
+                detailsKeyColumn=categoriesList.detailsKeyColumn
+                detailsUrlParameter=categoriesList.detailsUrlParameter
+                pagination=false
+            %}
+
+            <hr class="my-5 bg-dark">
+
+            {% partial "search-form" %}
+
+            <h5 class="mb-3 font-weight-bold">{{ 'home.courses.title'|_ }}</h5>
+
+            {% partial "course-grid"
+                courses=coursesList.records
+                detailsPage=coursesList.detailsPage
+                detailsKeyColumn=coursesList.detailsKeyColumn
+                detailsUrlParameter=coursesList.detailsUrlParameter
+                pagination=true
+            %}
+        </div>
+    </div>
+</div>

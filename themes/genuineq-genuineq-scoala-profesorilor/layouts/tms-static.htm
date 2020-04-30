@@ -21,11 +21,15 @@ security = 'all'
 
 {% if not user %}
     {% partial 'login-modal' %}
-    {% partial 'signup-modal' %}
+    {% partial 'signup-school-modal' %}
+    {% partial 'signup-teacher-modal' %}
+    {% partial 'signup-select-modal' %}
 
     <script src="{{ [
-            'assets/js/partials/signup-modal.js',
-            'assets/js/partials/login-modal.js'
+            'assets/js/partials/login-modal.js',
+            'assets/js/partials/signup-school-modal.js',
+            'assets/js/partials/signup-teacher-modal.js',
+            'assets/js/partials/signup-select-modal.js'
         ]|theme }}">
     </script>
 {% endif %}

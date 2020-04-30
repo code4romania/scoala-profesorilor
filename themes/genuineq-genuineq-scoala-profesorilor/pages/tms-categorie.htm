@@ -1,6 +1,6 @@
 title = "TMS - Categorie"
 url = "/tms-categorie/:slug/:page?"
-layout = "offline"
+layout = "tms-non-static"
 is_hidden = 0
 
 [builderList categoriesList]
@@ -8,7 +8,7 @@ modelClass = "Genuineq\Tms\Models\Category"
 scope = "-"
 scopeValue = "{{ :scope }}"
 displayColumn = "name"
-noRecordsMessage = "No records found"
+noRecordsMessage = "Nu exista inregistrari"
 detailsPage = "tms-categorie"
 detailsKeyColumn = "slug"
 detailsUrlParameter = "slug"

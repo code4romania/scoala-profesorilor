@@ -1,13 +1,13 @@
 [viewBag]
 ==
 
-<div class="modal fade" id="login-select-modal" tabindex="-1" role="dialog" aria-labelledby="login-select-modal" aria-hidden="true">
+<div class="modal fade" id="signup-select-modal" tabindex="-1" role="dialog" aria-labelledby="signup-select-modal" aria-hidden="true">
 
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
-                <h4 class="modal-title w-100" id="login-select-modal">{{ 'login-select-modal.title'|_ }}</h4>
+                <h4 class="modal-title w-100" id="signup-select-modal">{{ 'signup-select-modal.title'|_ }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -18,13 +18,13 @@
                     <div class="col-12 col-sm-6 col-md-6 col-lg-6 border-right">
                         <div class="row align-items-start">
                             <div class="col">
-                                <h5 class="pb-3">{{ 'login-select-modal.teacher.title'|_ }}</h5>
-                                <small>{{ 'login-select-modal.teacher.description'|_ }}</small>
+                                <h5 class="pb-3">{{ 'signup-select-modal.teacher.title'|_ }}</h5>
+                                <small>{{ 'signup-select-modal.teacher.description'|_ }}</small>
                             </div>
                         </div>
                         <div class="row d-sm-none d-md-none d-lg-none d-xl-none">
                             <div class="col">
-                                <button type="button" class="btn btl-lg btn-block btn-secondary rounded mt-3" data-dismiss="modal" data-toggle="modal" data-target="#login-modal">{{'auth.login-label'|_ }}</button>
+                                <button type="button" class="btn btl-lg btn-block btn-secondary rounded mt-3" data-dismiss="modal" data-toggle="modal" data-target="#signup-teacher-modal">{{'auth.signup-label'|_ }}</button>
                             </div>
                         </div>
                     </div>
@@ -32,13 +32,13 @@
                     <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                         <div class="row align-items-start">
                             <div class="col">
-                                <h5 class="pb-3 pt-5 pt-sm-0 pt-md-0 pt-lg-0 pt-xl-0">{{ 'login-select-modal.school.title'|_ }}</h5>
-                                <small>{{ 'login-select-modal.school.description'|_ }}</small>
+                                <h5 class="pb-3 pt-5 pt-sm-0 pt-md-0 pt-lg-0 pt-xl-0">{{ 'signup-select-modal.school.title'|_ }}</h5>
+                                <small>{{ 'signup-select-modal.school.description'|_ }}</small>
                             </div>
                         </div>
                         <div class="row d-sm-none d-md-none d-lg-none d-xl-none">
                             <div class="col">
-                                <button type="button" class="btn btl-lg btn-block btn-secondary rounded mt-3" data-dismiss="modal" data-toggle="modal" data-target="#login-modal">{{'auth.login-label'|_ }}</button>
+                                <button type="button" class="btn btl-lg btn-block btn-secondary rounded mt-3" data-dismiss="modal" data-toggle="modal" data-target="#signup-school-modal">{{'auth.signup-label'|_ }}</button>
                             </div>
                         </div>
                     </div>
@@ -46,10 +46,10 @@
 
                 <div class="row align-items-start d-none d-sm-flex d-md-flex d-lg-flex d-xl-flex">
                     <div class="col-12 col-sm-6 col-md-6 col-lg-6 border-right">
-                        <button type="button" class="btn btl-lg btn-block btn-secondary rounded mt-3" data-dismiss="modal" data-toggle="modal" data-target="#login-modal">{{'auth.login-label'|_ }}</button>
+                        <button type="button" class="btn btl-lg btn-block btn-secondary rounded mt-3" data-dismiss="modal" data-toggle="modal" data-target="#signup-teacher-modal">{{'auth.signup-label'|_ }}</button>
                     </div>
                     <div class="col-12 col-sm-6 col-md-6 col-lg-6">
-                        <button type="button" class="btn btl-lg btn-block btn-secondary rounded mt-3" data-dismiss="modal" data-toggle="modal" data-target="#login-modal">{{'auth.login-label'|_ }}</button>
+                        <button type="button" class="btn btl-lg btn-block btn-secondary rounded mt-3" data-dismiss="modal" data-toggle="modal" data-target="#signup-school-modal">{{'auth.signup-label'|_ }}</button>
                     </div>
                 </div>
             </div>
@@ -58,8 +58,8 @@
                 <div class="row w-100">
                     <div class="col-12 text-center">
                         <p class="m-0">
-                            {{ ('login-select-modal.footer.signup'|_)|raw }}
-                            <a data-dismiss="modal" data-toggle="modal" href="#signup-modal" data-target="#signup-modal">{{'auth.signup-label'|_ }}</a>
+                            {{ ('signup-select-modal.footer.login'|_)|raw }}
+                            <a data-dismiss="modal" data-toggle="modal" href="#login-modal" data-target="#login-modal">{{'auth.login-label'|_ }}</a>
                         </p>
                     </div>
                 </div>

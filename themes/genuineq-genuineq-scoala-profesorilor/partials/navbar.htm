@@ -20,28 +20,50 @@ code = "main-menu"
         <!-- Collapsible content -->
         <div class="collapse navbar-collapse" id="basicExampleNav">
 
-            {% if staticMenu.totalItems %}
+            <ul class="navbar-nav ml-auto d-flex align-items-center">
                 <!-- Links -->
-                <ul class="navbar-nav ml-auto">
+                {% if staticMenu.totalItems %}
                     {% for menuItem in staticMenu.menuItems %}
-                        <li class="nav-item {% if menuItem.isActive %} active {% endif %}">
+                        <li class="nav-item h-100 {% if menuItem.isActive %} active {% endif %}">
                             <a class="nav-link" href="{{ menuItem.url }} ">
                                 {{ menuItem.title }}
                                 {% if this.page.title == menuItem.title %} <span class="sr-only">(current)</span>{% endif %}
                             </a>
                         </li>
                     {% endfor %}
-                </ul>
-
+                {% endif %}
                 <!-- Links -->
-            {% endif %}
 
-            <div class="border-left border-dark mx-3"></div>
+                <li class="nav-item h-100 d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                    <div class="border-left border-dark h-100 mx-3">&zwnj;</div>
+                </li>
 
-            {% if not user %}
-                <button type="button" class="btn btn-sm align-middle btn-outline-black z-depth-0 rounded ml-0" data-toggle="modal" data-target="#login-select-modal">{{'auth.login-label'|_ }}</button>
-                <button type="button" class="btn btn-sm btn-success z-depth-0 rounded" data-toggle="modal" data-target="#signup-modal">{{'auth.signup-label'|_ }}</button>
-            {% endif %}
+                {% if not user %}
+                    <li class="nav-item h-100">
+                        <button type="button" class="btn btn-sm align-middle btn-outline-black z-depth-0 rounded ml-0" data-toggle="modal" data-target="#login-modal">{{'auth.login-label'|_ }}</button>
+                        <button type="button" class="btn btn-sm btn-success z-depth-0 rounded" data-toggle="modal" data-target="#signup-select-modal">{{'auth.signup-label'|_ }}</button>
+                    </li>
+                {% else %}
+                    <li class="nav-item h-100">
+                        <a class="nav-link" href="#">
+                            <img src="{{ 'assets/img/svg/icon-bell.svg'|theme }}" alt="notification" height="25">
+                        </a>
+                    </li>
+
+                    <li class="nav-item h-100 avatar">
+                        <a class="nav-link p-0" href="{{ user.getProfilePage() }}">
+                            <img src="{{ (user.getAvatarThumb()) ? (user.getAvatarThumb(50)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="rounded-circle z-depth-0" alt="avatar" height="50">
+                        </a>
+                    </li>
+
+                    <li class="nav-item h-100">
+                        <a class="nav-link ml-3" data-request="onLogout" data-request-data="redirect: '/'">
+                            {{'auth.logout-label'|_ }}&nbsp;
+                            <img src="{{ 'assets/img/svg/icon-logout.svg'|theme }}" alt="notification" height="16">
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
 
         </div>
         <!-- Collapsible content -->

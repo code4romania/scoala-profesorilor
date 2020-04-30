@@ -1,10 +1,6 @@
-[Esroyo\UserProfile\Components\Account account]
-paramCode = "code"
-forceSecure = 0
-
 [viewBag]
-==
 
+==
 <!-- Central Modal Small -->
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true">
 
@@ -22,12 +18,12 @@ forceSecure = 0
                 <div class="row">
                     <div class="col">
 
-                        {{ form_ajax('onSignin') }}
-
+                        <form method="POST" data-request="onLogin" data-request-validate data-request-flash>
                             <div class="form-group">
                                 <div class="md-form">
-                                    <input name="login" type="text" id="userSigninLogin" class="form-control">
+                                    <input name="email" type="text" id="userSigninLogin" class="form-control">
                                     <label for="userSigninLogin">{{ 'login-modal.email'|_ }}</label>
+                                    <div class="small text-danger" data-validate-for="email"></div>
                                 </div>
                             </div>
 
@@ -35,6 +31,7 @@ forceSecure = 0
                                 <div class="md-form">
                                     <input name="password" type="password" id="userSigninPassword" class="form-control">
                                     <label for="userSigninPassword">{{ 'login-modal.password'|_ }}</label>
+                                    <div class="small text-danger" data-validate-for="password"></div>
                                 </div>
                             </div>
 
@@ -49,12 +46,11 @@ forceSecure = 0
                             <div class="form-row">
                                 <div class="col-12">
                                     <div class="md-form m-0">
-                                        <button type="submit" class="btn btl-lg btn-block btn-secondary rounded m-0">{{'auth.login-label'|_ }}</button>
+                                        <button type="submit" class="btn btl-lg btn-block btn-secondary rounded m-0" data-attach-loading>{{'auth.login-label'|_ }}</button>
                                     </div>
                                 </div>
                             </div>
-
-                        {{ form_close() }}
+                        </form>
 
                     </div>
                 </div>
@@ -65,7 +61,7 @@ forceSecure = 0
                     <div class="col-12 text-center">
                         <p class="m-0">
                             {{ ('login-modal.footer.signup'|_)|raw }}
-                            <a data-dismiss="modal" data-toggle="modal" href="#signup-modal" data-target="#signup-modal">{{'auth.signup-label'|_ }}</a>
+                            <a data-dismiss="modal" data-toggle="modal" href="#signup-select-modal" data-target="#signup-select-modal">{{'auth.signup-label'|_ }}</a>
                         </p>
                     </div>
                 </div>
