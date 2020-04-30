@@ -1,0 +1,14 @@
+fields:
+    name:
+        label: 'genuineq.tms::lang.taught-subjects.label.name'
+        span: auto
+        type: text
+    diacritic:
+        label: 'genuineq.tms::lang.taught-subjects.label.diacritic'
+        span: auto
+        type: text
+    description:
+        label: 'genuineq.tms::lang.taught-subjects.label.description'
+        size: large
+        span: full
+        type: richeditor

@@ -1,0 +1,23 @@
+fields:
+    learning_plan_id:
+        label: 'genuineq.tms::lang.learning-plans-course.label.learning-plan'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+    course_id:
+        label: 'genuineq.tms::lang.learning-plans-course.label.course'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+    school_id:
+        label: 'genuineq.tms::lang.learning-plans-course.label.school'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+    covered_costs:
+        label: 'genuineq.tms::lang.learning-plans-course.label.covered-costs'
+        span: auto
+        type: number

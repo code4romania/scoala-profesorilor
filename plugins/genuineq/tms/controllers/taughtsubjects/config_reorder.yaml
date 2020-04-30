@@ -1,0 +1,4 @@
+title: TaughtSubjects
+modelClass: Genuineq\Tms\Models\TaughtSubject
+toolbar:
+    buttons: reorder_toolbar

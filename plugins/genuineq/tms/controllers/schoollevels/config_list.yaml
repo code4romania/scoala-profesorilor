@@ -1,0 +1,12 @@
+list: $/genuineq/tms/models/schoollevel/columns.yaml
+modelClass: Genuineq\Tms\Models\SchoolLevel
+title: SchoolLevels
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'genuineq/tms/schoollevels/update/:id'

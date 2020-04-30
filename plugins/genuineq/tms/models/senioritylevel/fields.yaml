@@ -1,0 +1,14 @@
+fields:
+    name:
+        label: 'genuineq.tms::lang.seniority-level.label.name'
+        span: auto
+        type: text
+    diacritic:
+        label: 'genuineq.tms::lang.seniority-level.label.diacritic'
+        span: auto
+        type: text
+    description:
+        label: 'genuineq.tms::lang.seniority-level.label.description'
+        size: large
+        span: full
+        type: richeditor

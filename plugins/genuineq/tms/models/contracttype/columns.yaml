@@ -1,0 +1,11 @@
+columns:
+    name:
+        label: 'genuineq.tms::lang.contract-types.label.name'
+        type: text
+        searchable: true
+        sortable: true
+    diacritic:
+        label: 'genuineq.tms::lang.contract-types.label.diacritic'
+        type: text
+        searchable: true
+        sortable: true

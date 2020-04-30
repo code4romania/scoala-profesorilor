@@ -1,0 +1,21 @@
+columns:
+    id:
+        label: 'genuineq.tms::lang.learning-plans-course.label.id'
+        type: number
+        searchable: true
+        sortable: true
+    course_name:
+        label: 'genuineq.tms::lang.learning-plans-course.label.course'
+        type: text
+        searchable: true
+        sortable: true
+    school_name:
+        label: 'genuineq.tms::lang.learning-plans-course.label.school'
+        type: text
+        searchable: true
+        sortable: true
+    covered_costs:
+        label: 'genuineq.tms::lang.learning-plans-course.label.covered-costs'
+        type: number
+        searchable: true
+        sortable: true

@@ -1,0 +1,10 @@
+name: ContractTypes
+form: $/genuineq/tms/models/contracttype/fields.yaml
+modelClass: Genuineq\Tms\Models\ContractType
+defaultRedirect: genuineq/tms/contracttypes
+create:
+    redirect: 'genuineq/tms/contracttypes/update/:id'
+    redirectClose: genuineq/tms/contracttypes
+update:
+    redirect: genuineq/tms/contracttypes
+    redirectClose: genuineq/tms/contracttypes

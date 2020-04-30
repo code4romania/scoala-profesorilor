@@ -1,0 +1,11 @@
+columns:
+    name:
+        label: 'genuineq.tms::lang.taught-subjects.label.name'
+        type: text
+        searchable: true
+        sortable: true
+    diacritic:
+        label: 'genuineq.tms::lang.taught-subjects.label.diacritic'
+        type: text
+        searchable: true
+        sortable: true

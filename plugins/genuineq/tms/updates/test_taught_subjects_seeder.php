@@ -1,16 +1,12 @@
 <?php namespace Genuineq\Tms\Updates;
 
-use Genuineq\Tms\Models\Category;
+use Genuineq\Tms\Models\TaughtSubject;
 use October\Rain\Database\Updates\Seeder;
+use Illuminate\Support\Facades\App;
 use Faker;
 
-class CategorySeeder extends Seeder
+class TestTaughtSubjectsSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         /* Check if the environment is either local OR development. */
@@ -19,12 +15,11 @@ class CategorySeeder extends Seeder
 
             for ($i=0; $i < 12; $i++) {
 
-                $name = $faker->sentence($nbWords = 6, $variableNbWords = true);
+                $name = $faker->sentence($nbWords = 2, $variableNbWords = true);
 
-                Category::create([
+                TaughtSubject::create([
                     'name' => $name,
-                    'slug' => str_slug($name, '-'),
-                    'color' => $faker->hexcolor(),
+                    'diacritic' => $name,
                     'description' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
                 ]);
             }

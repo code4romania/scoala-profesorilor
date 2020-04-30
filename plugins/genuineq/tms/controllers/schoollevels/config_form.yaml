@@ -1,0 +1,10 @@
+name: SchoolLevels
+form: $/genuineq/tms/models/schoollevel/fields.yaml
+modelClass: Genuineq\Tms\Models\SchoolLevel
+defaultRedirect: genuineq/tms/schoollevels
+create:
+    redirect: 'genuineq/tms/schoollevels/update/:id'
+    redirectClose: genuineq/tms/schoollevels
+update:
+    redirect: genuineq/tms/schoollevels
+    redirectClose: genuineq/tms/schoollevels

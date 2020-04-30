@@ -4,9 +4,10 @@ namespace Genuineq\Tms\Updates;
 
 use Genuineq\Tms\Models\Supplier;
 use October\Rain\Database\Updates\Seeder;
+use Illuminate\Support\Facades\App;
 use Faker;
 
-class SupplierSeeder extends Seeder
+class TestSupplierSeeder extends Seeder
 {
     /**
      * Run the database seeds.

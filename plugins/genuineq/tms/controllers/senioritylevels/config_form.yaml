@@ -1,0 +1,10 @@
+name: SeniorityLevels
+form: $/genuineq/tms/models/senioritylevel/fields.yaml
+modelClass: Genuineq\Tms\Models\SeniorityLevel
+defaultRedirect: genuineq/tms/senioritylevels
+create:
+    redirect: 'genuineq/tms/senioritylevels/update/:id'
+    redirectClose: genuineq/tms/senioritylevels
+update:
+    redirect: genuineq/tms/senioritylevels
+    redirectClose: genuineq/tms/senioritylevels

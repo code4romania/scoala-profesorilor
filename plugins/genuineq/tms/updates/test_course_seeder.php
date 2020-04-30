@@ -6,9 +6,10 @@ use Genuineq\Tms\Models\Course;
 use Genuineq\Tms\Models\CourseCategory;
 use Genuineq\Tms\Models\CourseSkill;
 use October\Rain\Database\Updates\Seeder;
+use Illuminate\Support\Facades\App;
 use Faker;
 
-class CourseSeeder extends Seeder
+class TestCourseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -20,10 +21,13 @@ class CourseSeeder extends Seeder
         if (App::environment(['local', 'development'])) {
             $faker = Faker\Factory::create();
 
+            $courseNumber = 100;
+            $totalCategoriesNumber = 12;
+            $totalSkillsNumber = 30;
             /**
              * Create courses
              */
-            for ($i=0; $i < 100; $i++) {
+            for ($i=0; $i < $courseNumber; $i++) {
 
                 $name = $faker->sentence($nbWords = 6, $variableNbWords = true);
                 $accredited = $faker->numberBetween($min = 0, $max = 1);
@@ -47,65 +51,49 @@ class CourseSeeder extends Seeder
             /**
              * Add courses to categories
              */
-            for ($i=1; $i <= 100; $i++) {
-                $sp1 = $faker->numberBetween($min = 1, $max = 30);
-                $sp2 = $faker->numberBetween($min = 1, $max = 30);
-                $sp3 = $faker->numberBetween($min = 1, $max = 30);
+            for ($i=1; $i <= $courseNumber; $i++) {
+                $categoriesNumber = $faker->numberBetween($min = 1, $max = 5);
 
-                while ($sp2 == $sp1) {
-                    $sp2 = $faker->numberBetween($min = 1, $max = 30);
+                $categories = array();
+                for ($j=0; $j < $categoriesNumber; $j++) {
+                    $category = $faker->numberBetween($min = 1, $max = $totalCategoriesNumber);
+
+                    while (in_array($category, $categories)) {
+                        $category = $faker->numberBetween($min = 1, $max = $totalCategoriesNumber);
+                    }
+                    $categories[] = $category;
                 }
 
-                while (($sp3 == $sp1) || ($sp3 == $sp2)) {
-                    $sp3 = $faker->numberBetween($min = 1, $max = 30);
+                for ($j=0; $j < $categoriesNumber; $j++) {
+                    CourseCategory::create([
+                        'course_id' => $i,
+                        'category_id' => $categories[$j],
+                    ]);
                 }
-
-                CourseCategory::create([
-                    'course_id' => $i,
-                    'category_id' => $sp1,
-                ]);
-
-                CourseCategory::create([
-                    'course_id' => $i,
-                    'category_id' => $sp2,
-                ]);
-
-                CourseCategory::create([
-                    'course_id' => $i,
-                    'category_id' => $sp3,
-                ]);
             }
 
             /**
              * Add skills to courses
              */
-            for ($i=1; $i <= 100; $i++) {
-                $sp1 = $faker->numberBetween($min = 1, $max = 30);
-                $sp2 = $faker->numberBetween($min = 1, $max = 30);
-                $sp3 = $faker->numberBetween($min = 1, $max = 30);
+            for ($i=1; $i <= $courseNumber; $i++) {
+                $skillsNumber = $faker->numberBetween($min = 1, $max = 5);
 
-                while ($sp2 == $sp1) {
-                    $sp2 = $faker->numberBetween($min = 1, $max = 30);
+                $skills = array();
+                for ($j=0; $j < $skillsNumber; $j++) {
+                    $skill = $faker->numberBetween($min = 1, $max = $totalSkillsNumber);
+
+                    while (in_array($skill, $skills)) {
+                        $skill = $faker->numberBetween($min = 1, $max = $totalSkillsNumber);
+                    }
+                    $skills[] = $skill;
                 }
 
-                while (($sp3 == $sp1) || ($sp3 == $sp2)) {
-                    $sp3 = $faker->numberBetween($min = 1, $max = 30);
+                for ($j=0; $j < $skillsNumber; $j++) {
+                    CourseSkill::create([
+                        'course_id' => $i,
+                        'skill_id' => $skills[$j],
+                    ]);
                 }
-
-                CourseSkill::create([
-                    'course_id' => $i,
-                    'skill_id' => $sp1,
-                ]);
-
-                CourseSkill::create([
-                    'course_id' => $i,
-                    'skill_id' => $sp2,
-                ]);
-
-                CourseSkill::create([
-                    'course_id' => $i,
-                    'skill_id' => $sp3,
-                ]);
             }
         }
     }
