@@ -24,7 +24,7 @@
     'skill' => [
         'label' => [
             'name' => 'Name',
-            'slug' => 'Slug',
+            'diacritic' => 'Diacritics',
             'description' => 'Description',
         ],
 
@@ -99,7 +99,7 @@
     'inspectotate' => [
         'label' => [
             'name' => 'Name',
-            'slug' => 'Slug',
+            'diacritic' => 'Diacritics',
             'description' => 'Description',
         ],
 
@@ -128,16 +128,29 @@
         'label' => [
             'year' => 'Year',
             'semester' => 'Semester',
-            'courses' => 'Courses',
+            'courses' => 'Learning Plan Courses',
+            'teacher' => 'Teacher',
         ],
 
         'backend-menu' => 'Learning Plans',
     ],
 
+    'learning-plans-course' => [
+        'label' => [
+            'id' => '#',
+            'learning-plan' => 'Learning Plan',
+            'course' => 'Course',
+            'school' => 'School',
+            'covered-costs' => 'School Covered Costs',
+        ],
+
+        'backend-menu' => 'Learning Plans Courses',
+    ],
+
     'specialization' => [
         'label' => [
             'name' => 'Name',
-            'slug' => 'Slug',
+            'diacritic' => 'Diacritics',
             'description' => 'Description',
         ],
 
@@ -147,10 +160,50 @@
     'grade' => [
         'label' => [
             'name' => 'Name',
-            'slug' => 'Slug',
+            'diacritic' => 'Diacritics',
             'description' => 'Description',
         ],
 
         'backend-menu' => 'Grades',
+    ],
+
+    'seniority-level' => [
+        'label' => [
+            'name' => 'Name',
+            'diacritic' => 'Diacritics',
+            'description' => 'Description',
+        ],
+
+        'backend-menu' => 'Seniority Levels',
+    ],
+
+    'taught-subjects' => [
+        'label' => [
+            'name' => 'Name',
+            'diacritic' => 'Diacritics',
+            'description' => 'Description',
+        ],
+
+        'backend-menu' => 'Taught Subjects',
+    ],
+
+    'school-levels' => [
+        'label' => [
+            'name' => 'Name',
+            'diacritic' => 'Diacritics',
+            'description' => 'Description',
+        ],
+
+        'backend-menu' => 'School Levels',
+    ],
+
+    'contract-types' => [
+        'label' => [
+            'name' => 'Name',
+            'diacritic' => 'Diacritics',
+            'description' => 'Description',
+        ],
+
+        'backend-menu' => 'Contract Types',
     ],
 ];

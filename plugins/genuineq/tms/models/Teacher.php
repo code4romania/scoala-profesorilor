@@ -12,6 +12,13 @@ class Teacher extends Model
 
     protected $dates = ['deleted_at'];
 
+    /**
+     * @var array The attributes that are mass assignable.
+     */
+    protected $fillable = [
+        'name',
+        'user_id',
+    ];
 
     /**
      * @var string The database table used by the model.
@@ -23,13 +30,25 @@ class Teacher extends Model
      */
     public $hasOne = [
         'address' => 'Genuineq\Tms\Models\Address',
+        'seniority_level' => 'Genuineq\Tms\Models\Address',
+        'school_level' => 'Genuineq\Tms\Models\Address',
     ];
 
     /**
-     * Profile picture relation
+     * "User" relation
      */
-    public $attachOne = [
-        'avatar' => 'System\Models\File'
+    public $belongsTo = [
+        'user' => 'Genuineq\user\Models\User',
+    ];
+
+    /**
+     * Learning plans relation
+     */
+    public $belongsToMany = [
+        'learning_plans' => [
+            'Genuineq\Tms\Models\LearningPlan',
+            'table' => 'genuineq_tms_teachers_learning_plans',
+        ],
     ];
 
     /**

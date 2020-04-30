@@ -19,47 +19,98 @@
     - 'Created table genuineq_tms_courses_skills'
     - builder_table_create_genuineq_tms_courses_skills.php
 1.0.8:
-    - 'Created categories seeder'
-    - category_seeder.php
-1.0.9:
-    - 'Created skills seeder'
-    - skill_seeder.php
-1.0.10:
-    - 'Created suppliers seeder'
-    - supplier_seeder.php
-1.0.11:
-    - 'Created courses seeder'
-    - course_seeder.php
-1.0.12:
     - 'Created table genuineq_tms_addresses'
     - builder_table_create_genuineq_tms_addresses.php
-1.0.13:
-    - 'Created addresses seeder'
-    - address_seeder.php
-1.0.14:
+1.0.9:
     - 'Created table genuineq_tms_teachers'
     - builder_table_create_genuineq_tms_teachers.php
-1.0.15:
+1.0.10:
     - 'Created table genuineq_tms_inspectorates'
     - builder_table_create_genuineq_tms_inspectorates.php
-1.0.16:
+1.0.11:
     - 'Created table genuineq_tms_schools'
     - builder_table_create_genuineq_tms_schools.php
-1.0.17:
+1.0.12:
     - 'Created table genuineq_tms_learning_plans'
     - builder_table_create_genuineq_tms_learning_plans.php
-1.0.18:
+1.0.13:
     - 'Created table genuineq_tms_learning_plans_courses'
     - builder_table_create_genuineq_tms_learning_plans_courses.php
-1.0.19:
+1.0.14:
     - 'Created table genuineq_tms_specializations'
     - builder_table_create_genuineq_tms_specializations.php
-1.0.20:
+1.0.15:
     - 'Created table genuineq_tms_grades'
     - builder_table_create_genuineq_tms_grades.php
-1.0.21:
+1.0.16:
     - 'Created table genuineq_tms_teachers_specializations'
     - builder_table_create_genuineq_tms_teachers_specializations.php
-1.0.22:
+1.0.17:
     - 'Created table genuineq_tms_teachers_grades'
     - builder_table_create_genuineq_tms_teachers_grades.php
+1.0.18:
+    - 'Created table genuineq_tms_seniority_levels'
+    - builder_table_create_genuineq_tms_seniority_levels.php
+1.0.19:
+    - 'Created table genuineq_tms_taught_subjects'
+    - builder_table_create_genuineq_tms_taught_subjects.php
+1.0.20:
+    - 'Created table genuineq_tms_school_levels'
+    - builder_table_create_genuineq_tms_school_levels.php
+1.0.21:
+    - 'Created table genuineq_tms_contract_types'
+    - builder_table_create_genuineq_tms_contract_types.php
+1.0.22:
+    - 'Created table genuineq_tms_teachers_taught_subjects'
+    - builder_table_create_genuineq_tms_teachers_taught_subjects.php
+1.0.23:
+    - 'Created table genuineq_tms_teachers_learning_plans'
+    - builder_table_create_genuineq_tms_teachers_learning_plans.php
+1.0.24:
+    - 'Created table genuineq_tms_schools_teachers'
+    - builder_table_create_genuineq_tms_schools_teachers.php
+1.0.25:
+    - 'Seeder with the list of addresses'
+    - address_seeder.php
+1.0.26:
+    - 'Seeder with the list of seniority levels'
+    - seniority_levels_seeder.php
+1.0.27:
+    - 'Seeder with the list of school levels'
+    - school_levels_seeder.php
+1.0.28:
+    - 'Seeder with the list of contract types'
+    - contract_types_seeder.php
+1.0.29:
+    - 'Seeder with the list of grades'
+    - grades_seeder.php
+1.0.30:
+    - 'Seeder with the list of inspectorates'
+    - inspectorates_seeder.php
+1.0.31:
+    - 'Seeder with test data for categories'
+    - test_category_seeder.php
+1.0.32:
+    - 'Seeder with test data for skills'
+    - test_skill_seeder.php
+1.0.33:
+    - 'Seeder with test data for taught subjects.'
+    - test_taught_subjects_seeder.php
+1.0.34:
+    - 'Seeder with test data for specializations'
+    - test_specializations_seeder.php
+1.0.35:
+    - 'Seeder with test data for suppliers'
+    - test_supplier_seeder.php
+1.0.36:
+    - 'Seeder with test data for courses'
+    - test_course_seeder.php
+1.0.37:
+    - 'Seeder with test data for learning plans'
+    - test_learning_plans_seeder.php
+1.0.38:
+    - 'Seeder with test data for teachers'
+    - test_teachers_seeder.php
+1.0.39:
+    - 'Seeder with test data for schools'
+    - test_schools_seeder.php

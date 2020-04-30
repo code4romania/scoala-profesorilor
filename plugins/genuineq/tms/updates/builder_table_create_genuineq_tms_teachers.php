@@ -11,13 +11,17 @@ class BuilderTableCreateGenuineqTmsTeachers extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
-            $table->string('name', 50)->comment = "The name of the teacher.";
-            $table->string('slug')->comment = "The slug of the teacher.";
-            $table->string('avatar')->nullable()->comment = "The avatar of the teacher.";
-            $table->string('phone', 15)->comment = "The phone number of the teacher.";
-            $table->dateTime('birth_date')->comment = "The birth date of the teacher.";
+            $table->string('name', 50)->nullable()->comment = "The name of the teacher.";
+            $table->string('slug')->nullable()->comment = "The slug of the teacher.";
+            $table->string('phone', 15)->nullable()->comment = "The phone number of the teacher.";
+            $table->dateTime('birth_date')->nullable()->comment = "The birth date of the teacher.";
+            $table->integer('address_id')->nullable()->unsigned();
+            $table->text('description')->nullable()->comment = "The description of the teacher.";
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('seniority_level_id')->nullable()->unsigned();
+            $table->integer('school_level_id')->nullable()->unsigned();
+            $table->integer('contract_type_id')->unsigned()->nullable();;
             $table->boolean('status')->default(1)->comment = "The status of the teacher.";
-            $table->integer('address_id')->unsigned();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->timestamp('deleted_at')->nullable();

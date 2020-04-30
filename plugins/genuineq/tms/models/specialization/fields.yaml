@@ -3,8 +3,8 @@ fields:
         label: 'genuineq.tms::lang.specialization.label.name'
         span: auto
         type: text
-    slug:
-        label: 'genuineq.tms::lang.specialization.label.slug'
+    diacritic:
+        label: 'genuineq.tms::lang.specialization.label.diacritic'
         span: auto
         defaultFrom: name
         type: text

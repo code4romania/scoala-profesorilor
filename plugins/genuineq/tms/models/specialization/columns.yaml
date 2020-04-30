@@ -4,8 +4,8 @@ columns:
         type: text
         searchable: true
         sortable: true
-    slug:
-        label: 'genuineq.tms::lang.specialization.label.slug'
+    diacritic:
+        label: 'genuineq.tms::lang.specialization.label.diacritic'
         type: text
         searchable: true
         sortable: true

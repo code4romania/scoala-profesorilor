@@ -12,7 +12,7 @@ class BuilderTableCreateGenuineqTmsCoursesCategories extends Migration
             $table->engine = 'InnoDB';
             $table->integer('course_id');
             $table->integer('category_id');
-            $table->primary(['course_id','category_id'], 'genuineq_tms_courses_categories_course_id');
+            $table->primary(['course_id','category_id'], 'genuineq_tms_courses_categories_id');
         });
     }
 

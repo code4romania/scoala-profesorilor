@@ -1,11 +1,17 @@
 <?php namespace Genuineq\Tms;
 
 use System\Classes\PluginBase;
+use Genuineq\User\Models\User;
+use Genuineq\Tms\Models\School;
+use Genuineq\Tms\Models\Teacher;
 
 class Plugin extends PluginBase
 {
     public function registerComponents()
     {
+        return [
+            // 'Genuineq\Tms\Components\Login' => 'login'
+        ];
     }
 
     public function registerFormWidgets()
@@ -64,6 +70,41 @@ class Plugin extends PluginBase
                 'provider' => 'Course', // The badge to display for this result
                 'results'  => $results,
             ];
+        });
+
+
+        /** Extend the "Genuineq\User\Models\User" model. */
+        User::extend(function($model) {
+            /** Link "School" model to user model */
+            $model->hasOne['schoolProfile'] = ['Genuineq\Tms\Models\School'];
+            /** Link "Teacher" model to user model */
+            $model->hasOne['teacherProfile'] = ['Genuineq\Tms\Models\Teacher'];
+
+            /** Add a "getProfile" function to the user model */
+            $model->addDynamicMethod('getProfile', function() use ($model) {
+                /** Return the valid profile */
+                return ($this->schoolProfile) ? ($this->schoolProfile) : ($this->teacherProfile);
+            });
+        });
+
+        /** Define listener of the "genuineq.user.register" event */
+        \Event::listen('genuineq.user.register', function ($user, $data) {
+            /** Create user profile based on user type. */
+            if ('school' == $user->type) {
+                $profile = new School(['user_id' => $user->id]);
+                $profile->save();
+
+                /** Make the connection */
+                // $user->schoolProfile = $profile;
+                // $user->save();
+            } else {
+                $profile = new Teacher(['name' => $user->name, 'user_id' => $user->id]);
+                $profile->save();
+
+                /** Make the connection */
+                // $user->teacherProfile = $profile;
+                // $user->save();
+            }
         });
     }
 }

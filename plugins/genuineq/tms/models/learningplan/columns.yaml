@@ -9,3 +9,8 @@ columns:
         type: number
         searchable: true
         sortable: true
+    teacher:
+        label: 'genuineq.tms::lang.learning-plan.label.teacher'
+        type: text
+        searchable: true
+        sortable: true

@@ -22,12 +22,17 @@ class LearningPlan extends Model
     /**
      * Courses relation
      */
+    public $hasMany = [
+        'courses' => 'Genuineq\Tms\Models\Course'
+    ];
+
+    /**
+     * Teachers relation
+     */
     public $belongsToMany = [
-        'courses' => [
-            'Genuineq\Tms\Models\Course',
-            'table' => 'genuineq_tms_learning_plans_courses',
-            'pivot' => ['school_id', 'covered_costs'],
-            'timestamps' => true,
+        'teachers' => [
+            'Genuineq\Tms\Models\Teachers',
+            'table' => 'genuineq_tms_teachers_learning_plans',
         ],
     ];
 

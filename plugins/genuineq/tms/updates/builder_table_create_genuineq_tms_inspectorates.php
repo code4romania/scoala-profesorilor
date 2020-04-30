@@ -12,7 +12,7 @@ class BuilderTableCreateGenuineqTmsInspectorates extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
             $table->string('name', 100)->comment = "The name of the inspectorate.";
-            $table->string('slug')->comment = "The slug of the inspectorate.";
+            $table->string('diacritic', 100)->comment = "The name of the inspectorate with discritics.";
             $table->text('description')->comment = "The description of the inspectorate.";
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();

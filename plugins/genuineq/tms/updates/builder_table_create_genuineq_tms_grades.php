@@ -11,15 +11,15 @@ class BuilderTableCreateGenuineqTmsGrades extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
-            $table->string('name', 50);
-            $table->string('slug', 50);
-            $table->text('description');
+            $table->string('name', 50)->comment = "The name of the grade.";
+            $table->string('diacritic', 50)->comment = "The name of the grade with discritics.";
+            $table->text('description')->comment = "The description of the grade.";
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->timestamp('deleted_at')->nullable();
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('genuineq_tms_grades');

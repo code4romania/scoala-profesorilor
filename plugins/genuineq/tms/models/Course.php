@@ -26,10 +26,17 @@ class Course extends Model
     ];
 
     /**
-     * Supplier relation
+     * "Supplier" relation
      */
     public $belongsTo = [
         'supplier' => 'Genuineq\Tms\Models\Supplier',
+    ];
+
+    /**
+     * Learning plans course" relation
+     */
+    public $hasMany = [
+        'learning_plans_course' => 'Genuineq\Tms\Models\LearningPlansCourse',
     ];
 
     /**
@@ -77,7 +84,7 @@ class Course extends Model
      * Function that calculates the color of a course
      *  by extractig the average color of the categories.
      */
-    public function getColor()
+    public function getColorAttribute()
     {
         /** Set a default color. */
         $color = "#4C025E";

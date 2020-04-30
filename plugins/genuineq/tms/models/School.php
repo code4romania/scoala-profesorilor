@@ -13,6 +13,12 @@ class School extends Model
 
     protected $dates = ['deleted_at'];
 
+    /**
+     * @var array The attributes that are mass assignable.
+     */
+    protected $fillable = [
+        'user_id',
+    ];
 
     /**
      * @var string The database table used by the model.
@@ -24,6 +30,21 @@ class School extends Model
      */
     public $hasOne = [
         'address' => 'Genuineq\Tms\Models\Address',
+        'inspectorate' => 'Genuineq\Tms\Models\Inspectorate',
+    ];
+
+    /**
+     * Learning plans course" relation
+     */
+    public $hasMany = [
+        'learning_plans_course' => 'Genuineq\Tms\Models\LearningPlansCourse',
+    ];
+
+    /**
+     * "User" relation
+     */
+    public $belongsTo = [
+        'user' => 'Genuineq\user\Models\User',
     ];
 
     /**

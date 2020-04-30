@@ -41,3 +41,8 @@ columns:
         type: text
         searchable: true
         sortable: true
+    color:
+        label: 'Color'
+        type: text
+        searchable: true
+        sortable: true

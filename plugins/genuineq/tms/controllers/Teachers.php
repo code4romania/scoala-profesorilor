@@ -18,6 +18,6 @@ class Teachers extends Controller
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('Genuineq.Tms', 'main-menu-item', 'side-menu-item6');
+        BackendMenu::setContext('Genuineq.Tms', 'main-menu-item', 'side-menu-item5');
     }
 }

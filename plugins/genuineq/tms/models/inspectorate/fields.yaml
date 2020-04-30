@@ -3,8 +3,8 @@ fields:
         label: 'genuineq.tms::lang.inspectotate.label.name'
         span: auto
         type: text
-    slug:
-        label: 'genuineq.tms::lang.inspectotate.label.slug'
+    diacritic:
+        label: 'genuineq.tms::lang.inspectotate.label.diacritic'
         span: auto
         type: text
     description:

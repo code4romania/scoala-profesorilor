@@ -38,6 +38,10 @@ navigation:
                 label: 'genuineq.tms::lang.learning-plan.backend-menu'
                 url: genuineq/tms/learningplans
                 icon: icon-line-chart
+            side-menu-item8:
+                label: 'genuineq.tms::lang.learning-plans-course.backend-menu'
+                url: genuineq/tms/learningplanscourses
+                icon: icon-list-ol
     main-menu-item2:
         label: 'genuineq.tms::lang.plugin.backend-menu.static'
         url: genuineq/tms/addresses
@@ -59,3 +63,19 @@ navigation:
                 label: 'genuineq.tms::lang.grade.backend-menu'
                 url: genuineq/tms/grades
                 icon: icon-graduation-cap
+            side-menu-item5:
+                label: 'genuineq.tms::lang.seniority-level.backend-menu'
+                url: genuineq/tms/senioritylevels
+                icon: icon-bars
+            side-menu-item6:
+                label: 'genuineq.tms::lang.taught-subjects.backend-menu'
+                url: genuineq/tms/taughtsubjects
+                icon: icon-dashboard
+            side-menu-item7:
+                label: 'genuineq.tms::lang.contract-types.backend-menu'
+                url: genuineq/tms/contracttypes
+                icon: icon-thumbs-up
+            side-menu-item8:
+                label: 'genuineq.tms::lang.school-levels.backend-menu'
+                url: genuineq/tms/schoollevels
+                icon: icon-bookmark
