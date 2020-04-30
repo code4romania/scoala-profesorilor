@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: genuineq.user::lang.group.label
+
+# Model Form Field configuration
+form: $/genuineq/user/models/usergroup/fields.yaml
+
+# Model Class name
+modelClass: Genuineq\User\Models\UserGroup
+
+# Default redirect location
+defaultRedirect: genuineq/user/usergroups
+
+# Create page
+create:
+    title: genuineq.user::lang.groups.create_title
+    redirect: genuineq/user/usergroups/update/:id
+    redirectClose: genuineq/user/usergroups
+
+# Update page
+update:
+    title: genuineq.user::lang.groups.update_title
+    redirect: genuineq/user/usergroups
+    redirectClose: genuineq/user/usergroups
+
+# Preview page
+preview:
+    title: genuineq.user::lang.groups.update_title

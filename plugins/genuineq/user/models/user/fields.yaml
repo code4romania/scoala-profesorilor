@@ -1,0 +1,99 @@
+# ===================================
+#  Field Definitions
+# ===================================
+
+fields:
+
+    name:
+        label: genuineq.user::lang.backend.user.fields.name
+        comment: genuineq.user::lang.backend.user.fields.name_comment
+        span: auto
+
+    email:
+        label: genuineq.user::lang.backend.user.fields.email
+        comment: genuineq.user::lang.backend.user.fields.email_comment
+        span: auto
+
+    identifier:
+        label: genuineq.user::lang.backend.user.fields.identifier
+        comment: genuineq.user::lang.backend.user.fields.identifier_comment
+        span: auto
+
+    type:
+        label: genuineq.user::lang.backend.user.fields.type
+        comment: genuineq.user::lang.backend.user.fields.type_comment
+        type: dropdown
+        span: auto
+
+    password@create:
+        label: genuineq.user::lang.backend.user.fields.create_password
+        comment: genuineq.user::lang.backend.user.fields.create_password_comment
+        type: password
+        span: left
+
+    password@update:
+        label: genuineq.user::lang.backend.user.fields.reset_password
+        comment: genuineq.user::lang.backend.user.fields.reset_password_comment
+        type: password
+        span: left
+
+    password_confirmation:
+        label: genuineq.user::lang.backend.user.fields.confirm_password
+        comment: genuineq.user::lang.backend.user.fields.confirm_password_comment
+        type: password
+        span: right
+        context: [create, update]
+
+    send_invite:
+        label: genuineq.user::lang.backend.user.fields.send_invite
+        comment: genuineq.user::lang.backend.user.fields.send_invite_comment
+        type: checkbox
+        default: true
+        span: full
+        context: create
+
+    block_mail:
+        label: genuineq.user::lang.backend.user.fields.block_mail
+        comment: genuineq.user::lang.backend.user.fields.block_mail_comment
+        type: checkbox
+        default: false
+        span: full
+        cssClass: field-align-above
+        context: update
+
+    created_ip_address:
+        label: genuineq.user::lang.backend.user.fields.created_ip_address
+        comment: genuineq.user::lang.backend.user.fields.created_ip_address_comment
+        span: auto
+        disabled: true
+        context: preview
+
+    last_ip_address:
+        label: genuineq.user::lang.backend.user.fields.last_ip_address
+        comment: genuineq.user::lang.backend.user.fields.last_ip_address_comment
+        span: auto
+        disabled: true
+        context: preview
+
+    is_activated:
+        label: genuineq.user::lang.backend.user.fields.is_activated
+        comment: genuineq.user::lang.backend.user.fields.is_activated_comment
+        type: checkbox
+        default: false
+        span: full
+
+    groups:
+        label: genuineq.user::lang.backend.user.fields.groups
+        comment: genuineq.user::lang.backend.user.fields.groups_comment
+        emptyOption: genuineq.user::lang.backend.user.fields.groups_empty
+        type: relation
+        span: full
+
+    avatar:
+        label: genuineq.user::lang.backend.user.fields.avatar
+        comment: genuineq.user::lang.backend.user.fields.avatar_comment
+        type: fileupload
+        mode: image
+        imageHeight: 260
+        imageWidth: 260
+        span: full

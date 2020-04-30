@@ -1,0 +1,16 @@
+{
+    "name": "genuineq/user",
+    "type": "october-plugin",
+    "description": "Custom user plugin for OctoberCMS",
+    "homepage": "https://www.genuineq.com",
+    "keywords": ["october", "user"],
+    "authors": [
+        {
+            "name": "Cosmin Bosutar",
+            "email": "cosmin.bosutar@genuineq.com"
+        }
+    ],
+    "require": {
+        "alcea/cnp": "^2.1"
+    }
+}

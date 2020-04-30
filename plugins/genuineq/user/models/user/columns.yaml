@@ -1,0 +1,52 @@
+# ===================================
+#  Column Definitions
+# ===================================
+
+columns:
+
+    id:
+        label: genuineq.user::lang.backend.user.columns.id
+        type: number
+        invisible: true
+
+    name:
+        label: genuineq.user::lang.backend.user.columns.name
+        type: text
+        searchable: true
+        sortable: true
+
+    email:
+        label: genuineq.user::lang.backend.user.columns.email
+        type: text
+        searchable: true
+        sortable: true
+
+    identifier:
+        label: genuineq.user::lang.backend.user.columns.identifier
+        type: text
+        searchable: true
+        sortable: true
+
+    type:
+        label: genuineq.user::lang.backend.user.columns.type
+        type: text
+        searchable: true
+        sortable: true
+
+    is_activated:
+        label: genuineq.user::lang.backend.user.columns.is_activated
+        type: switch
+        searchable: true
+        sortable: true
+
+    last_login:
+        label: genuineq.user::lang.backend.user.columns.last_login
+        type: datetime
+        searchable: true
+        sortable: true
+
+    last_ip_address:
+        label: genuineq.user::lang.backend.user.columns.last_ip_address
+        type: text
+        searchable: true
+        sortable: true

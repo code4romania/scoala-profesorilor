@@ -1,0 +1,30 @@
+# ===================================
+# Filter Scope Definitions
+# ===================================
+
+scopes:
+
+    groups:
+        # Filter name
+        label: genuineq.user::lang.group.label
+        # Model Class name
+        modelClass: Genuineq\User\Models\UserGroup
+        # Model attribute to display for the name
+        nameFrom: name
+        # Filter scope
+        scope: filterByGroup
+
+    created_date:
+        label: genuineq.user::lang.user.created_at
+        type: daterange
+        conditions: created_at >= ':after' AND created_at <= ':before'
+
+    activated:
+        # Filter name
+        label: genuineq.user::lang.user.status_activated
+        # Filter type
+        type: switch
+        # SQL conditions
+        conditions:
+            - is_activated = '0'
+            - is_activated = '1'

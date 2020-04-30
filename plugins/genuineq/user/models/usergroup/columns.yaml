@@ -1,0 +1,26 @@
+# ===================================
+#  Column Definitions
+# ===================================
+
+columns:
+
+    id:
+        label: genuineq.user::lang.group.id
+        invisible: true
+
+    name:
+        label: genuineq.user::lang.group.name
+        searchable: true
+
+    code:
+        label: genuineq.user::lang.group.code
+
+    created_at:
+        label: genuineq.user::lang.group.created_at
+
+    users_count:
+        label: genuineq.user::lang.group.users_count
+        relation: users_count
+        valueFrom: count
+        default: 0
+        sortable: false

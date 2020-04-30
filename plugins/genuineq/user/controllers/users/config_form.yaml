@@ -1,0 +1,25 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: genuineq.user::lang.backend.user.label
+
+# Model Form Field configuration
+form: $/genuineq/user/models/user/fields.yaml
+
+# Model Class name
+modelClass: Genuineq\User\Models\User
+
+# Default redirect location
+defaultRedirect: genuineq/user/users
+
+# Create page
+create:
+    redirect: genuineq/user/users/preview/:id
+    redirectClose: genuineq/user/users
+
+# Update page
+update:
+    redirect: genuineq/user/users/update/:id
+    redirectClose: genuineq/user/users/preview/:id

@@ -1,0 +1,7 @@
+1.0.1:
+    - Initialize plugin.
+    - create_users_table.php
+    - create_throttle_table.php
+    - create_mail_blockers_table.php
+    - create_user_groups_table.php
+    - seed_user_groups_table.php

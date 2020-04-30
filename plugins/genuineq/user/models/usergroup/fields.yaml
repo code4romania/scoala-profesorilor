@@ -1,0 +1,19 @@
+# ===================================
+#  Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: genuineq.user::lang.group.name
+        span: left
+
+    code:
+        label: genuineq.user::lang.group.code
+        comment: genuineq.user::lang.group.code_comment
+        span: right
+        preset: name
+
+    description:
+        label: genuineq.user::lang.group.description_field
+        type: textarea
+        size: tiny
