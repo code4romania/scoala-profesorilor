@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'activeTheme' => 'demo',
+    'activeTheme' => 'genuineq-genuineq-scoala-profesorilor',
 
     /*
     |--------------------------------------------------------------------------
