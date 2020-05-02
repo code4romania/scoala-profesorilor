@@ -37,7 +37,12 @@ class AuthManager extends RainAuthManager
      */
     public function register(array $credentials, $activate = false, $autoLogin = true)
     {
-        return parent::register($credentials, $activate, $autoLogin);
+        $user = parent::register($credentials, $activate, $autoLogin);
+
+        /** Add the user to the user type group. */
+        $user->addGroup(UserGroupModel::getGroup($user->type));
+
+        return $user;
     }
 
     /**

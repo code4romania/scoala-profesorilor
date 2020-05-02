@@ -10,7 +10,7 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            // 'Genuineq\Tms\Components\Login' => 'login'
+            'Genuineq\Tms\Components\SchoolProfile' => 'schoolProfile'
         ];
     }
 
@@ -83,7 +83,7 @@ class Plugin extends PluginBase
             /** Add a "getProfile" function to the user model */
             $model->addDynamicMethod('getProfile', function() use ($model) {
                 /** Return the valid profile */
-                return ($this->schoolProfile) ? ($this->schoolProfile) : ($this->teacherProfile);
+                return ($model->schoolProfile) ? ($model->schoolProfile) : ($model->teacherProfile);
             });
         });
 

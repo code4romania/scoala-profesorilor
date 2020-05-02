@@ -9,9 +9,14 @@ identifierValue = "{{ :slug }}"
 modelKeyColumn = "slug"
 displayColumn = "name"
 notFoundMessage = "Record not found"
+
+[session]
+security = "all"
+allowedUserGroups[] = "teacher"
+allowedUserGroups[] = "school"
 ==
 <?php
-    use Genuineq\Tms\Models\Category;
+use Genuineq\Tms\Models\Category;
     use Genuineq\Tms\Models\Course;
     use October\Rain\Support\Collection;
 

@@ -26,6 +26,11 @@ detailsKeyColumn = "slug"
 detailsUrlParameter = "slug"
 recordsPerPage = 12
 pageNumber = "{{ :page }}"
+
+[session]
+security = "all"
+allowedUserGroups[] = "teacher"
+allowedUserGroups[] = "school"
 ==
 <div class="container-fluid">
     <div class="row">

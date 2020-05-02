@@ -14,9 +14,14 @@ detailsKeyColumn = "slug"
 detailsUrlParameter = "slug"
 recordsPerPage = 8
 pageNumber = "{{ :page }}"
+
+[session]
+security = "all"
+allowedUserGroups[] = "teacher"
+allowedUserGroups[] = "school"
 ==
 <?php
-    use Genuineq\Tms\Models\Category;
+use Genuineq\Tms\Models\Category;
 
     function onStart()
     {

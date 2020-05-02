@@ -67,12 +67,12 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            \Genuineq\User\Components\Session::class       => 'session',
             \Genuineq\User\Components\Account::class       => 'account',
             \Genuineq\User\Components\ResetPassword::class => 'resetPassword',
 
-            \Genuineq\User\Components\Login::class       => 'login',
-            \Genuineq\User\Components\Register::class    => 'register',
+            \Genuineq\User\Components\Session::class       => 'session',
+            \Genuineq\User\Components\Login::class         => 'login',
+            \Genuineq\User\Components\Register::class      => 'register',
         ];
     }
 

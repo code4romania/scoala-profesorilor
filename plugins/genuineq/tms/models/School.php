@@ -17,7 +17,19 @@ class School extends Model
      * @var array The attributes that are mass assignable.
      */
     protected $fillable = [
+        'name',
+        'slug',
+        'phone',
+        'email',
+        'principal',
+        'description',
+        'contact_name',
+        'contact_email',
+        'contact_phone',
+        'contact_role',
         'user_id',
+        'address_id',
+        'inspectorate_id',
     ];
 
     /**
@@ -28,7 +40,7 @@ class School extends Model
     /**
      * Address relation
      */
-    public $hasOne = [
+    public $belongsTo = [
         'address' => 'Genuineq\Tms\Models\Address',
         'inspectorate' => 'Genuineq\Tms\Models\Inspectorate',
     ];
@@ -43,7 +55,7 @@ class School extends Model
     /**
      * "User" relation
      */
-    public $belongsTo = [
+    public $hasOne = [
         'user' => 'Genuineq\user\Models\User',
     ];
 

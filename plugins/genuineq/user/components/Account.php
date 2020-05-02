@@ -9,6 +9,7 @@ use Input;
 use Request;
 use Redirect;
 use Validator;
+use Exception;
 use ValidationException;
 use ApplicationException;
 use October\Rain\Auth\AuthException;
@@ -16,21 +17,22 @@ use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use Genuineq\User\Models\User as UserModel;
 use Genuineq\User\Models\Settings as UserSettings;
-use Exception;
+use Genuineq\User\Helpers\AuthRedirect;
+
+use Log;
 
 /**
  * Account component
  *
- * Allows users to register, sign in and update their account. They can also
- * deactivate their account and resend the account verification email.
+ * Allows users to update and deactivate their account.
  */
 class Account extends ComponentBase
 {
     public function componentDetails()
     {
         return [
-            'name'        => /*Account*/'genuineq.user::lang.account.account',
-            'description' => /*User management form.*/'genuineq.user::lang.account.account_desc'
+            'name'        => 'genuineq.user::lang.component.account.name',
+            'description' => 'genuineq.user::lang.component.account.description'
         ];
     }
 
@@ -38,27 +40,12 @@ class Account extends ComponentBase
     {
         return [
             'forceSecure' => [
-                'title'       => /*Force secure protocol*/'genuineq.user::lang.account.force_secure',
-                'description' => /*Always redirect the URL with the HTTPS schema.*/'genuineq.user::lang.account.force_secure_desc',
-                'type'        => 'checkbox',
-                'default'     => 0
-            ],
-            'requirePassword' => [
-                'title'       => /*Confirm password on update*/'genuineq.user::lang.account.update_requires_password',
-                'description' => /*Require the current password of the user when changing their profile.*/'genuineq.user::lang.account.update_requires_password_comment',
+                'title'       => 'genuineq.user::lang.component.account.backend.force_secure',
+                'description' => 'genuineq.user::lang.component.account.backend.force_secure_desc',
                 'type'        => 'checkbox',
                 'default'     => 0
             ],
         ];
-    }
-
-    /**
-     * Executed when this component is initialized
-     */
-    public function prepareVars()
-    {
-        $this->page['user'] = $this->user();
-        $this->page['updateRequiresPassword'] = $this->updateRequiresPassword();
     }
 
     /**
@@ -72,37 +59,35 @@ class Account extends ComponentBase
         if ($redirect = $this->redirectForceSecure()) {
             return $redirect;
         }
-
-        $this->prepareVars();
-    }
-
-    /***********************************************
-     ****************** Properties *****************
-     ***********************************************/
-
-    /**
-     * Returns the logged in user, if available
-     */
-    public function user()
-    {
-        if (!Auth::check()) {
-            return null;
-        }
-
-        return Auth::getUser();
-    }
-
-    /**
-     * Returns the update requires password setting
-     */
-    public function updateRequiresPassword()
-    {
-        return $this->property('requirePassword', false);
     }
 
     /***********************************************
      **************** AJAX handlers ****************
      ***********************************************/
+
+    /**
+     * Updates the user avatar.
+     */
+    public function onAvatarUpdate()
+    {
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        /** Extract the user */
+        $user = Auth::getUser();
+        // Log::info('user = ' . print_r($user, true));
+
+        if (Input::hasFile('avatar')) {
+            $user->avatar = Input::file('avatar');
+            $user->save();
+
+            Flash::success(Lang::get('genuineq.user::lang.component.account.message.avatar_update_successful'));
+            return Redirect::refresh();
+        }
+
+        Flash::success(Lang::get('genuineq.user::lang.component.account.message.avatar_update_failed'));
+    }
 
     /**
      * Update the user
@@ -173,87 +158,10 @@ class Account extends ComponentBase
         }
     }
 
-    /**
-     * Trigger a subsequent activation email
-     */
-    public function onSendActivationEmail()
-    {
-        try {
-            if (!$user = $this->user()) {
-                throw new ApplicationException(Lang::get(/*You must be logged in first!*/'genuineq.user::lang.account.login_first'));
-            }
-
-            if ($user->is_activated) {
-                throw new ApplicationException(Lang::get(/*Your account is already activated!*/'genuineq.user::lang.account.already_active'));
-            }
-
-            Flash::success(Lang::get(/*An activation email has been sent to your email address.*/'genuineq.user::lang.account.activation_email_sent'));
-
-            $this->sendActivationEmail($user);
-
-        }
-        catch (Exception $ex) {
-            if (Request::ajax()) throw $ex;
-            else Flash::error($ex->getMessage());
-        }
-
-        /*
-         * Redirect
-         */
-        if ($redirect = $this->makeRedirection()) {
-            return $redirect;
-        }
-    }
-
     /***********************************************
      ******************* Helpers *******************
      ***********************************************/
 
-    /**
-     * Returns a link used to activate the user account.
-     * @return string
-     */
-    protected function makeActivationUrl($code)
-    {
-        $params = [
-            $this->property('paramCode') => $code
-        ];
-
-        if ($pageName = $this->property('activationPage')) {
-            $url = $this->pageUrl($pageName, $params);
-        }
-        else {
-            $url = $this->currentPageUrl($params);
-        }
-
-        if (strpos($url, $code) === false) {
-            $url .= '?activate=' . $code;
-        }
-
-        return $url;
-    }
-
-    /**
-     * Sends the activation email to a user
-     * @param  User $user
-     * @return void
-     */
-    protected function sendActivationEmail($user)
-    {
-        $code = implode('!', [$user->id, $user->getActivationCode()]);
-
-        $link = $this->makeActivationUrl($code);
-
-        $data = [
-            'name' => $user->name,
-            'link' => $link,
-            'code' => $code
-        ];
-
-        Mail::send('genuineq.user::mail.activate', $data, function($message) use ($user) {
-            $message->to($user->email, $user->name);
-        });
-    }
 
     /**
      * Redirect to the intended page after successful update, sign in or registration.

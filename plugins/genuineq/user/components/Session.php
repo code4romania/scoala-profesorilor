@@ -10,6 +10,8 @@ use Redirect;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use Genuineq\User\Models\UserGroup;
+use Genuineq\User\Helpers\AuthRedirect;
+use Genuineq\User\Helpers\PluginConfig;
 
 /**
  * User session
@@ -51,19 +53,8 @@ class Session extends ComponentBase
                 'placeholder' => '*',
                 'type'        => 'set',
                 'default'     => []
-            ],
-            'redirect' => [
-                'title'       => 'genuineq.user::lang.component.session.backend.redirect_title',
-                'description' => 'genuineq.user::lang.component.session.backend.redirect_desc',
-                'type'        => 'dropdown',
-                'default'     => ''
             ]
         ];
-    }
-
-    public function getRedirectOptions()
-    {
-        return [''=>'- none -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
     public function getAllowedUserGroupsOptions()
@@ -72,29 +63,20 @@ class Session extends ComponentBase
     }
 
     /**
-     * Component is initialized.
-     */
-    public function init()
-    {
-        if (Request::ajax() && !$this->checkUserSecurity()) {
-            abort(403, Lang::get('genuineq.user::lang.component.session.message.access_denied'));
-        }
-    }
-
-    /**
      * Executed when this component is bound to a page or layout.
      */
     public function onRun()
     {
+        /**
+         * If the user doesn't have access it will be redirected to it's
+         *  specific dashboard if it's logged in or to the root URL in
+         *  case of guest users.
+         */
         if (!$this->checkUserSecurity()) {
-            if (empty($this->property('redirect'))) {
-                throw new \InvalidArgumentException('Redirect property is empty');
-            }
-
-            $redirectUrl = $this->controller->pageUrl($this->property('redirect'));
-            return Redirect::guest($redirectUrl);
+            return Redirect::to($this->pageUrl(AuthRedirect::accessDenied()));
         }
 
+        /** Make the user data available inside the page. */
         $this->page['user'] = $this->user();
     }
 
@@ -136,12 +118,14 @@ class Session extends ComponentBase
      */
     public function onLogout()
     {
-        $user = Auth::getUser();
+        if (!Auth::check()) {
+            $user = Auth::getUser();
 
-        Auth::logout();
+            Auth::logout();
 
-        if ($user) {
-            Event::fire('genuineq.user.logout', [$user]);
+            if ($user) {
+                Event::fire('genuineq.user.logout', [$user]);
+            }
         }
 
         $url = post('redirect', Request::fullUrl());
@@ -191,8 +175,7 @@ class Session extends ComponentBase
                     return false;
                 }
             }
-        }
-        else {
+        } else {
             if ($allowedGroup == self::ALLOW_USER) {
                 return false;
             }

@@ -187,6 +187,11 @@ return [
         'stop_impersonate_success' => 'You are no longer impersonating a user',
     ],
 
+    'helper' => [
+        'access_denied' => 'Nu aveti acces la locatia respectiva',
+        'login_required' => 'Trebuie sa fiti autentificat',
+    ],
+
     'backend' => [
         'user' => [
             'label' => 'User',
@@ -289,7 +294,7 @@ return [
                 'redirect_desc' => 'Page name to redirect if access is denied',
             ],
             'message' => [
-                'access_denied' => 'Accesul interzis',
+                'access_denied' => 'Nu aveti acces la locatia respectiva',
                 'logout' => 'Deconectare cu succes',
                 'stop_impersonate_success' => 'Impersonare incheiata',
             ],
@@ -297,7 +302,7 @@ return [
 
         'login' => [
             'name' => 'Login',
-            'description' => 'Alloes users to login',
+            'description' => 'Allows users to login',
             'backend' => [
                 'redirect_to' => 'Redirect to',
                 'redirect_to_desc' => 'Page name to redirect to after login',
@@ -331,7 +336,7 @@ return [
             ],
             'validation' => [
                 'name_required' => 'Numele este obligatoriu',
-                'name_alpha' => 'Numele poate contine doar litere, spatiu si caracterul -',
+                'name_regex' => 'Numele poate contine doar litere, spatiu si caracterul -',
                 'email_required' => 'Adresa de email este obligatorie',
                 'email_between' => 'Adresa de email trebuie sa aiba intre 6 si 255 de caractere',
                 'email_email' => 'Adresa de email nu este valida',
@@ -354,6 +359,22 @@ return [
                 'invalid_activation_code' => 'Codul de activare furnizat nu este valid',
                 'success_activation' => 'Contul a fost activat cu succes',
                 'already_activated' => 'Contul este deja activat. Va rugam sa va logati',
+            ],
+        ],
+
+        'account' => [
+            'name' => 'Account',
+            'description' => 'Allows users to manage their profiles',
+            'backend' => [
+                'force_secure' => 'Force secure protocol',
+                'force_secure_desc' => 'Always redirect the URL with the HTTPS schema',
+            ],
+            'validation' => [
+
+            ],
+            'message' => [
+                'avatar_update_successful' => 'Poza de profil a fost actualizata cu succes',
+                'avatar_update_failed' => 'Actualizarea pozei de profil a esuat',
             ],
         ],
     ]

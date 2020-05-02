@@ -44,6 +44,16 @@ class UserGroup extends GroupBase
     protected static $guestGroup = null;
 
     /**
+     * Returns the requested group based on the group code.
+     * @param string $code The group code
+     * @return Genuineq\User\Models\UserGroup
+     */
+    public static function getGroup($code)
+    {
+        return UserGroup::whereCode($code)->first();
+    }
+
+    /**
      * Returns the guest user group.
      * @return Genuineq\User\Models\UserGroup
      */
