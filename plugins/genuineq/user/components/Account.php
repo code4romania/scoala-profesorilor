@@ -3,6 +3,7 @@
 use Lang;
 use Auth;
 use Mail;
+use Hash;
 use Event;
 use Flash;
 use Input;
@@ -18,8 +19,7 @@ use Cms\Classes\ComponentBase;
 use Genuineq\User\Models\User as UserModel;
 use Genuineq\User\Models\Settings as UserSettings;
 use Genuineq\User\Helpers\AuthRedirect;
-
-use Log;
+use Genuineq\User\Helpers\PluginConfig;
 
 /**
  * Account component
@@ -76,7 +76,6 @@ class Account extends ComponentBase
 
         /** Extract the user */
         $user = Auth::getUser();
-        // Log::info('user = ' . print_r($user, true));
 
         if (Input::hasFile('avatar')) {
             $user->avatar = Input::file('avatar');
@@ -90,46 +89,90 @@ class Account extends ComponentBase
     }
 
     /**
-     * Update the user
+     * Updates the user email
      */
-    public function onUpdate()
+    public function onEmailUpdate()
     {
-        if (!$user = $this->user()) {
-            return;
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
+        /** Extract the form data. */
         $data = post();
 
-        if ($this->updateRequiresPassword()) {
-            if (!$user->checkHashValue('password', $data['password_current'])) {
-                throw new ValidationException(['password_current' => Lang::get('genuineq.user::lang.account.invalid_current_pass')]);
-            }
+        /** Extract the validation rules. */
+        $rules = [
+            'accountEmail' => 'required|between:6,255|email|unique:users,email',
+        ];
+
+        /** Construct the validation error messages. */
+        $messages = [
+            'accountEmail.required' => Lang::get('genuineq.user::lang.component.account.validation.account_mail_required'),
+            'accountEmail.between' => Lang::get('genuineq.user::lang.component.account.validation.account_mail_between'),
+            'accountEmail.email' => Lang::get('genuineq.user::lang.component.account.validation.account_mail_email'),
+            'accountEmail.unique' => Lang::get('genuineq.user::lang.component.account.validation.account_mail_unique'),
+        ];
+
+        /** Apply the validation rules. */
+        $validation = Validator::make($data, $rules, $messages);
+        if ($validation->fails()) {
+            throw new ValidationException($validation);
         }
 
-        if (Input::hasFile('avatar')) {
-            $user->avatar = Input::file('avatar');
-        }
+        /** Extract the user */
+        $user = Auth::getUser();
 
-        $user->fill($data);
+        /** Update the enmail */
+        $user->email = $data['accountEmail'];
         $user->save();
 
-        /*
-         * Password has changed, reauthenticate the user
-         */
-        if (array_key_exists('password', $data) && strlen($data['password'])) {
-            Auth::login($user->reload(), true);
+        Flash::success(Lang::get('genuineq.user::lang.component.account.message.email_update_successful'));
+    }
+
+    /**
+     * Updates the user password
+     */
+    public function onPasswordUpdate()
+    {
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
-        Flash::success(post('flash', Lang::get(/*Settings successfully saved!*/'genuineq.user::lang.account.success_saved')));
+        /** Extract the form data. */
+        $data = post();
 
-        /*
-         * Redirect
-         */
-        if ($redirect = $this->makeRedirection()) {
-            return $redirect;
+        /** Extract the validation rules. */
+        $rules = [
+            'accountNewPassword' => 'required|between:' . PluginConfig::getMinPasswordLength() . ',' . PluginConfig::getMaxPasswordLength() . '|confirmed',
+            'accountNewPassword_confirmation' => 'required|required_with:password',
+        ];
+
+        /** Construct the validation error messages. */
+        $messages = [
+            'accountNewPassword.required' => Lang::get('genuineq.user::lang.component.account.validation.account_new_password_required'),
+            'accountNewPassword.between' => Lang::get('genuineq.user::lang.component.account.validation.account_new_password_between_s') . PluginConfig::getMinPasswordLength() . ' si ' . PluginConfig::getMaxPasswordLength() . Lang::get('genuineq.user::lang.component.account.validation.account_new_password_between_e'),
+            'accountNewPassword.confirmed' => Lang::get('genuineq.user::lang.component.account.validation.account_new_password_confirmed'),
+            'accountNewPassword_confirmation.required' => Lang::get('genuineq.user::lang.component.account.validation.account_new_password_confirmation_required'),
+            'accountNewPassword_confirmation.required_with' => Lang::get('genuineq.user::lang.component.account.validation.account_new_password_confirmation_required_with'),
+        ];
+
+        /** Apply the validation rules. */
+        $validation = Validator::make($data, $rules, $messages);
+        if ($validation->fails()) {
+            throw new ValidationException($validation);
         }
 
-        $this->prepareVars();
+        /** Extract the user */
+        $user = Auth::getUser();
+
+        /** Update the password */
+        $user->password = $data['accountNewPassword'];
+        $user->forceSave();
+
+        /** Reauthenticate the user */
+        // Auth::login($user->reload(), true);
+
+        Flash::success(Lang::get('genuineq.user::lang.component.account.message.password_update_successful'));
     }
 
     /**

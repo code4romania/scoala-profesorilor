@@ -10,7 +10,8 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            'Genuineq\Tms\Components\SchoolProfile' => 'schoolProfile'
+            'Genuineq\Tms\Components\SchoolProfile' => 'schoolProfile',
+            'Genuineq\Tms\Components\TeacherProfile' => 'teacherProfile'
         ];
     }
 

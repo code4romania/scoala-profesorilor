@@ -218,7 +218,7 @@
             'validation' => [
                 'name_regex' => 'Numele scolii poate contine doar litere, spatiu si caracterul -',
                 'name_max' => 'Numele scolii trebuie sa fie de maxim 50 de caractere lungime',
-                'phone_numeric' => 'Numarul de telefon al scolii poate fi format doar din numere',
+                'phone_regex' => 'Numarul de telefon al scolii poate fi format doar din numere',
                 'phone_max' => 'Lungimea maxima a numarului de telefon al scolii este de 15 caractere',
                 'email_string' => 'Adresa de email a scolii trebuie sa fie de tip string',
                 'email_max' => 'Lungimea maxima a adresei de email a scolii este de 50 de caractere',
@@ -240,8 +240,37 @@
             ],
             'message' => [
                 'profile_update_successful' => 'Profilul a fost actualizat cu succes',
+                'profile_update_failed' => 'Actualizarea profilului a esuat',
                 'description_update_successful' => 'Descrierea a fost actualizata cu succes',
-                'access_denied' => 'Nu aveti acces la locatia respectiva',
+                'description_update_failed' => 'Actualizarea descrierii a esuat',
+                'login_required' => 'Trebuie sa fiti autentificat',
+            ],
+        ],
+
+        'teacher-profile' => [
+            'name' => 'Teacher Profile',
+            'description' => 'Allows the update of a teacher profile',
+            'backend' => [
+                'force_secure' => 'Force secure protocol',
+                'force_secure_desc' => 'Always redirect the URL with the HTTPS schema',
+            ],
+            'validation' => [
+                'name_regex' => 'Numele profesorului poate contine doar litere, spatiu si caracterul -',
+                'name_max' => 'Numele profesorului trebuie sa fie de maxim 50 de caractere lungime',
+                'phone_regex' => 'Numarul de telefon al profesorului poate fi format doar din numere',
+                'phone_max' => 'Lungimea maxima a numarului de telefon al profesorului este de 15 caractere',
+                'birth_date_date' => 'Data specificata nu este formatata corect. Folosit formatul dd/mm/yyyy',
+                'address_id_numeric' => 'Adresa specificata nu exista in lista de adrese posibile',
+                'seniority_level_id_numeric' => 'Nuvelul de senioritate specificat nu exista in lista de valori posibile',
+                'school_level_id_numeric' => 'Nivelul scolii specificat nu exista in lista de valori posibile',
+                'contract_type_id_numeric' => 'Tipul de contract specificat nu exista in lista de valori posibile',
+                'description_string' => 'Descrierea trebuie sa fie de tip string',
+            ],
+            'message' => [
+                'profile_update_successful' => 'Profilul a fost actualizat cu succes',
+                'profile_update_failed' => 'Actualizarea profilului a esuat',
+                'description_update_successful' => 'Descrierea a fost actualizata cu succes',
+                'description_update_failed' => 'Actualizarea descrierii a esuat',
                 'login_required' => 'Trebuie sa fiti autentificat',
             ],
         ],

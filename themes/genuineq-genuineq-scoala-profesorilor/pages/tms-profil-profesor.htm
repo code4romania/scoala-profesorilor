@@ -6,4 +6,264 @@ is_hidden = 0
 [session]
 security = "user"
 allowedUserGroups[] = "teacher"
+
+[teacherProfile]
+forceSecure = 0
+
+[account]
+forceSecure = 0
 ==
+<div class="containter-fluid h-25" style="background-image: url({{ 'background-teacher.jpg'|media }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+    <div class="row h-100 m-0">
+        <div class="col-12 col-sm-6 offset-sm-1 col-md-4 offset-md-2 col-lg-4 offset-lg-2 col-xl-4 offset-xl-2 bg-white h-100">
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-center">
+                        <img src="{{ (user.getAvatarThumb()) ? (user.getAvatarThumb(150)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="rounded-circle" alt="avatar" height="150">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="text-center">
+                        <p class="m-0">{{ user.name }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+            <div class="row">
+                <div class="col-12 bg-white rounded p-3">
+
+                    <h5 class="mb-3 font-weight-bold">{{ 'teacher.profile.form.profile.title'|_ }}</h5>
+
+                    <form method="POST" data-request="onTeacherProfileUpdate" data-request-validate data-request-flash>
+                        <div class="form-group">
+                            <div class="md-form">
+                                <input name="name" type="text" id="name" class="form-control" value="{{ profile.name }}">
+                                <label for="name">{{ 'teacher.profile.form.profile.name'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="name"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="md-form">
+                                <input name="phone" type="text" id="phone" class="form-control" value="{{ profile.phone }}">
+                                <label for="phone">{{ 'teacher.profile.form.profile.phone'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="phone"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="md-form">
+                                <input name="birth_date" type="text" id="birth_date" class="form-control" value="{{ profile.formated_birth_date }}">
+                                <label for="birth_date">{{ 'teacher.profile.form.profile.birth_date'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="birth_date"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="md-form">
+                                <input name="address_id" type="text" id="address_id" class="form-control" value="{{ profileAddress }}">
+                                <label for="address_id">{{ 'teacher.profile.form.profile.address_id'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="address_id"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="md-form">
+                                <input name="seniority_level_id" type="text" id="seniority_level_id" class="form-control" value="{{ profileSeniorityLevel }}">
+                                <label for="seniority_level_id">{{ 'teacher.profile.form.profile.seniority_level_id'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="seniority_level_id"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="md-form">
+                                <input name="school_level_id" type="text" id="school_level_id" class="form-control" value="{{ profileSchoolLevel }}">
+                                <label for="school_level">{{ 'teacher.profile.form.profile.school_level_id'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="school_level_id"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="md-form">
+                                <input name="contract_type_id" type="text" id="contract_type_id" class="form-control" value="{{ profileContractType }}">
+                                <label for="contract_type_id">{{ 'teacher.profile.form.profile.contract_type_id'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="contract_type_id"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
+                                <div class="md-form m-0">
+                                    <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'teacher.profile.form.profile.save'|_ }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+            <div class="row pt-5">
+                <div class="col-12 bg-white rounded p-3">
+
+                    <h5 class="mb-3 font-weight-bold">{{ 'teacher.profile.form.account.title'|_ }}</h5>
+
+                    <form method="POST" data-request="onEmailUpdate" data-request-validate data-request-flash>
+                        <div class="form-group">
+                            <div class="md-form">
+                                <input name="accountEmail" type="text" id="accountEmail" class="form-control" value="{{ user.email }}">
+                                <label for="accountEmail">{{ 'teacher.profile.form.account.email'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="accountEmail"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
+                                <div class="md-form m-0">
+                                    <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'teacher.profile.form.profile.save'|_ }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form method="POST" data-request="onPasswordUpdate" data-request-validate data-request-flash>
+                        <div class="form-group">
+                            <div class="md-form">
+                                <input name="accountNewPassword" type="password" id="accountNewPassword" class="form-control">
+                                <label for="accountNewPassword">{{ 'teacher.profile.form.account.new_password'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="accountNewPassword"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="md-form">
+                                <input name="accountNewPassword_confirmation" type="password" id="accountNewPassword_confirmation" class="form-control">
+                                <label for="accountNewPassword_confirmation">{{ 'teacher.profile.form.account.re_new_password'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="accountNewPassword_confirmation"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
+                                <div class="md-form m-0">
+                                    <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'teacher.profile.form.profile.save'|_ }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-5 offset-sm-1 col-md-5 offset-md-1 col-lg-5 offset-lg-1 col-xl-5 offset-xl-1">
+
+            <div class="row">
+                <div class="col-12 bg-white rounded p-3">
+
+                    <h5 class="mb-3 font-weight-bold">{{ 'teacher.profile.form.photo.title'|_ }}</h5>
+                    <small>{{ 'teacher.profile.form.photo.description'|_ }}</small>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text-center">
+                                <img src="{{ (user.getAvatarThumb()) ? (user.getAvatarThumb(150)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="rounded-circle" alt="avatar" height="150">
+                            </div>
+                        </div>
+                    </div>
+
+                    <form method="POST" data-request="onAvatarUpdate" data-request-validate data-request-flash data-request-files>
+                        <div class="form-group">
+                            <div class="md-form">
+                                <input name="avatar" type="file" class="custom-file-input" id="avatar">
+                                <label class="custom-file-label" for="avatar">{{ 'teacher.profile.form.photo.label'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="avatar"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
+                                <div class="md-form m-0">
+                                    <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'teacher.profile.form.profile.save'|_ }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+            <div class="row pt-5">
+                <div class="col-12 bg-white rounded p-3">
+
+                    <h5 class="mb-3 font-weight-bold">{{ 'teacher.profile.form.description.title'|_ }}</h5>
+
+                    <form method="POST" data-request="onTeacherProfileDescriptionUpdate" data-request-validate data-request-flash>
+                        <div class="form-group">
+                            <div class="md-form">
+                                <textarea name="description" type="text" id="description" class="md-textarea form-control" rows="3">{{ profile.description }}</textarea>
+                                <label for="description">{{ 'teacher.profile.form.description.description'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="description"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
+                                <div class="md-form m-0">
+                                    <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'teacher.profile.form.description.save'|_ }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% put scripts %}
+    <script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
+
+    <script type="text/javascript">
+
+        $('#address_id').autocomplete({
+            source: {{ addresses|raw }},
+            highlightClass: 'text-danger',
+            treshold: 1
+        });
+
+        $('#seniority_level_id').autocomplete({
+            source: {{ seniorityLevels|raw }},
+            highlightClass: 'text-danger',
+            treshold: 1
+        });
+
+        $('#school_level_id').autocomplete({
+            source: {{ schoolLevels|raw }},
+            highlightClass: 'text-danger',
+            treshold: 1
+        });
+
+        $('#contract_type_id').autocomplete({
+            source: {{ contractTypes|raw }},
+            highlightClass: 'text-danger',
+            treshold: 1
+        });
+
+        $('#birth_date').datepicker({
+            format: "dd-mm-yyyy",
+            weekStart: 1,
+            language: "ro",
+            todayHighlight: true
+        });
+
+    </script>
+{% endput %}

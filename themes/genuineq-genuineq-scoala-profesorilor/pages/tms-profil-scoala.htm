@@ -108,17 +108,17 @@ requirePassword = 0
 
                         <div class="form-group">
                             <div class="md-form">
-                                <input name="inspectorate_id" type="text" id="inspectorate" class="form-control" value="{{ profile.inspectorate.name }}">
-                                <label for="inspectorate">{{ 'school.profile.form.profile.inspectorate'|_ }}</label>
-                                <div class="small text-danger" data-validate-for="inspectorate"></div>
+                                <input name="inspectorate_id" type="text" id="inspectorate_id" class="form-control" value="{{ profile.inspectorate.name }}">
+                                <label for="inspectorate_id">{{ 'school.profile.form.profile.inspectorate_id'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="inspectorate_id"></div>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="md-form">
-                                <input name="address_id" type="text" id="address" class="form-control" value="{{ profileAddress }}">
-                                <label for="address">{{ 'school.profile.form.profile.address'|_ }}</label>
-                                <div class="small text-danger" data-validate-for="address"></div>
+                                <input name="address_id" type="text" id="address_id" class="form-control" value="{{ profileAddress }}">
+                                <label for="address_id">{{ 'school.profile.form.profile.address_id'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="address_id"></div>
                             </div>
                         </div>
 
@@ -178,7 +178,7 @@ requirePassword = 0
                         <div class="form-group">
                             <div class="md-form">
                                 <input name="avatar" type="file" class="custom-file-input" id="avatar">
-                                <label class="custom-file-label" for="avatar">{{ 'school.profile.form.photo.description'|_ }}</label>
+                                <label class="custom-file-label" for="avatar">{{ 'school.profile.form.photo.label'|_ }}</label>
                                 <div class="small text-danger" data-validate-for="avatar"></div>
                             </div>
                         </div>
@@ -186,7 +186,7 @@ requirePassword = 0
                         <div class="form-row">
                             <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
                                 <div class="md-form m-0">
-                                    <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'school.profile.form.profile.save'|_ }}</button>
+                                    <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'school.profile.form.photo.save'|_ }}</button>
                                 </div>
                             </div>
                         </div>
@@ -196,52 +196,53 @@ requirePassword = 0
 
             <div class="row pt-5">
                 <div class="col-12 bg-white rounded p-3">
-                    {{ form_ajax({method: 'onRegister', files: 'true'}) }}
-                        <div class="form-group">
-                            <label for="registerName">Full Name</label>
-                            <input
-                                name="name"
-                                type="text"
-                                class="form-control"
-                                id="registerName"
-                                placeholder="Enter your full name" />
-                        </div>
 
-                        <div class="form-group">
-                            <label for="registerEmail">Email</label>
-                            <input
-                                name="email"
-                                type="email"
-                                class="form-control"
-                                id="registerEmail"
-                                placeholder="Enter your email" />
-                        </div>
+                    <h5 class="mb-3 font-weight-bold">{{ 'school.profile.form.account.title'|_ }}</h5>
 
-                        {% if loginAttribute == "username" %}
-                            <div class="form-group">
-                                <label for="registerUsername">Username</label>
-                                <input
-                                    name="username"
-                                    type="text"
-                                    class="form-control"
-                                    id="registerUsername"
-                                    placeholder="Enter your username" />
+                    <form method="POST" data-request="onEmailUpdate" data-request-validate data-request-flash>
+                        <div class="form-group">
+                            <div class="md-form">
+                                <input name="accountEmail" type="text" id="accountEmail" class="form-control" value="{{ user.email }}">
+                                <label for="accountEmail">{{ 'school.profile.form.account.email'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="accountEmail"></div>
                             </div>
-                        {% endif %}
-
-                        <div class="form-group">
-                            <label for="registerPassword">Password</label>
-                            <input
-                                name="password"
-                                type="password"
-                                class="form-control"
-                                id="registerPassword"
-                                placeholder="Choose a password" />
                         </div>
 
-                        <button type="submit" class="btn btn-default">Register</button>
+                        <div class="form-row">
+                            <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
+                                <div class="md-form m-0">
+                                    <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'school.profile.form.account.save'|_ }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
 
-                    {{ form_close() }}
+                    <form method="POST" data-request="onPasswordUpdate" data-request-validate data-request-flash>
+                        <div class="form-group">
+                            <div class="md-form">
+                                <input name="accountNewPassword" type="password" id="accountNewPassword" class="form-control">
+                                <label for="accountNewPassword">{{ 'school.profile.form.account.new_password'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="accountNewPassword"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="md-form">
+                                <input name="accountNewPassword_confirmation" type="password" id="accountNewPassword_confirmation" class="form-control">
+                                <label for="accountNewPassword_confirmation">{{ 'school.profile.form.account.re_new_password'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="accountNewPassword_confirmation"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
+                                <div class="md-form m-0">
+                                    <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'school.profile.form.account.save'|_ }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
             </div>
 
@@ -253,22 +254,18 @@ requirePassword = 0
     <script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
 
     <script type="text/javascript">
-        $('#inspectorate').autocomplete({
+
+        $('#inspectorate_id').autocomplete({
             source: {{ inspectorates|raw }},
             highlightClass: 'text-danger',
             treshold: 1
-
         });
 
-        $('#address').autocomplete({
+        $('#address_id').autocomplete({
             source: {{ addresses|raw }},
             highlightClass: 'text-danger',
             treshold: 1
         });
-
-$('.onSchoolProfileDescriptionUpdate').on('ajaxError', function() {
-    alert('Updated!');
-})
 
     </script>
 {% endput %}

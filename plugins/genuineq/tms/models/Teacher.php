@@ -17,7 +17,15 @@ class Teacher extends Model
      */
     protected $fillable = [
         'name',
+        'slug',
+        'phone',
+        'birth_date',
+        'description',
         'user_id',
+        'address_id',
+        'seniority_level_id',
+        'school_level_id',
+        'contract_type_id',
     ];
 
     /**
@@ -28,16 +36,17 @@ class Teacher extends Model
     /**
      * Address relation
      */
-    public $hasOne = [
+    public $belongsTo = [
         'address' => 'Genuineq\Tms\Models\Address',
-        'seniority_level' => 'Genuineq\Tms\Models\Address',
-        'school_level' => 'Genuineq\Tms\Models\Address',
+        'seniority_level' => 'Genuineq\Tms\Models\SeniorityLevel',
+        'school_level' => 'Genuineq\Tms\Models\SchoolLevel',
+        'contract_type' => 'Genuineq\Tms\Models\ContractType',
     ];
 
     /**
      * "User" relation
      */
-    public $belongsTo = [
+    public $hasOne = [
         'user' => 'Genuineq\user\Models\User',
     ];
 
@@ -56,4 +65,11 @@ class Teacher extends Model
      */
     public $rules = [
     ];
+
+    /**
+     * Function that
+     */
+    public function getFormatedBirthDateAttribute(){
+        return date('d-m-Y', strtotime($this->birth_date));
+    }
 }

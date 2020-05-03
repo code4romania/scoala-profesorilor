@@ -50,7 +50,7 @@ class SchoolProfile extends ComponentBase
     public function prepareVars()
     {
         $this->page['profile'] = (Auth::check()) ? (Auth::getUser()->getProfile()) : (null);
-        $this->page['profileAddress'] = ($this->page['profile']) ? ($this->page['profile']->address->name . ', ' . $this->page['profile']->address->county) : (null);
+        $this->page['profileAddress'] = ($this->page['profile'] && $this->page['profile']->address) ? ($this->page['profile']->address->name . ', ' . $this->page['profile']->address->county) : (null);
 
         /* Extract all the inspectorates and create the source array. */
         $value = 0;
@@ -119,16 +119,16 @@ class SchoolProfile extends ComponentBase
             'contact_email' => 'string|max:50|email|nullable',
             'contact_phone' => ['nullable', 'max:15', 'regex:/^[0123456789 +]*$/i'],
             'contact_role' => 'string|max:50|nullable',
-            'user_id' => 'numeric',
-            'address_id' => 'numeric',
-            'inspectorate_id' => 'numeric',
+            'user_id' => 'numeric|nullable',
+            'address_id' => 'numeric|nullable',
+            'inspectorate_id' => 'numeric|nullable',
         ];
 
         /** Construct the validation error messages. */
         $messages = [
             'name.regex' => Lang::get('genuineq.tms::lang.component.school-profile.validation.name_regex'),
             'name.max' => Lang::get('genuineq.tms::lang.component.school-profile.validation.name_max'),
-            'phone.numeric' => Lang::get('genuineq.tms::lang.component.school-profile.validation.phone_numeric'),
+            'phone.regex' => Lang::get('genuineq.tms::lang.component.school-profile.validation.phone_regex'),
             'phone.max' => Lang::get('genuineq.tms::lang.component.school-profile.validation.phone_max'),
             'email.string' => Lang::get('genuineq.tms::lang.component.school-profile.validation.email_string'),
             'email.max' => Lang::get('genuineq.tms::lang.component.school-profile.validation.email_max'),
@@ -161,7 +161,7 @@ class SchoolProfile extends ComponentBase
             $schoolProfile->fill($data);
             $schoolProfile->save();
         } else {
-            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-profile.message.access_denied'));
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-profile.message.profile_update_failed'));
         }
 
         Flash::success(Lang::get('genuineq.tms::lang.component.school-profile.message.profile_update_successful'));
@@ -202,7 +202,7 @@ class SchoolProfile extends ComponentBase
             $schoolProfile->fill($data);
             $schoolProfile->save();
         } else {
-            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-profile.message.access_denied'));
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-profile.message.description_update_failed'));
         }
 
         Flash::success(Lang::get('genuineq.tms::lang.component.school-profile.message.description_update_successful'));

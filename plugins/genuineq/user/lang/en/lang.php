@@ -370,11 +370,22 @@ return [
                 'force_secure_desc' => 'Always redirect the URL with the HTTPS schema',
             ],
             'validation' => [
-
+                'account_mail_required' => 'Adresa de email este obligatorie',
+                'account_mail_between' => 'Adresa de email trebuie sa aiba intre 6 si 255 de caractere',
+                'account_mail_email' => 'Adresa de email nu este valida',
+                'account_mail_unique' => 'Adresa de email este deja folosita',
+                'account_new_password_required' => 'Noua parola este obligatorie',
+                'account_new_password_between_s' => 'Noua parola trebuie sa aiba intre ',
+                'account_new_password_between_e' => ' caractere',
+                'account_new_password_confirmed' => 'Parolele nu se potrivesc',
+                'account_new_password_confirmation_required' => 'Confirmarea noii parole este obligatorie',
+                'account_new_password_confirmation_required_with' => 'Confirmarea noii parole este obligatorie',
             ],
             'message' => [
                 'avatar_update_successful' => 'Poza de profil a fost actualizata cu succes',
                 'avatar_update_failed' => 'Actualizarea pozei de profil a esuat',
+                'email_update_successful' => 'Adresa de email a fost actualizata cu succes',
+                'password_update_successful' => 'Parola a fost actualizata cu succes',
             ],
         ],
     ]
