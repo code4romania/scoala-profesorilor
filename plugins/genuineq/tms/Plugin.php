@@ -11,7 +11,7 @@ class Plugin extends PluginBase
     {
         return [
             'Genuineq\Tms\Components\SchoolProfile' => 'schoolProfile',
-            'Genuineq\Tms\Components\TeacherProfile' => 'teacherProfile'
+            'Genuineq\Tms\Components\TeacherProfile' => 'teacherProfile',
         ];
     }
 

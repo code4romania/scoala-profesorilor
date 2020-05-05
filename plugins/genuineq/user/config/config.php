@@ -33,8 +33,8 @@
 
     /** Login redirects based on user types. */
     'loginRedirects' => [
-        'school' => 'tms-dashboard-scoala',
-        'teacher' => 'tms-dashboard-profesor'
+        'school' => '/',
+        'teacher' => '/'
     ],
 
     /** Profile page for each user type. */

@@ -15,78 +15,136 @@ detailsKeyColumn = "slug"
 detailsUrlParameter = "slug"
 pageNumber = "{{ :page }}"
 
-[builderList coursesList]
-modelClass = "Genuineq\Tms\Models\Course"
-scope = "-"
-scopeValue = "{{ :scope }}"
-displayColumn = "name"
-noRecordsMessage = "Nu exista inregistrari"
-detailsPage = "tms-curs"
-detailsKeyColumn = "slug"
-detailsUrlParameter = "slug"
-recordsPerPage = 12
-pageNumber = "{{ :page }}"
-
 [session]
 security = "all"
 allowedUserGroups[] = "teacher"
 allowedUserGroups[] = "school"
 ==
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12 col-sm-12 col-md-6 col-lg-6 py-4 bg-primary">
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-10 col-lg-7 mx-auto mb-3 text-white text-center">
-                    <h2 class="font-weight-bold wow fadeInLeft">{{ 'home.teachers.title'|_ }}</h2>
+<?php
+    use Genuineq\Tms\Models\Course;
+
+    function prepareVars(){
+        /* Get the search/filter options */
+        $options = post();
+
+        $this['courses'] = Course::listFrontEnd($options);
+        $this['pages'] = $this['courses']->lastPage();
+        $this['page'] = $this['courses']->currentPage();
+    }
+
+    function onStart() {
+        $this['categories'] = Course::getFilterCategories();
+        $this['accreditations'] = Course::getFilterAccreditations();
+        $this['sortTypes'] = Course::getSortingTypes();
+
+        $this->prepareVars();
+    }
+
+    function onCourseSearch() {
+        $this->prepareVars();
+    }
+?>
+==
+{% if not user %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 py-4 bg-primary">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-10 col-lg-7 mx-auto mb-3 text-white text-center">
+                        <h2 class="font-weight-bold wow fadeInLeft">{{ 'home.teachers.title'|_ }}</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <img class="img-thumbnail mx-auto mb-3 d-block rounded-circle wow fadeInLeft" src="{{ 'assets/img/svg/teacher.svg'|theme }}" alt="" style="background-color: {{ category.color }} !important;">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-10 col-lg-7 mx-auto mb-3 text-white text-center">
+                        <h4 class="font-weight-bold wow fadeInLeft">{{ 'home.teachers.action'|_ }}</h4>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-10 col-lg-6 mx-auto mb-3 text-white">
+                        <p class="wow fadeInLeft">{{ 'home.teachers.description'|_ }}</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-12">
-                    <img class="img-thumbnail mx-auto mb-3 d-block rounded-circle wow fadeInLeft" src="{{ 'assets/img/svg/teacher.svg'|theme }}" alt="" style="background-color: {{ category.color }} !important;">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 py-4 bg-secondary">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-10 col-lg-7 mx-auto mb-3 text-center">
+                        <h2 class="font-weight-bold wow fadeInRight">{{ 'home.school.title'|_ }}</h2>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-10 col-lg-7 mx-auto mb-3 text-white text-center">
-                    <h4 class="font-weight-bold wow fadeInLeft">{{ 'home.teachers.action'|_ }}</h4>
+                <div class="row">
+                    <div class="col-12">
+                        <img class="img-thumbnail mx-auto mb-3 d-block rounded-circle wow fadeInRight" src="{{ 'assets/img/svg/school.svg'|theme }}" alt="" style="background-color: {{ category.color }} !important;">
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-10 col-lg-6 mx-auto mb-3 text-white">
-                    <p class="wow fadeInLeft">{{ 'home.teachers.description'|_ }}</p>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-10 col-lg-7 mx-auto mb-3 text-center">
+                        <h4 class="font-weight-bold wow fadeInRight">{{ 'home.school.action'|_ }}</h4>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="col-12 col-sm-12 col-md-6 col-lg-6 py-4 bg-secondary">
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-10 col-lg-7 mx-auto mb-3 text-center">
-                    <h2 class="font-weight-bold wow fadeInRight">{{ 'home.school.title'|_ }}</h2>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <img class="img-thumbnail mx-auto mb-3 d-block rounded-circle wow fadeInRight" src="{{ 'assets/img/svg/school.svg'|theme }}" alt="" style="background-color: {{ category.color }} !important;">
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-10 col-lg-7 mx-auto mb-3 text-center">
-                    <h4 class="font-weight-bold wow fadeInRight">{{ 'home.school.action'|_ }}</h4>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-10 col-lg-6 mx-auto">
-                    <p class="wow fadeInRight">{{ 'home.school.description'|_ }}</p>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-10 col-lg-6 mx-auto">
+                        <p class="wow fadeInRight">{{ 'home.school.description'|_ }}</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+{% elseif 'teacher' == user.type %}
+    <div class="container-fluid bg-primary">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 py-4 ">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <img class="img-thumbnail mx-auto d-block rounded-circle wow fadeInLeft" src="{{ 'assets/img/svg/teacher.svg'|theme }}" alt="" style="background-color: {{ category.color }} !important;">
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto text-white">
+                            <h4 class="font-weight-bold wow fadeInLeft">{{ 'teacher.dashboard.title'|_ }}</h4>
+
+                            <p class="wow fadeInLeft">{{ 'teacher.dashboard.description'|_ }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="container-fluid bg-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 py-4">
+
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <img class="img-thumbnail mx-auto d-block rounded-circle wow fadeInRight" src="{{ 'assets/img/svg/school.svg'|theme }}" alt="" style="background-color: {{ category.color }} !important;">
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto">
+                            <h4 class="font-weight-bold wow fadeInRight">{{ 'school.dashboard.title'|_ }}</h4>
+
+                            <p class="wow fadeInRight">{{ 'school.dashboard.description'|_ }}</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
 
 <div class="container py-5">
     <div class="row">
@@ -104,17 +162,17 @@ allowedUserGroups[] = "school"
 
             <hr class="my-5 bg-dark">
 
-            {% partial "search-form" %}
+            {% partial "course-search-form" %}
 
             <h5 class="mb-3 font-weight-bold">{{ 'home.courses.title'|_ }}</h5>
 
-            {% partial "course-grid"
-                courses=coursesList.records
-                detailsPage=coursesList.detailsPage
-                detailsKeyColumn=coursesList.detailsKeyColumn
-                detailsUrlParameter=coursesList.detailsUrlParameter
-                pagination=true
-            %}
+            <div id="courseSearchResults">
+                {% partial "course-grid" %}
+            </div>
+            <div id="courseSearchPagination">
+                {% partial "course-search-pagination" %}
+            </div>
+
         </div>
     </div>
 </div>

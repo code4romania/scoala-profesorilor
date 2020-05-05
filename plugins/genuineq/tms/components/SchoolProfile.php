@@ -53,16 +53,14 @@ class SchoolProfile extends ComponentBase
         $this->page['profileAddress'] = ($this->page['profile'] && $this->page['profile']->address) ? ($this->page['profile']->address->name . ', ' . $this->page['profile']->address->county) : (null);
 
         /* Extract all the inspectorates and create the source array. */
-        $value = 0;
-        foreach (Inspectorate::all()->pluck('name') as $inspectorate) {
-            $inspectorates[$inspectorate] = $value++;
+        foreach (Inspectorate::all() as $inspectorate) {
+            $inspectorates[$inspectorate->name] = $inspectorate->id;
         }
         $this->page['inspectorates'] = json_encode($inspectorates);
 
         /* Extract all the addresses and create the source array. */
-        $value = 0;
         foreach (Address::all() as $address) {
-            $addresses[$address->name . ', ' . $address->county] = $value++;
+            $addresses[$address->name . ', ' . $address->county] = $address->id;
         }
         $this->page['addresses'] = json_encode($addresses);
     }

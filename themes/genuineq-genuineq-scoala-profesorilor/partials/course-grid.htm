@@ -10,9 +10,9 @@ description = "Displays a grid of courses"
             <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-4">
                 {% partial "course-card"
                     course=course
-                    detailsPage=detailsPage
-                    detailsKeyColumn=detailsKeyColumn
-                    detailsUrlParameter=detailsUrlParameter
+                    detailsPage="tms-curs"
+                    detailsKeyColumn="slug"
+                    detailsUrlParameter="slug"
                 %}
             </div>
         {% endfor %}

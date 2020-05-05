@@ -1,0 +1,66 @@
+description = "Displays the course search form."
+
+[viewBag]
+==
+<form id="courseSearchForm">
+    <div id="courseSearchFormContent" class="input-group mb-3">
+
+        <div class="input-group-prepend">
+            <span class="input-group-text md-addon border border-white bg-white"><i class="fa fa-search"></i></span>
+        </div>
+
+        <input name="searchInput" type="text" class="form-control border border-white shadow-none" placeholder="{{ 'search.placeholder'|_ }}" aria-label="{{ 'search.placeholder'|_ }}">
+
+        <div class="input-group-append">
+            <select name="sort" class="browser-default custom-select border border-white shadow-none" id="sort">
+                {% for key, value in sortTypes %}
+                    <option value="{{ value }}">{{ key }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="input-group-append">
+            <select name="category" class="browser-default custom-select border border-white shadow-none" id="category">
+                {% for key, value in categories %}
+                    <option value="{{ value }}">{{ key }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="input-group-append">
+            <select name="accreditation" class="browser-default custom-select border border-white shadow-none" id="accreditation">
+                {% for key, value in accreditations %}
+                    <option value="{{ value }}">{{ key }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+    </div>
+</form>
+
+<script type="text/javascript">
+    function courseSearchFormSubmit(){
+        /* Extract the clicked page. */
+        var $newPage = $('#courseSearchPagination > ul > li.active').data('page');
+
+        /* Select the course select form and send the request */
+        $('#courseSearchForm').request(
+            'onCourseSearch',
+            {
+                update: {'course-grid': '#courseSearchResults', 'course-search-pagination': '#courseSearchPagination'},
+                data: {page: $newPage}
+            }
+        );
+    }
+
+    $('#courseSearchFormContent').on('change', 'select', function () {
+        courseSearchFormSubmit();
+    });
+
+    $('#courseSearchForm').on('submit', function () {
+        alert('asdasd');
+        courseSearchFormSubmit();
+
+        return false;
+    })
+</script>

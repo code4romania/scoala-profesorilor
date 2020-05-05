@@ -1,0 +1,29 @@
+description = "Displays the course search pagination."
+
+[viewBag]
+==
+<ul class="pagination pg-darkgrey justify-content-center">
+    {% for i in 1..pages %}
+        {% if i == page %}
+            <li class="page-item active" data-page="{{ i }}"><a class="page-link search-pagination" data-page="{{ i }}">{{ i }}</a></li>
+        {% else %}
+            <li class="page-item" data-page="{{ i }}"><a class="page-link search-pagination" data-page="{{ i }}">{{ i }}</a></li>
+        {% endif %}
+    {% endfor %}
+</ul>
+
+<script type="text/javascript">
+    $('.search-pagination').on('click', function () {
+        /* Extract the clicked page. */
+        var $newPage = $(this).data('page');
+
+        /* Select the course select form and send the request */
+        $('#courseSearchForm').request(
+            'onCourseSearch',
+            {
+                update: {'course-grid': '#courseSearchResults', 'course-search-pagination': '#courseSearchPagination'},
+                data: {page: $newPage}
+            }
+        );
+    });
+</script>

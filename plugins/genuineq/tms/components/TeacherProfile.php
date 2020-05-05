@@ -17,8 +17,6 @@ use Genuineq\Tms\Models\SchoolLevel;
 use Genuineq\Tms\Models\ContractType;
 use Genuineq\User\Helpers\AuthRedirect;
 
-use Log;
-
 /**
  * Teacher profile component
  *

@@ -55,6 +55,25 @@
         ],
 
         'backend-menu' => 'Courses',
+
+        'frontend' => [
+            'all_courses' => 'Toate categoriile',
+            'all_accreditations' => 'Toate acreditarile',
+            'accredited' => 'Acreditat',
+            'not_accredited' => 'Neacreditat',
+            'name_asc' => 'Nume Ascendent',
+            'name_desc' => 'Nume Descendent',
+            'duration_asc' => 'Durata Ascendent',
+            'duration_desc' => 'Durata Descendent',
+            'start_date_asc' => 'Data start Ascendent',
+            'start_date_desc' => 'Data start Descendent',
+            'end_date_asc' => 'Data finalizare Ascendent ',
+            'end_date_desc' => 'Data finalizare Descendent',
+            'credits_asc' => 'Credite Ascendent',
+            'credits_desc' => 'Credite Descendent',
+            'price_asc' => 'Pret Ascendent',
+            'price_desc' => 'Pret Descendent',
+        ],
     ],
 
     'supplier' => [

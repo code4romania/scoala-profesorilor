@@ -20,6 +20,8 @@ use Genuineq\User\Models\User as UserModel;
 use Genuineq\User\Models\Settings as UserSettings;
 use Genuineq\User\Helpers\PluginConfig;
 
+use Log;
+
 /**
  * Login component
  *
@@ -237,9 +239,11 @@ class Login extends ComponentBase
 
         $redirectUrl = $this->pageUrl($page);
 
-        if ($redirectUrl = post('redirect', $redirectUrl)) {
-            return Redirect::$method($redirectUrl);
-        }
+        return Redirect::to($redirectUrl);
+
+        // if ($redirectUrl = post('redirect', $redirectUrl)) {
+        //     return Redirect::$method($redirectUrl);
+        // }
     }
 
     /**

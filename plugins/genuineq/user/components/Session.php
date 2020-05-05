@@ -119,20 +119,18 @@ class Session extends ComponentBase
     public function onLogout()
     {
         if (!Auth::check()) {
-            $user = Auth::getUser();
-
-            Auth::logout();
-
-            if ($user) {
-                Event::fire('genuineq.user.logout', [$user]);
-            }
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
-        $url = post('redirect', Request::fullUrl());
+        /** Extract the user. */
+        $user = Auth::getUser();
+
+        /** logout the user. */
+        Auth::logout();
 
         Flash::success(Lang::get('genuineq.user::lang.component.session.message.logout'));
 
-        return Redirect::to($url);
+        return Redirect::to($this->pageUrl('/'));
     }
 
     /**
