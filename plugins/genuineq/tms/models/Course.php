@@ -103,7 +103,7 @@ class Course extends Model
     }
 
     /**
-     * Function used for
+     * Function used for searching, filtering, sorting and paginating courses.
      *
      * @param query
      */

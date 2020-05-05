@@ -98,13 +98,21 @@ class SchoolProfile extends ComponentBase
         $data['slug'] = str_replace(' ', '-', strtolower($data['name']));
 
         /** Extract the inspectorate ID. */
-        $inspectorate = Inspectorate::whereName($data['inspectorate_id'])->first();
-        $data['inspectorate_id'] = ($inspectorate) ? ($inspectorate->id) : ('');
+        if ($data['inspectorate_id']) {
+            $inspectorate = Inspectorate::whereName($data['inspectorate_id'])->first();
+            $data['inspectorate_id'] = ($inspectorate) ? ($inspectorate->id) : ('');
+        } else {
+            unset($data['inspectorate_id']);
+        }
 
         /** Extract the address ID. */
-        $fullAddress = explode(', ', $data['address_id']);
-        $address = Address::whereName($fullAddress[0])->whereCounty($fullAddress[1])->first();
-        $data['address_id'] = ($address) ? ($address->id) : ('');;
+        if ($data['address_id']) {
+            $fullAddress = explode(', ', $data['address_id']);
+            $address = Address::whereName($fullAddress[0])->whereCounty($fullAddress[1])->first();
+            $data['address_id'] = ($address) ? ($address->id) : ('');;
+        } else {
+            unset($data['address_id']);
+        }
 
         /** Extract the validation rules. */
         $rules = [

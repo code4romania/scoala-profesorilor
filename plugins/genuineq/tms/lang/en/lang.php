@@ -113,6 +113,16 @@
         ],
 
         'backend-menu' => 'Teachers',
+
+        'frontend' => [
+            'all_seniority_levels' => 'Toate senioritatile',
+            'all_school_levels' => 'Toate nivelele scolare',
+            'all_contract_types' => 'Toate tipurile contractuale',
+            'name_asc' => 'Nume Ascendent',
+            'name_desc' => 'Nume Descendent',
+            'birth_date_asc' => 'Data nastere Ascendent',
+            'birth_date_desc' => 'Data nastere Descendent',
+        ],
     ],
 
     'inspectotate' => [

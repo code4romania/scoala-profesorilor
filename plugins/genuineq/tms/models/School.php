@@ -1,7 +1,8 @@
 <?php namespace Genuineq\Tms\Models;
 
 use Model;
-
+use Genuineq\Tms\Models\Teacher;
+use Log;
 /**
  * Model
  */
@@ -60,8 +61,33 @@ class School extends Model
     ];
 
     /**
+     * Teachers relation
+     */
+    public $belongsToMany = [
+        'teachers' => [
+            'Genuineq\Tms\Models\Teacher',
+            'table' => 'genuineq_tms_schools_teachers',
+            'order' => 'name',
+        ],
+    ];
+
+    /**
      * @var array Validation rules
      */
     public $rules = [
     ];
+
+    /**
+     * Function used for searching, filtering, sorting and paginating the school teachers.
+     *
+     * @param options An array of options to use.
+     */
+    public function filterTeachers($options = []){
+        /** Add the school ID */
+        $options['school'] = $this->id;
+
+        Log::info('$options = ' . print_r($options, true));
+
+        return Teacher::schoolTeachers($options);
+    }
 }

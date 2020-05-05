@@ -12,7 +12,7 @@ description = "Displays the course search form."
         <input name="searchInput" type="text" class="form-control border border-white shadow-none" placeholder="{{ 'search.placeholder'|_ }}" aria-label="{{ 'search.placeholder'|_ }}">
 
         <div class="input-group-append">
-            <select name="sort" class="browser-default custom-select border border-white shadow-none" id="sort">
+            <select name="sort" class="browser-default custom-select border border-white shadow-none rounded-0" id="sort">
                 {% for key, value in sortTypes %}
                     <option value="{{ value }}">{{ key }}</option>
                 {% endfor %}
@@ -20,7 +20,7 @@ description = "Displays the course search form."
         </div>
 
         <div class="input-group-append">
-            <select name="category" class="browser-default custom-select border border-white shadow-none" id="category">
+            <select name="category" class="browser-default custom-select border border-white shadow-none rounded-0" id="category">
                 {% for key, value in categories %}
                     <option value="{{ value }}">{{ key }}</option>
                 {% endfor %}
@@ -28,7 +28,7 @@ description = "Displays the course search form."
         </div>
 
         <div class="input-group-append">
-            <select name="accreditation" class="browser-default custom-select border border-white shadow-none" id="accreditation">
+            <select name="accreditation" class="browser-default custom-select border border-white shadow-none rounded-0" id="accreditation">
                 {% for key, value in accreditations %}
                     <option value="{{ value }}">{{ key }}</option>
                 {% endfor %}

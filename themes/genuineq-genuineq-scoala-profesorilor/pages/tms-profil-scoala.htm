@@ -14,258 +14,349 @@ forceSecure = 0
 forceSecure = 0
 requirePassword = 0
 ==
+<?php
+    use Genuineq\Tms\Models\Teacher;
+
+    function prepareVars(){
+        /* Get the search/filter options */
+        $options = post();
+
+        $this['teachers'] = Auth::getUser()->getProfile()->filterTeachers($options);
+        $this['pages'] = $this['teachers']->lastPage();
+        $this['page'] = $this['teachers']->currentPage();
+    }
+
+    function onEnd() {
+        $this['seniorityLevels'] = Teacher::getFilterSeniorityLevel();
+        $this['schoolLevels'] = Teacher::getFilterSchoolLevel();
+        $this['contractTypes'] = Teacher::getFilterContractType();
+        $this['sortTypes'] = Teacher::getSortingTypes();
+
+        $this->prepareVars();
+
+        // dd($this['teachers']);
+    }
+
+    function onTeacherSearch() {
+        $this->prepareVars();
+    }
+?>
+==
 <div class="containter-fluid h-25" style="background-image: url({{ 'background-school.jpg'|media }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
-    <div class="row h-100 m-0">
+    <div class="row h-75 m-0">
         <div class="col-12 col-sm-6 offset-sm-3 col-md-4 offset-md-4 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4 bg-white h-100">
-            <div class="row">
-                <div class="col-12">
-                    <div class="text-center">
-                        <img src="{{ (user.getAvatarThumb()) ? (user.getAvatarThumb(150)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="rounded-circle" alt="avatar" height="150">
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="text-center">
-                        <p class="m-0">{{ user.name }}</p>
-                    </div>
-                </div>
+
+            <div class="text-center">
+                <img src="{{ (user.getAvatarThumb()) ? (user.getAvatarThumb(150)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="rounded-circle" alt="avatar" height="150">
             </div>
+
+        </div>
+    </div>
+
+    <div class="row h-25 m-0">
+        <div class="col-12 col-sm-6 offset-sm-3 col-md-4 offset-md-4 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4 bg-white h-100">
+
+            <div class="text-center">
+                <p class="m-0">{{ profile.name }}</p>
+                <p class="m-0">{{ profileAddress }}</p>
+            </div>
+
         </div>
     </div>
 </div>
 
-<div class="container my-5">
-    <div class="row">
-        <div class="col-12 col-sm-5 col-md-5 col-lg-5 col-xl-5">
-            <div class="row">
-                <div class="col-12 bg-white rounded p-3">
+<div class="container-fluid bg-white py-4">
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="account-tab" data-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="true">{{ 'school.profile.tab.account'|_ }}</a>
+            </li>
 
-                    <h5 class="mb-3 font-weight-bold">{{ 'school.profile.form.profile.title'|_ }}</h5>
+            <li class="nav-item">
+                <a class="nav-link" id="teachers-tab" data-toggle="tab" href="#teachers" role="tab" aria-controls="teachers" aria-selected="false">{{ 'school.profile.tab.teachers'|_ }}</a>
+            </li>
 
-                    <form method="POST" data-request="onSchoolProfileUpdate" data-request-validate data-request-flash>
-                        <div class="form-group">
-                            <div class="md-form">
-                                <input name="name" type="text" id="name" class="form-control" value="{{ profile.name }}">
-                                <label for="name">{{ 'school.profile.form.profile.name'|_ }}</label>
-                                <div class="small text-danger" data-validate-for="name"></div>
-                            </div>
-                        </div>
+            <li class="nav-item">
+                <a class="nav-link" id="dashboard-tab" data-toggle="tab" href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false">{{ 'school.profile.tab.dashboard'|_ }}</a>
+            </li>
 
-                        <div class="form-group">
-                            <div class="md-form">
-                                <input name="email" type="email" id="email" class="form-control" value="{{ profile.email }}">
-                                <label for="email">{{ 'school.profile.form.profile.email'|_ }}</label>
-                                <div class="small text-danger" data-validate-for="email"></div>
-                            </div>
-                        </div>
+            <li class="nav-item">
+                <a class="nav-link" id="courses-tab" data-toggle="tab" href="#courses" role="tab" aria-controls="courses" aria-selected="false">{{ 'school.profile.tab.courses'|_ }}</a>
+            </li>
 
-                        <div class="form-group">
-                            <div class="md-form">
-                                <input name="phone" type="text" id="phone" class="form-control" value="{{ profile.phone }}">
-                                <label for="phone">{{ 'school.profile.form.profile.phone'|_ }}</label>
-                                <div class="small text-danger" data-validate-for="phone"></div>
-                            </div>
-                        </div>
+            <li class="nav-item">
+                <a class="nav-link" id="notifications-tab" data-toggle="tab" href="#notifications" role="tab" aria-controls="notifications" aria-selected="false">{{ 'school.profile.tab.notifications'|_ }}</a>
+            </li>
+        </ul>
+    </div>
+</div>
 
-                        <div class="form-group">
-                            <div class="md-form">
-                                <input name="principal" type="text" id="principal" class="form-control" value="{{ profile.principal }}">
-                                <label for="principal">{{ 'school.profile.form.profile.principal'|_ }}</label>
-                                <div class="small text-danger" data-validate-for="principal"></div>
-                            </div>
-                        </div>
+<div class="container">
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+            <div class="row my-5">
+                <div class="col-12 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                    <div class="row">
+                        <div class="col-12 bg-white rounded p-3">
 
-                        <div class="form-group">
-                            <div class="md-form">
-                                <input name="contact_name" type="text" id="contact_name" class="form-control" value="{{ profile.contact_name }}">
-                                <label for="contact_name">{{ 'school.profile.form.profile.contact_name'|_ }}</label>
-                                <div class="small text-danger" data-validate-for="contact_name"></div>
-                            </div>
-                        </div>
+                            <h5 class="mb-3 font-weight-bold">{{ 'school.profile.form.profile.title'|_ }}</h5>
 
-                        <div class="form-group">
-                            <div class="md-form">
-                                <input name="contact_email" type="email" id="contact_email" class="form-control" value="{{ profile.contact_email }}">
-                                <label for="contact_email">{{ 'school.profile.form.profile.contact_email'|_ }}</label>
-                                <div class="small text-danger" data-validate-for="contact_email"></div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="md-form">
-                                <input name="contact_phone" type="text" id="contact_phone" class="form-control" value="{{ profile.contact_phone }}">
-                                <label for="contact_phone">{{ 'school.profile.form.profile.contact_phone'|_ }}</label>
-                                <div class="small text-danger" data-validate-for="contact_phone"></div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="md-form">
-                                <input name="contact_role" type="text" id="contact_role" class="form-control" value="{{ profile.contact_role }}">
-                                <label for="contact_role">{{ 'school.profile.form.profile.contact_role'|_ }}</label>
-                                <div class="small text-danger" data-validate-for="contact_role"></div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="md-form">
-                                <input name="inspectorate_id" type="text" id="inspectorate_id" class="form-control" value="{{ profile.inspectorate.name }}">
-                                <label for="inspectorate_id">{{ 'school.profile.form.profile.inspectorate_id'|_ }}</label>
-                                <div class="small text-danger" data-validate-for="inspectorate_id"></div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="md-form">
-                                <input name="address_id" type="text" id="address_id" class="form-control" value="{{ profileAddress }}">
-                                <label for="address_id">{{ 'school.profile.form.profile.address_id'|_ }}</label>
-                                <div class="small text-danger" data-validate-for="address_id"></div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
-                                <div class="md-form m-0">
-                                    <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'school.profile.form.profile.save'|_ }}</button>
+                            <form method="POST" data-request="onSchoolProfileUpdate" data-request-validate data-request-flash>
+                                <div class="form-group">
+                                    <div class="md-form">
+                                        <input name="name" type="text" id="name" class="form-control" value="{{ profile.name }}">
+                                        <label for="name">{{ 'school.profile.form.profile.name'|_ }}</label>
+                                        <div class="small text-danger" data-validate-for="name"></div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </form>
 
-                </div>
-            </div>
-
-            <div class="row pt-5">
-                <div class="col-12 bg-white rounded p-3">
-                    <h5 class="mb-3 font-weight-bold">{{ 'school.profile.form.description.title'|_ }}</h5>
-
-                    <form method="POST" data-request="onSchoolProfileDescriptionUpdate" data-request-validate data-request-flash>
-                        <div class="form-group">
-                            <div class="md-form">
-                                <textarea name="description" type="text" id="description" class="md-textarea form-control" rows="3">{{ profile.description }}</textarea>
-                                <label for="description">{{ 'school.profile.form.description.description'|_ }}</label>
-                                <div class="small text-danger" data-validate-for="description"></div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
-                                <div class="md-form m-0">
-                                    <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'school.profile.form.description.save'|_ }}</button>
+                                <div class="form-group">
+                                    <div class="md-form">
+                                        <input name="email" type="email" id="email" class="form-control" value="{{ profile.email }}">
+                                        <label for="email">{{ 'school.profile.form.profile.email'|_ }}</label>
+                                        <div class="small text-danger" data-validate-for="email"></div>
+                                    </div>
                                 </div>
-                            </div>
+
+                                <div class="form-group">
+                                    <div class="md-form">
+                                        <input name="phone" type="text" id="phone" class="form-control" value="{{ profile.phone }}">
+                                        <label for="phone">{{ 'school.profile.form.profile.phone'|_ }}</label>
+                                        <div class="small text-danger" data-validate-for="phone"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="md-form">
+                                        <input name="principal" type="text" id="principal" class="form-control" value="{{ profile.principal }}">
+                                        <label for="principal">{{ 'school.profile.form.profile.principal'|_ }}</label>
+                                        <div class="small text-danger" data-validate-for="principal"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="md-form">
+                                        <input name="contact_name" type="text" id="contact_name" class="form-control" value="{{ profile.contact_name }}">
+                                        <label for="contact_name">{{ 'school.profile.form.profile.contact_name'|_ }}</label>
+                                        <div class="small text-danger" data-validate-for="contact_name"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="md-form">
+                                        <input name="contact_email" type="email" id="contact_email" class="form-control" value="{{ profile.contact_email }}">
+                                        <label for="contact_email">{{ 'school.profile.form.profile.contact_email'|_ }}</label>
+                                        <div class="small text-danger" data-validate-for="contact_email"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="md-form">
+                                        <input name="contact_phone" type="text" id="contact_phone" class="form-control" value="{{ profile.contact_phone }}">
+                                        <label for="contact_phone">{{ 'school.profile.form.profile.contact_phone'|_ }}</label>
+                                        <div class="small text-danger" data-validate-for="contact_phone"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="md-form">
+                                        <input name="contact_role" type="text" id="contact_role" class="form-control" value="{{ profile.contact_role }}">
+                                        <label for="contact_role">{{ 'school.profile.form.profile.contact_role'|_ }}</label>
+                                        <div class="small text-danger" data-validate-for="contact_role"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="md-form">
+                                        <input name="inspectorate_id" type="text" id="inspectorate_id" class="form-control" value="{{ profile.inspectorate.name }}">
+                                        <label for="inspectorate_id">{{ 'school.profile.form.profile.inspectorate_id'|_ }}</label>
+                                        <div class="small text-danger" data-validate-for="inspectorate_id"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="md-form">
+                                        <input name="address_id" type="text" id="address_id" class="form-control" value="{{ profileAddress }}">
+                                        <label for="address_id">{{ 'school.profile.form.profile.address_id'|_ }}</label>
+                                        <div class="small text-danger" data-validate-for="address_id"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
+                                        <div class="md-form m-0">
+                                            <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'school.profile.form.profile.save'|_ }}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
                         </div>
-                    </form>
+                    </div>
+
+                    <div class="row pt-5">
+                        <div class="col-12 bg-white rounded p-3">
+                            <h5 class="mb-3 font-weight-bold">{{ 'school.profile.form.description.title'|_ }}</h5>
+
+                            <form method="POST" data-request="onSchoolProfileDescriptionUpdate" data-request-validate data-request-flash>
+                                <div class="form-group">
+                                    <div class="md-form">
+                                        <textarea name="description" type="text" id="description" class="md-textarea form-control" rows="3">{{ profile.description }}</textarea>
+                                        <label for="description">{{ 'school.profile.form.description.description'|_ }}</label>
+                                        <div class="small text-danger" data-validate-for="description"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
+                                        <div class="md-form m-0">
+                                            <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'school.profile.form.description.save'|_ }}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="col-12 col-sm-5 offset-sm-1 col-md-5 offset-md-1 col-lg-5 offset-lg-1 col-xl-5 offset-xl-1">
-
-            <div class="row">
-                <div class="col-12 bg-white rounded p-3">
-                    <h5 class="mb-3 font-weight-bold">{{ 'school.profile.form.photo.title'|_ }}</h5>
-                    <small>{{ 'school.profile.form.photo.description'|_ }}</small>
+                <div class="col-12 col-sm-5 offset-sm-2 col-md-5 offset-md-2 col-lg-5 offset-lg-2 col-xl-5 offset-xl-2">
 
                     <div class="row">
-                        <div class="col-12">
-                            <div class="text-center">
-                                <img src="{{ (user.getAvatarThumb()) ? (user.getAvatarThumb(150)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="rounded-circle" alt="avatar" height="150">
+                        <div class="col-12 bg-white rounded p-3">
+                            <h5 class="mb-3 font-weight-bold">{{ 'school.profile.form.photo.title'|_ }}</h5>
+                            <small>{{ 'school.profile.form.photo.description'|_ }}</small>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="text-center">
+                                        <img src="{{ (user.getAvatarThumb()) ? (user.getAvatarThumb(150)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="rounded-circle" alt="avatar" height="150">
+                                    </div>
+                                </div>
                             </div>
+
+                            <form method="POST" data-request="onAvatarUpdate" data-request-validate data-request-flash data-request-files>
+                                <div class="form-group">
+                                    <div class="md-form">
+                                        <input name="avatar" type="file" class="custom-file-input" id="avatar">
+                                        <label class="custom-file-label" for="avatar">{{ 'school.profile.form.photo.label'|_ }}</label>
+                                        <div class="small text-danger" data-validate-for="avatar"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
+                                        <div class="md-form m-0">
+                                            <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'school.profile.form.photo.save'|_ }}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
 
-                    <form method="POST" data-request="onAvatarUpdate" data-request-validate data-request-flash data-request-files>
-                        <div class="form-group">
-                            <div class="md-form">
-                                <input name="avatar" type="file" class="custom-file-input" id="avatar">
-                                <label class="custom-file-label" for="avatar">{{ 'school.profile.form.photo.label'|_ }}</label>
-                                <div class="small text-danger" data-validate-for="avatar"></div>
-                            </div>
-                        </div>
+                    <div class="row pt-5">
+                        <div class="col-12 bg-white rounded p-3">
 
-                        <div class="form-row">
-                            <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
-                                <div class="md-form m-0">
-                                    <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'school.profile.form.photo.save'|_ }}</button>
+                            <h5 class="mb-3 font-weight-bold">{{ 'school.profile.form.account.title'|_ }}</h5>
+
+                            <form method="POST" data-request="onEmailUpdate" data-request-validate data-request-flash>
+                                <div class="form-group">
+                                    <div class="md-form">
+                                        <input name="accountEmail" type="text" id="accountEmail" class="form-control" value="{{ user.email }}">
+                                        <label for="accountEmail">{{ 'school.profile.form.account.email'|_ }}</label>
+                                        <div class="small text-danger" data-validate-for="accountEmail"></div>
+                                    </div>
                                 </div>
-                            </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
+                                        <div class="md-form m-0">
+                                            <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'school.profile.form.account.save'|_ }}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <form method="POST" data-request="onPasswordUpdate" data-request-validate data-request-flash>
+                                <div class="form-group">
+                                    <div class="md-form">
+                                        <input name="accountNewPassword" type="password" id="accountNewPassword" class="form-control">
+                                        <label for="accountNewPassword">{{ 'school.profile.form.account.new_password'|_ }}</label>
+                                        <div class="small text-danger" data-validate-for="accountNewPassword"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="md-form">
+                                        <input name="accountNewPassword_confirmation" type="password" id="accountNewPassword_confirmation" class="form-control">
+                                        <label for="accountNewPassword_confirmation">{{ 'school.profile.form.account.re_new_password'|_ }}</label>
+                                        <div class="small text-danger" data-validate-for="accountNewPassword_confirmation"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
+                                        <div class="md-form m-0">
+                                            <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'school.profile.form.account.save'|_ }}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
                         </div>
-                    </form>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="row pt-5">
-                <div class="col-12 bg-white rounded p-3">
+            {% put scripts %}
+                <script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
 
-                    <h5 class="mb-3 font-weight-bold">{{ 'school.profile.form.account.title'|_ }}</h5>
+                <script type="text/javascript">
 
-                    <form method="POST" data-request="onEmailUpdate" data-request-validate data-request-flash>
-                        <div class="form-group">
-                            <div class="md-form">
-                                <input name="accountEmail" type="text" id="accountEmail" class="form-control" value="{{ user.email }}">
-                                <label for="accountEmail">{{ 'school.profile.form.account.email'|_ }}</label>
-                                <div class="small text-danger" data-validate-for="accountEmail"></div>
-                            </div>
-                        </div>
+                    $('#inspectorate_id').autocomplete({
+                        source: {{ inspectorates|raw }},
+                        highlightClass: 'text-danger',
+                        treshold: 1
+                    });
 
-                        <div class="form-row">
-                            <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
-                                <div class="md-form m-0">
-                                    <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'school.profile.form.account.save'|_ }}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                    $('#address_id').autocomplete({
+                        source: {{ addresses|raw }},
+                        highlightClass: 'text-danger',
+                        treshold: 1
+                    });
 
-                    <form method="POST" data-request="onPasswordUpdate" data-request-validate data-request-flash>
-                        <div class="form-group">
-                            <div class="md-form">
-                                <input name="accountNewPassword" type="password" id="accountNewPassword" class="form-control">
-                                <label for="accountNewPassword">{{ 'school.profile.form.account.new_password'|_ }}</label>
-                                <div class="small text-danger" data-validate-for="accountNewPassword"></div>
-                            </div>
-                        </div>
+                </script>
+            {% endput %}
+        </div>
 
-                        <div class="form-group">
-                            <div class="md-form">
-                                <input name="accountNewPassword_confirmation" type="password" id="accountNewPassword_confirmation" class="form-control">
-                                <label for="accountNewPassword_confirmation">{{ 'school.profile.form.account.re_new_password'|_ }}</label>
-                                <div class="small text-danger" data-validate-for="accountNewPassword_confirmation"></div>
-                            </div>
-                        </div>
+        <div class="tab-pane fade" id="teachers" role="tabpanel" aria-labelledby="teachers-tab">
 
-                        <div class="form-row">
-                            <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
-                                <div class="md-form m-0">
-                                    <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'school.profile.form.account.save'|_ }}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+            <div class="row my-5">
+                <div class="col-12 p-0">
+                    {% partial "teacher-search-form" %}
 
+                    <h5 class="mb-3 font-weight-bold">{{ 'school.profile.tab.teachers.title'|_ }}</h5>
+
+                    <div id="teacherSearchResults">
+                        {% partial "teacher-grid" %}
+                    </div>
+
+                    <div id="teacherSearchPagination">
+                        {% partial "teacher-search-pagination" %}
+                    </div>
                 </div>
             </div>
 
         </div>
+
+        <div class="tab-pane fade" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+        </div>
+
+        <div class="tab-pane fade" id="courses" role="tabpanel" aria-labelledby="courses-tab">
+        </div>
+
+        <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="notifications-tab">
+        </div>
     </div>
 </div>
-
-{% put scripts %}
-    <script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
-
-    <script type="text/javascript">
-
-        $('#inspectorate_id').autocomplete({
-            source: {{ inspectorates|raw }},
-            highlightClass: 'text-danger',
-            treshold: 1
-        });
-
-        $('#address_id').autocomplete({
-            source: {{ addresses|raw }},
-            highlightClass: 'text-danger',
-            treshold: 1
-        });
-
-    </script>
-{% endput %}
