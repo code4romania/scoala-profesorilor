@@ -14,8 +14,15 @@ description = "Footer"
     ]|theme }}">
 </script>
 
-    {% framework extras %}
-    {% scripts %}
+{% framework extras %}
+{% scripts %}
+
+<script type="text/javascript">
+    $(document).on('ajaxSetup', function(event, context) {
+        // Enable the StripeLoadIndicator on all AJAX requests
+        context.options.loading = $.oc.stripeLoadIndicator
+    })
+</script>
 
 </body>
 </html>
