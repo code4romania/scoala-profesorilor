@@ -2,7 +2,7 @@
 
 use Lang;
 use Model;
-use Log;
+
 /**
  * Model
  */
@@ -97,8 +97,6 @@ class Teacher extends Model
             'contractType' => -1,
             'sort' => 'name asc'
         ], $options));
-
-        Log::info('$options = ' . print_r($options, true));
 
         /** Apply the school filter */
         if ($school && (-1 != $school)) {

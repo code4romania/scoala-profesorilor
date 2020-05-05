@@ -26,15 +26,13 @@ requirePassword = 0
         $this['page'] = $this['teachers']->currentPage();
     }
 
-    function onEnd() {
+    function onStart() {
         $this['seniorityLevels'] = Teacher::getFilterSeniorityLevel();
         $this['schoolLevels'] = Teacher::getFilterSchoolLevel();
         $this['contractTypes'] = Teacher::getFilterContractType();
         $this['sortTypes'] = Teacher::getSortingTypes();
 
         $this->prepareVars();
-
-        // dd($this['teachers']);
     }
 
     function onTeacherSearch() {

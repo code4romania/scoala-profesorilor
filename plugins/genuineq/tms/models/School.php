@@ -2,7 +2,7 @@
 
 use Model;
 use Genuineq\Tms\Models\Teacher;
-use Log;
+
 /**
  * Model
  */
@@ -85,8 +85,6 @@ class School extends Model
     public function filterTeachers($options = []){
         /** Add the school ID */
         $options['school'] = $this->id;
-
-        Log::info('$options = ' . print_r($options, true));
 
         return Teacher::schoolTeachers($options);
     }
