@@ -27,7 +27,7 @@ allowedUserGroups[] = "school"
         /* Get the search/filter options */
         $options = post();
 
-        $this['courses'] = Course::listFrontEnd($options);
+        $this['courses'] = Course::filterCourses($options);
         $this['pages'] = $this['courses']->lastPage();
         $this['page'] = $this['courses']->currentPage();
     }

@@ -107,7 +107,7 @@ class Course extends Model
      *
      * @param query
      */
-    public function scopeListFrontEnd($query, $options = []){
+    public function scopeFilterCourses($query, $options = []){
         /** Define the default options. */
         extract(array_merge([
             'page' => 1,

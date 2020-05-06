@@ -1,6 +1,7 @@
 <?php namespace Genuineq\Tms\Models;
 
 use Model;
+use Genuineq\Tms\Models\Course;
 
 /**
  * Model
@@ -34,4 +35,16 @@ class Category extends Model
             'order' => 'name',
         ],
     ];
+
+    /**
+     * Function used for searching, filtering, sorting and paginating the school courses.
+     *
+     * @param options An array of options to use.
+     */
+    public function filterCourses($options = []){
+        /** Add the category ID */
+        $options['category'] = $this->id;
+
+        return Course::filterCourses($options);
+    }
 }

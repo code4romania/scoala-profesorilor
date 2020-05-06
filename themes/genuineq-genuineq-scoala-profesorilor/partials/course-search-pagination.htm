@@ -21,7 +21,7 @@ description = "Displays the course search pagination."
         $('#courseSearchForm').request(
             'onCourseSearch',
             {
-                update: {'course-grid': '#courseSearchResults', 'course-course-search-pagination': '#courseSearchPagination'},
+                update: {'course-grid': '#courseSearchResults', 'course-search-pagination': '#courseSearchPagination'},
                 data: {page: $newPage}
             }
         );

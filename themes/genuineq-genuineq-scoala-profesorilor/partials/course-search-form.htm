@@ -19,13 +19,15 @@ description = "Displays the course search form."
             </select>
         </div>
 
-        <div class="input-group-append">
-            <select name="category" class="browser-default custom-select border border-white shadow-none rounded-0" id="category">
-                {% for key, value in categories %}
-                    <option value="{{ value }}">{{ key }}</option>
-                {% endfor %}
-            </select>
-        </div>
+        {% if categories %}
+            <div class="input-group-append">
+                <select name="category" class="browser-default custom-select border border-white shadow-none rounded-0" id="category">
+                    {% for key, value in categories %}
+                        <option value="{{ value }}">{{ key }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        {% endif %}
 
         <div class="input-group-append">
             <select name="accreditation" class="browser-default custom-select border border-white shadow-none rounded-0" id="accreditation">
