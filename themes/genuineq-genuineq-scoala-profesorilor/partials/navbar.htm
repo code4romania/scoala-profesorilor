@@ -51,7 +51,7 @@ code = "main-menu"
                     </li>
 
                     <li class="nav-item h-100 avatar">
-                        <a class="nav-link p-0" href="{{ user.getProfilePage() }}">
+                        <a class="nav-link p-0" href="{{ user.getProfilePage()|page }}">
                             <img src="{{ (user.getAvatarThumb()) ? (user.getAvatarThumb(50)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="rounded-circle z-depth-0" alt="avatar" height="50">
                         </a>
                     </li>

@@ -96,6 +96,11 @@ class TeacherProfile extends ComponentBase
             return $redirect;
         }
 
+        /** Force authentication in case user is not authenticated. */
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
         $this->prepareVars();
     }
 
@@ -226,12 +231,12 @@ class TeacherProfile extends ComponentBase
             throw new ValidationException($validation);
         }
 
-        /** Extract the school profile */
-        $schoolProfile = Auth::getUser()->getProfile();
+        /** Extract the teacher profile */
+        $teacherProfile = Auth::getUser()->getProfile();
 
-        if ($schoolProfile) {
-            $schoolProfile->fill($data);
-            $schoolProfile->save();
+        if ($teacherProfile) {
+            $teacherProfile->fill($data);
+            $teacherProfile->save();
         } else {
             throw new ApplicationException(Lang::get('genuineq.tms::lang.component.teacher-profile.message.description_update_failed'));
         }

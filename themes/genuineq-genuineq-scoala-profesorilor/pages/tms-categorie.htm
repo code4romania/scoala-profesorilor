@@ -19,35 +19,9 @@ pageNumber = "{{ :page }}"
 security = "all"
 allowedUserGroups[] = "teacher"
 allowedUserGroups[] = "school"
-==
-<?php
-    use Genuineq\Tms\Models\Category;
-    use Genuineq\Tms\Models\Course;
 
-    function prepareVars(){
-        /* Get the search/filter options */
-        $options = post();
-
-        $this['courses'] = Category::whereSlug($this->param('slug'))->first()->filterCourses($options);
-        $this['pages'] = $this['courses']->lastPage();
-        $this['page'] = $this['courses']->currentPage();
-    }
-
-    function onCourseSearch() {
-        $this->prepareVars();
-    }
-
-    function onStart()
-    {
-        /* Assets for carousel-half-page partial. */
-        $this->addCss('assets/css/carousel-half-page.css');
-
-        $this['accreditations'] = Course::getFilterAccreditations();
-        $this['sortTypes'] = Course::getSortingTypes();
-
-        $this->prepareVars();
-    }
-?>
+[courseSearch]
+category = {{ :slug }}
 ==
 <!--Intro Section-->
 {% partial "carousel-half-page" %}

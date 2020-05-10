@@ -21,7 +21,7 @@ description = "Displays the teacher search pagination."
         $('#teacherSearchForm').request(
             'onTeacherSearch',
             {
-                update: {'teacher-grid': '#teacherSearchResults', 'teacher-search-pagination': '#teacherSearchPagination'},
+                update: {'school-teachers/teacher-grid': '#teacherSearchResults', 'school-teachers/teacher-search-pagination': '#teacherSearchPagination'},
                 data: {page: $newPage}
             }
         );

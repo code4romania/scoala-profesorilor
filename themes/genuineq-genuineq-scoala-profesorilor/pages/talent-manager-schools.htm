@@ -19,31 +19,8 @@ pageNumber = "{{ :page }}"
 security = "all"
 allowedUserGroups[] = "teacher"
 allowedUserGroups[] = "school"
-==
-<?php
-    use Genuineq\Tms\Models\Course;
 
-    function prepareVars(){
-        /* Get the search/filter options */
-        $options = post();
-
-        $this['courses'] = Course::filterCourses($options);
-        $this['pages'] = $this['courses']->lastPage();
-        $this['page'] = $this['courses']->currentPage();
-    }
-
-    function onStart() {
-        $this['categories'] = Course::getFilterCategories();
-        $this['accreditations'] = Course::getFilterAccreditations();
-        $this['sortTypes'] = Course::getSortingTypes();
-
-        $this->prepareVars();
-    }
-
-    function onCourseSearch() {
-        $this->prepareVars();
-    }
-?>
+[courseSearch]
 ==
 {% if not user %}
     <div class="container-fluid">

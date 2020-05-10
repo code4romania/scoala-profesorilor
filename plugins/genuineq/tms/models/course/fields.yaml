@@ -23,7 +23,6 @@ fields:
     accredited:
         label: 'genuineq.tms::lang.course.label.accredited'
         span: left
-        placeholder: asdasd
         cssClass: my-auto
         type: checkbox
         comment: 'genuineq.tms::lang.course.comment.accredited'

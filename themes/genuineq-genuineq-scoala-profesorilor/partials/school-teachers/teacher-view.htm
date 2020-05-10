@@ -1,0 +1,62 @@
+description = "Displays a teacher"
+
+[viewBag]
+==
+<div class="row bg-white rounded d-flex align-items-center">
+    <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 text-center text-sm-left text-md-left text-lg-left text-xl-left">
+        <span class="my-3">{{ 'teachers.teacher-view.delete_label'|_ }} {{ teacher.name }}</span>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-3 offset-md-6 col-lg-3 offset-ld-6 col-xl-3 offset-xl-6 text-center text-sm-right text-md-right text-lg-right text-xl-right">
+        <a class="btn btn-md btn-danger mx-0 my-2 py-2 z-depth-0 waves-effect rounded" type="button" data-id="{{ teacher.id }}">{{ 'teachers.teacher-view.delete_btn'|_ }}</a>
+    </div>
+</div>
+
+<h5 class="mb-3 mt-4 font-weight-bold">{{ 'teachers.teacher-view.title'|_ }}</h5>
+
+<div class="row bg-white rounded py-3 d-flex align-items-center">
+    <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2">
+        <img src="{{ (teacher.user.getAvatarThumb()) ? (teacher.user.getAvatarThumb(50)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="card-img-top my-auto rounded-circle z-depth-0" alt="{{ teacher.name }}" height="150">
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-9 col-lg-10 col-xl-10">
+        <h5 class="mb-3 font-weight-bold text-center text-sm-left text-md-left text-lg-left text-xl-left">{{ 'teachers.teacher-view.title'|_ }}</h5>
+
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 text-center text-sm-left text-md-left text-lg-left text-xl-left my-2">
+                <span>{{ 'teachers.teacher-view.seniority_level'|_ }}: <strong>{{ teacher.seniority_level.name }}</strong></span><br/>
+                <span>{{ 'teachers.teacher-view.contract_type'|_ }}: <strong>{{ teacher.contract_type.name }}</strong></span><br/>
+                <span>{{ 'teachers.teacher-view.email'|_ }}: <strong>{{ teacher.email }}</strong></span><br/>
+                <span>{{ 'teachers.teacher-view.phone'|_ }}: <strong>{{ teacher.phone }}</strong></span>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-8 col-lg-8 col-xl-8 text-center text-sm-left text-md-left text-lg-left text-xl-left my-2 border-left border-dark">
+                <span>{{ 'teachers.teacher-view.description'|_ }}: <strong>{{ teacher.description }}</strong></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row py-3">
+    <div class="col-12 text-center text-sm-right text-md-right text-lg-right text-xl-right p-0">
+        <a id="teacher-edit" class="btn btn-md btn-secondary mx-0 my-2 py-2 z-depth-0 waves-effect rounded" type="button" data-id="{{ teacher.id }}">{{ 'teachers.teacher-view.edit'|_ }}</a>
+    </div>
+</div>
+
+{% partial "learning-plans/learning-plan-list" learningPlan=teacher.getActiveLearningPlan %}
+
+<script type="text/javascript">
+    $('#teacher-edit').on('click', function () {
+        /* Extract the clicked teacher ID. */
+        var $teacherId = $(this).data('id');
+
+        /* Send the view request */
+        $.request(
+            'onTeacherEdit',
+            {
+                update: {'school-teachers/teacher-edit': '#teachers-tab-content'},
+                data: {teacherId: $teacherId}
+            }
+        );
+    });
+</script>

@@ -1,0 +1,15 @@
+description = "Displays the tab containing all the teachers from the school profile"
+
+[viewBag]
+==
+{% partial "school-teachers/teacher-search-form" %}
+
+<h5 class="mb-3 font-weight-bold">{{ 'school.profile.tab.teachers.title'|_ }}</h5>
+
+<div id="teacherSearchResults">
+    {% partial "school-teachers/teacher-grid" %}
+</div>
+
+<div id="teacherSearchPagination">
+    {% partial "school-teachers/teacher-search-pagination" %}
+</div>

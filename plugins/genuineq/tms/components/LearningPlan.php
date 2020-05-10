@@ -20,7 +20,7 @@ use Genuineq\User\Helpers\AuthRedirect;
  *
  * Allows the update of a school profile.
  */
-class SchoolProfile extends ComponentBase
+class LearningPlan extends ComponentBase
 {
     public function componentDetails()
     {

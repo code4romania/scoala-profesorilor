@@ -1,0 +1,51 @@
+description = "Displays a teacher as a card"
+
+[viewBag]
+==
+<!-- Card -->
+<div class="card">
+
+    <!-- Card image -->
+    <div class="view overlay d-flex bg-white">
+        <img src="{{ (teacher.user.getAvatarThumb()) ? (teacher.user.getAvatarThumb(50)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="card-img-top my-auto rounded-circle z-depth-0" alt="{{ teacher.name }}" height="150">
+        <a class="teacher-view" data-id="{{ teacher.id }}">
+            <div class="mask rgba-white-slight"></div>
+        </a>
+    </div>
+    <!-- /.Card image -->
+
+    <!-- Card content -->
+    <div class="card-body">
+
+        <!-- Title -->
+        <h5 class="card-title text-center">
+            <a class="stretched-link teacher-view" data-id="{{ teacher.id }}">
+                <p class="m-0">{{ teacher.name }}</p>
+                <small>{{ teacher.seniority_level.name }}</small>
+                <br/>
+                <a class="btn btn-md btn-secondary mt-4 py-2 z-depth-0 waves-effect rounded teacher-view" type="button" data-id="{{ teacher.id }}">{{ 'teacher.card.view'|_ }}</a>
+            </a>
+        </h5>
+        <!-- /.Title -->
+
+    </div>
+    <!-- /.Card content -->
+
+</div>
+<!-- /.Card -->
+
+<script type="text/javascript">
+    $('.teacher-view').on('click', function () {
+        /* Extract the clicked teacher ID. */
+        var $teacherId = $(this).data('id');
+
+        /* Send the view request */
+        $.request(
+            'onTeacherView',
+            {
+                update: {'school-teachers/teacher-view': '#teachers-tab-content'},
+                data: {teacherId: $teacherId}
+            }
+        );
+    });
+</script>

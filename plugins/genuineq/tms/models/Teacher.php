@@ -35,19 +35,13 @@ class Teacher extends Model
     public $table = 'genuineq_tms_teachers';
 
     /**
-     * Address relation
+     * One-to-one relations
      */
     public $belongsTo = [
         'address' => 'Genuineq\Tms\Models\Address',
         'seniority_level' => 'Genuineq\Tms\Models\SeniorityLevel',
         'school_level' => 'Genuineq\Tms\Models\SchoolLevel',
         'contract_type' => 'Genuineq\Tms\Models\ContractType',
-    ];
-
-    /**
-     * "User" relation
-     */
-    public $hasOne = [
         'user' => 'Genuineq\user\Models\User',
     ];
 
@@ -58,6 +52,7 @@ class Teacher extends Model
         'learning_plans' => [
             'Genuineq\Tms\Models\LearningPlan',
             'table' => 'genuineq_tms_teachers_learning_plans',
+            'order' => 'created_at desc',
         ],
         'schools' => [
             'Genuineq\Tms\Models\School',
@@ -73,10 +68,25 @@ class Teacher extends Model
     ];
 
     /**
-     * Function that
+     * Function that returns the birth date in a frontend format
      */
     public function getFormatedBirthDateAttribute(){
         return date('d-m-Y', strtotime($this->birth_date));
+    }
+
+    /**
+     * Function that extracts the email from the user
+     *  which has this profile
+     */
+    public function getEmailAttribute(){
+        return ($this->user) ? ($this->user->email) : ('');
+    }
+
+    /**
+     * Function that extracts the active learning plan.
+     */
+    public function getActiveLearningPlan(){
+        return $this->learning_plans->first();
     }
 
 

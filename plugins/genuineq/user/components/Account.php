@@ -169,9 +169,6 @@ class Account extends ComponentBase
         $user->password = $data['accountNewPassword'];
         $user->forceSave();
 
-        /** Reauthenticate the user */
-        // Auth::login($user->reload(), true);
-
         Flash::success(Lang::get('genuineq.user::lang.component.account.message.password_update_successful'));
     }
 

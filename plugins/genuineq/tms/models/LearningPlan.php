@@ -23,7 +23,7 @@ class LearningPlan extends Model
      * Courses relation
      */
     public $hasMany = [
-        'courses' => 'Genuineq\Tms\Models\Course'
+        'courses' => 'Genuineq\Tms\Models\LearningPlansCourse'
     ];
 
     /**

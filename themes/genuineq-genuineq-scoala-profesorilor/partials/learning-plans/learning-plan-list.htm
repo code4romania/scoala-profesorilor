@@ -1,0 +1,45 @@
+description = "Displays a learning plan as a list"
+
+[viewBag]
+==
+
+<div class="row py-3">
+    <div class="col-12">
+
+        <h5 class="mb-3 font-weight-bold text-center text-sm-left text-md-left text-lg-left text-xl-left">{{ 'learning-plans.learning-plan.title'|_ }}</h5>
+
+        <div class="d-inline-block w-100" style="overflow-y:auto;">
+            <ul class="timeline timeline-horizontal m-0">
+
+                {% for key, learningPlanCourse in learningPlan.courses %}
+                    {% partial "learning-plans/learning-plan-card" course=learningPlanCourse.course index=(key + 1) %}
+                {% endfor %}
+
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row ">
+    <div class="col-12 text-center text-sm-right text-md-right text-lg-right text-xl-right p-0">
+        <a id="learning-plan-edit" class="btn btn-md btn-secondary mx-0 my-2 py-2 z-depth-0 waves-effect rounded" type="button" data-id="{{ learningPlan.id }}">{{ 'learning-plans.learning-plan.edit'|_ }}</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#learning-plan-edit').on('click', function () {
+        /* Extract the clicked learning plan ID. */
+        var $learningPlanId = $(this).data('id');
+
+        /* Send the view request */
+        $.request(
+            'onTeacherLearningPlanEdit',
+            {
+                update: {'school-teachers/teacher-edit': '#teachers-tab-content'},
+                data: {teacherId: $teacherId}
+            }
+        );
+    });
+</script>
