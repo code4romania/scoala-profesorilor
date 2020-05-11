@@ -1,0 +1,67 @@
+description = "Displays the learning plan course search form."
+
+[viewBag]
+==
+<form id="learningPlanCourseSearchForm">
+    <div id="learningPlanCourseSearchFormourseSearchFormContent" class="input-group mb-3">
+
+        <div class="input-group-prepend">
+            <span class="input-group-text md-addon border border-white bg-white"><i class="fa fa-search"></i></span>
+        </div>
+
+        <input name="searchInput" type="text" class="form-control border border-white shadow-none" placeholder="{{ 'learning-plans.learning-plan-course-search-form.search'|_ }}" aria-label="{{ 'learning-plans.learning-plan-course-search-form.search'|_ }}">
+
+        <div class="input-group-append">
+            <select name="sort" class="browser-default custom-select border border-white shadow-none rounded-0" id="sort">
+                {% for key, value in learningPlanCourseSortTypes %}
+                    <option value="{{ value }}">{{ key }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="input-group-append">
+            <select name="category" class="browser-default custom-select border border-white shadow-none rounded-0" id="category">
+                {% for key, value in learningPlanCourseCategories %}
+                    <option value="{{ value }}">{{ key }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="input-group-append">
+            <select name="accreditation" class="browser-default custom-select border border-white shadow-none rounded-0" id="accreditation">
+                {% for key, value in learningPlanCourseAccreditations %}
+                    <option value="{{ value }}">{{ key }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+    </div>
+</form>
+
+<script type="text/javascript">
+    function learningPlanCourseSearchFormSubmit(){
+        /* Extract the clicked page. */
+        var $newPage = $('#learningPlanCourseSearchPagination > ul > li.active').data('page');
+        /* Extract the clicked learning plan ID. */
+        var $learningPlanId = $('#learningPlanCourseSearchPagination > ul > li.active').data('id');
+
+        /* Select the course select form and send the request */
+        $('#learningPlanCourseSearchForm').request(
+            'onLearningPlanCourseSearch',
+            {
+                update: {'learning-plans/learning-plan-course-grid': '#learningPlanCourseSearchResults', 'learning-plans/learning-plan-course-pagination': '#learningPlanCourseSearchPagination'},
+                data: {page: $newPage, learningPlanId: $learningPlanId}
+            }
+        );
+    }
+
+    $('#learningPlanCourseSearchFormourseSearchFormContent').on('change', 'select', function () {
+        learningPlanCourseSearchFormSubmit();
+    });
+
+    $('#learningPlanCourseSearchForm').on('submit', function () {
+        learningPlanCourseSearchFormSubmit();
+
+        return false;
+    })
+</script>

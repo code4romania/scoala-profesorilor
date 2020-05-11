@@ -72,11 +72,6 @@ class CourseSearch extends ComponentBase
             return $redirect;
         }
 
-        /** Force authentication in case user is not authenticated. */
-        if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
-        }
-
         $this->prepareVars();
     }
 
@@ -85,15 +80,11 @@ class CourseSearch extends ComponentBase
      ***********************************************/
 
     /**
-     * Searches, filters, orders and paginates courses based on
+     * Searches, filters, orders and paginates courses based
      *  on the post options.
      */
     public function onCourseSearch()
     {
-        if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
-        }
-
         /* Extract the courses based on the received options. */
         $this->extractCourses(/*options*/post());
     }

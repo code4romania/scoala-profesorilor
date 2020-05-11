@@ -10,10 +10,10 @@ use Validator;
 use ValidationException;
 use ApplicationException;
 use Cms\Classes\ComponentBase;
-use Genuineq\Tms\Models\School;
-use Genuineq\Tms\Models\Address;
-use Genuineq\Tms\Models\Inspectorate;
-use Genuineq\User\Helpers\AuthRedirect;
+use Genuineq\Tms\Models\Course;
+use Genuineq\Tms\Models\LearningPlan as LearningPlanModel;
+
+use Log;
 
 /**
  * School profile component
@@ -25,8 +25,8 @@ class LearningPlan extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'genuineq.tms::lang.component.school-profile.name',
-            'description' => 'genuineq.tms::lang.component.school-profile.description'
+            'name'        => 'genuineq.tms::lang.component.learning-plan.name',
+            'description' => 'genuineq.tms::lang.component.learning-plan.description'
         ];
     }
 
@@ -34,8 +34,8 @@ class LearningPlan extends ComponentBase
     {
         return [
             'forceSecure' => [
-                'title'       => 'genuineq.tms::lang.component.school-profile.backend.force_secure',
-                'description' => 'genuineq.tms::lang.component.school-profile.backend.force_secure_desc',
+                'title'       => 'genuineq.tms::lang.component.learning-plan.backend.force_secure',
+                'description' => 'genuineq.tms::lang.component.learning-plan.backend.force_secure_desc',
                 'type'        => 'checkbox',
                 'default'     => 0
             ],
@@ -47,20 +47,6 @@ class LearningPlan extends ComponentBase
      */
     public function prepareVars()
     {
-        $this->page['profile'] = (Auth::check()) ? (Auth::getUser()->getProfile()) : (null);
-        $this->page['profileAddress'] = ($this->page['profile'] && $this->page['profile']->address) ? ($this->page['profile']->address->name . ', ' . $this->page['profile']->address->county) : (null);
-
-        /* Extract all the inspectorates and create the source array. */
-        foreach (Inspectorate::all() as $inspectorate) {
-            $inspectorates[$inspectorate->name] = $inspectorate->id;
-        }
-        $this->page['inspectorates'] = json_encode($inspectorates);
-
-        /* Extract all the addresses and create the source array. */
-        foreach (Address::all() as $address) {
-            $addresses[$address->name . ', ' . $address->county] = $address->id;
-        }
-        $this->page['addresses'] = json_encode($addresses);
     }
 
     /**
@@ -88,138 +74,62 @@ class LearningPlan extends ComponentBase
      ***********************************************/
 
     /**
-     * Update the school profile.
+     * Prepares all the data needed for updating the learning plan.
      */
-    public function onSchoolProfileUpdate()
+    public function onLearningPlanEdit()
     {
         if (!Auth::check()) {
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
-        /** Extract the post data to validate. */
-        $data = post();
-        $data['slug'] = str_replace(' ', '-', strtolower($data['name']));
 
-        /** Extract the inspectorate ID. */
-        if ($data['inspectorate_id']) {
-            $inspectorate = Inspectorate::whereName($data['inspectorate_id'])->first();
-            $data['inspectorate_id'] = ($inspectorate) ? ($inspectorate->id) : ('');
-        } else {
-            unset($data['inspectorate_id']);
-        }
+        /** Extract all categories for filtering. */
+        $this->page['learningPlanCourseCategories'] = Course::getFilterCategories();
+        /** Extract all accreditations for filtering. */
+        $this->page['learningPlanCourseAccreditations'] = Course::getFilterAccreditations();
+        /** Extract all sorting types for filtering. */
+        $this->page['learningPlanCourseSortTypes'] = Course::getSortingTypes();
 
-        /** Extract the address ID. */
-        if ($data['address_id']) {
-            $fullAddress = explode(', ', $data['address_id']);
-            $address = Address::whereName($fullAddress[0])->whereCounty($fullAddress[1])->first();
-            $data['address_id'] = ($address) ? ($address->id) : ('');;
-        } else {
-            unset($data['address_id']);
-        }
-
-        /** Extract the validation rules. */
-        $rules = [
-            'name' => ['nullable', 'max:50', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
-            'slug' => 'string|max:50|nullable',
-            'phone' => ['nullable', 'max:15', 'regex:/^[0123456789 +]*$/i'],
-            'email' => 'string|max:50|email|nullable',
-            'principal' => ['nullable', 'max:50', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
-            'contact_name' => ['nullable', 'max:50', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
-            'contact_email' => 'string|max:50|email|nullable',
-            'contact_phone' => ['nullable', 'max:15', 'regex:/^[0123456789 +]*$/i'],
-            'contact_role' => 'string|max:50|nullable',
-            'user_id' => 'numeric|nullable',
-            'address_id' => 'numeric|nullable',
-            'inspectorate_id' => 'numeric|nullable',
-        ];
-
-        /** Construct the validation error messages. */
-        $messages = [
-            'name.regex' => Lang::get('genuineq.tms::lang.component.school-profile.validation.name_regex'),
-            'name.max' => Lang::get('genuineq.tms::lang.component.school-profile.validation.name_max'),
-            'phone.regex' => Lang::get('genuineq.tms::lang.component.school-profile.validation.phone_regex'),
-            'phone.max' => Lang::get('genuineq.tms::lang.component.school-profile.validation.phone_max'),
-            'email.string' => Lang::get('genuineq.tms::lang.component.school-profile.validation.email_string'),
-            'email.max' => Lang::get('genuineq.tms::lang.component.school-profile.validation.email_max'),
-            'email.email' => Lang::get('genuineq.tms::lang.component.school-profile.validation.email_email'),
-            'principal.regex' => Lang::get('genuineq.tms::lang.component.school-profile.validation.principal_regex'),
-            'principal.max' => Lang::get('genuineq.tms::lang.component.school-profile.validation.principal_max'),
-            'contact_name.regex' => Lang::get('genuineq.tms::lang.component.school-profile.validation.contact_name_regex'),
-            'contact_name.max' => Lang::get('genuineq.tms::lang.component.school-profile.validation.contact_name_max'),
-            'contact_phone.numeric' => Lang::get('genuineq.tms::lang.component.school-profile.validation.contact_phone_numeric'),
-            'contact_phone.max' => Lang::get('genuineq.tms::lang.component.school-profile.validation.contact_phone_max'),
-            'contact_role.string' => Lang::get('genuineq.tms::lang.component.school-profile.validation.contact_role_string'),
-            'contact_role.max' => Lang::get('genuineq.tms::lang.component.school-profile.validation.contact_role_max'),
-            'contact_email.string' => Lang::get('genuineq.tms::lang.component.school-profile.validation.contact_email_string'),
-            'contact_email.max' => Lang::get('genuineq.tms::lang.component.school-profile.validation.contact_email_max'),
-            'contact_email.email' => Lang::get('genuineq.tms::lang.component.school-profile.validation.contact_email_email'),
-            'address_id.numeric' => Lang::get('genuineq.tms::lang.component.school-profile.validation.address_id_numeric'),
-            'inspectorate_id.numeric' => Lang::get('genuineq.tms::lang.component.school-profile.validation.inspectorate_id_numeric'),
-        ];
-
-        /** Apply the validation rules. */
-        $validation = Validator::make($data, $rules, $messages);
-        if ($validation->fails()) {
-            throw new ValidationException($validation);
-        }
-
-        /** Extract the school profile */
-        $schoolProfile = Auth::getUser()->getProfile();
-
-        if ($schoolProfile) {
-            $schoolProfile->fill($data);
-            $schoolProfile->save();
-        } else {
-            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-profile.message.profile_update_failed'));
-        }
-
-        Flash::success(Lang::get('genuineq.tms::lang.component.school-profile.message.profile_update_successful'));
+        /** Get all the learning plan courses. */
+        $this->extractLearningPlanCourses(/*options*/[]);
     }
 
     /**
-     * Update the school profile description
+     * Searches, filters, orders and paginates learning profilecourses
+     *  based on the post options.
      */
-    public function onSchoolProfileDescriptionUpdate()
+    public function onLearningPlanCourseSearch()
     {
-        if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
-        }
-
-        /** Extract the post data to validate. */
-        $data = post();
-
-        /** Extract the validation rules. */
-        $rules = [
-            'description' => 'string|nullable',
-        ];
-
-        /** Construct the validation error messages. */
-        $messages = [
-            'description.string' => Lang::get('genuineq.tms::lang.component.school-profile.validation.description_string'),
-        ];
-
-        /** Apply the validation rules. */
-        $validation = Validator::make($data, $rules, $messages);
-        if ($validation->fails()) {
-            throw new ValidationException($validation);
-        }
-
-        /** Extract the school profile */
-        $schoolProfile = Auth::getUser()->getProfile();
-
-        if ($schoolProfile) {
-            $schoolProfile->fill($data);
-            $schoolProfile->save();
-        } else {
-            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-profile.message.description_update_failed'));
-        }
-
-        Flash::success(Lang::get('genuineq.tms::lang.component.school-profile.message.description_update_successful'));
+        Log::info('post() = ' . print_r(post(), true));
+        /* Extract the courses based on the received options. */
+        $this->extractLearningPlanCourses(/*options*/post());
     }
 
+    /**
+     * Function that adds a new course to a learning plan.
+     */
+    public function onLearningPlanCourseAdd()
+    {
+        Log::info('post(): ' . print_r(post(), true));
+    }
     /***********************************************
      ******************* Helpers *******************
      ***********************************************/
+
+    /**
+     * Extract the requested courses.
+     */
+    protected function extractLearningPlanCourses($options)
+    {
+        /** Extract the learning plan. */
+        $this->page['learningPlan'] = LearningPlanModel::find(post('learningPlanId'));
+        /** Extract all courses for filtering. */
+        $this->page['learningPlanCourses'] = Course::filterCourses($options, /*_courses*/$this->page['learningPlan']->realCourses->pluck('id'));
+        /** Extract the number of pages. */
+        $this->page['learningPlanCoursesPages'] = $this->page['learningPlanCourses']->lastPage();
+        /** Extract the current page. */
+        $this->page['learningPlanCoursesPage'] = $this->page['learningPlanCourses']->currentPage();
+    }
 
     /**
      * Checks if the force secure property is enabled and if so

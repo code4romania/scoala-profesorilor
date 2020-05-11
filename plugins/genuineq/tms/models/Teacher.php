@@ -86,7 +86,7 @@ class Teacher extends Model
      * Function that extracts the active learning plan.
      */
     public function getActiveLearningPlan(){
-        return $this->learning_plans->first();
+        return $this->learning_plans->where('status', 1)->first();
     }
 
 

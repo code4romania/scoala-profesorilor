@@ -105,9 +105,13 @@ class Course extends Model
     /**
      * Function used for searching, filtering, sorting and paginating courses.
      *
-     * @param query
+     * @param query The query to be used for extracting courses
+     * @param options The option for searching, filtering, sorting and paginating
+     * @param _courses Collection of courses to be removed
+     *
+     * @return Collection of courses
      */
-    public function scopeFilterCourses($query, $options = []){
+    public function scopeFilterCourses($query, $options = [], $_courses = null){
         /** Define the default options. */
         extract(array_merge([
             'page' => 1,
@@ -144,6 +148,11 @@ class Course extends Model
             $sortTypes = explode(' ', $sort);
 
             $query->orderBy(/*field*/$sortTypes[0], /*type*/$sortTypes[1]);
+        }
+
+        /** Check if some specific courses need to be skiped */
+        if ($_courses) {
+            $query->whereNotIn('id', $_courses);
         }
 
         $page = ($query->paginate($perPage, $page)->lastPage() < $page) ? (1) : ($page);

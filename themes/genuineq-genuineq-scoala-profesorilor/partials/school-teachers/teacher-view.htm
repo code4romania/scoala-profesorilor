@@ -43,7 +43,9 @@ description = "Displays a teacher"
     </div>
 </div>
 
-{% partial "learning-plans/learning-plan-list" learningPlan=teacher.getActiveLearningPlan %}
+{% partial "learning-plans/learning-plan-view" learningPlan=teacher.getActiveLearningPlan %}
+
+{% partial "learning-plans/learning-plan-btn-edit" learningPlan=teacher.getActiveLearningPlan %}
 
 <script type="text/javascript">
     $('#teacher-edit').on('click', function () {

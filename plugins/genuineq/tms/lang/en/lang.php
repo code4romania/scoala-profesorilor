@@ -348,13 +348,22 @@
         ],
 
         'course-search' => [
-            'name' => 'Course search',
+            'name' => 'Course Search',
             'description' => 'Allows the search, filter, order and paginate courses',
             'backend' => [
                 'force_secure' => 'Force secure protocol',
                 'force_secure_desc' => 'Always redirect the URL with the HTTPS schema',
                 'category' => 'Category param',
                 'category_desc' => 'The URL parameter from which to extract the category from which to filter',
+            ],
+        ],
+
+        'learning-plan' => [
+            'name' => 'Learning Plan',
+            'description' => 'Allows to edit a learning plan',
+            'backend' => [
+                'force_secure' => 'Force secure protocol',
+                'force_secure_desc' => 'Always redirect the URL with the HTTPS schema',
             ],
         ],
     ],

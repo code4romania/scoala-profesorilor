@@ -31,8 +31,13 @@ class LearningPlan extends Model
      */
     public $belongsToMany = [
         'teachers' => [
-            'Genuineq\Tms\Models\Teachers',
+            'Genuineq\Tms\Models\Teacher',
             'table' => 'genuineq_tms_teachers_learning_plans',
+        ],
+        'realCourses' => [
+            'Genuineq\Tms\Models\Course',
+            'table' => 'genuineq_tms_learning_plans_courses',
+            'order' => 'start_date asc',
         ],
     ];
 

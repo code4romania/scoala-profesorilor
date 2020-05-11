@@ -1,0 +1,22 @@
+description = "Displays a learning plan as a list"
+
+[viewBag]
+==
+
+<div class="row py-3">
+    <div class="col-12">
+
+        <h5 class="mb-3 font-weight-bold text-center text-sm-left text-md-left text-lg-left text-xl-left">{{ 'learning-plans.learning-plan.title'|_ }}</h5>
+
+        <div class="d-inline-block w-100" style="overflow-y:auto;">
+            <ul class="timeline timeline-horizontal m-0">
+
+                {% for key, learningPlanCourse in learningPlan.realCourses %}
+                    {% partial "learning-plans/learning-plan-card-view" course=learningPlanCourse index=(key + 1) %}
+                {% endfor %}
+
+            </ul>
+        </div>
+
+    </div>
+</div>
