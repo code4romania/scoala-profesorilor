@@ -19,14 +19,8 @@ RUN useradd -G www-data,root -u 1000 -d /home/tms tms
 RUN mkdir -p /home/tms/.composer && \
     chown -R tms:tms /home/tms
 
-#Install project dependencies
-RUN composer install --no-interaction --prefer-dist --no-scripts && \
-    composer clearcache && \
-    chown -R tms:www-data /var/www/html && \
-    find . -type d \( -path './plugins' -or  -path './storage' -or  -path './themes' -or  -path './plugins/*' -or  -path './storage/*' -or  -path './themes/*' \) -exec chmod g+ws {} \;
-
 # Add octobercms cron
-RUN echo "* * * * * tms /var/www/html/artisan schedule:run >> /dev/null 2>&1" > /etc/cron.d/october-cron && \
+RUN echo "* * * * * tms /var/www/artisan schedule:run >> /dev/null 2>&1" > /etc/cron.d/october-cron && \
     crontab /etc/cron.d/october-cron
 
 COPY ./bootstrap /var/www/bootstrap
@@ -49,6 +43,14 @@ COPY ./server.php /var/www/server.php
 
 # Set working directory
 WORKDIR /var/www
+
+
+#Install project dependencies
+RUN composer install --no-interaction --prefer-dist --no-scripts && \
+    composer clearcache && \
+    chown -R tms:www-data /var/www && \
+    find . -type d \( -path './plugins' -or  -path './storage' -or  -path './themes' -or  -path './plugins/*' -or  -path './storage/*' -or  -path './themes/*' \) -exec chmod g+ws {} \;
+
 
 EXPOSE 80
 
