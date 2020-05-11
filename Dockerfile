@@ -26,7 +26,6 @@ RUN echo "* * * * * tms /var/www/artisan schedule:run >> /dev/null 2>&1" > /etc/
 COPY ./bootstrap /var/www/bootstrap
 COPY ./config /var/www/config
 COPY ./modules /var/www/modules
-COPY ./node_modules /var/www/node_modules
 COPY ./plugins /var/www/plugins
 COPY ./storage /var/www/storage
 COPY ./tests /var/www/tests
