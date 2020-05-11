@@ -1,9 +1,5 @@
 FROM php:7.2-fpm
 
-# Arguments defined in docker-compose.yml
-ARG user
-ARG uid
-
 # Install system dependencies
 RUN apt-get update && apt-get install -y cron git-core jq unzip vim zip libjpeg-dev libpng-dev libpq-dev libsqlite3-dev libwebp-dev libzip-dev
 
@@ -19,18 +15,18 @@ RUN docker-php-ext-configure zip --with-libzip && \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
+RUN useradd -G www-data,root -u 1000 -d /home/tms tms
+RUN mkdir -p /home/tms/.composer && \
+    chown -R tms:tms /home/tms
 
 #Install project dependencies
 RUN composer install --no-interaction --prefer-dist --no-scripts && \
     composer clearcache && \
-    chown -R $user:www-data /var/www/html && \
+    chown -R tms:www-data /var/www/html && \
     find . -type d \( -path './plugins' -or  -path './storage' -or  -path './themes' -or  -path './plugins/*' -or  -path './storage/*' -or  -path './themes/*' \) -exec chmod g+ws {} \;
 
 # Add octobercms cron
-RUN echo "* * * * * $user /var/www/html/artisan schedule:run >> /dev/null 2>&1" > /etc/cron.d/october-cron && \
+RUN echo "* * * * * tms /var/www/html/artisan schedule:run >> /dev/null 2>&1" > /etc/cron.d/october-cron && \
     crontab /etc/cron.d/october-cron
 
 COPY ./bootstrap /var/www/bootstrap
@@ -56,4 +52,4 @@ WORKDIR /var/www
 
 EXPOSE 80
 
-USER $user
+USER tms
