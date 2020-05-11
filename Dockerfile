@@ -47,8 +47,8 @@ WORKDIR /var/www
 #Install project dependencies
 RUN composer install --no-interaction --prefer-dist --no-scripts && \
     composer clearcache && \
-    chown -R tms:www-data /var/www && \
-    find . -type d \( -path './plugins' -or  -path './storage' -or  -path './themes' -or  -path './plugins/*' -or  -path './storage/*' -or  -path './themes/*' \) -exec chmod g+ws {} \;
+    chown -R tms:www-data /var/www;
+    #find . -type d \( -path './plugins' -or  -path './storage' -or  -path './themes' -or  -path './plugins/*' -or  -path './storage/*' -or  -path './themes/*' \) -exec chmod g+ws {} \;
 
 
 EXPOSE 80
