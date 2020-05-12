@@ -18,14 +18,13 @@ description = "Modal that specifies how a course is added to a learning plan"
             <div class="modal-body">
                 <div class="row">
                     <div class="col-12">
-
                         <form id="learning-plan-course-add-modal-form" data-request-validate data-request-flash>
 
                             <div class="form-group">
                                 <div class="md-form">
-                                    <input name="deduct" type="number" id="deduct" class="form-control">
-                                    <label for="deduct">{{ 'learning-plans.learning-plan-course-add-modal.deduct'|_ }}</label>
-                                    <div class="small text-danger" data-validate-for="deduct"></div>
+                                    <input name="covered_costs" type="number" id="covered_costs" class="form-control">
+                                    <label for="covered_costs">{{ 'learning-plans.learning-plan-course-add-modal.covered_costs'|_ }}</label>
+                                    <div class="small text-danger" data-validate-for="covered_costs"></div>
                                 </div>
                             </div>
 
@@ -35,9 +34,10 @@ description = "Modal that specifies how a course is added to a learning plan"
                                 <div class="small text-danger" data-validate-for="name"></div>
                             </div>
 
-                            <input name="course_id" id="course_id" hidden>
+                            <input name="learningPlanId" id="learningPlanId" hidden>
+                            <input name="courseId" id="courseId" hidden>
 
-                        </div>
+                        </form>
                     </div>
                 </div>
 
@@ -56,23 +56,18 @@ description = "Modal that specifies how a course is added to a learning plan"
 <script type="text/javascript">
     /* Function that saves the ID of the course that was clicked. */
     $('#learning-plan-course-add-modal').on('show.bs.modal', function (event) {
-        alert($(event.relatedTarget));
-        console.log($(event.relatedTarget));
-        alert($(event.relatedTarget).data('id'));
-        $('#course_id').val($(event.relatedTarget).data('id'));
+        $('#courseId').val($(event.relatedTarget).data('courseId'));
+        $('#learningPlanId').val($(event.relatedTarget).data('learningPlanId'));
     });
 
     $('#learning-plan-course-add-modal-add').on('click', function () {
-        /* Extract the clicked course ID. */
-        var $learningPlanId = $(this).data('id');
-
         /* Extract the search form input data for the update. */
-        var $learningPlanCourseSearchInput = $('learningPlanCourseSearchInput').val();
-        var $learningPlanCourseSort = $('learningPlanCourseSort').val();
-        var $learningPlanCourseCategory = $('learningPlanCourseCategory').val();
-        var $learningPlanCourseAccreditation = $('learningPlanCourseAccreditation').val();
+        var $learningPlanCourseSearchInput = $('#learningPlanCourseSearchInput').val();
+        var $learningPlanCourseSort = $('#learningPlanCourseSort').val();
+        var $learningPlanCourseCategory = $('#learningPlanCourseCategory').val();
+        var $learningPlanCourseAccreditation = $('#learningPlanCourseAccreditation').val();
         /* Extract the active page. */
-        var $newPage = $('#courseSearchPagination > ul > li.active').data('page');
+        var $newPage = $('#learningPlanCourseSearchPagination > ul > li.active').data('page');
 
         $('#learning-plan-course-add-modal-form').request(
             'onLearningPlanCourseAdd',
@@ -83,13 +78,12 @@ description = "Modal that specifies how a course is added to a learning plan"
                     'learning-plans/learning-plan-course-pagination': '#learningPlanCourseSearchPagination'
                 },
                 data: {
-                    learningPlanId: $learningPlanId,
                     learningPlanCourseSearchInput: $learningPlanCourseSearchInput,
                     learningPlanCourseSort: $learningPlanCourseSort,
                     learningPlanCourseCategory: $learningPlanCourseCategory,
                     learningPlanCourseAccreditation: $learningPlanCourseAccreditation,
                     page: $newPage,
-                }
+                },
             }
         );
     });

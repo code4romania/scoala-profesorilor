@@ -5,65 +5,7 @@ description = "Displays a grid of teachers"
 <div class="row">
     {% for teacher in teachers %}
         <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-4">
-            {% partial "school-teachers/teacher-card"
-                teacher=teacher
-            %}
+            {% partial "school-teachers/teacher-card" teacher=teacher %}
         </div>
     {% endfor %}
 </div>
-
-{% if ((1 < teachers.lastPage) and (true == pagination)) %}
-    <nav>
-        <ul class="pagination pg-primary justify-content-center">
-            {% if teachers.currentPage > 1 %}
-                <li class="page-item">
-                    <a class="page-link" href="{{ this.page.baseFileName|page({ (pageParam): (teachers.currentPage-1) }) }}">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            {% endif %}
-
-            {% for page in 1..teachers.lastPage %}
-                <li class="page-item {{ teachers.currentPage == page ? 'active' : null }}">
-                    <a class="page-link" href="{{ this.page.baseFileName|page({ (pageParam): page }) }}">{{ page }}</a>
-                </li>
-            {% endfor %}
-
-            {% if teachers.lastPage > teachers.currentPage %}
-                <li class="page-item">
-                    <a class="page-link" href="{{ this.page.baseFileName|page({ (pageParam): (teachers.currentPage+1) }) }}">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            {% endif %}
-
-        </ul>
-    </nav>
-{% elseif ((true == rawPagination) and (1 < teachers.lastPage)) %}
-    <nav>
-        <ul class="pagination pg-primary justify-content-center">
-            {% if teachers.currentPage() > 1 %}
-                <li class="page-item">
-                    <a class="page-link" href="{{ teachers.previousPageUrl() }}">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            {% endif %}
-
-            {% for page in 1..teachers.lastPage() %}
-                <li class="page-item {{ teachers.currentPage() == page ? 'active' : null }}">
-                    <a class="page-link" href="{{ teachers.url(page) }}">{{ page }}</a>
-                </li>
-            {% endfor %}
-
-            {% if teachers.lastPage() > teachers.currentPage() %}
-                <li class="page-item">
-                    <a class="page-link" href="{{ teachers.nextPageUrl() }}">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            {% endif %}
-
-        </ul>
-    </nav>
-{% endif %}

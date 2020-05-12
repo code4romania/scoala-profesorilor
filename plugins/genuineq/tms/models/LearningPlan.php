@@ -27,7 +27,7 @@ class LearningPlan extends Model
     ];
 
     /**
-     * Teachers relation
+     * Teacher and real courses relation
      */
     public $belongsToMany = [
         'teachers' => [
@@ -46,4 +46,8 @@ class LearningPlan extends Model
      */
     public $rules = [
     ];
+
+    public function getTeacherAttribute(){
+        return $this->teachers->first();
+    }
 }

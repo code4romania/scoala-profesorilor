@@ -39,6 +39,6 @@ description = "Displays a learning plan course as a card"
                 {% endfor %}
             </span>
         </small>
-        <button type="button" class="btn btn-outline-primary waves-effect rounded" data-toggle="modal" data-target="#learning-plan-course-add-modal" data-id="{{ learningPlanCourse.id }}">{{ 'learning-plans.learning-plan-course-card.add_course'|_ }}</button>
+        <button type="button" class="btn btn-outline-primary waves-effect rounded" data-toggle="modal" data-target="#learning-plan-course-add-modal" data-learning-plan-id="{{ learningPlan.id }}" data-course-id="{{ learningPlanCourse.id }}">{{ 'learning-plans.learning-plan-course-card.add_course'|_ }}</button>
     </div>
 </div>

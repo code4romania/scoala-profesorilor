@@ -11,6 +11,7 @@ use ValidationException;
 use ApplicationException;
 use Cms\Classes\ComponentBase;
 use Genuineq\Tms\Models\Course;
+use Genuineq\Tms\Models\LearningPlansCourse;
 use Genuineq\Tms\Models\LearningPlan as LearningPlanModel;
 
 use Log;
@@ -82,7 +83,6 @@ class LearningPlan extends ComponentBase
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
-
         /** Extract all categories for filtering. */
         $this->page['learningPlanCourseCategories'] = Course::getFilterCategories();
         /** Extract all accreditations for filtering. */
@@ -100,7 +100,6 @@ class LearningPlan extends ComponentBase
      */
     public function onLearningPlanCourseSearch()
     {
-        Log::info('post() = ' . print_r(post(), true));
         /* Extract the courses based on the received options. */
         $this->extractLearningPlanCourses(/*options*/post());
     }
@@ -110,8 +109,108 @@ class LearningPlan extends ComponentBase
      */
     public function onLearningPlanCourseAdd()
     {
-        Log::info('post(): ' . print_r(post(), true));
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        /** Extract the post data to validate. */
+        $data['learning_plan_id'] = post('learningPlanId');
+        $data['course_id'] = post('courseId');
+        $data['covered_costs'] = post('covered_costs');
+
+        /** Extract the school ID. */
+        $data['school_id'] = Auth::getUser()->getProfile()->id;
+
+        /** Prepare value for the mandatory field. */
+        if (post('mandatory')) {
+            $data['mandatory'] = 1;
+        }
+
+        /** Extract the course. */
+        $course = Course::find($data['course_id']);
+
+        /** Extract the validation rules. */
+        $rules = [
+            'learning_plan_id' => 'required|numeric|exists:genuineq_tms_learning_plans,id',
+            'school_id' => 'required|numeric|exists:genuineq_tms_schools,id',
+            'course_id' => 'required|numeric|exists:genuineq_tms_courses,id',
+            'covered_costs' => 'present|numeric|max:' . $course->price,
+        ];
+
+        /** Construct the validation error messages. */
+        $messages = [
+            'learning_plan_id.required' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.learning_plan_id_required'),
+            'learning_plan_id.numeric' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.learning_plan_id_numeric'),
+            'learning_plan_id.exists' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.learning_plan_id_exists'),
+            'course_id.required' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.course_id_required'),
+            'course_id.numeric' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.course_id_numeric'),
+            'course_id.exists' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.course_id_exists'),
+            'school_id.required' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_id_required'),
+            'school_id.numeric' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_id_numeric'),
+            'school_id.exists' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_id_exists'),
+            'covered_costs.present' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.covered_costs_present'),
+            'covered_costs.numeric' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.covered_costs_numeric'),
+            'covered_costs.max' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.covered_costs_max'),
+        ];
+
+        /** Remove empty entries of covered costs. */
+        if (!$data['covered_costs']) {
+            $data['covered_costs'] = 0;
+        }
+
+        /** Apply the validation rules. */
+        $validation = Validator::make($data, $rules, $messages);
+        if ($validation->fails()) {
+            throw new ValidationException($validation);
+        }
+
+        /** Add the course to the learning plan. */
+        $learningPlanCourse = new LearningPlansCourse($data);
+        $learningPlanCourse->save();
+
+        Flash::success(Lang::get('genuineq.tms::lang.component.learning-plan.message.course_added_successful'));
+
+        /** Extract the received courses filtering options */
+        $options = [
+            'searchInput' => post('learningPlanCourseSearchInput'),
+            'sort' => post('learningPlanCourseSort'),
+            'category' => post('learningPlanCourseCategory'),
+            'accreditation' => post('learningPlanCourseAccreditation'),
+        ];
+
+        /* Extract the courses based on the received options. */
+        $this->extractLearningPlanCourses($options);
     }
+
+    /**
+     * Function that removed a new course from a learning plan.
+     */
+    public function onLearningPlanCourseRemove()
+    {
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        /** Extract the learning plan. */
+        $learningPlan = LearningPlanModel::find(post('learningPlanId'));
+
+        /** Delete the course from the learning plan. */
+        $learningPlan->courses->where('course_id', post('courseId'))->first()->delete();
+
+        Flash::success(Lang::get('genuineq.tms::lang.component.learning-plan.message.course_deleted_successful'));
+
+        /** Extract the received courses filtering options */
+        $options = [
+            'searchInput' => post('learningPlanCourseSearchInput'),
+            'sort' => post('learningPlanCourseSort'),
+            'category' => post('learningPlanCourseCategory'),
+            'accreditation' => post('learningPlanCourseAccreditation'),
+        ];
+
+        /* Extract the courses based on the received options. */
+        $this->extractLearningPlanCourses($options);
+    }
+
     /***********************************************
      ******************* Helpers *******************
      ***********************************************/

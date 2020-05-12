@@ -9,10 +9,10 @@ description = "Displays the learning plan course search form."
             <span class="input-group-text md-addon border border-white bg-white"><i class="fa fa-search"></i></span>
         </div>
 
-        <input name="searchInput" type="text" class="form-control border border-white shadow-none" placeholder="{{ 'learning-plans.learning-plan-course-search-form.search'|_ }}" aria-label="{{ 'learning-plans.learning-plan-course-search-form.search'|_ }}">
+        <input name="searchInput" id="learningPlanCourseSearchInput" type="text" class="form-control border border-white shadow-none" placeholder="{{ 'learning-plans.learning-plan-course-search-form.search'|_ }}" aria-label="{{ 'learning-plans.learning-plan-course-search-form.search'|_ }}">
 
         <div class="input-group-append">
-            <select name="sort" class="browser-default custom-select border border-white shadow-none rounded-0" id="sort">
+            <select name="sort" class="browser-default custom-select border border-white shadow-none rounded-0" id="learningPlanCourseSort">
                 {% for key, value in learningPlanCourseSortTypes %}
                     <option value="{{ value }}">{{ key }}</option>
                 {% endfor %}
@@ -20,7 +20,7 @@ description = "Displays the learning plan course search form."
         </div>
 
         <div class="input-group-append">
-            <select name="category" class="browser-default custom-select border border-white shadow-none rounded-0" id="category">
+            <select name="category" class="browser-default custom-select border border-white shadow-none rounded-0" id="learningPlanCourseCategory">
                 {% for key, value in learningPlanCourseCategories %}
                     <option value="{{ value }}">{{ key }}</option>
                 {% endfor %}
@@ -28,7 +28,7 @@ description = "Displays the learning plan course search form."
         </div>
 
         <div class="input-group-append">
-            <select name="accreditation" class="browser-default custom-select border border-white shadow-none rounded-0" id="accreditation">
+            <select name="accreditation" class="browser-default custom-select border border-white shadow-none rounded-0" id="learningPlanCourseAccreditation">
                 {% for key, value in learningPlanCourseAccreditations %}
                     <option value="{{ value }}">{{ key }}</option>
                 {% endfor %}

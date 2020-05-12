@@ -9,9 +9,18 @@ class LearningPlansCourse extends Model
 {
     use \October\Rain\Database\Traits\Validation;
 
-    use \October\Rain\Database\Traits\SoftDelete;
+    protected $dates = [];
 
-    protected $dates = ['deleted_at'];
+    /**
+     * @var array The attributes that are mass assignable.
+     */
+    protected $fillable = [
+        'learning_plan_id',
+        'school_id',
+        'course_id',
+        'covered_costs',
+        'mandatory',
+    ];
 
 
     /**

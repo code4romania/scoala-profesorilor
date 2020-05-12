@@ -312,7 +312,7 @@
                 'force_secure_desc' => 'Always redirect the URL with the HTTPS schema',
             ],
             'validation' => [
-                'name_regex' => 'Numele profesorului poate contine doar litere, spatiu si caracterul -',
+                'name_regex' => 'Numele profesorului poate contine doar litere, numere, spatiu si caracterul -',
                 'name_max' => 'Numele profesorului trebuie sa fie de maxim 50 de caractere lungime',
                 'phone_regex' => 'Numarul de telefon al profesorului poate fi format doar din numere',
                 'phone_max' => 'Lungimea maxima a numarului de telefon al profesorului este de 15 caractere',
@@ -364,6 +364,24 @@
             'backend' => [
                 'force_secure' => 'Force secure protocol',
                 'force_secure_desc' => 'Always redirect the URL with the HTTPS schema',
+            ],
+            'validation' => [
+                'learning_plan_id_required' => 'Nu a fost selectat un planul de invatare',
+                'learning_plan_id_numeric' => 'Planul de invatare selectat nu este corect',
+                'learning_plan_id_exists' => 'Planul de invatare selectat nu exista',
+                'course_id_required' => 'Nu a fost selectat un curs',
+                'course_id_numeric' => 'Cursul selectat nu este corect',
+                'course_id_exists' => 'Cursul selectat nu exista',
+                'school_id_required' => 'Nu a fost selectata o scoala',
+                'school_id_numeric' => 'Scoala selectata nu este corecta',
+                'school_id_exists' => 'Scoala selectata nu exista',
+                'covered_costs_present' => 'Costurile decontate trebuie sa fie trimise',
+                'covered_costs_numeric' => 'Costurile decontate trebuie sa fie numerice',
+                'covered_costs_max' => 'Costurile decontate nu pot sa fie mai mari decat valoarea cursului',
+            ],
+            'message' => [
+                'course_added_successful' => 'Cursul a fost adaugat cu succes',
+                'course_deleted_successful' => 'Cursul a fost sters cu succes',
             ],
         ],
     ],

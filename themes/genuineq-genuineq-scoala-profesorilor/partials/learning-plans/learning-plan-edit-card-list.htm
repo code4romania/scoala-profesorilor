@@ -19,3 +19,41 @@ description = "Displays a learning plan as a list and the list of courses"
 
     </div>
 </div>
+
+<script type="text/javascript">
+    $('.learning-plan-edit-card-remove').on('click', function () {
+        /* Extract the course and learning plan ID. */
+        var $courseId = $(this).data('courseId');
+        var $learningPlanId = $(this).data('learningPlanId');
+
+        /* Extract the search form input data for the update. */
+        var $learningPlanCourseSearchInput = $('#learningPlanCourseSearchInput').val();
+        var $learningPlanCourseSort = $('#learningPlanCourseSort').val();
+        var $learningPlanCourseCategory = $('#learningPlanCourseCategory').val();
+        var $learningPlanCourseAccreditation = $('#learningPlanCourseAccreditation').val();
+
+        /* Extract the active page. */
+        var $newPage = $('#learningPlanCourseSearchPagination > ul > li.active').data('page');
+
+        $.request(
+            'onLearningPlanCourseRemove',
+            {
+                confirm: "{{ 'learning-plans.learning-plan-edit-card-list.confirm'|_ }}",
+                update: {
+                    'learning-plans/learning-plan-edit-card-list': '#learningPlanCardList',
+                    'learning-plans/learning-plan-course-grid': '#learningPlanCourseSearchResults',
+                    'learning-plans/learning-plan-course-pagination': '#learningPlanCourseSearchPagination'
+                },
+                data: {
+                    courseId: $courseId,
+                    learningPlanId: $learningPlanId,
+                    learningPlanCourseSearchInput: $learningPlanCourseSearchInput,
+                    learningPlanCourseSort: $learningPlanCourseSort,
+                    learningPlanCourseCategory: $learningPlanCourseCategory,
+                    learningPlanCourseAccreditation: $learningPlanCourseAccreditation,
+                    page: $newPage,
+                },
+            }
+        );
+    });
+</script>
