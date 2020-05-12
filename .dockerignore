@@ -1,0 +1,10 @@
+/vendor
+.DS_Store
+.idea
+.env
+.env.*.php
+.env.php
+composer.lock
+package-lock.json
+/node_modules
+/containers
