@@ -76,6 +76,18 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function registerPageSnippets()
+    {
+        return [
+            \Genuineq\User\Components\Account::class       => 'account',
+            \Genuineq\User\Components\ResetPassword::class => 'resetPassword',
+
+            \Genuineq\User\Components\Session::class       => 'session',
+            \Genuineq\User\Components\Login::class         => 'login',
+            \Genuineq\User\Components\Register::class      => 'register',
+        ];
+    }
+
     public function registerPermissions()
     {
         return [

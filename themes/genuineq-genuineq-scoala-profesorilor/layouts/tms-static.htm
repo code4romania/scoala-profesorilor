@@ -15,6 +15,15 @@ security = 'all'
 
 {% partial 'navbar' %}
 
+{% flash %}
+    <p
+        data-control="flash-message"
+        class="flash-message fade {{ type }}"
+        data-interval="5">
+        {{ message }}
+    </p>
+{% endflash %}
+
 <div class="container py-5">
     <div class="row">
         <div class="col-12">
