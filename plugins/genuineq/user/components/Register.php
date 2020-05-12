@@ -130,7 +130,7 @@ class Register extends ComponentBase
 
             /** Extract the validation rules. */
             $rules = [
-                'name' => ['required', 'regex:/^[a-zA-Z -]*$/i'],
+                'name' => ['required', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
                 'email' => 'required|between:6,255|email|unique:users',
                 ((post('cif')) ? ('cif') : ('sid')) => 'required',
                 'password' => 'required|between:' . PluginConfig::getMinPasswordLength() . ',' . PluginConfig::getMaxPasswordLength() . '|confirmed',
