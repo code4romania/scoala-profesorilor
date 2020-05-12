@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'lifetime' => 120,
+    'lifetime' => env('SESSION_LIFETIME', 120),
 
     'expire_on_close' => false,
 
@@ -147,7 +147,7 @@ return [
     | the HTTP protocol. You are free to modify this option if needed.
     |
     */
-    
+
     'http_only' => true,
 
     /*

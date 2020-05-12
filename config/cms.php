@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'activeTheme' => 'genuineq-genuineq-scoala-profesorilor',
+    'activeTheme' => env('CMS_ACTIVE_THEME', 'genuineq-genuineq-scoala-profesorilor'),
 
     /*
     |--------------------------------------------------------------------------
@@ -24,7 +24,7 @@ return [
     |
     */
 
-    'edgeUpdates' => false,
+    'edgeUpdates' => env('CMS_EDGE_UPDATES', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -36,7 +36,7 @@ return [
     |
     */
 
-    'backendUri' => 'backend',
+    'backendUri' => env('CMS_BACKEND_URI', 'backend'),
 
     /*
     |--------------------------------------------------------------------------
@@ -49,7 +49,7 @@ return [
     |
     */
 
-    'backendForceSecure' => null,
+    'backendForceSecure' => env('CMS_BACKEND_FORCE_SECURE', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'backendForceRemember' => true,
+    'backendForceRemember' => env('CMS_BACKEND_FORCE_REMEMBER', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -131,7 +131,7 @@ return [
     |
     */
 
-    'disableCoreUpdates' => false,
+    'disableCoreUpdates' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -156,7 +156,7 @@ return [
     |
     */
 
-    'enableRoutesCache' => env('ROUTES_CACHE', false),
+    'enableRoutesCache' => env('CMS_ROUTES_CACHE', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -196,7 +196,7 @@ return [
     |
     */
 
-    'enableAssetCache' => env('ASSET_CACHE', false),
+    'enableAssetCache' => env('CMS_ASSET_CACHE', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -210,7 +210,7 @@ return [
     |
     */
 
-    'enableAssetMinify' => null,
+    'enableAssetMinify' => env('CMS_ASSET_MINIFY', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -224,7 +224,7 @@ return [
     |
     */
 
-    'enableAssetDeepHashing' => null,
+    'enableAssetDeepHashing' => env('CMS_ASSET_DEEP_HASHING', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -250,7 +250,7 @@ return [
     |
     */
 
-    'databaseTemplates' => env('DATABASE_TEMPLATES', false),
+    'databaseTemplates' => env('CMS_DATABASE_TEMPLATES', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -327,7 +327,7 @@ return [
     |
     */
 
-    'convertLineEndings' => false,
+    'convertLineEndings' => env('CMS_CONVERT_LINE_ENDINGS', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -343,7 +343,7 @@ return [
     |
     */
 
-    'linkPolicy' => env('LINK_POLICY', 'detect'),
+    'linkPolicy' => env('CMS_LINK_POLICY', 'detect'),
 
     /*
     |--------------------------------------------------------------------------
@@ -379,7 +379,7 @@ return [
     |
     */
 
-    'enableCsrfProtection' => env('ENABLE_CSRF', true),
+    'enableCsrfProtection' => env('CMS_ENABLE_CSRF', true),
 
     /*
     |--------------------------------------------------------------------------
