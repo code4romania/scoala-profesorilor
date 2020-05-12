@@ -1,0 +1,29 @@
+description = "Deletes the connection between a school teacher and the school"
+
+[viewBag]
+==
+<div class="row bg-white rounded d-flex align-items-center">
+    <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 text-center text-sm-left text-md-left text-lg-left text-xl-left">
+        <span class="my-3">{{ 'teachers.teacher-remove.label'|_ }} {{ teacher.name }}</span>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-3 offset-md-6 col-lg-3 offset-ld-6 col-xl-3 offset-xl-6 text-center text-sm-right text-md-right text-lg-right text-xl-right">
+        <a id="teacher-remove" class="btn btn-md btn-danger mx-0 my-2 py-2 z-depth-0 waves-effect rounded" type="button" data-teacher-id="{{ teacher.id }}">{{ 'teachers.teacher-remove.btn'|_ }}</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#teacher-remove').on('click', function () {
+        /* Extract the clicked teacher ID. */
+        var $teacherId = $(this).data('teacherId');
+
+        /* Send the view request */
+        $.request(
+            'onTeacherRemove',
+            {
+                update: {'school-teachers/teacher-edit': '#teachers-tab-content'},
+                data: {teacherId: $teacherId}
+            }
+        );
+    });
+</script>

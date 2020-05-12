@@ -10,12 +10,15 @@ use Validator;
 use ValidationException;
 use ApplicationException;
 use Cms\Classes\ComponentBase;
+use Genuineq\Tms\Models\School;
 use Genuineq\Tms\Models\Teacher;
 use Genuineq\Tms\Models\Address;
 use Genuineq\Tms\Models\SeniorityLevel;
 use Genuineq\Tms\Models\SchoolLevel;
 use Genuineq\Tms\Models\ContractType;
 use Genuineq\User\Helpers\AuthRedirect;
+
+use Log;
 
 /**
  * School teacher profile component
@@ -79,7 +82,7 @@ class SchoolTeacherProfile extends ComponentBase
      * Searches, filters, orders and paginates school teachers based on
      *  on the post options.
      */
-    function onTeacherSearch()
+    public function onTeacherSearch()
     {
         if (!Auth::check()) {
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
@@ -92,7 +95,7 @@ class SchoolTeacherProfile extends ComponentBase
     /**
      * Prepares all the school teacher for viewing.
      */
-    function onDisplayTeachers()
+    public function onDisplayTeachers()
     {
         if (!Auth::check()) {
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
@@ -105,7 +108,7 @@ class SchoolTeacherProfile extends ComponentBase
     /**
      * Prepares a school teacher for viewing.
      */
-    function onTeacherView()
+    public function onTeacherView()
     {
         if (!Auth::check()) {
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
@@ -117,7 +120,7 @@ class SchoolTeacherProfile extends ComponentBase
     /**
      * Prepares a school teacher for editing.
      */
-    function onTeacherEdit()
+    public function onTeacherEdit()
     {
         if (!Auth::check()) {
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
@@ -135,6 +138,53 @@ class SchoolTeacherProfile extends ComponentBase
         $this->page['schoolTeacherProfileContractType'] = ($this->page['schoolTeacherProfile']->contract_type) ? ($this->page['schoolTeacherProfile']->contract_type->name) : (null);
 
         $this->page['schoolTeacher'] = Teacher::find(post('teacherId'));
+    }
+
+    /**
+     * Deletes the connection between a school teacher and the school.
+     */
+    public function onTeacherRemove()
+    {
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        /** Extract the teacher. */
+        $teacher = Teacher::find(post('teacherId'));
+        /** Extract the school. */
+        $school = Auth::getUser()->getProfile();
+
+        /** Extract the school teacher link. */
+        $link = $school->teachers->where('id', $teacher->id)->first()->pivot;
+
+        /** Delete the link */
+        $link->delete();
+
+        /**
+         * Delete any course sponsorships from the current school,
+         *  from the active learning plan of the teacher.
+         */
+        $learningPlan = $teacher->getActiveLearningPlan();
+
+        /** Extract all courses added by the school. */
+        $schoolCourses = $learningPlan->courses->where('school_id', $school->id);
+
+        /** Remove any sponsorship and/or the mandatory mark from the future courses. */
+        foreach ($schoolCourses as $learningPlanCourse) {
+            /** Check if the course has NOT started. */
+            if ((date('Y-m-d') < $learningPlanCourse->course->start_date) && (($learningPlanCourse->covered_costs) || ($learningPlanCourse->mandatory))) {
+                /** Remove any sponsorship */
+                $learningPlanCourse->covered_costs = 0;
+                /** Mark as no longer mandatory */
+                $learningPlanCourse->mandatory = 0;
+
+                $learningPlanCourse->save();
+            }
+        }
+
+        /////////////////////////////////////
+        //TO DO: Add appraisal remove/close
+        /////////////////////////////////////
     }
 
     /**
