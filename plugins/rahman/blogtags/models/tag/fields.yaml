@@ -1,0 +1,16 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+    name:
+        label: Name
+        span: auto
+    slug:
+        label: Slug
+        disabled: true
+        preset: name
+        span: auto
