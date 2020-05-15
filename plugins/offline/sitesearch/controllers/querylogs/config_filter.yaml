@@ -1,5 +1,0 @@
-scopes:
-    created_at:
-        label: offline.sitesearch::lang.log.created_at
-        type: daterange
-        conditions: created_at >= ':filtered'
