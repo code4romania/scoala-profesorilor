@@ -88,3 +88,8 @@ The October CMS platform is open-sourced software licensed under the [MIT licens
 ## Security Vulnerabilities
 
 Please review [our security policy](https://github.com/octobercms/october/security/policy) on how to report security vulnerabilities.
+
+
+Docker build commands:
+  docker build -f ./docker/app/Dockerfile -t tms_prod_app .
+  docker build -f ./docker/nginx/Dockerfile -t tms_prod_nginx .

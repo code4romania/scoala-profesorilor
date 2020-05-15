@@ -34,6 +34,7 @@ COPY ./package.json /var/www/package.json
 COPY ./phpcs.xml /var/www/phpcs.xml
 COPY ./phpunit.xml /var/www/phpunit.xml
 COPY ./server.php /var/www/server.php
+COPY ./index.php /var/www/index.php
 
 # Set working directory
 WORKDIR /var/www
