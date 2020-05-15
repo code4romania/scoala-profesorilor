@@ -1,4 +1,0 @@
-title: ContractTypes
-modelClass: Genuineq\Tms\Models\ContractType
-toolbar:
-    buttons: reorder_toolbar

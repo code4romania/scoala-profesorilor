@@ -1,4 +1,0 @@
-title: Courses
-modelClass: Genuineq\Tms\Models\Course
-toolbar:
-    buttons: reorder_toolbar

@@ -1,4 +1,0 @@
-title: SchoolLevels
-modelClass: Genuineq\Tms\Models\SchoolLevel
-toolbar:
-    buttons: reorder_toolbar

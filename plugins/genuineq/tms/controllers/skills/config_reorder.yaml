@@ -1,4 +1,0 @@
-title: Skills
-modelClass: Genuineq\Tms\Models\Skill
-toolbar:
-    buttons: reorder_toolbar

@@ -1,4 +1,0 @@
-title: Teachers
-modelClass: Genuineq\Tms\Models\Teacher
-toolbar:
-    buttons: reorder_toolbar

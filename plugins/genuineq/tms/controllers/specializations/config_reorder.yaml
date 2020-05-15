@@ -1,4 +1,0 @@
-title: Specializations
-modelClass: Genuineq\Tms\Models\Specialization
-toolbar:
-    buttons: reorder_toolbar

@@ -1,4 +1,0 @@
-title: Grades
-modelClass: Genuineq\Tms\Models\Grade
-toolbar:
-    buttons: reorder_toolbar

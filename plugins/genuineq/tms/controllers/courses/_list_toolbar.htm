@@ -1,7 +1,11 @@
 <div data-control="toolbar">
-        <a href="<?= Backend::url('genuineq/tms/courses/create') ?>" class="btn btn-primary oc-icon-plus"><?= e(trans('backend::lang.form.create')) ?></a>
-            <a href="<?= Backend::url('genuineq/tms/courses/reorder') ?>" class="btn btn-default oc-icon-list"><?= e(trans('backend::lang.reorder.default_title')) ?></a>
-        <button
+    <a href="<?= Backend::url('genuineq/tms/courses/create') ?>" class="btn btn-primary oc-icon-plus"><?= e(trans('backend::lang.form.create')) ?></a>
+
+    <a href="<?= Backend::url('genuineq/tms/courses/import') ?>" class="btn btn-default oc-icon-list"><?= e(trans('genuineq.tms::lang.course.import-export.import_label')) ?></a>
+
+    <a href="<?= Backend::url('genuineq/tms/courses/export') ?>" class="btn btn-default oc-icon-list"><?= e(trans('genuineq.tms::lang.course.import-export.export_label')) ?></a>
+
+    <button
         class="btn btn-default oc-icon-trash-o"
         disabled="disabled"
         onclick="$(this).data('request-data', {

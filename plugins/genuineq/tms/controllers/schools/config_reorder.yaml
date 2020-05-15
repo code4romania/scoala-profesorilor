@@ -1,4 +1,0 @@
-title: Schools
-modelClass: Genuineq\Tms\Models\School
-toolbar:
-    buttons: reorder_toolbar

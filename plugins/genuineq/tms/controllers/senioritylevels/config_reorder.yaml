@@ -1,4 +1,0 @@
-title: SeniorityLevels
-modelClass: Genuineq\Tms\Models\SeniorityLevel
-toolbar:
-    buttons: reorder_toolbar

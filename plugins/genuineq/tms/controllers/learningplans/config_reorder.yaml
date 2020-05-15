@@ -1,4 +1,0 @@
-title: LearningPlans
-modelClass: Genuineq\Tms\Models\LearningPlan
-toolbar:
-    buttons: reorder_toolbar
