@@ -7,7 +7,7 @@ description = "Displays a category as a card"
 
     <!-- Card image -->
     <div class="view overlay d-flex" style="background-color: {{ category.color }} !important;height: 140px;">
-        <img class="card-img-top my-auto" src="{{ category.icon|media }}" alt="">
+        <img class="card-img-top my-auto h-100" src="{{ (category.icon) ? (category.icon|media) : ('assets/img/svg/category.svg'|theme) }}" alt="">
         <a href="{{ detailsPage|page({ (detailsUrlParameter) : attribute(category, detailsKeyColumn)}) }}">
             <div class="mask rgba-white-slight"></div>
         </a>

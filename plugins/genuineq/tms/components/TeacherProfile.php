@@ -49,7 +49,7 @@ class TeacherProfile extends ComponentBase
      */
     public function prepareVars()
     {
-        $this->page['profile'] = (Auth::check()) ? (Auth::getUser()->getProfile()) : (null);
+        $this->page['profile'] = (Auth::check()) ? (Auth::getUser()->profile) : (null);
         $this->page['profileAddress'] = ($this->page['profile'] && $this->page['profile']->address) ? ($this->page['profile']->address->name . ', ' . $this->page['profile']->address->county) : (null);
         $this->page['profileSeniorityLevel'] = ($this->page['profile'] && $this->page['profile']->seniority_level) ? ($this->page['profile']->seniority_level->name) : (null);
         $this->page['profileSchoolLevel'] = ($this->page['profile'] && $this->page['profile']->school_level) ? ($this->page['profile']->school_level->name) : (null);
@@ -191,7 +191,7 @@ class TeacherProfile extends ComponentBase
         }
 
         /** Extract the teacher profile */
-        $teacherProfile = Auth::getUser()->getProfile();
+        $teacherProfile = Auth::getUser()->profile;
 
         if ($teacherProfile) {
             $teacherProfile->fill($data);
@@ -232,7 +232,7 @@ class TeacherProfile extends ComponentBase
         }
 
         /** Extract the teacher profile */
-        $teacherProfile = Auth::getUser()->getProfile();
+        $teacherProfile = Auth::getUser()->profile;
 
         if ($teacherProfile) {
             $teacherProfile->fill($data);

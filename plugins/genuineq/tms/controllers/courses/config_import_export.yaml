@@ -1,0 +1,15 @@
+# ===================================
+#  Import/Export Behavior Config
+# ===================================
+
+import:
+    title: Import courses
+    modelClass: Genuineq\Tms\Models\CourseImport
+    list: $/genuineq/tms/models/course/import_columns.yaml
+    redirect: genuineq/tms/courses
+
+export:
+    title: Export courses
+    modelClass: Genuineq\Tms\Models\CourseExport
+    list: $/genuineq/tms/models/course/export_columns.yaml
+    redirect: genuineq/tms/courses

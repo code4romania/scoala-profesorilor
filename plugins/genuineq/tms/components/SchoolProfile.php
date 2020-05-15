@@ -47,7 +47,7 @@ class SchoolProfile extends ComponentBase
      */
     public function prepareVars()
     {
-        $this->page['profile'] = (Auth::check()) ? (Auth::getUser()->getProfile()) : (null);
+        $this->page['profile'] = (Auth::check()) ? (Auth::getUser()->profile) : (null);
         $this->page['profileAddress'] = ($this->page['profile'] && $this->page['profile']->address) ? ($this->page['profile']->address->name . ', ' . $this->page['profile']->address->county) : (null);
 
         /* Extract all the inspectorates and create the source array. */
@@ -164,7 +164,7 @@ class SchoolProfile extends ComponentBase
         }
 
         /** Extract the school profile */
-        $schoolProfile = Auth::getUser()->getProfile();
+        $schoolProfile = Auth::getUser()->profile;
 
         if ($schoolProfile) {
             $schoolProfile->fill($data);
@@ -205,7 +205,7 @@ class SchoolProfile extends ComponentBase
         }
 
         /** Extract the school profile */
-        $schoolProfile = Auth::getUser()->getProfile();
+        $schoolProfile = Auth::getUser()->profile;
 
         if ($schoolProfile) {
             $schoolProfile->fill($data);

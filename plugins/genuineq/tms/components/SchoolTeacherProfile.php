@@ -5,18 +5,22 @@ use Auth;
 use Flash;
 use Input;
 use Request;
+use Storage;
 use Redirect;
+use Response;
 use Validator;
 use ValidationException;
 use ApplicationException;
 use Cms\Classes\ComponentBase;
+use Maatwebsite\Excel\Facades\Excel;
 use Genuineq\Tms\Models\School;
 use Genuineq\Tms\Models\Teacher;
 use Genuineq\Tms\Models\Address;
-use Genuineq\Tms\Models\SeniorityLevel;
 use Genuineq\Tms\Models\SchoolLevel;
 use Genuineq\Tms\Models\ContractType;
+use Genuineq\Tms\Models\SeniorityLevel;
 use Genuineq\User\Helpers\AuthRedirect;
+use Genuineq\Tms\Classes\TeachersImport;
 
 use Log;
 
@@ -152,7 +156,7 @@ class SchoolTeacherProfile extends ComponentBase
         /** Extract the teacher. */
         $teacher = Teacher::find(post('teacherId'));
         /** Extract the school. */
-        $school = Auth::getUser()->getProfile();
+        $school = Auth::getUser()->profile;
 
         /** Extract the school teacher link. */
         $link = $school->teachers->where('id', $teacher->id)->first()->pivot;
@@ -439,6 +443,39 @@ class SchoolTeacherProfile extends ComponentBase
         Flash::success(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.password_update_successful'));
     }
 
+    /**
+     * Prepares the download of a teachers import file template
+     */
+    public function onDownloadImportTemplate(){
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        return Redirect::to('tms-teachers-import-download');
+    }
+
+    /**
+     * Imports a list of teachers and assign them to the current school
+     */
+    public function onTeachersImport(){
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        /** Check if a file has beeen provided. */
+        if (Input::hasFile('import_file')) {
+            /** Import the teachers. */
+            Excel::import(new TeachersImport, Input::file('import_file'));
+
+            /** Remove the uploaded file. */
+            Storage::delete(Input::file('import_file')->getRealPath() . '/' . Input::file('import_file')->getClientOriginalName());
+
+            Flash::success(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.teachers_import_successful'));
+        } else {
+            Flash::success(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.teachers_import_failed'));
+        }
+    }
+
     /***********************************************
      ******************* Helpers *******************
      ***********************************************/
@@ -449,7 +486,7 @@ class SchoolTeacherProfile extends ComponentBase
     protected function extractTeachers($options)
     {
         /* Get the school teachers based on the received options. */
-        $this->page['teachers'] = Auth::getUser()->getProfile()->filterTeachers($options);
+        $this->page['teachers'] = Auth::getUser()->profile->filterTeachers($options);
         /** Extract the number of pages. */
         $this->page['pages'] = $this->page['teachers']->lastPage();
         /** Extract the current page. */
@@ -508,7 +545,7 @@ class SchoolTeacherProfile extends ComponentBase
      */
     protected function isTeacherLinked($teacher){
         /** Extract the school */
-        $school = Auth::getUser()->getProfile();
+        $school = Auth::getUser()->profile;
 
         /** Check if the teacher is linked */
         foreach ($school->teachers as $_teacher) {

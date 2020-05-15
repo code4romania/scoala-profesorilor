@@ -218,32 +218,32 @@ class User extends UserBase
      * Before validation event
      * @return void
      */
-    public function beforeValidate()
-    {
-        /*
-         * Guests are special
-         */
-        if ($this->is_guest && !$this->password) {
-            $this->generatePassword();
-        }
+    // public function beforeValidate()
+    // {
+    //     /*
+    //      * Guests are special
+    //      */
+    //     if ($this->is_guest && !$this->password) {
+    //         $this->generatePassword();
+    //     }
 
-        /*
-         * When the username is not used, the email is substituted.
-         */
-        if (
-            (!$this->username) ||
-            ($this->isDirty('email') && $this->getOriginal('email') == $this->username)
-        ) {
-            $this->username = $this->email;
-        }
+    //     /*
+    //      * When the username is not used, the email is substituted.
+    //      */
+    //     if (
+    //         (!$this->username) ||
+    //         ($this->isDirty('email') && $this->getOriginal('email') == $this->username)
+    //     ) {
+    //         $this->username = $this->email;
+    //     }
 
-        /*
-         * Apply Password Length Settings
-         */
-        $minPasswordLength = static::getMinPasswordLength();
-        $this->rules['password'] = "required:create|between:$minPasswordLength,255|confirmed";
-        $this->rules['password_confirmation'] = "required_with:password|between:$minPasswordLength,255";
-    }
+    //     /*
+    //      * Apply Password Length Settings
+    //      */
+    //     $minPasswordLength = static::getMinPasswordLength();
+    //     $this->rules['password'] = "required:create|between:$minPasswordLength,255|confirmed";
+    //     $this->rules['password_confirmation'] = "required_with:password|between:$minPasswordLength,255";
+    // }
 
     /**
      * After create event

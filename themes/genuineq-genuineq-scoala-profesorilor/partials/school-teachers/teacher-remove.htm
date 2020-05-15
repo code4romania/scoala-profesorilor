@@ -21,7 +21,7 @@ description = "Deletes the connection between a school teacher and the school"
         $.request(
             'onTeacherRemove',
             {
-                update: {'school-teachers/teacher-edit': '#teachers-tab-content'},
+                update: {'school-profile/teachers-tab': '#teachers-tab-content'},
                 data: {teacherId: $teacherId}
             }
         );

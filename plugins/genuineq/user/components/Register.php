@@ -1,6 +1,5 @@
 <?php namespace Genuineq\User\Components;
 
-use Log;
 use URL;
 use Lang;
 use Auth;
@@ -132,7 +131,7 @@ class Register extends ComponentBase
             $rules = [
                 'name' => ['required', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
                 'email' => 'required|between:6,255|email|unique:users',
-                ((post('cif')) ? ('cif') : ('sid')) => 'required',
+                ((post('cif')) ? ('cif') : ('sid')) => 'required|unique:users,identifier',
                 'password' => 'required|between:' . PluginConfig::getMinPasswordLength() . ',' . PluginConfig::getMaxPasswordLength() . '|confirmed',
                 'password_confirmation' => 'required|required_with:password',
             ];
@@ -146,7 +145,9 @@ class Register extends ComponentBase
                 'email.email' => Lang::get('genuineq.user::lang.component.register.validation.email_email'),
                 'email.unique' => Lang::get('genuineq.user::lang.component.register.validation.email_unique'),
                 'cui.required' => Lang::get('genuineq.user::lang.component.register.validation.cui_required'),
+                'cui.unique' => Lang::get('genuineq.user::lang.component.register.validation.cui_unique'),
                 'sid.required' => Lang::get('genuineq.user::lang.component.register.validation.sid_required'),
+                'sid.unique' => Lang::get('genuineq.user::lang.component.register.validation.sid_unique'),
                 'password.required' => Lang::get('genuineq.user::lang.component.register.validation.password_required'),
                 'password.between' => Lang::get('genuineq.user::lang.component.register.validation.password_between_s') . PluginConfig::getMinPasswordLength() . ' si ' . PluginConfig::getMaxPasswordLength() . Lang::get('genuineq.user::lang.component.register.validation.password_between_e'),
                 'password.confirmed' => Lang::get('genuineq.user::lang.component.register.validation.password_confirmed'),

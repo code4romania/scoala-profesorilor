@@ -1,0 +1,20 @@
+title = "Descarca sablon import profesori"
+url = "/tms-teachers-import-download"
+layout = "tms-non-static"
+is_hidden = 0
+
+[session]
+security = "user"
+allowedUserGroups[] = "school"
+==
+    function onStart()
+    {
+        $pathToFile = storage_path('static/teachers-import-template.xlsx');
+        $fileName = 'sablon-import-profesori.xlsx';
+        $headers = [
+            'Content-Type' => 'application/xlsx'
+        ];
+
+        return Response::download($pathToFile, $fileName, $headers);
+    }
+==

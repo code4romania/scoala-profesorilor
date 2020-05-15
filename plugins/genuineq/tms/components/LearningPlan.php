@@ -119,7 +119,7 @@ class LearningPlan extends ComponentBase
         $data['covered_costs'] = post('covered_costs');
 
         /** Extract the school ID. */
-        $data['school_id'] = Auth::getUser()->getProfile()->id;
+        $data['school_id'] = Auth::getUser()->profile->id;
 
         /** Prepare value for the mandatory field. */
         if (post('mandatory')) {

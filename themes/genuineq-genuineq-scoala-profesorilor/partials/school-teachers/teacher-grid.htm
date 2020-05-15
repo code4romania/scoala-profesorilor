@@ -10,6 +10,9 @@ description = "Displays a grid of teachers"
     {% endfor %}
 </div>
 
+{% partial "school-teachers/teacher-import-btn" %}
+{% partial "school-teachers/teacher-import-modal" %}
+
 <script type="text/javascript">
     $('.teacher-view').on('click', function () {
         /* Extract the clicked teacher ID. */
