@@ -158,11 +158,9 @@ class SchoolTeacherProfile extends ComponentBase
         /** Extract the school. */
         $school = Auth::getUser()->profile;
 
-        /** Extract the school teacher link. */
-        $link = $school->teachers->where('id', $teacher->id)->first()->pivot;
 
-        /** Delete the link */
-        $link->delete();
+        /** Extract the school teacher link and remove it. */
+        $school->teachers()->detach($teacher->id);
 
         /**
          * Delete any course sponsorships from the current school,
@@ -170,25 +168,31 @@ class SchoolTeacherProfile extends ComponentBase
          */
         $learningPlan = $teacher->getActiveLearningPlan();
 
-        /** Extract all courses added by the school. */
-        $schoolCourses = $learningPlan->courses->where('school_id', $school->id);
+        /** Check if the learning plan has any courses. */
+        if ($learningPlan && $learningPlan->courses) {
+            /** Extract all courses added by the school. */
+            $schoolCourses = $learningPlan->courses->where('school_id', $school->id);
 
-        /** Remove any sponsorship and/or the mandatory mark from the future courses. */
-        foreach ($schoolCourses as $learningPlanCourse) {
-            /** Check if the course has NOT started. */
-            if ((date('Y-m-d') < $learningPlanCourse->course->start_date) && (($learningPlanCourse->covered_costs) || ($learningPlanCourse->mandatory))) {
-                /** Remove any sponsorship */
-                $learningPlanCourse->covered_costs = 0;
-                /** Mark as no longer mandatory */
-                $learningPlanCourse->mandatory = 0;
+            /** Remove any sponsorship and/or the mandatory mark from the future courses. */
+            foreach ($schoolCourses as $learningPlanCourse) {
+                /** Check if the course has NOT started. */
+                if ((date('Y-m-d') < $learningPlanCourse->course->start_date) && (($learningPlanCourse->covered_costs) || ($learningPlanCourse->mandatory))) {
+                    /** Remove any sponsorship */
+                    $learningPlanCourse->covered_costs = 0;
+                    /** Mark as no longer mandatory */
+                    $learningPlanCourse->mandatory = 0;
 
-                $learningPlanCourse->save();
+                    $learningPlanCourse->save();
+                }
             }
         }
 
         /////////////////////////////////////
         //TO DO: Add appraisal remove/close
         /////////////////////////////////////
+
+        /* Get all the school teachers. */
+        $this->extractTeachers(/*options*/[]);
     }
 
     /**
@@ -471,8 +475,9 @@ class SchoolTeacherProfile extends ComponentBase
             Storage::delete(Input::file('import_file')->getRealPath() . '/' . Input::file('import_file')->getClientOriginalName());
 
             Flash::success(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.teachers_import_successful'));
+            return Redirect::refresh();
         } else {
-            Flash::success(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.teachers_import_failed'));
+            Flash::error(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.teachers_import_failed'));
         }
     }
 

@@ -17,6 +17,7 @@ use Genuineq\Tms\Models\SchoolTeacher;
 use Genuineq\Tms\Models\Address;
 use Genuineq\Tms\Models\SeniorityLevel;
 use Genuineq\Tms\Models\SchoolLevel;
+use Genuineq\Tms\Models\LearningPlan;
 use Genuineq\Tms\Models\ContractType;
 use Genuineq\User\Models\Settings as UserSettings;
 use alcea\cnp\Cnp;
@@ -111,11 +112,19 @@ class TeachersFirstSheetImport implements OnEachRow, WithHeadingRow
             $teacher->schools()->attach(Auth::user()->profile);
             $teacher->reloadRelations('schools');
 
+            /** Create a new learning plan. */
+            $teacher->learning_plans()->attach(LearningPlan::createNewPlan()->id);
+
             /** Send activation email if the activation is configured to be performed by the user */
             if (UserSettings::ACTIVATE_USER == UserSettings::get('activate_mode')) {
                 $this->sendActivationEmail($user);
             }
         }
+    }
+
+    public function headingRow(): int
+    {
+        return 2;
     }
 
     /***********************************************

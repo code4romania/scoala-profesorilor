@@ -50,4 +50,18 @@ class LearningPlan extends Model
     public function getTeacherAttribute(){
         return $this->teachers->first();
     }
+
+    public static function createNewPlan(){
+        $learningPlan = new LearningPlan();
+
+        $learningPlan->year = date('Y');
+        /**
+         * Semester 1: August - January
+         * Semester 2: February - June
+         */
+        $learningPlan->semester = ((1 == date('n')) || (8 <= date('n'))) ? (1) : (2);
+        $learningPlan->save();
+
+        return $learningPlan;
+    }
 }

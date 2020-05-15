@@ -375,7 +375,7 @@
                 'force_secure_desc' => 'Always redirect the URL with the HTTPS schema',
             ],
             'validation' => [
-                'learning_plan_id_required' => 'Nu a fost selectat un planul de invatare',
+                'learning_plan_id_required' => 'Nu a fost selectat un plan de invatare',
                 'learning_plan_id_numeric' => 'Planul de invatare selectat nu este corect',
                 'learning_plan_id_exists' => 'Planul de invatare selectat nu exista',
                 'course_id_required' => 'Nu a fost selectat un curs',

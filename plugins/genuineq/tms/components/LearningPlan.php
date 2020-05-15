@@ -223,7 +223,7 @@ class LearningPlan extends ComponentBase
         /** Extract the learning plan. */
         $this->page['learningPlan'] = LearningPlanModel::find(post('learningPlanId'));
         /** Extract all courses for filtering. */
-        $this->page['learningPlanCourses'] = Course::filterCourses($options, /*_courses*/$this->page['learningPlan']->realCourses->pluck('id'));
+        $this->page['learningPlanCourses'] = Course::filterCourses($options, /*_courses*/(($this->page['learningPlan'] && $this->page['learningPlan']->realCourses) ? ($this->page['learningPlan']->realCourses->pluck('id')) : (null)));
         /** Extract the number of pages. */
         $this->page['learningPlanCoursesPages'] = $this->page['learningPlanCourses']->lastPage();
         /** Extract the current page. */
