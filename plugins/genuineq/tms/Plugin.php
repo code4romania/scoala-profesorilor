@@ -84,8 +84,8 @@ class Plugin extends PluginBase
             /** Link "Teacher" model to user model */
             $model->hasOne['teacherProfile'] = ['Genuineq\Tms\Models\Teacher'];
 
-            /** Add a "getProfile" function to the user model */
-            $model->addDynamicMethod('getProfile', function() use ($model) {
+            /** Add a "getProfileAttribute" function to the user model */
+            $model->addDynamicMethod('getProfileAttribute', function() use ($model) {
                 /** Return the valid profile */
                 return ($model->schoolProfile) ? ($model->schoolProfile) : ($model->teacherProfile);
             });
