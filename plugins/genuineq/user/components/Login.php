@@ -144,7 +144,7 @@ class Login extends ComponentBase
                     $remember = false;
                     break;
                 case UserSettings::REMEMBER_ASK:
-                    $remember = (bool) array_get($data, 'remember', false);
+                    $remember = (bool) ((post('remember')) ? (true) : (false));
                     break;
             }
 
