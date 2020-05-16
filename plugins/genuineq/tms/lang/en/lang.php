@@ -350,9 +350,14 @@
                 'avatar_update_failed' => 'Actualizarea pozei de profil a esuat',
                 'email_update_successful' => 'Adresa de email a fost actualizata cu succes',
                 'password_update_successful' => 'Parola a fost actualizata cu succes',
-                'teachers_import_successful' => 'Profesorii au fost adaugati cu succes',
+                'teachers_import_successful_1' => ' profesori au fost adaugati cu succes si pentru ',
+                'teachers_import_successful_2' => ' au aparut eroari',
                 'teachers_import_failed' => 'Nu a fost specificat un fisier.',
-                'teachers_import_sheet_skipped' => 'Sheet-ul urmator  nu a fost parcurs: ',
+                'teachers_import_sheet_skipped' => 'Sheet-ul urmator nu a fost parcurs: ',
+                'teachers_import_failed' => 'Import-ul a esut.',
+                'teachers_import_add_successful' => 'Profesorul a fost adaugat cu succes',
+                'teachers_import_add_failed' => 'Adaugarea profesorului a esuat',
+                'validation_failed' => 'Validarea '
             ],
         ],
 
@@ -392,20 +397,6 @@
                 'course_added_successful' => 'Cursul a fost adaugat cu succes',
                 'course_deleted_successful' => 'Cursul a fost sters cu succes',
             ],
-        ],
-
-        'teachers-import' => [
-            'name' => 'Course Search',
-            'description' => 'Allows the search, filter, order and paginate courses',
-            'backend' => [
-                'force_secure' => 'Force secure protocol',
-                'force_secure_desc' => 'Always redirect the URL with the HTTPS schema',
-                'category' => 'Category param',
-                'category_desc' => 'The URL parameter from which to extract the category from which to filter',
-            ],
-            'validation' => [
-                'validation_failed' => 'Nu este valid profesorul de pe linia: ',
-            ]
         ],
     ],
 ];

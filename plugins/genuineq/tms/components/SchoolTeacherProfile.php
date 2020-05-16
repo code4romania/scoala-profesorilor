@@ -21,6 +21,7 @@ use Genuineq\Tms\Models\ContractType;
 use Genuineq\Tms\Models\SeniorityLevel;
 use Genuineq\User\Helpers\AuthRedirect;
 use Genuineq\Tms\Classes\TeachersImport;
+use Genuineq\Tms\Classes\SchoolTeacher;
 
 use Log;
 
@@ -58,6 +59,9 @@ class SchoolTeacherProfile extends ComponentBase
     {
         /* Get all the school teachers. */
         $this->extractTeachers(/*options*/[]);
+
+        /** Prepare the static data. */
+        $this->prepareAutocompleteVars();
     }
 
     /**
@@ -105,6 +109,44 @@ class SchoolTeacherProfile extends ComponentBase
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
+        /** Prepare the static data. */
+        $this->prepareAutocompleteVars();
+
+        /* Get all the school teachers. */
+        $this->extractTeachers(/*options*/[]);
+    }
+
+    /**
+     * Prepares a school teacher for viewing.
+     */
+    public function onTeacherAdd()
+    {
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        $data = [
+            'name' => post('school_teacher_add_name'),
+            'email' => post('school_teacher_add_email'),
+            'identifier' => post('school_teacher_add_sid'),
+            'phone' => post('school_teacher_add_phone'),
+            'birth_date' => post('school_teacher_add_birth_date'),
+            'description' => post('school_teacher_add_description'),
+            'address' => post('school_teacher_add_address_id'),
+            'seniority_level' => post('school_teacher_add_seniority_level_id'),
+            'school_level' => post('school_teacher_add_school_level_id'),
+            'contract_type' => post('school_teacher_add_contract_type_id'),
+        ];
+
+        if (SchoolTeacher::createSchoolTeacher($data)) {
+            Flash::success(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.teachers_import_add_successful'));
+        } else {
+            Flash::error(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.teachers_import_add_failed'));
+        }
+
+        /** Prepare the static data. */
+        $this->prepareAutocompleteVars();
+
         /* Get all the school teachers. */
         $this->extractTeachers(/*options*/[]);
     }
@@ -131,7 +173,7 @@ class SchoolTeacherProfile extends ComponentBase
         }
 
         /** Prepare the static data. */
-        $this->prepareEditVars();
+        $this->prepareAutocompleteVars();
 
         $this->page['schoolTeacherProfile'] = Teacher::find(post('teacherId'));
         $this->page['schoolTeacherUser'] = $this->page['schoolTeacherProfile']->user;
@@ -190,6 +232,9 @@ class SchoolTeacherProfile extends ComponentBase
         /////////////////////////////////////
         //TO DO: Add appraisal remove/close
         /////////////////////////////////////
+
+        /** Prepare the static data. */
+        $this->prepareAutocompleteVars();
 
         /* Get all the school teachers. */
         $this->extractTeachers(/*options*/[]);
@@ -469,12 +514,18 @@ class SchoolTeacherProfile extends ComponentBase
         /** Check if a file has beeen provided. */
         if (Input::hasFile('import_file')) {
             /** Import the teachers. */
-            Excel::import(new TeachersImport, Input::file('import_file'));
+            $import = new TeachersImport();
+            Excel::import($import, Input::file('import_file'));
 
             /** Remove the uploaded file. */
             Storage::delete(Input::file('import_file')->getRealPath() . '/' . Input::file('import_file')->getClientOriginalName());
 
-            Flash::success(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.teachers_import_successful'));
+            Flash::success(
+                $import->getSuccessfullRowCount() .
+                Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.teachers_import_successful_1') .
+                $import->getFailedRowCount() .
+                Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.teachers_import_successful_2')
+            );
             return Redirect::refresh();
         } else {
             Flash::error(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.teachers_import_failed'));
@@ -510,7 +561,7 @@ class SchoolTeacherProfile extends ComponentBase
     /**
      * Executed when a school teacher is about to b edited.
      */
-    protected function prepareEditVars()
+    protected function prepareAutocompleteVars()
     {
         /* Extract all the addresses and create the source array. */
         $value = 0;

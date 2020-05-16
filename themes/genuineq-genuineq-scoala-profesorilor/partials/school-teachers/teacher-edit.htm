@@ -17,7 +17,7 @@ description = "Displays the teacher profile forms"
                 <form method="POST" data-request="onSchoolTeacherProfileUpdate" data-request-data="teacherId: '{{ schoolTeacherProfile.id }}'" data-request-validate data-request-flash>
                     <div class="form-group">
                         <div class="md-form">
-                            <input name="name" type="text" id="school_teacher_name" class="form-control" placeholder="{{ 'teacher.profile.form.profile.name'|_ }}" value="{{ schoolTeacherProfile.name }}">
+                            <input name="name" type="text" id="school_teacher_name" class="form-control" value="{{ schoolTeacherProfile.name }}">
                             <label for="school_teacher_name">{{ 'teacher.profile.form.profile.name'|_ }}</label>
                             <div class="small text-danger" data-validate-for="name"></div>
                         </div>
