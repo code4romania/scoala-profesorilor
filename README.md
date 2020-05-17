@@ -91,5 +91,4 @@ Please review [our security policy](https://github.com/octobercms/october/securi
 
 
 Docker build commands:
-  docker build -f ./docker/app/Dockerfile -t tms_prod_app .
-  docker build -f ./docker/nginx/Dockerfile -t tms_prod_nginx .
+  docker build -f ./docker/Dockerfile -t tms_prod_app .

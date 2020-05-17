@@ -1,7 +1,11 @@
 FROM php:7.2-fpm
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y cron git-core jq unzip vim zip libjpeg-dev libpng-dev libpq-dev libsqlite3-dev libwebp-dev libzip-dev
+RUN apt-get update && \
+    apt-get install -y nginx cron git-core jq unzip vim zip libjpeg-dev libpng-dev libpq-dev libsqlite3-dev libwebp-dev libzip-dev
+
+# Start nginx
+RUN service nginx start
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -35,12 +39,19 @@ COPY ./phpcs.xml /var/www/phpcs.xml
 COPY ./phpunit.xml /var/www/phpunit.xml
 COPY ./server.php /var/www/server.php
 COPY ./index.php /var/www/index.php
+# Copy nginx configuration
+COPY ./docker/app.conf /etc/nginx/conf.d/tms.conf
 
 # Set working directory
 WORKDIR /var/www
 
 #Install project dependencies
-RUN composer install --no-interaction --prefer-dist --no-scripts && \
+RUN composer install --no-interaction --no-dev --prefer-dist --no-scripts && \
     composer clearcache && \
     chown -R www-data:www-data /var/www && \
     find . -type d \( -path './plugins' -or  -path './storage' -or  -path './themes' -or  -path './plugins/*' -or  -path './storage/*' -or  -path './themes/*' \) -exec chmod g+ws {} \;
+
+#Update DB schema
+# ENTRYPOINT cd /var/www && php artisan october:up
+
+EXPOSE 443 80
