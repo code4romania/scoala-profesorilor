@@ -1,27 +1,45 @@
-FROM php:7.2-fpm
+FROM ubuntu:16.04
+
+MAINTAINER Cosmin Bosutar
+
+RUN apt-get update \
+    && apt-get install -y locales \
+    && locale-gen en_US.UTF-8
+
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
 
 # Install system dependencies
-RUN apt-get update && \
-    apt-get install -y nginx cron git-core jq unzip vim zip libjpeg-dev libpng-dev libpq-dev libsqlite3-dev libwebp-dev libzip-dev
+RUN apt-get update \
+    && apt-get install -y nginx curl cron zip unzip git software-properties-common supervisor jq libjpeg-dev libpng-dev libpq-dev libsqlite3-dev libwebp-dev libzip-dev
 
-# Start nginx
-RUN service nginx start
-
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Install PHP extensions
-RUN docker-php-ext-configure zip --with-libzip && \
-    docker-php-ext-configure gd --with-png-dir --with-jpeg-dir --with-webp-dir && \
-    docker-php-ext-install exif gd mysqli opcache pdo_pgsql pdo_mysql zip
+RUN apt-get update \
+    && add-apt-repository -y ppa:ondrej/php \
+    && apt-get update \
+    && apt-get install -y php7.2-fpm php7.2-ctype php7.2-curl php7.2-xml php7.2-fileinfo php7.2-gd \
+                          php7.2-json php7.2-mbstring php7.2-mysql php7.2-sqlite3 php7.2-zip
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+RUN mkdir /run/php \
+    && apt-get remove -y --purge software-properties-common \
+    && apt-get -y autoremove \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Add octobercms cron
 RUN echo "* * * * * /var/www/artisan schedule:run >> /dev/null 2>&1" > /etc/cron.d/october-cron && \
     crontab /etc/cron.d/october-cron
 
+# Symlinking Nginx log files to stdout and stderr
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+    && ln -sf /dev/stderr /var/log/nginx/error.log
+
+#Copy app files
 COPY ./bootstrap /var/www/bootstrap
 COPY ./config /var/www/config
 COPY ./modules /var/www/modules
@@ -39,8 +57,12 @@ COPY ./phpcs.xml /var/www/phpcs.xml
 COPY ./phpunit.xml /var/www/phpunit.xml
 COPY ./server.php /var/www/server.php
 COPY ./index.php /var/www/index.php
-# Copy nginx configuration
-COPY ./docker/app.conf /etc/nginx/conf.d/tms.conf
+
+COPY ./docker/default /etc/nginx/sites-available/default
+
+COPY ./docker/php-fpm.conf /etc/php/7.2/fpm/php-fpm.conf
+
+COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Set working directory
 WORKDIR /var/www
@@ -55,3 +77,5 @@ RUN composer install --no-interaction --no-dev --prefer-dist --no-scripts && \
 # ENTRYPOINT cd /var/www && php artisan october:up
 
 EXPOSE 443 80
+
+CMD ["/usr/bin/supervisord"]
