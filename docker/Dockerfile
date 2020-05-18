@@ -12,7 +12,7 @@ ENV LC_ALL en_US.UTF-8
 
 # Install system dependencies
 RUN apt-get update \
-    && apt-get install -y nginx curl cron zip unzip git software-properties-common supervisor jq libjpeg-dev libpng-dev libpq-dev libsqlite3-dev libwebp-dev libzip-dev
+    && apt-get install -y nginx vim curl cron zip unzip git software-properties-common supervisor jq libjpeg-dev libpng-dev libpq-dev libsqlite3-dev libwebp-dev libzip-dev
 
 RUN apt-get update \
     && add-apt-repository -y ppa:ondrej/php \
@@ -27,13 +27,13 @@ RUN mkdir /run/php \
     && apt-get remove -y --purge software-properties-common \
     && apt-get -y autoremove \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Add octobercms cron
-RUN echo "* * * * * /var/www/artisan schedule:run >> /dev/null 2>&1" > /etc/cron.d/october-cron && \
-    crontab /etc/cron.d/october-cron
+RUN echo "* * * * * /var/www/artisan schedule:run >> /dev/null 2>&1" > /etc/cron.d/october-cron \
+    && crontab /etc/cron.d/october-cron
 
 # Symlinking Nginx log files to stdout and stderr
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
@@ -68,10 +68,10 @@ COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 WORKDIR /var/www
 
 #Install project dependencies
-RUN composer install --no-interaction --no-dev --prefer-dist --no-scripts && \
-    composer clearcache && \
-    chown -R www-data:www-data /var/www && \
-    find . -type d \( -path './plugins' -or  -path './storage' -or  -path './themes' -or  -path './plugins/*' -or  -path './storage/*' -or  -path './themes/*' \) -exec chmod g+ws {} \;
+RUN composer install --no-interaction --no-dev --prefer-dist --no-scripts \
+    && composer clearcache \
+    && chown -R www-data:www-data /var/www \
+    && find . -type d \( -path './plugins' -or  -path './storage' -or  -path './themes' -or  -path './plugins/*' -or  -path './storage/*' -or  -path './themes/*' \) -exec chmod g+ws {} \;
 
 #Update DB schema
 # ENTRYPOINT cd /var/www && php artisan october:up
