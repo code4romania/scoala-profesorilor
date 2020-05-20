@@ -12,7 +12,7 @@ ENV LC_ALL en_US.UTF-8
 
 # Install system dependencies
 RUN apt-get update \
-    && apt-get install -y nginx vim curl cron zip unzip git software-properties-common supervisor jq libjpeg-dev libpng-dev libpq-dev libsqlite3-dev libwebp-dev libzip-dev
+    && apt-get install -y nginx vim curl cron zip unzip git software-properties-common supervisor jq mysql-client-core-5.7 libjpeg-dev libpng-dev libpq-dev libsqlite3-dev libwebp-dev libzip-dev
 
 RUN apt-get update \
     && add-apt-repository -y ppa:ondrej/php \
@@ -44,7 +44,6 @@ COPY ./bootstrap /var/www/bootstrap
 COPY ./config /var/www/config
 COPY ./modules /var/www/modules
 COPY ./plugins /var/www/plugins
-COPY ./storage /var/www/storage
 COPY ./tests /var/www/tests
 COPY ./themes /var/www/themes
 COPY ./.babelrc /var/www/.babelrc
@@ -58,11 +57,38 @@ COPY ./phpunit.xml /var/www/phpunit.xml
 COPY ./server.php /var/www/server.php
 COPY ./index.php /var/www/index.php
 
+# Create the storage folder and the rest of the storage folder structure
+RUN mkdir /var/www/storage \
+    && mkdir /var/www/storage/temp \
+    && mkdir /var/www/storage/temp/public \
+    && mkdir /var/www/storage/temp/media \
+    && mkdir /var/www/storage/logs \
+    && mkdir /var/www/storage/cms \
+    && mkdir /var/www/storage/cms/cache \
+    && mkdir /var/www/storage/cms/combiner \
+    && mkdir /var/www/storage/cms/twig \
+    && mkdir /var/www/storage/framework \
+    && mkdir /var/www/storage/framework/cache \
+    && mkdir /var/www/storage/framework/sessions \
+    && mkdir /var/www/storage/framework/views
+
+# Copy storage relevant folders & files
+COPY ./storage/static /var/www/storage/static
+COPY ./storage/framework/classes.php /var/www/storage/framework/classes.php
+COPY ./storage/framework/packages.php /var/www/storage/framework/packages.php
+COPY ./storage/framework/services.php /var/www/storage/framework/services.php
+
+# Copy nginx configuration
 COPY ./docker/default /etc/nginx/sites-available/default
-
+# Copy php fpm configuration
 COPY ./docker/php-fpm.conf /etc/php/7.2/fpm/php-fpm.conf
-
+# Copy supervisord configuration
 COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Copy entrypoint script
+COPY ./docker/docker-entrypoint.sh /usr/local/bin/
+# Backwards compat
+RUN ln -s /usr/local/bin/docker-entrypoint.sh /
 
 # Set working directory
 WORKDIR /var/www
@@ -70,12 +96,12 @@ WORKDIR /var/www
 #Install project dependencies
 RUN composer install --no-interaction --no-dev --prefer-dist --no-scripts \
     && composer clearcache \
+    && php artisan october:mirror public --relative \
     && chown -R www-data:www-data /var/www \
     && find . -type d \( -path './plugins' -or  -path './storage' -or  -path './themes' -or  -path './plugins/*' -or  -path './storage/*' -or  -path './themes/*' \) -exec chmod g+ws {} \;
 
-#Update DB schema
-# ENTRYPOINT cd /var/www && php artisan october:up
-
 EXPOSE 443 80
+
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 CMD ["/usr/bin/supervisord"]

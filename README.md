@@ -91,4 +91,18 @@ Please review [our security policy](https://github.com/octobercms/october/securi
 
 
 Docker build commands:
-  docker build -f ./docker/Dockerfile -t tms_prod_app .
+  docker build -f ./docker/Dockerfile -t tms_prod_app:latest . &&
+  docker tag tms_prod_app:latest 961595780523.dkr.ecr.eu-central-1.amazonaws.com/production:tms_prod_app_<VERSION> &&
+  docker push 961595780523.dkr.ecr.eu-central-1.amazonaws.com/production:tms_prod_app_<VERSION>
+
+Docker list images:
+  docker image ls
+
+Docker run image:
+  docker run --rm -it -p 80:80 <IMAGE_ID>
+
+Docker list running containers:
+  docker ps
+
+Docker connect to container:
+  docker exec -it <CONTAINER_ID> bash
