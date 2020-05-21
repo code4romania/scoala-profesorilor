@@ -1,0 +1,87 @@
+description = "Displays a carousel that has more items per page"
+
+[viewBag]
+==
+
+<!--Carousel Wrapper-->
+<div id="carousel-multiple-courses-{{ id }}" class="carousel slide" data-ride="carousel" data-touch="true">
+    <div class="carousel-inner row w-100 mx-auto" role="listbox">
+
+        {% for learningPlanCourse in learningPlanCourses %}
+            <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 py-2 {{ loop.first ? 'active' : '' }}">
+                {% partial "learning-plans/learning-plan-proposed-requests-card" course=learningPlanCourse.course %}
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <!--Controls-->
+    <a class="carousel-control-prev carousel-control-bg-invert" href="#carousel-multiple-courses-{{ id }}" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">{{ 'carousel.previous'|_ }}</span>
+    </a>
+    <a class="carousel-control-next carousel-control-bg-invert" href="#carousel-multiple-courses-{{ id }}" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">{{ 'carousel.next'|_ }}</span>
+    </a>
+    <!--/.Controls-->
+</div>
+<!--/.Carousel Wrapper-->
+
+
+<script type="text/javascript">
+    $('#carousel-multiple-courses-{{ id }}').on('slide.bs.carousel', function (e) {
+        var $e = $(e.relatedTarget);
+        var idx = $e.index();
+        var itemsPerSlide = 5;
+        var totalItems = $('.carousel-item').length;
+
+        if (idx >= totalItems-(itemsPerSlide-1)) {
+            var it = itemsPerSlide - (totalItems - idx);
+            for (var i=0; i<it; i++) {
+                // append slides to end
+                if (e.direction=="left") {
+                    $('.carousel-item').eq(i).appendTo('.carousel-inner');
+                } else {
+                    $('.carousel-item').eq(0).appendTo('.carousel-inner');
+                }
+            }
+        }
+    });
+
+
+    $('.proposed-requests-accept').on('click', function () {
+        /* Extract the course and learning plan ID. */
+        var $courseId = $(this).data('courseId');
+        var $learningPlanId = $(this).data('learningPlanId');
+
+        $.request(
+            'onLearningPlanRequestAccept',
+            {
+                update: {'school-teachers/teacher-view': '#teachers-tab-content'},
+                data: {
+                    courseId: $courseId,
+                    learningPlanId: $learningPlanId,
+                },
+            }
+        );
+    });
+
+
+    $('.proposed-requests-decline').on('click', function () {
+        /* Extract the course and learning plan ID. */
+        var $courseId = $(this).data('courseId');
+        var $learningPlanId = $(this).data('learningPlanId');
+
+        $.request(
+            'onLearningPlanRequestDecline',
+            {
+                update: {'school-teachers/teacher-view': '#teachers-tab-content'},
+                data: {
+                    courseId: $courseId,
+                    learningPlanId: $learningPlanId,
+                },
+            }
+        );
+    });
+</script>

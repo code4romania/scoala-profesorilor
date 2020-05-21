@@ -1,23 +1,27 @@
 fields:
-    learning_plan_id:
+    learning_plan:
         label: 'genuineq.tms::lang.learning-plans-course.label.learning-plan'
-        nameFrom: name
-        descriptionFrom: description
+        nameFrom: id
+        descriptionFrom: id
         span: auto
         type: relation
-    course_id:
+    course:
         label: 'genuineq.tms::lang.learning-plans-course.label.course'
-        nameFrom: name
+        nameFrom: id
         descriptionFrom: description
         span: auto
         type: relation
-    school_id:
+    school:
         label: 'genuineq.tms::lang.learning-plans-course.label.school'
-        nameFrom: name
+        nameFrom: id
         descriptionFrom: description
         span: auto
         type: relation
     covered_costs:
         label: 'genuineq.tms::lang.learning-plans-course.label.covered-costs'
-        span: auto
+        span: left
         type: number
+    accredited:
+        label: 'genuineq.tms::lang.learning-plans-course.label.mandatory'
+        span: right
+        type: checkbox

@@ -15,7 +15,10 @@ class BuilderTableCreateGenuineqTmsLearningPlansCourses extends Migration
             $table->integer('course_id');
             $table->integer('school_id')->unsigned()->nullable();
             $table->double('covered_costs', 10, 2)->default(0);
-            $table->boolean('mandatory')->default(0)->comment = "indicated if the course is mandatory or not.";
+            $table->boolean('mandatory')->default(0)->comment = "Indicated if the course is mandatory or not.";
+            $table->integer('requestable_id')->unsigned()->nullable();
+            $table->string('requestable_type')->nullable();
+            $table->enum('status', ['proposed', 'accepted', 'declined',]);
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->timestamp('deleted_at')->nullable();

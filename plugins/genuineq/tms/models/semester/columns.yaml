@@ -1,0 +1,11 @@
+columns:
+    year:
+        label: 'genuineq.tms::lang.semesters.label.year'
+        type: number
+        searchable: true
+        sortable: true
+    semester:
+        label: 'genuineq.tms::lang.semesters.label.semester'
+        type: number
+        searchable: true
+        sortable: true

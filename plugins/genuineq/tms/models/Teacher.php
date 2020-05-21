@@ -35,6 +35,15 @@ class Teacher extends Model
     public $table = 'genuineq_tms_teachers';
 
     /**
+     * Requests relation.
+     */
+    public $morphMany = [
+        'requests' => [
+            'Genuineq\Tms\Models\LearningPlansCourse',
+            'name' => 'requestable']
+    ];
+
+    /**
      * One-to-one relations
      */
     public $belongsTo = [
@@ -46,14 +55,19 @@ class Teacher extends Model
     ];
 
     /**
-     * Learning plans relation
+     * Learning plan relation
      */
-    public $belongsToMany = [
+    public $hasMany = [
         'learning_plans' => [
             'Genuineq\Tms\Models\LearningPlan',
-            'table' => 'genuineq_tms_teachers_learning_plans',
             'order' => 'created_at desc',
         ],
+    ];
+
+    /**
+     * Schools relation
+     */
+    public $belongsToMany = [
         'schools' => [
             'Genuineq\Tms\Models\School',
             'table' => 'genuineq_tms_schools_teachers',
@@ -85,10 +99,36 @@ class Teacher extends Model
     /**
      * Function that extracts the active learning plan.
      */
-    public function getActiveLearningPlan(){
+    public function getActiveLearningPlanAttribute(){
         return $this->learning_plans->where('status', 1)->first();
     }
 
+    /**
+     * Function that extracts the proposed requests.
+     */
+    public function getProposedRequestsAttribute(){
+        return $this->requests
+                    ->where('learning_plan_id', $this->active_learning_plan->id)
+                    ->where('status', 'proposed');
+    }
+
+    /**
+     * Function that extracts the accepted requests.
+     */
+    public function getAcceptedRequestsAttribute(){
+        return $this->requests
+                    ->where('learning_plan_id', $this->active_learning_plan->id)
+                    ->where('status', 'accepted');
+    }
+
+    /**
+     * Function that extracts the declined requests.
+     */
+    public function getDeclinedRequestsAttribute(){
+        return $this->requests
+                    ->where('learning_plan_id', $this->active_learning_plan->id)
+                    ->where('status', 'declined');
+    }
 
     /**
      * Function used for searching, filtering, sorting and paginating teachers.

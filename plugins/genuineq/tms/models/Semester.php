@@ -5,21 +5,19 @@ use Model;
 /**
  * Model
  */
-class TeacherLearningPlan extends Model
+class Semester extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     
-    /*
-     * Disable timestamps by default.
-     * Remove this line if timestamps are defined in the database table.
-     */
-    public $timestamps = false;
+    use \October\Rain\Database\Traits\SoftDelete;
+
+    protected $dates = ['deleted_at'];
 
 
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'genuineq_tms_teachers_learning_plans';
+    public $table = 'genuineq_tms_semesters';
 
     /**
      * @var array Validation rules

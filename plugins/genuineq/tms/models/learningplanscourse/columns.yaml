@@ -4,6 +4,11 @@ columns:
         type: number
         searchable: true
         sortable: true
+    learning_plan_name:
+        label: 'genuineq.tms::lang.learning-plans-course.label.learning-plan'
+        type: text
+        searchable: true
+        sortable: true
     course_name:
         label: 'genuineq.tms::lang.learning-plans-course.label.course'
         type: text

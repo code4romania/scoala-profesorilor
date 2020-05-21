@@ -13,11 +13,11 @@ class TestTeachersSeeder extends Seeder
         if (App::environment(['local', 'development'])) {
             $faker = Faker\Factory::create('ro_RO');
 
-            for ($i=0; $i < 77; $i++) {
+            for ($i=0; $i < 80; $i++) {
 
                 $name = $faker->name();
 
-                Teacher::create([
+                $teacher = Teacher::create([
                     'name' => $name,
                     'slug' => str_slug($name, '-'),
                     'phone' => $faker->tollFreePhoneNumber(),

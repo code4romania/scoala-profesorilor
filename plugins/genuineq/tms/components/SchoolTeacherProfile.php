@@ -161,6 +161,8 @@ class SchoolTeacherProfile extends ComponentBase
         }
 
         $this->page['teacher'] = Teacher::find(post('teacherId'));
+        $this->page['proposedRequests'] = Auth::getUser()->profile->getProposedLearningPlanRequests($this->page['teacher']->active_learning_plan->id);
+        $this->page['teacherDeclinedRequests'] = $this->page['teacher']->declined_requests;
     }
 
     /**

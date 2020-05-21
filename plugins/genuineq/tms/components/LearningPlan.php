@@ -11,6 +11,7 @@ use ValidationException;
 use ApplicationException;
 use Cms\Classes\ComponentBase;
 use Genuineq\Tms\Models\Course;
+use Genuineq\Tms\Models\Teacher;
 use Genuineq\Tms\Models\LearningPlansCourse;
 use Genuineq\Tms\Models\LearningPlan as LearningPlanModel;
 
@@ -121,9 +122,14 @@ class LearningPlan extends ComponentBase
         /** Extract the school ID. */
         $data['school_id'] = Auth::getUser()->profile->id;
 
-        /** Prepare value for the mandatory field. */
+        /** Check if course is mandatory */
         if (post('mandatory')) {
             $data['mandatory'] = 1;
+            /** Mark the course as accepted. */
+            $data['status'] = 'accepted';
+        } else {
+            /** Mark the course as proposed. */
+            $data['status'] = 'proposed';
         }
 
         /** Extract the course. */
@@ -166,6 +172,9 @@ class LearningPlan extends ComponentBase
 
         /** Add the course to the learning plan. */
         $learningPlanCourse = new LearningPlansCourse($data);
+        if (!post('mandatory')) {
+            $learningPlanCourse->requestable = Teacher::find(post('teacherId'));
+        }
         $learningPlanCourse->save();
 
         Flash::success(Lang::get('genuineq.tms::lang.component.learning-plan.message.course_added_successful'));
@@ -211,6 +220,56 @@ class LearningPlan extends ComponentBase
         $this->extractLearningPlanCourses($options);
     }
 
+    /**
+     * Function that accepts a request.
+     */
+    public function onLearningPlanRequestAccept()
+    {
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        /** Extract the learning plan. */
+        $learningPlan = LearningPlanModel::find(post('learningPlanId'));
+
+        /** Extract the course */
+        $learningPlanCourse = $learningPlan->courses->where('course_id', post('courseId'))->first();
+
+        /** Mark the course as accepted. */
+        $learningPlanCourse->status = 'accepted';
+        $learningPlanCourse->school_id =  Auth::getUser()->profile->id;
+        $learningPlanCourse->save();
+
+        $this->page['teacher'] = $learningPlan->teacher;
+        $this->page['proposedRequests'] = Auth::getUser()->profile->getProposedLearningPlanRequests($this->page['teacher']->active_learning_plan->id);
+        $this->page['teacherDeclinedRequests'] = $this->page['teacher']->declined_requests;
+    }
+
+    /**
+     * Function that declines a request.
+     */
+    public function onLearningPlanRequestDecline()
+    {
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        /** Extract the learning plan. */
+        $learningPlan = LearningPlanModel::find(post('learningPlanId'));
+
+        /** Extract the course */
+        $learningPlanCourse = $learningPlan->courses->where('course_id', post('courseId'))->first();
+
+        /** Mark the course as declined. */
+        $learningPlanCourse->status = 'declined';
+        $learningPlanCourse->covered_costs = 0;
+        $learningPlanCourse->save();
+
+        $this->page['teacher'] = $learningPlan->teacher;
+        $this->page['proposedRequests'] = Auth::getUser()->profile->getProposedLearningPlanRequests($this->page['teacher']->active_learning_plan->id);
+        $this->page['teacherDeclinedRequests'] = $this->page['teacher']->declined_requests;
+    }
+
     /***********************************************
      ******************* Helpers *******************
      ***********************************************/
@@ -223,7 +282,7 @@ class LearningPlan extends ComponentBase
         /** Extract the learning plan. */
         $this->page['learningPlan'] = LearningPlanModel::find(post('learningPlanId'));
         /** Extract all courses for filtering. */
-        $this->page['learningPlanCourses'] = Course::filterCourses($options, /*_courses*/(($this->page['learningPlan'] && $this->page['learningPlan']->realCourses) ? ($this->page['learningPlan']->realCourses->pluck('id')) : (null)));
+        $this->page['learningPlanCourses'] = Course::filterCourses($options, /*_courses*/(($this->page['learningPlan'] && $this->page['learningPlan']->courses) ? ($this->page['learningPlan']->courses->pluck('course_id')) : (null)));
         /** Extract the number of pages. */
         $this->page['learningPlanCoursesPages'] = $this->page['learningPlanCourses']->lastPage();
         /** Extract the current page. */

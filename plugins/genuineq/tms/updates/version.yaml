@@ -64,11 +64,11 @@
     - 'Created table genuineq_tms_teachers_taught_subjects'
     - builder_table_create_genuineq_tms_teachers_taught_subjects.php
 1.0.23:
-    - 'Created table genuineq_tms_teachers_learning_plans'
-    - builder_table_create_genuineq_tms_teachers_learning_plans.php
-1.0.24:
     - 'Created table genuineq_tms_schools_teachers'
     - builder_table_create_genuineq_tms_schools_teachers.php
+1.0.24:
+    - 'Created table genuineq_tms_semesters'
+    - builder_table_create_genuineq_tms_semesters.php
 1.0.25:
     - 'Seeder with the list of addresses'
     - address_seeder.php
@@ -106,11 +106,14 @@
     - 'Seeder with test data for courses'
     - test_course_seeder.php
 1.0.37:
-    - 'Seeder with test data for learning plans'
-    - test_learning_plans_seeder.php
+    - 'Seeder with test data for semesters'
+    - test_semesters_seeder.php
 1.0.38:
     - 'Seeder with test data for teachers'
     - test_teachers_seeder.php
 1.0.39:
     - 'Seeder with test data for schools'
     - test_schools_seeder.php
+1.0.40:
+    - 'Seeder with test data for learning plans'
+    - test_learning_plans_seeder.php

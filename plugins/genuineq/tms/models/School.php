@@ -38,6 +38,15 @@ class School extends Model
     public $table = 'genuineq_tms_schools';
 
     /**
+     * Requests relation.
+     */
+    public $morphMany = [
+        'requests' => [
+            'Genuineq\Tms\Models\LearningPlansCourse',
+            'name' => 'requestable']
+    ];
+
+    /**
      * Address relation
      */
     public $belongsTo = [
@@ -86,5 +95,32 @@ class School extends Model
         $options['school'] = $this->id;
 
         return Teacher::schoolTeachers($options);
+    }
+
+    /**
+     * Function that extracts the proposed requests for a specific learning plan.
+     */
+    public function getProposedLearningPlanRequests($learningPlanId){
+        return $this->requests
+                    ->where('learning_plan_id', $learningPlanId)
+                    ->where('status', 'proposed');
+    }
+
+    /**
+     * Function that extracts the accepted requests for a specific learning plan.
+     */
+    public function getAcceptedLearningPlanRequests($learningPlanId){
+        return $this->requests
+                    ->where('learning_plan_id', $learningPlanId)
+                    ->where('status', 'accepted');
+    }
+
+    /**
+     * Function that extracts the declined requests for a specific learning plan.
+     */
+    public function getDeclinedLearningPlanRequests($learningPlanId){
+        return $this->requests
+                    ->where('learning_plan_id', $learningPlanId)
+                    ->where('status', 'declined');
     }
 }

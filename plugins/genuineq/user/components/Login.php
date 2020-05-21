@@ -240,10 +240,6 @@ class Login extends ComponentBase
         $redirectUrl = $this->pageUrl($page);
 
         return Redirect::to($redirectUrl);
-
-        // if ($redirectUrl = post('redirect', $redirectUrl)) {
-        //     return Redirect::$method($redirectUrl);
-        // }
     }
 
     /**

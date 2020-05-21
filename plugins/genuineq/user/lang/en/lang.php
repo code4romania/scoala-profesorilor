@@ -390,5 +390,11 @@ return [
                 'password_update_successful' => 'Parola a fost actualizata cu succes',
             ],
         ],
-    ]
+    ],
+
+    // 'email' => [
+    //     'activate' => [
+
+    //     ]
+    // ],
 ];

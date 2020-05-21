@@ -35,9 +35,33 @@ description = "Displays a teacher"
     </div>
 </div>
 
-{% partial "learning-plans/learning-plan-view" learningPlan=teacher.getActiveLearningPlan %}
+{% partial "learning-plans/learning-plan-view" learningPlan=teacher.active_learning_plan %}
 
-{% partial "learning-plans/learning-plan-edit-btn" learningPlan=teacher.getActiveLearningPlan %}
+{% partial "learning-plans/learning-plan-edit-btn" learningPlan=teacher.active_learning_plan %}
+
+
+{% if 0 < proposedRequests.count() %}
+    <div class="row py-5 mt-4 align-middle" style="background-color: #c7ffe7;">
+
+        <div class="col-12">
+            <h5 class="mb-3 font-weight-bold">{{ 'teachers.teacher-view.requested-courses'|_ }}&nbsp;{{ teacher.name }}</h5>
+            {% partial "learning-plans/learning-plan-proposed-requests-slider" id='teacher-requested-courses' learningPlanCourses=proposedRequests %}
+        </div>
+
+    </div>
+{% endif %}
+
+
+{% if 0 < teacherDeclinedRequests.count() %}
+    <div class="row py-5 align-middle" style="background-color: #ffbccb;">
+
+        <div class="col-12">
+            <h5 class="mb-3 font-weight-bold">{{ 'teachers.teacher-view.declined-courses'|_ }}&nbsp;{{ teacher.name }}</h5>
+            {% partial "learning-plans/learning-plan-declined-requests-slider" id='teacher-declined-courses' learningPlanCourses=teacherDeclinedRequests %}
+        </div>
+
+    </div>
+{% endif %}
 
 <script type="text/javascript">
     $('#teacher-edit').on('click', function () {

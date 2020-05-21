@@ -161,10 +161,11 @@
 
     'learning-plan' => [
         'label' => [
+            'id' => '#',
             'year' => 'Year',
             'semester' => 'Semester',
-            'courses' => 'Learning Plan Courses',
             'teacher' => 'Teacher',
+            'courses' => 'Learning Plan Courses',
         ],
 
         'backend-menu' => 'Learning Plans',
@@ -173,7 +174,9 @@
     'learning-plans-course' => [
         'label' => [
             'id' => '#',
+            'teacher-name' => 'Teacher',
             'learning-plan' => 'Learning Plan',
+            'mandatory' => 'Mandatory',
             'course' => 'Course',
             'school' => 'School',
             'covered-costs' => 'School Covered Costs',
@@ -240,6 +243,15 @@
         ],
 
         'backend-menu' => 'Contract Types',
+    ],
+
+    'semesters' => [
+        'label' => [
+            'semester' => 'Semester',
+            'year' => 'Year',
+        ],
+
+        'backend-menu' => 'Semesters',
     ],
 
     'component' => [

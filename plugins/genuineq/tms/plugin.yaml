@@ -42,6 +42,10 @@ navigation:
                 label: 'genuineq.tms::lang.learning-plans-course.backend-menu'
                 url: genuineq/tms/learningplanscourses
                 icon: icon-list-ol
+            side-menu-item9:
+                label: 'genuineq.tms::lang.semesters.backend-menu'
+                url: genuineq/tms/semesters
+                icon: icon-calendar
     main-menu-item2:
         label: 'genuineq.tms::lang.plugin.backend-menu.static'
         url: genuineq/tms/addresses

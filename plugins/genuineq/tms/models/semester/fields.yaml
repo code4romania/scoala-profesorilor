@@ -1,0 +1,9 @@
+fields:
+    semester:
+        label: 'genuineq.tms::lang.semesters.label.semester'
+        span: auto
+        type: number
+    year:
+        label: 'genuineq.tms::lang.semesters.label.year'
+        span: auto
+        type: number

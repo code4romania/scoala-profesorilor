@@ -10,8 +10,8 @@ description = "Displays a learning plan as a list and the list of courses"
         <div class="d-inline-block w-100" style="overflow-y:auto;">
             <ul class="timeline timeline-horizontal m-0">
 
-                {% for key, learningPlanCourse in learningPlan.realCourses %}
-                    {% partial "learning-plans/learning-plan-edit-card" course=learningPlanCourse index=(key + 1) %}
+                {% for key, learningPlanCourse in learningPlan.accepted_courses %}
+                    {% partial "learning-plans/learning-plan-edit-card" course=learningPlanCourse.course index=(key + 1) %}
                 {% endfor %}
 
             </ul>

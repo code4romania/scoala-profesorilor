@@ -1,0 +1,10 @@
+name: Semesters
+form: $/genuineq/tms/models/semester/fields.yaml
+modelClass: Genuineq\Tms\Models\Semester
+defaultRedirect: genuineq/tms/semesters
+create:
+    redirect: 'genuineq/tms/semesters/update/:id'
+    redirectClose: genuineq/tms/semesters
+update:
+    redirect: genuineq/tms/semesters
+    redirectClose: genuineq/tms/semesters

@@ -20,6 +20,7 @@ class LearningPlansCourse extends Model
         'course_id',
         'covered_costs',
         'mandatory',
+        'status',
     ];
 
 
@@ -38,10 +39,27 @@ class LearningPlansCourse extends Model
     ];
 
     /**
+     * Requests relation.
+     */
+    public $morphTo = [
+        'requestable' => []
+    ];
+
+    /**
      * @var array Validation rules
      */
     public $rules = [
     ];
+
+    /**
+     * Function that extracts the name of the learning plan
+     *  this learning-plans-coures belongs to.
+     *
+     * @return String
+     */
+    public function getLearningPlanNameAttribute(){
+        return $this->learning_plan->name;
+    }
 
     /**
      * Function that extracts the name of the course
@@ -50,11 +68,7 @@ class LearningPlansCourse extends Model
      * @return String
      */
     public function getCourseNameAttribute(){
-        if (null !== $this->course) {
-            return $this->course->name;
-        } else {
-            return '';
-        }
+        return $this->course->name;
     }
 
     /**

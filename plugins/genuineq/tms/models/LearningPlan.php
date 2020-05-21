@@ -27,13 +27,17 @@ class LearningPlan extends Model
     ];
 
     /**
-     * Teacher and real courses relation
+     * Semester relation
+     */
+    public $belongsTo = [
+        'semester' => ['Genuineq\Tms\Models\Semester'],
+        'teacher' => ['Genuineq\Tms\Models\Teacher'],
+    ];
+
+    /**
+     * Real courses relation
      */
     public $belongsToMany = [
-        'teachers' => [
-            'Genuineq\Tms\Models\Teacher',
-            'table' => 'genuineq_tms_teachers_learning_plans',
-        ],
         'realCourses' => [
             'Genuineq\Tms\Models\Course',
             'table' => 'genuineq_tms_learning_plans_courses',
@@ -47,8 +51,32 @@ class LearningPlan extends Model
     public $rules = [
     ];
 
-    public function getTeacherAttribute(){
-        return $this->teachers->first();
+    public function getTeacherNameAttribute(){
+        return $this->teacher->name;
+    }
+
+    public function getYearAttribute(){
+        return $this->semester->year;
+    }
+
+    public function getRealSemesterAttribute(){
+        return $this->semester->semester;
+    }
+
+    public function getNameAttribute(){
+        return $this->teacher->name . ' ' . $this->semester->year . '-' . $this->semester->semester;
+    }
+
+    public function getProposedCoursesAttribute(){
+        return $this->courses->where('status', 'proposed');
+    }
+
+    public function getAcceptedCoursesAttribute(){
+        return $this->courses->where('status', 'accepted');
+    }
+
+    public function getDeclinedCoursesAttribute(){
+        return $this->courses->where('status', 'declined');
     }
 
     public static function createNewPlan(){
