@@ -1,0 +1,240 @@
+{
+    "ipcMode": null,
+    "executionRoleArn": null,
+    "containerDefinitions": [
+        {
+            "dnsSearchDomains": null,
+            "environmentFiles": null,
+            "logConfiguration": null,
+            "entryPoint": null,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "protocol": "tcp",
+                    "containerPort": 80
+                }
+            ],
+            "command": null,
+            "linuxParameters": null,
+            "cpu": 0,
+            "environment": [
+                {
+                    "name": "CMS_CONVERT_LINE_ENDINGS",
+                    "value": "true"
+                },
+                {
+                    "name": "APP_ENV",
+                    "value": "production"
+                },
+                {
+                    "name": "MAIL_ENCRYPTION",
+                    "value": ""
+                },
+                {
+                    "name": "CMS_ROUTES_CACHE",
+                    "value": "true"
+                },
+                {
+                    "name": "DB_PORT",
+                    "value": "3306"
+                },
+                {
+                    "name": "MAIL_HOST",
+                    "value": ""
+                },
+                {
+                    "name": "APP_NAME",
+                    "value": "Scoala Profesorilor"
+                },
+                {
+                    "name": "SESSION_LIFETIME",
+                    "value": "120"
+                },
+                {
+                    "name": "APP_KEY",
+                    "value": "${{ secrets.APP_KEY }}"
+                },
+                {
+                    "name": "CMS_ACTIVE_THEME",
+                    "value": "genuineq-genuineq-scoala-profesorilor"
+                },
+                {
+                    "name": "CMS_ASSET_DEEP_HASHING",
+                    "value": "true"
+                },
+                {
+                    "name": "SESSION_DRIVER",
+                    "value": "database"
+                },
+                {
+                    "name": "DB_USERNAME",
+                    "value": "tms"
+                },
+                {
+                    "name": "CMS_ASSET_MINIFY",
+                    "value": "true"
+                },
+                {
+                    "name": "MAIL_DRIVER",
+                    "value": ""
+                },
+                {
+                    "name": "APP_URL",
+                    "value": "www.scoalaprofesorilor.ro"
+                },
+                {
+                    "name": "APP_DEBUG",
+                    "value": "false"
+                },
+                {
+                    "name": "CMS_ASSET_CACHE",
+                    "value": "true"
+                },
+                {
+                    "name": "CMS_LINK_POLICY",
+                    "value": "detect"
+                },
+                {
+                    "name": "MAIL_USERNAME",
+                    "value": ""
+                },
+                {
+                    "name": "CMS_ENABLE_CSRF",
+                    "value": "true"
+                },
+                {
+                    "name": "APP_LOG",
+                    "value": "daily"
+                },
+                {
+                    "name": "MAIL_NAME",
+                    "value": "Scoala Profesorilor"
+                },
+                {
+                    "name": "DB_HOST",
+                    "value": "${{ secrets.DB_HOST }}"
+                },
+                {
+                    "name": "MAIL_PORT",
+                    "value": ""
+                },
+                {
+                    "name": "CMS_BACKEND_FORCE_REMEMBER",
+                    "value": "null"
+                },
+                {
+                    "name": "CMS_BACKEND_URI",
+                    "value": "backend-scoala-profesorilor"
+                },
+                {
+                    "name": "CMS_BACKEND_FORCE_SECURE",
+                    "value": "false"
+                },
+                {
+                    "name": "CMS_EDGE_UPDATES",
+                    "value": "false"
+                },
+                {
+                    "name": "DB_DATABASE",
+                    "value": "tms"
+                },
+                {
+                    "name": "MAIL_PASSWORD",
+                    "value": ""
+                },
+                {
+                    "name": "DB_PASSWORD",
+                    "value": "${{ secrets.DB_PASSWORD }}"
+                }
+            ],
+            "resourceRequirements": null,
+            "ulimits": null,
+            "dnsServers": null,
+            "mountPoints": [
+                {
+                    "readOnly": null,
+                    "containerPath": "/var/www/storage/app",
+                    "sourceVolume": "temp_pv"
+                }
+            ],
+            "workingDirectory": null,
+            "secrets": null,
+            "dockerSecurityOptions": null,
+            "memory": null,
+            "memoryReservation": 512,
+            "volumesFrom": [],
+            "stopTimeout": null,
+            "image": "961595780523.dkr.ecr.eu-central-1.amazonaws.com/production:tms_prod_app_024",
+            "startTimeout": null,
+            "firelensConfiguration": null,
+            "dependsOn": null,
+            "disableNetworking": null,
+            "interactive": null,
+            "healthCheck": null,
+            "essential": true,
+            "links": [],
+            "hostname": null,
+            "extraHosts": null,
+            "pseudoTerminal": null,
+            "user": null,
+            "readonlyRootFilesystem": null,
+            "dockerLabels": null,
+            "systemControls": null,
+            "privileged": null,
+            "name": "app"
+        }
+    ],
+    "memory": null,
+    "taskRoleArn": null,
+    "family": "application",
+    "pidMode": null,
+    "requiresCompatibilities": [
+        "EC2"
+    ],
+    "networkMode": null,
+    "cpu": null,
+    "inferenceAccelerators": null,
+    "proxyConfiguration": null,
+    "volumes": [
+        {
+            "efsVolumeConfiguration": {
+                "transitEncryptionPort": null,
+                "fileSystemId": "fs-2640f37e",
+                "authorizationConfig": {
+                    "iam": "DISABLED",
+                    "accessPointId": null
+                },
+                "transitEncryption": "DISABLED",
+                "rootDirectory": "/"
+            },
+            "name": "tms_prod_persistent_volume",
+            "host": null,
+            "dockerVolumeConfiguration": null
+        },
+        {
+            "efsVolumeConfiguration": null,
+            "name": "temp_pv",
+            "host": {
+                "sourcePath": "/home/ec2-user/pv"
+            },
+            "dockerVolumeConfiguration": null
+        },
+        {
+            "efsVolumeConfiguration": {
+                "transitEncryptionPort": null,
+                "fileSystemId": "fs-2640f37e",
+                "authorizationConfig": {
+                    "iam": "DISABLED",
+                    "accessPointId": null
+                },
+                "transitEncryption": "DISABLED",
+                "rootDirectory": "/"
+            },
+            "name": "efs_pv",
+            "host": null,
+            "dockerVolumeConfiguration": null
+        }
+    ],
+    "placementConstraints": [],
+    "tags": []
+}
