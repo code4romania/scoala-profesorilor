@@ -71,7 +71,7 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: ./tms-app-prod-td.json
+        task-definition: .github/workflows/tms-app-prod-td.json
         container-name: app
         image: ${{ steps.build-image.outputs.image }}
 
