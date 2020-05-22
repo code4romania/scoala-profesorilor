@@ -41,7 +41,7 @@ class PluginConfig
                     'code' => 'teacher',
                     'description' => 'Group that contains all users of a teacher.',
                 ],
-            ],
+            ]
         );
     }
 
