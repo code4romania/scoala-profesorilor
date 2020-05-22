@@ -43,8 +43,15 @@ description = "Displays a request course as a card"
             </span>
         </small>
 
-        <a class="btn btn-sm btn-outline-primary mt-3 py-2 z-depth-0 waves-effect rounded proposed-requests-decline" type="button" data-course-id="{{ course.id }}" data-learning-plan-id="{{ teacher.active_learning_plan.id }}">{{ 'learning-plans.learning-plan-proposed-requests.decline'|_ }}</a>
-        <a class="btn btn-sm btn-secondary mt-3 py-2 z-depth-0 waves-effect rounded proposed-requests-accept" type="button" data-course-id="{{ course.id }}" data-learning-plan-id="{{ teacher.active_learning_plan.id }}">{{ 'learning-plans.learning-plan-proposed-requests.accept'|_ }}</a>
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                <a class="btn btn-sm btn-outline-primary mt-3 py-2 z-depth-0 waves-effect rounded proposed-requests-decline" type="button" data-course-id="{{ course.id }}" data-learning-plan-id="{{ teacher.active_learning_plan.id }}">{{ 'learning-plans.learning-plan-proposed-requests.decline'|_ }}</a>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                <a class="btn btn-sm btn-secondary mt-3 py-2 z-depth-0 waves-effect rounded proposed-requests-accept" type="button" data-course-id="{{ course.id }}" data-learning-plan-id="{{ teacher.active_learning_plan.id }}">{{ 'learning-plans.learning-plan-proposed-requests.accept'|_ }}</a>
+            </div>
+        </div>
 
     </div>
 </div>

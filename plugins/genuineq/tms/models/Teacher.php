@@ -2,6 +2,8 @@
 
 use Lang;
 use Model;
+use Illuminate\Support\Collection;
+use Genuineq\Tms\Models\LearningPlan;
 
 /**
  * Model
@@ -131,6 +133,20 @@ class Teacher extends Model
     }
 
     /**
+     * Function that merges the declined requests from all
+     *  the schools in one collection.
+     */
+    public function getSchoolDeclinedRequestsAttribute(){
+        $declinedRequests = new Collection();
+
+        foreach ($this->schools as $school) {
+            $declinedRequests = $declinedRequests->merge($school->getDeclinedLearningPlanRequests($this->active_learning_plan->id));
+        }
+
+        return $declinedRequests;
+    }
+
+    /**
      * Function used for searching, filtering, sorting and paginating teachers.
      *
      * @param options An array of options to use.
@@ -207,6 +223,24 @@ class Teacher extends Model
 
         return $query->paginate($perPage, $page);
     }
+
+    /***********************************************
+     ******************** Events *******************
+     ***********************************************/
+
+    /**
+     * Create all dependencies;
+     */
+    public function afterCreate()
+    {
+        $learningPlan = new LearningPlan();
+        $learningPlan->teacher_id = $this->id;
+        $learningPlan->save();
+    }
+
+    /***********************************************
+     ***************** Static data *****************
+     ***********************************************/
 
     /**
      * Function that returns seniority levels used for filtering.

@@ -15,9 +15,9 @@ description = "Displays a learning plan edit button"
 
         /* Send the view request */
         $.request(
-            'onLearningPlanEdit',
+            'onTeacherLearningPlanEdit',
             {
-                update: {'learning-plans/learning-plan-edit': '#teachers-tab-content'},
+                update: {'teacher-learning-plans/learning-plan-edit': '#learning-plan-tab-content'},
                 data: {learningPlanId: $learningPlanId}
             }
         );

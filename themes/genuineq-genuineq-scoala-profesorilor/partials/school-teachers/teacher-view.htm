@@ -37,7 +37,7 @@ description = "Displays a teacher"
 
 {% partial "learning-plans/learning-plan-view" learningPlan=teacher.active_learning_plan %}
 
-{% partial "learning-plans/learning-plan-edit-btn" learningPlan=teacher.active_learning_plan %}
+{% partial "school-learning-plans/learning-plan-edit-btn" learningPlan=teacher.active_learning_plan displayDivId='teachers-tab-content' %}
 
 
 {% if 0 < proposedRequests.count() %}
@@ -45,7 +45,7 @@ description = "Displays a teacher"
 
         <div class="col-12">
             <h5 class="mb-3 font-weight-bold">{{ 'teachers.teacher-view.requested-courses'|_ }}&nbsp;{{ teacher.name }}</h5>
-            {% partial "learning-plans/learning-plan-proposed-requests-slider" id='teacher-requested-courses' learningPlanCourses=proposedRequests %}
+            {% partial "school-learning-plans/learning-plan-proposed-requests-slider" id='teacher-requested-courses' learningPlanCourses=proposedRequests %}
         </div>
 
     </div>

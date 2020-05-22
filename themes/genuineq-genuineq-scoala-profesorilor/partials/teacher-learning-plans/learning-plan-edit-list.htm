@@ -11,7 +11,7 @@ description = "Displays a learning plan as a list and the list of courses"
             <ul class="timeline timeline-horizontal m-0">
 
                 {% for key, learningPlanCourse in learningPlan.accepted_courses %}
-                    {% partial "learning-plans/learning-plan-edit-card" course=learningPlanCourse.course index=loop.index %}
+                    {% partial "teacher-learning-plans/learning-plan-edit-card" course=learningPlanCourse.course index=loop.index %}
                 {% endfor %}
 
             </ul>
@@ -36,12 +36,12 @@ description = "Displays a learning plan as a list and the list of courses"
         var $newPage = $('#learningPlanCourseSearchPagination > ul > li.active').data('page');
 
         $.request(
-            'onLearningPlanCourseRemove',
+            'onTeacherLearningPlanCourseRemove',
             {
                 confirm: "{{ 'learning-plans.learning-plan-edit-card-list.confirm'|_ }}",
                 update: {
-                    'learning-plans/learning-plan-edit-card-list': '#learningPlanCardList',
-                    'learning-plans/learning-plan-course-grid': '#learningPlanCourseSearchResults',
+                    'teacher-learning-plans/learning-plan-edit-list': '#learningPlanCardList',
+                    'teacher-learning-plans/learning-plan-course-grid': '#learningPlanCourseSearchResults',
                     'learning-plans/learning-plan-course-pagination': '#learningPlanCourseSearchPagination'
                 },
                 data: {

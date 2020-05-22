@@ -7,14 +7,9 @@ description = "Displays a carousel that has more items per page"
 <div id="carousel-multiple-courses-{{ id }}" class="carousel slide" data-ride="carousel" data-touch="true">
     <div class="carousel-inner carousel-inner-{{ id }} row w-100 mx-auto" role="listbox">
 
-        {% for course in courses %}
-            <div class="carousel-item carousel-item-{{ id }} col-12 col-sm-6 col-md-4 col-lg-3 py-2 {{ loop.first ? 'active' : '' }}">
-                {% partial "course-card"
-                    course=course
-                    detailsPage=detailsPage
-                    detailsKeyColumn=detailsKeyColumn
-                    detailsUrlParameter=detailsUrlParameter
-                %}
+        {% for learningPlanCourse in learningPlanCourses %}
+            <div class="carousel-item carousel-item-{{ id }} col-12 col-sm-6 col-md-3 col-lg-3 py-2 {{ loop.first ? 'active' : '' }}">
+                {% partial "school-learning-plans/learning-plan-proposed-requests-card" course=learningPlanCourse.course %}
             </div>
         {% endfor %}
 
@@ -52,5 +47,41 @@ description = "Displays a carousel that has more items per page"
                 }
             }
         }
+    });
+
+
+    $('.proposed-requests-accept').on('click', function () {
+        /* Extract the course and learning plan ID. */
+        var $courseId = $(this).data('courseId');
+        var $learningPlanId = $(this).data('learningPlanId');
+
+        $.request(
+            'onSchoolLearningPlanRequestAccept',
+            {
+                update: {'school-teachers/teacher-view': '#teachers-tab-content'},
+                data: {
+                    courseId: $courseId,
+                    learningPlanId: $learningPlanId,
+                },
+            }
+        );
+    });
+
+
+    $('.proposed-requests-decline').on('click', function () {
+        /* Extract the course and learning plan ID. */
+        var $courseId = $(this).data('courseId');
+        var $learningPlanId = $(this).data('learningPlanId');
+
+        $.request(
+            'onSchoolLearningPlanRequestDecline',
+            {
+                update: {'school-teachers/teacher-view': '#teachers-tab-content'},
+                data: {
+                    courseId: $courseId,
+                    learningPlanId: $learningPlanId,
+                },
+            }
+        );
     });
 </script>

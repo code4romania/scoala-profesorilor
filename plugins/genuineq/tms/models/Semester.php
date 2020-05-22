@@ -8,7 +8,7 @@ use Model;
 class Semester extends Model
 {
     use \October\Rain\Database\Traits\Validation;
-    
+
     use \October\Rain\Database\Traits\SoftDelete;
 
     protected $dates = ['deleted_at'];
@@ -24,4 +24,17 @@ class Semester extends Model
      */
     public $rules = [
     ];
+
+
+    /***********************************************
+     ******************** Events *******************
+     ***********************************************/
+
+    /**
+     * Configure correct date;
+     */
+    public function beforeCreate()
+    {
+        $this->year = date('Y');
+    }
 }

@@ -13,7 +13,7 @@ class TestTeachersSeeder extends Seeder
         if (App::environment(['local', 'development'])) {
             $faker = Faker\Factory::create('ro_RO');
 
-            for ($i=0; $i < 80; $i++) {
+            for ($i=0; $i < 10; $i++) {
 
                 $name = $faker->name();
 

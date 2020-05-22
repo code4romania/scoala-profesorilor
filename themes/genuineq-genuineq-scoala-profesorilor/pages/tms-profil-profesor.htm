@@ -7,11 +7,22 @@ is_hidden = 0
 security = "user"
 allowedUserGroups[] = "teacher"
 
+[account]
+forceSecure = 0
+
 [teacherProfile]
 forceSecure = 0
 
-[account]
+[learningPlan]
 forceSecure = 0
+==
+<?php
+    function onStart()
+    {
+        /* Assets for carousel-multiple-courses partial. */
+        $this->addCss('assets/css/carousel-multiple-courses.css');
+    }
+?>
 ==
 <div class="containter-fluid h-25" style="background-image: url({{ 'background-teacher.jpg'|media }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
     <div class="row h-100 m-0">
@@ -32,8 +43,43 @@ forceSecure = 0
     </div>
 </div>
 
-<div class="container my-5">
-    <div class="row">
-        {% partial "teacher-profile/profile" teacherUser=user %}
+<div class="container-fluid bg-white py-4">
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="account-tab-nav" data-toggle="tab" href="#account-tab-body" role="tab" aria-controls="account-tab-body" aria-selected="true">{{ 'teacher.profile.tab.account'|_ }}</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" id="notifications-tab-nav" data-toggle="tab" href="#notifications-tab-body" role="tab" aria-controls="notifications-tab-body" aria-selected="false">{{ 'teacher.profile.tab.notifications'|_ }}</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" id="learning-plan-tab-nav" data-toggle="tab" href="#learning-plan-tab-body" role="tab" aria-controls="learning-plan-tab-body" aria-selected="false" data-request="onTeacherViewLearningPlan" data-request-update="teacher-profile/learning-plan-tab: '#learning-plan-tab-content'">{{ 'teacher.profile.tab.courses'|_ }}</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="container">
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="account-tab-body" role="tabpanel" aria-labelledby="account-tab-body">
+            <div class="row my-5">
+                {% partial "teacher-profile/account-tab" teacherUser=user %}
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="notifications-tab-body" role="tabpanel" aria-labelledby="notifications-tab-body">
+        </div>
+
+        <div class="tab-pane fade" id="learning-plan-tab-body" role="tabpanel" aria-labelledby="learning-plan-tab-body">
+
+            <div class="row my-5">
+                <div class="col-12" id="learning-plan-tab-content">
+                    {% partial "teacher-profile/learning-plan-tab" %}
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>

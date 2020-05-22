@@ -3,10 +3,10 @@ description = "Displays a learning plan as a list and the list of courses"
 [viewBag]
 ==
 <div id="learningPlanCardList">
-    {% partial "learning-plans/learning-plan-edit-card-list" %}
+    {% partial "teacher-learning-plans/learning-plan-edit-list" %}
 </div>
 
-{% partial "learning-plans/learning-plan-edit-save-btn" %}
+{% partial "teacher-learning-plans/learning-plan-edit-save-btn" %}
 
 <div class="mb-5"></div>
 
@@ -16,12 +16,14 @@ description = "Displays a learning plan as a list and the list of courses"
 <h5 class="mb-3 font-weight-bold">{{ 'learning-plans.learning-plan-edit.courses_title'|_ }}</h5>
 
 <div id="learningPlanCourseSearchResults">
-    {% partial "learning-plans/learning-plan-course-grid" %}
+    {% partial "teacher-learning-plans/learning-plan-course-grid" %}
 </div>
 <div id="learningPlanCourseSearchPagination">
     {% partial "learning-plans/learning-plan-course-pagination" %}
 </div>
 
-{% partial "learning-plans/learning-plan-course-add-modal" %}
+{% if schools %}
+    {% partial "teacher-learning-plans/learning-plan-edit-add-modal" %}
+{% endif %}
 
 <!--/.Courses Section-->

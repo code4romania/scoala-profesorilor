@@ -217,22 +217,26 @@ description = "Displays the tab containing all the school account data"
     </div>
 </div>
 
-{% put scripts %}
-    <script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
+<script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        $('#school_inspectorate_id').autocomplete({
-            source: {{ inspectorates|raw }},
-            highlightClass: 'text-danger',
-            treshold: 1
-        });
+    $('#school_inspectorate_id').autocomplete({
+        source: {{ inspectorates|raw }},
+        highlightClass: 'text-danger',
+        treshold: 1
+    });
 
-        $('#school_address_id').autocomplete({
-            source: {{ addresses|raw }},
-            highlightClass: 'text-danger',
-            treshold: 1
-        });
+    $('#school_address_id').autocomplete({
+        source: {{ addresses|raw }},
+        highlightClass: 'text-danger',
+        treshold: 1
+    });
 
-    </script>
-{% endput %}
+    $('#school_avatar').on('change',function(event){
+        if (event.target.files.length) {
+            $(this).next('.custom-file-label').html(event.target.files[0].name);
+        }
+    })
+
+</script>

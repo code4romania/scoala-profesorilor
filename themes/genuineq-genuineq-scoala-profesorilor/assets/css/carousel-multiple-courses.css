@@ -161,6 +161,9 @@
     height: 80px !important;
 }
 
+.carousel-control-next, .carousel-control-prev {
+    width: 80px !important;
+}
 
 /*LG 6th  -  if you want a carousel with 6 slides */
 @media (min-width: 991px) {

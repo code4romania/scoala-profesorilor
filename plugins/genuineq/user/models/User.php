@@ -256,6 +256,9 @@ class User extends UserBase
         if ($this->send_invite) {
             $this->sendInvitation();
         }
+
+        /** Fire global user creation event, */
+        Event::fire('genuineq.user.created');
     }
 
     /**

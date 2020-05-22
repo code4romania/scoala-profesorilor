@@ -5,11 +5,11 @@ description = "Displays a carousel that has more items per page"
 
 <!--Carousel Wrapper-->
 <div id="carousel-multiple-courses-{{ id }}" class="carousel slide" data-ride="carousel" data-touch="true">
-    <div class="carousel-inner row w-100 mx-auto" role="listbox">
+    <div class="carousel-inner carousel-inner-{{ id }} row w-100 mx-auto" role="listbox">
 
         {% for learningPlanCourse in learningPlanCourses %}
-            <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 py-2 {{ loop.first ? 'active' : '' }}">
-                {% partial "learning-plans/learning-plan-proposed-requests-card" course=learningPlanCourse.course %}
+            <div class="carousel-item carousel-item-{{ id }} col-12 col-sm-6 col-md-3 col-lg-3 py-2 {{ loop.first ? 'active' : '' }}">
+                {% partial "teacher-learning-plans/learning-plan-proposed-requests-card" course=learningPlanCourse.course %}
             </div>
         {% endfor %}
 
@@ -33,17 +33,17 @@ description = "Displays a carousel that has more items per page"
     $('#carousel-multiple-courses-{{ id }}').on('slide.bs.carousel', function (e) {
         var $e = $(e.relatedTarget);
         var idx = $e.index();
-        var itemsPerSlide = 5;
-        var totalItems = $('.carousel-item').length;
+        var itemsPerSlide = 1;
+        var totalItems = $('.carousel-item-{{ id }}').length;
 
         if (idx >= totalItems-(itemsPerSlide-1)) {
             var it = itemsPerSlide - (totalItems - idx);
             for (var i=0; i<it; i++) {
                 // append slides to end
                 if (e.direction=="left") {
-                    $('.carousel-item').eq(i).appendTo('.carousel-inner');
+                    $('.carousel-item-{{ id }}').eq(i).appendTo('.carousel-inner-{{ id }}');
                 } else {
-                    $('.carousel-item').eq(0).appendTo('.carousel-inner');
+                    $('.carousel-item-{{ id }}').eq(0).appendTo('.carousel-inner-{{ id }}');
                 }
             }
         }
@@ -53,16 +53,12 @@ description = "Displays a carousel that has more items per page"
     $('.proposed-requests-accept').on('click', function () {
         /* Extract the course and learning plan ID. */
         var $courseId = $(this).data('courseId');
-        var $learningPlanId = $(this).data('learningPlanId');
 
         $.request(
-            'onLearningPlanRequestAccept',
+            'onTeacherLearningPlanRequestAccept',
             {
-                update: {'school-teachers/teacher-view': '#teachers-tab-content'},
-                data: {
-                    courseId: $courseId,
-                    learningPlanId: $learningPlanId,
-                },
+                update: {'teacher-profile/learning-plan-tab': '#learning-plan-tab-content'},
+                data: {courseId: $courseId},
             }
         );
     });
@@ -71,16 +67,12 @@ description = "Displays a carousel that has more items per page"
     $('.proposed-requests-decline').on('click', function () {
         /* Extract the course and learning plan ID. */
         var $courseId = $(this).data('courseId');
-        var $learningPlanId = $(this).data('learningPlanId');
 
         $.request(
-            'onLearningPlanRequestDecline',
+            'onTeacherLearningPlanRequestDecline',
             {
-                update: {'school-teachers/teacher-view': '#teachers-tab-content'},
-                data: {
-                    courseId: $courseId,
-                    learningPlanId: $learningPlanId,
-                },
+                update: {'teacher-profile/learning-plan-tab': '#learning-plan-tab-content'},
+                data: {courseId: $courseId},
             }
         );
     });

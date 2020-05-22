@@ -1,6 +1,8 @@
 <?php namespace Genuineq\Tms\Models;
 
+use Log;
 use Model;
+use Genuineq\Tms\Models\Semester;
 
 /**
  * Model
@@ -79,17 +81,46 @@ class LearningPlan extends Model
         return $this->courses->where('status', 'declined');
     }
 
-    public static function createNewPlan(){
-        $learningPlan = new LearningPlan();
+    public function getTotalCostAttribute(){
+        $cost = 0;
 
-        $learningPlan->year = date('Y');
-        /**
-         * Semester 1: August - January
-         * Semester 2: February - June
-         */
-        $learningPlan->semester = ((1 == date('n')) || (8 <= date('n'))) ? (1) : (2);
-        $learningPlan->save();
+        foreach ($this->accepted_courses as $learningPlanCorse) {
+            $cost += $learningPlanCorse->course->price;
+        }
 
-        return $learningPlan;
+        return $cost;
+    }
+
+    public function getTotalCoveredCostAttribute(){
+        $coveredCost = 0;
+
+        foreach ($this->accepted_courses as $learningPlanCorse) {
+            $coveredCost += $learningPlanCorse->coveted_costs;
+        }
+
+        return $coveredCost;
+    }
+
+    public function getTotalCreditsAttribute(){
+        $credits = 0;
+
+        foreach ($this->accepted_courses as $learningPlanCorse) {
+            $credits += $learningPlanCorse->course->credits;
+        }
+
+        return $credits;
+    }
+
+
+    /***********************************************
+     ******************** Events *******************
+     ***********************************************/
+
+    /**
+     * Create all dependencies;
+     */
+    public function beforeCreate()
+    {
+        $this->semester_id = Semester::latest()->first()->id;
     }
 }

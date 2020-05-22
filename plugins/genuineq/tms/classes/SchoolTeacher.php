@@ -104,9 +104,6 @@ class SchoolTeacher
             $teacher->schools()->attach(Auth::user()->profile);
             $teacher->reloadRelations('schools');
 
-            /** Create a new learning plan. */
-            $teacher->learning_plans()->attach(LearningPlan::createNewPlan()->id);
-
             /** Send activation email if the activation is configured to be performed by the user */
             if (UserSettings::ACTIVATE_USER == UserSettings::get('activate_mode')) {
                 self::sendActivationEmail($user);

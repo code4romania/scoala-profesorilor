@@ -16,7 +16,7 @@ class TestSemesterSeeder extends Seeder
     {
         /* Check if the environment is either local OR development. */
         if (App::environment(['local', 'development'])) {
-            $years = 20;
+            $years = 5;
 
             for ($i=0; $i < $years; $i++) {
                 Semester::create([

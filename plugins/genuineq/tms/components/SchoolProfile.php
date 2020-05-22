@@ -1,5 +1,6 @@
 <?php namespace Genuineq\Tms\Components;
 
+use Log;
 use Lang;
 use Auth;
 use Flash;

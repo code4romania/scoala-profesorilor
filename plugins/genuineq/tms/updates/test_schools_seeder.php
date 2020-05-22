@@ -14,8 +14,7 @@ class TestSchoolsSeeder extends Seeder
         if (App::environment(['local', 'development'])) {
             $faker = Faker\Factory::create('ro_RO');
 
-            $totalTeachersNumber = 80;
-            $totalSchoolsNumber = 40;
+            $totalSchoolsNumber = 10;
 
             for ($i=0; $i < $totalSchoolsNumber; $i++) {
 
@@ -41,15 +40,22 @@ class TestSchoolsSeeder extends Seeder
              * Add teachers to schools
              */
             for ($i=1; $i <= $totalSchoolsNumber; $i++) {
-                SchoolTeacher::create([
-                    'school_id' => $i,
-                    'teacher_id' => $i,
-                ]);
+                if ($i == $totalSchoolsNumber) {
+                    SchoolTeacher::create([
+                        'school_id' => $i,
+                        'teacher_id' => $i,
+                    ]);
+                } else {
+                    SchoolTeacher::create([
+                        'school_id' => $i,
+                        'teacher_id' => $i,
+                    ]);
 
-                SchoolTeacher::create([
-                    'school_id' => $i,
-                    'teacher_id' => (40 + $i),
-                ]);
+                    SchoolTeacher::create([
+                        'school_id' => $i,
+                        'teacher_id' => ($i + 1),
+                    ]);
+                }
             }
         }
     }

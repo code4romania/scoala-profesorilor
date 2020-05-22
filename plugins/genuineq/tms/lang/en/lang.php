@@ -408,6 +408,8 @@
             'message' => [
                 'course_added_successful' => 'Cursul a fost adaugat cu succes',
                 'course_deleted_successful' => 'Cursul a fost sters cu succes',
+                'school_not_valid' => 'Scoala selectata nu exista sau nu sunteti asociat cu ea',
+                'course_deleted_not_allowed' => 'Nu puteti sa stergeti un curs marcat ca obligatoriu de catre o scoala'
             ],
         ],
     ],
