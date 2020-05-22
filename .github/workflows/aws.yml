@@ -80,5 +80,5 @@ jobs:
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
         service: tms-app-prod
-        cluster: default
+        cluster: production
         wait-for-service-stability: true
