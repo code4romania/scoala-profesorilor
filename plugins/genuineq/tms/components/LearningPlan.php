@@ -75,6 +75,24 @@ class LearningPlan extends ComponentBase
      **************** AJAX handlers ****************
      ***********************************************/
 
+    /***********************************************
+     ******************* Common *******************
+     ***********************************************/
+
+    /**
+     * Searches, filters, orders and paginates learning profile
+     *  courses based on the post options.
+     */
+    public function onLearningPlanCourseSearch()
+    {
+        /* Extract the courses based on the received options. */
+        $this->extractLearningPlanCourses(/*options*/post(), post('learningPlanId'));
+    }
+
+    /***********************************************
+     ******************* School ********************
+     ***********************************************/
+
     /**
      * Prepares all the data needed for updating the learning plan.
      */
@@ -96,19 +114,9 @@ class LearningPlan extends ComponentBase
     }
 
     /**
-     * Searches, filters, orders and paginates learning profilecourses
-     *  based on the post options.
-     */
-    public function onLearningPlanCourseSearch()
-    {
-        /* Extract the courses based on the received options. */
-        $this->extractLearningPlanCourses(/*options*/post(), post('learningPlanId'));
-    }
-
-    /**
      * Function that adds a new course to a learning plan.
      */
-    public function onLearningPlanCourseAdd()
+    public function onSchoolLearningPlanCourseAdd()
     {
         if (!Auth::check()) {
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
@@ -194,7 +202,7 @@ class LearningPlan extends ComponentBase
     /**
      * Function that removes a course from a learning plan.
      */
-    public function onLearningPlanCourseRemove()
+    public function onSchoolLearningPlanCourseRemove()
     {
         if (!Auth::check()) {
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));

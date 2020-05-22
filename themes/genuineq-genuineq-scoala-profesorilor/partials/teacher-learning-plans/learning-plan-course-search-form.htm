@@ -49,7 +49,10 @@ description = "Displays the learning plan course search form."
         $('#learningPlanCourseSearchForm').request(
             'onLearningPlanCourseSearch',
             {
-                update: {'learning-plans/learning-plan-course-grid': '#learningPlanCourseSearchResults', 'learning-plans/learning-plan-course-pagination': '#learningPlanCourseSearchPagination'},
+                update: {
+                    'teacher-learning-plans/learning-plan-course-grid': '#learningPlanCourseSearchResults',
+                    'teacher-learning-plans/learning-plan-course-pagination': '#learningPlanCourseSearchPagination'
+                },
                 data: {page: $newPage, learningPlanId: $learningPlanId}
             }
         );

@@ -11,7 +11,7 @@ description = "Displays a learning plan as a list and the list of courses"
 <div class="mb-5"></div>
 
 <!--Courses Section-->
-{% partial "learning-plans/learning-plan-course-search-form" %}
+{% partial "teacher-learning-plans/learning-plan-course-search-form" %}
 
 <h5 class="mb-3 font-weight-bold">{{ 'learning-plans.learning-plan-edit.courses_title'|_ }}</h5>
 
@@ -19,7 +19,7 @@ description = "Displays a learning plan as a list and the list of courses"
     {% partial "teacher-learning-plans/learning-plan-course-grid" %}
 </div>
 <div id="learningPlanCourseSearchPagination">
-    {% partial "learning-plans/learning-plan-course-pagination" %}
+    {% partial "teacher-learning-plans/learning-plan-course-pagination" %}
 </div>
 
 {% if schools %}
