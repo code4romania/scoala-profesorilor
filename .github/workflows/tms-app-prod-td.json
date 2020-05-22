@@ -52,7 +52,7 @@
                 },
                 {
                     "name": "APP_KEY",
-                    "value": "EVkxpudGSl8QkVVgg6DGXgbz92AbAAkg"
+                    "value": "${{ secrets.APP_KEY }}"
                 },
                 {
                     "name": "CMS_ACTIVE_THEME",
@@ -112,7 +112,7 @@
                 },
                 {
                     "name": "DB_HOST",
-                    "value": "tms-production-db.cormbvmgsnbp.eu-central-1.rds.amazonaws.com"
+                    "value": "${{ secrets.DB_HOST }}"
                 },
                 {
                     "name": "MAIL_PORT",
@@ -144,7 +144,7 @@
                 },
                 {
                     "name": "DB_PASSWORD",
-                    "value": "nAKEzKuDq3Em"
+                    "value": "${{ secrets.DB_PASSWORD }}"
                 }
             ],
             "resourceRequirements": null,
