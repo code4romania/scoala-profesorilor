@@ -1,5 +1,5 @@
 title = "TMS - Categorie"
-url = "/tms-categorie/:slug/:page?"
+url = "/tms-categorie/:slug"
 layout = "tms-non-static"
 is_hidden = 0
 
@@ -21,7 +21,8 @@ allowedUserGroups[] = "teacher"
 allowedUserGroups[] = "school"
 
 [courseSearch]
-category = {{ :slug }}
+forceSecure = 0
+category = "{{ :slug }}"
 ==
 <!--Intro Section-->
 {% partial "carousel-half-page" %}

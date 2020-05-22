@@ -1,0 +1,10 @@
+plugin:
+    name: 'janvince.smallextensions::lang.plugin.name'
+    description: 'janvince.smallextensions::lang.plugin.description'
+    author: 'Jan Vince'
+    icon: oc-icon-universal-access
+    homepage: 'http://www.vince.cz'
+permissions:
+    janvince.smallextensions.settings:
+        tab: 'janvince.smallextensions::lang.permissions.settings_tab'
+        label: 'janvince.smallextensions::lang.permissions.settings_description'

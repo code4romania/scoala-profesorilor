@@ -1,0 +1,38 @@
+[staticPage]
+useContent = 1
+default = 0
+
+[login]
+forceSecure = 0
+
+[register]
+forceSecure = 0
+==
+<html lang="en">
+    {% partial 'head' %}
+
+    <body>
+        {% partial 'navbar' %}
+
+        {% flash %}
+            <p
+                data-control="flash-message"
+                class="flash-message fade {{ type }}"
+                data-interval="5">
+                {{ message }}
+            </p>
+        {% endflash %}
+
+        {% page %}
+
+        {% partial 'footer' %}
+
+    </body>
+</html>
+
+{% if not user %}
+    {% partial 'signing/login-modal' %}
+    {% partial 'signing/signup-school-modal' %}
+    {% partial 'signing/signup-teacher-modal' %}
+    {% partial 'signing/signup-select-modal' %}
+{% endif %}

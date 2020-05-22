@@ -11,40 +11,36 @@ forceSecure = 0
 [session]
 security = 'all'
 ==
-{% partial 'head' %}
+<html lang="en">
+    {% partial 'head' %}
 
-{% partial 'navbar' %}
+    <body class="bg-default">
+        {% partial 'navbar' %}
 
-{% flash %}
-    <p
-        data-control="flash-message"
-        class="flash-message fade {{ type }}"
-        data-interval="5">
-        {{ message }}
-    </p>
-{% endflash %}
+        {% flash %}
+            <p
+                data-control="flash-message"
+                class="flash-message fade {{ type }}"
+                data-interval="5">
+                {{ message }}
+            </p>
+        {% endflash %}
 
-<div class="container py-5">
-    <div class="row">
-        <div class="col-12">
-            {% page %}
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-12">
+                    {% page %}
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-{% partial 'footer' %}
+        {% partial 'footer' %}
+    </body>
+</html>
 
 {% if not user %}
-    {% partial 'login-modal' %}
-    {% partial 'signup-school-modal' %}
-    {% partial 'signup-teacher-modal' %}
-    {% partial 'signup-select-modal' %}
-
-    <script src="{{ [
-            'assets/js/partials/login-modal.js',
-            'assets/js/partials/signup-school-modal.js',
-            'assets/js/partials/signup-teacher-modal.js',
-            'assets/js/partials/signup-select-modal.js'
-        ]|theme }}">
-    </script>
+    {% partial 'signing/login-modal' %}
+    {% partial 'signing/signup-school-modal' %}
+    {% partial 'signing/signup-teacher-modal' %}
+    {% partial 'signing/signup-select-modal' %}
 {% endif %}

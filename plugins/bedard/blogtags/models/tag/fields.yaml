@@ -1,0 +1,13 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: Tag
+
+    posts:
+        label: Posts
+        type: relation
+        nameFrom: title
+        emptyOption: No posts available.

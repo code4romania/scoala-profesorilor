@@ -1,0 +1,13 @@
+{% set links = __SELF__.links %}
+
+{% if links | length %}
+	<ul class="">
+		{% for link in links %}
+			<li class="">
+				<a class="" target="{{ __SELF__.linkTarget }}" href="{{ link.getLink }}" title="{{ link.getName }}">
+					<i class="{{ link.getIcon }}"></i>
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}

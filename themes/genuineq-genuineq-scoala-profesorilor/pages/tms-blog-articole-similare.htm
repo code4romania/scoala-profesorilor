@@ -1,0 +1,160 @@
+title = "Articole similare"
+url = "/articole-similare/:slug/:page?"
+layout = "tms-blog"
+description = "Displays posts having a specific tag"
+is_hidden = 0
+
+[blogCategories]
+slug = "{{ :slug }}"
+displayEmpty = 1
+categoryPage = "tms-blog-categorie"
+
+[blogTagSearch]
+tag = "{{ :slug }}"
+pagination = 1
+page = "{{ :page }}"
+resultsPerPage = 10
+postPage = "tms-blog-post"
+categoryPage = "tms-blog-categorie"
+
+[blogTags]
+results = 0
+orderBy = 0
+direction = "desc"
+
+[session]
+security = "all"
+allowedUserGroups[] = "teacher"
+allowedUserGroups[] = "school"
+==
+<div class="containter-fluid h-25" style="background-image: url({{ 'background-teacher.jpg'|media }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+    <div class="row h-100 m-0 align-items-center">
+        <div class="col-12 text-center">
+            <h3 class="mt-4 mb-5 font-bold text-white">{{ 'blog.homepage.title'|_ }}</h3>
+        </div>
+    </div>
+</div>
+
+<main>
+    <!--Main layout-->
+    <div class="container mt-5">
+        <div class="row">
+
+            <!--Main column-->
+            <div class="col-12 col-sm-12 col-md-6 col-lg-8 col-xl-8">
+
+                {% for post in blogTagSearch.posts %}
+
+                    <!--Post-->
+                    <div class="post-wrapper" data-wow-delay="0.2s">
+                        <!--Featured image -->
+                        <a href="{{ post.url }}">
+                            <img src="{{ post.custom_fields.featured_image|media }}" class="img-fluid" alt="post-image">
+                        </a>
+
+                        <h6>
+                            <img src="{{ 'assets/img/svg/icon-dot.svg'|theme }}" alt="author">&nbsp;{{ 'blog.author'|_ }}:&nbsp;{{ post.user.first_name }}&nbsp;{{ post.user.last_name }}
+
+                            <img src="{{ 'assets/img/svg/icon-published.svg'|theme }}" class="ml-3" alt="published">&nbsp;{{post.published_at | date('d M, Y') }}
+
+                            <img src="{{ 'assets/img/svg/icon-tag.svg'|theme }}" class="ml-3" alt="tag">&nbsp;
+                            {% for tag in post.tags %}
+                                {% if loop.last %}
+                                    <a href="{{ 'tms-blog-articole-similare'|page({ slug: tag.slug }) }}">{{ tag.name }}</a>
+                                {% else %}
+                                    <a href="{{ 'tms-blog-articole-similare'|page({ slug: tag.slug }) }}">{{ tag.name }}</a>,&nbsp;
+                                {% endif %}
+                            {% endfor %}
+                        </h6>
+
+                        <br>
+
+                        <!--Post data-->
+                        <a href="{{ post.url }}">
+                            <h1 class="h1-responsive dark-grey-text font-bold">{{ post.title }}</h1>
+                        </a>
+
+                        <br>
+
+                        <!--Post excerpt-->
+                        <p>{{ post.excerpt }}</p>
+                    </div>
+                    <!--/.Post-->
+
+                    {% if not loop.last %}
+                        <hr class="my-5">
+                    {% else %}
+                        <div class="mb-5"></div>
+                    {% endif %}
+                {% endfor %}
+
+
+                <!--Pagination-->
+                <nav class="mb-5">
+                    {% if blogTagSearch.lastPage > 1 %}
+                        <ul class="pagination pg-primary justify-content-center">
+                            {% if blogTagSearch.currentPage > 1 %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ this.page.baseFileName|page({ (pageParam): page }) }}">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+
+                            {% for page in 1..blogTagSearch.lastPage %}
+                                <li class="page-item {{ blogTagSearch.currentPage == page ? 'active' : null }}">
+                                    <a class="page-link" href="{{ this.page.baseFileName|page({ (pageParam): page }) }}">{{ page }}</a>
+                                </li>
+                            {% endfor %}
+
+                            {% if blogTagSearch.lastPage > blogTagSearch.currentPage %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ this.page.baseFileName|page({ (pageParam): (blogTagSearch.currentPage+1) }) }}">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+                </nav>
+                <!--/.Pagination-->
+
+            </div>
+
+            <!--Sidebar-->
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+
+                <div class="widget-wrapper" data-wow-delay="0.4s">
+                    <h5 class="font-bold dark-grey-text mb-3">{{ 'blog.homepage.categories'|_ }}</h5>
+
+                    {% for category in categories %}
+                        <a href="{{ category.url }}">{{ category.name }}</a>
+
+                        {% if not loop.last %}
+                            <hr class="my-1">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="widget-wrapper mt-4" data-wow-delay="0.6s">
+                    <h5 class="font-bold dark-grey-text mb-3">{{ 'blog.homepage.tags'|_ }}</h5>
+
+                    {% for tag in blogTags.tags %}
+                        <a href="{{ 'tms-blog-articole-similare'|page({ slug: tag.slug }) }}">
+                            {% if loop.last %}
+                                &#x23;{{ tag.name }}
+                            {% else %}
+                                &#x23;{{ tag.name }},&nbsp;
+                            {% endif %}
+                        </a>
+                    {% endfor %}
+                </div>
+
+                <div class="mb-5"></div>
+
+            </div>
+            <!--/.Sidebar-->
+        </div>
+    </div>
+    <!--/.Main layout-->
+</main>

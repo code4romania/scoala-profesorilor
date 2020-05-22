@@ -1,0 +1,120 @@
+1.0.1: First version of Small Extensions
+1.0.2: Added Rainlab.Blog WYSIWYG editor extension.
+1.0.3:
+    - Added extra Notes tab to Static Menu items in Rainlab.Pages
+    - Changed backend Settings labels and tabs
+    - Added permissions to access backend settings
+1.0.4: Detect Rainlab.Translate plugin and support translatable WYSIWYG editor
+1.0.5:
+    - Field to set editor custom toolbar buttons
+    - More better detection of Rainlab.Translate plugin availability
+1.0.6:
+    - Fixed typo in permissions code (thanks Christopher19815)
+1.0.7:
+    - Added Custom fields for Blog posts (API code, string, switch and datetime)
+    - smallextensions_tables.php
+1.0.8:
+    - Changed menu order number
+    - Added option to hide content tab on Rainlab.Pages page
+    - Changed settings layout
+    - Added docs for custom fields
+1.0.9:
+    - Added option to hide content tab on Rainlab.Pages page
+    - Added docs and preview images to October CMS plugin detail page
+1.0.10:
+    - Added extra blog image column
+    - smallextensions_tables_update_01.php
+1.0.11:
+    - Changed update class name to prevent installation exception
+1.1.0:
+    - Added option to replace Blog featured images with one featured image selectable from Media manager
+    - Added own plugin category (Small plugins)
+    - Finally started to use semantic versioning 2.0.0 (http://semver.org) :)
+    - smallextensions_tables_update_02.php
+1.1.1:
+    - All custom fields allowed while creating new blog post (previously allowed only on existing records)
+1.1.2:
+    - Small change in plugin category name
+1.1.3:
+    - As of version 1.2.17 of Rainlab.Pages, custom fields are moved to secondary tabs area by default. If "Hide Content tab" setting of this plugin is set, custom fields will be moved back to primary tabs and secondary tabs container will be hidden.
+1.1.4:
+    - Removed Rainlab Blog code dependency
+    - Better Settings fields placement
+1.1.5:
+    - Editor toolbar buttons input field changed to textarea to support larger input (thanks kealsera)
+1.2.0:
+    - Added post author field with administrators dropdown
+1.2.1:
+    - Disabled is_activated check for backend user as this is not needed
+1.2.2:
+    - Check permission for authors list and set default value for logged in user
+1.2.3:
+    - Check for signed in user in plugin's boot method
+1.2.4:
+    - Fixed typo in fields.yaml (thanks Jorge Noguera)
+1.2.5:
+    - Changed column type for repeater to 'text' instead of json (thanks CanThis)
+1.3.0:
+    - Added extra blog image columns for title and description
+    - smallextensions_tables_update_03.php
+1.3.1:
+    - Added options for menu item image (imagefinder) and color (colorpicker)
+1.3.2:
+    - Fixed settings translation for EN
+1.3.3:
+    - Labels can be added to blog custom fields just right in the Settings
+1.3.4:
+    - Changed field type colorpicker to text only. Small change in Settings UI. Fixed some typos.
+1.3.5:
+    - Added server info tab with PHP info data
+1.3.6:
+    - Added new Twig functions section
+1.3.7:
+    - Added trans and choice functions to bypass |_ and |__ twig filters if Rainlab Translate plugin is not installed.
+1.3.8:
+    - Twig function to be enabled by default in settings
+1.3.9:
+    - Fixed typo in translations
+1.4.0:
+    - Added Report widget to clean cache files and folders (for those affected with putenv() disabled problem)
+1.4.1:
+    - Fixed typo in cs locale
+1.4.2:
+    - Added option for report widget to clear thumbnails
+1.4.3:
+    - Fixed report widget
+1.5.0:
+    - Added forceLogin component that can be used to force login to backend area before visiting a page
+1.5.1:
+    - Added translations for forceLogin component
+1.5.2:
+    - Fixed forceLogin redirection logic
+1.6.0:
+    - Added option to allow extra fields in backend administrator\'s form (now only description is available)
+    - Fixed plugin uninstall
+    - smallextensions_tables_update_04.php
+1.7.0:
+    - Added new custom Rainlab Blog columns 'text' and 'repeater'
+1.7.1:
+    - Added fully configurable repeater fields and labels
+1.7.2:
+    - Fixed Blog Post plugin check
+1.7.3:
+    - Fixed translation
+1.7.4:
+    - Fixed widget translation
+1.8.0:
+    - Added option to link Rainlab Blog post and Rainlab User
+    - smallextensions_tables_update_05.php
+1.8.1:
+    - Fixed unintended deletion of user when blog post is deleted (thx laurensmartina for issue)
+1.8.2:
+    - Fixed API Code field (thx SalocinDotTEN)
+1.8.3:
+    - Better detection of missing Translate plugin
+1.9.0:
+    - Added Optimize DB report widget
+1.9.1:
+    - Fixed raw SQL in Optimize DB report widget
+1.9.2:
+    - Fixed artisan Blog post creation (thanks mbroadhead)

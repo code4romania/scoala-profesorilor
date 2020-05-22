@@ -1,0 +1,15 @@
+1.2.1:
+  - Move settings into blog category
+
+1.2.0:
+  - Minor README changes; another style to list required plugins
+
+1.1.0:
+  - Degraded from PHP7.1 to PHP7.0 to support the minimal required version for October CMS
+
+1.0.1:
+  - Fixed typo in README
+
+1.0.0:
+  - The initial release of Blog Time to Read
+  - populate_default_settings.php

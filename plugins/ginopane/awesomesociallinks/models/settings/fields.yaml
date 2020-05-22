@@ -1,0 +1,37 @@
+fields:
+    section_title:
+        label: 'ginopane.awesomesociallinks::lang.settings.name'
+        span: full
+        type: section
+
+    links:
+        label: 'ginopane.awesomesociallinks::lang.settings.list_item'
+        type: repeater
+        prompt: 'ginopane.awesomesociallinks::lang.settings.list_item_prompt'
+        span: full
+        titleFrom: name
+        form:
+            fields:
+                icon:
+                    label: 'ginopane.awesomesociallinks::lang.settings.list_item_icon'
+                    placeholder: 'ginopane.awesomesociallinks::lang.settings.list_item_icon_placeholder'
+                    type: awesomeiconslist
+                    iconTypes: 'brands'
+                    span: storm
+                    cssClass: col-md-6 col-lg-3
+
+                name:
+                    label: 'ginopane.awesomesociallinks::lang.settings.list_item_name'
+                    placeholder: 'ginopane.awesomesociallinks::lang.settings.list_item_name_placeholder'
+                    type: text
+                    span: storm
+                    cssClass: col-md-6 col-lg-3
+                    required: true
+
+                link:
+                    label: 'ginopane.awesomesociallinks::lang.settings.list_item_url'
+                    placeholder: 'ginopane.awesomesociallinks::lang.settings.list_item_url_placeholder'
+                    type: text
+                    span: storm
+                    cssClass: col-md-12 col-lg-6
+                    required: true
