@@ -3,6 +3,7 @@ columns:
         label: 'genuineq.tms::lang.learning-plans-course.label.id'
         type: number
         searchable: true
+        invisible: false
         sortable: true
     learning_plan_name:
         label: 'genuineq.tms::lang.learning-plans-course.label.learning-plan'

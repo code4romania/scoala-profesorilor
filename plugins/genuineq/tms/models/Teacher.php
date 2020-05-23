@@ -83,6 +83,10 @@ class Teacher extends Model
     public $rules = [
     ];
 
+    /***********************************************
+     ******************* Mutators ******************
+     ***********************************************/
+
     /**
      * Function that returns the birth date in a frontend format
      */
@@ -145,6 +149,10 @@ class Teacher extends Model
 
         return $declinedRequests;
     }
+
+    /***********************************************
+     ******************** Search *******************
+     ***********************************************/
 
     /**
      * Function used for searching, filtering, sorting and paginating teachers.

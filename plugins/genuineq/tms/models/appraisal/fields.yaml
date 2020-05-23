@@ -1,0 +1,43 @@
+fields:
+    school:
+        label: 'genuineq.tms::lang.appraisal.label.school'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation
+    semester:
+        label: 'genuineq.tms::lang.appraisal.label.semester'
+        nameFrom: 'concat(year, ''-'', semester)'
+        descriptionFrom: 'concat(year, ''-'', semester)'
+        select: 'concat(year, ''-'', semester)'
+        span: auto
+        required: 1
+        type: relation
+    status:
+        label: 'genuineq.tms::lang.appraisal.label.status'
+        options:
+            New: new
+            'Objectives Set': objectives-set
+            'Skills Set': skills-set
+            Closed: closed
+        showSearch: true
+        span: auto
+        required: 1
+        type: dropdown
+    teacher_id:
+        label: 'genuineq.tms::lang.appraisal.label.teacher'
+        span: right
+        required: 1
+        type: number
+    objectives:
+        label: 'genuineq.tms::lang.appraisal.label.objectives'
+        size: huge
+        span: full
+        type: textarea
+    skills:
+        label: 'genuineq.tms::lang.appraisal.label.skills'
+        nameFrom: name
+        descriptionFrom: description
+        span: full
+        type: relation

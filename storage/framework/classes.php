@@ -473,4 +473,5 @@
   'JanVince\\SmallExtensions\\Models\\Settings' => 'plugins/janvince/smallextensions/models/Settings.php',
   'JanVince\\SmallExtensions\\Components\\ForceLogin' => 'plugins/janvince/smallextensions/components/ForceLogin.php',
   'JanVince\\SmallExtensions\\Models\\BlogFields' => 'plugins/janvince/smallextensions/models/BlogFields.php',
+  'Genuineq\\Tms\\Models\\Appraisal' => 'plugins/genuineq/tms/models/Appraisal.php',
 );

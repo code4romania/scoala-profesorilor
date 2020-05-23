@@ -117,3 +117,9 @@
 1.0.40:
     - 'Seeder with test data for learning plans'
     - test_learning_plans_seeder.php
+1.0.41:
+    - 'Created table genuineq_tms_appraisals'
+    - builder_table_create_genuineq_tms_appraisals.php
+1.0.42:
+    - 'Created table genuineq_tms_appraisals_skills'
+    - builder_table_create_genuineq_tms_appraisals_skills.php

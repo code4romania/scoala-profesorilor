@@ -1,0 +1,10 @@
+name: Appraisals
+form: $/genuineq/tms/models/appraisal/fields.yaml
+modelClass: Genuineq\Tms\Models\Appraisal
+defaultRedirect: genuineq/tms/appraisals
+create:
+    redirect: 'genuineq/tms/appraisals/update/:id'
+    redirectClose: genuineq/tms/appraisals
+update:
+    redirect: genuineq/tms/appraisals
+    redirectClose: genuineq/tms/appraisals

@@ -254,6 +254,19 @@
         'backend-menu' => 'Semesters',
     ],
 
+    'appraisal' => [
+        'label' => [
+            'school' => 'School',
+            'teacher' => 'Teacher',
+            'semester' => 'Semester',
+            'objectives' => 'Objectives',
+            'status' => 'Status',
+            'skills' => 'Skills',
+        ],
+
+        'backend-menu' => 'Appraisals',
+    ],
+
     'component' => [
         'school-profile' => [
             'name' => 'School Profile',

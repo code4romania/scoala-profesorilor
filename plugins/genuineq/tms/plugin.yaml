@@ -46,6 +46,10 @@ navigation:
                 label: 'genuineq.tms::lang.semesters.backend-menu'
                 url: genuineq/tms/semesters
                 icon: icon-calendar
+            side-menu-item10:
+                label: 'genuineq.tms::lang.appraisal.backend-menu'
+                url: genuineq/tms/appraisals
+                icon: icon-sliders
     main-menu-item2:
         label: 'genuineq.tms::lang.plugin.backend-menu.static'
         url: genuineq/tms/addresses
