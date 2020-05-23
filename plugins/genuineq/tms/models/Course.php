@@ -170,10 +170,14 @@ class Course extends Model
             $categories[$category->name] = $category->id;
         }
 
-        $categories = array_reverse($categories);
-        $categories[Lang::get('genuineq.tms::lang.course.frontend.all_courses')] = -1;
+        if ($categories) {
+            $categories = array_reverse($categories);
+            $categories[Lang::get('genuineq.tms::lang.course.frontend.all_courses')] = -1;
 
-        return array_reverse($categories);
+            return array_reverse($categories);
+        } else {
+            return [];
+        }
     }
 
     /**

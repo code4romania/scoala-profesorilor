@@ -5,6 +5,7 @@ namespace Genuineq\Tms\Updates;
 use Genuineq\Tms\Models\Skill;
 use October\Rain\Database\Updates\Seeder;
 use Illuminate\Support\Facades\App;
+use Config;
 use Faker;
 
 class TestSkillSeeder extends Seeder
@@ -16,7 +17,8 @@ class TestSkillSeeder extends Seeder
      */
     public function run()
     {
-        if (App::environment(['local', 'development'])) {
+        /* Check if the FAKE data should be added in DB. */
+        if (env('TMS_ADD_FAKE_SKILLS', false)) {
             $faker = Faker\Factory::create();
 
             for ($i=0; $i < 30; $i++) {

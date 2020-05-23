@@ -3,14 +3,15 @@
 use Genuineq\Tms\Models\Teacher;
 use October\Rain\Database\Updates\Seeder;
 use Illuminate\Support\Facades\App;
+use Config;
 use Faker;
 
 class TestTeachersSeeder extends Seeder
 {
     public function run()
     {
-        /* Check if the environment is either local OR development. */
-        if (App::environment(['local', 'development'])) {
+        /* Check if the FAKE data should be added in DB. */
+        if (env('TMS_ADD_FAKE_TEACHERS', false)) {
             $faker = Faker\Factory::create('ro_RO');
 
             for ($i=0; $i < 10; $i++) {

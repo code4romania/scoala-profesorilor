@@ -6,14 +6,15 @@ use Genuineq\Tms\Models\LearningPlan;
 use Genuineq\Tms\Models\LearningPlansCourse;
 use October\Rain\Database\Updates\Seeder;
 use Illuminate\Support\Facades\App;
+use Config;
 use Faker;
 
 class TestLearningPlansSeeder extends Seeder
 {
     public function run()
     {
-        /* Check if the environment is either local OR development. */
-        if (App::environment(['local', 'development'])) {
+        /* Check if the FAKE data should be added in DB. */
+        if (env('TMS_ADD_FAKE_LEARNING_PLANS', false)) {
             $faker = Faker\Factory::create('ro_RO');
 
             $totalYearsNumber = 5;

@@ -7,6 +7,7 @@ use Genuineq\Tms\Models\CourseCategory;
 use Genuineq\Tms\Models\CourseSkill;
 use October\Rain\Database\Updates\Seeder;
 use Illuminate\Support\Facades\App;
+use Config;
 use Faker;
 
 class TestCourseSeeder extends Seeder
@@ -18,7 +19,8 @@ class TestCourseSeeder extends Seeder
      */
     public function run()
     {
-        if (App::environment(['local', 'development'])) {
+        /* Check if the FAKE data should be added in DB. */
+        if (env('TMS_ADD_FAKE_COURSES', false)) {
             $faker = Faker\Factory::create();
 
             $courseNumber = 100;
