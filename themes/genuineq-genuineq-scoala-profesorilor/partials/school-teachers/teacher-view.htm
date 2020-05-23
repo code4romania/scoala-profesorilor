@@ -12,7 +12,8 @@ description = "Displays a teacher"
     </div>
 
     <div class="col-12 col-sm-12 col-md-9 col-lg-10 col-xl-10">
-        <h5 class="mb-3 font-weight-bold text-center text-sm-left text-md-left text-lg-left text-xl-left">{{ 'teachers.teacher-view.title'|_ }}</h5>
+
+        <h5 class="mb-3 font-weight-bold text-center text-sm-left text-md-left text-lg-left text-xl-left">{{ teacher.name }}</h5>
 
         <div class="row">
             <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 text-center text-sm-left text-md-left text-lg-left text-xl-left my-2">
@@ -26,6 +27,18 @@ description = "Displays a teacher"
                 <span>{{ 'teachers.teacher-view.description'|_ }}: <strong>{{ teacher.description }}</strong></span>
             </div>
         </div>
+
+         <div class="row bg-default">
+            <div class="col-12 text-left my-2">
+                <h5 class="mb-3 font-weight-bold text-center text-sm-left text-md-left text-lg-left text-xl-left">{{ 'teachers.teacher-view.schools'|_ }}</h5>
+                <ul>
+                    {% for school in teacher.schools %}
+                        <li>{{ school.name }}</li>
+                    {% endfor%}
+                </ul>
+            </div>
+        </div>
+
     </div>
 </div>
 
