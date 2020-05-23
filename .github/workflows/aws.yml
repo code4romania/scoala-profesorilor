@@ -66,6 +66,12 @@ jobs:
         docker build -f ./docker/Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+        
+    - name: Replace image in config
+      uses: datamonsters/replace-action@v2
+      with:
+        files: .github/workflows/tms-app-prod-td.json
+        replacements: '$APP_KEY=${{ secrets.APP_KEY }},$DB_HOST=${{ secrets.DB_HOST }},$DB_PASSWORD=${{ secrets.DB_PASSWORD }}'
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
@@ -81,4 +87,4 @@ jobs:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
         service: tms-app-prod
         cluster: production
-        wait-for-service-stability: true
+        wait-for-service-stability: false
