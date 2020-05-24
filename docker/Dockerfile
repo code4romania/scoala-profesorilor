@@ -74,9 +74,6 @@ RUN mkdir /var/www/storage \
 
 # Copy storage relevant folders & files
 COPY ./storage/static /var/www/storage/static
-# COPY ./storage/framework/classes.php /var/www/storage/framework/classes.php
-# COPY ./storage/framework/packages.php /var/www/storage/framework/packages.php
-# COPY ./storage/framework/services.php /var/www/storage/framework/services.php
 
 # Copy nginx configuration
 COPY ./docker/default /etc/nginx/sites-available/default
