@@ -40,7 +40,7 @@
                 },
                 {
                     "name": "APP_URL",
-                    "value": "scoalaprofesorilor.ro"
+                    "value": "https://scoalaprofesorilor.ro"
                 },
                 {
                     "name": "CMS_ACTIVE_THEME",
@@ -84,7 +84,7 @@
                 },
                 {
                     "name": "CMS_LINK_POLICY",
-                    "value": "detect"
+                    "value": "secure"
                 },
                 {
                     "name": "CMS_ROUTES_CACHE",

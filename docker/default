@@ -2,7 +2,7 @@ server {
     listen 80;
     listen [::]:80;
 
-    server_name www.ec2-52-28-14-180.eu-central-1.compute.amazonaws.com ec2-52-28-14-180.eu-central-1.compute.amazonaws.com;
+    server_name www.scoalaprofesorilor.ro scoalaprofesorilor.ro;
     root /var/www/public;
     index index.php index.html index.htm;
 
