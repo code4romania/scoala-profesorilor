@@ -92,7 +92,7 @@
                 },
                 {
                     "name": "CMS_LINK_POLICY",
-                    "value": "detect"
+                    "value": "secure"
                 },
                 {
                     "name": "MAIL_USERNAME",
@@ -128,7 +128,7 @@
                 },
                 {
                     "name": "CMS_BACKEND_FORCE_SECURE",
-                    "value": "false"
+                    "value": "true"
                 },
                 {
                     "name": "CMS_EDGE_UPDATES",
