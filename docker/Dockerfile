@@ -96,7 +96,7 @@ WORKDIR /var/www
 #Install project dependencies
 RUN composer install --no-interaction --no-dev --prefer-dist --no-scripts \
     && composer clearcache \
-    && php artisan october:mirror public --relative \
+    # && php artisan october:mirror public --relative \
     && chown -R www-data:www-data /var/www \
     && find . -type d \( -path './plugins' -or  -path './storage' -or  -path './themes' -or  -path './plugins/*' -or  -path './storage/*' -or  -path './themes/*' \) -exec chmod g+ws {} \;
 
