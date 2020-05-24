@@ -84,7 +84,7 @@
                 },
                 {
                     "name": "CMS_LINK_POLICY",
-                    "value": "secure"
+                    "value": "detect"
                 },
                 {
                     "name": "CMS_ROUTES_CACHE",
