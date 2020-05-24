@@ -29,7 +29,7 @@
 
 on:
   schedule:
-  - cron: "35 12 * * *"
+  - cron: "0 14 * * *"
 
 name: Deploy to Amazon ECS
 

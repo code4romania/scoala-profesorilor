@@ -19,132 +19,132 @@
             "cpu": 0,
             "environment": [
                 {
-                    "name": "CMS_CONVERT_LINE_ENDINGS",
-                    "value": "true"
-                },
-                {
-                    "name": "APP_ENV",
-                    "value": "production"
-                },
-                {
-                    "name": "MAIL_ENCRYPTION",
-                    "value": ""
-                },
-                {
-                    "name": "CMS_ROUTES_CACHE",
-                    "value": "true"
-                },
-                {
-                    "name": "DB_PORT",
-                    "value": "3306"
-                },
-                {
-                    "name": "MAIL_HOST",
-                    "value": ""
-                },
-                {
-                    "name": "APP_NAME",
-                    "value": "Scoala Profesorilor"
-                },
-                {
-                    "name": "SESSION_LIFETIME",
-                    "value": "120"
-                },
-                {
                     "name": "APP_KEY",
                     "value": "$APP_KEY"
-                },
-                {
-                    "name": "CMS_ACTIVE_THEME",
-                    "value": "genuineq-genuineq-scoala-profesorilor"
-                },
-                {
-                    "name": "CMS_ASSET_DEEP_HASHING",
-                    "value": "true"
-                },
-                {
-                    "name": "SESSION_DRIVER",
-                    "value": "database"
-                },
-                {
-                    "name": "DB_USERNAME",
-                    "value": "tms"
-                },
-                {
-                    "name": "CMS_ASSET_MINIFY",
-                    "value": "true"
-                },
-                {
-                    "name": "MAIL_DRIVER",
-                    "value": ""
-                },
-                {
-                    "name": "APP_URL",
-                    "value": "www.scoalaprofesorilor.ro"
                 },
                 {
                     "name": "APP_DEBUG",
                     "value": "false"
                 },
                 {
-                    "name": "CMS_ASSET_CACHE",
-                    "value": "true"
-                },
-                {
-                    "name": "CMS_LINK_POLICY",
-                    "value": "detect"
-                },
-                {
-                    "name": "MAIL_USERNAME",
-                    "value": ""
-                },
-                {
-                    "name": "CMS_ENABLE_CSRF",
-                    "value": "true"
+                    "name": "APP_ENV",
+                    "value": "production"
                 },
                 {
                     "name": "APP_LOG",
                     "value": "daily"
                 },
                 {
-                    "name": "MAIL_NAME",
+                    "name": "APP_NAME",
                     "value": "Scoala Profesorilor"
                 },
                 {
-                    "name": "DB_HOST",
-                    "value": "$DB_HOST"
+                    "name": "APP_URL",
+                    "value": "scoalaprofesorilor.ro"
                 },
                 {
-                    "name": "MAIL_PORT",
-                    "value": ""
+                    "name": "CMS_ACTIVE_THEME",
+                    "value": "genuineq-genuineq-scoala-profesorilor"
+                },
+                {
+                    "name": "CMS_ASSET_CACHE",
+                    "value": "true"
+                },
+                {
+                    "name": "CMS_ASSET_DEEP_HASHING",
+                    "value": "true"
+                },
+                {
+                    "name": "CMS_ASSET_MINIFY",
+                    "value": "true"
                 },
                 {
                     "name": "CMS_BACKEND_FORCE_REMEMBER",
                     "value": "null"
                 },
                 {
+                    "name": "CMS_BACKEND_FORCE_SECURE",
+                    "value": "true"
+                },
+                {
                     "name": "CMS_BACKEND_URI",
                     "value": "backend-scoala-profesorilor"
                 },
                 {
-                    "name": "CMS_BACKEND_FORCE_SECURE",
-                    "value": "false"
+                    "name": "CMS_CONVERT_LINE_ENDINGS",
+                    "value": "true"
                 },
                 {
                     "name": "CMS_EDGE_UPDATES",
                     "value": "false"
                 },
                 {
+                    "name": "CMS_ENABLE_CSRF",
+                    "value": "true"
+                },
+                {
+                    "name": "CMS_LINK_POLICY",
+                    "value": "secure"
+                },
+                {
+                    "name": "CMS_ROUTES_CACHE",
+                    "value": "true"
+                },
+                {
                     "name": "DB_DATABASE",
                     "value": "tms"
                 },
                 {
-                    "name": "MAIL_PASSWORD",
-                    "value": ""
+                    "name": "DB_HOST",
+                    "value": "$DB_HOST"
                 },
                 {
                     "name": "DB_PASSWORD",
                     "value": "$DB_PASSWORD"
+                },
+                {
+                    "name": "DB_PORT",
+                    "value": "3306"
+                },
+                {
+                    "name": "DB_USERNAME",
+                    "value": "tms"
+                },
+                {
+                    "name": "MAIL_ENCRYPTION",
+                    "value": ""
+                },
+                {
+                    "name": "SESSION_DRIVER",
+                    "value": "database"
+                },
+                {
+                    "name": "SESSION_LIFETIME",
+                    "value": "120"
+                },
+                {
+                    "name": "MAIL_HOST",
+                    "value": ""
+                },
+                {
+                    "name": "MAIL_DRIVER",
+                    "value": ""
+                },
+                {
+                    "name": "MAIL_USERNAME",
+                    "value": ""
+                },
+                {
+                    "name": "MAIL_NAME",
+                    "value": "Scoala Profesorilor"
+                },
+                {
+                    "name": "MAIL_PORT",
+                    "value": ""
+                },
+                {
+                    "name": "MAIL_PASSWORD",
+                    "value": ""
                 }
             ],
             "resourceRequirements": null,
