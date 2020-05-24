@@ -74,9 +74,9 @@ RUN mkdir /var/www/storage \
 
 # Copy storage relevant folders & files
 COPY ./storage/static /var/www/storage/static
-COPY ./storage/framework/classes.php /var/www/storage/framework/classes.php
-COPY ./storage/framework/packages.php /var/www/storage/framework/packages.php
-COPY ./storage/framework/services.php /var/www/storage/framework/services.php
+# COPY ./storage/framework/classes.php /var/www/storage/framework/classes.php
+# COPY ./storage/framework/packages.php /var/www/storage/framework/packages.php
+# COPY ./storage/framework/services.php /var/www/storage/framework/services.php
 
 # Copy nginx configuration
 COPY ./docker/default /etc/nginx/sites-available/default
@@ -95,6 +95,7 @@ WORKDIR /var/www
 
 #Install project dependencies
 RUN composer install --no-interaction --no-dev --prefer-dist --no-scripts \
+    && composer dump-autoload -o \
     && composer clearcache \
     && chown -R www-data:www-data /var/www \
     && find . -type d \( -path './plugins' -or  -path './storage' -or  -path './themes' -or  -path './plugins/*' -or  -path './storage/*' -or  -path './themes/*' \) -exec chmod g+ws {} \;

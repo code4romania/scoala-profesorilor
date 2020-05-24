@@ -475,4 +475,5 @@
   'JanVince\\SmallExtensions\\Models\\BlogFields' => 'plugins/janvince/smallextensions/models/BlogFields.php',
   'Genuineq\\Tms\\Models\\Appraisal' => 'plugins/genuineq/tms/models/Appraisal.php',
   'popcornphp\\redirecttohttps\\Plugin' => 'plugins/popcornphp/redirecttohttps/Plugin.php',
+  'iabsis\\https\\Plugin' => 'plugins/iabsis/https/Plugin.php',
 );
