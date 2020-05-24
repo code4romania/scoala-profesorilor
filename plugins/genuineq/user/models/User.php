@@ -258,7 +258,7 @@ class User extends UserBase
         }
 
         /** Fire global user creation event, */
-        Event::fire('genuineq.user.created');
+        Event::fire('genuineq.user.created', [$this]);
     }
 
     /**

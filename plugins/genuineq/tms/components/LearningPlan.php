@@ -14,6 +14,7 @@ use Genuineq\Tms\Models\Course;
 use Genuineq\Tms\Models\Teacher;
 use Genuineq\Tms\Models\LearningPlansCourse;
 use Genuineq\Tms\Models\LearningPlan as LearningPlanModel;
+use Genuineq\User\Helpers\AuthRedirect;
 
 use Log;
 
@@ -64,9 +65,9 @@ class LearningPlan extends ComponentBase
         }
 
         /** Force authentication in case user is not authenticated. */
-        if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
-        }
+        // if (!Auth::check()) {
+        //     return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        // }
 
         $this->prepareVars();
     }
@@ -427,16 +428,18 @@ class LearningPlan extends ComponentBase
             Flash::success(Lang::get('genuineq.tms::lang.component.learning-plan.message.course_added_successful'));
         }
 
-        /** Extract the received courses filtering options */
-        $options = [
-            'searchInput' => post('learningPlanCourseSearchInput'),
-            'sort' => post('learningPlanCourseSort'),
-            'category' => post('learningPlanCourseCategory'),
-            'accreditation' => post('learningPlanCourseAccreditation'),
-        ];
+        if (!post('noSearch')) {
+            /** Extract the received courses filtering options */
+            $options = [
+                'searchInput' => post('learningPlanCourseSearchInput'),
+                'sort' => post('learningPlanCourseSort'),
+                'category' => post('learningPlanCourseCategory'),
+                'accreditation' => post('learningPlanCourseAccreditation'),
+            ];
 
-        /* Extract the courses based on the received options. */
-        $this->extractLearningPlanCourses($options, post('learningPlanId'));
+            /* Extract the courses based on the received options. */
+            $this->extractLearningPlanCourses($options, post('learningPlanId'));
+        }
         /** Extract the schools of the user. */
         $this->extractSchools();
     }
@@ -468,16 +471,18 @@ class LearningPlan extends ComponentBase
             Flash::success(Lang::get('genuineq.tms::lang.component.learning-plan.message.course_deleted_successful'));
         }
 
-        /** Extract the received courses filtering options */
-        $options = [
-            'searchInput' => post('learningPlanCourseSearchInput'),
-            'sort' => post('learningPlanCourseSort'),
-            'category' => post('learningPlanCourseCategory'),
-            'accreditation' => post('learningPlanCourseAccreditation'),
-        ];
+        if (!post('noSearch')) {
+            /** Extract the received courses filtering options */
+            $options = [
+                'searchInput' => post('learningPlanCourseSearchInput'),
+                'sort' => post('learningPlanCourseSort'),
+                'category' => post('learningPlanCourseCategory'),
+                'accreditation' => post('learningPlanCourseAccreditation'),
+            ];
 
-        /* Extract the courses based on the received options. */
-        $this->extractLearningPlanCourses($options, post('learningPlanId'));
+            /* Extract the courses based on the received options. */
+            $this->extractLearningPlanCourses($options, post('learningPlanId'));
+        }
         /** Extract the schools of the user. */
         $this->extractSchools();
     }

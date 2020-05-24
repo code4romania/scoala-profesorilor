@@ -12,7 +12,7 @@ class BuilderTableCreateGenuineqTmsSuppliers extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
             $table->string('name')->comment = "The name of the supplier.";
-            $table->string('slug')->comment = "The slug of the supplier.";
+            $table->string('slug')->unique()->comment = "The slug of the supplier.";
             $table->string('email', 75)->comment = "The contact email of the supplier.";
             $table->string('phone', 12)->comment = "The contact phone of the supplier.";
             $table->text('description')->nullable()->comment = "The description of the supplier.";

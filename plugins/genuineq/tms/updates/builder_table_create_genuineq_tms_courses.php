@@ -12,7 +12,7 @@ class BuilderTableCreateGenuineqTmsCourses extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
             $table->string('name')->comment = "The name of the course.";
-            $table->string('slug')->comment = "The slug of the course.";
+            $table->string('slug')->unique()->comment = "The slug of the course.";
             $table->integer('supplier_id')->unsigned()->nullable();
             $table->double('duration', 10, 1)->comment = "The total duration of the course in hours.";
             $table->string('address')->comment = "The address where the course will take place.";

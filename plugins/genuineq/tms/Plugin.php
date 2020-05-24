@@ -66,7 +66,7 @@ class Plugin extends PluginBase
         });
 
         /** Define listener of the "genuineq.user.created" event */
-        Event::listen('genuineq.user.created', function ($user, $data) {
+        Event::listen('genuineq.user.created', function ($user) {
             /** Create user profile based on user type. */
             if ('school' == $user->type) {
                 $profile = new School(['user_id' => $user->id]);

@@ -12,7 +12,7 @@ class BuilderTableCreateGenuineqTmsTeachers extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
             $table->string('name', 50)->nullable()->comment = "The name of the teacher.";
-            $table->string('slug')->nullable()->comment = "The slug of the teacher.";
+            $table->string('slug')->unique()->nullable()->comment = "The slug of the teacher.";
             $table->string('phone', 15)->nullable()->comment = "The phone number of the teacher.";
             $table->dateTime('birth_date')->nullable()->comment = "The birth date of the teacher.";
             $table->integer('address_id')->nullable()->unsigned();

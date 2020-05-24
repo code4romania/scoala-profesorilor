@@ -111,6 +111,13 @@ class LearningPlan extends Model
         return $credits;
     }
 
+    /**
+     * Function that checks if the learning plan
+     *  has a specific course.
+     */
+    public function hasCourse($courseId){
+        return ($this->realCourses->where('id', $courseId)->count()) ? (true) : (false);
+    }
 
     /***********************************************
      ******************** Events *******************

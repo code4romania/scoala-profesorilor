@@ -10,13 +10,15 @@ modelKeyColumn = "slug"
 displayColumn = "name"
 notFoundMessage = "Record not found"
 
+[learningPlan]
+forceSecure = 0
+
 [session]
 security = "all"
 allowedUserGroups[] = "teacher"
 allowedUserGroups[] = "school"
 ==
 <?php
-use Genuineq\Tms\Models\Category;
     use Genuineq\Tms\Models\Course;
     use October\Rain\Support\Collection;
 
@@ -75,9 +77,12 @@ use Genuineq\Tms\Models\Category;
                 <p class="my-1 font-weight-bold">{{ course.credits }} {{ 'course.credits'|_ }} <span class="mx-1">&vert;</span> {{ course.price }} {{ 'general.coin'|_ }}</p>
             </div>
 
-            <div class="col-auto ml-auto">
-                <a href="#" class="btn btn-sm btn-success z-depth-0 rounded m-0" type="button">Sign Up</a>
-            </div>
+            {% if user %}
+                <div id="add-remove-course" class="col-auto ml-auto">
+                    {% partial "teacher-learning-plans/learning-plan-course-add-remove-btn" %}
+                </div>
+            {% endif %}
+
         </div>
     </div>
 </section>
