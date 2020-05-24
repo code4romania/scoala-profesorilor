@@ -28,8 +28,13 @@
 #    types: [created]
 
 on:
-  schedule:
-  - cron: "0 14 * * *"
+  push:
+    branches:
+      - master
+
+#on:
+#  schedule:
+#  - cron: "0 14 * * *"
 
 name: Deploy to Amazon ECS
 
