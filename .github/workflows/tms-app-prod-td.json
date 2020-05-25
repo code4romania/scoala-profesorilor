@@ -64,7 +64,7 @@
                 },
                 {
                     "name": "CMS_BACKEND_FORCE_SECURE",
-                    "value": "false"
+                    "value": "true"
                 },
                 {
                     "name": "CMS_BACKEND_URI",
@@ -84,7 +84,7 @@
                 },
                 {
                     "name": "CMS_LINK_POLICY",
-                    "value": "insecure"
+                    "value": "force"
                 },
                 {
                     "name": "CMS_ROUTES_CACHE",
