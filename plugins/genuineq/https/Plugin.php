@@ -1,4 +1,4 @@
-<?php namespace Iabsis\Https;
+<?php namespace Genuineq\Https;
 
 use System\Classes\PluginBase;
 
@@ -18,7 +18,7 @@ class Plugin extends PluginBase
         return [
             'name'        => 'https',
             'description' => 'No description provided yet...',
-            'author'      => 'iabsis',
+            'author'      => 'genuineq',
             'icon'        => 'icon-leaf'
         ];
     }
