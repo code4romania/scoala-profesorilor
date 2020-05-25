@@ -117,7 +117,7 @@ class SchoolTeacherProfile extends ComponentBase
     }
 
     /**
-     * Prepares a school teacher for viewing.
+     * Adds a teacher to a school.
      */
     public function onTeacherAdd()
     {
@@ -138,10 +138,20 @@ class SchoolTeacherProfile extends ComponentBase
             'contract_type' => post('school_teacher_add_contract_type_id'),
         ];
 
-        if (SchoolTeacher::createSchoolTeacher($data)) {
-            Flash::success(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.teachers_import_add_successful'));
-        } else {
-            Flash::error(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.teachers_import_add_failed'));
+        $result = SchoolTeacher::createSingleSchoolTeacher($data);
+        switch ($result['value']) {
+            case 1:
+                Flash::success($result['status']);
+                break;
+            case 2:
+                Flash::error($result['status']);
+                break;
+            case 3:
+                throw new ValidationException($result['status']);
+                break;
+            case 4:
+                throw new ValidationException(['identifier' => [$result['status']]]);
+                break;
         }
 
         /** Prepare the static data. */
@@ -202,7 +212,6 @@ class SchoolTeacherProfile extends ComponentBase
         /** Extract the school. */
         $school = Auth::getUser()->profile;
 
-
         /** Extract the school teacher link and remove it. */
         $school->teachers()->detach($teacher->id);
 
@@ -210,7 +219,7 @@ class SchoolTeacherProfile extends ComponentBase
          * Delete any course sponsorships from the current school,
          *  from the active learning plan of the teacher.
          */
-        $learningPlan = $teacher->getActiveLearningPlan();
+        $learningPlan = $teacher->active_learning_plan;
 
         /** Check if the learning plan has any courses. */
         if ($learningPlan && $learningPlan->courses) {
@@ -231,9 +240,10 @@ class SchoolTeacherProfile extends ComponentBase
             }
         }
 
-        /////////////////////////////////////
-        //TO DO: Add appraisal remove/close
-        /////////////////////////////////////
+        /** Close the active appraisal. */
+        $appraisal = $school->appraisals->where('teacher_id', $teacher->id)->first();
+        $appraisal->status = 'closed';
+        $appraisal->save();
 
         /** Prepare the static data. */
         $this->prepareAutocompleteVars();

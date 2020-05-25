@@ -4,6 +4,7 @@ use Lang;
 use Model;
 use Illuminate\Support\Collection;
 use Genuineq\Tms\Models\LearningPlan;
+use Genuineq\Tms\Models\Appraisal;
 
 /**
  * Model
@@ -230,6 +231,21 @@ class Teacher extends Model
         $page = ($query->paginate($perPage, $page)->lastPage() < $page) ? (1) : ($page);
 
         return $query->paginate($perPage, $page);
+    }
+
+    /***********************************************
+     ******************* Functions *****************
+     ***********************************************/
+
+    /**
+     * Function that creates a new learning plan
+     *  for the teacher;
+     */
+    public function newLearningPlan()
+    {
+        $learningPlan = new LearningPlan();
+        $learningPlan->teacher_id = $this->id;
+        $learningPlan->save();
     }
 
     /***********************************************

@@ -363,6 +363,16 @@
                 'account_new_password_confirmed' => 'Parolele nu se potrivesc',
                 'account_new_password_confirmation_required' => 'Confirmarea noii parole este obligatorie',
                 'account_new_password_confirmation_required_with' => 'Confirmarea noii parole este obligatorie',
+
+                'name_required' => 'Numele este obligatoriu',
+                'name_regex' => 'Numele poate contine doar litere, spatiu si caracterul -',
+                'email_required' => 'Adresa de email este obligatorie',
+                'email_between' => 'Adresa de email trebuie sa aiba intre 6 si 255 de caractere',
+                'email_email' => 'Adresa de email nu este valida',
+                'email_unique' => 'Adresa de email este deja folosita',
+                'identifier_required' => 'CNP-ul este obligatoriu pentru identificare unica',
+                'identifier_unique' => 'CNP-ul introdus este deja folosit',
+                'identifier_invalid' => 'CNP-ul introdus nu este valid',
             ],
             'message' => [
                 'teacher_not_linked' => 'Nu puteti modifica un profesor neasociat',
@@ -380,8 +390,9 @@
                 'teachers_import_failed' => 'Nu a fost specificat un fisier.',
                 'teachers_import_sheet_skipped' => 'Sheet-ul urmator nu a fost parcurs: ',
                 'teachers_import_failed' => 'Import-ul a esut.',
+                'teachers_import_association_successful' => 'Profesorul a fost asociat cu succes',
+                'teachers_import_association_exists' => 'Profesorul este deja asociat',
                 'teachers_import_add_successful' => 'Profesorul a fost adaugat cu succes',
-                'teachers_import_add_failed' => 'Adaugarea profesorului a esuat',
                 'validation_failed' => 'Validarea '
             ],
         ],

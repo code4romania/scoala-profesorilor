@@ -53,6 +53,10 @@ class LearningPlan extends Model
     public $rules = [
     ];
 
+    /***********************************************
+     ******************* Mutators ******************
+     ***********************************************/
+
     public function getTeacherNameAttribute(){
         return $this->teacher->name;
     }
@@ -111,12 +115,24 @@ class LearningPlan extends Model
         return $credits;
     }
 
+    /***********************************************
+     ******************* Functions *****************
+     ***********************************************/
+
     /**
      * Function that checks if the learning plan
      *  has a specific course.
      */
     public function hasCourse($courseId){
         return ($this->realCourses->where('id', $courseId)->count()) ? (true) : (false);
+    }
+
+    /**
+     * Function that archives the learning plan.
+     */
+    public function archive(){
+        $this->status = 0;
+        $this->save();
     }
 
     /***********************************************

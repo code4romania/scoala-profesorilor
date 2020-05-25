@@ -2,6 +2,7 @@
 
 use Model;
 use Genuineq\Tms\Models\School\Teacher;
+use Genuineq\Tms\Models\Semester;
 
 /**
  * Model
@@ -30,12 +31,10 @@ class Appraisal extends Model
     /**
      * Skills relation
      */
-    public $belongsToMany = [
-        'skills' => [
-            'Genuineq\Tms\Models\Skill',
-            'table' => 'genuineq_tms_appraisals_skills',
-            'order' => 'name',
-        ],
+    public $hasOne = [
+        'firstSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'skill_1_id'],
+        'secondSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'skill_2_id'],
+        'thirdSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'skill_3_id']
     ];
 
     /**
@@ -70,5 +69,17 @@ class Appraisal extends Model
      */
     public function getSemesterNameAttribute(){
         return $this->semester->year . '-' . $this->semester->semester;
+    }
+
+    /***********************************************
+     ******************** Events *******************
+     ***********************************************/
+
+    /**
+     * Create all dependencies;
+     */
+    public function beforeCreate()
+    {
+        $this->semester_id = Semester::latest()->first()->id;
     }
 }

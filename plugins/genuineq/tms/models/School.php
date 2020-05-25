@@ -59,6 +59,7 @@ class School extends Model
      */
     public $hasMany = [
         'learning_plans_course' => 'Genuineq\Tms\Models\LearningPlansCourse',
+        'appraisals' => 'Genuineq\Tms\Models\Appraisal',
     ];
 
     /**

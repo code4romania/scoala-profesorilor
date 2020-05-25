@@ -344,7 +344,7 @@ return [
                 'cui_required' => 'CUI-ul scolii este obligatoriu pentru identificare unica',
                 'cui_unique' => 'CUI-ul scolii este deja folosit, va rugam sa va logati',
                 'sid_required' => 'CNP-ul este obligatoriu pentru identificare unica',
-                'sid_unique' => 'CNP-ul introsus este deja folosit, va rugam sa va logati',
+                'sid_unique' => 'CNP-ul introdus este deja folosit, va rugam sa va logati',
                 'sid_invalid' => 'CNP-ul introdus nu este valid',
                 'password_required' => 'Parola este obligatorie',
                 'password_between_s' => 'Parola trebuie sa aiba intre ',
