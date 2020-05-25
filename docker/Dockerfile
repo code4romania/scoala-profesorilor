@@ -84,7 +84,7 @@ COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Copy entrypoint script
 COPY ./docker/docker-entrypoint.sh /usr/local/bin/
-# Backwards compat
+# Backwards compatibility
 RUN ln -s /usr/local/bin/docker-entrypoint.sh /
 
 # Set working directory
