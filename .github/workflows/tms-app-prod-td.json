@@ -64,7 +64,7 @@
                 },
                 {
                     "name": "CMS_BACKEND_FORCE_SECURE",
-                    "value": "false"
+                    "value": "true"
                 },
                 {
                     "name": "CMS_BACKEND_URI",
@@ -84,7 +84,7 @@
                 },
                 {
                     "name": "CMS_LINK_POLICY",
-                    "value": "insecure"
+                    "value": "secure"
                 },
                 {
                     "name": "CMS_ROUTES_CACHE",
@@ -111,10 +111,6 @@
                     "value": "tms"
                 },
                 {
-                    "name": "MAIL_ENCRYPTION",
-                    "value": ""
-                },
-                {
                     "name": "SESSION_DRIVER",
                     "value": "database"
                 },
@@ -128,7 +124,7 @@
                 },
                 {
                     "name": "MAIL_DRIVER",
-                    "value": ""
+                    "value": "smtp"
                 },
                 {
                     "name": "MAIL_USERNAME",
@@ -144,6 +140,10 @@
                 },
                 {
                     "name": "MAIL_PASSWORD",
+                    "value": ""
+                },
+                {
+                    "name": "MAIL_ENCRYPTION",
                     "value": ""
                 }
             ],
