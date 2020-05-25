@@ -154,7 +154,7 @@
                 {
                     "readOnly": null,
                     "containerPath": "/var/www/storage/app",
-                    "sourceVolume": "temp_pv"
+                    "sourceVolume": "tms_prod_persistent_volume"
                 }
             ],
             "workingDirectory": null,
