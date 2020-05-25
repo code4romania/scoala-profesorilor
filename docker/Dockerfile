@@ -86,7 +86,7 @@ COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY ./docker/docker-entrypoint.sh /usr/local/bin/
 # Backwards compat
 RUN chmod 777 /usr/local/bin/docker-entrypoint.sh \
-    ln -s /usr/local/bin/docker-entrypoint.sh /
+     && ln -s /usr/local/bin/docker-entrypoint.sh /
 
 # Set working directory
 WORKDIR /var/www
