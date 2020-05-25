@@ -274,6 +274,8 @@
             'objectives_set' => 'Obiective setate',
             'skills_set' => 'Skill-uri alese',
             'closed' => 'Inchis',
+            'asc' => 'Crescator',
+            'desc' => 'Descrescator',
         ],
     ],
 
