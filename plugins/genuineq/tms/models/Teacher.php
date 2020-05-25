@@ -91,7 +91,8 @@ class Teacher extends Model
     /**
      * Function that returns the birth date in a frontend format
      */
-    public function getFormatedBirthDateAttribute(){
+    public function getFormatedBirthDateAttribute()
+    {
         return date('d-m-Y', strtotime($this->birth_date));
     }
 
@@ -99,21 +100,24 @@ class Teacher extends Model
      * Function that extracts the email from the user
      *  which has this profile
      */
-    public function getEmailAttribute(){
+    public function getEmailAttribute()
+    {
         return ($this->user) ? ($this->user->email) : ('');
     }
 
     /**
      * Function that extracts the active learning plan.
      */
-    public function getActiveLearningPlanAttribute(){
+    public function getActiveLearningPlanAttribute()
+    {
         return $this->learning_plans->where('status', 1)->first();
     }
 
     /**
      * Function that extracts the proposed requests.
      */
-    public function getProposedRequestsAttribute(){
+    public function getProposedRequestsAttribute()
+    {
         return $this->requests
                     ->where('learning_plan_id', $this->active_learning_plan->id)
                     ->where('status', 'proposed');
@@ -122,7 +126,8 @@ class Teacher extends Model
     /**
      * Function that extracts the accepted requests.
      */
-    public function getAcceptedRequestsAttribute(){
+    public function getAcceptedRequestsAttribute()
+    {
         return $this->requests
                     ->where('learning_plan_id', $this->active_learning_plan->id)
                     ->where('status', 'accepted');
@@ -131,7 +136,8 @@ class Teacher extends Model
     /**
      * Function that extracts the declined requests.
      */
-    public function getDeclinedRequestsAttribute(){
+    public function getDeclinedRequestsAttribute()
+    {
         return $this->requests
                     ->where('learning_plan_id', $this->active_learning_plan->id)
                     ->where('status', 'declined');
@@ -141,7 +147,8 @@ class Teacher extends Model
      * Function that merges the declined requests from all
      *  the schools in one collection.
      */
-    public function getSchoolDeclinedRequestsAttribute(){
+    public function getSchoolDeclinedRequestsAttribute()
+    {
         $declinedRequests = new Collection();
 
         foreach ($this->schools as $school) {
@@ -152,7 +159,36 @@ class Teacher extends Model
     }
 
     /***********************************************
-     ******************** Search *******************
+     ******************* Functions *****************
+     ***********************************************/
+
+    /**
+     * Function that creates a new learning plan
+     *  for the teacher;
+     */
+    public function newLearningPlan()
+    {
+        $learningPlan = new LearningPlan();
+        $learningPlan->teacher_id = $this->id;
+        $learningPlan->save();
+    }
+
+    /***********************************************
+     ******************** Events *******************
+     ***********************************************/
+
+    /**
+     * Create all dependencies;
+     */
+    public function afterCreate()
+    {
+        $learningPlan = new LearningPlan();
+        $learningPlan->teacher_id = $this->id;
+        $learningPlan->save();
+    }
+
+    /***********************************************
+     **************** Search/Filter ****************
      ***********************************************/
 
     /**
@@ -160,7 +196,8 @@ class Teacher extends Model
      *
      * @param options An array of options to use.
      */
-    public function scopeSchoolTeachers($query, $options = []){
+    public function scopeSchoolTeachers($query, $options = [])
+    {
         /** Define the default options. */
         extract(array_merge([
             'page' => 1,
@@ -234,42 +271,14 @@ class Teacher extends Model
     }
 
     /***********************************************
-     ******************* Functions *****************
-     ***********************************************/
-
-    /**
-     * Function that creates a new learning plan
-     *  for the teacher;
-     */
-    public function newLearningPlan()
-    {
-        $learningPlan = new LearningPlan();
-        $learningPlan->teacher_id = $this->id;
-        $learningPlan->save();
-    }
-
-    /***********************************************
-     ******************** Events *******************
-     ***********************************************/
-
-    /**
-     * Create all dependencies;
-     */
-    public function afterCreate()
-    {
-        $learningPlan = new LearningPlan();
-        $learningPlan->teacher_id = $this->id;
-        $learningPlan->save();
-    }
-
-    /***********************************************
      ***************** Static data *****************
      ***********************************************/
 
     /**
      * Function that returns seniority levels used for filtering.
      */
-    public static function getFilterSeniorityLevel(){
+    public static function getFilterSeniorityLevel()
+    {
         /** Extract the list of seniority levels. */
         foreach (SeniorityLevel::all() as $seniorityLevel) {
             $seniorityLevels[$seniorityLevel->name] = $seniorityLevel->id;
@@ -284,7 +293,8 @@ class Teacher extends Model
     /**
      * Function that returns school levels used for filtering.
      */
-    public static function getFilterSchoolLevel(){
+    public static function getFilterSchoolLevel()
+    {
         /** Extract the list of school levels. */
         foreach (SchoolLevel::all() as $schoolLevel) {
             $schoolLevels[$schoolLevel->name] = $schoolLevel->id;
@@ -299,7 +309,8 @@ class Teacher extends Model
     /**
      * Function that returns contract types used for filtering.
      */
-    public static function getFilterContractType(){
+    public static function getFilterContractType()
+    {
         /** Extract the list of contract types. */
         foreach (ContractType::all() as $contractType) {
             $contractTypes[$contractType->name] = $contractType->id;
@@ -314,7 +325,8 @@ class Teacher extends Model
     /**
      * Function that returns values used for sorting.
      */
-    public static function getSortingTypes(){
+    public static function getSortingTypes()
+    {
         return [
             Lang::get('genuineq.tms::lang.teacher.frontend.name_asc') => 'name asc',
             Lang::get('genuineq.tms::lang.teacher.frontend.name_desc') => 'name desc',

@@ -1,0 +1,41 @@
+description = "Displays the learning plan course search pagination."
+
+[viewBag]
+==
+<ul class="pagination pg-darkgrey justify-content-center">
+    {% for i in 1..learningPlanCoursesPages %}
+        {% if i == learningPlanCoursesPage %}
+            <li class="page-item active" data-page="{{ i }}" data-id="{{ learningPlan.id }}">
+                <a class="page-link learning-plan-course-search-pagination" data-page="{{ i }}" data-id="{{ learningPlan.id }}">{{ i }}</a>
+            </li>
+        {% else %}
+            <li class="page-item" data-page="{{ i }}" data-id="{{ learningPlan.id }}">
+                <a class="page-link learning-plan-course-search-pagination" data-page="{{ i }}" data-id="{{ learningPlan.id }}">{{ i }}</a>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+
+<script type="text/javascript">
+    $('.learning-plan-course-search-pagination').on('click', function () {
+        /* Extract the clicked page. */
+        var $newPage = $(this).data('page');
+        /* Extract the clicked learning plan ID. */
+        var $learningPlanId = $(this).data('id');
+
+        /* Select the course select form and send the request */
+        $('#learningPlanCourseSearchForm').request(
+            'onLearningPlanCourseSearch',
+            {
+                update: {
+                    'teacher-learning-plans/learning-plan-course-grid': '#learningPlanCourseSearchResults',
+                    'teacher-learning-plans/learning-plan-course-pagination': '#learningPlanCourseSearchPagination'
+                },
+                data: {
+                    page: $newPage,
+                    learningPlanId: $learningPlanId
+                }
+            }
+        );
+    });
+</script>

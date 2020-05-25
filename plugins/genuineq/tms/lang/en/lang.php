@@ -265,6 +265,16 @@
         ],
 
         'backend-menu' => 'Appraisals',
+
+        'frontend' => [
+            'all_statuses' => 'Toate starile',
+            'all_years' => 'Toti anii',
+            'all_semesters' => 'Toate semestrele',
+            'new' => 'Nou',
+            'objectives_set' => 'Obiective setate',
+            'skills_set' => 'Skill-uri alese',
+            'closed' => 'Inchis',
+        ],
     ],
 
     'component' => [
@@ -410,7 +420,7 @@
 
         'learning-plan' => [
             'name' => 'Learning Plan',
-            'description' => 'Allows to edit a learning plan',
+            'description' => 'Allows to view and update a learning plan',
             'backend' => [
                 'force_secure' => 'Force secure protocol',
                 'force_secure_desc' => 'Always redirect the URL with the HTTPS schema',
@@ -434,6 +444,15 @@
                 'course_deleted_successful' => 'Cursul a fost sters cu succes',
                 'school_not_valid' => 'Scoala selectata nu exista sau nu sunteti asociat cu ea',
                 'course_deleted_not_allowed' => 'Nu puteti sa stergeti un curs marcat ca obligatoriu de catre o scoala'
+            ],
+        ],
+
+        'appraisal' => [
+            'name' => 'Appraisal',
+            'description' => 'Allows to view and update an appraisal',
+            'validation' => [
+            ],
+            'message' => [
             ],
         ],
     ],

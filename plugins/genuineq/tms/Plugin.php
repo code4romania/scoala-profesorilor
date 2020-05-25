@@ -18,6 +18,7 @@ class Plugin extends PluginBase
             'Genuineq\Tms\Components\SchoolTeacherProfile' => 'schoolTeacherProfile',
             'Genuineq\Tms\Components\CourseSearch' => 'courseSearch',
             'Genuineq\Tms\Components\LearningPlan' => 'learningPlan',
+            'Genuineq\Tms\Components\Appraisal' => 'appraisal',
         ];
     }
 

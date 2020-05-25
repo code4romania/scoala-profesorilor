@@ -3,7 +3,7 @@ description = "Displays the learning plan course search form."
 [viewBag]
 ==
 <form id="learningPlanCourseSearchForm">
-    <div id="learningPlanCourseSearchFormourseSearchFormContent" class="input-group mb-3">
+    <div id="learningPlanCourseSearchFormContent" class="input-group mb-3">
 
         <div class="input-group-prepend">
             <span class="input-group-text md-addon border border-white bg-white"><i class="fa fa-search"></i></span>
@@ -42,7 +42,7 @@ description = "Displays the learning plan course search form."
     function learningPlanCourseSearchFormSubmit(){
         /* Extract the clicked page. */
         var $newPage = $('#learningPlanCourseSearchPagination > ul > li.active').data('page');
-        /* Extract the clicked learning plan ID. */
+        /* Extract the active learning plan ID. */
         var $learningPlanId = $('#learningPlanCourseSearchPagination > ul > li.active').data('id');
 
         /* Select the course select form and send the request */
@@ -58,7 +58,7 @@ description = "Displays the learning plan course search form."
         );
     }
 
-    $('#learningPlanCourseSearchFormourseSearchFormContent').on('change', 'select', function () {
+    $('#learningPlanCourseSearchFormContent').on('change', 'select', function () {
         learningPlanCourseSearchFormSubmit();
     });
 

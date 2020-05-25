@@ -21,7 +21,7 @@ use Log;
 /**
  * School profile component
  *
- * Allows the update of a school profile.
+ * Allows to view and update a learning plan.
  */
 class LearningPlan extends ComponentBase
 {
@@ -278,6 +278,10 @@ class LearningPlan extends ComponentBase
         $this->page['proposedRequests'] = Auth::getUser()->profile->getProposedLearningPlanRequests($this->page['teacher']->active_learning_plan->id);
         $this->page['teacherDeclinedRequests'] = $this->page['teacher']->declined_requests;
     }
+
+    /***********************************************
+     ****************** Teacher ********************
+     ***********************************************/
 
     /**
      * Prepares all the data needed for updating the learning plan.

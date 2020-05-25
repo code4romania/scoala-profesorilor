@@ -58,27 +58,9 @@ class Course extends Model
         ],
     ];
 
-    /**
-     * Function that formats the start date of the course
-     *  to d.m.Y format.
-     *
-     * @return string The formated course start date.
-     */
-    public function startDate(){
-        $date = new DateTime($this->start_date);
-        return $date->format('d.m.Y');
-    }
-
-    /**
-     * Function that formats the end date of the course
-     *  to d.m.Y format.
-     *
-     * @return string The formated course end date.
-     */
-    public function endDate(){
-        $date = new DateTime($this->end_date);
-        return $date->format('d.m.Y');
-    }
+    /***********************************************
+     ******************* Mutators ******************
+     ***********************************************/
 
     /**
      * Function that calculates the color of a course
@@ -103,6 +85,38 @@ class Course extends Model
         return $color;
     }
 
+    /***********************************************
+     ******************* Functions *****************
+     ***********************************************/
+
+    /**
+     * Function that formats the start date of the course
+     *  to d.m.Y format.
+     *
+     * @return string The formated course start date.
+     */
+    public function startDate()
+    {
+        $date = new DateTime($this->start_date);
+        return $date->format('d.m.Y');
+    }
+
+    /**
+     * Function that formats the end date of the course
+     *  to d.m.Y format.
+     *
+     * @return string The formated course end date.
+     */
+    public function endDate()
+    {
+        $date = new DateTime($this->end_date);
+        return $date->format('d.m.Y');
+    }
+
+    /***********************************************
+     **************** Search/Filter ****************
+     ***********************************************/
+
     /**
      * Function used for searching, filtering, sorting and paginating courses.
      *
@@ -112,7 +126,8 @@ class Course extends Model
      *
      * @return Collection of courses
      */
-    public function scopeFilterCourses($query, $options = [], $_courses = null){
+    public function scopeFilterCourses($query, $options = [], $_courses = null)
+    {
         /** Define the default options. */
         extract(array_merge([
             'page' => 1,
@@ -161,10 +176,15 @@ class Course extends Model
         return $query->paginate($perPage, $page);
     }
 
+    /***********************************************
+     ***************** Static data *****************
+     ***********************************************/
+
     /**
      * Function that returns category values used for filtering.
      */
-    public static function getFilterCategories(){
+    public static function getFilterCategories()
+    {
         /** Extract the list of categories. */
         foreach (Category::all() as $category) {
             $categories[$category->name] = $category->id;
@@ -183,7 +203,8 @@ class Course extends Model
     /**
      * Function that returns accreditation values used for filtering.
      */
-    public static function getFilterAccreditations(){
+    public static function getFilterAccreditations()
+    {
         /** Construct the list of accreditations. */
         return [
             Lang::get('genuineq.tms::lang.course.frontend.all_accreditations') => -1,
@@ -195,7 +216,8 @@ class Course extends Model
     /**
      * Function that returns values used for sorting.
      */
-    public static function getSortingTypes(){
+    public static function getSortingTypes()
+    {
         return [
             Lang::get('genuineq.tms::lang.course.frontend.name_asc') => 'name asc',
             Lang::get('genuineq.tms::lang.course.frontend.name_desc') => 'name desc',

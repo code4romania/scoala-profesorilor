@@ -15,6 +15,9 @@ forceSecure = 0
 
 [learningPlan]
 forceSecure = 0
+
+[appraisal]
+forceSecure = 0
 ==
 <?php
     function onStart()
@@ -55,14 +58,21 @@ forceSecure = 0
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" id="learning-plan-tab-nav" data-toggle="tab" href="#learning-plan-tab-body" role="tab" aria-controls="learning-plan-tab-body" aria-selected="false" data-request="onTeacherViewLearningPlan" data-request-update="teacher-profile/learning-plan-tab: '#learning-plan-tab-content'">{{ 'teacher.profile.tab.courses'|_ }}</a>
+                <a class="nav-link" id="learning-plan-tab-nav" data-toggle="tab" href="#learning-plan-tab-body" role="tab" aria-controls="learning-plan-tab-body" aria-selected="false" data-request="onTeacherViewLearningPlan" data-request-update="teacher-profile/learning-plan-tab: '#learning-plan-tab-content'">{{ 'teacher.profile.tab.learning-plan'|_ }}</a>
             </li>
+
+            {% if profile.schools.count() %}
+                <li class="nav-item">
+                    <a class="nav-link" id="appraisals-tab-nav" data-toggle="tab" href="#appraisals-tab-body" role="tab" aria-controls="appraisals-tab-body" aria-selected="false" data-request="onTeacherAppraisalsView" data-request-update="teacher-profile/appraisals-tab: '#appraisals-tab-content'">{{ 'teacher.profile.tab.appraisals'|_ }}</a>
+                </li>
+            {% endif %}
         </ul>
     </div>
 </div>
 
 <div class="container">
     <div class="tab-content" id="myTabContent">
+
         <div class="tab-pane fade show active" id="account-tab-body" role="tabpanel" aria-labelledby="account-tab-body">
             <div class="row my-5">
                 {% partial "teacher-profile/account-tab" teacherUser=user %}
@@ -81,5 +91,18 @@ forceSecure = 0
             </div>
 
         </div>
+
+        {% if profile.schools.count() %}
+            <div class="tab-pane fade" id="appraisals-tab-body" role="tabpanel" aria-labelledby="appraisals-tab-body">
+
+                <div class="row my-5">
+                    <div class="col-12" id="appraisals-tab-content">
+                        {% partial "teacher-profile/appraisals-tab" %}
+                    </div>
+                </div>
+
+            </div>
+        {% endif %}
+
     </div>
 </div>

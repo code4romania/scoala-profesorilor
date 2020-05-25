@@ -477,4 +477,5 @@
   'popcornphp\\redirecttohttps\\Plugin' => 'plugins/popcornphp/redirecttohttps/Plugin.php',
   'iabsis\\https\\Plugin' => 'plugins/iabsis/https/Plugin.php',
   'genuineq\\https\\Plugin' => 'plugins/genuineq/https/Plugin.php',
+  'Genuineq\\Tms\\Components\\Appraisal' => 'plugins/genuineq/tms/components/Appraisal.php',
 );
