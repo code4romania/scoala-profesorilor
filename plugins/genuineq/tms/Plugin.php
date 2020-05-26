@@ -13,12 +13,12 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            'Genuineq\Tms\Components\SchoolProfile' => 'schoolProfile',
-            'Genuineq\Tms\Components\TeacherProfile' => 'teacherProfile',
-            'Genuineq\Tms\Components\SchoolTeacherProfile' => 'schoolTeacherProfile',
-            'Genuineq\Tms\Components\CourseSearch' => 'courseSearch',
-            'Genuineq\Tms\Components\LearningPlan' => 'learningPlan',
-            'Genuineq\Tms\Components\Appraisal' => 'appraisal',
+            'Genuineq\Tms\Components\SchoolProfile' => 'schoolProfileComponent',
+            'Genuineq\Tms\Components\TeacherProfile' => 'teacherProfileComponent',
+            'Genuineq\Tms\Components\SchoolTeacherProfile' => 'schoolTeacherProfileComponent',
+            'Genuineq\Tms\Components\CourseSearch' => 'courseSearchComponent',
+            'Genuineq\Tms\Components\LearningPlan' => 'learningPlanComponent',
+            'Genuineq\Tms\Components\Appraisal' => 'appraisalComponent',
         ];
     }
 

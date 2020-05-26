@@ -1,39 +1,39 @@
-description = "Displays the learning plan course search pagination."
+description = "Displays the appraisals search pagination."
 
 [viewBag]
 ==
 <ul class="pagination pg-darkgrey justify-content-center">
-    {% for i in 1..learningPlanCoursesPages %}
-        {% if i == learningPlanCoursesPage %}
-            <li class="page-item active" data-page="{{ i }}" data-id="{{ learningPlan.id }}">
-                <a class="page-link learning-plan-course-search-pagination" data-page="{{ i }}" data-id="{{ learningPlan.id }}">{{ i }}</a>
+    {% for i in 1..appraisalsPages %}
+        {% if i == appraisalsPage %}
+            <li class="page-item active" data-page="{{ i }}" data-id="{{ teacher.id }}">
+                <a class="page-link appraisal-search-pagination" data-page="{{ i }}" data-id="{{ teacher.id }}">{{ i }}</a>
             </li>
         {% else %}
-            <li class="page-item" data-page="{{ i }}" data-id="{{ learningPlan.id }}">
-                <a class="page-link learning-plan-course-search-pagination" data-page="{{ i }}" data-id="{{ learningPlan.id }}">{{ i }}</a>
+            <li class="page-item" data-page="{{ i }}" data-id="{{ teacher.id }}">
+                <a class="page-link appraisal-search-pagination" data-page="{{ i }}" data-id="{{ teacher.id }}">{{ i }}</a>
             </li>
         {% endif %}
     {% endfor %}
 </ul>
 
 <script type="text/javascript">
-    $('.learning-plan-course-search-pagination').on('click', function () {
+    $('.appraisal-search-pagination').on('click', function () {
         /* Extract the clicked page. */
         var $newPage = $(this).data('page');
-        /* Extract the clicked learning plan ID. */
-        var $learningPlanId = $(this).data('id');
+        /* Extract the active teacher plan ID. */
+        var $teacherId = $(this).data('id');
 
         /* Select the course select form and send the request */
-        $('#learningPlanCourseSearchForm').request(
-            'onLearningPlanCourseSearch',
+        $('#appraisalSearchForm').request(
+            'onAppraisalSearch',
             {
                 update: {
-                    'teacher-learning-plans/learning-plan-course-grid': '#learningPlanCourseSearchResults',
-                    'teacher-learning-plans/learning-plan-course-pagination': '#learningPlanCourseSearchPagination'
+                    'teacher-appraisals/appraisal-grid': '#appraisalSearchResults',
+                    'teacher-appraisals/appraisal-pagination': '#appraisalSearchPagination'
                 },
                 data: {
                     page: $newPage,
-                    learningPlanId: $learningPlanId
+                    teacherId: $teacherId
                 }
             }
         );

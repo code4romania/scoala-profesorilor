@@ -84,7 +84,7 @@ COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Copy entrypoint script
 COPY ./docker/docker-entrypoint.sh /usr/local/bin/
-# Backwards compat
+# Backwards compatibility
 RUN chmod 777 /usr/local/bin/docker-entrypoint.sh \
      && ln -s /usr/local/bin/docker-entrypoint.sh /
 

@@ -269,6 +269,7 @@
         'frontend' => [
             'all_statuses' => 'Toate starile',
             'all_years' => 'Toti anii',
+            'all_schools' => 'Toate scolile',
             'all_semesters' => 'Toate semestrele',
             'new' => 'Nou',
             'objectives_set' => 'Obiective setate',
@@ -455,6 +456,10 @@
             'validation' => [
             ],
             'message' => [
+                'not_allowed' => 'Nu aveti acces la evaluarea ceruta',
+                'not_exists' => 'Evaluarea ceruta nu exista',
+                'save_successfull' => "Obiectivele au fost salvate cu succes",
+                'set_successfull' => "Obiectivele au fost stabilite cu succes"
             ],
         ],
     ],

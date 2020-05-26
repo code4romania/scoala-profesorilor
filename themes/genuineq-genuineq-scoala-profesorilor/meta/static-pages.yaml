@@ -1,19 +1,4 @@
 static-pages:
-    index: {  }
-    layouts:
-        layouts-full-image-background: {  }
-        layouts-1-column-blog: {  }
-        layouts-2-column-blog: {  }
-        layouts-basic-landing-page: {  }
-        layouts-corporate: {  }
-        layouts-full-image-carousel: {  }
-        layouts-half-page-carousel: {  }
-        layouts-jumbotron: {  }
-        layouts-team-profiles: {  }
-    subpages:
-        subpages-child-one: {  }
-        subpages-child-two: {  }
-        subpages-child-three: {  }
     termeni-si-conditii: {  }
     politica-de-confidentialitate: {  }
     despre-program: {  }

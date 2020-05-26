@@ -194,6 +194,7 @@ class LearningPlan extends ComponentBase
             'sort' => post('learningPlanCourseSort'),
             'category' => post('learningPlanCourseCategory'),
             'accreditation' => post('learningPlanCourseAccreditation'),
+            'page' => post('newPage'),
         ];
 
         /* Extract the courses based on the received options. */
@@ -223,6 +224,7 @@ class LearningPlan extends ComponentBase
             'sort' => post('learningPlanCourseSort'),
             'category' => post('learningPlanCourseCategory'),
             'accreditation' => post('learningPlanCourseAccreditation'),
+            'page' => post('newPage'),
         ];
 
         /* Extract the courses based on the received options. */
@@ -439,6 +441,7 @@ class LearningPlan extends ComponentBase
                 'sort' => post('learningPlanCourseSort'),
                 'category' => post('learningPlanCourseCategory'),
                 'accreditation' => post('learningPlanCourseAccreditation'),
+                'page' => post('newPage'),
             ];
 
             /* Extract the courses based on the received options. */
@@ -482,6 +485,7 @@ class LearningPlan extends ComponentBase
                 'sort' => post('learningPlanCourseSort'),
                 'category' => post('learningPlanCourseCategory'),
                 'accreditation' => post('learningPlanCourseAccreditation'),
+                'page' => post('newPage'),
             ];
 
             /* Extract the courses based on the received options. */

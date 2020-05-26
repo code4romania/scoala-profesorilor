@@ -1,5 +1,6 @@
 <?php namespace Genuineq\Tms\Models;
 
+use Log;
 use Lang;
 use Model;
 use Genuineq\Tms\Models\School\Teacher;
@@ -33,9 +34,9 @@ class Appraisal extends Model
      * Skills relation
      */
     public $hasOne = [
-        'firstSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'skill_1_id'],
-        'secondSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'skill_2_id'],
-        'thirdSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'skill_3_id']
+        'firstSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'id', 'otherKey' => 'skill_1_id'],
+        'secondSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'id',  'otherKey' => 'skill_2_id'],
+        'thirdSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'id',  'otherKey' => 'skill_3_id']
     ];
 
     /**
@@ -75,6 +76,115 @@ class Appraisal extends Model
         return $this->semester->year . '-' . $this->semester->semester;
     }
 
+    /**
+     * Function that extracts the name
+     *  of the first skill.
+     */
+    public function getFirstSkillNameAttribute()
+    {
+        return ($this->firstSkill) ? ($this->firstSkill->name) : ('');
+    }
+
+    /**
+     * Function that extracts the name
+     *  of the second skill.
+     */
+    public function getSecondSkillNameAttribute()
+    {
+        return ($this->secondSkill) ? ($this->secondSkill->name) : ('');
+    }
+
+    /**
+     * Function that extracts the name
+     *  of the third skill.
+     */
+    public function getThirdSkillNameAttribute()
+    {
+        return ($this->thirdSkill) ? ($this->thirdSkill->name) : ('');
+    }
+
+    /**
+     * Function that extracts the grade
+     *  for the first skill.
+     */
+    public function getFirstSkillGradeAttribute()
+    {
+        return ($this->grade_1) ? ($this->grade_1) : ('');
+    }
+
+    /**
+     * Function that extracts the grade
+     *  for the second skill.
+     */
+    public function getSecondSkillGradeAttribute()
+    {
+        return ($this->grade_2) ? ($this->grade_2) : ('');
+    }
+
+    /**
+     * Function that extracts the grade
+     *  for the third skill.
+     */
+    public function getThirdSkillGradeAttribute()
+    {
+        return ($this->grade_3) ? ($this->grade_3) : ('');
+    }
+
+    /**
+     * Function that extracts the description
+     *  of the first skill.
+     */
+    public function getFirstSkillDescriptionAttribute()
+    {
+        return ($this->firstSkill) ? ($this->firstSkill->description) : ('');
+    }
+
+    /**
+     * Function that extracts the description
+     *  of the second skill.
+     */
+    public function getSecondSkillDescriptionAttribute()
+    {
+        return ($this->secondSkill) ? ($this->secondSkill->description) : ('');
+    }
+
+    /**
+     * Function that extracts the description
+     *  of the third skill.
+     */
+    public function getThirdSkillDescriptionAttribute()
+    {
+        return ($this->thirdSkill) ? ($this->thirdSkill->description) : ('');
+    }
+
+    /**
+     * Function that extracts the frontend display
+     *  for the appraisal status.
+     */
+    public function getFrontendStatusAttribute()
+    {
+        $val = '';
+        switch ($this->status) {
+            case 'new':
+                $val = Lang::get('genuineq.tms::lang.appraisal.frontend.new');
+                break;
+
+            case 'objectives-set':
+                $val = Lang::get('genuineq.tms::lang.appraisal.frontend.objectives_set');
+                break;
+
+            case 'skills-set':
+                $val = Lang::get('genuineq.tms::lang.appraisal.frontend.skills_set');
+                break;
+
+            case 'closed':
+                $val = Lang::get('genuineq.tms::lang.appraisal.frontend.closed');
+                break;
+            }
+
+        return $val;
+    }
+
     /***********************************************
      ******************** Events *******************
      ***********************************************/
@@ -106,10 +216,11 @@ class Appraisal extends Model
             'page' => 1,
             'perPage' => 12,
             'searchInput' => '',
+            'school' => '',
             'status' => -1,
             'year' => -1,
             'semester' => -1,
-            'sort' => 'year desc'
+            'sort' => 'created_at desc'
         ], $options));
 
         /** Apply the status filter */
@@ -119,10 +230,28 @@ class Appraisal extends Model
 
         if ($searchInput) {
             /** Search the requested input */
-            $query->where('name', 'like', "%${searchInput}%");
+            $query->whereHas('school', function ($query) use ($searchInput) {
+                $query->where('name', 'like', "%${searchInput}%");
+            });
         }
 
-        $query->orderBy('created_at', 'desc');
+        if ($year && (-1 != $year)) {
+            $query->whereHas('semester', function ($query) use ($year) {
+                $query->where('year', $year);
+            });
+        }
+
+        if ($semester && (-1 != $semester)) {
+            $query->whereHas('semester', function ($query) use ($semester) {
+                $query->where('semester', $semester);
+            });
+        }
+
+        if ($sort) {
+            $sortTypes = explode(' ', $sort);
+
+            $query->orderBy(/*field*/$sortTypes[0], /*type*/$sortTypes[1]);
+        }
 
         $page = ($query->paginate($perPage, $page)->lastPage() < $page) ? (1) : ($page);
 
@@ -155,13 +284,12 @@ class Appraisal extends Model
         /** Extract the list of contract types. */
         $years = [];
         foreach (Appraisal::where('teacher_id', $teacherId)->get() as $appraisal) {
-            $years['' . $appraisal->year] = $appraisal->year;
+            $years['' . $appraisal->semester->year] = '' . $appraisal->semester->year;
         }
 
-        $years = array_reverse($years);
         $years[Lang::get('genuineq.tms::lang.appraisal.frontend.all_years')] = -1;
 
-        return array_reverse($years);
+        return array_reverse($years, true);
     }
 
     /**
@@ -169,15 +297,9 @@ class Appraisal extends Model
      */
     public static function getFilterSemesters($teacherId)
     {
-        $appraisals = Appraisal::where('teacher_id', $teacherId)->get();
-        if (1 < $appraisals->count()) {
-            $semesters[Lang::get('genuineq.tms::lang.appraisal.frontend.all_years')] = -1;
-            $semesters['1'] = 1;
-            $semesters['2'] = 2;
-        } else {
-            $semesters[Lang::get('genuineq.tms::lang.appraisal.frontend.all_years')] = -1;
-            $semesters['' . $appraisals[0]->semester] = $appraisals[0]->semester;
-        }
+        $semesters[Lang::get('genuineq.tms::lang.appraisal.frontend.all_semesters')] = -1;
+        $semesters['1'] = 1;
+        $semesters['2'] = 2;
 
         return $semesters;
     }
@@ -188,12 +310,24 @@ class Appraisal extends Model
     public static function getSortingTypes()
     {
         return [
-            Lang::get('genuineq.tms::lang.apprasal.frontend.status_asc') => 'status asc',
-            Lang::get('genuineq.tms::lang.apprasal.frontend.status_desc') => 'status desc',
-            Lang::get('genuineq.tms::lang.apprasal.frontend.year_asc') => 'year asc',
-            Lang::get('genuineq.tms::lang.apprasal.frontend.year_desc') => 'year desc',
-            Lang::get('genuineq.tms::lang.apprasal.frontend.semester_asc') => 'semester asc',
-            Lang::get('genuineq.tms::lang.apprasal.frontend.semester_desc') => 'semester desc',
+            Lang::get('genuineq.tms::lang.appraisal.frontend.desc') => 'created_at desc',
+            Lang::get('genuineq.tms::lang.appraisal.frontend.asc') => 'created_at asc',
         ];
+    }
+
+    /**
+     * Function that returns schools used for filtering.
+     */
+    public static function getFilterSchools($teacherId)
+    {
+        /** Extract the list of contract types. */
+        $schools = [];
+        foreach (Appraisal::where('teacher_id', $teacherId)->get() as $appraisal) {
+            $schools['' . $appraisal->school->name] = '' . $appraisal->school->id;
+        }
+
+        $schools[Lang::get('genuineq.tms::lang.appraisal.frontend.all_schools')] = -1;
+
+        return array_reverse($schools, true);
     }
 }

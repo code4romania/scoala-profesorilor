@@ -12,6 +12,22 @@ description = "Displays the appraisal search form."
         <input name="searchInput" id="appraisalSearchInput" type="text" class="form-control border border-white shadow-none" placeholder="{{ 'appraisals.appraisal-search-form.search'|_ }}" aria-label="{{ 'appraisals.appraisal-search-form.search'|_ }}">
 
         <div class="input-group-append">
+            <select name="school" class="browser-default custom-select border border-white shadow-none rounded-0" id="appraisalSchools">
+                {% for key, value in appraisalSchools %}
+                    <option value="{{ value }}">{{ key }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="input-group-append">
+            <select name="sort" class="browser-default custom-select border border-white shadow-none rounded-0" id="appraisalSort">
+                {% for key, value in appraisalSortTypes %}
+                    <option value="{{ value }}">{{ key }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="input-group-append">
             <select name="status" class="browser-default custom-select border border-white shadow-none rounded-0" id="appraisalStatus">
                 {% for key, value in appraisalStatuses %}
                     <option value="{{ value }}">{{ key }}</option>
@@ -43,7 +59,7 @@ description = "Displays the appraisal search form."
         /* Extract the clicked page. */
         var $newPage = $('#appraisalSearchPagination > ul > li.active').data('page');
         /* Extract the active teacher ID. */
-        // var $appraisalId = $('#appraisalSearchPagination > ul > li.active').data('id');
+        var $teacherId = $('#appraisalSearchPagination > ul > li.active').data('id');
 
         /* Select the course select form and send the request */
         $('#appraisalSearchForm').request(
