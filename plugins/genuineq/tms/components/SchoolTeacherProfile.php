@@ -241,7 +241,7 @@ class SchoolTeacherProfile extends ComponentBase
         }
 
         /** Close the active appraisal. */
-        $appraisal = $school->appraisals->where('teacher_id', $teacher->id)->first();
+        $appraisal = $school->appraisals->where('teacher_id', $teacher->id)->where('status', '<>', 'closed')->first();
         $appraisal->status = 'closed';
         $appraisal->save();
 
