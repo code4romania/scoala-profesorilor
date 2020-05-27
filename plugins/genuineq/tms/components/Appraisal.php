@@ -8,6 +8,7 @@ use Request;
 use Redirect;
 use ApplicationException;
 use Cms\Classes\ComponentBase;
+use Genuineq\Tms\Models\Skill;
 use Genuineq\Tms\Models\Teacher;
 use Genuineq\Tms\Models\Appraisal as AppraisalModule;
 use Genuineq\User\Helpers\AuthRedirect;
@@ -36,7 +37,6 @@ class Appraisal extends ComponentBase
      */
     public function prepareVars()
     {
-
     }
 
     /**
@@ -62,7 +62,7 @@ class Appraisal extends ComponentBase
     public function onAppraisalSearch()
     {
         /* Extract the appraisals based on the received options. */
-        $this->extractAppraisals(/*options*/post(), post('teacherId'));
+        $this->teacherExtractAppraisals(/*options*/post(), post('teacherId'));
     }
 
     /***********************************************
@@ -79,10 +79,10 @@ class Appraisal extends ComponentBase
         }
 
         /** Extracts all the appraisals of specified teacher. */
-        $this->extractAppraisals(/*options*/[], Auth::getUser()->profile->id);
+        $this->teacherExtractAppraisals(/*options*/[], Auth::getUser()->profile->id);
 
         /** Extracts all the appraisals statics of specified teacher. */
-        $this->extractSearchStatics(Auth::getUser()->profile->id);
+        $this->teacherExtractSearchStatics(Auth::getUser()->profile->id);
     }
 
     /**
@@ -153,7 +153,7 @@ class Appraisal extends ComponentBase
             'page' => post('newPage'),
         ];
         /** Extracts all the appraisals of specified teacher. */
-        $this->extractAppraisals($options, Auth::getUser()->profile->id);
+        $this->teacherExtractAppraisals($options, Auth::getUser()->profile->id);
     }
 
     /**
@@ -177,12 +177,16 @@ class Appraisal extends ComponentBase
             throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.not_exists'));
         }
 
+        if ('' == post('objectives')) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.empty_objectives'));
+        }
+
         /** Save updated objectives. */
         $appraisal->objectives = post('objectives');
         $appraisal->status = 'objectives-set';
         $appraisal->save();
 
-        Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.set_successfull'));
+        Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.objectives_set_successfull'));
 
         /** Extract the received courses filtering options */
         $options = [
@@ -196,7 +200,242 @@ class Appraisal extends ComponentBase
         ];
 
         /** Extracts all the appraisals of specified teacher. */
-        $this->extractAppraisals($options, Auth::getUser()->profile->id);
+        $this->teacherExtractAppraisals($options, Auth::getUser()->profile->id);
+    }
+
+    /***********************************************
+     ****************** School *********************
+     ***********************************************/
+
+    /**
+     * Extracts all the appraisals of specified teacher.
+     */
+    public function onSchoolAppraisalEdit()
+    {
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        $school = Auth::getUser()->profile;
+        /** Extract the requested teacher */
+        $teacher = $school->teachers->where('id', post('teacherId'))->first();
+
+        if (!$teacher) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.teacher_not_exists'));
+        }
+
+        /** Extract the teacher active appraisal. */
+        $this->page['appraisal'] = $school->getActiveAppraisal(post('teacherId'));
+
+        /** Extracts all the appraisals of specified teacher. */
+        $this->schoolExtractAppraisals(/*options*/[], post('teacherId'), $school);
+
+        /** Extracts all the appraisals statics of specified teacher. */
+        $this->schoolExtractSearchStatics(post('teacherId'));
+    }
+
+    /**
+     * Function that extracts a specific appraisal.
+     */
+    public function onSchoolViewGetAppraisalDetails()
+    {
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        /** Extract the requested teacher */
+        $teacher = Auth::getUser()->profile->teachers->where('id', post('teacherId'))->first();
+
+        if (!$teacher) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.teacher_not_exists'));
+        }
+
+        /** Extract the requested appraisal */
+        $appraisal =  Auth::getUser()->profile->appraisals->where('id', post('appraisalId'))->where('teacher_id', post('teacherId'))->first();
+
+        if (!$appraisal) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.not_exists'));
+        }
+
+        /** Extract the appraisal. */
+        $this->page['appraisal'] = $appraisal;
+        /** Extract the teacher. */
+        $this->page['teacher'] = Teacher::find(post('teacherId'));
+
+        /** Extract all the skills and create the source array. */
+        $value = 0;
+        foreach (Skill::all()->pluck('name') as $skill) {
+            $skills[$skill] = $value++;
+        }
+        $this->page['skills'] = json_encode($skills);
+    }
+
+    /**
+     * Updates the objectives in a specified appraisal.
+     */
+    public function onSchoolSaveAppraisalObjectives()
+    {
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        $school = Auth::getUser()->profile;
+        /** Extract the requested teacher */
+        $teacher = $school->teachers->where('id', post('teacherId'))->first();
+
+        if (!$teacher) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.teacher_not_exists'));
+        }
+
+        /** Extract the requested appraisal */
+        $appraisal =  $school->appraisals->where('id', post('appraisalId'))->where('teacher_id', post('teacherId'))->first();
+
+        if (!$appraisal) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.not_exists'));
+        }
+
+        /** Save updated skills and notes. */
+        $appraisal->notes = post('notes');
+        $appraisal->skill_1_id = Skill::whereName(post('first_skill'))->first()->id;
+        $appraisal->skill_2_id = Skill::whereName(post('second_skill'))->first()->id;
+        $appraisal->skill_3_id = Skill::whereName(post('third_skill'))->first()->id;
+        $appraisal->save();
+
+        Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.save_successfull'));
+
+        /** Extract the appraisal. */
+        $this->page['appraisal'] = $appraisal;
+        /** Extract the teacher. */
+        $this->page['teacher'] = Teacher::find(post('teacherId'));
+
+        /** Extract the received courses filtering options */
+        $options = [
+            'searchInput' => post('appraisalSearchInput'),
+            'sort' => post('appraisalSort'),
+            'status' => post('appraisalStatus'),
+            'year' => post('appraisalYear'),
+            'semester' => post('appraisalSemester'),
+            'page' => post('newPage'),
+        ];
+        /** Extracts all the appraisals of specified teacher. */
+        $this->schoolExtractAppraisals(/*options*/[], post('teacherId'), $school);
+
+        /** Extract all the skills and create the source array. */
+        $value = 0;
+        foreach (Skill::all()->pluck('name') as $skill) {
+            $skills[$skill] = $value++;
+        }
+        $this->page['skills'] = json_encode($skills);
+    }
+
+    /**
+     * Sets the skills in a specified appraisal.
+     */
+    public function onSchoolSetAppraisalSkills()
+    {
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        $school = Auth::getUser()->profile;
+        /** Extract the requested teacher */
+        $teacher = $school->teachers->where('id', post('teacherId'))->first();
+
+        if (!$teacher) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.teacher_not_exists'));
+        }
+
+        /** Extract the requested appraisal */
+        $appraisal =  $school->appraisals->where('id', post('appraisalId'))->where('teacher_id', post('teacherId'))->first();
+
+        if (!$appraisal) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.not_exists'));
+        }
+
+        /** Save updated skills and notes. */
+        $appraisal->notes = post('notes');
+        $appraisal->skill_1_id = Skill::whereName(post('first_skill'))->first()->id;
+        $appraisal->skill_2_id = Skill::whereName(post('second_skill'))->first()->id;
+        $appraisal->skill_3_id = Skill::whereName(post('third_skill'))->first()->id;
+        $appraisal->status = 'skills-set';
+        $appraisal->save();
+
+        Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.skills_set_successfull'));
+
+        /** Extract the appraisal. */
+        $this->page['appraisal'] = $appraisal;
+        /** Extract the teacher. */
+        $this->page['teacher'] = Teacher::find(post('teacherId'));
+
+        /** Extract the received courses filtering options */
+        $options = [
+            'searchInput' => post('appraisalSearchInput'),
+            'sort' => post('appraisalSort'),
+            'status' => post('appraisalStatus'),
+            'year' => post('appraisalYear'),
+            'semester' => post('appraisalSemester'),
+            'page' => post('newPage'),
+        ];
+        /** Extracts all the appraisals of specified teacher. */
+        $this->schoolExtractAppraisals(/*options*/[], post('teacherId'), $school);
+    }
+
+    /**
+     * Closes a specified appraisal.
+     */
+    public function onSchoolAppraisalClose()
+    {
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        $school = Auth::getUser()->profile;
+        /** Extract the requested teacher */
+        $teacher = $school->teachers->where('id', post('teacherId'))->first();
+
+        if (!$teacher) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.teacher_not_exists'));
+        }
+
+        /** Extract the requested appraisal */
+        $appraisal =  $school->appraisals->where('id', post('appraisalId'))->where('teacher_id', post('teacherId'))->first();
+
+        if (!$appraisal) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.not_exists'));
+        }
+
+        if ( (1 > post('first_skill_grade')) || (10 < post('first_skill_grade'))
+          || (1 > post('second_skill_grade')) || (10 < post('second_skill_grade'))
+          || (1 > post('third_skill_grade')) || (10 < post('third_skill_grade')) ) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.invalid_grade'));
+        }
+
+        /** Save updated skills and notes. */
+        $appraisal->notes = post('notes');
+        $appraisal->grade_1 = post('first_skill_grade');
+        $appraisal->grade_2 = post('second_skill_grade');
+        $appraisal->grade_3 = post('third_skill_grade');
+        $appraisal->status = 'closed';
+        $appraisal->save();
+
+        Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.close_successfull'));
+
+        /** Extract the appraisal. */
+        $this->page['appraisal'] = $appraisal;
+        /** Extract the teacher. */
+        $this->page['teacher'] = Teacher::find(post('teacherId'));
+
+        /** Extract the received courses filtering options */
+        $options = [
+            'searchInput' => post('appraisalSearchInput'),
+            'sort' => post('appraisalSort'),
+            'status' => post('appraisalStatus'),
+            'year' => post('appraisalYear'),
+            'semester' => post('appraisalSemester'),
+            'page' => post('newPage'),
+        ];
+        /** Extracts all the appraisals of specified teacher. */
+        $this->schoolExtractAppraisals(/*options*/[], post('teacherId'), $school);
     }
 
     /***********************************************
@@ -206,7 +445,7 @@ class Appraisal extends ComponentBase
     /**
      * Extract the requested appraisals.
      */
-    protected function extractAppraisals($options, $teacherId)
+    protected function teacherExtractAppraisals($options, $teacherId)
     {
         /** Extract the teacher. */
         $this->page['teacher'] = Teacher::find($teacherId);
@@ -223,7 +462,7 @@ class Appraisal extends ComponentBase
      * returns a redirect object.
      * @return mixed
      */
-    protected function extractSearchStatics($teacherId)
+    protected function teacherExtractSearchStatics($teacherId)
     {
         /** Extract all statuses for filtering. */
         $this->page['appraisalStatuses'] = AppraisalModule::getFilterStatuses();
@@ -235,5 +474,37 @@ class Appraisal extends ComponentBase
         $this->page['appraisalSortTypes'] = AppraisalModule::getSortingTypes();
         /** Extract schools for filtering. */
         $this->page['appraisalSchools'] = AppraisalModule::getFilterSchools($teacherId);
+    }
+
+    /**
+     * Extract the requested appraisals.
+     */
+    protected function schoolExtractAppraisals($options, $teacherId, $school)
+    {
+        /** Extract the teacher. */
+        $this->page['teacher'] = Teacher::find($teacherId);
+        /** Extract all appraisals for filtering. */
+        $this->page['appraisals'] = $school->filterAppraisals($options);
+        /** Extract the number of pages. */
+        $this->page['appraisalsPages'] = $this->page['appraisals']->lastPage();
+        /** Extract the current page. */
+        $this->page['appraisalsPage'] = $this->page['appraisals']->currentPage();
+    }
+
+    /**
+     * Checks if the force secure property is enabled and if so
+     * returns a redirect object.
+     * @return mixed
+     */
+    protected function schoolExtractSearchStatics($teacherId)
+    {
+        /** Extract all statuses for filtering. */
+        $this->page['appraisalStatuses'] = AppraisalModule::getFilterStatuses();
+        /** Extract all years for filtering. */
+        $this->page['appraisalYears'] = AppraisalModule::getFilterYears($teacherId);
+        /** Extract all semesters for filtering. */
+        $this->page['appraisalSemesters'] = AppraisalModule::getFilterSemesters($teacherId);
+        /** Extract all sort types for filtering. */
+        $this->page['appraisalSortTypes'] = AppraisalModule::getSortingTypes();
     }
 }

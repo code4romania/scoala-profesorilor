@@ -4,7 +4,6 @@ use Lang;
 use Model;
 use Illuminate\Support\Collection;
 use Genuineq\Tms\Models\LearningPlan;
-use Genuineq\Tms\Models\Appraisal;
 
 /**
  * Model
@@ -203,7 +202,7 @@ class Teacher extends Model
             'page' => 1,
             'perPage' => 12,
             'searchInput' => '',
-            'school' => null,
+            'school' => -1,
             'seniorityLevel' => -1,
             'schoolLevel' => -1,
             'contractType' => -1,

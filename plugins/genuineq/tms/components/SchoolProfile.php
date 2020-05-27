@@ -23,6 +23,11 @@ use Genuineq\User\Helpers\AuthRedirect;
  */
 class SchoolProfile extends ComponentBase
 {
+    /**
+     * @var Genuineq\Tms\Models\School The school that is displayed.
+     */
+    public $profile;
+
     public function componentDetails()
     {
         return [
@@ -48,7 +53,7 @@ class SchoolProfile extends ComponentBase
      */
     public function prepareVars()
     {
-        $this->page['profile'] = (Auth::check()) ? (Auth::getUser()->profile) : (null);
+        $this->profile = $this->page['profile'] = (Auth::check()) ? (Auth::getUser()->profile) : (null);
         $this->page['profileAddress'] = ($this->page['profile'] && $this->page['profile']->address) ? ($this->page['profile']->address->name . ', ' . $this->page['profile']->address->county) : (null);
 
         /* Extract all the inspectorates and create the source array. */

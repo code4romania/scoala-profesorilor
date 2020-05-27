@@ -1,5 +1,6 @@
 <?php namespace Genuineq\Tms\Components;
 
+use Log;
 use Lang;
 use Auth;
 use Flash;
@@ -22,8 +23,6 @@ use Genuineq\Tms\Models\SeniorityLevel;
 use Genuineq\User\Helpers\AuthRedirect;
 use Genuineq\Tms\Classes\TeachersImport;
 use Genuineq\Tms\Classes\SchoolTeacher;
-
-use Log;
 
 /**
  * School teacher profile component
@@ -109,11 +108,11 @@ class SchoolTeacherProfile extends ComponentBase
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
-        /** Prepare the static data. */
-        $this->prepareAutocompleteVars();
-
         /* Get all the school teachers. */
         $this->extractTeachers(/*options*/[]);
+
+        /** Prepare the static data. */
+        $this->prepareAutocompleteVars();
     }
 
     /**
@@ -170,8 +169,17 @@ class SchoolTeacherProfile extends ComponentBase
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
+        $school = Auth::getUser()->profile;
+        /** Extract the requested teacher */
+        $teacher = $school->teachers->where('id', post('teacherId'))->first();
+
+        if (!$teacher) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.not_exists'));
+        }
+
         $this->page['teacher'] = Teacher::find(post('teacherId'));
-        $this->page['proposedRequests'] = Auth::getUser()->profile->getProposedLearningPlanRequests($this->page['teacher']->active_learning_plan->id);
+        $this->page['appraisal'] = $school->getActiveAppraisal(post('teacherId'));
+        $this->page['proposedRequests'] = $school->getProposedLearningPlanRequests($this->page['teacher']->active_learning_plan->id);
         $this->page['teacherDeclinedRequests'] = $this->page['teacher']->declined_requests;
     }
 
@@ -184,18 +192,22 @@ class SchoolTeacherProfile extends ComponentBase
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
+        /** Extract the requested teacher */
+        $teacher = Auth::getUser()->profile->teachers->where('id', post('teacherId'))->first();
+
+        if (!$teacher) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.not_exists'));
+        }
+
         /** Prepare the static data. */
         $this->prepareAutocompleteVars();
 
-        $this->page['schoolTeacherProfile'] = Teacher::find(post('teacherId'));
-        $this->page['schoolTeacherUser'] = $this->page['schoolTeacherProfile']->user;
-
-        $this->page['schoolTeacherProfileAddress'] = ($this->page['schoolTeacherProfile']->address) ? ($this->page['schoolTeacherProfile']->address->name . ', ' . $this->page['schoolTeacherProfile']->address->county) : (null);
-        $this->page['schoolTeacherProfileSeniorityLevel'] = ($this->page['schoolTeacherProfile']->seniority_level) ? ($this->page['schoolTeacherProfile']->seniority_level->name) : (null);
-        $this->page['schoolTeacherProfileSchoolLevel'] = ($this->page['schoolTeacherProfile']->school_level) ? ($this->page['schoolTeacherProfile']->school_level->name) : (null);
-        $this->page['schoolTeacherProfileContractType'] = ($this->page['schoolTeacherProfile']->contract_type) ? ($this->page['schoolTeacherProfile']->contract_type->name) : (null);
-
-        $this->page['schoolTeacher'] = Teacher::find(post('teacherId'));
+        $this->page['schoolTeacherProfile'] = $teacher;
+        $this->page['schoolTeacherUser'] = $teacher->user;
+        $this->page['schoolTeacherProfileAddress'] = ($teacher->address) ? ($teacher->address->name . ', ' . $teacher->address->county) : (null);
+        $this->page['schoolTeacherProfileSeniorityLevel'] = ($teacher->seniority_level) ? ($teacher->seniority_level->name) : (null);
+        $this->page['schoolTeacherProfileSchoolLevel'] = ($teacher->school_level) ? ($teacher->school_level->name) : (null);
+        $this->page['schoolTeacherProfileContractType'] = ($teacher->contract_type) ? ($teacher->contract_type->name) : (null);
     }
 
     /**
@@ -207,10 +219,14 @@ class SchoolTeacherProfile extends ComponentBase
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
-        /** Extract the teacher. */
-        $teacher = Teacher::find(post('teacherId'));
         /** Extract the school. */
         $school = Auth::getUser()->profile;
+        /** Extract the requested teacher */
+        $teacher = $school->teachers->where('id', post('teacherId'))->first();
+
+        if (!$teacher) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.not_exists'));
+        }
 
         /** Extract the school teacher link and remove it. */
         $school->teachers()->detach($teacher->id);
@@ -257,11 +273,15 @@ class SchoolTeacherProfile extends ComponentBase
      */
     public function onSchoolTeacherProfileUpdate()
     {
-        $teacher = Teacher::find(post('teacherId'));
         if (!Auth::check()) {
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
-        } elseif (!$this->isTeacherLinked($teacher)) {
-            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.teacher_not_linked'));
+        }
+
+        /** Extract the requested teacher */
+        $teacher = Auth::getUser()->profile->teachers->where('id', post('teacherId'))->first();
+
+        if (!$teacher) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.not_exists'));
         }
 
         /** Extract the post data to validate. */
@@ -352,11 +372,15 @@ class SchoolTeacherProfile extends ComponentBase
      */
     public function onSchoolTeacherProfileDescriptionUpdate()
     {
-        $teacher = Teacher::find(post('teacherId'));
         if (!Auth::check()) {
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
-        } elseif (!$this->isTeacherLinked($teacher)) {
-            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.teacher_not_linked'));
+        }
+
+        /** Extract the requested teacher */
+        $teacher = Auth::getUser()->profile->teachers->where('id', post('teacherId'))->first();
+
+        if (!$teacher) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.not_exists'));
         }
 
         /** Extract the post data to validate. */
@@ -393,11 +417,15 @@ class SchoolTeacherProfile extends ComponentBase
      */
     public function onSchoolTeacherAvatarUpdate()
     {
-        $teacher = Teacher::find(post('teacherId'));
         if (!Auth::check()) {
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
-        } elseif (!$this->isTeacherLinked($teacher)) {
-            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.teacher_not_linked'));
+        }
+
+        /** Extract the requested teacher */
+        $teacher = Auth::getUser()->profile->teachers->where('id', post('teacherId'))->first();
+
+        if (!$teacher) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.not_exists'));
         }
 
         /** Extract the user */
@@ -422,8 +450,13 @@ class SchoolTeacherProfile extends ComponentBase
         $teacher = Teacher::find(post('teacherId'));
         if (!Auth::check()) {
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
-        } elseif (!$this->isTeacherLinked($teacher)) {
-            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.teacher_not_linked'));
+        }
+
+        /** Extract the requested teacher */
+        $teacher = Auth::getUser()->profile->teachers->where('id', post('teacherId'))->first();
+
+        if (!$teacher) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.not_exists'));
         }
 
         /** Extract the form data. */
@@ -463,11 +496,15 @@ class SchoolTeacherProfile extends ComponentBase
      */
     public function onSchoolTeacherPasswordUpdate()
     {
-        $teacher = Teacher::find(post('teacherId'));
         if (!Auth::check()) {
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
-        } elseif (!$this->isTeacherLinked($teacher)) {
-            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.teacher_not_linked'));
+        }
+
+        /** Extract the requested teacher */
+        $teacher = Auth::getUser()->profile->teachers->where('id', post('teacherId'))->first();
+
+        if (!$teacher) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.not_exists'));
         }
 
         /** Extract the form data. */
@@ -602,27 +639,6 @@ class SchoolTeacherProfile extends ComponentBase
             $contractTypes[$contractType] = $value++;
         }
         $this->page['schoolTeacherContractTypes'] = json_encode($contractTypes);
-    }
-
-    /**
-     * Checks is a teacher is linked with the authenticated school user.
-     *
-     * Teacher $teacher The teacher to check.
-     *
-     * @return boolean
-     */
-    protected function isTeacherLinked($teacher){
-        /** Extract the school */
-        $school = Auth::getUser()->profile;
-
-        /** Check if the teacher is linked */
-        foreach ($school->teachers as $_teacher) {
-            if ($_teacher->id == $teacher->id) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**

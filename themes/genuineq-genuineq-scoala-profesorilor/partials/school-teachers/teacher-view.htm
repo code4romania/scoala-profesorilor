@@ -76,6 +76,8 @@ description = "Displays a teacher"
     </div>
 {% endif %}
 
+{% partial "school-appraisals/appraisal-view" learningPlan=teacher.active_learning_plan %}
+
 <script type="text/javascript">
     $('#teacher-edit').on('click', function () {
         /* Extract the clicked teacher ID. */

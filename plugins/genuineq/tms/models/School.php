@@ -2,6 +2,7 @@
 
 use Model;
 use Genuineq\Tms\Models\Teacher;
+use Genuineq\Tms\Models\Appraisal;
 
 /**
  * Model
@@ -58,8 +59,13 @@ class School extends Model
      * Learning plans course" relation
      */
     public $hasMany = [
-        'learning_plans_course' => 'Genuineq\Tms\Models\LearningPlansCourse',
-        'appraisals' => 'Genuineq\Tms\Models\Appraisal',
+        'learning_plans_course' => [
+            'Genuineq\Tms\Models\LearningPlansCourse'
+        ],
+        'appraisals' => [
+            'Genuineq\Tms\Models\Appraisal',
+            'order' => 'created_at desc'
+        ],
     ];
 
     /**
@@ -76,7 +82,7 @@ class School extends Model
         'teachers' => [
             'Genuineq\Tms\Models\Teacher',
             'table' => 'genuineq_tms_schools_teachers',
-            'order' => 'name',
+            'order' => 'name'
         ],
     ];
 
@@ -86,12 +92,34 @@ class School extends Model
     public $rules = [
     ];
 
+    /***********************************************
+     ******************* Functions *****************
+     ***********************************************/
+
     /**
-     * Function used for searching, filtering, sorting and paginating the school teachers.
+     * Function that extracts the latest appraisal
+     *  for an associated teacher.
+     */
+    public function getActiveAppraisal($teacherId)
+    {
+        return $this->appraisals
+                    ->where('teacher_id', $teacherId)
+                    ->where('status', '<>', 'closed')->first();
+                    // ->orderBy('created_at', 'desc')->first();
+    }
+
+    /***********************************************
+     **************** Search/Filter ****************
+     ***********************************************/
+
+    /**
+     * Function used for search, filter, sort
+     *  and pagination of the school teachers.
      *
      * @param options An array of options to use.
      */
-    public function filterTeachers($options = []){
+    public function filterTeachers($options = [])
+    {
         /** Add the school ID */
         $options['school'] = $this->id;
 
@@ -99,29 +127,44 @@ class School extends Model
     }
 
     /**
+     * Function used for search, filter, sort
+     *  and pagination of the appraisals.
+     *
+     * @param options An array of options to use.
+     */
+    public function filterAppraisals($options = [])
+    {
+        /** Add the school ID */
+        $options['school'] = $this->id;
+
+        return Appraisal::filterAppraisals($options);
+    }
+
+    /***********************************************
+     ***************** Static data *****************
+     ***********************************************/
+
+    /**
      * Function that extracts the proposed requests for a specific learning plan.
      */
-    public function getProposedLearningPlanRequests($learningPlanId){
-        return $this->requests
-                    ->where('learning_plan_id', $learningPlanId)
-                    ->where('status', 'proposed');
+    public function getProposedLearningPlanRequests($learningPlanId)
+    {
+        return $this->requests->where('learning_plan_id', $learningPlanId)->where('status', 'proposed');
     }
 
     /**
      * Function that extracts the accepted requests for a specific learning plan.
      */
-    public function getAcceptedLearningPlanRequests($learningPlanId){
-        return $this->requests
-                    ->where('learning_plan_id', $learningPlanId)
-                    ->where('status', 'accepted');
+    public function getAcceptedLearningPlanRequests($learningPlanId)
+    {
+        return $this->requests->where('learning_plan_id', $learningPlanId)->where('status', 'accepted');
     }
 
     /**
      * Function that extracts the declined requests for a specific learning plan.
      */
-    public function getDeclinedLearningPlanRequests($learningPlanId){
-        return $this->requests
-                    ->where('learning_plan_id', $learningPlanId)
-                    ->where('status', 'declined');
+    public function getDeclinedLearningPlanRequests($learningPlanId)
+    {
+        return $this->requests->where('learning_plan_id', $learningPlanId)->where('status', 'declined');
     }
 }

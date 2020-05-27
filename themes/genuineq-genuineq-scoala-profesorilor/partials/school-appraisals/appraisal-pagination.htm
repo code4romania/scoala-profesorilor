@@ -1,0 +1,41 @@
+description = "Displays the appraisals search pagination."
+
+[viewBag]
+==
+<ul class="pagination pg-darkgrey justify-content-center">
+    {% for i in 1..appraisalsPages %}
+        {% if i == appraisalsPage %}
+            <li class="page-item active" data-page="{{ i }}" data-id="{{ teacher.id }}">
+                <a class="page-link appraisal-search-pagination" data-page="{{ i }}" data-id="{{ teacher.id }}">{{ i }}</a>
+            </li>
+        {% else %}
+            <li class="page-item" data-page="{{ i }}" data-id="{{ teacher.id }}">
+                <a class="page-link appraisal-search-pagination" data-page="{{ i }}" data-id="{{ teacher.id }}">{{ i }}</a>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+
+<script type="text/javascript">
+    $('.appraisal-search-pagination').on('click', function () {
+        /* Extract the clicked page. */
+        var $newPage = $(this).data('page');
+        /* Extract the active teacher plan ID. */
+        var $teacherId = $(this).data('id');
+
+        /* Select the course select form and send the request */
+        $('#appraisalSearchForm').request(
+            'onAppraisalSearch',
+            {
+                update: {
+                    'school-appraisals/appraisal-grid': '#appraisalSearchResults',
+                    'school-appraisals/appraisal-pagination': '#appraisalSearchPagination'
+                },
+                data: {
+                    page: $newPage,
+                    teacherId: $teacherId
+                }
+            }
+        );
+    });
+</script>

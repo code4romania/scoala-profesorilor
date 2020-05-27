@@ -406,7 +406,7 @@
                 'teachers_import_association_successful' => 'Profesorul a fost asociat cu succes',
                 'teachers_import_association_exists' => 'Profesorul este deja asociat',
                 'teachers_import_add_successful' => 'Profesorul a fost adaugat cu succes',
-                'validation_failed' => 'Validarea '
+                'not_exists' => 'Profesorul specificat nu exista sau nu sunteti asociet cu el',
             ],
         ],
 
@@ -458,8 +458,13 @@
             'message' => [
                 'not_allowed' => 'Nu aveti acces la evaluarea ceruta',
                 'not_exists' => 'Evaluarea ceruta nu exista',
-                'save_successfull' => "Obiectivele au fost salvate cu succes",
-                'set_successfull' => "Obiectivele au fost stabilite cu succes"
+                'empty_objectives' => 'Obiectivele nu pot sa fie goale',
+                'save_successfull' => "Schimbarile au fost salvate cu succes",
+                'objectives_set_successfull' => "Obiectivele au fost stabilite cu succes",
+                'skills_set_successfull' => "Skill-urile au fost stabilite cu succes",
+                'close_successfull' => "Evaluarea a fost inchisa cu succes",
+                'invalid_grade' => "Notele pot sa fie intre 1 si 10",
+                'teacher_not_exists' => 'Profesorul specificat nu exista sau nu sunteti asociet cu el',
             ],
         ],
     ],

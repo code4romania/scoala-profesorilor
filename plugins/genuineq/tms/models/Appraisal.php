@@ -3,8 +3,8 @@
 use Log;
 use Lang;
 use Model;
-use Genuineq\Tms\Models\School\Teacher;
 use Genuineq\Tms\Models\Semester;
+use Genuineq\Tms\Models\School\Teacher;
 
 /**
  * Model
@@ -216,31 +216,45 @@ class Appraisal extends Model
             'page' => 1,
             'perPage' => 12,
             'searchInput' => '',
-            'school' => '',
+            'school' => -1,
             'status' => -1,
             'year' => -1,
             'semester' => -1,
             'sort' => 'created_at desc'
         ], $options));
 
+        /** Apply the school filter */
+        if ($school && (-1 != $school)) {
+            $query->whereHas('school', function($q) use ($school){
+                $q->where('id', '=', $school);
+            });
+        }
+
         /** Apply the status filter */
         if ($status && (-1 != $status)) {
             $query->where('status', $status);
         }
 
+        /** Apply the search input */
         if ($searchInput) {
-            /** Search the requested input */
-            $query->whereHas('school', function ($query) use ($searchInput) {
+            $query->where('objectives', 'like', "%${searchInput}%")
+              ->orWhereHas('firstSkill', function ($query) use ($searchInput) {
+                $query->where('name', 'like', "%${searchInput}%");
+            })->orWhereHas('secondSkill', function ($query) use ($searchInput) {
+                $query->where('name', 'like', "%${searchInput}%");
+            })->orWhereHas('thirdSkill', function ($query) use ($searchInput) {
                 $query->where('name', 'like', "%${searchInput}%");
             });
         }
 
+        /** Apply the year filter */
         if ($year && (-1 != $year)) {
             $query->whereHas('semester', function ($query) use ($year) {
                 $query->where('year', $year);
             });
         }
 
+        /** Apply the semester filter */
         if ($semester && (-1 != $semester)) {
             $query->whereHas('semester', function ($query) use ($semester) {
                 $query->where('semester', $semester);
