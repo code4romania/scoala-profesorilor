@@ -185,19 +185,14 @@ class Course extends Model
      */
     public static function getFilterCategories()
     {
+        $categories[Lang::get('genuineq.tms::lang.course.frontend.all_courses')] = -1;
+
         /** Extract the list of categories. */
         foreach (Category::all() as $category) {
             $categories[$category->name] = $category->id;
         }
 
-        if ($categories) {
-            $categories = array_reverse($categories);
-            $categories[Lang::get('genuineq.tms::lang.course.frontend.all_courses')] = -1;
-
-            return array_reverse($categories);
-        } else {
-            return [];
-        }
+        return $categories;
     }
 
     /**
