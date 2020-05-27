@@ -19,6 +19,7 @@ class Plugin extends PluginBase
             'Genuineq\Tms\Components\CourseSearch' => 'courseSearchComponent',
             'Genuineq\Tms\Components\LearningPlan' => 'learningPlanComponent',
             'Genuineq\Tms\Components\Appraisal' => 'appraisalComponent',
+            'Genuineq\Tms\Components\Budget' => 'budgetComponent',
         ];
     }
 

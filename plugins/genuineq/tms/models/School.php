@@ -3,6 +3,7 @@
 use Model;
 use Genuineq\Tms\Models\Teacher;
 use Genuineq\Tms\Models\Appraisal;
+use Genuineq\Tms\Models\Budget;
 
 /**
  * Model
@@ -44,7 +45,12 @@ class School extends Model
     public $morphMany = [
         'requests' => [
             'Genuineq\Tms\Models\LearningPlansCourse',
-            'name' => 'requestable']
+            'name' => 'requestable'
+        ],
+        'budgets' => [
+            'Genuineq\Tms\Models\Budget',
+            'name' => 'budgetable'
+        ]
     ];
 
     /**
@@ -106,6 +112,20 @@ class School extends Model
                     ->where('teacher_id', $teacherId)
                     ->where('status', '<>', 'closed')->first();
                     // ->orderBy('created_at', 'desc')->first();
+    }
+
+    /***********************************************
+     ******************** Events *******************
+     ***********************************************/
+
+    /**
+     * Create all dependencies;
+     */
+    public function afterCreate()
+    {
+        $budget = new Budget();
+        $budget->budgetable = $this;
+        $budget->save();
     }
 
     /***********************************************

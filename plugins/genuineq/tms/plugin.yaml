@@ -50,6 +50,10 @@ navigation:
                 label: 'genuineq.tms::lang.appraisal.backend-menu'
                 url: genuineq/tms/appraisals
                 icon: icon-sliders
+            side-menu-item11:
+                label: 'genuineq.tms::lang.budgets.backend-menu'
+                url: /
+                icon: icon-dollar
     main-menu-item2:
         label: 'genuineq.tms::lang.plugin.backend-menu.static'
         url: genuineq/tms/addresses

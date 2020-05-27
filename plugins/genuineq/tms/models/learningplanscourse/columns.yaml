@@ -20,7 +20,7 @@ columns:
         type: text
         searchable: true
         sortable: true
-    covered_costs:
+    school_covered_costs:
         label: 'genuineq.tms::lang.learning-plans-course.label.covered-costs'
         type: number
         searchable: true

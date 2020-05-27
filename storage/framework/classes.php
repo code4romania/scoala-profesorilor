@@ -478,4 +478,8 @@
   'iabsis\\https\\Plugin' => 'plugins/iabsis/https/Plugin.php',
   'genuineq\\https\\Plugin' => 'plugins/genuineq/https/Plugin.php',
   'Genuineq\\Tms\\Components\\Appraisal' => 'plugins/genuineq/tms/components/Appraisal.php',
+  'Genuineq\\Tms\\Models\\Budget' => 'plugins/genuineq/tms/models/Budget.php',
+  'Genuineq\\Tms\\Components\\Budget' => 'plugins/genuineq/tms/components/Budget.php',
+  'rainlab\\googleanalytics\\Plugin' => 'plugins/rainlab/googleanalytics/Plugin.php',
+  'RainLab\\GoogleAnalytics\\Models\\Settings' => 'plugins/rainlab/googleanalytics/models/Settings.php',
 );

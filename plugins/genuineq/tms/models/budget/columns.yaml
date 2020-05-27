@@ -1,0 +1,11 @@
+columns:
+    budget:
+        label: 'genuineq.tms::lang.budgets.label.budget'
+        type: text
+        searchable: true
+        sortable: true
+    semester:
+        label: 'genuineq.tms::lang.budgets.label.semester'
+        type: text
+        searchable: true
+        sortable: true

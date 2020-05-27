@@ -245,9 +245,9 @@ class SchoolTeacherProfile extends ComponentBase
             /** Remove any sponsorship and/or the mandatory mark from the future courses. */
             foreach ($schoolCourses as $learningPlanCourse) {
                 /** Check if the course has NOT started. */
-                if ((date('Y-m-d') < $learningPlanCourse->course->start_date) && (($learningPlanCourse->covered_costs) || ($learningPlanCourse->mandatory))) {
+                if ((date('Y-m-d') < $learningPlanCourse->course->start_date) && (($learningPlanCourse->school_covered_costs) || ($learningPlanCourse->mandatory))) {
                     /** Remove any sponsorship */
-                    $learningPlanCourse->covered_costs = 0;
+                    $learningPlanCourse->school_covered_costs = 0;
                     /** Mark as no longer mandatory */
                     $learningPlanCourse->mandatory = 0;
 

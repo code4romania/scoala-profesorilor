@@ -66,7 +66,7 @@ class TestLearningPlansSeeder extends Seeder
                                         'mandatory' => 0,
                                         'requestable_id' => ($teacherNr + $school),
                                         'requestable_type' => 'Genuineq\Tms\Models\School',
-                                        'covered_costs' => $faker->numberBetween($min = 0, $max = Course::find($courses[$j])->price),
+                                        'school_covered_costs' => $faker->numberBetween($min = 0, $max = Course::find($courses[$j])->price),
                                         'status' => 'proposed',
                                     ]);
                                     break;
@@ -78,7 +78,7 @@ class TestLearningPlansSeeder extends Seeder
                                         'mandatory' => 0,
                                         'requestable_id' => ($teacherNr + $school),
                                         'requestable_type' => 'Genuineq\Tms\Models\School',
-                                        'covered_costs' => $faker->numberBetween($min = 0, $max = Course::find($courses[$j])->price),
+                                        'school_covered_costs' => $faker->numberBetween($min = 0, $max = Course::find($courses[$j])->price),
                                         'status' => 'accepted',
                                     ]);
                                     break;
@@ -90,7 +90,7 @@ class TestLearningPlansSeeder extends Seeder
                                         'mandatory' => 0,
                                         'requestable_id' => ($teacherNr + $school),
                                         'requestable_type' => 'Genuineq\Tms\Models\School',
-                                        'covered_costs' => $faker->numberBetween($min = 0, $max = Course::find($courses[$j])->price),
+                                        'school_covered_costs' => $faker->numberBetween($min = 0, $max = Course::find($courses[$j])->price),
                                         'status' => 'declined',
                                     ]);
                                     break;
@@ -102,7 +102,7 @@ class TestLearningPlansSeeder extends Seeder
                                         'mandatory' => 0,
                                         'requestable_id' => $teacherNr,
                                         'requestable_type' => 'Genuineq\Tms\Models\Teacher',
-                                        'covered_costs' => $faker->numberBetween($min = 0, $max = Course::find($courses[$j])->price),
+                                        'school_covered_costs' => $faker->numberBetween($min = 0, $max = Course::find($courses[$j])->price),
                                         'status' => 'proposed',
                                     ]);
                                     break;
@@ -114,7 +114,7 @@ class TestLearningPlansSeeder extends Seeder
                                         'mandatory' => 0,
                                         'requestable_id' => $teacherNr,
                                         'requestable_type' => 'Genuineq\Tms\Models\Teacher',
-                                        'covered_costs' => $faker->numberBetween($min = 0, $max = Course::find($courses[$j])->price),
+                                        'school_covered_costs' => $faker->numberBetween($min = 0, $max = Course::find($courses[$j])->price),
                                         'status' => 'accepted',
                                     ]);
                                     break;
@@ -126,7 +126,7 @@ class TestLearningPlansSeeder extends Seeder
                                         'mandatory' => 0,
                                         'requestable_id' => $teacherNr,
                                         'requestable_type' => 'Genuineq\Tms\Models\Teacher',
-                                        'covered_costs' => $faker->numberBetween($min = 0, $max = Course::find($courses[$j])->price),
+                                        'school_covered_costs' => $faker->numberBetween($min = 0, $max = Course::find($courses[$j])->price),
                                         'status' => 'declined',
                                     ]);
                                     break;
@@ -137,7 +137,7 @@ class TestLearningPlansSeeder extends Seeder
                                         'course_id' => $courses[$j],
                                         'mandatory' => 1,
                                         'school_id' => ($teacherNr + $school),
-                                        'covered_costs' => $faker->numberBetween($min = 0, $max = Course::find($courses[$j])->price),
+                                        'school_covered_costs' => $faker->numberBetween($min = 0, $max = Course::find($courses[$j])->price),
                                         'status' => 'accepted',
                                     ]);
                                     break;

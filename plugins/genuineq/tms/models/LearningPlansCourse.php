@@ -1,5 +1,6 @@
 <?php namespace Genuineq\Tms\Models;
 
+use Log;
 use Model;
 
 /**
@@ -18,7 +19,10 @@ class LearningPlansCourse extends Model
         'learning_plan_id',
         'school_id',
         'course_id',
-        'covered_costs',
+        'school_budget_id',
+        'school_covered_costs',
+        'teacher_budget_id',
+        'teacher_covered_costs',
         'mandatory',
         'status',
     ];
@@ -50,6 +54,10 @@ class LearningPlansCourse extends Model
      */
     public $rules = [
     ];
+
+    /***********************************************
+     ******************* Mutators ******************
+     ***********************************************/
 
     /**
      * Function that extracts the name of the learning plan
@@ -83,5 +91,77 @@ class LearningPlansCourse extends Model
         } else {
             return '';
         }
+    }
+
+    /***********************************************
+     **************** Search/Filter ****************
+     ***********************************************/
+
+    /**
+     * Function used for searching, filtering, sorting and paginating budget courses.
+     *
+     * @param query The query to be used for extracting budget courses
+     * @param options The option for searching, filtering, sorting and paginating
+     *
+     * @return mixed
+     */
+    public function scopeTeacherFilterBudgetCourses($query, $options = [])
+    {
+        /** Define the default options. */
+        extract(array_merge([
+            'page' => 1,
+            'perPage' => 12,
+            'ids'=> [],
+            'searchInput' => '',
+            'sortBy' => null,
+            'sort' => 'desc'
+        ], $options));
+
+        /** Apply the id filter */
+        if (count($ids)) {
+            $query->whereIn('id', $ids);
+        } else {
+            /** Force invalid query to return no value. */
+            $query->whereIn('id', [-1]);
+        }
+
+        /** Apply the search input */
+        if ($searchInput) {
+            $query->whereHas('course', function ($query) use ($searchInput) {
+                $query->where('name', 'like', "%${searchInput}%");
+            });
+        }
+
+        $query->orderBy($sortBy, $sort);
+
+        /** Prepare resulta array */
+        $results = [
+            'number-courses' => $query->get()->count(),
+            'number-accredited' => 0,
+            'costs-supported' => 0,
+            'costs-discounted' => 0,
+            'total-credits' => 0,
+            'total-hours' => 0,
+            'courses' => null
+        ];
+
+        /** Extract result statistics */
+        foreach ($query->get() as $budgetCourse) {
+            $results['costs-supported'] += $budgetCourse->teacher_covered_costs;
+            $results['costs-discounted'] += $budgetCourse->school_covered_costs;
+            $results['total-hours'] += $budgetCourse->course->duration;
+
+            if ($budgetCourse->course->accredited) {
+                $results['number-accredited']++;
+                $results['total-credits'] += $budgetCourse->course->credits;
+            }
+
+        }
+
+        $page = ($query->paginate($perPage, $page)->lastPage() < $page) ? (1) : ($page);
+
+        $results['courses'] = $query->paginate($perPage, $page);
+
+        return $results;
     }
 }

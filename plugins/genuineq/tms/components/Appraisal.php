@@ -458,9 +458,7 @@ class Appraisal extends ComponentBase
     }
 
     /**
-     * Checks if the force secure property is enabled and if so
-     * returns a redirect object.
-     * @return mixed
+     * Extract the requested teacher statics.
      */
     protected function teacherExtractSearchStatics($teacherId)
     {
@@ -469,7 +467,7 @@ class Appraisal extends ComponentBase
         /** Extract all years for filtering. */
         $this->page['appraisalYears'] = AppraisalModule::getFilterYears($teacherId);
         /** Extract all semesters for filtering. */
-        $this->page['appraisalSemesters'] = AppraisalModule::getFilterSemesters($teacherId);
+        $this->page['appraisalSemesters'] = AppraisalModule::getFilterSemesters();
         /** Extract all sort types for filtering. */
         $this->page['appraisalSortTypes'] = AppraisalModule::getSortingTypes();
         /** Extract schools for filtering. */
@@ -492,9 +490,7 @@ class Appraisal extends ComponentBase
     }
 
     /**
-     * Checks if the force secure property is enabled and if so
-     * returns a redirect object.
-     * @return mixed
+     * Extract the requested school statics.
      */
     protected function schoolExtractSearchStatics($teacherId)
     {
@@ -503,7 +499,7 @@ class Appraisal extends ComponentBase
         /** Extract all years for filtering. */
         $this->page['appraisalYears'] = AppraisalModule::getFilterYears($teacherId);
         /** Extract all semesters for filtering. */
-        $this->page['appraisalSemesters'] = AppraisalModule::getFilterSemesters($teacherId);
+        $this->page['appraisalSemesters'] = AppraisalModule::getFilterSemesters();
         /** Extract all sort types for filtering. */
         $this->page['appraisalSortTypes'] = AppraisalModule::getSortingTypes();
     }

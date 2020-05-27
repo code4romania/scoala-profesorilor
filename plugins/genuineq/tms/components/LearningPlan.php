@@ -126,7 +126,7 @@ class LearningPlan extends ComponentBase
         /** Extract the post data to validate. */
         $data['learning_plan_id'] = post('learningPlanId');
         $data['course_id'] = post('courseId');
-        $data['covered_costs'] = post('covered_costs');
+        $data['school_covered_costs'] = post('school_covered_costs');
 
         /** Extract the school ID. */
         $data['school_id'] = Auth::getUser()->profile->id;
@@ -149,7 +149,7 @@ class LearningPlan extends ComponentBase
             'learning_plan_id' => 'required|numeric|exists:genuineq_tms_learning_plans,id',
             'school_id' => 'required|numeric|exists:genuineq_tms_schools,id',
             'course_id' => 'required|numeric|exists:genuineq_tms_courses,id',
-            'covered_costs' => 'present|numeric|max:' . $course->price,
+            'school_covered_costs' => 'present|numeric|max:' . $course->price,
         ];
 
         /** Construct the validation error messages. */
@@ -163,14 +163,14 @@ class LearningPlan extends ComponentBase
             'school_id.required' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_id_required'),
             'school_id.numeric' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_id_numeric'),
             'school_id.exists' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_id_exists'),
-            'covered_costs.present' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.covered_costs_present'),
-            'covered_costs.numeric' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.covered_costs_numeric'),
-            'covered_costs.max' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.covered_costs_max'),
+            'school_covered_costs.present' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_covered_costs_present'),
+            'school_covered_costs.numeric' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_covered_costs_numeric'),
+            'school_covered_costs.max' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_covered_costs_max'),
         ];
 
         /** Remove empty entries of covered costs. */
-        if (!$data['covered_costs']) {
-            $data['covered_costs'] = 0;
+        if (!$data['school_covered_costs']) {
+            $data['school_covered_costs'] = 0;
         }
 
         /** Apply the validation rules. */
@@ -273,7 +273,7 @@ class LearningPlan extends ComponentBase
 
         /** Mark the course as declined. */
         $learningPlanCourse->status = 'declined';
-        $learningPlanCourse->covered_costs = 0;
+        $learningPlanCourse->school_covered_costs = 0;
         $learningPlanCourse->save();
 
         $this->page['teacher'] = $learningPlan->teacher;
@@ -340,7 +340,9 @@ class LearningPlan extends ComponentBase
             /** Extract the post data to validate. */
             $data['learning_plan_id'] = post('learningPlanId');
             $data['course_id'] = post('courseId');
-            $data['covered_costs'] = (post('covered_costs')) ? (post('covered_costs')) : (0);
+            $data['school_covered_costs'] = post('school_covered_costs');
+            $data['teacher_budget_id'] = Auth::getUser()->profile->active_budget_id;
+            $data['teacher_covered_costs'] = Course::find(post('courseId'))->price - post('school_covered_costs');
 
 
             /** Extract the school. */
@@ -361,7 +363,7 @@ class LearningPlan extends ComponentBase
                     'learning_plan_id' => 'required|numeric|exists:genuineq_tms_learning_plans,id',
                     'course_id' => 'required|numeric|exists:genuineq_tms_courses,id',
                     'school_id' => 'required|numeric|exists:genuineq_tms_schools,id',
-                    'covered_costs' => 'present|numeric|max:' . $course->price,
+                    'school_covered_costs' => 'present|numeric|max:' . $course->price,
                 ];
 
                 /** Construct the validation error messages. */
@@ -375,9 +377,9 @@ class LearningPlan extends ComponentBase
                     'school_id.required' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_id_required'),
                     'school_id.numeric' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_id_numeric'),
                     'school_id.exists' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_id_exists'),
-                    'covered_costs.present' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.covered_costs_present'),
-                    'covered_costs.numeric' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.covered_costs_numeric'),
-                    'covered_costs.max' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.covered_costs_max'),
+                    'school_covered_costs.present' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_covered_costs_present'),
+                    'school_covered_costs.numeric' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_covered_costs_numeric'),
+                    'school_covered_costs.max' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_covered_costs_max'),
                 ];
 
                 /** Apply the validation rules. */
@@ -401,7 +403,9 @@ class LearningPlan extends ComponentBase
             /** Extract the post data to validate. */
             $data['learning_plan_id'] = post('learningPlanId');
             $data['course_id'] = post('courseId');
-            $data['covered_costs'] = 0;
+            $data['school_covered_costs'] = 0;
+            $data['teacher_budget_id'] = Auth::getUser()->profile->active_budget_id;
+            $data['teacher_covered_costs'] = Course::find(post('courseId'))->price;
             /** Mark the course as accepted. */
             $data['status'] = 'accepted';
 
@@ -530,7 +534,7 @@ class LearningPlan extends ComponentBase
 
         /** Mark the course as declined. */
         $learningPlanCourse->status = 'declined';
-        // $learningPlanCourse->covered_costs = 0;
+        // $learningPlanCourse->school_covered_costs = 0;
         $learningPlanCourse->save();
 
         $this->page['learningPlan'] = Auth::getUser()->profile->active_learning_plan;

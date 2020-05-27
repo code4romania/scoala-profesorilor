@@ -120,3 +120,6 @@
 1.0.41:
     - 'Created table genuineq_tms_appraisals'
     - builder_table_create_genuineq_tms_appraisals.php
+1.0.42:
+    - 'Created table genuineq_tms_budgets'
+    - builder_table_create_genuineq_tms_budgets.php

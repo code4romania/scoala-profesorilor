@@ -1,0 +1,19 @@
+description = "Displays the teacher's budget courses"
+
+[viewBag]
+==
+<div id="budgetCourseSummary">
+    {% partial "teacher-budgets/budget-course-summary" teacher=learningPlan.teacher %}
+</div>
+
+<!--Courses Section-->
+{% partial "teacher-budgets/budget-course-search-form" %}
+
+<div id="budgetCourseSearchResults">
+    {% partial "teacher-budgets/budget-course-grid" %}
+</div>
+<div id="budgetCourseSearchPagination">
+    {% partial "teacher-budgets/budget-course-pagination" %}
+</div>
+
+<!--/.Courses Section-->

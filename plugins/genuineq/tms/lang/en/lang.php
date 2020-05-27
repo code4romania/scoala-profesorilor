@@ -280,6 +280,23 @@
         ],
     ],
 
+    'budgets' => [
+        'label' => [
+            'budget' => 'Budget',
+            'semester' => 'Semester',
+            'courses' => 'Courses',
+        ],
+
+        'backend-menu' => 'Budgets',
+
+        'frontend' => [
+            'all_years' => 'Toti anii',
+            'all_semesters' => 'Toate semestrele',
+            'desc' => 'Pret Descendent',
+            'asc' => 'Pret Ascendent',
+        ],
+    ],
+
     'component' => [
         'school-profile' => [
             'name' => 'School Profile',
@@ -338,11 +355,13 @@
                 'school_level_id_numeric' => 'Nivelul scolii specificat nu exista in lista de valori posibile',
                 'contract_type_id_numeric' => 'Tipul de contract specificat nu exista in lista de valori posibile',
                 'description_string' => 'Descrierea trebuie sa fie de tip string',
+                'invalid_budget' => 'Bugetul trebuie sa minim 0'
             ],
             'message' => [
                 'profile_update_successful' => 'Profilul a fost actualizat cu succes',
                 'profile_update_failed' => 'Actualizarea profilului a esuat',
                 'description_update_successful' => 'Descrierea a fost actualizata cu succes',
+                'budget_update_successful' => 'Bugetul a fost actualizat cu succes',
                 'description_update_failed' => 'Actualizarea descrierii a esuat',
                 'login_required' => 'Trebuie sa fiti autentificat',
             ],
@@ -438,9 +457,9 @@
                 'school_id_required' => 'Nu a fost selectata o scoala',
                 'school_id_numeric' => 'Scoala selectata nu este corecta',
                 'school_id_exists' => 'Scoala selectata nu exista',
-                'covered_costs_present' => 'Costurile decontate trebuie sa fie trimise',
-                'covered_costs_numeric' => 'Costurile decontate trebuie sa fie numerice',
-                'covered_costs_max' => 'Costurile decontate nu pot sa fie mai mari decat valoarea cursului',
+                'school_covered_costs_present' => 'Costurile decontate trebuie sa fie trimise',
+                'school_covered_costs_numeric' => 'Costurile decontate trebuie sa fie numerice',
+                'school_covered_costs_max' => 'Costurile decontate nu pot sa fie mai mari decat valoarea cursului',
             ],
             'message' => [
                 'course_added_successful' => 'Cursul a fost adaugat cu succes',
@@ -465,6 +484,13 @@
                 'close_successfull' => "Evaluarea a fost inchisa cu succes",
                 'invalid_grade' => "Notele pot sa fie intre 1 si 10",
                 'teacher_not_exists' => 'Profesorul specificat nu exista sau nu sunteti asociet cu el',
+            ],
+        ],
+
+        'budget' => [
+            'name' => 'Budget',
+            'description' => 'Allows the search, filter, order and paginate budget courses',
+            'validation' => [
             ],
         ],
     ],

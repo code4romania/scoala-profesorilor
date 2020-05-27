@@ -1,5 +1,6 @@
 <?php namespace Genuineq\Tms\Components;
 
+use Log;
 use Auth;
 use Request;
 use Redirect;
@@ -7,8 +8,6 @@ use Cms\Classes\ComponentBase;
 use Genuineq\Tms\Models\Course;
 use Genuineq\Tms\Models\Category;
 use Genuineq\User\Helpers\AuthRedirect;
-
-use Log;
 
 /**
  * School profile component

@@ -35,8 +35,8 @@ class Appraisal extends Model
      */
     public $hasOne = [
         'firstSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'id', 'otherKey' => 'skill_1_id'],
-        'secondSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'id',  'otherKey' => 'skill_2_id'],
-        'thirdSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'id',  'otherKey' => 'skill_3_id']
+        'secondSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'id', 'otherKey' => 'skill_2_id'],
+        'thirdSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'id', 'otherKey' => 'skill_3_id']
     ];
 
     /**
@@ -202,9 +202,9 @@ class Appraisal extends Model
      ***********************************************/
 
     /**
-     * Function used for searching, filtering, sorting and paginating courses.
+     * Function used for searching, filtering, sorting and paginating appraisals.
      *
-     * @param query The query to be used for extracting courses
+     * @param query The query to be used for extracting appraisals
      * @param options The option for searching, filtering, sorting and paginating
      *
      * @return Collection of appraisals
@@ -309,7 +309,7 @@ class Appraisal extends Model
     /**
      * Function that returns years used for filtering.
      */
-    public static function getFilterSemesters($teacherId)
+    public static function getFilterSemesters()
     {
         $semesters[Lang::get('genuineq.tms::lang.appraisal.frontend.all_semesters')] = -1;
         $semesters['1'] = 1;

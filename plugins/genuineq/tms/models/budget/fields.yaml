@@ -1,0 +1,17 @@
+fields:
+    budget:
+        label: 'genuineq.tms::lang.budgets.label.budget'
+        span: left
+        type: number
+    semester:
+        label: 'genuineq.tms::lang.budgets.label.semester'
+        nameFrom: name
+        descriptionFrom: description
+        span: right
+        type: relation
+    courses:
+        label: 'genuineq.tms::lang.budgets.label.courses'
+        prompt: 'Add new item'
+        span: full
+        type: repeater
+        form: {  }

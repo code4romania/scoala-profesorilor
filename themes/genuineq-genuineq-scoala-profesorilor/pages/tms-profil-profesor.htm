@@ -15,6 +15,8 @@ forceSecure = 0
 [learningPlanComponent]
 
 [appraisalComponent]
+
+[budgetComponent]
 ==
 <?php
     function onStart()
@@ -58,6 +60,10 @@ forceSecure = 0
                 <a class="nav-link" id="learning-plan-tab-nav" data-toggle="tab" href="#learning-plan-tab-body" role="tab" aria-controls="learning-plan-tab-body" aria-selected="false" data-request="onTeacherViewLearningPlan" data-request-update="teacher-profile/learning-plan-tab: '#learning-plan-tab-content'">{{ 'teacher.profile.tab.learning-plan'|_ }}</a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" id="budget-tab-nav" data-toggle="tab" href="#budget-tab-body" role="tab" aria-controls="budget-tab-body" aria-selected="false" data-request="onTeacherViewBudget" data-request-update="teacher-profile/budget-course-plan-tab: '#budget-tab-content'">{{ 'teacher.profile.tab.budget'|_ }}</a>
+            </li>
+
             {% if profile.schools.count() %}
                 <li class="nav-item">
                     <a class="nav-link" id="appraisals-tab-nav" data-toggle="tab" href="#appraisals-tab-body" role="tab" aria-controls="appraisals-tab-body" aria-selected="false" data-request="onTeacherAppraisalsView" data-request-update="teacher-profile/appraisals-tab: '#appraisals-tab-content'">{{ 'teacher.profile.tab.appraisals'|_ }}</a>
@@ -84,6 +90,16 @@ forceSecure = 0
             <div class="row my-5">
                 <div class="col-12" id="learning-plan-tab-content">
                     {% partial "teacher-profile/learning-plan-tab" %}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="tab-pane fade" id="budget-tab-body" role="tabpanel" aria-labelledby="budget-tab-body">
+
+            <div class="row my-5">
+                <div class="col-12" id="budget-tab-content">
+                    {% partial "teacher-profile/budget-course-plan-tab" %}
                 </div>
             </div>
 

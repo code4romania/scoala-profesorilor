@@ -1,0 +1,20 @@
+description = "Displays a a teacher's budget course summary"
+
+[viewBag]
+==
+<div class="row bg-white rounded py-3 mb-5 d-flex align-items-center">
+    <div class="col-12">
+        <h5 class="mb-3 font-weight-bold text-center text-sm-left text-md-left text-lg-left text-xl-left">{{ 'teacher-budgets.budget-course-summary.title'|_ }}</h5>
+
+        <div class="row">
+            <div class="col-12">
+                <span>{{ 'teacher-budgets.budget-course-summary.courses'|_ }}: <strong>{{ budgetCoursesNumber }}</strong></span><br/>
+                <span>{{ 'teacher-budgets.budget-course-summary.accredited'|_ }}: <strong>{{ budgetCoursesAccredited }}</strong></span><br/>
+                <span>{{ 'teacher-budgets.budget-course-summary.credits'|_ }}: <strong>{{ budgetCoursesCredits }}</strong></span><br/>
+                <span>{{ 'teacher-budgets.budget-course-summary.hours'|_ }}: <strong>{{ budgetCoursesHours }}</strong></span><br/>
+                <span>{{ 'teacher-budgets.budget-course-summary.costs_supported'|_ }}: <strong>{{ budgetCoursesSupported }} {{ 'general.coin'|_ }}</strong></span><br/>
+                <span>{{ 'teacher-budgets.budget-course-summary.costs_discounted'|_ }}: <strong>{{ budgetCoursesDiscounted }} {{ 'general.coin'|_ }}</strong></span><br/>
+            </div>
+        </div>
+    </div>
+</div>

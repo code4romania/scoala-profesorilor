@@ -1,0 +1,10 @@
+name: Budgets
+form: $/genuineq/tms/models/budget/fields.yaml
+modelClass: Genuineq\Tms\Models\Budget
+defaultRedirect: genuineq/tms/budgets
+create:
+    redirect: 'genuineq/tms/budgets/update/:id'
+    redirectClose: genuineq/tms/budgets
+update:
+    redirect: genuineq/tms/budgets
+    redirectClose: genuineq/tms/budgets

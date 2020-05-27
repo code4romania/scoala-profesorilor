@@ -244,6 +244,27 @@ class TeacherProfile extends ComponentBase
         Flash::success(Lang::get('genuineq.tms::lang.component.teacher-profile.message.description_update_successful'));
     }
 
+    /**
+     * Update the teacher budget
+     */
+    public function onTeacherProfileBudgetUpdate()
+    {
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        if (0 > post('budget')) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.teacher-profile.validation.invalid_budget'));
+        }
+
+        /** Extract the teacher profile budget and update it. */
+        $budget = Auth::getUser()->profile->active_budget;
+        $budget->budget = post('budget');
+        $budget->save();
+
+        Flash::success(Lang::get('genuineq.tms::lang.component.teacher-profile.message.budget_update_successful'));
+    }
+
     /***********************************************
      ******************* Helpers *******************
      ***********************************************/

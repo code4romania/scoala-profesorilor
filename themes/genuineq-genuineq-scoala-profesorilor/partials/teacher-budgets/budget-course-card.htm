@@ -1,0 +1,44 @@
+description = "Displays a budget course as a card"
+
+[viewBag]
+==
+<div class="card">
+    <div class="card-header" style="background-color: {{ budgetCourse.course.color }} !important;">
+        <div class="row w-100 m-0">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-left p-0 m-0">
+                {% if 1 == budgetCourse.course.accredited %}
+                    <p class="small m-0 text-white"><img class="mr-1" src="{{ 'assets/img/svg/w-acknowledged.svg'|theme }}" alt="">  {{ 'course.acknowledged'|_ }}</p>
+                {% else %}
+                    <p class="small m-0 text-white"><img class="mr-1" src="{{ 'assets/img/svg/w-unacknowledged.svg'|theme }}" alt="">  {{ 'course.unacknowledged'|_ }}</p>
+                {% endif %}
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-right p-0 m-0">
+                {% if 1 == budgetCourse.course.accredited %}
+                    <p class="small m-0 text-white">{{ budgetCourse.course.credits }} {{ 'course.credits'|_ }} <span class="mx-1">&vert;</span> {{ budgetCourse.course.price }} {{ 'general.coin'|_ }}</p>
+                {% else %}
+                    <p class="small m-0 text-white">{{ budgetCourse.course.price }} {{ 'general.coin'|_ }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <small class="card-text">{{ budgetCourse.course.supplier.name }}</small>
+
+        <h5 class="card-title font-weight-bold">{{ budgetCourse.course.name }}</h5>
+
+        <p class="card-text text-truncate">{{ budgetCourse.course.description }}</p>
+
+        <small class="card-text align-middle"><img class="mr-1" src="{{ 'assets/img/svg/calendar.svg'|theme }}" alt=""> {{ budgetCourse.course.startDate() }} <span class="mx-1">&ndash;</span> {{ budgetCourse.course.endDate() }}</small><br>
+        <small class="card-text align-middle d-block text-truncate">{{ 'course.domain'|_ }}<span class="mr-1">&colon;</span>
+            <span style="color: {{ budgetCourse.course.color }} !important;">
+                {% for category in budgetCourse.course.categories %}
+                    {{ category.name }}
+                    {% if budgetCourse.course.categories.last() != category %}
+                        <span class="mr-1">&comma;</span>
+                    {% endif %}
+                {% endfor %}
+            </span>
+        </small>
+
+    </div>
+</div>

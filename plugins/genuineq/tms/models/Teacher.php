@@ -4,6 +4,7 @@ use Lang;
 use Model;
 use Illuminate\Support\Collection;
 use Genuineq\Tms\Models\LearningPlan;
+use Genuineq\Tms\Models\Budget;
 
 /**
  * Model
@@ -42,7 +43,12 @@ class Teacher extends Model
     public $morphMany = [
         'requests' => [
             'Genuineq\Tms\Models\LearningPlansCourse',
-            'name' => 'requestable']
+            'name' => 'requestable'
+        ],
+        'budgets' => [
+            'Genuineq\Tms\Models\Budget',
+            'name' => 'budgetable'
+        ]
     ];
 
     /**
@@ -110,6 +116,22 @@ class Teacher extends Model
     public function getActiveLearningPlanAttribute()
     {
         return $this->learning_plans->where('status', 1)->first();
+    }
+
+    /**
+     * Function that extracts the active budget.
+     */
+    public function getActiveBudgetAttribute()
+    {
+        return $this->budgets->where('status', 1)->first();
+    }
+
+    /**
+     * Function that extracts the active budget ID.
+     */
+    public function getActiveBudgetIdAttribute()
+    {
+        return $this->budgets->where('status', 1)->first()->id;
     }
 
     /**
@@ -184,6 +206,10 @@ class Teacher extends Model
         $learningPlan = new LearningPlan();
         $learningPlan->teacher_id = $this->id;
         $learningPlan->save();
+
+        $budget = new Budget();
+        $budget->budgetable = $this;
+        $budget->save();
     }
 
     /***********************************************
@@ -272,6 +298,32 @@ class Teacher extends Model
     /***********************************************
      ***************** Static data *****************
      ***********************************************/
+
+    /**
+     * Function that returns years used for budget courses filtering.
+     */
+    public function getBudgetFilterYears($teacherId)
+    {
+        foreach ($this->budgets as $budget) {
+            $years['' . $budget->semester->year] = '' . $budget->semester->year;
+        }
+
+        $years[Lang::get('genuineq.tms::lang.teacher.frontend.all_budget_years')] = -1;
+
+        return array_reverse($years, true);
+    }
+
+    /**
+     * Function that returns years used for budget courses filtering.
+     */
+    public function getFilterSemesters()
+    {
+        $semesters[Lang::get('genuineq.tms::lang.teacher.frontend.all_budget_semesters')] = -1;
+        $semesters['1'] = 1;
+        $semesters['2'] = 2;
+
+        return $semesters;
+    }
 
     /**
      * Function that returns seniority levels used for filtering.

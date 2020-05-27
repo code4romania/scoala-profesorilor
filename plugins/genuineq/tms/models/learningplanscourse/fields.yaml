@@ -17,7 +17,7 @@ fields:
         descriptionFrom: name
         span: left
         type: relation
-    covered_costs:
+    school_covered_costs:
         label: 'genuineq.tms::lang.learning-plans-course.label.covered-costs'
         span: right
         type: number
