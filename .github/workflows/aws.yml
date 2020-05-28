@@ -39,8 +39,11 @@ on:
 name: Deploy to Amazon ECS
 
 jobs:
-  laravel-tests:
+  
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v1
     - name: Copy ENV Laravel Configuration for CI
@@ -55,13 +58,7 @@ jobs:
         touch database/database.sqlite
         php artisan migrate
     - name: Execute tests (Unit and Feature tests) via PHPUnit
-      run: vendor/bin/phpunit
-  
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
-
-    steps:
+      run: vendor/bin/phpunit plugins/genuineq/tms/tests/
     
     - name: Laravel PHPUnit
       uses: nathanheffley/laravel-phpunit-action@v0.1.0
