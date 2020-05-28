@@ -42,8 +42,6 @@ description = "Displays the budget course search form."
     function budgetCourseSearchFormSubmit(){
         /* Extract the clicked page. */
         var $newPage = $('#budgetCourseSearchPagination > ul > li.active').data('page');
-        /* Extract the active teacher ID. */
-        var $teacherId = $('#budgetCourseSearchPagination > ul > li.active').data('id');
 
         /* Select the course select form and send the request */
         $('#budgetCourseSearchForm').request(
@@ -54,10 +52,7 @@ description = "Displays the budget course search form."
                     'teacher-budgets/budget-course-pagination': '#budgetCourseSearchPagination',
                     'teacher-budgets/budget-course-summary': '#budgetCourseSummary'
                 },
-                data: {
-                    page: $newPage,
-                    teacherId: $teacherId
-                }
+                data: { page: $newPage }
             }
         );
     }

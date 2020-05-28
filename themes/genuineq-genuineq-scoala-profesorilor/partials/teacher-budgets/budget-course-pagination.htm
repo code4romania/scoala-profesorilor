@@ -6,11 +6,11 @@ description = "Displays the budget course search pagination."
     {% for i in 1..budgetCoursesPages %}
         {% if i == budgetCoursesPage %}
             <li class="page-item active" data-page="{{ i }}">
-                <a class="page-link budget-course-search-pagination" data-page="{{ i }}" data-id="{{ budget.id }}">{{ i }}</a>
+                <a class="page-link budget-course-search-pagination" data-page="{{ i }}">{{ i }}</a>
             </li>
         {% else %}
-            <li class="page-item" data-page="{{ i }}" data-id="{{ budget.id }}">
-                <a class="page-link budget-course-search-pagination" data-page="{{ i }}" data-id="{{ budget.id }}">{{ i }}</a>
+            <li class="page-item" data-page="{{ i }}">
+                <a class="page-link budget-course-search-pagination" data-page="{{ i }}">{{ i }}</a>
             </li>
         {% endif %}
     {% endfor %}
@@ -20,8 +20,6 @@ description = "Displays the budget course search pagination."
     $('.budget-course-search-pagination').on('click', function () {
         /* Extract the clicked page. */
         var $newPage = $(this).data('page');
-        /* Extract the active teacher ID. */
-        var $teacherId = $('#budgetCourseSearchPagination > ul > li.active').data('id');
 
         /* Select the course select form and send the request */
         $('#budgetCourseSearchForm').request(
@@ -32,10 +30,7 @@ description = "Displays the budget course search pagination."
                     'teacher-budgets/budget-course-pagination': '#budgetCourseSearchPagination',
                     'teacher-budgets/budget-course-summary': '#budgetCourseSummary'
                 },
-                data: {
-                    page: $newPage,
-                    teacherId: $teacherId
-                }
+                data: { page: $newPage }
             }
         );
     });

@@ -1,0 +1,37 @@
+description = "Displays the school course search pagination."
+
+[viewBag]
+==
+<ul class="pagination pg-darkgrey justify-content-center">
+    {% for i in 1..coursesPages %}
+        {% if i == coursesPage %}
+            <li class="page-item active" data-page="{{ i }}">
+                <a class="page-link course-search-pagination" data-page="{{ i }}">{{ i }}</a>
+            </li>
+        {% else %}
+            <li class="page-item" data-page="{{ i }}">
+                <a class="page-link course-search-pagination" data-page="{{ i }}">{{ i }}</a>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+
+<script type="text/javascript">
+    $('.course-search-pagination').on('click', function () {
+        /* Extract the clicked page. */
+        var $newPage = $(this).data('page');
+
+        /* Select the course select form and send the request */
+        $('#courseSearchForm').request(
+            'onSchoolCourseSearch',
+            {
+                update: {
+                    'school-courses/course-grid': '#courseSearchResults',
+                    'school-courses/course-pagination': '#courseSearchPagination',
+                    'school-courses/course-summary': '#courseSummary'
+                },
+                data: { page: $newPage }
+            }
+        );
+    });
+</script>

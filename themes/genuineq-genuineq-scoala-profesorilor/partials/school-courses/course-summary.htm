@@ -1,0 +1,19 @@
+description = "Displays a school's sponsored courses summary in the active semester"
+
+[viewBag]
+==
+<div class="row bg-white rounded py-3 mb-5 d-flex align-items-center">
+    <div class="col-12">
+        <h5 class="mb-3 font-weight-bold text-center text-sm-left text-md-left text-lg-left text-xl-left">{{ 'school-courses.course-summary.title'|_ }}</h5>
+
+        <div class="row">
+            <div class="col-12">
+                <span>{{ 'school-courses.course-summary.courses'|_ }}: <strong>{{ coursesNumber }}</strong></span><br/>
+                <span>{{ 'school-courses.course-summary.accredited'|_ }}: <strong>{{ coursesAccredited }}</strong></span><br/>
+                <span>{{ 'school-courses.course-summary.credits'|_ }}: <strong>{{ coursesCredits }}</strong></span><br/>
+                <span>{{ 'school-courses.course-summary.hours'|_ }}: <strong>{{ coursesHours }}</strong></span><br/>
+                <span>{{ 'school-courses.course-summary.costs_supported'|_ }}: <strong>{{ coursesSupported }} {{ 'general.coin'|_ }}</strong></span><br/>
+            </div>
+        </div>
+    </div>
+</div>

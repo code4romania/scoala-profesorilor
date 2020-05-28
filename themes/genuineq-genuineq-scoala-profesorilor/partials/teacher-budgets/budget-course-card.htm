@@ -14,7 +14,7 @@ description = "Displays a budget course as a card"
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-right p-0 m-0">
                 {% if 1 == budgetCourse.course.accredited %}
-                    <p class="small m-0 text-white">{{ budgetCourse.course.credits }} {{ 'course.credits'|_ }} <span class="mx-1">&vert;</span> {{ budgetCourse.course.price }} {{ 'general.coin'|_ }}</p>
+                    <p class="small m-0 text-white">{{ budgetCourse.course.credits }} {{ 'course.credits'|_ }} <span class="mx-1">&vert;</span> {{ budgetCourse.teacher_covered_costs }} {{ 'general.coin'|_ }}</p>
                 {% else %}
                     <p class="small m-0 text-white">{{ budgetCourse.course.price }} {{ 'general.coin'|_ }}</p>
                 {% endif %}

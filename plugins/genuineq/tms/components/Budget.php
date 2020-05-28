@@ -54,6 +54,10 @@ class Budget extends ComponentBase
      **************** AJAX handlers ****************
      ***********************************************/
 
+     /***********************************************
+     ****************** Teacher ********************
+     ***********************************************/
+
     /**
      * Loads all the courses from all the budgets
      *  of the teacher.
@@ -97,6 +101,54 @@ class Budget extends ComponentBase
         $this->teacherExtractBudgetCourses($options);
     }
 
+    /***********************************************
+     ******************* School ********************
+     ***********************************************/
+
+    /**
+     * Loads all the courses from the active budget
+     *  of the school.
+     */
+    public function onSchoolViewCourses()
+    {
+        /** Force authentication in case user is not authenticated. */
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        /* Extract the courses based on the received options. */
+        $this->schoolExtractCourses(
+            [
+                'id' => Auth::getUser()->profile->id,
+                'budget' => Auth::getUser()->profile,
+                'type' => 'Genuineq\Tms\Models\School',
+                'sortBy' => 'school_covered_costs'
+            ]
+        );
+    }
+
+    /**
+     * Loads all the courses from the active budget
+     *  of the school.
+     */
+    public function onSchoolCourseSearch()
+    {
+        /** Force authentication in case user is not authenticated. */
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        /** Extract all the options. */
+        $options = post();
+        /** Add teacher options. */
+        $options['id'] = Auth::getUser()->profile->id;
+        $options['type'] = 'Genuineq\Tms\Models\School';
+        $options['sortBy'] = 'school_covered_costs';
+
+        /* Extract the courses based on the received options. */
+        $this->schoolExtractCourses($options);
+    }
+
 
     /***********************************************
      ******************* Helpers *******************
@@ -124,7 +176,7 @@ class Budget extends ComponentBase
     }
 
     /**
-     * Extract the requested school statics.
+     * Extract the requested teacher statics.
      */
     protected function teacherExtractSearchStatics($teacherId)
     {
@@ -134,5 +186,38 @@ class Budget extends ComponentBase
         $this->page['budgetCourseYears'] = BudgetModel::getFilterYears($teacherId);
         /** Extract all semesters for filtering. */
         $this->page['budgetCourseSemesters'] = BudgetModel::getFilterSemesters();
+    }
+
+    /**
+     * Extract the requested courses.
+     */
+    protected function schoolExtractCourses($options)
+    {
+        $schoolCourses = BudgetModel::filterSchoolCourses($options);
+
+        $this->page['courses'] = $schoolCourses['courses'];
+        $this->page['coursesPages'] = $this->page['courses']->lastPage();
+        $this->page['coursesPage'] = $this->page['courses']->currentPage();
+        $this->page['coursesNumber'] = $schoolCourses['number-courses'];
+        $this->page['coursesAccredited'] = $schoolCourses['number-accredited'];
+        $this->page['coursesSupported'] = $schoolCourses['costs-supported'];
+        $this->page['coursesCredits'] = $schoolCourses['total-credits'];
+        $this->page['coursesHours'] = $schoolCourses['total-hours'];
+
+        /** Extracts all the budget statics of specified teacher. */
+        $this->schoolExtractSearchStatics(Auth::getUser()->profile->id);
+    }
+
+    /**
+     * Extract the requested school statics.
+     */
+    protected function schoolExtractSearchStatics($teacherId)
+    {
+        /** Extract all sort types for filtering. */
+        $this->page['coursesSortTypes'] = BudgetModel::getSortingTypes();
+        /** Extract all years for filtering. */
+        $this->page['coursesCategories'] = Course::getFilterCategories();
+        /** Extract all semesters for filtering. */
+        $this->page['coursesAccreditations'] = Course::getFilterAccreditations();
     }
 }

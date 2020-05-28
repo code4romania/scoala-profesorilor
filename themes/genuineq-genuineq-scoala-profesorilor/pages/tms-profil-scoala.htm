@@ -16,6 +16,8 @@ allowedUserGroups[] = "school"
 [learningPlanComponent]
 
 [appraisalComponent]
+
+[budgetComponent]
 ==
 <div class="containter-fluid" style="background-image: url({{ 'background-school.jpg'|media }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
     <div class="row m-0">
@@ -56,7 +58,7 @@ allowedUserGroups[] = "school"
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" id="courses-tab-nav" data-toggle="tab" href="#courses-tab-body" role="tab" aria-controls="courses-tab-body" aria-selected="false">{{ 'school.profile.tab.courses'|_ }}</a>
+                <a class="nav-link" id="courses-tab-nav" data-toggle="tab" href="#courses-tab-body" role="tab" aria-controls="courses-tab-body" aria-selected="false" data-request="onSchoolViewCourses" data-request-update="school-profile/courses-tab: '#courses-tab-content'">{{ 'school.profile.tab.courses'|_ }}</a>
             </li>
 
             <li class="nav-item">
@@ -86,6 +88,13 @@ allowedUserGroups[] = "school"
         </div>
 
         <div class="tab-pane fade" id="courses-tab-body" role="tabpanel" aria-labelledby="courses-tab-body">
+
+            <div class="row my-5">
+                <div class="col-12" id="courses-tab-content">
+                    {% partial "school-profile/courses-tab" %}
+                </div>
+            </div>
+
         </div>
 
         <div class="tab-pane fade" id="notifications-tab-body" role="tabpanel" aria-labelledby="notifications-tab-body">

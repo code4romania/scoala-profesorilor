@@ -99,12 +99,12 @@ class Budget extends Model
      *
      * @return Collection of budget courses
      */
-    public static function filterTeacherBudgetCourses($options = [])
+    public static function filterTeacherActiveCourses($options = [])
     {
         /** Define the default options. */
         extract(array_merge([
             'page' => 1,
-            'perPage' => 1,
+            'perPage' => 12,
             'searchInput' => '',
             'id' => null,
             'type' => null,
@@ -114,10 +114,7 @@ class Budget extends Model
             'sort' => 'desc'
         ], $options));
 
-        /*********************************************************
-         ******************** Filter budgets *********************
-         *********************************************************/
-        /** Apply the budgets ID and type filter */
+        /******************** Filter budgets *********************/
         $budgets = Budget::where('budgetable_id', $id)->where('budgetable_type', $type);
 
         /** Apply the budgets year filter */
@@ -130,9 +127,7 @@ class Budget extends Model
             $budgets = $budgets->whereHas('semester', function ($query) use ($semester) { $query->where('semester', $semester); });
         }
 
-        /*********************************************************
-         ******************** Merge courses **********************
-         *********************************************************/
+        /******************** Merge courses **********************/
         $budgetCourses = new Collection();
         foreach ($budgets->get() as $key => $budget) {
             /** One of 'teacherCourses' or 'schoolCourses' will be empty. */
@@ -140,9 +135,7 @@ class Budget extends Model
             $budgetCourses = $budgetCourses->merge($budget->schoolCourses);
         }
 
-        /*********************************************************
-         ******************** Filter courses *********************
-         *********************************************************/
+        /******************** Filter courses *********************/
         $budgetCoursesOptions = [
             'page' => $page,
             'perPage' => $perPage,
@@ -153,6 +146,49 @@ class Budget extends Model
         ];
 
         return LearningPlansCourse::teacherFilterBudgetCourses($budgetCoursesOptions);
+    }
+
+    /**
+     * Function used for searching, filtering, sorting and paginating school courses.
+     *
+     * @param options The option for searching, filtering, sorting and paginating
+     *
+     * @return Collection of school courses
+     */
+    public static function filterSchoolCourses($options = [])
+    {
+        /** Define the default options. */
+        extract(array_merge([
+            'page' => 1,
+            'perPage' => 12,
+            'searchInput' => '',
+            'id' => null,
+            'type' => null,
+            'category' => -1,
+            'accreditation' => -1,
+            'sortBy' => null,
+            'sort' => 'desc'
+        ], $options));
+
+        /******************** Filter active budget *********************/
+        $budget = Budget::where('budgetable_id', $id)->where('budgetable_type', $type)->where('status', 1)->first();
+
+        /******************** Extract courses **********************/
+        $budgetCourses = $budget->schoolCourses;
+
+        /******************** Filter courses *********************/
+        $budgetCoursesOptions = [
+            'page' => $page,
+            'perPage' => $perPage,
+            'ids' => $budgetCourses->pluck('id'),
+            'searchInput' => $searchInput,
+            'category' => $category,
+            'accreditation' => $accreditation,
+            'sortBy' => $sortBy,
+            'sort' => $sort
+        ];
+
+        return LearningPlansCourse::schoolFilterSchoolCourses($budgetCoursesOptions);
     }
 
     /***********************************************

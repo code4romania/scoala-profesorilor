@@ -1,0 +1,19 @@
+description = "Displays the school's sponsored courses in the active semester"
+
+[viewBag]
+==
+<div id="coursesSummary">
+    {% partial "school-courses/course-summary" teacher=learningPlan.teacher %}
+</div>
+
+<!--Courses Section-->
+{% partial "school-courses/course-search-form" %}
+
+<div id="coursesSearchResults">
+    {% partial "school-courses/course-grid" %}
+</div>
+<div id="coursesSearchPagination">
+    {% partial "school-courses/course-pagination" %}
+</div>
+
+<!--/.Courses Section-->

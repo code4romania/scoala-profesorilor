@@ -128,8 +128,8 @@ class LearningPlan extends ComponentBase
         $data['course_id'] = post('courseId');
         $data['school_covered_costs'] = post('school_covered_costs');
 
-        /** Extract the school ID. */
-        $data['school_id'] = Auth::getUser()->profile->id;
+        /** Extract the school budget ID. */
+        $data['school_budget_id'] = Auth::getUser()->profile->active_budget_id;
 
         /** Check if course is mandatory */
         if (post('mandatory')) {
@@ -147,7 +147,7 @@ class LearningPlan extends ComponentBase
         /** Extract the validation rules. */
         $rules = [
             'learning_plan_id' => 'required|numeric|exists:genuineq_tms_learning_plans,id',
-            'school_id' => 'required|numeric|exists:genuineq_tms_schools,id',
+            'school_budget_id' => 'required|numeric|exists:genuineq_tms_budgets,id',
             'course_id' => 'required|numeric|exists:genuineq_tms_courses,id',
             'school_covered_costs' => 'present|numeric|max:' . $course->price,
         ];
@@ -160,9 +160,9 @@ class LearningPlan extends ComponentBase
             'course_id.required' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.course_id_required'),
             'course_id.numeric' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.course_id_numeric'),
             'course_id.exists' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.course_id_exists'),
-            'school_id.required' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_id_required'),
-            'school_id.numeric' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_id_numeric'),
-            'school_id.exists' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_id_exists'),
+            'school_budget_id.required' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_budget_id_required'),
+            'school_budget_id.numeric' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_budget_id_numeric'),
+            'school_budget_id.exists' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_budget_id_exists'),
             'school_covered_costs.present' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_covered_costs_present'),
             'school_covered_costs.numeric' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_covered_costs_numeric'),
             'school_covered_costs.max' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_covered_costs_max'),

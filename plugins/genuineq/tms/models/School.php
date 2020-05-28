@@ -99,6 +99,26 @@ class School extends Model
     ];
 
     /***********************************************
+     ******************* Mutators ******************
+     ***********************************************/
+
+    /**
+     * Function that extracts the active budget.
+     */
+    public function getActiveBudgetAttribute()
+    {
+        return $this->budgets->where('status', 1)->first();
+    }
+
+    /**
+     * Function that extracts the active budget ID.
+     */
+    public function getActiveBudgetIdAttribute()
+    {
+        return $this->budgets->where('status', 1)->first()->id;
+    }
+
+    /***********************************************
      ******************* Functions *****************
      ***********************************************/
 

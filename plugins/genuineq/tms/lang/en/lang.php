@@ -292,8 +292,8 @@
         'frontend' => [
             'all_years' => 'Toti anii',
             'all_semesters' => 'Toate semestrele',
-            'desc' => 'Pret Descendent',
-            'asc' => 'Pret Ascendent',
+            'desc' => 'Cost acoperit descrescator',
+            'asc' => 'Cost acoperit crescator',
         ],
     ],
 
@@ -454,9 +454,9 @@
                 'course_id_required' => 'Nu a fost selectat un curs',
                 'course_id_numeric' => 'Cursul selectat nu este corect',
                 'course_id_exists' => 'Cursul selectat nu exista',
-                'school_id_required' => 'Nu a fost selectata o scoala',
-                'school_id_numeric' => 'Scoala selectata nu este corecta',
-                'school_id_exists' => 'Scoala selectata nu exista',
+                'school_budget_id_required' => 'Nu a fost selectata o scoala',
+                'school_budget_id_numeric' => 'Scoala selectata nu este corecta',
+                'school_budget_id_exists' => 'Scoala selectata nu exista',
                 'school_covered_costs_present' => 'Costurile decontate trebuie sa fie trimise',
                 'school_covered_costs_numeric' => 'Costurile decontate trebuie sa fie numerice',
                 'school_covered_costs_max' => 'Costurile decontate nu pot sa fie mai mari decat valoarea cursului',

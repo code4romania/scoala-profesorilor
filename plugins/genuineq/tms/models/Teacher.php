@@ -300,32 +300,6 @@ class Teacher extends Model
      ***********************************************/
 
     /**
-     * Function that returns years used for budget courses filtering.
-     */
-    public function getBudgetFilterYears($teacherId)
-    {
-        foreach ($this->budgets as $budget) {
-            $years['' . $budget->semester->year] = '' . $budget->semester->year;
-        }
-
-        $years[Lang::get('genuineq.tms::lang.teacher.frontend.all_budget_years')] = -1;
-
-        return array_reverse($years, true);
-    }
-
-    /**
-     * Function that returns years used for budget courses filtering.
-     */
-    public function getFilterSemesters()
-    {
-        $semesters[Lang::get('genuineq.tms::lang.teacher.frontend.all_budget_semesters')] = -1;
-        $semesters['1'] = 1;
-        $semesters['2'] = 2;
-
-        return $semesters;
-    }
-
-    /**
      * Function that returns seniority levels used for filtering.
      */
     public static function getFilterSeniorityLevel()
