@@ -39,11 +39,22 @@ on:
 name: Deploy to Amazon ECS
 
 jobs:
+  phpunit:
+    name: PHPUnit
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: nathanheffley/laravel-phpunit-action@master
+  
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
 
     steps:
+    
+    - name: Laravel PHPUnit
+      uses: nathanheffley/laravel-phpunit-action@v0.1.0
+      
     - name: Checkout
       uses: actions/checkout@v2
 
