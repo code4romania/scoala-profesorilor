@@ -60,9 +60,6 @@ jobs:
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: vendor/bin/phpunit plugins/genuineq/tms/tests/
     
-    - name: Laravel PHPUnit
-      uses: nathanheffley/laravel-phpunit-action@v0.1.0
-      
     - name: Checkout
       uses: actions/checkout@v2
 
