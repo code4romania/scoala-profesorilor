@@ -11,6 +11,10 @@ php artisan config:clear
 php artisan october:mirror public --relative
 
 # Run any DB migrations
-php artisan october:up
+#php artisan october:up
+
+# Reinstall plugins
+php artisan plugin:refresh genuineq.user
+php artisan plugin:refresh genuineq.tms
 
 exec "$@"
