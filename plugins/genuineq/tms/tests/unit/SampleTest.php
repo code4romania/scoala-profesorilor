@@ -6,6 +6,6 @@ class SampleTest extends PluginTestCase
 {
     public function testTrueAssertsToTrue()
     {
-        $this->assertTrue(false);
+        $this->assertTrue(true);
     }
 }
