@@ -44,6 +44,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
+    - name: Laravel PHPUnit
+      uses: nathanheffley/laravel-phpunit-action@v0.1.0
+      
     - name: Checkout
       uses: actions/checkout@v2
 
