@@ -173,6 +173,25 @@ class Account extends ComponentBase
     }
 
     /**
+     * Updated email notifications flag.
+     */
+    public function onEmailNotificationsUpdate()
+    {
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        /** Extract the user */
+        $user = Auth::getUser();
+
+        /** Update the enmail notifications */
+        $user->email_notifications = post('emailNotifications');
+        $user->save();
+
+        Flash::success(Lang::get('genuineq.user::lang.component.account.message.email_notifications_update_successful'));
+    }
+
+    /**
      * Deactivate user
      */
     public function onDeactivate()

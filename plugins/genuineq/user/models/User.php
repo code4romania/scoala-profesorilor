@@ -67,6 +67,17 @@ class User extends UserBase
         'last_login'
     ];
 
+    /**
+     * Notification relation.
+     */
+    public $morphMany = [
+        'notifications' => [
+            'RainLab\Notify\Models\Notification',
+            'name' => 'notifiable',
+            'order' => 'created_at desc'
+        ]
+    ];
+
     public static $loginAttribute = 'email';
 
     /**

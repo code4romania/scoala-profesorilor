@@ -1,0 +1,20 @@
+# ===================================
+#  Condition Attribute Definitions
+# ===================================
+
+attributes:
+
+    name:
+        label: Name
+
+    email:
+        label: Email
+
+    user_id:
+        label: User ID
+
+    contact_email:
+        label: Contact Email
+
+    status:
+        label: Status

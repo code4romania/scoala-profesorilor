@@ -1,0 +1,10 @@
+subject = "Noua cerere de curs"
+description = "Noua cerere de curs"
+==
+Buna {{ school_name }}
+
+Profesorul {{ teacher_name }} a deschis o noua solicitare pentru cursul {{ course_name }}:
+    - Suma ceruta spre a fi decontata: {{ school_covered_costs }}
+    - Suma acoperita de profesor: {{ teacher_covered_costs }}
+
+{% partial 'buttons' url_reject=link_reject url_accept=link_approve %}

@@ -53,7 +53,7 @@ forceSecure = 0
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" id="notifications-tab-nav" data-toggle="tab" href="#notifications-tab-body" role="tab" aria-controls="notifications-tab-body" aria-selected="false">{{ 'teacher.profile.tab.notifications'|_ }}</a>
+                <a class="nav-link" id="notifications-tab-nav" data-toggle="tab" href="#notifications-tab-body" role="tab" aria-controls="notifications-tab-body" aria-selected="false" data-request="onViewNotifications" data-request-update="teacher-profile/notifications-tab: '#notifications-tab-content'">{{ 'teacher.profile.tab.notifications'|_ }}</a>
             </li>
 
             <li class="nav-item">
@@ -83,6 +83,13 @@ forceSecure = 0
         </div>
 
         <div class="tab-pane fade" id="notifications-tab-body" role="tabpanel" aria-labelledby="notifications-tab-body">
+
+            <div class="row my-5">
+                <div class="col-12" id="notifications-tab-content">
+                    {% partial "teacher-profile/notifications-tab" %}
+                </div>
+            </div>
+
         </div>
 
         <div class="tab-pane fade" id="learning-plan-tab-body" role="tabpanel" aria-labelledby="learning-plan-tab-body">
@@ -119,3 +126,21 @@ forceSecure = 0
 
     </div>
 </div>
+
+{% put scripts %}
+    <script type="text/javascript">
+        const tmsTeacherProfileAnchor = window.location.hash;
+        $(`a[href="${tmsTeacherProfileAnchor}"]`).tab('show');
+
+
+        $.request(
+            'onViewNotifications',
+            {
+                update: {
+                    'teacher-profile/notifications-tab': '#notifications-tab-content'
+                }
+            }
+        );
+
+    </script>
+{% endput %}

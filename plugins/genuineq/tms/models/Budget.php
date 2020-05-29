@@ -99,7 +99,7 @@ class Budget extends Model
      *
      * @return Collection of budget courses
      */
-    public static function filterTeacherActiveCourses($options = [])
+    public static function filterTeacherBudgetCourses($options = [])
     {
         /** Define the default options. */
         extract(array_merge([

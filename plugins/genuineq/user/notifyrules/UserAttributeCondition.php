@@ -1,6 +1,6 @@
 <?php namespace Genuineq\User\NotifyRules;
 
-use Genuineq\Notify\Classes\ModelAttributesConditionBase;
+use RainLab\Notify\Classes\ModelAttributesConditionBase;
 use ApplicationException;
 
 class UserAttributeCondition extends ModelAttributesConditionBase

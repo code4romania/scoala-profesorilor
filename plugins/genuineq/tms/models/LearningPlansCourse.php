@@ -17,7 +17,6 @@ class LearningPlansCourse extends Model
      */
     protected $fillable = [
         'learning_plan_id',
-        'school_id',
         'course_id',
         'school_budget_id',
         'school_covered_costs',

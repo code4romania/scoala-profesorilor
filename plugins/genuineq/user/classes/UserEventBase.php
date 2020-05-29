@@ -1,6 +1,6 @@
 <?php namespace Genuineq\User\Classes;
 
-use Genuineq\Notify\Classes\EventBase;
+use RainLab\Notify\Classes\EventBase;
 
 class UserEventBase extends EventBase
 {

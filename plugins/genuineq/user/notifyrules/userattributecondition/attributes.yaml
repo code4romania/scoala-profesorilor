@@ -15,3 +15,6 @@ attributes:
 
     email:
         label: Email address
+
+    email_notifications:
+        label: Email Notifications

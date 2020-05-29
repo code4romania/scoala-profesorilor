@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('reset_password_code')->nullable()->index();
             $table->text('permissions')->nullable();
             $table->boolean('is_activated')->default(0);
+            $table->boolean('email_notifications')->default(1);
             $table->timestamp('activated_at')->nullable();
             $table->timestamp('last_login')->nullable();
             $table->timestamp('last_seen')->nullable();

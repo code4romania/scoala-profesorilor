@@ -9,7 +9,9 @@ use System\Classes\SettingsManager;
 use Illuminate\Foundation\AliasLoader;
 use Genuineq\User\Classes\UserRedirector;
 use Genuineq\User\Models\MailBlocker;
-use Genuineq\Notify\Classes\Notifier;
+use RainLab\User\Models\User;
+use RainLab\Notify\Classes\Notifier;
+use RainLab\Notify\NotifyRules\SaveDatabaseAction;
 
 class Plugin extends PluginBase
 {
@@ -58,10 +60,9 @@ class Plugin extends PluginBase
             return MailBlocker::filterMessage($view, $message);
         });
 
-        /*
-         * Compatability with Genuineq.Notify
-         */
+        /** Compatability with Rainlab.Notify */
         $this->bindNotificationEvents();
+        $this->extendSaveDatabaseAction();
     }
 
     public function registerComponents()
@@ -69,10 +70,10 @@ class Plugin extends PluginBase
         return [
             \Genuineq\User\Components\Account::class       => 'account',
             \Genuineq\User\Components\ResetPassword::class => 'resetPassword',
-
             \Genuineq\User\Components\Session::class       => 'session',
             \Genuineq\User\Components\Login::class         => 'login',
             \Genuineq\User\Components\Register::class      => 'register',
+            \Genuineq\User\Components\Notifications::class => 'notifications',
         ];
     }
 
@@ -169,12 +170,6 @@ class Plugin extends PluginBase
     public function registerNotificationRules()
     {
         return [
-            'groups' => [
-                'user' => [
-                    'label' => 'User',
-                    'icon' => 'icon-user'
-                ],
-            ],
             'events' => [
                 \Genuineq\User\NotifyRules\UserActivatedEvent::class,
                 \Genuineq\User\NotifyRules\UserRegisteredEvent::class,
@@ -182,6 +177,12 @@ class Plugin extends PluginBase
             'actions' => [],
             'conditions' => [
                 \Genuineq\User\NotifyRules\UserAttributeCondition::class
+            ],
+            'groups' => [
+                'user' => [
+                    'label' => 'User',
+                    'icon' => 'icon-user'
+                ],
             ],
         ];
     }
@@ -196,10 +197,19 @@ class Plugin extends PluginBase
             'genuineq.user.activate' => \Genuineq\User\NotifyRules\UserActivatedEvent::class,
             'genuineq.user.register' => \Genuineq\User\NotifyRules\UserRegisteredEvent::class
         ]);
+    }
 
-        Notifier::instance()->registerCallback(function($manager) {
-            $manager->registerGlobalParams([
-                'user' => Auth::getUser()
+    protected function extendSaveDatabaseAction()
+    {
+        if (!class_exists(SaveDatabaseAction::class)) {
+            return;
+        }
+
+        SaveDatabaseAction::extend(function ($action) {
+            $action->addTableDefinition([
+                'label' => 'User notifications',
+                'class' => User::class,
+                'param' => 'user'
             ]);
         });
     }

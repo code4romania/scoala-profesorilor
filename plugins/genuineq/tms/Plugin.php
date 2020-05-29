@@ -7,9 +7,21 @@ use Genuineq\User\Models\User;
 use Genuineq\Tms\Models\School;
 use Genuineq\Tms\Models\Teacher;
 use Genuineq\Tms\Classes\SemesterCloser;
+use RainLab\Notify\Classes\Notifier;
 
 class Plugin extends PluginBase
 {
+    /**
+     * @var boolean Determine if this plugin should have elevated privileges.
+     */
+    public $elevated = true;
+
+    public function register()
+    {
+        /** Compatability with Rainlab.Notify */
+        $this->bindNotificationEvents();
+    }
+
     public function registerComponents()
     {
         return [
@@ -48,6 +60,68 @@ class Plugin extends PluginBase
         })->dailyAt('00:00')->when(function () {
             return Carbon::today() == (new Carbon('last day of june'));
         });
+    }
+
+    public function registerMailTemplates()
+    {
+        return [
+            'genuineq.tms::mail.teacher-course-request',
+            'genuineq.tms::mail.teacher-course-approve',
+            'genuineq.tms::mail.teacher-course-reject',
+            'genuineq.tms::mail.school-course-request',
+            'genuineq.tms::mail.school-course-approve',
+            'genuineq.tms::mail.school-course-reject',
+        ];
+    }
+
+    public function registerNotificationRules()
+    {
+        return [
+            'events' => [
+                \Genuineq\Tms\NotifyRules\TeacherCourseRequestEvent::class,
+                \Genuineq\Tms\NotifyRules\TeacherCourseApproveEvent::class,
+                \Genuineq\Tms\NotifyRules\TeacherCourseRejectEvent::class,
+
+                \Genuineq\Tms\NotifyRules\SchoolCourseRequestEvent::class,
+                \Genuineq\Tms\NotifyRules\SchoolCourseApproveEvent::class,
+                \Genuineq\Tms\NotifyRules\SchoolCourseRejectEvent::class,
+            ],
+            'actions' => [],
+            'conditions' => [
+                \Genuineq\Tms\NotifyRules\TeacherAttributeCondition::class,
+                \Genuineq\Tms\NotifyRules\SchoolAttributeCondition::class,
+                \Genuineq\Tms\NotifyRules\LearningPlanCourseAttributeCondition::class,
+            ],
+            'groups' => [
+                'tms' => [
+                    'label' => 'TMS',
+                    'icon' => 'icon-book'
+                ],
+            ],
+        ];
+    }
+
+    protected function bindNotificationEvents()
+    {
+        if (!class_exists(Notifier::class)) {
+            return;
+        }
+
+        Notifier::bindEvents([
+            'genuineq.tms.teacher.course.request' => \Genuineq\Tms\NotifyRules\TeacherCourseRequestEvent::class,
+            'genuineq.tms.teacher.course.approve' => \Genuineq\Tms\NotifyRules\TeacherCourseApproveEvent::class,
+            'genuineq.tms.teacher.course.reject' => \Genuineq\Tms\NotifyRules\TeacherCourseRejectEvent::class,
+
+            'genuineq.tms.school.course.request' => \Genuineq\Tms\NotifyRules\SchoolCourseRequestEvent::class,
+            'genuineq.tms.school.course.approve' => \Genuineq\Tms\NotifyRules\SchoolCourseApproveEvent::class,
+            'genuineq.tms.school.course.reject' => \Genuineq\Tms\NotifyRules\SchoolCourseRejectEvent::class,
+
+            // 'genuineq.tms.teacher.appraisal.objectives.set' => \Genuineq\Tms\NotifyRules\TeacherCourseRequestEvent::class,
+
+            // 'genuineq.tms.school.appraisal.objectives.approve' => \Genuineq\Tms\NotifyRules\TeacherCourseRequestEvent::class,
+            // 'genuineq.tms.school.appraisal.objectives.reject' => \Genuineq\Tms\NotifyRules\TeacherCourseRequestEvent::class,
+            // 'genuineq.tms.school.appraisal.evaluation.done' => \Genuineq\Tms\NotifyRules\TeacherCourseRequestEvent::class,
+        ]);
     }
 
     public function boot()

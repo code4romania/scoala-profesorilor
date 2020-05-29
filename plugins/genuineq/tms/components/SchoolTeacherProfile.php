@@ -240,12 +240,14 @@ class SchoolTeacherProfile extends ComponentBase
         /** Check if the learning plan has any courses. */
         if ($learningPlan && $learningPlan->courses) {
             /** Extract all courses added by the school. */
-            $schoolCourses = $learningPlan->courses->where('school_id', $school->id);
+            $schoolCourses = $learningPlan->courses->where('school_budget_id', $school->active_budget_id);
 
             /** Remove any sponsorship and/or the mandatory mark from the future courses. */
             foreach ($schoolCourses as $learningPlanCourse) {
                 /** Check if the course has NOT started. */
                 if ((date('Y-m-d') < $learningPlanCourse->course->start_date) && (($learningPlanCourse->school_covered_costs) || ($learningPlanCourse->mandatory))) {
+                    /** Remove course from school budget */
+                    $learningPlanCourse->school_budget_id = null;
                     /** Remove any sponsorship */
                     $learningPlanCourse->school_covered_costs = 0;
                     /** Mark as no longer mandatory */

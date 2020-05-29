@@ -1,22 +1,25 @@
 <?php namespace Genuineq\Tms\Components;
 
+use Log;
 use Lang;
 use Auth;
 use Flash;
 use Input;
+use Event;
 use Request;
 use Redirect;
 use Validator;
+use Carbon\Carbon;
 use ValidationException;
 use ApplicationException;
 use Cms\Classes\ComponentBase;
 use Genuineq\Tms\Models\Course;
+use Genuineq\Tms\Models\School;
 use Genuineq\Tms\Models\Teacher;
+use Genuineq\Tms\Models\Budget;
 use Genuineq\Tms\Models\LearningPlansCourse;
 use Genuineq\Tms\Models\LearningPlan as LearningPlanModel;
 use Genuineq\User\Helpers\AuthRedirect;
-
-use Log;
 
 /**
  * School profile component
@@ -64,10 +67,21 @@ class LearningPlan extends ComponentBase
             return $redirect;
         }
 
-        /** Force authentication in case user is not authenticated. */
-        // if (!Auth::check()) {
-        //     return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
-        // }
+        // Log::info('a = ' . print_r(get('a'), true));
+        // Log::info('t = ' . print_r(get('t'), true));
+
+        /** Check if an action was requested. */
+        if (1 == get('a')) {
+            if ('sr' == get('t')) {
+                $this->actionSchoolReject();
+            } elseif ('sa' == get('t')) {
+                $this->actionSchoolApprove();
+            } elseif ('tr' == get('t')) {
+                $this->actionTeacherReject();
+            } elseif ('ta' == get('t')) {
+                $this->actionTeacherApprove();
+            }
+        }
 
         $this->prepareVars();
     }
@@ -127,6 +141,7 @@ class LearningPlan extends ComponentBase
         $data['learning_plan_id'] = post('learningPlanId');
         $data['course_id'] = post('courseId');
         $data['school_covered_costs'] = post('school_covered_costs');
+        $data['teacher_covered_costs'] = Course::find(post('courseId'))->price - post('school_covered_costs');
 
         /** Extract the school budget ID. */
         $data['school_budget_id'] = Auth::getUser()->profile->active_budget_id;
@@ -186,6 +201,17 @@ class LearningPlan extends ComponentBase
         }
         $learningPlanCourse->save();
 
+        if (!post('mandatory')) {
+            Event::fire(
+                'genuineq.tms.school.course.request',
+                [
+                    /*teacher*/Teacher::find(post('teacherId')),
+                    /*course*/$learningPlanCourse,
+                    /*school*/Auth::getUser()
+                ]
+            );
+        }
+
         Flash::success(Lang::get('genuineq.tms::lang.component.learning-plan.message.course_added_successful'));
 
         /** Extract the received courses filtering options */
@@ -240,6 +266,9 @@ class LearningPlan extends ComponentBase
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
+        Log::info('learningPlanId: ' . print_r(post('learningPlanId'), true));
+        Log::info('courseId: ' . print_r(post('courseId'), true));
+
         /** Extract the learning plan. */
         $learningPlan = LearningPlanModel::find(post('learningPlanId'));
 
@@ -248,12 +277,27 @@ class LearningPlan extends ComponentBase
 
         /** Mark the course as accepted. */
         $learningPlanCourse->status = 'accepted';
-        $learningPlanCourse->school_id =  Auth::getUser()->profile->id;
+        $learningPlanCourse->school_budget_id =  Auth::getUser()->profile->active_budget_id;
         $learningPlanCourse->save();
 
-        $this->page['teacher'] = $learningPlan->teacher;
-        $this->page['proposedRequests'] = Auth::getUser()->profile->getProposedLearningPlanRequests($this->page['teacher']->active_learning_plan->id);
-        $this->page['teacherDeclinedRequests'] = $this->page['teacher']->declined_requests;
+        Event::fire(
+            'genuineq.tms.school.course.approve',
+            [
+                /*teacher*/$learningPlan->teacher,
+                /*course*/$learningPlanCourse,
+                /*school*/Auth::getUser(),
+            ]
+        );
+
+        /** Check if action is originated from notifications. */
+        if (post('notificationId')) {
+            Auth::getUser()->notifications()->where('id', post('notificationId'))->update(['read_at' => Carbon::now()]);
+            $this->page['notifications'] = Auth::getUser()->notifications()->applyUnread()->get();
+        } else {
+            $this->page['teacher'] = $learningPlan->teacher;
+            $this->page['proposedRequests'] = Auth::getUser()->profile->getProposedLearningPlanRequests($this->page['teacher']->active_learning_plan->id);
+            $this->page['teacherDeclinedRequests'] = $this->page['teacher']->declined_requests;
+        }
     }
 
     /**
@@ -276,9 +320,24 @@ class LearningPlan extends ComponentBase
         $learningPlanCourse->school_covered_costs = 0;
         $learningPlanCourse->save();
 
-        $this->page['teacher'] = $learningPlan->teacher;
-        $this->page['proposedRequests'] = Auth::getUser()->profile->getProposedLearningPlanRequests($this->page['teacher']->active_learning_plan->id);
-        $this->page['teacherDeclinedRequests'] = $this->page['teacher']->declined_requests;
+        Event::fire(
+            'genuineq.tms.school.course.reject',
+            [
+                /*teacher*/$learningPlan->teacher,
+                /*course*/$learningPlanCourse,
+                /*school*/Auth::getUser(),
+            ]
+        );
+
+        /** Check if action is originated from notifications. */
+        if (post('notificationId')) {
+            Auth::getUser()->notifications()->where('id', post('notificationId'))->update(['read_at' => Carbon::now()]);
+            $this->page['notifications'] = Auth::getUser()->notifications()->applyUnread()->get();
+        } else {
+            $this->page['teacher'] = $learningPlan->teacher;
+            $this->page['proposedRequests'] = Auth::getUser()->profile->getProposedLearningPlanRequests($this->page['teacher']->active_learning_plan->id);
+            $this->page['teacherDeclinedRequests'] = $this->page['teacher']->declined_requests;
+        }
     }
 
     /***********************************************
@@ -351,7 +410,7 @@ class LearningPlan extends ComponentBase
             if (!$school) {
                 Flash::error(Lang::get('genuineq.tms::lang.component.learning-plan.message.school_not_valid'));
             } else {
-                $data['school_id'] = $school->id;
+                $data['school_budget_id'] = Auth::getUser()->profile->active_budget_id;
                 /** Mark the course as proposed. */
                 $data['status'] = 'proposed';
 
@@ -362,7 +421,7 @@ class LearningPlan extends ComponentBase
                 $rules = [
                     'learning_plan_id' => 'required|numeric|exists:genuineq_tms_learning_plans,id',
                     'course_id' => 'required|numeric|exists:genuineq_tms_courses,id',
-                    'school_id' => 'required|numeric|exists:genuineq_tms_schools,id',
+                    'school_budget_id' => 'required|numeric|exists:genuineq_tms_schools,id',
                     'school_covered_costs' => 'present|numeric|max:' . $course->price,
                 ];
 
@@ -374,9 +433,9 @@ class LearningPlan extends ComponentBase
                     'course_id.required' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.course_id_required'),
                     'course_id.numeric' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.course_id_numeric'),
                     'course_id.exists' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.course_id_exists'),
-                    'school_id.required' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_id_required'),
-                    'school_id.numeric' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_id_numeric'),
-                    'school_id.exists' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_id_exists'),
+                    'school_budget_id.required' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_budget_id_required'),
+                    'school_budget_id.numeric' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_budget_id_numeric'),
+                    'school_budget_id.exists' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_budget_id_exists'),
                     'school_covered_costs.present' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_covered_costs_present'),
                     'school_covered_costs.numeric' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_covered_costs_numeric'),
                     'school_covered_costs.max' => Lang::get('genuineq.tms::lang.component.learning-plan.validation.school_covered_costs_max'),
@@ -392,6 +451,15 @@ class LearningPlan extends ComponentBase
                 $learningPlanCourse = new LearningPlansCourse($data);
                 $learningPlanCourse->requestable = $school;
                 $learningPlanCourse->save();
+
+                Event::fire(
+                    'genuineq.tms.teacher.course.request',
+                    [
+                        /*school*/$school,
+                        /*course*/$learningPlanCourse,
+                        /*user*/Auth::getUser()
+                    ]
+                );
 
                 Flash::success(Lang::get('genuineq.tms::lang.component.learning-plan.message.course_added_successful'));
             }
@@ -469,10 +537,7 @@ class LearningPlan extends ComponentBase
         /** Extract the clearning plan course. */
         $learningPlanCourse = $learningPlan->courses->where('course_id', post('courseId'))->first();
 
-        if( Auth::getUser()->profile->schools->count() &&
-            $learningPlanCourse->school_id &&
-            Auth::getUser()->profile->schools->where('id', $learningPlanCourse->school_id)->first() &&
-            $learningPlanCourse->mandatory)
+        if( Auth::getUser()->profile->schools->count() && $learningPlanCourse->school_budget_id && $learningPlanCourse->mandatory )
         {
             Flash::error(Lang::get('genuineq.tms::lang.component.learning-plan.message.course_deleted_not_allowed'));
         } else {
@@ -515,9 +580,24 @@ class LearningPlan extends ComponentBase
         $learningPlanCourse->status = 'accepted';
         $learningPlanCourse->save();
 
-        $this->page['learningPlan'] = Auth::getUser()->profile->active_learning_plan;
-        $this->page['proposedRequests'] = Auth::getUser()->profile->proposed_requests;
-        $this->page['schoolDeclinedRequests'] = Auth::getUser()->profile->school_declined_requests;
+        Event::fire(
+            'genuineq.tms.teacher.course.approve',
+            [
+                /*school*/Budget::find($learningPlanCourse->school_budget_id)->budgetable,
+                /*course*/$learningPlanCourse,
+                /*user*/Auth::getUser()
+            ]
+        );
+
+        /** Check if action is originated from notifications. */
+        if (post('notificationId')) {
+            Auth::getUser()->notifications()->where('id', post('notificationId'))->update(['read_at' => Carbon::now()]);
+            $this->page['notifications'] = Auth::getUser()->notifications()->applyUnread()->get();
+        } else {
+            $this->page['learningPlan'] = Auth::getUser()->profile->active_learning_plan;
+            $this->page['proposedRequests'] = Auth::getUser()->profile->proposed_requests;
+            $this->page['schoolDeclinedRequests'] = Auth::getUser()->profile->school_declined_requests;
+        }
     }
 
     /**
@@ -534,12 +614,27 @@ class LearningPlan extends ComponentBase
 
         /** Mark the course as declined. */
         $learningPlanCourse->status = 'declined';
-        // $learningPlanCourse->school_covered_costs = 0;
+        $learningPlanCourse->school_covered_costs = 0;
         $learningPlanCourse->save();
 
-        $this->page['learningPlan'] = Auth::getUser()->profile->active_learning_plan;
-        $this->page['proposedRequests'] = Auth::getUser()->profile->proposed_requests;
-        $this->page['schoolDeclinedRequests'] = Auth::getUser()->profile->school_declined_requests;
+        Event::fire(
+            'genuineq.tms.teacher.course.reject',
+            [
+                /*school*/Budget::find($learningPlanCourse->school_budget_id)->budgetable,
+                /*course*/$learningPlanCourse,
+                /*user*/Auth::getUser()
+            ]
+        );
+
+        /** Check if action is originated from notifications. */
+        if (post('notificationId')) {
+            Auth::getUser()->notifications()->where('id', post('notificationId'))->update(['read_at' => Carbon::now()]);
+            $this->page['notifications'] = Auth::getUser()->notifications()->applyUnread()->get();
+        } else {
+            $this->page['learningPlan'] = Auth::getUser()->profile->active_learning_plan;
+            $this->page['proposedRequests'] = Auth::getUser()->profile->proposed_requests;
+            $this->page['schoolDeclinedRequests'] = Auth::getUser()->profile->school_declined_requests;
+        }
     }
 
     /***********************************************
@@ -591,4 +686,106 @@ class LearningPlan extends ComponentBase
 
         return Redirect::secure(Request::path());
     }
+
+
+    /**
+     * School action for request reject.
+     */
+    protected function actionSchoolReject()
+    {
+        /** Extract the learning plan course. */
+        $learningPlanCourse = LearningPlansCourse::find(get('lpci'));
+
+        if ('proposed' == $learningPlanCourse->status) {
+            /** Mark the course as declined. */
+            $learningPlanCourse->status = 'declined';
+            $learningPlanCourse->school_covered_costs = 0;
+            $learningPlanCourse->save();
+
+            Event::fire(
+                'genuineq.tms.school.course.reject',
+                [
+                    /*teacher*/$learningPlanCourse->learning_plan->teacher,
+                    /*course*/$learningPlanCourse,
+                    /*school*/School::find(get('si'))->user,
+                ]
+            );
+        }
+    }
+
+    /**
+     * School action for request approve.
+     */
+    protected function actionSchoolApprove()
+    {
+        /** Extract the learning plan course. */
+        $learningPlanCourse = LearningPlansCourse::find(get('lpci'));
+
+        if ('proposed' == $learningPlanCourse->status) {
+            /** Mark the course as accepted. */
+            $learningPlanCourse->status = 'accepted';
+            $learningPlanCourse->school_budget_id = School::find(get('si'))->active_budget_id;
+            $learningPlanCourse->save();
+
+            Event::fire(
+                'genuineq.tms.school.course.approve',
+                [
+                    /*teacher*/$learningPlanCourse->learning_plan->teacher,
+                    /*course*/$learningPlanCourse,
+                    /*school*/School::find(get('si'))->user,
+                ]
+            );
+        }
+    }
+
+
+    /**
+     * teacher action for request reject.
+     */
+    protected function actionTeacherReject()
+    {
+        /** Extract the learning plan course. */
+        $learningPlanCourse = LearningPlansCourse::find(get('lpci'));
+
+        if ('proposed' == $learningPlanCourse->status) {
+            /** Mark the course as declined. */
+            $learningPlanCourse->status = 'declined';
+            $learningPlanCourse->school_covered_costs = 0;
+            $learningPlanCourse->save();
+
+            Event::fire(
+                'genuineq.tms.teacher.course.reject',
+                [
+                    /*school*/School::find(get('si')),
+                    /*course*/$learningPlanCourse,
+                    /*user*/Auth::getUser()
+                ]
+            );
+        }
+    }
+
+    /**
+     * Teacher action for request approve.
+     */
+    protected function actionTeacherApprove()
+    {
+        /** Extract the learning plan course. */
+        $learningPlanCourse = LearningPlansCourse::find(get('lpci'));
+
+        if ('proposed' == $learningPlanCourse->status) {
+            /** Mark the course as accepted. */
+            $learningPlanCourse->status = 'accepted';
+            $learningPlanCourse->save();
+
+            Event::fire(
+                'genuineq.tms.teacher.course.approve',
+                [
+                    /*school*/School::find(get('si')),
+                    /*course*/$learningPlanCourse,
+                    /*user*/Auth::getUser()
+                ]
+            );
+        }
+    }
+
 }

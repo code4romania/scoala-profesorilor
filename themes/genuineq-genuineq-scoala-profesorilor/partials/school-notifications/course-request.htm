@@ -1,0 +1,22 @@
+description = "Displays a course request notifications"
+
+[viewBag]
+==
+
+<div class="row my-3 py-2 bg-white rounded d-flex align-items-center">
+    <div class="col-12">
+        <button type="button" class="close learning-plan-edit-card-remove" data-request="onMarkNotificationAsRead" data-request-data="notificationId: '{{ notification.id }}'" data-request-update="school-notifications/list: '#notificationsList'"><span aria-hidden="true">&times;</span></button>
+    </div>
+
+    <div class="col-12">
+        Profesorul {{ notification.data['teacher_name'] }} a solicitat decontarea cursului {{ notification.data['course_name'] }} cu suma in valoare de {{ notification.data['school_covered_costs'] }} Ron iar aportul personal este in valoare de {{ notification.data['teacher_covered_costs'] }} Ron.
+    </div>
+
+    <div class="col-6">
+        <button type="button" class="btn btn-primary btn-sm waves-effect rounded d-flex justify-content-center d-md-table mx-auto" data-request="onSchoolLearningPlanRequestDecline" data-request-data="{ courseId: '{{ notification.data['learningPlanCourse']['id'] }}', learningPlanId: '{{ notification.data['learningPlanCourse']['learning_plan_id'] }}', notificationId: '{{ notification.id }}' }" data-request-update="school-notifications/list: '#notificationsList'">{{ 'school-notifications.course-request.decline'|_ }}</button>
+    </div>
+
+    <div class="col-6">
+        <button type="button" class="btn btn-success btn-sm waves-effect rounded d-flex justify-content-center d-md-table mx-auto" data-request="onSchoolLearningPlanRequestAccept" data-request-data="{ courseId: '{{ notification.data['learningPlanCourse']['id'] }}', learningPlanId: '{{ notification.data['learningPlanCourse']['learning_plan_id'] }}', notificationId: '{{ notification.id }}' }" data-request-update="school-notifications/list: '#notificationsList'">{{ 'school-notifications.course-request.accept'|_ }}</button>
+    </div>
+</div>

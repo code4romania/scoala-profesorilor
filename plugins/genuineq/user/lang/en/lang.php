@@ -233,6 +233,9 @@ return [
                 'is_activated' => 'User activated',
                 'is_activated_comment' => 'Is the user already activated or the activation flow must be executed?',
 
+                'email_notifications' => 'Email notifications',
+                'email_notifications_comment' => 'Will the user receive notifications via email?',
+
                 'groups' => 'Group',
                 'groups_comment' => 'The ONE group the user is past of, select based on the user type',
                 'groups_empty' => 'There are no user groups available',
@@ -388,13 +391,15 @@ return [
                 'avatar_update_failed' => 'Actualizarea pozei de profil a esuat',
                 'email_update_successful' => 'Adresa de email a fost actualizata cu succes',
                 'password_update_successful' => 'Parola a fost actualizata cu succes',
+                'email_notifications_update_successful' => 'Notificarile au fost actualizate cu succes',
             ],
         ],
+
+        'notifications' => [
+            'name' => 'Notifications',
+            'description' => 'Displays user notifications',
+
+
+        ],
     ],
-
-    // 'email' => [
-    //     'activate' => [
-
-    //     ]
-    // ],
 ];

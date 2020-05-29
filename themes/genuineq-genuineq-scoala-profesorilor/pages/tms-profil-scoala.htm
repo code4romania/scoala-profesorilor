@@ -19,6 +19,14 @@ allowedUserGroups[] = "school"
 
 [budgetComponent]
 ==
+<?php
+    function onStart()
+    {
+        /* Assets for carousel-multiple-courses partial. */
+        $this->addCss('assets/css/carousel-multiple-courses.css');
+    }
+?>
+==
 <div class="containter-fluid" style="background-image: url({{ 'background-school.jpg'|media }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
     <div class="row m-0">
         <div class="col-12 col-sm-6 offset-sm-3 col-md-4 offset-md-4 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4 bg-white">
@@ -62,7 +70,7 @@ allowedUserGroups[] = "school"
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" id="notifications-tab-nav" data-toggle="tab" href="#notifications-tab-body" role="tab" aria-controls="notifications-tab-body" aria-selected="false">{{ 'school.profile.tab.notifications'|_ }}</a>
+                <a class="nav-link" id="notifications-tab-nav" data-toggle="tab" href="#notifications-tab-body" role="tab" aria-controls="notifications-tab-body" aria-selected="false" data-request="onViewNotifications" data-request-update="school-profile/notifications-tab: '#notifications-tab-content'">{{ 'school.profile.tab.notifications'|_ }}</a>
             </li>
         </ul>
     </div>
@@ -98,6 +106,57 @@ allowedUserGroups[] = "school"
         </div>
 
         <div class="tab-pane fade" id="notifications-tab-body" role="tabpanel" aria-labelledby="notifications-tab-body">
+
+            <div class="row my-5">
+                <div class="col-12" id="notifications-tab-content">
+                    {% partial "school-profile/notifications-tab" %}
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $('.learning-plan-course-search-pagination').on('click', function () {
+        /* Extract the clicked page. */
+        var $newPage = $(this).data('page');
+        /* Extract the clicked learning plan ID. */
+        var $learningPlanId = $(this).data('id');
+
+        /* Select the course select form and send the request */
+        $('#learningPlanCourseSearchForm').request(
+            'onLearningPlanCourseSearch',
+            {
+                update: {
+                    'school-learning-plans/learning-plan-course-grid': '#learningPlanCourseSearchResults',
+                    'school-learning-plans/learning-plan-course-pagination': '#learningPlanCourseSearchPagination'
+                },
+                data: {
+                    page: $newPage,
+                    learningPlanId: $learningPlanId
+                }
+            }
+        );
+    });
+</script>
+
+
+
+{% put scripts %}
+    <script type="text/javascript">
+        const tmsSchoolProfileAnchor = window.location.hash;
+        $(`a[href="${tmsSchoolProfileAnchor}"]`).tab('show');
+
+
+        $.request(
+            'onViewNotifications',
+            {
+                update: {
+                    'school-profile/notifications-tab': '#notifications-tab-content'
+                }
+            }
+        );
+
+    </script>
+{% endput %}

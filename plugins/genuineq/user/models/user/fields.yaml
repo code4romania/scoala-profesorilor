@@ -82,6 +82,13 @@ fields:
         default: false
         span: full
 
+    email_notifications:
+        label: genuineq.user::lang.backend.user.fields.email_notifications
+        comment: genuineq.user::lang.backend.user.fields.email_notifications_comment
+        type: checkbox
+        default: false
+        span: full
+
     groups:
         label: genuineq.user::lang.backend.user.fields.groups
         comment: genuineq.user::lang.backend.user.fields.groups_comment

@@ -14,6 +14,8 @@ class AuthFacadeTest extends PluginTestCase
             'email' => 'some@website.tld',
             'password' => 'changeme',
             'password_confirmation' => 'changeme',
+            'identifier' => '0123456789',
+            'type' => 'school',
         ]);
 
         // our one user should be returned
@@ -34,6 +36,8 @@ class AuthFacadeTest extends PluginTestCase
             'email' => 'some@website.tld',
             'password' => 'changeme',
             'password_confirmation' => 'changeme',
+            'identifier' => '0123456789',
+            'type' => 'school',
         ], true);
 
         // that user should be activated
@@ -68,6 +72,8 @@ class AuthFacadeTest extends PluginTestCase
             'email' => 'some@website.tld',
             'password' => 'changeme',
             'password_confirmation' => 'changeme',
+            'identifier' => '0123456789',
+            'type' => 'school',
         ]);
 
         // in order to log in as this user, we must be activated

@@ -59,6 +59,7 @@ class School extends Model
     public $belongsTo = [
         'address' => 'Genuineq\Tms\Models\Address',
         'inspectorate' => 'Genuineq\Tms\Models\Inspectorate',
+        'user' => 'Genuineq\user\Models\User',
     ];
 
     /**
@@ -72,13 +73,6 @@ class School extends Model
             'Genuineq\Tms\Models\Appraisal',
             'order' => 'created_at desc'
         ],
-    ];
-
-    /**
-     * "User" relation
-     */
-    public $hasOne = [
-        'user' => 'Genuineq\user\Models\User',
     ];
 
     /**

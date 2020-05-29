@@ -1,0 +1,32 @@
+# ===================================
+#  Condition Attribute Definitions
+# ===================================
+
+attributes:
+
+    learning_plan_id:
+        label: Learning Plan Id
+
+    school_budget_id:
+        label: School Budget Id
+
+    school_covered_costs:
+        label: School Covered Costs
+
+    teacher_budget_id:
+        label: Teacher Budget ID
+
+    teacher_covered_costs:
+        label: Teacher Covered Costs
+
+    mandatory:
+        label: Mandatory
+
+    status:
+        label: Status
+
+    requestable_id:
+        label: Requestable Id
+
+    requestable_type:
+        label: Requestable Type
