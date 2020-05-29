@@ -67,9 +67,6 @@ class LearningPlan extends ComponentBase
             return $redirect;
         }
 
-        // Log::info('a = ' . print_r(get('a'), true));
-        // Log::info('t = ' . print_r(get('t'), true));
-
         /** Check if an action was requested. */
         if (1 == get('a')) {
             if ('sr' == get('t')) {
@@ -265,9 +262,6 @@ class LearningPlan extends ComponentBase
         if (!Auth::check()) {
             return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
         }
-
-        Log::info('learningPlanId: ' . print_r(post('learningPlanId'), true));
-        Log::info('courseId: ' . print_r(post('courseId'), true));
 
         /** Extract the learning plan. */
         $learningPlan = LearningPlanModel::find(post('learningPlanId'));
