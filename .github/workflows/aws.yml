@@ -26,7 +26,7 @@
 #on:
 #  release:
 #    types: [created]
- 
+
 on:
   push:
     branches:
@@ -39,7 +39,7 @@ on:
 name: Deploy to Amazon ECS
 
 jobs:
-  
+
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
@@ -59,7 +59,7 @@ jobs:
 #        php artisan migrate
 #    - name: Execute tests (Unit and Feature tests) via PHPUnit
 #      run: vendor/bin/phpunit plugins/genuineq/tms/tests/
-    
+
     - name: Checkout
       uses: actions/checkout@v2
 
@@ -87,12 +87,12 @@ jobs:
         docker build -f ./docker/Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
-        
+
     - name: Replace image in config
       uses: datamonsters/replace-action@v2
       with:
         files: .github/workflows/tms-app-prod-td.json
-        replacements: '$APP_KEY=${{ secrets.APP_KEY }},$DB_HOST=${{ secrets.DB_HOST }},$DB_PASSWORD=${{ secrets.DB_PASSWORD }}'
+        replacements: '$APP_KEY=${{ secrets.APP_KEY }},$DB_HOST=${{ secrets.DB_HOST }},$DB_PASSWORD=${{ secrets.DB_PASSWORD }},$MAIL_HOST=${{ secrets.MAIL_HOST }},$MAIL_USERNAME=${{ secrets.MAIL_USERNAME }},$MAIL_PORT=${{ secrets.MAIL_PORT }},$MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }},$MAIL_ENCRYPTION=${{ secrets.MAIL_ENCRYPTION }}'
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
