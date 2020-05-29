@@ -21,3 +21,4 @@ _ide_helper.php
 
 # for netbeans
 nbproject
+storage/framework/classes.php
