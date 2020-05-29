@@ -232,6 +232,13 @@ class Appraisal extends ComponentBase
 
         /** Extracts all the appraisals statics of specified teacher. */
         $this->schoolExtractSearchStatics(post('teacherId'));
+
+        /** Extract all the skills and create the source array. */
+        $value = 0;
+        foreach (Skill::all()->pluck('name') as $skill) {
+            $skills[$skill] = $value++;
+        }
+        $this->page['skills'] = json_encode($skills);
     }
 
     /**
@@ -294,14 +301,104 @@ class Appraisal extends ComponentBase
             throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.not_exists'));
         }
 
-        /** Save updated skills and notes. */
-        $appraisal->notes = post('notes');
-        $appraisal->skill_1_id = Skill::whereName(post('first_skill'))->first()->id;
-        $appraisal->skill_2_id = Skill::whereName(post('second_skill'))->first()->id;
-        $appraisal->skill_3_id = Skill::whereName(post('third_skill'))->first()->id;
+        /** Save the objectives, notes, skills and grades. */
+        switch ($appraisal->status) {
+            case 'objectives-set':
+                $appraisal->objectives = post('objectives');
+                $appraisal->notes_objectives_set = post('notes');
+                break;
+
+            case 'objectives-approved':
+                $appraisal->objectives = post('objectives');
+                $appraisal->notes_objectives_approved = post('notes');
+
+                $appraisal->skill_1_id = Skill::whereName(post('first_skill'))->first()->id;
+                $appraisal->skill_2_id = Skill::whereName(post('second_skill'))->first()->id;
+                $appraisal->skill_3_id = Skill::whereName(post('third_skill'))->first()->id;
+                break;
+
+            case 'skills-set':
+                $appraisal->notes_skills_set = post('notes');
+                break;
+
+            case 'evaluation-opened':
+                if ( (1 > post('first_skill_grade')) || (10 < post('first_skill_grade'))
+                    || (1 > post('second_skill_grade')) || (10 < post('second_skill_grade'))
+                    || (1 > post('third_skill_grade')) || (10 < post('third_skill_grade')) ) {
+                    throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.invalid_grade'));
+                }
+
+                $appraisal->grade_1 = post('first_skill_grade');
+                $appraisal->grade_2 = post('second_skill_grade');
+                $appraisal->grade_3 = post('third_skill_grade');
+
+                $appraisal->notes_evaluation_opened = post('notes');
+                break;
+
+            case 'closed':
+                $val = Lang::get('genuineq.tms::lang.appraisal.frontend.closed');
+                break;
+        }
         $appraisal->save();
 
         Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.save_successfull'));
+
+        /** Extract the appraisal. */
+        $this->page['appraisal'] = $appraisal;
+        /** Extract the teacher. */
+        $this->page['teacher'] = Teacher::find(post('teacherId'));
+
+        /** Extract the received courses filtering options */
+        $options = [
+            'searchInput' => post('appraisalSearchInput'),
+            'sort' => post('appraisalSort'),
+            'status' => post('appraisalStatus'),
+            'year' => post('appraisalYear'),
+            'semester' => post('appraisalSemester'),
+            'page' => post('newPage'),
+        ];
+        /** Extracts all the appraisals of specified teacher. */
+        $this->schoolExtractAppraisals(/*options*/[], post('teacherId'), $school);
+
+        /** Extract all the skills and create the source array. */
+        $value = 0;
+        foreach (Skill::all()->pluck('name') as $skill) {
+            $skills[$skill] = $value++;
+        }
+        $this->page['skills'] = json_encode($skills);
+    }
+
+    /**
+     * Approves the objectives in a specified appraisal.
+     */
+    public function onSchoolApproveAppraisalObjectives()
+    {
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        $school = Auth::getUser()->profile;
+        /** Extract the requested teacher */
+        $teacher = $school->teachers->where('id', post('teacherId'))->first();
+
+        if (!$teacher) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.teacher_not_exists'));
+        }
+
+        /** Extract the requested appraisal */
+        $appraisal =  $school->appraisals->where('id', post('appraisalId'))->where('teacher_id', post('teacherId'))->first();
+
+        if (!$appraisal) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.not_exists'));
+        }
+
+        /** Save the notes. */
+        $appraisal->objectives = post('objectives');
+        $appraisal->notes_objectives_set = post('notes');
+        $appraisal->status = 'objectives-approved';
+        $appraisal->save();
+
+        Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.objectives_approved_successfull'));
 
         /** Extract the appraisal. */
         $this->page['appraisal'] = $appraisal;
@@ -353,7 +450,7 @@ class Appraisal extends ComponentBase
         }
 
         /** Save updated skills and notes. */
-        $appraisal->notes = post('notes');
+        $appraisal->notes_objectives_approved = post('notes');
         $appraisal->skill_1_id = Skill::whereName(post('first_skill'))->first()->id;
         $appraisal->skill_2_id = Skill::whereName(post('second_skill'))->first()->id;
         $appraisal->skill_3_id = Skill::whereName(post('third_skill'))->first()->id;
@@ -411,7 +508,7 @@ class Appraisal extends ComponentBase
         }
 
         /** Save updated skills and notes. */
-        $appraisal->notes = post('notes');
+        $appraisal->notes_evaluation_opened = post('notes');
         $appraisal->grade_1 = post('first_skill_grade');
         $appraisal->grade_2 = post('second_skill_grade');
         $appraisal->grade_3 = post('third_skill_grade');

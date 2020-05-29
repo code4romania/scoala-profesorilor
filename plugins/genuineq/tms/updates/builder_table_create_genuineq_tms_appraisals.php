@@ -21,8 +21,11 @@ class BuilderTableCreateGenuineqTmsAppraisals extends Migration
             $table->integer('grade_2')->unsigned()->nullable();
             $table->integer('skill_3_id')->unsigned()->nullable();
             $table->integer('grade_3')->unsigned()->nullable();
-            $table->text('notes')->nullable();
-            $table->enum('status', ['new', 'objectives-set', 'skills-set', 'closed',])->default('new');
+            $table->text('notes_objectives_set')->nullable();
+            $table->text('notes_objectives_approved')->nullable();
+            $table->text('notes_skills_set')->nullable();
+            $table->text('notes_evaluation_opened')->nullable();
+            $table->enum('status', ['new', 'objectives-set', 'objectives-approved', 'skills-set', 'evaluation-opened', 'closed',])->default('new');
             $table->timestamp('deleted_at')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();

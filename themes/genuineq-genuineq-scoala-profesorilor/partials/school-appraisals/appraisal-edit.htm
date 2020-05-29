@@ -3,7 +3,9 @@ description = "Displays a teacher's appraisal"
 [viewBag]
 ==
 
-<div id="appraisalViewEditDetails"></div>
+<div id="appraisalViewEditDetails">
+    {% partial "school-appraisals/appraisal-details" %}
+</div>
 
 {% partial "school-appraisals/appraisal-edit-save-btn" %}
 

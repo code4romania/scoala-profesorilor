@@ -18,11 +18,9 @@ description = "Displays an appraisal details"
                 <form id="appraisalDetails" method="POST" data-request-validate data-request-flash>
 
                     <div class="form-group">
-                        <div class="md-form">
-                            <textarea name="objectives" type="text" id="appraisal_objectives" class="md-textarea form-control" rows="6" {% if 'new' != appraisal.status %} readonly {% endif %}>{{ appraisal.objectives }}</textarea>
-                            <label for="appraisal_objectives">{{ 'teacher_appraisal.appraisal_view.objectives'|_ }}</label>
-                            <div class="small text-danger" data-validate-for="appraisal_objectives"></div>
-                        </div>
+                        <label for="appraisal_objectives">{{ 'teacher_appraisal.appraisal_view.objectives'|_ }}</label>
+                        <textarea name="objectives" type="text" id="appraisal_objectives" class="md-textarea form-control" rows="25" {% if 'new' != appraisal.status %} readonly {% endif %}>{{ appraisal.objectives }}</textarea>
+                        <div class="small text-danger" data-validate-for="appraisal_objectives"></div>
                     </div>
 
                     <div class="row align-items-top">

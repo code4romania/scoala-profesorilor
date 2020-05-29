@@ -173,8 +173,16 @@ class Appraisal extends Model
                 $val = Lang::get('genuineq.tms::lang.appraisal.frontend.objectives_set');
                 break;
 
+            case 'objectives-approved':
+                $val = Lang::get('genuineq.tms::lang.appraisal.frontend.objectives_approved');
+                break;
+
             case 'skills-set':
                 $val = Lang::get('genuineq.tms::lang.appraisal.frontend.skills_set');
+                break;
+
+            case 'evaluation-opened':
+                $val = Lang::get('genuineq.tms::lang.appraisal.frontend.evaluation_opened');
                 break;
 
             case 'closed':
@@ -285,7 +293,9 @@ class Appraisal extends Model
             Lang::get('genuineq.tms::lang.appraisal.frontend.all_statuses') => -1,
             Lang::get('genuineq.tms::lang.appraisal.frontend.new') => 'new',
             Lang::get('genuineq.tms::lang.appraisal.frontend.objectives_set') => 'objectives-set',
+            Lang::get('genuineq.tms::lang.appraisal.frontend.objectives_approved') => 'objectives-approved',
             Lang::get('genuineq.tms::lang.appraisal.frontend.skills_set') => 'skills-set',
+            Lang::get('genuineq.tms::lang.appraisal.frontend.evaluation_opened') => 'evaluation-opened',
             Lang::get('genuineq.tms::lang.appraisal.frontend.closed') => 'closed',
         ];
     }
