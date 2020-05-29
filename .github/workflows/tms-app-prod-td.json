@@ -120,7 +120,7 @@
                 },
                 {
                     "name": "MAIL_HOST",
-                    "value": ""
+                    "value": "$MAIL_HOST"
                 },
                 {
                     "name": "MAIL_DRIVER",
@@ -128,7 +128,7 @@
                 },
                 {
                     "name": "MAIL_USERNAME",
-                    "value": ""
+                    "value": "$MAIL_USERNAME"
                 },
                 {
                     "name": "MAIL_NAME",
@@ -136,15 +136,15 @@
                 },
                 {
                     "name": "MAIL_PORT",
-                    "value": ""
+                    "value": "$MAIL_PORT"
                 },
                 {
                     "name": "MAIL_PASSWORD",
-                    "value": ""
+                    "value": "$MAIL_PASSWORD"
                 },
                 {
                     "name": "MAIL_ENCRYPTION",
-                    "value": ""
+                    "value": "$MAIL_ENCRYPTION"
                 }
             ],
             "resourceRequirements": null,
