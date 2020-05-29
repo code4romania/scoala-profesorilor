@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "03d058424d1df09778bf04886bbcc72e",
+    "content-hash": "83c701676b8fc4d60dfbdfa74f15cd95",
     "packages": [
         {
             "name": "alcea/cnp",
