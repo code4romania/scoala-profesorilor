@@ -63,13 +63,12 @@ code = "main-menu"
                 {% content 'footer-contact-data.htm' %}
                 <ul class="list-unstyled">
                     <li>
-                        <i class="fa fa-facebook mr-1" aria-hidden="true"></i>
-                        <i class="fa fa-twitter mr-1" aria-hidden="true"></i>
-                        <i class="fa fa-linkedin mr-1" aria-hidden="true"></i>
-                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                        {% for link in linkList.links %}
+                            <a class="mx-1" target="{{ linkList.linkTarget }}" href="{{ link.getLink }}" title="{{ link.getName }}"><i class="{{ link.getIcon }}"></i></a>
+                        {% endfor %}
                     </li>
                     <li>
-                        <a href="#" class="btn btn-sm btn-success z-depth-0 rounded" type="button">{{ 'footer.call-to-action'|_ }}</a>
+                        <a href="#" class="btn btn-sm btn-success z-depth-0 rounded d-none" type="button">{{ 'footer.call-to-action'|_ }}</a>
                     </li>
                 </ul>
             </div>
@@ -82,7 +81,7 @@ code = "main-menu"
     <!--Copyright-->
     <div class="footer-copyright text-center primary-color-dark">
         <div class="container-fluid py-3">
-            <a href="https://www.civiclabs.ro" target="_blank">© {{ 'now'|date('Y') }} {{ 'footer.copyright'|_ }}</a>
+            © {{ 'now'|date('Y') }} {{ 'footer.copyright'|_ }}
         </div>
     </div>
     <!--/.Copyright-->

@@ -111,6 +111,40 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function registerReportWidgets()
+    {
+        return [
+            'Genuineq\Tms\ReportWidgets\TotalTeachers' => [
+                'label'   => 'genuineq.tms::lang.reportwidgets.totalteachers.label',
+                'context' => 'dashboard',
+            ],
+            'Genuineq\Tms\ReportWidgets\TotalSchools' => [
+                'label'   => 'genuineq.tms::lang.reportwidgets.totalschools.label',
+                'context' => 'dashboard',
+            ],
+            'Genuineq\Tms\ReportWidgets\TotalCourses' => [
+                'label'   => 'genuineq.tms::lang.reportwidgets.totalcourses.label',
+                'context' => 'dashboard',
+            ],
+            'Genuineq\Tms\ReportWidgets\TotalSkills' => [
+                'label'   => 'genuineq.tms::lang.reportwidgets.totalskills.label',
+                'context' => 'dashboard',
+            ],
+            'Genuineq\Tms\ReportWidgets\TotalSuppliers' => [
+                'label'   => 'genuineq.tms::lang.reportwidgets.totalsuppliers.label',
+                'context' => 'dashboard',
+            ],
+            'Genuineq\Tms\ReportWidgets\LearningPlanCompletion' => [
+                'label'   => 'genuineq.tms::lang.reportwidgets.learningplancompletion.label',
+                'context' => 'dashboard',
+            ],
+            'Genuineq\Tms\ReportWidgets\CoursesTop' => [
+                'label'   => 'genuineq.tms::lang.reportwidgets.coursestop.label',
+                'context' => 'dashboard',
+            ],
+        ];
+    }
+
     protected function bindNotificationEvents()
     {
         if (!class_exists(Notifier::class)) {

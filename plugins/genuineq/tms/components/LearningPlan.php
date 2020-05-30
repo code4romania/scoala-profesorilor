@@ -138,7 +138,11 @@ class LearningPlan extends ComponentBase
         $data['learning_plan_id'] = post('learningPlanId');
         $data['course_id'] = post('courseId');
         $data['school_covered_costs'] = post('school_covered_costs');
-        $data['teacher_covered_costs'] = Course::find(post('courseId'))->price - post('school_covered_costs');
+        if (post('school_covered_costs')) {
+            $data['teacher_covered_costs'] = Course::find(post('courseId'))->price - post('school_covered_costs');
+        } else {
+            $data['teacher_covered_costs'] = Course::find(post('courseId'))->price;
+        }
 
         /** Extract the school budget ID. */
         $data['school_budget_id'] = Auth::getUser()->profile->active_budget_id;
@@ -395,7 +399,11 @@ class LearningPlan extends ComponentBase
             $data['course_id'] = post('courseId');
             $data['school_covered_costs'] = post('school_covered_costs');
             $data['teacher_budget_id'] = Auth::getUser()->profile->active_budget_id;
-            $data['teacher_covered_costs'] = Course::find(post('courseId'))->price - post('school_covered_costs');
+            if (post('school_covered_costs')) {
+                $data['teacher_covered_costs'] = Course::find(post('courseId'))->price - post('school_covered_costs');
+            } else {
+                $data['teacher_covered_costs'] = Course::find(post('courseId'))->price;
+            }
 
 
             /** Extract the school. */

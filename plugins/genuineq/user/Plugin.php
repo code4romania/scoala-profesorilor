@@ -25,7 +25,9 @@ class Plugin extends PluginBase
         return [
             'name'        => 'genuineq.user::lang.plugin.name',
             'description' => 'genuineq.user::lang.plugin.description',
+            'author'      => 'genuineq',
             'icon'        => 'icon-user',
+            'homepage'    => 'https://www.genuineq.com'
         ];
     }
 

@@ -19,11 +19,28 @@ class Semester extends Model
      */
     public $table = 'genuineq_tms_semesters';
 
+    public $hasMany = [
+        'learningPlans' => 'Genuineq\Tms\Models\LearningPlan'
+    ];
+
     /**
      * @var array Validation rules
      */
     public $rules = [
     ];
+
+    /***********************************************
+     ******************* Functions *****************
+     ***********************************************/
+
+    /**
+     * Function that extracts the latest appraisal
+     *  for an associated teacher.
+     */
+    public static function getLatest()
+    {
+        return Semester::orderBy('created_at','desc')->first();
+    }
 
 
     /***********************************************

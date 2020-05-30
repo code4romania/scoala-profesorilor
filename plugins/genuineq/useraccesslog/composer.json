@@ -1,0 +1,21 @@
+{
+    "name": "genuineq/oc-useraccesslog-plugin",
+    "type": "october-plugin",
+    "extra": {
+        "installer-name": "useraccesslog"
+    },
+    "description": "User access log plugin for OctoberCMS",
+    "homepage": "https://www.genuineq.com",
+    "keywords": ["october", "plugin", "user", "access", "log"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "genuineq",
+            "email": "office@genuineq.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "composer/installers": "~1.0"
+    }
+}

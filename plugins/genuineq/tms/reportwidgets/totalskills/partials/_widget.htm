@@ -1,0 +1,15 @@
+<div class="report-widget">
+    <h3><?= e($this->property('title')) ?></h3>
+
+    <div class="scoreboard">
+        <div data-control="toolbar">
+            <?php if($totalSkills){ ?>
+                <div class="scoreboard-item title-value">
+                    <h4 class="m-t"><?= e($labelSkills) ?></h4>
+                    <p><?= e($totalSkills) ?></p>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+
+</div>

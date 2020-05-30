@@ -1,0 +1,29 @@
+<div class="report-widget">
+    <h3><?= e($this->property('title')) ?></h3>
+
+    <div class="scoreboard">
+        <div data-control="toolbar">
+            <?php if(isset($learningPlansTotal)){ ?>
+                <div class="scoreboard-item title-value">
+                    <h4 class="m-t"><?= e($labelLearningPlansTotal) ?></h4>
+                    <p><?= e($learningPlansTotal) ?></p>
+                </div>
+            <?php } ?>
+
+            <?php if(isset($learningPlansCompleted)){ ?>
+                <div class="scoreboard-item title-value">
+                    <h4 class="m-t"><?= e($labelLearningPlansCompleted) ?></h4>
+                    <p><?= e($learningPlansCompleted) ?></p>
+                </div>
+            <?php } ?>
+
+            <?php if(isset($learningPlansCompletionPercentage)){ ?>
+                <div class="scoreboard-item title-value">
+                    <h4 class="m-t"><?= e($labelLearningPlansCompletionPercentage) ?></h4>
+                    <p><?= e($learningPlansCompletionPercentage) ?>&nbsp;%</p>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+
+</div>

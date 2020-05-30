@@ -497,4 +497,81 @@
             ],
         ],
     ],
+
+    'reportwidgets' => [
+        'totalcourses' => [
+            'label' => 'Total Courses',
+            'title' => 'Widget title',
+            'title_default' => 'Total Courses',
+            'title_validation' => 'Title is required',
+
+            'frontend' => [
+                'label_courses' => 'Courses',
+            ]
+        ],
+
+        'totalschools' => [
+            'label' => 'Total Schools',
+            'title' => 'Widget title',
+            'title_default' => 'Total Schools',
+            'title_validation' => 'Title is required',
+
+            'frontend' => [
+                'label_school' => 'Schools',
+            ]
+        ],
+
+        'totalskills' => [
+            'label' => 'Total Skills',
+            'title' => 'Widget title',
+            'title_default' => 'Total Skills',
+            'title_validation' => 'Title is required',
+
+            'frontend' => [
+                'label_skills' => 'Skills',
+            ]
+        ],
+
+        'totalsuppliers' => [
+            'label' => 'Total Suppliers',
+            'title' => 'Widget title',
+            'title_default' => 'Total Suppliers',
+            'title_validation' => 'Title is required',
+
+            'frontend' => [
+                'label_suppliers' => 'Suppliers',
+            ]
+        ],
+
+        'totalteachers' => [
+            'label' => 'Total Teachers',
+            'title' => 'Widget title',
+            'title_default' => 'Total Teachers',
+            'title_validation' => 'Title is required',
+
+            'frontend' => [
+                'label_teachers' => 'Teachers',
+            ]
+        ],
+
+        'learningplancompletion' => [
+            'label' => 'Learning Plans Status',
+            'title' => 'Widget title',
+            'title_default' => 'Learning Plans Status',
+            'title_validation' => 'Title is required',
+
+            'frontend' => [
+                'label_learning_plans_total' => 'Learning Plans Total',
+                'label_learning_plans_completed' => 'Learning Plans Completed',
+                'label_learning_plans_completed_percentage' => 'Learning Plans Completed Percentage',
+            ]
+        ],
+
+        'coursestop' => [
+            'label' => 'Courses Top',
+            'title' => 'Widget title',
+            'title_default' => 'Courses Top',
+            'title_validation' => 'Title is required',
+        ],
+    ],
 ];

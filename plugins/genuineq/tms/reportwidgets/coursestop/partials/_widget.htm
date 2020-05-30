@@ -1,0 +1,12 @@
+<div class="report-widget">
+    <h3><?= e($this->property('title')) ?></h3>
+
+    <div class="control-chart wrap-legend" data-control="chart-bar" data-height="100" data-full-width="1">
+        <ul>
+            <?php foreach($courses as $key => $course) { ?>
+                <li><?=$coursesNames[$key]?> <span><?=$course?></span></li>
+            <?php } ?>
+        </ul>
+    </div>
+
+</div>
