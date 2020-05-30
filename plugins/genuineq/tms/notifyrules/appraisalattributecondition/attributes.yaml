@@ -1,0 +1,41 @@
+# ===================================
+#  Condition Attribute Definitions
+# ===================================
+
+attributes:
+
+    objectives:
+        label: Objectives
+
+    skill_1_id:
+        label: Skill 1 Id
+
+    grade_1:
+        label: Grade 1
+
+    skill_2_id:
+        label: Skill 2 Id
+
+    grade_2:
+        label: Grade 2
+
+    skill_3_id:
+        label: Skill 3 Id
+
+    grade_3:
+        label: Grade 3
+
+    notes_objectives_set:
+        label: Notes objectives-set
+
+    notes_objectives_approved:
+        label: Notes objectives-approved
+
+    notes_skills_set:
+        label: Notes skills-set
+
+    notes_evaluation_opened:
+        label: Notes evaluation-opened
+
+    status:
+        label: Status

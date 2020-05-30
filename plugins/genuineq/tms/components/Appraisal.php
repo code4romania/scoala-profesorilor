@@ -4,6 +4,7 @@ use Log;
 use Lang;
 use Auth;
 use Flash;
+use Event;
 use Request;
 use Redirect;
 use ApplicationException;
@@ -187,6 +188,15 @@ class Appraisal extends ComponentBase
         $appraisal->save();
 
         Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.objectives_set_successfull'));
+
+        Event::fire(
+            'genuineq.tms.teacher.appraisal.objectives.set',
+            [
+                /*school*/$appraisal->school,
+                /*user*/Auth::getUser(),
+                /*appraisal*/$appraisal,
+            ]
+        );
 
         /** Extract the received courses filtering options */
         $options = [
@@ -400,6 +410,15 @@ class Appraisal extends ComponentBase
 
         Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.objectives_approved_successfull'));
 
+        Event::fire(
+            'genuineq.tms.school.appraisal.objectives.approve',
+            [
+                /*teacher*/Teacher::find(post('teacherId')),
+                /*user*/Auth::getUser(),
+                /*appraisal*/$appraisal,
+            ]
+        );
+
         /** Extract the appraisal. */
         $this->page['appraisal'] = $appraisal;
         /** Extract the teacher. */
@@ -459,6 +478,15 @@ class Appraisal extends ComponentBase
 
         Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.skills_set_successfull'));
 
+        Event::fire(
+            'genuineq.tms.school.appraisal.skills.set',
+            [
+                /*teacher*/Teacher::find(post('teacherId')),
+                /*user*/Auth::getUser(),
+                /*appraisal*/$appraisal,
+            ]
+        );
+
         /** Extract the appraisal. */
         $this->page['appraisal'] = $appraisal;
         /** Extract the teacher. */
@@ -516,6 +544,15 @@ class Appraisal extends ComponentBase
         $appraisal->save();
 
         Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.close_successfull'));
+
+        Event::fire(
+            'genuineq.tms.school.appraisal.evaluation.closed',
+            [
+                /*teacher*/Teacher::find(post('teacherId')),
+                /*user*/Auth::getUser(),
+                /*appraisal*/$appraisal,
+            ]
+        );
 
         /** Extract the appraisal. */
         $this->page['appraisal'] = $appraisal;

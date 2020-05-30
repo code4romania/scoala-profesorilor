@@ -68,9 +68,14 @@ class Plugin extends PluginBase
             'genuineq.tms::mail.teacher-course-request',
             'genuineq.tms::mail.teacher-course-approve',
             'genuineq.tms::mail.teacher-course-reject',
+            'genuineq.tms::mail.teacher-objectives-set',
+
             'genuineq.tms::mail.school-course-request',
             'genuineq.tms::mail.school-course-approve',
             'genuineq.tms::mail.school-course-reject',
+            'genuineq.tms::mail.school-objectives-approve',
+            'genuineq.tms::mail.school-skills-set',
+            'genuineq.tms::mail.school-evaluation-close'
         ];
     }
 
@@ -81,16 +86,21 @@ class Plugin extends PluginBase
                 \Genuineq\Tms\NotifyRules\TeacherCourseRequestEvent::class,
                 \Genuineq\Tms\NotifyRules\TeacherCourseApproveEvent::class,
                 \Genuineq\Tms\NotifyRules\TeacherCourseRejectEvent::class,
+                \Genuineq\Tms\NotifyRules\TeacherObjectivesSetEvent::class,
 
                 \Genuineq\Tms\NotifyRules\SchoolCourseRequestEvent::class,
                 \Genuineq\Tms\NotifyRules\SchoolCourseApproveEvent::class,
                 \Genuineq\Tms\NotifyRules\SchoolCourseRejectEvent::class,
+                \Genuineq\Tms\NotifyRules\SchoolObjectivesApproveEvent::class,
+                \Genuineq\Tms\NotifyRules\SchoolSkillsSetEvent::class,
+                \Genuineq\Tms\NotifyRules\SchoolEvaluationClosedEvent::class,
             ],
             'actions' => [],
             'conditions' => [
                 \Genuineq\Tms\NotifyRules\TeacherAttributeCondition::class,
                 \Genuineq\Tms\NotifyRules\SchoolAttributeCondition::class,
                 \Genuineq\Tms\NotifyRules\LearningPlanCourseAttributeCondition::class,
+                \Genuineq\Tms\NotifyRules\AppraisalAttributeCondition::class,
             ],
             'groups' => [
                 'tms' => [
@@ -111,16 +121,14 @@ class Plugin extends PluginBase
             'genuineq.tms.teacher.course.request' => \Genuineq\Tms\NotifyRules\TeacherCourseRequestEvent::class,
             'genuineq.tms.teacher.course.approve' => \Genuineq\Tms\NotifyRules\TeacherCourseApproveEvent::class,
             'genuineq.tms.teacher.course.reject' => \Genuineq\Tms\NotifyRules\TeacherCourseRejectEvent::class,
+            'genuineq.tms.teacher.appraisal.objectives.set' => \Genuineq\Tms\NotifyRules\TeacherObjectivesSetEvent::class,
 
             'genuineq.tms.school.course.request' => \Genuineq\Tms\NotifyRules\SchoolCourseRequestEvent::class,
             'genuineq.tms.school.course.approve' => \Genuineq\Tms\NotifyRules\SchoolCourseApproveEvent::class,
             'genuineq.tms.school.course.reject' => \Genuineq\Tms\NotifyRules\SchoolCourseRejectEvent::class,
-
-            // 'genuineq.tms.teacher.appraisal.objectives.set' => \Genuineq\Tms\NotifyRules\TeacherCourseRequestEvent::class,
-
-            // 'genuineq.tms.school.appraisal.objectives.approve' => \Genuineq\Tms\NotifyRules\TeacherCourseRequestEvent::class,
-            // 'genuineq.tms.school.appraisal.objectives.reject' => \Genuineq\Tms\NotifyRules\TeacherCourseRequestEvent::class,
-            // 'genuineq.tms.school.appraisal.evaluation.done' => \Genuineq\Tms\NotifyRules\TeacherCourseRequestEvent::class,
+            'genuineq.tms.school.appraisal.objectives.approve' => \Genuineq\Tms\NotifyRules\SchoolObjectivesApproveEvent::class,
+            'genuineq.tms.school.appraisal.skills.set' => \Genuineq\Tms\NotifyRules\SchoolSkillsSetEvent::class,
+            'genuineq.tms.school.appraisal.evaluation.closed' => \Genuineq\Tms\NotifyRules\SchoolEvaluationClosedEvent::class,
         ]);
     }
 

@@ -204,7 +204,7 @@ class LearningPlan extends ComponentBase
                 [
                     /*teacher*/Teacher::find(post('teacherId')),
                     /*course*/$learningPlanCourse,
-                    /*school*/Auth::getUser()
+                    /*user*/Auth::getUser()
                 ]
             );
         }
@@ -279,7 +279,7 @@ class LearningPlan extends ComponentBase
             [
                 /*teacher*/$learningPlan->teacher,
                 /*course*/$learningPlanCourse,
-                /*school*/Auth::getUser(),
+                /*user*/Auth::getUser(),
             ]
         );
 
@@ -319,7 +319,7 @@ class LearningPlan extends ComponentBase
             [
                 /*teacher*/$learningPlan->teacher,
                 /*course*/$learningPlanCourse,
-                /*school*/Auth::getUser(),
+                /*user*/Auth::getUser(),
             ]
         );
 
@@ -701,7 +701,7 @@ class LearningPlan extends ComponentBase
                 [
                     /*teacher*/$learningPlanCourse->learning_plan->teacher,
                     /*course*/$learningPlanCourse,
-                    /*school*/School::find(get('si'))->user,
+                    /*user*/School::find(get('si'))->user,
                 ]
             );
         }
@@ -726,7 +726,7 @@ class LearningPlan extends ComponentBase
                 [
                     /*teacher*/$learningPlanCourse->learning_plan->teacher,
                     /*course*/$learningPlanCourse,
-                    /*school*/School::find(get('si'))->user,
+                    /*user*/School::find(get('si'))->user,
                 ]
             );
         }

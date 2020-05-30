@@ -10,5 +10,11 @@ description = "Displays the list of notifications"
         {% partial "teacher-notifications/course-reject" notification=notification %}
     {% elseif 'school-course-approve' == notification.data['notification-type'] %}
         {% partial "teacher-notifications/course-approve" notification=notification %}
+    {% elseif 'school-objectives-approve' == notification.data['notification-type'] %}
+        {% partial "teacher-notifications/objectives-approve" notification=notification %}
+    {% elseif 'school-skills-set' == notification.data['notification-type'] %}
+        {% partial "teacher-notifications/skills-set" notification=notification %}
+    {% elseif 'school-evaluation-close' == notification.data['notification-type'] %}
+        {% partial "teacher-notifications/evaluation-close" notification=notification %}
     {% endif %}
 {% endfor %}
