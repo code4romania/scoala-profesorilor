@@ -31,6 +31,7 @@ class Appraisal extends ComponentBase
 
     public function defineProperties()
     {
+        return [];
     }
 
     /**

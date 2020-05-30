@@ -28,6 +28,7 @@ class Budget extends ComponentBase
 
     public function defineProperties()
     {
+        return [];
     }
 
     /**
