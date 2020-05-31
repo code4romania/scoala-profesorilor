@@ -5,6 +5,8 @@ use Lang;
 use Model;
 use Illuminate\Support\Collection;
 use Genuineq\Tms\Models\Semester;
+use Genuineq\Tms\Models\Teacher;
+use Genuineq\Tms\Models\School;
 use Genuineq\Tms\Models\LearningPlansCourse;
 
 /**
@@ -209,7 +211,7 @@ class Budget extends Model
     /**
      * Function that returns years used for filtering.
      */
-    public static function getFilterYears($teacherId)
+    public static function getTeacherFilterYears($teacherId)
     {
         foreach (Teacher::find($teacherId)->budgets as $budget) {
             $years['' . $budget->semester->year] = '' . $budget->semester->year;
@@ -221,13 +223,47 @@ class Budget extends Model
     }
 
     /**
-     * Function that returns years used for filtering.
+     * Function that returns semesters used for filtering.
      */
-    public static function getFilterSemesters()
+    public static function getTeacherFilterSemesters()
     {
         $semesters[Lang::get('genuineq.tms::lang.budgets.frontend.all_semesters')] = -1;
         $semesters['1'] = 1;
         $semesters['2'] = 2;
+
+        return $semesters;
+    }
+
+    /**
+     * Function that returns years used for filtering.
+     */
+    public static function getSchoolFilterYears($schoolId)
+    {
+        foreach (School::find($schoolId)->budgets as $budget) {
+            $years['' . $budget->semester->year] = '' . $budget->semester->year;
+        }
+
+        return array_reverse($years, true);
+    }
+
+    /**
+     * Function that returns semesters used for filtering.
+     */
+    public static function getSchoolFilterSemesters($schoolId)
+    {
+        /** Extract the school */
+        $school = School::find($schoolId);
+
+        /** Check if the school has more than one budget in DB  */
+        if (1 < $school->budgets->count()) {
+            $semesters['1'] = 1;
+            $semesters['2'] = 2;
+        } else {
+            /** Extract the semester */
+            $semester = $school->active_budget->semester;
+            /** Populate the array */
+            $semesters[$semester->semester] = $semester->semester;
+        }
 
         return $semesters;
     }

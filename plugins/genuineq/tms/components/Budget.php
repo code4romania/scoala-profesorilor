@@ -3,6 +3,7 @@
 use Log;
 use Lang;
 use Auth;
+use Flash;
 use Request;
 use Redirect;
 use Cms\Classes\ComponentBase;
@@ -107,6 +108,28 @@ class Budget extends ComponentBase
      ***********************************************/
 
     /**
+     * Update the school active budget
+     */
+    public function onSchoolBudgetUpdate()
+    {
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        if (0 > post('budget')) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.budget.validation.invalid_budget'));
+        }
+
+        /** Extract the teacher profile budget and update it. */
+        $budget = Auth::getUser()->profile->active_budget;
+        $budget->budget = post('budget');
+        $budget->save();
+
+        Flash::success(Lang::get('genuineq.tms::lang.component.budget.message.budget_update_successful'));
+        $this->page['school'] = Auth::getUser()->profile;
+    }
+
+    /**
      * Loads all the courses from the active budget
      *  of the school.
      */
@@ -184,9 +207,9 @@ class Budget extends ComponentBase
         /** Extract all sort types for filtering. */
         $this->page['budgetCourseSortTypes'] = BudgetModel::getSortingTypes();
         /** Extract all years for filtering. */
-        $this->page['budgetCourseYears'] = BudgetModel::getFilterYears($teacherId);
+        $this->page['budgetCourseYears'] = BudgetModel::getTeacherFilterYears($teacherId);
         /** Extract all semesters for filtering. */
-        $this->page['budgetCourseSemesters'] = BudgetModel::getFilterSemesters();
+        $this->page['budgetCourseSemesters'] = BudgetModel::getTeacherFilterSemesters();
     }
 
     /**

@@ -245,7 +245,7 @@ class TeacherProfile extends ComponentBase
     }
 
     /**
-     * Update the teacher budget
+     * Update the teacher active budget
      */
     public function onTeacherProfileBudgetUpdate()
     {

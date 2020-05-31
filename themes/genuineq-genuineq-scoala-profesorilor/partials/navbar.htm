@@ -45,14 +45,9 @@ code = "main-menu"
                     </li>
                 {% else %}
                     <li class="nav-item h-100">
-                        {% if 'teacher' == user.type %}
-                            <a class="nav-link" href="/tms-profil-profesor#notifications-tab-body">
-                        {% else %}
-                            <a class="nav-link" href="/tms-profil-scoala#notifications-tab-body">
-                        {% endif %}
-                            <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-10px;">{{ hasNotifications }}</span>
-                            <img src="{{ 'assets/img/svg/icon-bell.svg'|theme }}" alt="notification" height="25">
-                        </a>
+                        <div id="notificationsSummary">
+                            {% partial "navbar-notifications" %}
+                        </div>
                     </li>
 
                     <li class="nav-item h-100 avatar">

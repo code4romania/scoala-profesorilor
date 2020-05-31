@@ -73,6 +73,7 @@ class Notifications extends ComponentBase
         Auth::getUser()->notifications()->where('id', post('notificationId'))->update(['read_at' => Carbon::now()]);
 
         $this->page['notifications'] = Auth::getUser()->notifications()->applyUnread()->get();
+        $this->page['hasNotifications'] = Auth::getUser()->notifications()->applyUnread()->count();
     }
 
     /***********************************************

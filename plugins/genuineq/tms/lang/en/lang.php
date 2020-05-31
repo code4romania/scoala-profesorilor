@@ -495,6 +495,43 @@
             'description' => 'Allows the search, filter, order and paginate budget courses',
             'validation' => [
             ],
+            'validation' => [
+                'invalid_budget' => 'Bugetul trebuie sa minim 0',
+            ],
+            'message' => [
+                'budget_update_successful' => 'Bugetul a fost actualizat cu succes',
+            ],
+        ],
+
+        'school-dashboard' => [
+            'name' => 'School Dashboard',
+            'description' => 'Displays the school dashboard',
+            'backend' => [
+                'force_secure' => 'Force secure protocol',
+                'force_secure_desc' => 'Always redirect the URL with the HTTPS schema',
+            ],
+
+            'frontend' => [
+                'budget_total' => 'Buget total RON',
+                'budget_spent' => 'Buget cheltuit RON',
+                'teachers_not_financed' => 'Profesori nefinantati',
+                'teachers_financed' => 'Profesori finantati',
+                'accredited_courses' => 'Cursuri acreditate',
+                'noncredited_courses' => 'Cursuri neacreditate',
+                'school_spent_money' => 'Costuri scoala RON',
+                'teachers_spent_money' => 'Costuri profesori RON',
+                'school_budget' => 'Buget total scoala RON',
+                'teachers_budget' => 'Buget total profesori RON',
+                'first_semester' => ['0' => 'August', '1' => 'Septembrie', '2' => 'Octombrie', '3' => 'Noiembrie', '4' => 'Decembrie', '5' => 'Ianuarie'],
+                'second_semester' => ['0' => 'Februarie', '1' => 'Martie', '2' => 'Aprilie', '3' => 'Mai', '4' => 'Iunie', '5' => 'Iulie'],
+                'compare_semester' => ['0' => 'Luna 1', '1' => 'Luna 2', '2' => 'Luna 3', '3' => 'Luna 4', '4' => 'Luna 5', '5' => 'Luna 6'],
+                'first_semester_distributed_costs_label' => 'Semestrul 1 ',
+                'second_semester_distributed_costs_label' => 'Semestru 2 '
+            ],
+
+            'message' => [
+                'login_required' => 'Trebuie sa fiti autentificat',
+            ],
         ],
     ],
 

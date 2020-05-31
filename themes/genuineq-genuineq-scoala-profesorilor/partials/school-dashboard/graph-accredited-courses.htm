@@ -1,0 +1,53 @@
+description = "Displays the accredited courses graphic"
+
+[viewBag]
+==
+<canvas id="accreditedCourses"></canvas>
+
+<script type="text/javascript">
+    var ctxP = document.getElementById("accreditedCourses").getContext('2d');
+
+    var myPieChart = new Chart(ctxP, {
+        plugins: [ChartDataLabels],
+        type: 'pie',
+        data: {
+            labels: ["{{ accreditedCoursesLabel }}", "{{ noncreditedCoursesLabel }}"],
+            datasets: [{
+                data: [{{ accreditedCourses }}, {{ noncreditedCourses }}],
+                backgroundColor: ["#4C025E", "#00D857"],
+                hoverBackgroundColor: ["#25002f", "#006c2b"]
+            }]
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'bottom',
+                labels: {
+                    padding: 20,
+                    boxWidth: 10
+                }
+            },
+            plugins: {
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        let sum = 0;
+                        let dataArr = ctx.chart.data.datasets[0].data;
+                        dataArr.map(data => {
+                            sum += data;
+                        });
+                        let percentage = (value * 100 / sum).toFixed(2) + "%";
+                        return percentage;
+                    },
+                    color: 'white',
+                    labels: {
+                        title: {
+                                font: {
+                                    size: '16'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>

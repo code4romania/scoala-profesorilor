@@ -1,0 +1,16 @@
+description = "Displays the school active budget and the update budget button"
+
+[viewBag]
+==
+
+<div class="row bg-white rounded d-flex align-items-center py-2">
+    <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 text-center text-sm-left text-md-left text-lg-left text-xl-left">
+        <span class="my-3">{{ 'school-dashboard.active-budget.label'|_ }}:&nbsp;{% if school.active_budget.budget %} {{ school.active_budget.budget }} {% else %} 0 {% endif %}&nbsp;{{ 'general.coin'|_ }}</span>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-3 offset-md-6 col-lg-3 offset-ld-6 col-xl-3 offset-xl-6 text-center text-sm-right text-md-right text-lg-right text-xl-right">
+        <button type="button" class="btn btn-secondary btn-sm waves-effect rounded" data-toggle="modal" data-target="#budget-update-modal" >{{ 'school-dashboard.active-budget.update'|_ }}</button>
+    </div>
+</div>
+
+{% partial "school-dashboard/budget-update-modal" %}

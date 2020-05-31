@@ -291,6 +291,7 @@ class LearningPlan extends ComponentBase
         if (post('notificationId')) {
             Auth::getUser()->notifications()->where('id', post('notificationId'))->update(['read_at' => Carbon::now()]);
             $this->page['notifications'] = Auth::getUser()->notifications()->applyUnread()->get();
+            $this->page['hasNotifications'] = Auth::getUser()->notifications()->applyUnread()->count();
         } else {
             $this->page['teacher'] = $learningPlan->teacher;
             $this->page['proposedRequests'] = Auth::getUser()->profile->getProposedLearningPlanRequests($this->page['teacher']->active_learning_plan->id);
@@ -331,6 +332,7 @@ class LearningPlan extends ComponentBase
         if (post('notificationId')) {
             Auth::getUser()->notifications()->where('id', post('notificationId'))->update(['read_at' => Carbon::now()]);
             $this->page['notifications'] = Auth::getUser()->notifications()->applyUnread()->get();
+            $this->page['hasNotifications'] = Auth::getUser()->notifications()->applyUnread()->count();
         } else {
             $this->page['teacher'] = $learningPlan->teacher;
             $this->page['proposedRequests'] = Auth::getUser()->profile->getProposedLearningPlanRequests($this->page['teacher']->active_learning_plan->id);
@@ -595,6 +597,7 @@ class LearningPlan extends ComponentBase
         if (post('notificationId')) {
             Auth::getUser()->notifications()->where('id', post('notificationId'))->update(['read_at' => Carbon::now()]);
             $this->page['notifications'] = Auth::getUser()->notifications()->applyUnread()->get();
+            $this->page['hasNotifications'] = Auth::getUser()->notifications()->applyUnread()->count();
         } else {
             $this->page['learningPlan'] = Auth::getUser()->profile->active_learning_plan;
             $this->page['proposedRequests'] = Auth::getUser()->profile->proposed_requests;
@@ -632,6 +635,7 @@ class LearningPlan extends ComponentBase
         if (post('notificationId')) {
             Auth::getUser()->notifications()->where('id', post('notificationId'))->update(['read_at' => Carbon::now()]);
             $this->page['notifications'] = Auth::getUser()->notifications()->applyUnread()->get();
+            $this->page['hasNotifications'] = Auth::getUser()->notifications()->applyUnread()->count();
         } else {
             $this->page['learningPlan'] = Auth::getUser()->profile->active_learning_plan;
             $this->page['proposedRequests'] = Auth::getUser()->profile->proposed_requests;

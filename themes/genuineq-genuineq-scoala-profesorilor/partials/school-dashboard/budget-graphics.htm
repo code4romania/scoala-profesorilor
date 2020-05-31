@@ -1,0 +1,40 @@
+description = "Displays the graphics of the school"
+
+[viewBag]
+==
+
+<div class="row bg-white my-3">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 my-2">
+        {% partial "school-dashboard/graph-spent-budget" %}
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 my-2">
+        {% partial "school-dashboard/graph-financed-teachers" %}
+    </div>
+</div>
+
+<div class="row bg-white my-3">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 my-2">
+        {% partial "school-dashboard/graph-accredited-courses" %}
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 my-2">
+        {% partial "school-dashboard/graph-spent-money" %}
+    </div>
+</div>
+
+<div class="row bg-white my-3">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 my-2">
+        {% partial "school-dashboard/graph-budget-total" %}
+    </div>
+</div>
+
+<div class="row bg-white my-3">
+    <div class="col-12 my-2">
+        {% partial "school-dashboard/budget-distributed-costs-compare-btn" %}
+
+        <div id="costsDistribution">
+            {% partial "school-dashboard/graph-distributed-costs" %}
+        </div>
+    </div>
+</div>

@@ -18,6 +18,8 @@ allowedUserGroups[] = "school"
 [appraisalComponent]
 
 [budgetComponent]
+
+[schoolDashboardComponent]
 ==
 <?php
     function onStart()
@@ -62,7 +64,7 @@ allowedUserGroups[] = "school"
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" id="dashboard-tab-nav" data-toggle="tab" href="#dashboard-tab-body" role="tab" aria-controls="dashboard-tab-body" aria-selected="false">{{ 'school.profile.tab.dashboard'|_ }}</a>
+                <a class="nav-link" id="dashboard-tab-nav" data-toggle="tab" href="#dashboard-tab-body" role="tab" aria-controls="dashboard-tab-body" aria-selected="false" data-request="onSchoolDashboardView" data-request-update="school-profile/dashboard-tab: '#dashboard-tab-content'">{{ 'school.profile.tab.dashboard'|_ }}</a>
             </li>
 
             <li class="nav-item">
@@ -93,6 +95,13 @@ allowedUserGroups[] = "school"
         </div>
 
         <div class="tab-pane fade" id="dashboard-tab-body" role="tabpanel" aria-labelledby="dashboard-tab-body">
+
+            <div class="row my-5">
+                <div class="col-12" id="dashboard-tab-content">
+                    {% partial "school-profile/dashboard-tab" %}
+                </div>
+            </div>
+
         </div>
 
         <div class="tab-pane fade" id="courses-tab-body" role="tabpanel" aria-labelledby="courses-tab-body">
@@ -140,8 +149,6 @@ allowedUserGroups[] = "school"
         );
     });
 </script>
-
-
 
 {% put scripts %}
     <script type="text/javascript">
