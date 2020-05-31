@@ -52,8 +52,6 @@ class TeacherProfile extends ComponentBase
         $this->page['profile'] = (Auth::check()) ? (Auth::getUser()->profile) : (null);
         $this->page['profileAddress'] = ($this->page['profile'] && $this->page['profile']->address) ? ($this->page['profile']->address->name . ', ' . $this->page['profile']->address->county) : (null);
         $this->page['profileSeniorityLevel'] = ($this->page['profile'] && $this->page['profile']->seniority_level) ? ($this->page['profile']->seniority_level->name) : (null);
-        $this->page['profileSchoolLevel'] = ($this->page['profile'] && $this->page['profile']->school_level) ? ($this->page['profile']->school_level->name) : (null);
-        $this->page['profileContractType'] = ($this->page['profile'] && $this->page['profile']->contract_type) ? ($this->page['profile']->contract_type->name) : (null);
 
         /* Extract all the addresses and create the source array. */
         $value = 0;
@@ -68,20 +66,6 @@ class TeacherProfile extends ComponentBase
             $seniorityLevels[$seniorityLevel] = $value++;
         }
         $this->page['seniorityLevels'] = json_encode($seniorityLevels);
-
-        /* Extract all the school levels and create the source array. */
-        $value = 0;
-        foreach (SchoolLevel::all()->pluck('name') as $schoolLevel) {
-            $schoolLevels[$schoolLevel] = $value++;
-        }
-        $this->page['schoolLevels'] = json_encode($schoolLevels);
-
-        /* Extract all the contract types and create the source array. */
-        $value = 0;
-        foreach (ContractType::all()->pluck('name') as $contractType) {
-            $contractTypes[$contractType] = $value++;
-        }
-        $this->page['contractTypes'] = json_encode($contractTypes);
     }
 
     /**
@@ -138,22 +122,6 @@ class TeacherProfile extends ComponentBase
             unset($data['seniority_level_id']);
         }
 
-        /** Extract the school level ID. */
-        if ($data['school_level_id']) {
-            $schoolLevel = SchoolLevel::whereName($data['school_level_id'])->first();
-            $data['school_level_id'] = ($schoolLevel) ? ($schoolLevel->id) : ('');
-        } else {
-            unset($data['school_level_id']);
-        }
-
-        /** Extract the contract type ID. */
-        if ($data['contract_type_id']) {
-            $contractType = ContractType::whereName($data['contract_type_id'])->first();
-            $data['contract_type_id'] = ($contractType) ? ($contractType->id) : ('');
-        } else {
-            unset($data['contract_type_id']);
-        }
-
         if ($data['birth_date']) {
             $data['birth_date'] = date('Y-m-d H:i:s', strtotime($data['birth_date']));
         } else {
@@ -167,8 +135,6 @@ class TeacherProfile extends ComponentBase
             'birth_date' => 'date|nullable',
             'address_id' => 'numeric|nullable',
             'seniority_level_id' => 'numeric|nullable',
-            'school_level_id' => 'numeric|nullable',
-            'contract_type_id' => 'numeric|nullable',
         ];
 
         /** Construct the validation error messages. */
@@ -180,8 +146,6 @@ class TeacherProfile extends ComponentBase
             'birth_date.date' => Lang::get('genuineq.tms::lang.component.teacher-profile.validation.birth_date_date'),
             'address_id.numeric' => Lang::get('genuineq.tms::lang.component.teacher-profile.validation.address_id_numeric'),
             'seniority_level_id.numeric' => Lang::get('genuineq.tms::lang.component.teacher-profile.validation.seniority_level_id_numeric'),
-            'school_level_id.numeric' => Lang::get('genuineq.tms::lang.component.teacher-profile.validation.school_level_id_numeric'),
-            'contract_type_id.numeric' => Lang::get('genuineq.tms::lang.component.teacher-profile.validation.contract_type_id_numeric'),
         ];
 
         /** Apply the validation rules. */

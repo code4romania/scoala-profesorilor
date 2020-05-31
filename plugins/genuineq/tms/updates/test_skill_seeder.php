@@ -21,7 +21,9 @@ class TestSkillSeeder extends Seeder
         if (env('TMS_ADD_FAKE_SKILLS', false)) {
             $faker = Faker\Factory::create();
 
-            for ($i=0; $i < 30; $i++) {
+            $totalSkillsNumber = 30;
+
+            for ($i=0; $i < $totalSkillsNumber; $i++) {
 
                 $name = $faker->sentence($nbWords = 6, $variableNbWords = true);
 

@@ -63,6 +63,8 @@ class Appraisal extends ComponentBase
      */
     public function onAppraisalSearch()
     {
+        $options = post();
+        $options['teacher'] = post('teacherId');
         /* Extract the appraisals based on the received options. */
         $this->teacherExtractAppraisals(/*options*/post(), post('teacherId'));
     }
@@ -81,7 +83,7 @@ class Appraisal extends ComponentBase
         }
 
         /** Extracts all the appraisals of specified teacher. */
-        $this->teacherExtractAppraisals(/*options*/[], Auth::getUser()->profile->id);
+        $this->teacherExtractAppraisals(/*options*/['teacher' =>  Auth::getUser()->profile->id], Auth::getUser()->profile->id);
 
         /** Extracts all the appraisals statics of specified teacher. */
         $this->teacherExtractSearchStatics(Auth::getUser()->profile->id);
@@ -147,6 +149,7 @@ class Appraisal extends ComponentBase
         /** Extract the received courses filtering options */
         $options = [
             'searchInput' => post('appraisalSearchInput'),
+            'teacher' =>  Auth::getUser()->profile->id,
             'school' => post('appraisalSchools'),
             'sort' => post('appraisalSort'),
             'status' => post('appraisalStatus'),
@@ -202,6 +205,7 @@ class Appraisal extends ComponentBase
         /** Extract the received courses filtering options */
         $options = [
             'searchInput' => post('appraisalSearchInput'),
+            'teacher' =>  Auth::getUser()->profile->id,
             'school' => post('appraisalSchools'),
             'sort' => post('appraisalSort'),
             'status' => post('appraisalStatus'),
@@ -585,7 +589,7 @@ class Appraisal extends ComponentBase
         /** Extract the teacher. */
         $this->page['teacher'] = Teacher::find($teacherId);
         /** Extract all appraisals for filtering. */
-        $this->page['appraisals'] = AppraisalModule::filterAppraisals($options);
+        $this->page['appraisals'] = AppraisalModule::teacherFilterAppraisals($options);
         /** Extract the number of pages. */
         $this->page['appraisalsPages'] = $this->page['appraisals']->lastPage();
         /** Extract the current page. */
@@ -617,7 +621,7 @@ class Appraisal extends ComponentBase
         /** Extract the teacher. */
         $this->page['teacher'] = Teacher::find($teacherId);
         /** Extract all appraisals for filtering. */
-        $this->page['appraisals'] = $school->filterAppraisals($options);
+        $this->page['appraisals'] = $school->schoolFilterAppraisals($options);
         /** Extract the number of pages. */
         $this->page['appraisalsPages'] = $this->page['appraisals']->lastPage();
         /** Extract the current page. */

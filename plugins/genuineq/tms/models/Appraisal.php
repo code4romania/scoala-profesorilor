@@ -4,7 +4,7 @@ use Log;
 use Lang;
 use Model;
 use Genuineq\Tms\Models\Semester;
-use Genuineq\Tms\Models\School\Teacher;
+use Genuineq\Tms\Models\Teacher;
 
 /**
  * Model
@@ -26,6 +26,7 @@ class Appraisal extends Model
      * Belongs to relations
      */
     public $belongsTo = [
+        'teacher' => ['Genuineq\Tms\Models\Teacher'],
         'school' => ['Genuineq\Tms\Models\School'],
         'semester' => ['Genuineq\Tms\Models\Semester'],
     ];
@@ -64,12 +65,12 @@ class Appraisal extends Model
      */
     public function getTeacherNameAttribute()
     {
-        return Teacher::find($this->teacher_id)->name;
+        return $this->teacher->name;
     }
 
     /**
      * Function that extracts the name
-     *  of the teacher for whch the appraisal is.
+     *  of the semester for whch the appraisal is.
      */
     public function getSemesterNameAttribute()
     {
@@ -207,7 +208,76 @@ class Appraisal extends Model
 
     /***********************************************
      **************** Search/Filter ****************
-     ***********************************************/
+     ***********************************************//**
+     * Function used for searching, filtering, sorting and paginating appraisals.
+     *
+     * @param query The query to be used for extracting appraisals
+     * @param options The option for searching, filtering, sorting and paginating
+     *
+     * @return Collection of appraisals
+     */
+    public function scopeTeacherFilterAppraisals($query, $options = [])
+    {
+        /** Define the default options. */
+        extract(array_merge([
+            'page' => 1,
+            'perPage' => 12,
+            'searchInput' => '',
+            'teacher' => -1,
+            'status' => -1,
+            'year' => -1,
+            'semester' => -1,
+            'sort' => 'created_at desc'
+        ], $options));
+
+        /** Apply the teacher filter */
+        if ($teacher && (-1 != $teacher)) {
+            $query->whereHas('teacher', function($q) use ($teacher){
+                $q->where('id', '=', $teacher);
+            });
+        }
+
+        /** Apply the status filter */
+        if ($status && (-1 != $status)) {
+            $query->where('status', $status);
+        }
+
+        /** Apply the search input */
+        if ($searchInput) {
+            $query->where('objectives', 'like', "%${searchInput}%")
+              ->orWhereHas('firstSkill', function ($query) use ($searchInput) {
+                $query->where('name', 'like', "%${searchInput}%");
+            })->orWhereHas('secondSkill', function ($query) use ($searchInput) {
+                $query->where('name', 'like', "%${searchInput}%");
+            })->orWhereHas('thirdSkill', function ($query) use ($searchInput) {
+                $query->where('name', 'like', "%${searchInput}%");
+            });
+        }
+
+        /** Apply the year filter */
+        if ($year && (-1 != $year)) {
+            $query->whereHas('semester', function ($query) use ($year) {
+                $query->where('year', $year);
+            });
+        }
+
+        /** Apply the semester filter */
+        if ($semester && (-1 != $semester)) {
+            $query->whereHas('semester', function ($query) use ($semester) {
+                $query->where('semester', $semester);
+            });
+        }
+
+        if ($sort) {
+            $sortTypes = explode(' ', $sort);
+
+            $query->orderBy(/*field*/$sortTypes[0], /*type*/$sortTypes[1]);
+        }
+
+        $page = ($query->paginate($perPage, $page)->lastPage() < $page) ? (1) : ($page);
+
+        return $query->paginate($perPage, $page);
+    }
 
     /**
      * Function used for searching, filtering, sorting and paginating appraisals.
@@ -217,7 +287,7 @@ class Appraisal extends Model
      *
      * @return Collection of appraisals
      */
-    public function scopeFilterAppraisals($query, $options = [])
+    public function scopeSchoolFilterAppraisals($query, $options = [])
     {
         /** Define the default options. */
         extract(array_merge([

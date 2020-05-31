@@ -14,7 +14,9 @@ class TestSpecializationsSeeder extends Seeder
         if (env('TMS_ADD_FAKE_SPECIALIZATIONS', false)) {
             $faker = Faker\Factory::create();
 
-            for ($i=0; $i < 23; $i++) {
+            $totalSpecializationsNumber = 23;
+
+            for ($i=0; $i < $totalSpecializationsNumber; $i++) {
 
                 $name = $faker->sentence($nbWords = 2, $variableNbWords = true);
 

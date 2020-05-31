@@ -1,21 +1,19 @@
 <?php namespace Genuineq\Tms\Classes;
 
-use Genuineq\User\Models\Semester;
-use Genuineq\User\Models\LearningPlan;
-use Genuineq\User\Models\Appraisal;
-use Genuineq\User\Models\Budget;
+use Genuineq\Tms\Models\Semester;
+use Genuineq\Tms\Models\LearningPlan;
+use Genuineq\Tms\Models\Appraisal;
+use Genuineq\Tms\Models\Budget;
 
 class SemesterCloser
 {
     /**
      * Function performs all the operation for closing the first semester.
      */
-    public static function closeFirstSemester(array $newData)
+    public static function closeFirstSemester()
     {
         /** Extract closing semester. */
-        $closingSemester = Semester::latest()->first();
-        $closingSemester->status = 0;
-        $closingSemester->save();
+        $closingSemester = Semester::getLatest();
 
         /** Create a new second semester */
         $newSemester = new Semester();
@@ -30,12 +28,10 @@ class SemesterCloser
     /**
      * Function performs all the operation for closing the second semester.
      */
-    public static function closeSecondSemester(array $newData)
+    public static function closeSecondSemester()
     {
         /** Extract closing semester. */
-        $closingSemester = Semester::latest()->first();
-        $closingSemester->status = 0;
-        $closingSemester->save();
+        $closingSemester = Semester::getLatest();
 
         /** Create a new first semester */
         $newSemester = new Semester();
@@ -51,9 +47,9 @@ class SemesterCloser
      ******************* Helpers *******************
      ***********************************************/
 
-    private function archiveLearningPlans($closingSemesterId, $newSemesterId)
+    private static function archiveLearningPlans($closingSemesterId, $newSemesterId)
     {
-        $closingLearningPlans = LearningPlan::where('semester_id', $closingSemesterId)::where('status', 1)->get();
+        $closingLearningPlans = LearningPlan::where('semester_id', $closingSemesterId)->where('status', 1)->get();
 
         foreach ($closingLearningPlans as $key => $closingLearningPlan) {
             /** Close old learning plan. */
@@ -68,9 +64,9 @@ class SemesterCloser
         }
     }
 
-    private function archiveAppraisals($closingSemesterId, $newSemesterId)
+    private static function archiveAppraisals($closingSemesterId, $newSemesterId)
     {
-        $closingAppraisals = Appraisal::where('semester_id', $closingSemesterId)::where('status', 1)->get();
+        $closingAppraisals = Appraisal::where('semester_id', $closingSemesterId)->where('status', 1)->get();
 
         foreach ($closingAppraisals as $key => $closingAppraisal) {
             /** Close old appraisal. */
@@ -86,9 +82,9 @@ class SemesterCloser
         }
     }
 
-    private function archiveBudgets($closingSemesterId, $newSemesterId)
+    private static function archiveBudgets($closingSemesterId, $newSemesterId)
     {
-        $closingBudgets = Budget::where('semester_id', $closingSemesterId)::where('status', 1)->get();
+        $closingBudgets = Budget::where('semester_id', $closingSemesterId)->where('status', 1)->get();
 
         foreach ($closingBudgets as $key => $closingBudget) {
             /** Close old budget. */

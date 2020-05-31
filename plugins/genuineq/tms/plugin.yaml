@@ -80,14 +80,10 @@ navigation:
                 url: genuineq/tms/senioritylevels
                 icon: icon-bars
             side-menu-item6:
-                label: 'genuineq.tms::lang.taught-subjects.backend-menu'
-                url: genuineq/tms/taughtsubjects
-                icon: icon-dashboard
-            side-menu-item7:
                 label: 'genuineq.tms::lang.contract-types.backend-menu'
                 url: genuineq/tms/contracttypes
                 icon: icon-thumbs-up
-            side-menu-item8:
+            side-menu-item7:
                 label: 'genuineq.tms::lang.school-levels.backend-menu'
                 url: genuineq/tms/schoollevels
                 icon: icon-bookmark

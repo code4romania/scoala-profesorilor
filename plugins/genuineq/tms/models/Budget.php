@@ -87,7 +87,7 @@ class Budget extends Model
      */
     public function beforeCreate()
     {
-        $this->semester_id = Semester::latest()->first()->id;
+        $this->semester_id = Semester::getLatest()->id;
     }
 
     /***********************************************

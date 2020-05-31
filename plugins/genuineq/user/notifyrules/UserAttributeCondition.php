@@ -1,5 +1,6 @@
 <?php namespace Genuineq\User\NotifyRules;
 
+use Log;
 use RainLab\Notify\Classes\ModelAttributesConditionBase;
 use ApplicationException;
 
@@ -24,6 +25,7 @@ class UserAttributeCondition extends ModelAttributesConditionBase
      */
     public function isTrue(&$params)
     {
+        Log::info('params  ' . print_r($params, true));
         $hostObj = $this->host;
 
         $attribute = $hostObj->subcondition;

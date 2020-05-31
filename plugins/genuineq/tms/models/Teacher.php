@@ -57,8 +57,6 @@ class Teacher extends Model
     public $belongsTo = [
         'address' => 'Genuineq\Tms\Models\Address',
         'seniority_level' => 'Genuineq\Tms\Models\SeniorityLevel',
-        'school_level' => 'Genuineq\Tms\Models\SchoolLevel',
-        'contract_type' => 'Genuineq\Tms\Models\ContractType',
         'user' => 'Genuineq\user\Models\User',
     ];
 

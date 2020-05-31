@@ -50,22 +50,6 @@ description = "Displays the teacher pofile forms"
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <div class="md-form">
-                        <input name="school_level_id" type="text" id="teacher_school_level_id" class="form-control" value="{{ profileSchoolLevel }}">
-                        <label for="teacher_school_level_id">{{ 'teacher.profile.form.profile.school_level_id'|_ }}</label>
-                        <div class="small text-danger" data-validate-for="school_level_id"></div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="md-form">
-                        <input name="contract_type_id" type="text" id="teacher_contract_type_id" class="form-control" value="{{ profileContractType }}">
-                        <label for="teacher_contract_type_id">{{ 'teacher.profile.form.profile.contract_type_id'|_ }}</label>
-                        <div class="small text-danger" data-validate-for="contract_type_id"></div>
-                    </div>
-                </div>
-
                 <div class="form-row">
                     <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
                         <div class="md-form m-0">
@@ -255,18 +239,6 @@ description = "Displays the teacher pofile forms"
 
         $('#teacher_seniority_level_id').autocomplete({
             source: {{ seniorityLevels|raw }},
-            highlightClass: 'text-danger',
-            treshold: 1
-        });
-
-        $('#teacher_school_level_id').autocomplete({
-            source: {{ schoolLevels|raw }},
-            highlightClass: 'text-danger',
-            treshold: 1
-        });
-
-        $('#teacher_contract_type_id').autocomplete({
-            source: {{ contractTypes|raw }},
             highlightClass: 'text-danger',
             treshold: 1
         });

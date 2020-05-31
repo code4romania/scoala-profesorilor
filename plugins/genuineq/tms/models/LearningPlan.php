@@ -95,11 +95,11 @@ class LearningPlan extends Model
         return $cost;
     }
 
-    public function getTotalCoveredCostAttribute(){
+    public function getSchoolCoveredCostAttribute(){
         $coveredCost = 0;
 
         foreach ($this->accepted_courses as $learningPlanCorse) {
-            $coveredCost += $learningPlanCorse->coveted_costs;
+            $coveredCost += $learningPlanCorse->school_covered_costs;
         }
 
         return $coveredCost;

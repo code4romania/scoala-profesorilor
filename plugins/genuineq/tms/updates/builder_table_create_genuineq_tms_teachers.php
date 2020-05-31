@@ -19,8 +19,6 @@ class BuilderTableCreateGenuineqTmsTeachers extends Migration
             $table->text('description')->nullable()->comment = "The description of the teacher.";
             $table->integer('user_id')->unsigned()->nullable();
             $table->integer('seniority_level_id')->nullable()->unsigned();
-            $table->integer('school_level_id')->nullable()->unsigned();
-            $table->integer('contract_type_id')->unsigned()->nullable();;
             $table->boolean('status')->default(1)->comment = "The status of the teacher.";
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
