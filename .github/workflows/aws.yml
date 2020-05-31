@@ -23,14 +23,14 @@
 #    See the documentation for each action used below for the recommended IAM policies for this IAM user,
 #    and best practices on handling the access key credentials.
 
-#on:
-#  release:
-#    types: [created]
-
 on:
-  push:
-    branches:
-      - master
+  release:
+    types: [created]
+
+#on:
+#  push:
+#    branches:
+3      - master
 
 #on:
 #  schedule:
