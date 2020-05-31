@@ -3,6 +3,7 @@
 use Log;
 use Auth;
 use Lang;
+use Flash;
 use DateTime;
 use Redirect;
 use Genuineq\Tms\Models\Budget;
@@ -70,6 +71,39 @@ class SchoolDashboard extends ComponentBase
         $this->page['schoolYears'] = Budget::getSchoolFilterYears(Auth::getUser()->profile->id);
         $this->page['schoolSemesters'] = Budget::getSchoolFilterSemesters(Auth::getUser()->profile->id);
 
+        /** Get active semester ID. */
+        $activeSemesterId = Auth::getUser()->profile->active_budget->semester_id;
+
+        $this->prepareBudgetAllocationData($activeSemesterId);
+        $this->prepareFinancedTeachersData($activeSemesterId);
+        $this->prepareAccreditedCoursesData($activeSemesterId);
+        $this->prepareSpentMoneyData($activeSemesterId);
+        $this->prepareBudgetTotalData($activeSemesterId);
+        $this->prepareDistributedCostsData($activeSemesterId);
+    }
+
+    /**
+     * Update the school active budget
+     */
+    public function onSchoolBudgetUpdate()
+    {
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        if (0 > post('budget')) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-dashboard.validation.invalid_budget'));
+        }
+
+        /** Extract the teacher profile budget and update it. */
+        $budget = Auth::getUser()->profile->active_budget;
+        $budget->budget = post('budget');
+        $budget->save();
+
+        Flash::success(Lang::get('genuineq.tms::lang.component.school-dashboard.message.budget_update_successful'));
+        $this->page['school'] = (Auth::check()) ? (Auth::getUser()->profile) : (null);
+        $this->page['schoolYears'] = Budget::getSchoolFilterYears(Auth::getUser()->profile->id);
+        $this->page['schoolSemesters'] = Budget::getSchoolFilterSemesters(Auth::getUser()->profile->id);
 
         /** Get active semester ID. */
         $activeSemesterId = Auth::getUser()->profile->active_budget->semester_id;
@@ -129,7 +163,8 @@ class SchoolDashboard extends ComponentBase
         $budget = Auth::getUser()->profile->budgets->where('semester_id', $semesterId)->first();
 
         /** Get the total budget. */
-        $this->page['budgetTotal'] = $budget->budget;
+        $this->page['budgetTotal'] = ($budget->budget) ? ($budget->budget) : (0);
+        $this->page['budgetSpent'] = 0;
         /** Get the total spent budget. */
         foreach ($budget->schoolCourses as $key => $course) {
             $this->page['budgetSpent'] += $course->school_covered_costs;
@@ -214,7 +249,7 @@ class SchoolDashboard extends ComponentBase
         /** Extract the school budget. */
         $budget = Auth::getUser()->profile->budgets->where('semester_id', $semesterId)->first();
 
-        $this->page['schoolBudget'] = $budget->budget;
+        $this->page['schoolBudget'] = ($budget->budget) ? ($budget->budget) : (0);
         $this->page['teachersBudget'] = 0;
 
         /** Calculate the teachers total costs. */
@@ -249,7 +284,11 @@ class SchoolDashboard extends ComponentBase
         /** Calculate the distributed costs. */
         foreach ($budget->schoolCourses as $key => $learningPlanCourse) {
             $month = date("n", strtotime($learningPlanCourse->course->end_date));
-            $distributedCosts[$month] += $learningPlanCourse->school_covered_costs;
+            if (array_key_exists($month, $distributedCosts)) {
+                $distributedCosts[$month] += $learningPlanCourse->school_covered_costs;
+            } else {
+                $distributedCosts[$month] = $learningPlanCourse->school_covered_costs;
+            }
         }
 
         $this->page['distributedCosts'] = [0 => array_values($distributedCosts)];
@@ -282,7 +321,11 @@ class SchoolDashboard extends ComponentBase
         /** Calculate the distributed costs. */
         foreach ($budget->schoolCourses as $key => $learningPlanCourse) {
             $month = date("n", strtotime($learningPlanCourse->course->end_date));
-            $distributedCosts[$month] += $learningPlanCourse->school_covered_costs;
+            if (array_key_exists($month, $distributedCosts)) {
+                $distributedCosts[$month] += $learningPlanCourse->school_covered_costs;
+            } else {
+                $distributedCosts[$month] = $learningPlanCourse->school_covered_costs;
+            }
         }
         $this->page['distributedCosts'] = [0 => array_values($distributedCosts)];
 
@@ -303,7 +346,11 @@ class SchoolDashboard extends ComponentBase
         /** Calculate the distributed costs. */
         foreach ($budget->schoolCourses as $key => $learningPlanCourse) {
             $month = date("n", strtotime($learningPlanCourse->course->end_date));
-            $distributedCosts[$month] += $learningPlanCourse->school_covered_costs;
+            if (array_key_exists($month, $distributedCosts)) {
+                $distributedCosts[$month] += $learningPlanCourse->school_covered_costs;
+            } else {
+                $distributedCosts[$month] = $learningPlanCourse->school_covered_costs;
+            }
         }
         $this->page['distributedCosts'] = [0 => $this->page['distributedCosts'][0], 1 => array_values($distributedCosts)];
         $this->page['distributedCostsColor'] = [0 => 'rgba(75, 192, 192, 0.2)', 1 => 'rgba(153, 102, 255, 0.2)'];

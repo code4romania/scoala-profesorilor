@@ -495,12 +495,6 @@
             'description' => 'Allows the search, filter, order and paginate budget courses',
             'validation' => [
             ],
-            'validation' => [
-                'invalid_budget' => 'Bugetul trebuie sa minim 0',
-            ],
-            'message' => [
-                'budget_update_successful' => 'Bugetul a fost actualizat cu succes',
-            ],
         ],
 
         'school-dashboard' => [
@@ -529,8 +523,13 @@
                 'second_semester_distributed_costs_label' => 'Semestru 2 '
             ],
 
+            'validation' => [
+                'invalid_budget' => 'Bugetul trebuie sa minim 0',
+            ],
+
             'message' => [
                 'login_required' => 'Trebuie sa fiti autentificat',
+                'budget_update_successful' => 'Bugetul a fost actualizat cu succes',
             ],
         ],
     ],
