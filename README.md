@@ -2,12 +2,7 @@
     <img src="https://github.com/octobercms/october/blob/master/themes/demo/assets/images/october.png?raw=true" alt="October" width="25%" height="25%" />
 </p>
 
-[October](https://octobercms.com) is a Content Management System (CMS) and web platform whose sole purpose is to make your development workflow simple again. It was born out of frustration with existing systems. We feel building websites has become a convoluted and confusing process that leaves developers unsatisfied. We want to turn you around to the simpler side and get back to basics.
-
-October's mission is to show the world that web development is not rocket science.
-
-[![Build Status](https://travis-ci.org/octobercms/october.svg?branch=develop)](https://travis-ci.org/octobercms/october)
-[![License](https://poser.pugx.org/october/october/license.svg)](https://packagist.org/packages/october/october)
+[Scoala Profesorilor](https://www.scoalaprofesorilor.ro) este o aplicație web în care profesorul își poate crea un cont și configura un parcurs profesional dorit, iar pe baza acestuia i se recomandă un plan de învățare (cu cursurile recomandate, acreditate sau nu), iar școala își poate crea un cont unde își poate introduce toți profesorii și menține la zi informațiile despre gradele, cursurile și formările acestora, unde poate configura parcursul resurselor sale umane, estima costuri și organiza calendarul de training.
 
 ## Installing October
 
