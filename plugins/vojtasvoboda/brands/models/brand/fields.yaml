@@ -1,0 +1,51 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: vojtasvoboda.brands::lang.labels.brand.name
+        span: left
+    slug:
+        label: vojtasvoboda.brands::lang.labels.brand.slug
+        span: right
+        preset:
+            field: name
+            type: slug
+    enabled:
+        label: vojtasvoboda.brands::lang.labels.brand.enabled
+        type: switch
+        default: true
+tabs:
+    fields:
+        description:
+            tab: vojtasvoboda.brands::lang.labels.brand.description
+            label: vojtasvoboda.brands::lang.labels.brand.description
+            type: richeditor
+        categories:
+            tab: vojtasvoboda.brands::lang.labels.brand.categories
+            label: vojtasvoboda.brands::lang.labels.brand.categories
+            type: relation
+            nameFrom: name
+        logo:
+            tab: vojtasvoboda.brands::lang.labels.brand.images
+            label: vojtasvoboda.brands::lang.labels.brand.logo
+            type: fileupload
+            mode: image
+            imageWidth: 100
+            imageHeight: 100
+        images:
+            tab: vojtasvoboda.brands::lang.labels.brand.images
+            label: vojtasvoboda.brands::lang.labels.brand.gallery
+            type: fileupload
+            mode: image
+        external_link:
+            tab: vojtasvoboda.brands::lang.labels.brand.links
+            label: vojtasvoboda.brands::lang.labels.brand.external_link
+            type: text
+            comment: vojtasvoboda.brands::lang.labels.brand.external_link_comment
+        no_link:
+            tab: vojtasvoboda.brands::lang.labels.brand.links
+            label: vojtasvoboda.brands::lang.labels.brand.no_link
+            type: switch
+            comment: vojtasvoboda.brands::lang.labels.brand.no_link_comment

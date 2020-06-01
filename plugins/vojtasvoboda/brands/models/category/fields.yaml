@@ -1,0 +1,23 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: vojtasvoboda.brands::lang.labels.category.name
+        span: left
+        searchable: true
+    slug:
+        label: vojtasvoboda.brands::lang.labels.category.slug
+        span: right
+        preset:
+            field: name
+            type: slug
+    enabled:
+        label: vojtasvoboda.brands::lang.labels.brand.enabled
+        type: switch
+        default: true
+    description:
+        label: vojtasvoboda.brands::lang.labels.category.description
+        type: richeditor
+        searchable: false

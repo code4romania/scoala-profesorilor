@@ -1,0 +1,31 @@
+<div class="brands" id="paginated">
+
+    <div class="row">
+        {% for brand in __SELF__.brands %}
+        <div class="item col-md-{{ __SELF__.columnSize }}">
+            {% if not brand.no_link %}<a href="{{ brand.url }}"{% if brand.external_link %} target="_blank"{% endif %}>{% endif %}
+                {% if brand.logo %}
+                <img src="{{ brand.logo.getThumb(__SELF__.logoWidth, __SELF__.logoHeight, 'auto') }}" alt="{{ brand.name }}" class="img-responsive" />
+                {% endif %}
+            {% if not brand.no_link %}</a>{% endif %}
+            {% if brand.categories %}
+            <div class="categories">
+                {% for category in brand.categories %}
+                <a href="{{ category.url }}">
+                    <span class="category label label-default">{{ category.name }}</span>
+                </a>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% if not brand.no_link %}<a href="{{ brand.url }}"{% if brand.external_link %} target="_blank"{% endif %}>{% endif %}
+                {{ brand.name }}
+            {% if not brand.no_link %}</a>{% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="row">
+        {% partial __SELF__ ~ "::paginating" items=__SELF__.brands pagePath=__SELF__.pagePath %}
+    </div>
+
+</div>

@@ -1,0 +1,13 @@
+1.0.1:
+  - First version of Brands
+  - create_brands_table.php
+  - create_categories_table.php
+  - create_brand_category_table.php
+1.0.2: Add CS locale
+1.0.3: Add DE locale (thanks to Patrick Durrer)
+1.0.4: Fix typo
+1.0.5: Add letters filtration
+1.0.6: Fix letters component when replacing component with own code
+1.0.7: Fix showing only enabled brands
+1.0.8: Categories sort ordering
+1.0.9: Add filtering by categories

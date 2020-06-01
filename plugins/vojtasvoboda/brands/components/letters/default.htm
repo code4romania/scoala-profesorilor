@@ -1,0 +1,15 @@
+{% set chars = __SELF__.characters %}
+
+{% if chars %}
+<div class="col-sm-12">
+    <ul class="pagination">
+        {% for char in chars %}
+        <li{% if char.name == this.param.letter %} class="active"{% endif %}>
+            <a href="{{ char.url }}"{% if char.name == this.param.letter %} class="active"{% endif %}>
+                {{ char.name }} <span class="badge">{{ char.count }}</span>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}

@@ -1,0 +1,59 @@
+title = "TMS -Parteneri"
+url = "/parteneri"
+layout = "tms-non-static"
+is_hidden = 0
+
+[brands brandsComponent]
+brandPage = "talent-manager-schools"
+categoryPage = "talent-manager-schools"
+categoryFilter = "{{ :category }}"
+letterFilter = "{{ :letter }}"
+perPage = 12
+sortOrder = "ASC"
+pageNumber = "{{ page }}"
+perRow = 3
+logoWidth = 150
+logoHeight = 150
+==
+<?php
+    use VojtaSvoboda\Brands\Models\Category;
+
+    function onStart()
+    {
+        /* Extract all brand categories */
+        $this['brandCategories'] = Category::all();
+    }
+?>
+==
+<div class="container-fluid bg-white">
+    <div class="container bg-white py-3">
+
+        {% for brandCategory in brandCategories %}
+            <div class="row">
+                <div class="col-12">
+                    <h5 class="font-weight-bold py-2">{{ brandCategory.name }}</h5>
+                </div>
+            </div>
+
+            <div class="row align-items-center">
+                {% for brand in brandCategory.brands %}
+                    <div class="col-12 col-sm-4 col-md-3 col-lg-3 col-xl-3 text-center my-3 align-self-center">
+                        {% if not brand.no_link %}
+                            <a href="{{ brand.url }}"{% if brand.external_link %} target="_blank"{% endif %}>
+                        {% endif %}
+
+                            {% if brand.logo %}
+                                <img src="{{ brand.logo.getThumb(brandsComponent.logoWidth, 'auto', 'auto') }}" alt="{{ brand.name }}" class="rounded mx-auto d-block img-responsive" />
+                            {% endif %}
+                            <p class="pt-2">{{ brand.name }}</p>
+
+                        {% if not brand.no_link %}
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+    </div>
+</div>
