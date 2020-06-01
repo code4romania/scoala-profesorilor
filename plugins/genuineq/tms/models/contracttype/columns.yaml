@@ -4,6 +4,7 @@ columns:
         type: text
         searchable: true
         sortable: true
+
     diacritic:
         label: 'genuineq.tms::lang.contract-types.label.diacritic'
         type: text

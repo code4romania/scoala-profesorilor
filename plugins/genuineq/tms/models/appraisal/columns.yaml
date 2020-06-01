@@ -4,16 +4,19 @@ columns:
         type: text
         searchable: true
         sortable: true
+
     school_name:
         label: 'genuineq.tms::lang.appraisal.label.school'
         type: text
         searchable: true
         sortable: true
+
     teacher_name:
         label: 'genuineq.tms::lang.appraisal.label.teacher'
         type: text
         searchable: true
         sortable: true
+
     semester_name:
         label: 'genuineq.tms::lang.appraisal.label.semester'
         type: text

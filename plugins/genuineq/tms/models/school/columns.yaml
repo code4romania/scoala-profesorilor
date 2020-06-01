@@ -4,43 +4,32 @@ columns:
         type: text
         searchable: true
         sortable: true
-    slug:
-        label: 'genuineq.tms::lang.school.label.slug'
-        type: text
-        searchable: true
-        sortable: true
-    phone:
-        label: 'genuineq.tms::lang.school.label.phone'
-        type: number
-        searchable: true
-        sortable: true
-    email:
-        label: 'genuineq.tms::lang.school.label.email'
-        type: text
-        searchable: true
-        sortable: true
-    principal:
-        label: 'genuineq.tms::lang.school.label.principal'
-        type: text
-        searchable: true
-        sortable: true
+
     contact_name:
         label: 'genuineq.tms::lang.school.label.contact_name'
         type: text
         searchable: true
         sortable: true
-    contact_role:
-        label: 'genuineq.tms::lang.school.label.contact_role'
-        type: text
-        searchable: true
-        sortable: true
-    contact_phone:
-        label: 'genuineq.tms::lang.school.label.contact_phone'
-        type: number
-        searchable: true
-        sortable: true
+
     contact_email:
         label: 'genuineq.tms::lang.school.label.contact_email'
         type: text
         searchable: true
+        sortable: true
+
+    address_name:
+        label: 'genuineq.tms::lang.school.label.address'
+        type: text
+        searchable: true
+        sortable: true
+
+    inspectorate_name:
+        label: 'genuineq.tms::lang.school.label.inspectorate'
+        type: text
+        searchable: true
+        sortable: true
+
+    status:
+        label: 'genuineq.tms::lang.school.label.status_list'
+        type: number
         sortable: true

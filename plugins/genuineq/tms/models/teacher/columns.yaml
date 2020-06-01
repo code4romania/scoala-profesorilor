@@ -4,18 +4,38 @@ columns:
         type: text
         searchable: true
         sortable: true
-    slug:
-        label: 'genuineq.tms::lang.teacher.label.slug'
+
+    email:
+        label: 'genuineq.tms::lang.teacher.label.email'
         type: text
         searchable: true
         sortable: true
+
     phone:
         label: 'genuineq.tms::lang.teacher.label.phone'
         type: number
         searchable: true
         sortable: true
+
+    address_name:
+        label: 'genuineq.tms::lang.teacher.label.address'
+        type: text
+        searchable: true
+        sortable: true
+
     birth_date:
         label: 'genuineq.tms::lang.teacher.label.birth_date'
         type: date
         searchable: true
+        sortable: true
+
+    seniority:
+        label: 'genuineq.tms::lang.teacher.label.seniority'
+        type: text
+        searchable: true
+        sortable: true
+
+    status:
+        label: 'genuineq.tms::lang.course.label.status_list'
+        type: number
         sortable: true

@@ -52,7 +52,7 @@ navigation:
                 icon: icon-sliders
             side-menu-item11:
                 label: 'genuineq.tms::lang.budgets.backend-menu'
-                url: /
+                url: genuineq/tms/budgets
                 icon: icon-dollar
     main-menu-item2:
         label: 'genuineq.tms::lang.plugin.backend-menu.static'

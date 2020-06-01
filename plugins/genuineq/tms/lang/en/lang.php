@@ -24,7 +24,7 @@
     'skill' => [
         'label' => [
             'name' => 'Name',
-            'diacritic' => 'Diacritics',
+            'slug' => 'Slug',
             'description' => 'Description',
         ],
 
@@ -44,7 +44,8 @@
             'price' => 'Price (RON)',
             'color' => 'Color',
             'description' => 'Description',
-            'status' => 'Status',
+            'status_list' => 'Active(1)/Archived(0)',
+            'status_form' => 'Status',
             'categories' => 'Categories',
             'skills' => 'Skills',
             'supplier' => 'Supplier',
@@ -94,6 +95,8 @@
             'email' => 'Email',
             'phone' => 'Phone',
             'description' => 'Description',
+            'status_list' => 'Active(1)/Archived(0)',
+            'status_form' => 'Status',
         ],
 
         'backend-menu' => 'Suppliers',
@@ -118,9 +121,16 @@
         'label' => [
             'name' => 'Name',
             'slug' => 'Slug',
-            'avatar' => 'Avatar',
+            'email' => 'Email',
             'phone' => 'Phone',
+            'address' => 'Address',
+            'seniority' => 'Seniority',
+            'status' => 'Status',
             'birth_date' => 'Birth Date',
+            'user' => 'User',
+            'seniority_level' => 'Seniority Level',
+            'description' => 'Description',
+            'schools' => 'Schools',
         ],
 
         'backend-menu' => 'Teachers',
@@ -159,6 +169,12 @@
             'contact_email' => 'Contact Email',
             'contact_phone' => 'Contact Phone',
             'contact_role' => 'Contact Role',
+            'address' => 'Address',
+            'inspectorate' => 'Inspectorate',
+            'status_list' => 'Active(1)/Archived(0)',
+            'status' => 'Status',
+            'user' => 'User',
+            'teachers' => 'Teachers',
         ],
 
         'backend-menu' => 'Schools',
@@ -171,6 +187,7 @@
             'semester' => 'Semester',
             'teacher' => 'Teacher',
             'courses' => 'Learning Plan Courses',
+            'status_list' => 'Active(1)/Archived(0)',
         ],
 
         'backend-menu' => 'Learning Plans',
@@ -179,12 +196,11 @@
     'learning-plans-course' => [
         'label' => [
             'id' => '#',
-            'teacher-name' => 'Teacher',
-            'learning-plan' => 'Learning Plan',
+            'learning_plan_name' => 'Teacher',
+            'school_covered_costs' => 'School Covered Costs (RON)',
+            'teacher_covered_costs' => 'Teacher Covered Costs (RON)',
             'mandatory' => 'Mandatory',
-            'course' => 'Course',
-            'school' => 'School',
-            'covered-costs' => 'School Covered Costs',
+            'course_name' => 'Course',
         ],
 
         'backend-menu' => 'Learning Plans Courses',
@@ -266,7 +282,16 @@
             'semester' => 'Semester',
             'objectives' => 'Objectives',
             'status' => 'Status',
-            'skills' => 'Skills',
+            'first_skill' => 'First skill',
+            'first_skill_grade' => 'First skill grade',
+            'second_skill' => 'Second skill',
+            'second_skill_grade' => 'Second skill grade',
+            'third_skill' => 'Third skill',
+            'third_skill_grade' => 'Third skill grade',
+            'notes_objectives_set' => 'Notes objectives set',
+            'notes_objectives_approved' => 'Notes objectives approved',
+            'notes_skills_set' => 'Notes skills set',
+            'notes_evaluation_opened' => 'Notes evaluation opened',
         ],
 
         'backend-menu' => 'Appraisals',
@@ -290,8 +315,11 @@
     'budgets' => [
         'label' => [
             'budget' => 'Budget',
+            'budgetable_name' => 'Budget owner',
+            'budgetable_type' => 'Budget owner type',
             'semester' => 'Semester',
-            'courses' => 'Courses',
+            'status_list' => 'Active(1)/Archived(0)',
+            'status_form' => 'Status',
         ],
 
         'backend-menu' => 'Budgets',

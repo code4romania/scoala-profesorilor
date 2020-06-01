@@ -1,29 +1,71 @@
 fields:
     name:
         label: 'genuineq.tms::lang.teacher.label.name'
-        span: auto
+        span: left
         required: 1
         type: text
+
     slug:
         label: 'genuineq.tms::lang.teacher.label.slug'
-        span: auto
+        span: right
         required: 1
         defaultFrom: name
         type: text
+
     phone:
         label: 'genuineq.tms::lang.teacher.label.phone'
-        span: auto
+        span: left
         required: 1
         type: number
+
+    address:
+        label: 'genuineq.tms::lang.teacher.label.address'
+        nameFrom: 'concat(name, '', '', county)'
+        descriptionFrom: 'concat(name, '', '', county)'
+        select: 'concat(name, '', '', county)'
+        span: right
+        required: 1
+        type: relation
+
     birth_date:
         label: 'genuineq.tms::lang.teacher.label.birth_date'
         mode: date
-        span: auto
+        span: left
         required: 1
         type: datepicker
-    avatar:
-        label: 'genuineq.tms::lang.teacher.label.avatar'
-        mode: image
-        imageWidth: '200'
-        span: auto
-        type: mediafinder
+
+    seniority_level:
+        label: 'genuineq.tms::lang.teacher.label.seniority_level'
+        nameFrom: name
+        span: right
+        required: 1
+        type: relation
+
+    user:
+        label: 'genuineq.tms::lang.teacher.label.user'
+        nameFrom: 'concat(name, '', '', email)'
+        descriptionFrom: 'concat(name, '', '', email)'
+        select: 'concat(name, '', '', email)'
+        span: left
+        required: 1
+        type: relation
+
+    status:
+        label: 'genuineq.tms::lang.teacher.label.status'
+        span: right
+        type: dropdown
+        options:
+            0: Archived
+            1: Active
+
+    description:
+        label: 'genuineq.tms::lang.teacher.label.description'
+        size: large
+        span: full
+        type: richeditor
+
+    schools:
+        label: 'genuineq.tms::lang.teacher.label.schools'
+        nameFrom: name
+        span: left
+        type: relation

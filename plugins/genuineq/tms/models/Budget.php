@@ -79,6 +79,28 @@ class Budget extends Model
     ];
 
     /***********************************************
+     ******************* Mutators ******************
+     ***********************************************/
+
+    /**
+     * Function that extracts the name
+     *  of the teacher/school for whch the appraisal is.
+     */
+    public function getBudgetableNameAttribute()
+    {
+        return $this->budgetable->name;
+    }
+
+    /**
+     * Function that extracts the name
+     *  of the semester for whch the appraisal is.
+     */
+    public function getSemesterNameAttribute()
+    {
+        return $this->semester->year . '-' . $this->semester->semester;
+    }
+
+    /***********************************************
      ******************** Events *******************
      ***********************************************/
 

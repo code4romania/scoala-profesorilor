@@ -1,17 +1,40 @@
 fields:
+    budgetable_id:
+        label: 'genuineq.tms::lang.budgets.label.budgetable_name'
+        type: number
+        span: left
+        required: 1
+
+    budgetable_type:
+        label: 'genuineq.tms::lang.budgets.label.budgetable_type'
+        span: right
+        searchable: true
+        sortable: true
+        required: 1
+        type: dropdown
+        options:
+            Genuineq\Tms\Models\School: School
+            Genuineq\Tms\Models\Teacher: Teacher
+
     budget:
         label: 'genuineq.tms::lang.budgets.label.budget'
         span: left
         type: number
+        required: 1
+
     semester:
         label: 'genuineq.tms::lang.budgets.label.semester'
-        nameFrom: name
-        descriptionFrom: description
+        nameFrom: 'concat(year, ''-'', semester)'
+        descriptionFrom: 'concat(year, ''-'', semester)'
+        select: 'concat(year, ''-'', semester)'
         span: right
         type: relation
-    courses:
-        label: 'genuineq.tms::lang.budgets.label.courses'
-        prompt: 'Add new item'
-        span: full
-        type: repeater
-        form: {  }
+        required: 1
+
+    status:
+        label: 'genuineq.tms::lang.budgets.label.status_form'
+        span: right
+        type: dropdown
+        options:
+            0: Archived
+            1: Active

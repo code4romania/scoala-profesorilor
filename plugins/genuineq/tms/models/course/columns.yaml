@@ -4,44 +4,53 @@ columns:
         type: text
         searchable: true
         sortable: true
+
     slug:
         label: 'genuineq.tms::lang.course.label.slug'
         type: text
         searchable: true
         sortable: true
+
     start_date:
         label: 'genuineq.tms::lang.course.label.date-start'
         type: datetime
         sortable: true
+
     end_date:
         label: 'genuineq.tms::lang.course.label.date-end'
         type: datetime
         sortable: true
+
     accredited:
         label: 'genuineq.tms::lang.course.label.accredited'
         type: switch
         sortable: true
+
     credits:
         label: 'genuineq.tms::lang.course.label.credits'
         type: number
         searchable: true
         sortable: true
+
     price:
         label: 'genuineq.tms::lang.course.label.price'
         type: number
         searchable: true
         sortable: true
+
     duration:
         label: 'genuineq.tms::lang.course.label.duration'
         type: number
         searchable: true
         sortable: true
+
     address:
         label: 'genuineq.tms::lang.course.label.address'
         type: text
         searchable: true
         sortable: true
+
     status:
-        label: 'genuineq.tms::lang.course.label.status'
+        label: 'genuineq.tms::lang.course.label.status_list'
         type: number
         sortable: true

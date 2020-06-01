@@ -4,6 +4,7 @@ columns:
         type: text
         searchable: true
         sortable: true
+
     diacritic:
         label: 'genuineq.tms::lang.seniority-level.label.diacritic'
         type: text

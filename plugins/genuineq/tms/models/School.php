@@ -113,6 +113,20 @@ class School extends Model
         return $this->budgets->where('status', 1)->first()->id;
     }
 
+    /**
+     * Function that extracts the address name of the school.
+     */
+    public function getAddressNameAttribute(){
+        return ($this->address) ? ($this->address->name . ', ' . $this->address->county) : ('');
+    }
+
+    /**
+     * Function that extracts the inspectorate name of the school.
+     */
+    public function getInspectorateNameAttribute(){
+        return ($this->inspectorate) ? ($this->inspectorate->name) : ('');
+    }
+
     /***********************************************
      ******************* Functions *****************
      ***********************************************/

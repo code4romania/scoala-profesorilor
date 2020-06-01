@@ -3,11 +3,15 @@ fields:
         label: 'genuineq.tms::lang.grade.label.name'
         span: auto
         type: text
+        required: 1
+
     diacritic:
         label: 'genuineq.tms::lang.grade.label.diacritic'
         span: auto
         defaultFrom: name
         type: text
+        required: 1
+
     description:
         label: 'genuineq.tms::lang.grade.label.description'
         size: large

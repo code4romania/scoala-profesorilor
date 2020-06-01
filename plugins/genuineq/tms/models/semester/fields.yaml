@@ -1,8 +1,12 @@
 fields:
     semester:
         label: 'genuineq.tms::lang.semesters.label.semester'
-        span: auto
-        type: number
+        span: left
+        type: dropdown
+        options:
+            1: First
+            2: Second
+
     year:
         label: 'genuineq.tms::lang.semesters.label.year'
         span: auto

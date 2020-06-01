@@ -109,6 +109,20 @@ class Teacher extends Model
     }
 
     /**
+     * Function that extracts the address name of the teacher.
+     */
+    public function getAddressNameAttribute(){
+        return ($this->address) ? ($this->address->name . ', ' . $this->address->county) : ('');
+    }
+
+    /**
+     * Function that extracts the seniority of the teacher.
+     */
+    public function getSeniorityAttribute(){
+        return ($this->seniority_level) ? ($this->seniority_level->name) : ('');
+    }
+
+    /**
      * Function that extracts the active learning plan.
      */
     public function getActiveLearningPlanAttribute()

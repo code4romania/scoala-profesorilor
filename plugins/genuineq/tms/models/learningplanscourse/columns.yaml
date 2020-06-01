@@ -3,25 +3,32 @@ columns:
         label: 'genuineq.tms::lang.learning-plans-course.label.id'
         type: number
         searchable: true
+        sortable: true
         invisible: false
-        sortable: true
+
     learning_plan_name:
-        label: 'genuineq.tms::lang.learning-plans-course.label.learning-plan'
+        label: 'genuineq.tms::lang.learning-plans-course.label.learning_plan_name'
         type: text
         searchable: true
         sortable: true
+
     course_name:
-        label: 'genuineq.tms::lang.learning-plans-course.label.course'
+        label: 'genuineq.tms::lang.learning-plans-course.label.course_name'
         type: text
         searchable: true
         sortable: true
-    school_name:
-        label: 'genuineq.tms::lang.learning-plans-course.label.school'
-        type: text
-        searchable: true
-        sortable: true
+
     school_covered_costs:
-        label: 'genuineq.tms::lang.learning-plans-course.label.covered-costs'
+        label: 'genuineq.tms::lang.learning-plans-course.label.school_covered_costs'
         type: number
-        searchable: true
+        sortable: true
+
+    teacher_covered_costs:
+        label: 'genuineq.tms::lang.learning-plans-course.label.teacher_covered_costs'
+        type: number
+        sortable: true
+
+    mandatory:
+        label: 'genuineq.tms::lang.learning-plans-course.label.mandatory'
+        type: number
         sortable: true

@@ -2,10 +2,17 @@ fields:
     school:
         label: 'genuineq.tms::lang.appraisal.label.school'
         nameFrom: name
-        descriptionFrom: description
-        span: auto
+        span: left
         required: 1
         type: relation
+
+    teacher:
+        label: 'genuineq.tms::lang.appraisal.label.teacher'
+        nameFrom: name
+        span: right
+        required: 1
+        type: relation
+
     semester:
         label: 'genuineq.tms::lang.appraisal.label.semester'
         nameFrom: 'concat(year, ''-'', semester)'
@@ -14,6 +21,7 @@ fields:
         span: auto
         required: 1
         type: relation
+
     status:
         label: 'genuineq.tms::lang.appraisal.label.status'
         options:
@@ -25,19 +33,69 @@ fields:
         span: auto
         required: 1
         type: dropdown
-    teacher_id:
-        label: 'genuineq.tms::lang.appraisal.label.teacher'
-        span: right
-        required: 1
-        type: number
+
     objectives:
         label: 'genuineq.tms::lang.appraisal.label.objectives'
         size: huge
         span: full
         type: textarea
-    skills:
-        label: 'genuineq.tms::lang.appraisal.label.skills'
+
+    firstSkill:
+        label: 'genuineq.tms::lang.appraisal.label.first_skill'
         nameFrom: name
-        descriptionFrom: description
-        span: full
+        span: left
+        required: 1
         type: relation
+
+    grade_1:
+        label: 'genuineq.tms::lang.appraisal.label.first_skill_grade'
+        span: right
+        type: number
+
+    secondSkill:
+        label: 'genuineq.tms::lang.appraisal.label.second_skill'
+        nameFrom: name
+        span: left
+        required: 1
+        type: relation
+
+    grade_2:
+        label: 'genuineq.tms::lang.appraisal.label.second_skill_grade'
+        span: right
+        type: number
+
+    thirdSkill:
+        label: 'genuineq.tms::lang.appraisal.label.third_skill'
+        nameFrom: name
+        span: left
+        required: 1
+        type: relation
+
+    grade_3:
+        label: 'genuineq.tms::lang.appraisal.label.third_skill_grade'
+        span: right
+        type: number
+
+    notes_objectives_set:
+        label: 'genuineq.tms::lang.appraisal.label.notes_objectives_set'
+        size: huge
+        span: full
+        type: textarea
+
+    notes_objectives_approved:
+        label: 'genuineq.tms::lang.appraisal.label.notes_objectives_approved'
+        size: huge
+        span: full
+        type: textarea
+
+    notes_skills_set:
+        label: 'genuineq.tms::lang.appraisal.label.notes_skills_set'
+        size: huge
+        span: full
+        type: textarea
+
+    notes_evaluation_opened:
+        label: 'genuineq.tms::lang.appraisal.label.notes_evaluation_opened'
+        size: huge
+        span: full
+        type: textarea

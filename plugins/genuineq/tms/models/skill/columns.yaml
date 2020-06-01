@@ -4,11 +4,13 @@ columns:
         type: text
         searchable: true
         sortable: true
+
     slug:
         label: 'genuineq.tms::lang.category.label.slug'
         type: text
         searchable: true
         sortable: true
+
     description:
         label: 'genuineq.tms::lang.category.label.description'
         type: text

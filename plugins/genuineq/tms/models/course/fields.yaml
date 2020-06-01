@@ -3,6 +3,8 @@ fields:
         label: 'genuineq.tms::lang.course.label.name'
         span: left
         type: text
+        required: 1
+
     slug:
         label: 'genuineq.tms::lang.course.label.slug'
         span: right
@@ -10,22 +12,40 @@ fields:
             field: name
             type: ''
         type: text
+
     start_date:
         label: 'genuineq.tms::lang.course.label.date-start'
         mode: datetime
         span: left
         type: datepicker
+        required: 1
+
     end_date:
         label: 'genuineq.tms::lang.course.label.date-end'
         mode: datetime
         span: right
         type: datepicker
+        required: 1
+
+    duration:
+        label: 'genuineq.tms::lang.course.label.duration'
+        span: left
+        type: number
+        required: 1
+
+    price:
+        label: 'genuineq.tms::lang.course.label.price'
+        span: right
+        type: number
+        required: 1
+
     accredited:
         label: 'genuineq.tms::lang.course.label.accredited'
         span: left
         cssClass: my-auto
         type: checkbox
         comment: 'genuineq.tms::lang.course.comment.accredited'
+
     credits:
         label: 'genuineq.tms::lang.course.label.credits'
         span: auto
@@ -36,43 +56,42 @@ fields:
             field: accredited
             condition: checked
         type: number
+
+    status:
+        label: 'genuineq.tms::lang.course.label.status_form'
+        span: right
+        type: dropdown
+        options:
+            0: Archived
+            1: Active
+
     address:
         label: 'genuineq.tms::lang.course.label.address'
         size: small
         span: full
         type: richeditor
-    duration:
-        label: 'genuineq.tms::lang.course.label.duration'
-        span: left
-        type: number
-    price:
-        label: 'genuineq.tms::lang.course.label.price'
-        span: right
-        type: number
+
     description:
         label: 'genuineq.tms::lang.course.label.description'
         size: large
         span: full
         type: richeditor
+        required: 1
+
     categories:
         label: 'genuineq.tms::lang.course.label.categories'
         nameFrom: name
         span: left
         type: categorytagrelation
+
     supplier:
         label: 'genuineq.tms::lang.course.label.supplier'
         nameFrom: name
         span: right
         type: relation
+
     skills:
         label: 'genuineq.tms::lang.course.label.skills'
         nameFrom: name
         span: left
         type: relation
-    status:
-        label: 'genuineq.tms::lang.course.label.status'
-        span: right
-        type: dropdown
-        options:
-            0: 0
-            1: 1

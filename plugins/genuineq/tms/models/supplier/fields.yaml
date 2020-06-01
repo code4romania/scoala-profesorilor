@@ -3,6 +3,8 @@ fields:
         label: 'genuineq.tms::lang.supplier.label.name'
         span: left
         type: text
+        required: 1
+
     slug:
         label: 'genuineq.tms::lang.supplier.label.slug'
         span: right
@@ -10,14 +12,27 @@ fields:
             field: name
             type: ''
         type: text
+
     email:
         label: 'genuineq.tms::lang.supplier.label.email'
         span: left
         type: text
+        required: 1
+
     phone:
         label: 'genuineq.tms::lang.supplier.label.phone'
         span: right
         type: text
+        required: 1
+
+    status:
+        label: 'genuineq.tms::lang.supplier.label.status_form'
+        span: right
+        type: dropdown
+        options:
+            0: Archived
+            1: Active
+
     description:
         label: 'genuineq.tms::lang.supplier.label.description'
         size: large

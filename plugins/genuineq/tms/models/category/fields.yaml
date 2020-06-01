@@ -3,6 +3,7 @@ fields:
         label: 'genuineq.tms::lang.category.label.name'
         span: left
         type: text
+        required: 1
     slug:
         label: 'genuineq.tms::lang.category.label.slug'
         span: right
@@ -14,6 +15,7 @@ fields:
         label: 'genuineq.tms::lang.category.label.color'
         span: left
         type: colorpicker
+        required: 1
     icon:
         label: 'genuineq.tms::lang.category.label.icon'
         mode: image

@@ -5,6 +5,8 @@ fields:
         descriptionFrom: description
         span: left
         type: relation
+        required: 1
+
     semester:
         label: 'genuineq.tms::lang.learning-plan.label.semester'
         nameFrom: 'concat(year, ''-'', semester)'
@@ -12,6 +14,8 @@ fields:
         select: 'concat(year, ''-'', semester)'
         span: right
         type: relation
+        required: 1
+
     courses:
         label: 'genuineq.tms::lang.learning-plan.label.courses'
         select: '(SELECT name from genuineq_tms_courses where id = course_id)'

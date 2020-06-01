@@ -4,6 +4,7 @@ columns:
         type: number
         searchable: true
         sortable: true
+
     semester:
         label: 'genuineq.tms::lang.semesters.label.semester'
         type: number

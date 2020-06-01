@@ -3,13 +3,17 @@ fields:
         label: 'genuineq.tms::lang.skill.label.name'
         span: left
         type: text
+        required: 1
+
     slug:
         label: 'genuineq.tms::lang.skill.label.slug'
         span: right
+        required: 1
         preset:
             field: name
             type: ''
         type: text
+
     description:
         label: 'genuineq.tms::lang.skill.label.description'
         size: large

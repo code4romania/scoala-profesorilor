@@ -4,11 +4,6 @@ columns:
         type: text
         searchable: true
         sortable: true
-    slug:
-        label: 'genuineq.tms::lang.category.label.slug'
-        type: text
-        searchable: true
-        sortable: true
     color:
         label: 'genuineq.tms::lang.category.label.color'
         type: text

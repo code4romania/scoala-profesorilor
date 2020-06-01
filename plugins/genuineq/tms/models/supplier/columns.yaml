@@ -4,23 +4,26 @@ columns:
         type: text
         searchable: true
         sortable: true
-    slug:
-        label: 'genuineq.tms::lang.supplier.label.slug'
-        type: text
-        searchable: true
-        sortable: true
+
     email:
         label: 'genuineq.tms::lang.supplier.label.email'
         type: text
         searchable: true
         sortable: true
+
     phone:
         label: 'genuineq.tms::lang.supplier.label.phone'
         type: text
         searchable: true
         sortable: true
+
     description:
         label: 'genuineq.tms::lang.supplier.label.description'
         type: text
         searchable: true
         sortable: false
+
+    status:
+        label: 'genuineq.tms::lang.supplier.label.status_list'
+        type: number
+        sortable: true

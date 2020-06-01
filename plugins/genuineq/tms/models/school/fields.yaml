@@ -1,58 +1,100 @@
 fields:
     name:
         label: 'genuineq.tms::lang.school.label.name'
-        span: auto
+        span: left
         required: 1
         type: text
+
     slug:
         label: 'genuineq.tms::lang.school.label.slug'
-        span: auto
+        span: right
         defaultFrom: name
         type: text
+
     phone:
         label: 'genuineq.tms::lang.school.label.phone'
-        span: auto
+        span: left
         required: 1
         type: number
-    email:
-        label: 'genuineq.tms::lang.school.label.email'
-        span: auto
-        required: 1
-        type: text
+
     principal:
         label: 'genuineq.tms::lang.school.label.principal'
-        span: auto
+        span: right
         required: 1
         type: text
-    avatar:
-        label: 'genuineq.tms::lang.school.label.avatar'
-        mode: image
-        imageWidth: '200'
-        span: auto
-        required: 0
-        type: mediafinder
+
+    user:
+        label: 'genuineq.tms::lang.school.label.user'
+        nameFrom: email
+        span: left
+        required: 1
+        type: relation
+
+    user:
+        label: 'genuineq.tms::lang.school.label.user'
+        nameFrom: 'concat(name, '', '', identifier)'
+        descriptionFrom: 'concat(name, '', '', identifier)'
+        select: 'concat(name, '', '', identifier)'
+        span: left
+        required: 1
+        type: relation
+
+    address:
+        label: 'genuineq.tms::lang.school.label.address'
+        nameFrom: 'concat(name, '', '', county)'
+        descriptionFrom: 'concat(name, '', '', county)'
+        select: 'concat(name, '', '', county)'
+        span: right
+        required: 1
+        type: relation
+
+    inspectorate:
+        label: 'genuineq.tms::lang.school.label.inspectorate'
+        nameFrom: name
+        span: left
+        required: 1
+        type: relation
+
+    status:
+        label: 'genuineq.tms::lang.school.label.status'
+        span: right
+        type: dropdown
+        options:
+            0: Archived
+            1: Active
+
+    contact_name:
+        label: 'genuineq.tms::lang.school.label.contact_name'
+        span: left
+        required: 1
+        type: text
+
+    contact_role:
+        label: 'genuineq.tms::lang.school.label.contact_role'
+        span: right
+        required: 1
+        type: text
+
+    contact_phone:
+        label: 'genuineq.tms::lang.school.label.contact_phone'
+        span: left
+        required: 1
+        type: text
+
+    contact_email:
+        label: 'genuineq.tms::lang.school.label.contact_email'
+        span: right
+        required: 1
+        type: text
+
     description:
         label: 'genuineq.tms::lang.school.label.description'
         size: large
         span: full
         type: richeditor
-    contact_name:
-        label: 'genuineq.tms::lang.school.label.contact_name'
-        span: auto
-        required: 1
-        type: text
-    contact_role:
-        label: 'genuineq.tms::lang.school.label.contact_role'
-        span: auto
-        required: 1
-        type: text
-    contact_phone:
-        label: 'genuineq.tms::lang.school.label.contact_phone'
-        span: auto
-        required: 1
-        type: text
-    contact_email:
-        label: 'genuineq.tms::lang.school.label.contact_email'
-        span: auto
-        required: 1
-        type: text
+
+    teachers:
+        label: 'genuineq.tms::lang.school.label.teachers'
+        nameFrom: name
+        span: left
+        type: relation

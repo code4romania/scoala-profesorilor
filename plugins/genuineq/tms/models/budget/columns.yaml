@@ -4,8 +4,26 @@ columns:
         type: text
         searchable: true
         sortable: true
-    semester:
+
+    budgetable_name:
+        label: 'genuineq.tms::lang.budgets.label.budgetable_name'
+        type: text
+        searchable: true
+        sortable: true
+
+    budgetable_type:
+        label: 'genuineq.tms::lang.budgets.label.budgetable_type'
+        type: text
+        searchable: true
+        sortable: true
+
+    semester_name:
         label: 'genuineq.tms::lang.budgets.label.semester'
         type: text
         searchable: true
+        sortable: true
+
+    status:
+        label: 'genuineq.tms::lang.budgets.label.status_list'
+        type: number
         sortable: true

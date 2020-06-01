@@ -4,18 +4,26 @@ columns:
         type: number
         searchable: true
         sortable: true
+
     teacher_name:
         label: 'genuineq.tms::lang.learning-plan.label.teacher'
         type: text
         searchable: true
         sortable: true
+
     year:
         label: 'genuineq.tms::lang.learning-plan.label.year'
         type: number
         searchable: true
         sortable: true
+
     real_semester:
         label: 'genuineq.tms::lang.learning-plan.label.semester'
         type: number
         searchable: true
+        sortable: true
+
+    status:
+        label: 'genuineq.tms::lang.learning-plan.label.status_list'
+        type: number
         sortable: true

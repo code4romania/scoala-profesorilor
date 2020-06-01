@@ -3,10 +3,14 @@ fields:
         label: 'genuineq.tms::lang.seniority-level.label.name'
         span: auto
         type: text
+        required: 1
+
     diacritic:
         label: 'genuineq.tms::lang.seniority-level.label.diacritic'
         span: auto
         type: text
+        required: 1
+
     description:
         label: 'genuineq.tms::lang.seniority-level.label.description'
         size: large
