@@ -1,4 +1,4 @@
-title = "TMS - Curs"
+title = "Curs"
 url = "/tms-curs/:slug"
 layout = "tms-non-static"
 is_hidden = 0
@@ -11,6 +11,7 @@ displayColumn = "name"
 notFoundMessage = "Record not found"
 
 [learningPlanComponent]
+forceSecure = 0
 
 [session]
 security = "all"
@@ -18,7 +19,7 @@ allowedUserGroups[] = "teacher"
 allowedUserGroups[] = "school"
 ==
 <?php
-    use Genuineq\Tms\Models\Course;
+use Genuineq\Tms\Models\Course;
     use October\Rain\Support\Collection;
 
     function onStart()

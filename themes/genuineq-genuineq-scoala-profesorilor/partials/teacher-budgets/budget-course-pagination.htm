@@ -5,8 +5,12 @@ description = "Displays the budget course search pagination."
 {% if 1 < budgetCoursesPages %}
     <ul class="pagination pg-darkgrey justify-content-center">
         {% if 1 < budgetCoursesPage %}
+            <li class="page-item" data-page="{{ 1 }}">
+                <a class="page-link budget-course-search-pagination" data-page="{{ 1 }}">&Lang;</a>
+            </li>
+
             <li class="page-item" data-page="{{ budgetCoursesPage - 1 }}">
-                <a class="page-link budget-course-search-pagination" data-page="{{ budgetCoursesPage - 1 }}">&laquo;</a>
+                <a class="page-link budget-course-search-pagination" data-page="{{ budgetCoursesPage - 1 }}">&lang;</a>
             </li>
         {% endif %}
 
@@ -26,7 +30,11 @@ description = "Displays the budget course search pagination."
 
         {% if budgetCoursesPage < budgetCoursesPages %}
             <li class="page-item" data-page="{{ budgetCoursesPage + 1 }}">
-                <a class="page-link budget-course-search-pagination" data-page="{{ budgetCoursesPage + 1 }}">&raquo;</a>
+                <a class="page-link budget-course-search-pagination" data-page="{{ budgetCoursesPage + 1 }}">&rang;</a>
+            </li>
+
+            <li class="page-item" data-page="{{ budgetCoursesPages }}">
+                <a class="page-link budget-course-search-pagination" data-page="{{ budgetCoursesPages }}">&Rang;</a>
             </li>
         {% endif %}
     </ul>

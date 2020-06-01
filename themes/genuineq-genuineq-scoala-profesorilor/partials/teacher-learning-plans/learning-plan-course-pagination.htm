@@ -5,28 +5,36 @@ description = "Displays the learning plan course search pagination."
 {% if 1 < learningPlanCoursesPages %}
     <ul class="pagination pg-darkgrey justify-content-center">
         {% if 1 < learningPlanCoursesPage %}
-            <li class="page-item" data-page="{{ learningPlanCoursesPage - 1 }}">
-                <a class="page-link learning-plan-course-search-pagination" data-page="{{ learningPlanCoursesPage - 1 }}">&laquo;</a>
+            <li class="page-item" data-page="{{ 1 }}" data-id="{{ learningPlan.id }}">
+                <a class="page-link learning-plan-course-search-pagination" data-page="{{ 1 }}" data-id="{{ learningPlan.id }}">&Lang;</a>
+            </li>
+
+            <li class="page-item" data-page="{{ learningPlanCoursesPage - 1 }}" data-id="{{ learningPlan.id }}">
+                <a class="page-link learning-plan-course-search-pagination" data-page="{{ learningPlanCoursesPage - 1 }}" data-id="{{ learningPlan.id }}">&lang;</a>
             </li>
         {% endif %}
 
         {% set cells = 5 %}
         {% for i in learningPlanCoursesPage..learningPlanCoursesPages if cells %}
             {% if i == learningPlanCoursesPage %}
-                <li class="page-item active" data-page="{{ i }}">
-                    <a class="page-link learning-plan-course-search-pagination" data-page="{{ i }}">{{ i }}</a>
+                <li class="page-item active" data-page="{{ i }}" data-id="{{ learningPlan.id }}">
+                    <a class="page-link learning-plan-course-search-pagination" data-page="{{ i }}" data-id="{{ learningPlan.id }}">{{ i }}</a>
                 </li>
             {% else %}
-                <li class="page-item" data-page="{{ i }}">
-                    <a class="page-link learning-plan-course-search-pagination" data-page="{{ i }}">{{ i }}</a>
+                <li class="page-item" data-page="{{ i }}" data-id="{{ learningPlan.id }}">
+                    <a class="page-link learning-plan-course-search-pagination" data-page="{{ i }}" data-id="{{ learningPlan.id }}">{{ i }}</a>
                 </li>
             {% endif %}
             {% set cells = (cells - 1) %}
         {% endfor %}
 
         {% if learningPlanCoursesPage < learningPlanCoursesPages %}
-            <li class="page-item" data-page="{{ learningPlanCoursesPage + 1 }}">
-                <a class="page-link learning-plan-course-search-pagination" data-page="{{ learningPlanCoursesPage + 1 }}">&raquo;</a>
+            <li class="page-item" data-page="{{ learningPlanCoursesPage + 1 }}" data-id="{{ learningPlan.id }}">
+                <a class="page-link learning-plan-course-search-pagination" data-page="{{ learningPlanCoursesPage + 1 }}" data-id="{{ learningPlan.id }}">&rang;</a>
+            </li>
+
+            <li class="page-item" data-page="{{ learningPlanCoursesPages }}" data-id="{{ learningPlan.id }}">
+                <a class="page-link learning-plan-course-search-pagination" data-page="{{ learningPlanCoursesPages }}" data-id="{{ learningPlan.id }}">&Rang;</a>
             </li>
         {% endif %}
     </ul>

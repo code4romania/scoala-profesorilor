@@ -26,7 +26,7 @@ description = "Displays a grid of courses"
             {% if courses.currentPage > 1 %}
                 <li class="page-item">
                     <a class="page-link" href="{{ this.page.baseFileName|page({ (pageParam): (courses.currentPage-1) }) }}">
-                        <span aria-hidden="true">&laquo;</span>
+                        <span aria-hidden="true">&lang;</span>
                     </a>
                 </li>
             {% endif %}
@@ -40,7 +40,7 @@ description = "Displays a grid of courses"
             {% if courses.lastPage > courses.currentPage %}
                 <li class="page-item">
                     <a class="page-link" href="{{ this.page.baseFileName|page({ (pageParam): (courses.currentPage+1) }) }}">
-                        <span aria-hidden="true">&raquo;</span>
+                        <span aria-hidden="true">&rang;</span>
                     </a>
                 </li>
             {% endif %}
@@ -53,7 +53,7 @@ description = "Displays a grid of courses"
             {% if courses.currentPage() > 1 %}
                 <li class="page-item">
                     <a class="page-link" href="{{ courses.previousPageUrl() }}">
-                        <span aria-hidden="true">&laquo;</span>
+                        <span aria-hidden="true">&lang;</span>
                     </a>
                 </li>
             {% endif %}
@@ -67,7 +67,7 @@ description = "Displays a grid of courses"
             {% if courses.lastPage() > courses.currentPage() %}
                 <li class="page-item">
                     <a class="page-link" href="{{ courses.nextPageUrl() }}">
-                        <span aria-hidden="true">&raquo;</span>
+                        <span aria-hidden="true">&rang;</span>
                     </a>
                 </li>
             {% endif %}
