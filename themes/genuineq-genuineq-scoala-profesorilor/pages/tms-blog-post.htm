@@ -48,6 +48,8 @@ order_facebook = 2
 order_google+ = 3
 order_stumbleupon = 4
 order_linkedin = 5
+
+[mailSignup]
 ==
 <div class="containter-fluid h-25" style="background-image: url({{ 'background-teacher.jpg'|media }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
     <div class="row h-100 m-0 align-items-center">
@@ -102,6 +104,8 @@ order_linkedin = 5
                 <hr class="my-5">
 
                 {% component 'ssbuttons' %}
+
+                <hr class="my-5">
             </div>
 
             <!--Sidebar-->
@@ -135,6 +139,31 @@ order_linkedin = 5
                 <div class="mb-5"></div>
 
                 {% component 'ssbuttonsnb' %}
+
+                <div class="mb-5"></div>
+
+                <div class="row">
+                    <div class="col-12">
+
+                        <form id="subscribe-form" data-request="mailSignup::onSignup" data-request-update="'mailSignup::result': '#subscribe-form'" >
+                            <div class="form-group">
+                                <div class="md-form">
+                                    <input type="text" name="email" class="form-control">
+                                    <label for="email">{{ 'blog.newsletter_subscription'|_ }}</label>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-12">
+                                    <div class="md-form m-0">
+                                        <button type="submit" class="btn btn-secondary btn-sm btn-block rounded m-0">{{ 'blog.newsletter_subscribe'|_ }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
 
                 <div class="mb-5"></div>
 
