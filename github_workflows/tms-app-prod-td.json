@@ -147,7 +147,7 @@
             ], 
             "memoryReservation": 512,
             "volumesFrom": [],
-            "image": "961595780523.dkr.ecr.eu-central-1.amazonaws.com/production:$TAG",
+            "image": "961595780523.dkr.ecr.eu-central-1.amazonaws.com/production:#TAG",
             "essential": true,
             "links": [],
             "name": "app"
@@ -187,6 +187,5 @@
             "name": "efs_pv"
         }
     ],
-    "placementConstraints": [],
-    "tags": []
+    "placementConstraints": []
 }
