@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => 'noreply@scoalaprofesorilor.ro',
+        'address' => env('MAIL_FROM', 'noreply@scoalaprofesorilor.ro'),
         'name' => env('MAIL_NAME', '')],
 
     /*
