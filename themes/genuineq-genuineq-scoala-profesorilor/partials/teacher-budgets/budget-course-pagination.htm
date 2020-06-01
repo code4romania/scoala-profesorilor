@@ -2,19 +2,35 @@ description = "Displays the budget course search pagination."
 
 [viewBag]
 ==
-<ul class="pagination pg-darkgrey justify-content-center">
-    {% for i in 1..budgetCoursesPages %}
-        {% if i == budgetCoursesPage %}
-            <li class="page-item active" data-page="{{ i }}">
-                <a class="page-link budget-course-search-pagination" data-page="{{ i }}">{{ i }}</a>
-            </li>
-        {% else %}
-            <li class="page-item" data-page="{{ i }}">
-                <a class="page-link budget-course-search-pagination" data-page="{{ i }}">{{ i }}</a>
+{% if 1 < budgetCoursesPages %}
+    <ul class="pagination pg-darkgrey justify-content-center">
+        {% if 1 < budgetCoursesPage %}
+            <li class="page-item" data-page="{{ budgetCoursesPage - 1 }}">
+                <a class="page-link budget-course-search-pagination" data-page="{{ budgetCoursesPage - 1 }}">&laquo;</a>
             </li>
         {% endif %}
-    {% endfor %}
-</ul>
+
+        {% set cells = 5 %}
+        {% for i in budgetCoursesPage..budgetCoursesPages if cells %}
+            {% if i == budgetCoursesPage %}
+                <li class="page-item active" data-page="{{ i }}">
+                    <a class="page-link budget-course-search-pagination" data-page="{{ i }}">{{ i }}</a>
+                </li>
+            {% else %}
+                <li class="page-item" data-page="{{ i }}">
+                    <a class="page-link budget-course-search-pagination" data-page="{{ i }}">{{ i }}</a>
+                </li>
+            {% endif %}
+            {% set cells = (cells - 1) %}
+        {% endfor %}
+
+        {% if budgetCoursesPage < budgetCoursesPages %}
+            <li class="page-item" data-page="{{ budgetCoursesPage + 1 }}">
+                <a class="page-link budget-course-search-pagination" data-page="{{ budgetCoursesPage + 1 }}">&raquo;</a>
+            </li>
+        {% endif %}
+    </ul>
+{% endif %}
 
 <script type="text/javascript">
     $('.budget-course-search-pagination').on('click', function () {
