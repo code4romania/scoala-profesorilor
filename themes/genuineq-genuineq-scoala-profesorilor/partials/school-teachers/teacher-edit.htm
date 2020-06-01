@@ -41,7 +41,7 @@ description = "Displays the teacher profile forms"
 
                     <div class="form-group">
                         <div class="md-form">
-                            <input name="address_id" type="text" id="school_teacher_address_id" class="form-control" value="{{ teacherProfileAddress }}">
+                            <input name="address_id" type="text" id="school_teacher_address_id" class="form-control" value="{{ schoolTeacherProfileAddress }}">
                             <label for="school_teacher_address_id">{{ 'teacher.profile.form.profile.address_id'|_ }}</label>
                             <div class="small text-danger" data-validate-for="address_id"></div>
                         </div>
@@ -49,25 +49,9 @@ description = "Displays the teacher profile forms"
 
                     <div class="form-group">
                         <div class="md-form">
-                            <input name="seniority_level_id" type="text" id="school_teacher_seniority_level_id" class="form-control" value="{{ teacherProfileSeniorityLevel }}">
+                            <input name="seniority_level_id" type="text" id="school_teacher_seniority_level_id" class="form-control" value="{{ schoolTeacherProfileSeniorityLevel }}">
                             <label for="school_teacher_seniority_level_id">{{ 'teacher.profile.form.profile.seniority_level_id'|_ }}</label>
                             <div class="small text-danger" data-validate-for="seniority_level_id"></div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="md-form">
-                            <input name="school_level_id" type="text" id="school_teacher_school_level_id" class="form-control" value="{{ teacherProfileSchoolLevel }}">
-                            <label for="school_teacher_school_level_id">{{ 'teacher.profile.form.profile.school_level_id'|_ }}</label>
-                            <div class="small text-danger" data-validate-for="school_level_id"></div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="md-form">
-                            <input name="contract_type_id" type="text" id="school_teacher_contract_type_id" class="form-control" value="{{ teacherProfileContractType }}">
-                            <label for="school_teacher_contract_type_id">{{ 'teacher.profile.form.profile.contract_type_id'|_ }}</label>
-                            <div class="small text-danger" data-validate-for="contract_type_id"></div>
                         </div>
                     </div>
 
@@ -200,6 +184,65 @@ description = "Displays the teacher profile forms"
             </div>
         </div>
 
+        <div class="row pt-5">
+            <div class="col-12 bg-white rounded p-3">
+
+                <h5 class="mb-3 font-weight-bold">{{ 'teacher.profile.form.profile.title'|_ }}</h5>
+
+                <form method="POST" data-request="onSchoolTeacherProfileLinkUpdate" data-request-data="teacherId: '{{ schoolTeacherProfile.id }}'" data-request-validate data-request-flash>
+
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="school_level_id" type="text" id="school_teacher_school_level_id" class="form-control" value="{{ schoolTeacherProfileSchoolLevel }}">
+                            <label for="school_teacher_school_level_id">{{ 'teacher.profile.form.profile.school_level_id'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="school_level_id"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="contract_type_id" type="text" id="school_teacher_contract_type_id" class="form-control" value="{{ schoolTeacherProfileContractType }}">
+                            <label for="school_teacher_contract_type_id">{{ 'teacher.profile.form.profile.contract_type_id'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="contract_type_id"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="grade_id" type="text" id="school_teacher_grade_id" class="form-control" value="{{ schoolTeacherProfileGrade }}">
+                            <label for="school_teacher_grade_id">{{ 'teacher.profile.form.profile.grade_id'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="grade_id"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="specialization_1_id" type="text" id="school_teacher_specialization_1_id" class="form-control" value="{{ schoolTeacherProfileSpecialization_1 }}">
+                            <label for="school_teacher_specialization_1_id">{{ 'teacher.profile.form.profile.specialization_1_id'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="specialization_1_id"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="specialization_2_id" type="text" id="school_teacher_specialization_2_id" class="form-control" value="{{ schoolTeacherProfileSpecialization_2 }}">
+                            <label for="school_teacher_specialization_2_id">{{ 'teacher.profile.form.profile.specialization_2_id'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="specialization_2_id"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
+                            <div class="md-form m-0">
+                                <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'teacher.profile.form.profile.save'|_ }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -234,6 +277,24 @@ description = "Displays the teacher profile forms"
 
     $('#school_teacher_contract_type_id').autocomplete({
         source: {{ schoolTeacherContractTypes|raw }},
+        highlightClass: 'text-danger',
+        treshold: 1
+    });
+
+    $('#school_teacher_grade_id').autocomplete({
+        source: {{ schoolTeacherGrades|raw }},
+        highlightClass: 'text-danger',
+        treshold: 1
+    });
+
+    $('#school_teacher_specialization_1_id').autocomplete({
+        source: {{ schoolTeacherSpecializations|raw }},
+        highlightClass: 'text-danger',
+        treshold: 1
+    });
+
+    $('#school_teacher_specialization_2_id').autocomplete({
+        source: {{ schoolTeacherSpecializations|raw }},
         highlightClass: 'text-danger',
         treshold: 1
     });

@@ -121,6 +121,36 @@ description = "Modal that displays a form to create a new teacher."
                             </div>
                         </div>
 
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <div class="md-form">
+                                    <input name="school_teacher_add_grade_id" type="text" id="school_teacher_add_grade_id" class="form-control">
+                                    <label for="school_teacher_add_grade_id">{{ 'teacher.profile.form.profile.grade_id'|_ }}</label>
+                                    <div class="small text-danger" data-validate-for="school_teacher_add_grade_id"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <div class="md-form">
+                                    <input name="school_teacher_add_specialization_1_id" type="text" id="school_teacher_add_specialization_1_id" class="form-control">
+                                    <label for="school_teacher_add_specialization_1_id">{{ 'teacher.profile.form.profile.specialization_1_id'|_ }}</label>
+                                    <div class="small text-danger" data-validate-for="school_teacher_add_specialization_1_id"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <div class="md-form">
+                                    <input name="school_teacher_add_specialization_2_id" type="text" id="school_teacher_add_specialization_2_id" class="form-control">
+                                    <label for="school_teacher_add_specialization_2_id">{{ 'teacher.profile.form.profile.specialization_2_id'|_ }}</label>
+                                    <div class="small text-danger" data-validate-for="school_teacher_add_specialization_2_id"></div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="col-12">
                             <div class="form-row">
                                 <div class="md-form m-0">
@@ -169,6 +199,24 @@ description = "Modal that displays a form to create a new teacher."
 
     $('#school_teacher_add_contract_type_id').autocomplete({
         source: {{ schoolTeacherContractTypes|raw }},
+        highlightClass: 'text-danger',
+        treshold: 1
+    });
+
+    $('#school_teacher_add_grade_id').autocomplete({
+        source: {{ schoolTeacherGrades|raw }},
+        highlightClass: 'text-danger',
+        treshold: 1
+    });
+
+    $('#school_teacher_add_specialization_1_id').autocomplete({
+        source: {{ schoolTeacherSpecializations|raw }},
+        highlightClass: 'text-danger',
+        treshold: 1
+    });
+
+    $('#school_teacher_add_specialization_2_id').autocomplete({
+        source: {{ schoolTeacherSpecializations|raw }},
         highlightClass: 'text-danger',
         treshold: 1
     });

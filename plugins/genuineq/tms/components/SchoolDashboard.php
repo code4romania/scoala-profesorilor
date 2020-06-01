@@ -6,8 +6,10 @@ use Lang;
 use Flash;
 use DateTime;
 use Redirect;
+use Genuineq\Tms\Models\Skill;
 use Genuineq\Tms\Models\Budget;
 use Genuineq\Tms\Models\Semester;
+use Genuineq\Tms\Models\SeniorityLevel;
 use Genuineq\User\Helpers\AuthRedirect;
 use Cms\Classes\ComponentBase;
 
@@ -80,6 +82,8 @@ class SchoolDashboard extends ComponentBase
         $this->prepareSpentMoneyData($activeSemesterId);
         $this->prepareBudgetTotalData($activeSemesterId);
         $this->prepareDistributedCostsData($activeSemesterId);
+        $this->prepareTeacherSenioritiesData();
+        $this->prepareSkillMatrixData();
     }
 
     /**
@@ -114,6 +118,8 @@ class SchoolDashboard extends ComponentBase
         $this->prepareSpentMoneyData($activeSemesterId);
         $this->prepareBudgetTotalData($activeSemesterId);
         $this->prepareDistributedCostsData($activeSemesterId);
+        $this->prepareTeacherSenioritiesData();
+        $this->prepareSkillMatrixData();
     }
 
     /**
@@ -262,6 +268,41 @@ class SchoolDashboard extends ComponentBase
     }
 
     /**
+     * Extract the teacher seniorities a specified semester.
+     */
+    protected function prepareTeacherSenioritiesData()
+    {
+        /** Extract the school. */
+        $school = Auth::getUser()->profile;
+        /** Create the seniorities array. */
+        $seniorities = [
+            1 => 0,
+            2 => 0,
+            3 => 0,
+            4 => 0,
+            5 => 0,
+        ];
+
+        $senioritiesLabels = [
+            1 => SeniorityLevel::find(1)->name,
+            2 => SeniorityLevel::find(2)->name,
+            3 => SeniorityLevel::find(3)->name,
+            4 => SeniorityLevel::find(4)->name,
+            5 => SeniorityLevel::find(5)->name,
+        ];
+
+        /** Parse all teachers and count seniorities. */
+        foreach ($school->teachers as $key => $teacher) {
+            if ($teacher->seniority_level_id) {
+                $seniorities[$teacher->seniority_level_id]++;
+            }
+        }
+
+        $this->page['seniorities'] = $seniorities;
+        $this->page['senioritiesLabels'] = $senioritiesLabels;
+    }
+
+    /**
      * Extract the bufet totals for a specified semester.
      */
     protected function prepareDistributedCostsData($semesterId)
@@ -355,5 +396,112 @@ class SchoolDashboard extends ComponentBase
         $this->page['distributedCosts'] = [0 => $this->page['distributedCosts'][0], 1 => array_values($distributedCosts)];
         $this->page['distributedCostsColor'] = [0 => 'rgba(75, 192, 192, 0.2)', 1 => 'rgba(153, 102, 255, 0.2)'];
         $this->page['distributedCostsBorderColor'] = [0 => 'rgba(75, 192, 192, 1)', 1 => 'rgba(153, 102, 255, 1)'];
+    }
+
+    /**
+     * Extract the data fot the skill matrix.
+     */
+    protected function prepareSkillMatrixData()
+    {
+        /** Extract the school. */
+        $school = Auth::getUser()->profile;
+
+        /** Will contain all the skills of the school from all the semesters. */
+        $allSkills = [];
+        /** Will contain all the skills from all the semesters grouped by semester. */
+        $semesterSkills = [];
+        /** Will contain all the skills from all the semesters grouped by skill. */
+        $skillSemesters = [];
+
+        /** Parse all semesters */
+        foreach (Semester::all() as $key => $semester) {
+            /** Populate the semesters with empty arrays */
+            $semesterSkills[$semester->id] = [];
+
+            /** Extract school appraisals. */
+            $appraisals = $school->appraisals->where('semester_id', $semester->id);
+            foreach ($appraisals as $key => $appraisal) {
+                if ($appraisal->firstSkill) {
+                    /** Check if the skill is new */
+                    if (!in_array($appraisal->firstSkill->id, $allSkills)) {
+                        $allSkills[] = $appraisal->firstSkill->id;
+                    }
+                    /** Check if the skill has beed added to the semester */
+                    if (array_key_exists($appraisal->firstSkill->id, $semesterSkills[$semester->id])) {
+                        $semesterSkills[$semester->id][$appraisal->firstSkill->id]['sum'] += $appraisal->grade_1;
+                        $semesterSkills[$semester->id][$appraisal->firstSkill->id]['count']++;
+                    } else {
+                        $semesterSkills[$semester->id][$appraisal->firstSkill->id]['sum'] = $appraisal->grade_1;
+                        $semesterSkills[$semester->id][$appraisal->firstSkill->id]['count'] = 1;
+                    }
+                }
+
+                if ($appraisal->secondSkill) {
+                    /** Check if the skill is new */
+                    if (!in_array($appraisal->secondSkill->id, $allSkills)) {
+                        $allSkills[] = $appraisal->secondSkill->id;
+                    }
+                    /** Check if the skill has beed added to the semester */
+                    if (array_key_exists($appraisal->secondSkill->id, $semesterSkills[$semester->id])) {
+                        $semesterSkills[$semester->id][$appraisal->secondSkill->id]['sum'] += $appraisal->grade_2;
+                        $semesterSkills[$semester->id][$appraisal->secondSkill->id]['count']++;
+                    } else {
+                        $semesterSkills[$semester->id][$appraisal->secondSkill->id]['sum'] = $appraisal->grade_2;
+                        $semesterSkills[$semester->id][$appraisal->secondSkill->id]['count'] = 1;
+                    }
+                }
+
+                if ($appraisal->thirdSkill) {
+                    /** Check if the skill is new */
+                    if (!in_array($appraisal->thirdSkill->id, $allSkills)) {
+                        $allSkills[] = $appraisal->thirdSkill->id;
+                    }
+                    /** Check if the skill has beed added to the semester */
+                    if (array_key_exists($appraisal->thirdSkill->id, $semesterSkills[$semester->id])) {
+                        $semesterSkills[$semester->id][$appraisal->thirdSkill->id]['sum'] += $appraisal->grade_3;
+                        $semesterSkills[$semester->id][$appraisal->thirdSkill->id]['count']++;
+                    } else {
+                        $semesterSkills[$semester->id][$appraisal->thirdSkill->id]['sum'] = $appraisal->grade_3;
+                        $semesterSkills[$semester->id][$appraisal->thirdSkill->id]['count'] = 1;
+                    }
+                }
+            }
+        }
+
+        /** Calculate semester average for each identified skill. */
+        foreach ($allSkills as $key => $skill) {
+            foreach (Semester::all() as $key => $semester) {
+                if (array_key_exists($skill, $semesterSkills[$semester->id])) {
+                    $skillSemesters[$skill]['values'][$semester->id] = $semesterSkills[$semester->id][$skill]['sum'] / $semesterSkills[$semester->id][$skill]['count'];
+                } else {
+                    $skillSemesters[$skill]['values'][$semester->id] = 0;
+                }
+            }
+            $skillSemesters[$skill]['label'] = Skill::find($skill)->name;
+            if (5 > $skill) {
+                $skillSemesters[$skill]['backgroundColor'] = 'rgba(' . $skill . ', ' . (215 + $skill) . ', ' . (75 + $skill) . ', 0.2)';
+                $skillSemesters[$skill]['borderColor'] = 'rgba(' . $skill . ', ' . (215 + $skill) . ', ' . (75 + $skill) . ', 1)';
+            } elseif (10 > $skill) {
+                $skillSemesters[$skill]['backgroundColor'] = 'rgba(' . $skill . ', ' . (175 + $skill) . ', ' . (25 + $skill) . ', 0.2)';
+                $skillSemesters[$skill]['borderColor'] = 'rgba(' . $skill . ', ' . (175 + $skill) . ', ' . (25 + $skill) . ', 1)';
+            } elseif (20 > $skill) {
+                $skillSemesters[$skill]['backgroundColor'] = 'rgba(' . $skill . ', ' . (115 + $skill) . ', ' . (55 + $skill) . ', 0.2)';
+                $skillSemesters[$skill]['borderColor'] = 'rgba(' . $skill . ', ' . (115 + $skill) . ', ' . (55 + $skill) . ', 1)';
+            } elseif (50 > $skill) {
+                $skillSemesters[$skill]['backgroundColor'] = 'rgba(' . $skill . ', ' . (35 + $skill) . ', ' . (85 + $skill) . ', 0.2)';
+                $skillSemesters[$skill]['borderColor'] = 'rgba(' . $skill . ', ' . (35 + $skill) . ', ' . (85 + $skill) . ', 1)';
+            } else {
+                $skillSemesters[$skill]['backgroundColor'] = 'rgba(153, 102, 255, 0.2)';
+                $skillSemesters[$skill]['borderColor'] = 'rgba(153, 102, 255, 1)';
+            }
+        }
+
+        /** Extract the semester labels. */
+        foreach (Semester::all() as $key => $semester) {
+            $skillSemestersLabels[] = $semester->year . '-' . $semester->semester;
+        }
+
+        $this->page['skillSemesters'] = $skillSemesters;
+        $this->page['skillSemestersLabels'] = $skillSemestersLabels;
     }
 }

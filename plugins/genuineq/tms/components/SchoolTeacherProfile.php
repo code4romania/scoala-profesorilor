@@ -17,9 +17,11 @@ use Maatwebsite\Excel\Facades\Excel;
 use Genuineq\Tms\Models\School;
 use Genuineq\Tms\Models\Teacher;
 use Genuineq\Tms\Models\Address;
+use Genuineq\Tms\Models\Grade;
 use Genuineq\Tms\Models\SchoolLevel;
 use Genuineq\Tms\Models\ContractType;
 use Genuineq\Tms\Models\SeniorityLevel;
+use Genuineq\Tms\Models\Specialization;
 use Genuineq\User\Helpers\AuthRedirect;
 use Genuineq\Tms\Classes\TeachersImport;
 use Genuineq\Tms\Classes\SchoolTeacher;
@@ -125,6 +127,7 @@ class SchoolTeacherProfile extends ComponentBase
         }
 
         $data = [
+            /** Teacher data */
             'name' => post('school_teacher_add_name'),
             'email' => post('school_teacher_add_email'),
             'identifier' => post('school_teacher_add_sid'),
@@ -133,8 +136,12 @@ class SchoolTeacherProfile extends ComponentBase
             'description' => post('school_teacher_add_description'),
             'address' => post('school_teacher_add_address_id'),
             'seniority_level' => post('school_teacher_add_seniority_level_id'),
+            /** Link data */
             'school_level' => post('school_teacher_add_school_level_id'),
             'contract_type' => post('school_teacher_add_contract_type_id'),
+            'grade' => post('school_teacher_add_grade_id'),
+            'specialization_1' => post('school_teacher_add_specialization_1_id'),
+            'specialization_2' => post('school_teacher_add_specialization_2_id'),
         ];
 
         $result = SchoolTeacher::createSingleSchoolTeacher($data);
@@ -177,10 +184,11 @@ class SchoolTeacherProfile extends ComponentBase
             throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.not_exists'));
         }
 
-        $this->page['teacher'] = Teacher::find(post('teacherId'));
+        $this->page['teacher'] = $teacher;
         $this->page['appraisal'] = $school->getActiveAppraisal(post('teacherId'));
-        $this->page['proposedRequests'] = $school->getProposedLearningPlanRequests($this->page['teacher']->active_learning_plan->id);
-        $this->page['teacherDeclinedRequests'] = $this->page['teacher']->declined_requests;
+        $this->page['proposedRequests'] = $school->getProposedLearningPlanRequests($teacher->active_learning_plan->id);
+        $this->page['teacherDeclinedRequests'] = $teacher->declined_requests;
+        $this->page['contractType'] = ($teacher->pivot->contract_type_id) ? (ContractType::find($teacher->pivot->contract_type_id)->name) : (null);
     }
 
     /**
@@ -204,10 +212,15 @@ class SchoolTeacherProfile extends ComponentBase
 
         $this->page['schoolTeacherProfile'] = $teacher;
         $this->page['schoolTeacherUser'] = $teacher->user;
+        $this->page['schoolTeacherLink'] = $teacher->pivot;
         $this->page['schoolTeacherProfileAddress'] = ($teacher->address) ? ($teacher->address->name . ', ' . $teacher->address->county) : (null);
         $this->page['schoolTeacherProfileSeniorityLevel'] = ($teacher->seniority_level) ? ($teacher->seniority_level->name) : (null);
-        $this->page['schoolTeacherProfileSchoolLevel'] = ($teacher->school_level) ? ($teacher->school_level->name) : (null);
-        $this->page['schoolTeacherProfileContractType'] = ($teacher->contract_type) ? ($teacher->contract_type->name) : (null);
+
+        $this->page['schoolTeacherProfileSchoolLevel'] = ($teacher->pivot->school_level_id) ? (SchoolLevel::find($teacher->pivot->school_level_id)->name) : (null);
+        $this->page['schoolTeacherProfileContractType'] = ($teacher->pivot->contract_type_id) ? (ContractType::find($teacher->pivot->contract_type_id)->name) : (null);
+        $this->page['schoolTeacherProfileGrade'] = ($teacher->pivot->grade_id) ? (Grade::find($teacher->pivot->grade_id)->name) : (null);
+        $this->page['schoolTeacherProfileSpecialization_1'] = ($teacher->pivot->specialization_1_id) ? (Specialization::find($teacher->pivot->specialization_1_id)->name) : (null);
+        $this->page['schoolTeacherProfileSpecialization_2'] = ($teacher->pivot->specialization_2_id) ? (Specialization::find($teacher->pivot->specialization_2_id)->name) : (null);
     }
 
     /**
@@ -307,22 +320,6 @@ class SchoolTeacherProfile extends ComponentBase
             unset($data['seniority_level_id']);
         }
 
-        /** Extract the school level ID. */
-        if ($data['school_level_id']) {
-            $schoolLevel = SchoolLevel::whereName($data['school_level_id'])->first();
-            $data['school_level_id'] = ($schoolLevel) ? ($schoolLevel->id) : ('');
-        } else {
-            unset($data['school_level_id']);
-        }
-
-        /** Extract the contract type ID. */
-        if ($data['contract_type_id']) {
-            $contractType = ContractType::whereName($data['contract_type_id'])->first();
-            $data['contract_type_id'] = ($contractType) ? ($contractType->id) : ('');
-        } else {
-            unset($data['contract_type_id']);
-        }
-
         if ($data['birth_date']) {
             $data['birth_date'] = date('Y-m-d H:i:s', strtotime($data['birth_date']));
         } else {
@@ -336,8 +333,6 @@ class SchoolTeacherProfile extends ComponentBase
             'birth_date' => 'date|nullable',
             'address_id' => 'numeric|nullable',
             'seniority_level_id' => 'numeric|nullable',
-            'school_level_id' => 'numeric|nullable',
-            'contract_type_id' => 'numeric|nullable',
         ];
 
         /** Construct the validation error messages. */
@@ -349,8 +344,6 @@ class SchoolTeacherProfile extends ComponentBase
             'birth_date.date' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.birth_date_date'),
             'address_id.numeric' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.address_id_numeric'),
             'seniority_level_id.numeric' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.seniority_level_id_numeric'),
-            'school_level_id.numeric' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.school_level_id_numeric'),
-            'contract_type_id.numeric' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.contract_type_id_numeric'),
         ];
 
         /** Apply the validation rules. */
@@ -365,6 +358,55 @@ class SchoolTeacherProfile extends ComponentBase
         } else {
             throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.profile_update_failed'));
         }
+
+        Flash::success(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.profile_update_successful'));
+    }
+
+    /**
+     * Update the teacher profile.
+     */
+    public function onSchoolTeacherProfileLinkUpdate()
+    {
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        /** Extract the requested teacher */
+        $teacher = Auth::getUser()->profile->teachers->where('id', post('teacherId'))->first();
+
+        if (!$teacher) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.not_exists'));
+        }
+
+        /** Extract the school teacher link. */
+        $schoolTeacherLink = $teacher->pivot;
+
+        /** Extract the school level ID. */
+        if (post('school_level_id')) {
+            $schoolTeacherLink->school_level_id = SchoolLevel::whereName(post('school_level_id'))->first()->id;
+        }
+
+        /** Extract the contract type ID. */
+        if (post('contract_type_id')) {
+            $schoolTeacherLink->contract_type_id = ContractType::whereName(post('contract_type_id'))->first()->id;
+        }
+
+        /** Extract the contract type ID. */
+        if (post('grade_id')) {
+            $schoolTeacherLink->grade_id = Grade::whereName(post('grade_id'))->first()->id;
+        }
+
+        /** Extract the contract type ID. */
+        if (post('specialization_1_id')) {
+            $schoolTeacherLink->specialization_1_id = Specialization::whereName(post('specialization_1_id'))->first()->id;
+        }
+
+        /** Extract the contract type ID. */
+        if (post('specialization_2_id')) {
+            $schoolTeacherLink->specialization_2_id = Specialization::whereName(post('specialization_2_id'))->first()->id;
+        }
+
+        $schoolTeacherLink->save();
 
         Flash::success(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.profile_update_successful'));
     }
@@ -641,6 +683,20 @@ class SchoolTeacherProfile extends ComponentBase
             $contractTypes[$contractType] = $value++;
         }
         $this->page['schoolTeacherContractTypes'] = json_encode($contractTypes);
+
+        /* Extract all the grades and create the source array. */
+        $value = 0;
+        foreach (Grade::all()->pluck('name') as $grade) {
+            $grades[$grade] = $value++;
+        }
+        $this->page['schoolTeacherGrades'] = json_encode($grades);
+
+        /* Extract all the specializations and create the source array. */
+        $value = 0;
+        foreach (Specialization::all()->pluck('name') as $specialization) {
+            $specializations[$specialization] = $value++;
+        }
+        $this->page['schoolTeacherSpecializations'] = json_encode($specializations);
     }
 
     /**

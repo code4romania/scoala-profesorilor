@@ -27,6 +27,10 @@ description = "Displays the graphics of the school"
     <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 my-2">
         {% partial "school-dashboard/graph-budget-total" %}
     </div>
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 my-2">
+        {% partial "school-dashboard/graph-teacher-seniorites" %}
+    </div>
 </div>
 
 <div class="row bg-white my-3">
@@ -36,5 +40,11 @@ description = "Displays the graphics of the school"
         <div id="costsDistribution">
             {% partial "school-dashboard/graph-distributed-costs" %}
         </div>
+    </div>
+</div>
+
+<div class="row bg-white my-3">
+    <div class="col-12 my-2">
+        {% partial "school-dashboard/graph-skill-matrix" %}
     </div>
 </div>

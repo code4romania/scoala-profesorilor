@@ -520,7 +520,7 @@
                 'second_semester' => ['0' => 'Februarie', '1' => 'Martie', '2' => 'Aprilie', '3' => 'Mai', '4' => 'Iunie', '5' => 'Iulie'],
                 'compare_semester' => ['0' => 'Luna 1', '1' => 'Luna 2', '2' => 'Luna 3', '3' => 'Luna 4', '4' => 'Luna 5', '5' => 'Luna 6'],
                 'first_semester_distributed_costs_label' => 'Semestrul 1 ',
-                'second_semester_distributed_costs_label' => 'Semestru 2 '
+                'second_semester_distributed_costs_label' => 'Semestru 2 ',
             ],
 
             'validation' => [

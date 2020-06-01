@@ -13,10 +13,12 @@ use Genuineq\Tms\Models\Teacher;
 use Genuineq\Tms\Models\Address;
 use Genuineq\Tms\Models\Appraisal;
 use Genuineq\User\Models\UserGroup;
-use Genuineq\Tms\Models\SchoolLevel;
 use Genuineq\Tms\Models\LearningPlan;
+use Genuineq\Tms\Models\Grade;
+use Genuineq\Tms\Models\SchoolLevel;
 use Genuineq\Tms\Models\ContractType;
 use Genuineq\Tms\Models\SeniorityLevel;
+use Genuineq\Tms\Models\Specialization;
 use Genuineq\User\Models\Settings as UserSettings;
 
 class SchoolTeacher
@@ -131,33 +133,36 @@ class SchoolTeacher
             /** Add the user to the teacher group. */
             $user->addGroup(UserGroup::getGroup('teacher'));
 
-            /** Create a new user profile. */
-            $teacher = new Teacher();
 
+            /** Get the address. */
+            $fullAddress = explode(', ', $newData['address']);
+            $address = Address::where('name', $fullAddress[0])->where('county', $fullAddress[1])->first();
+            /** Get the seniority level */
+            $seniorityLevel = SeniorityLevel::whereName($newData['seniority_level'])->first();
+
+            /** Populate the new user profile. */
+            $teacher = $user->profile;
             $teacher->name = $newData['name'];
             $teacher->slug = str_replace(' ', '-', strtolower($newData['name']));
             $teacher->phone = $newData['phone'];
             $teacher->birth_date = date('Y-m-d H:i:s', strtotime($newData['birth_date']));
-            $teacher->description = $newData['description'];
-
-            $fullAddress = explode(', ', $newData['address']);
-            $address = Address::whereName($fullAddress[0])->whereCounty($fullAddress[1])->first();
             $teacher->address_id = ($address) ? ($address->id) : ('');
-
-            $seniorityLevel = SeniorityLevel::whereName($newData['seniority_level'])->first();
-            $teacher->seniority_level_id = ($seniorityLevel) ? ($seniorityLevel->id) : ('');
-
-            $schoolLevel = SchoolLevel::whereName($newData['school_level'])->first();
-            $teacher->school_level_id = ($schoolLevel) ? ($schoolLevel->id) : ('');
-
-            $contractType = ContractType::whereName($newData['contract_type'])->first();
-            $teacher->contract_type_id = ($contractType) ? ($contractType->id) : ('');
+            $teacher->description = $newData['description'];
             $teacher->user_id = $user->id;
-
+            $teacher->seniority_level_id = ($seniorityLevel) ? ($seniorityLevel->id) : ('');
             $teacher->save();
 
             /** Make the school-teacher connection. */
-            $teacher->schools()->attach($school);
+            $teacher->schools()->attach(
+                $school,
+                [
+                    'contract_type_id' => (ContractType::whereName($newData['contract_type'])->first()) ? (ContractType::whereName($newData['contract_type'])->first()->id) : (null),
+                    'school_level_id' => (SchoolLevel::whereName($newData['school_level'])->first()) ? (SchoolLevel::whereName($newData['school_level'])->first()->id) : (null),
+                    'grade_id' => (Grade::whereName($newData['grade'])->first()) ? (Grade::whereName($newData['grade'])->first()->id) : (null),
+                    'specialization_1_id' => (Specialization::whereName($newData['specialization_1'])->first()) ? (Specialization::whereName($newData['specialization_1'])->first()->id) : (null),
+                    'specialization_2_id' => (Specialization::whereName($newData['specialization_2'])->first()) ? (Specialization::whereName($newData['specialization_2'])->first()->id) : (null),
+                ]
+            );
             $teacher->reloadRelations('schools');
 
             /** Create appraisal for the new connection. */
@@ -251,33 +256,35 @@ class SchoolTeacher
             /** Add the user to the teacher group. */
             $user->addGroup(UserGroup::getGroup('teacher'));
 
-            /** Create a new user profile. */
-            $teacher = new Teacher();
+            /** Get the address. */
+            $fullAddress = explode(', ', $newData['address']);
+            $address = Address::whereName($fullAddress[0])->whereCounty($fullAddress[1])->first();
+            /** Get the seniority level */
+            $seniorityLevel = SeniorityLevel::whereName($newData['seniority_level'])->first();
 
+            /** Populate the new user profile. */
+            $teacher = $user->profile;
             $teacher->name = $newData['name'];
             $teacher->slug = str_replace(' ', '-', strtolower($newData['name']));
             $teacher->phone = $newData['phone'];
             $teacher->birth_date = date('Y-m-d H:i:s', strtotime($newData['birth_date']));
-            $teacher->description = $newData['description'];
-
-            $fullAddress = explode(', ', $newData['address']);
-            $address = Address::whereName($fullAddress[0])->whereCounty($fullAddress[1])->first();
             $teacher->address_id = ($address) ? ($address->id) : ('');
-
-            $seniorityLevel = SeniorityLevel::whereName($newData['seniority_level'])->first();
-            $teacher->seniority_level_id = ($seniorityLevel) ? ($seniorityLevel->id) : ('');
-
-            $schoolLevel = SchoolLevel::whereName($newData['school_level'])->first();
-            $teacher->school_level_id = ($schoolLevel) ? ($schoolLevel->id) : ('');
-
-            $contractType = ContractType::whereName($newData['contract_type'])->first();
-            $teacher->contract_type_id = ($contractType) ? ($contractType->id) : ('');
+            $teacher->description = $newData['description'];
             $teacher->user_id = $user->id;
-
+            $teacher->seniority_level_id = ($seniorityLevel) ? ($seniorityLevel->id) : ('');
             $teacher->save();
 
             /** Make the school-teacher connection. */
-            $teacher->schools()->attach($school);
+            $teacher->schools()->attach(
+                $school,
+                [
+                    'contract_type_id' => (ContractType::whereName($newData['contract_type'])->first()) ? (ContractType::whereName($newData['contract_type'])->first()->id) : (null),
+                    'school_level_id' => (SchoolLevel::whereName($newData['school_level'])->first()) ? (SchoolLevel::whereName($newData['school_level'])->first()->id) : (null),
+                    'grade_id' => (Grade::whereName($newData['grade'])->first()) ? (Grade::whereName($newData['grade'])->first()->id) : (null),
+                    'specialization_1_id' => (Specialization::whereName($newData['specialization_1'])->first()) ? (Specialization::whereName($newData['specialization_1'])->first()->id) : (null),
+                    'specialization_2_id' => (Specialization::whereName($newData['specialization_2'])->first()) ? (Specialization::whereName($newData['specialization_2'])->first()->id) : (null),
+                ]
+            );
             $teacher->reloadRelations('schools');
 
             /** Create appraisal for the new connection. */
