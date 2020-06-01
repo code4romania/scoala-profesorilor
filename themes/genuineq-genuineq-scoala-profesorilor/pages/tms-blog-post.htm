@@ -22,6 +22,32 @@ categoryPage = "tms-blog-categorie"
 results = 0
 orderBy = 0
 direction = "desc"
+
+[ssbuttons]
+fa = "maxcdn"
+twitter = 1
+facebook = 1
+google+ = 0
+stumbleupon = 0
+linkedin = 1
+order_twitter = 1
+order_facebook = 2
+order_google+ = 3
+order_stumbleupon = 4
+order_linkedin = 5
+
+[ssbuttonsnb]
+fa = "maxcdn"
+twitter = 1
+facebook = 1
+google+ = 0
+stumbleupon = 0
+linkedin = 1
+order_twitter = 1
+order_facebook = 2
+order_google+ = 3
+order_stumbleupon = 4
+order_linkedin = 5
 ==
 <div class="containter-fluid h-25" style="background-image: url({{ 'background-teacher.jpg'|media }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
     <div class="row h-100 m-0 align-items-center">
@@ -75,6 +101,7 @@ direction = "desc"
 
                 <hr class="my-5">
 
+                {% component 'ssbuttons' %}
             </div>
 
             <!--Sidebar-->
@@ -105,6 +132,9 @@ direction = "desc"
                         </a>
                     {% endfor %}
                 </div>
+                <div class="mb-5"></div>
+
+                {% component 'ssbuttonsnb' %}
 
                 <div class="mb-5"></div>
 
