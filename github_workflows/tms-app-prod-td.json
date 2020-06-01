@@ -187,6 +187,5 @@
             "name": "efs_pv"
         }
     ],
-    "placementConstraints": [],
-    "tags": []
+    "placementConstraints": []
 }
