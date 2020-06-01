@@ -144,7 +144,7 @@
                     "containerPath": "/var/www/storage/app",
                     "sourceVolume": "tms_prod_persistent_volume"
                 }
-            ],
+            ], 
             "memoryReservation": 512,
             "volumesFrom": [],
             "image": "961595780523.dkr.ecr.eu-central-1.amazonaws.com/production:$TAG",
