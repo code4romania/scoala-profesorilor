@@ -41,3 +41,7 @@ columns:
         type: text
         searchable: true
         sortable: true
+    status:
+        label: 'genuineq.tms::lang.course.label.status'
+        type: number
+        sortable: true

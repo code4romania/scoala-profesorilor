@@ -139,6 +139,9 @@ class Course extends Model
 
         ], $options));
 
+        /** Search the requested input */
+        $query->where('status', 1);
+
         if ($searchInput) {
             /** Search the requested input */
             $query->where('name', 'like', "%${searchInput}%");

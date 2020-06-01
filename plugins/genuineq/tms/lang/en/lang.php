@@ -56,6 +56,11 @@
 
         'backend-menu' => 'Courses',
 
+        'backend' => [
+            'archive' => 'Archive selected',
+            'archive_confirm' => 'Archive the selected records?',
+        ],
+
         'frontend' => [
             'all_courses' => 'Toate categoriile',
             'all_accreditations' => 'Toate acreditarile',

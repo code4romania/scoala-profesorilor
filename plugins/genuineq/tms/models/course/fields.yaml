@@ -57,18 +57,22 @@ fields:
     categories:
         label: 'genuineq.tms::lang.course.label.categories'
         nameFrom: name
-        descriptionFrom: description
         span: left
         type: categorytagrelation
     supplier:
         label: 'genuineq.tms::lang.course.label.supplier'
         nameFrom: name
-        descriptionFrom: description
-        span: auto
+        span: right
         type: relation
     skills:
         label: 'genuineq.tms::lang.course.label.skills'
         nameFrom: name
-        descriptionFrom: description
-        span: auto
+        span: left
         type: relation
+    status:
+        label: 'genuineq.tms::lang.course.label.status'
+        span: right
+        type: dropdown
+        options:
+            0: 0
+            1: 1

@@ -146,7 +146,7 @@ class Appraisal extends ComponentBase
         /** Extract the teacher. */
         $this->page['teacher'] = Teacher::find(post('teacherId'));
 
-        /** Extract the received courses filtering options */
+        /** Extract the received appraisal filtering options */
         $options = [
             'searchInput' => post('appraisalSearchInput'),
             'teacher' =>  Auth::getUser()->profile->id,
@@ -202,7 +202,7 @@ class Appraisal extends ComponentBase
             ]
         );
 
-        /** Extract the received courses filtering options */
+        /** Extract the received appraisal filtering options */
         $options = [
             'searchInput' => post('appraisalSearchInput'),
             'teacher' =>  Auth::getUser()->profile->id,
@@ -363,7 +363,7 @@ class Appraisal extends ComponentBase
         /** Extract the teacher. */
         $this->page['teacher'] = Teacher::find(post('teacherId'));
 
-        /** Extract the received courses filtering options */
+        /** Extract the received appraisal filtering options */
         $options = [
             'searchInput' => post('appraisalSearchInput'),
             'sort' => post('appraisalSort'),
@@ -429,7 +429,7 @@ class Appraisal extends ComponentBase
         /** Extract the teacher. */
         $this->page['teacher'] = Teacher::find(post('teacherId'));
 
-        /** Extract the received courses filtering options */
+        /** Extract the received appraisal filtering options */
         $options = [
             'searchInput' => post('appraisalSearchInput'),
             'sort' => post('appraisalSort'),
@@ -497,7 +497,7 @@ class Appraisal extends ComponentBase
         /** Extract the teacher. */
         $this->page['teacher'] = Teacher::find(post('teacherId'));
 
-        /** Extract the received courses filtering options */
+        /** Extract the received appraisal filtering options */
         $options = [
             'searchInput' => post('appraisalSearchInput'),
             'sort' => post('appraisalSort'),
@@ -564,7 +564,7 @@ class Appraisal extends ComponentBase
         /** Extract the teacher. */
         $this->page['teacher'] = Teacher::find(post('teacherId'));
 
-        /** Extract the received courses filtering options */
+        /** Extract the received appraisal filtering options */
         $options = [
             'searchInput' => post('appraisalSearchInput'),
             'sort' => post('appraisalSort'),
