@@ -1,12 +1,6 @@
 { 
-    "ipcMode": null,
-    "executionRoleArn": null,
     "containerDefinitions": [
         {
-            "dnsSearchDomains": null,
-            "environmentFiles": null,
-            "logConfiguration": null,
-            "entryPoint": null,
             "portMappings": [
                 {
                     "hostPort": 80,
@@ -14,8 +8,6 @@
                     "containerPort": 80
                 }
             ],
-            "command": null,
-            "linuxParameters": null,
             "cpu": 0,
             "environment": [
                 {
@@ -147,92 +139,52 @@
                     "value": "$MAIL_ENCRYPTION"
                 }
             ],
-            "resourceRequirements": null,
-            "ulimits": null,
-            "dnsServers": null,
             "mountPoints": [
                 {
-                    "readOnly": null,
                     "containerPath": "/var/www/storage/app",
                     "sourceVolume": "tms_prod_persistent_volume"
                 }
-            ],
-            "workingDirectory": null,
-            "secrets": null,
-            "dockerSecurityOptions": null,
-            "memory": null,
+            ], 
             "memoryReservation": 512,
             "volumesFrom": [],
-            "stopTimeout": null,
-            "image": "961595780523.dkr.ecr.eu-central-1.amazonaws.com/production:tms_prod_app_024",
-            "startTimeout": null,
-            "firelensConfiguration": null,
-            "dependsOn": null,
-            "disableNetworking": null,
-            "interactive": null,
-            "healthCheck": null,
+            "image": "961595780523.dkr.ecr.eu-central-1.amazonaws.com/production:$TAG",
             "essential": true,
             "links": [],
-            "hostname": null,
-            "extraHosts": null,
-            "pseudoTerminal": null,
-            "user": null,
-            "readonlyRootFilesystem": null,
-            "dockerLabels": null,
-            "systemControls": null,
-            "privileged": null,
             "name": "app"
         }
     ],
-    "memory": null,
-    "taskRoleArn": null,
     "family": "application",
-    "pidMode": null,
     "requiresCompatibilities": [
         "EC2"
     ],
-    "networkMode": null,
-    "cpu": null,
-    "inferenceAccelerators": null,
-    "proxyConfiguration": null,
     "volumes": [
         {
             "efsVolumeConfiguration": {
-                "transitEncryptionPort": null,
                 "fileSystemId": "fs-2640f37e",
                 "authorizationConfig": {
-                    "iam": "DISABLED",
-                    "accessPointId": null
+                    "iam": "DISABLED"
                 },
                 "transitEncryption": "DISABLED",
                 "rootDirectory": "/"
             },
-            "name": "tms_prod_persistent_volume",
-            "host": null,
-            "dockerVolumeConfiguration": null
+            "name": "tms_prod_persistent_volume"
         },
         {
-            "efsVolumeConfiguration": null,
             "name": "temp_pv",
             "host": {
                 "sourcePath": "/home/ec2-user/pv"
-            },
-            "dockerVolumeConfiguration": null
+            }
         },
         {
             "efsVolumeConfiguration": {
-                "transitEncryptionPort": null,
                 "fileSystemId": "fs-2640f37e",
                 "authorizationConfig": {
-                    "iam": "DISABLED",
-                    "accessPointId": null
+                    "iam": "DISABLED"
                 },
                 "transitEncryption": "DISABLED",
                 "rootDirectory": "/"
             },
-            "name": "efs_pv",
-            "host": null,
-            "dockerVolumeConfiguration": null
+            "name": "efs_pv"
         }
     ],
     "placementConstraints": [],
