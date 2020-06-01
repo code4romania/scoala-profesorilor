@@ -39,7 +39,7 @@ RUN echo "* * * * * /var/www/artisan schedule:run >> /dev/null 2>&1" > /etc/cron
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 
-#Copy app files
+# Copy app files
 COPY ./bootstrap /var/www/bootstrap
 COPY ./config /var/www/config
 COPY ./modules /var/www/modules
