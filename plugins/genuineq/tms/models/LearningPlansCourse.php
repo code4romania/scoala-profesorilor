@@ -141,7 +141,9 @@ class LearningPlansCourse extends Model
             'costs-discounted' => 0,
             'total-credits' => 0,
             'total-hours' => 0,
-            'courses' => null
+            'courses' => null,
+            'categories' => [],
+            'number-categories' => 0
         ];
 
         /** Extract result statistics */
@@ -155,6 +157,14 @@ class LearningPlansCourse extends Model
                 $results['total-credits'] += $budgetCourse->course->credits;
             }
 
+            /** Extarct and count categories */
+            foreach ($budgetCourse->course->categories as $key => $category) {
+                if (!array_key_exists ($category->id, $results['categories'])) {
+                    /** Save the category */
+                    $results['categories'][$category->id] = $category;
+                    $results['number-categories']++;
+                }
+            }
         }
 
         $page = ($query->paginate($perPage, $page)->lastPage() < $page) ? (1) : ($page);

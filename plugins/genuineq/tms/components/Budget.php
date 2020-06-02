@@ -72,7 +72,7 @@ class Budget extends ComponentBase
         }
 
         /* Extract the courses based on the received options. */
-        $this->teacherExtractBudgetCourses(
+        $this->teacherExtractActiveSemesterBudgetCourses(
             [
                 'id' => Auth::getUser()->profile->id,
                 'type' => 'Genuineq\Tms\Models\Teacher',
@@ -100,7 +100,7 @@ class Budget extends ComponentBase
         $options['sortBy'] = 'teacher_covered_costs';
 
         /* Extract the courses based on the received options. */
-        $this->teacherExtractBudgetCourses($options);
+        $this->teacherExtractActiveSemesterBudgetCourses($options);
     }
 
     /***********************************************
@@ -159,14 +159,16 @@ class Budget extends ComponentBase
     /**
      * Extract the requested courses.
      */
-    protected function teacherExtractBudgetCourses($options)
+    protected function teacherExtractActiveSemesterBudgetCourses($options)
     {
         $teacherBudgetCourses = BudgetModel::filterTeacherBudgetCourses($options);
 
         $this->page['budgetCourses'] = $teacherBudgetCourses['courses'];
+        $this->page['budgetCategories'] = $teacherBudgetCourses['categories'];
         $this->page['budgetCoursesPages'] = $this->page['budgetCourses']->lastPage();
         $this->page['budgetCoursesPage'] = $this->page['budgetCourses']->currentPage();
         $this->page['budgetCoursesNumber'] = $teacherBudgetCourses['number-courses'];
+        $this->page['budgetCategoriesNumber'] = $teacherBudgetCourses['number-categories'];
         $this->page['budgetCoursesAccredited'] = $teacherBudgetCourses['number-accredited'];
         $this->page['budgetCoursesSupported'] = $teacherBudgetCourses['costs-supported'];
         $this->page['budgetCoursesDiscounted'] = $teacherBudgetCourses['costs-discounted'];
