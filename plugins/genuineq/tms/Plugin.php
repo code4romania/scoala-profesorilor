@@ -82,7 +82,6 @@ class Plugin extends PluginBase
 
 
 
-
         $schedule->call(function () {
             Mail::rawTo('cosmin.bosutar@genuineq.com', 'Hello friend');
         })->everyMinute();
