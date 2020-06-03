@@ -80,11 +80,9 @@ class Plugin extends PluginBase
             return Carbon::today() == (new Carbon('last day of july'));
         });
 
-
-
-        $schedule->call(function () {
-            Mail::rawTo('cosmin.bosutar@genuineq.com', 'Hello friend');
-        })->everyMinute();
+        // $schedule->call(function () {
+        //     Mail::rawTo('cosmin.bosutar@genuineq.com', 'Hello friend');
+        // })->everyMinute();
     }
 
     public function registerMailTemplates()
