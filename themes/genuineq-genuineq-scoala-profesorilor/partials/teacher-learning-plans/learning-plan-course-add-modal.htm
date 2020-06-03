@@ -56,10 +56,12 @@ description = "Modal that specifies how a course is added to a learning plan"
 </div>
 
 <script type="text/javascript">
-    $('#school').autocomplete({
-        source: {{ schools|raw }},
-        highlightClass: 'text-danger',
-        treshold: 1
+    $( document ).ready(function() {
+        $('#school').autocomplete({
+            source: {{ schools|raw }},
+            highlightClass: 'text-danger',
+            treshold: 1
+        });
     });
 
     /* Function that saves the ID of the course that was clicked. */
