@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-#Create .env file from environment variables
+# Create .env file from environment variables
 echo APP_ENV=$APP_ENV > .env
 echo APP_DEBUG=$APP_DEBUG\" >> .env
 echo APP_NAME=\"$APP_NAME\" >> .env
