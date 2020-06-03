@@ -79,6 +79,13 @@ class Plugin extends PluginBase
         })->dailyAt('00:00')->when(function () {
             return Carbon::today() == (new Carbon('last day of july'));
         });
+
+
+
+
+        $schedule->call(function () {
+            Log::info("TASK IS UP AND RUNNING");
+        })->everyMinute();
     }
 
     public function registerMailTemplates()
