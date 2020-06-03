@@ -5,8 +5,74 @@ use Genuineq\Tms\Models\LearningPlan;
 use Genuineq\Tms\Models\Appraisal;
 use Genuineq\Tms\Models\Budget;
 
-class SemesterCloser
+class PeriodicTasks
 {
+    /**
+     * Function that moves all active appraisals from status 'new'
+     *  to status 'objectives-set'.
+     */
+    public static function appraisalsSetObjectives()
+    {
+        /** Extract active semester. */
+        $activeSemester = Semester::getLatest();
+
+        /** Parse all appraisals that are in new state and move them to the next status. */
+        foreach ($activeSemester->new_appraisals as $key => $appraisal) {
+            $appraisal->status = 'objectives-set';
+            $appraisal->save();
+        }
+    }
+
+    /**
+     * Function that moves all active appraisals from status 'objectives-set'
+     *  to status 'objectives-approved'.
+     */
+    public static function appraisalsApproveObjectives()
+    {
+        /** Extract active semester. */
+        $activeSemester = Semester::getLatest();
+
+        /** Parse all appraisals that are in objectives-set state and move them to the next status. */
+        foreach ($activeSemester->objectives_set_appraisals as $key => $appraisal) {
+            $appraisal->status = 'objectives-approved';
+            $appraisal->save();
+        }
+    }
+
+    /**
+     * Function that moves all active appraisals from status 'objectives-approved'
+     *  to status 'skills-set'.
+     */
+    public static function appraisalsSetSkillsObjectives()
+    {
+        /** Extract active semester. */
+        $activeSemester = Semester::getLatest();
+
+        /** Parse all appraisals that are in objectives-approved state and move them to the next status. */
+        foreach ($activeSemester->objectives_approved_appraisals as $key => $appraisal) {
+            $appraisal->status = 'objectives-approved';
+            $appraisal->save();
+        }
+    }
+
+    /**
+     * Function that moves all active appraisals from status 'skills-set'
+     *  to status 'evaluation-opened'.
+     */
+    public static function openAppraisals()
+    {
+        /** Extract active semester. */
+        $activeSemester = Semester::getLatest();
+
+        /** Parse all appraisals that are in skills-set state and move them to the next status. */
+        foreach ($activeSemester->skills_set_appraisals as $key => $appraisal) {
+            $appraisal->status = 'evaluation-opened';
+            $appraisal->save();
+        }
+    }
+
+
+
     /**
      * Function performs all the operation for closing the first semester.
      */

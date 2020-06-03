@@ -10,7 +10,7 @@ use Genuineq\Tms\Models\LearningPlansCourse;
 use Genuineq\Tms\Models\Semester;
 use October\Rain\Database\Updates\Seeder;
 use Illuminate\Support\Facades\App;
-use Genuineq\Tms\Classes\SemesterCloser;
+use Genuineq\Tms\Classes\PeriodicTasks;
 use Config;
 use Faker;
 
@@ -125,9 +125,9 @@ class TestSemesterSeeder extends Seeder
                 }
             } else {
                 if (1 == $semester) {
-                    SemesterCloser::closeFirstSemester();
+                    PeriodicTasks::closeFirstSemester();
                 } else {
-                    SemesterCloser::closeSecondSemester();
+                    PeriodicTasks::closeSecondSemester();
                 }
 
                 if (1 == $semester) {

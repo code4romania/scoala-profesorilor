@@ -20,7 +20,8 @@ class Semester extends Model
     public $table = 'genuineq_tms_semesters';
 
     public $hasMany = [
-        'learningPlans' => 'Genuineq\Tms\Models\LearningPlan'
+        'learningPlans' => 'Genuineq\Tms\Models\LearningPlan',
+        'appraisals' => 'Genuineq\Tms\Models\Appraisal'
     ];
 
     /**
@@ -28,6 +29,54 @@ class Semester extends Model
      */
     public $rules = [
     ];
+
+    /***********************************************
+     ******************* Mutators ******************
+     ***********************************************/
+
+    /**
+     * Function that extracts the appraisals that have
+     *  the new status.
+     */
+    public function getNewAppraisalsAttribute()
+    {
+        return $this->appraisals->where('status', 'new');
+    }
+
+    /**
+     * Function that extracts the appraisals that have
+     *  the objectives-set status.
+     */
+    public function getObjectivesSetAppraisalsAttribute()
+    {
+        return $this->appraisals->where('status', 'objectives-set');
+    }
+
+    /**
+     * Function that extracts the appraisals that have
+     *  the objectives-set status.
+     */
+    public function getObjectivesApprovedAppraisalsAttribute()
+    {
+        return $this->appraisals->where('status', 'objectives-set');
+    }
+
+    /**
+     * Function that extracts the appraisals that have
+     *  the skills-set status.
+     */
+    public function getSkillsSetAppraisalsAttribute()
+    {
+        return $this->appraisals->where('status', 'skills-set');
+    }
+
+    /**
+     * Function that extracts the active learning plans.
+     */
+    public function getActiveLearningPlansAttribute()
+    {
+        return $this->learningPlans->where('status', 1);
+    }
 
     /***********************************************
      ******************* Functions *****************

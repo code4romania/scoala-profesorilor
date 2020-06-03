@@ -6,8 +6,9 @@ use System\Classes\PluginBase;
 use Genuineq\User\Models\User;
 use Genuineq\Tms\Models\School;
 use Genuineq\Tms\Models\Teacher;
-use Genuineq\Tms\Classes\SemesterCloser;
+use Genuineq\Tms\Classes\PeriodicTasks;
 use RainLab\Notify\Classes\Notifier;
+use Log;
 
 class Plugin extends PluginBase
 {
@@ -48,18 +49,35 @@ class Plugin extends PluginBase
 
     public function registerSchedule($schedule)
     {
+
+        /** Task for start of the last month of the first semester */
+        $schedule->call(function () {
+            PeriodicTasks::openFirstSemesterAppraisals();
+        })->dailyAt('00:00')->when(function () {
+            return Carbon::today() == (new Carbon('last day of december'));
+        });
+
         /** Task for end of first semester */
         $schedule->call(function () {
-            SemesterCloser::closeFirstSemester();
+            PeriodicTasks::closeFirstSemester();
         })->dailyAt('00:00')->when(function () {
             return Carbon::today() == (new Carbon('last day of january'));
         });
 
-        /** Task for end of second semester */
+
+
+        /** Task for start of the last month of the second semester */
         $schedule->call(function () {
-            SemesterCloser::closeSecondSemester();
+            PeriodicTasks::openSecondSemesterAppraisals();
         })->dailyAt('00:00')->when(function () {
             return Carbon::today() == (new Carbon('last day of june'));
+        });
+
+        /** Task for end of second semester */
+        $schedule->call(function () {
+            PeriodicTasks::closeSecondSemester();
+        })->dailyAt('00:00')->when(function () {
+            return Carbon::today() == (new Carbon('last day of july'));
         });
     }
 
