@@ -8,7 +8,7 @@ echo APP_LOG=$APP_LOG >> .env
 echo APP_NAME=\"$APP_NAME\" >> .env
 echo APP_URL=\"$APP_URL\" >> .env
 echo APP_KEY=$APP_KEY >> .env
-echo DB_HOST=$DB_HOST >> .env
+echo DB_HOST=\"$DB_HOST\" >> .env
 echo DB_PORT=$DB_PORT >> .env
 echo DB_DATABASE=\"$DB_DATABASE\" >> .env
 echo DB_USERNAME=\"$DB_USERNAME\" >> .env
@@ -51,7 +51,7 @@ php artisan config:cache
 php artisan october:mirror public --relative
 
 # Change public folder ownership
-chown -R www-data:www-data /var/www/public
+# chown -R www-data:www-data /var/www/public
 
 # Run any DB migrations
 php artisan october:up
