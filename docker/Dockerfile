@@ -32,7 +32,7 @@ RUN mkdir /run/php \
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Add octobercms cron
-RUN echo "* * * * * /var/www/artisan schedule:run >> /dev/null 2>&1" > /etc/cron.d/october-cron \
+RUN echo "* * * * * /usr/bin/php /var/www/artisan schedule:run >> /dev/null 2>&1" > /etc/cron.d/october-cron \
     && crontab /etc/cron.d/october-cron
 
 # Symlinking Nginx log files to stdout and stderr
