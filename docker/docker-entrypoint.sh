@@ -50,8 +50,8 @@ php artisan october:mirror public --relative
 #php artisan october:up
 
 # Reinstall plugins
-php artisan plugin:refresh genuineq.user
-php artisan plugin:refresh genuineq.tms
+# php artisan plugin:refresh genuineq.user
+# php artisan plugin:refresh genuineq.tms
 
 # Start cron
 service cron start
