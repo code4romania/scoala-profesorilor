@@ -3,7 +3,7 @@ set -e
 
 # Create .env file from environment variables
 echo APP_ENV=$APP_ENV > .env
-echo APP_DEBUG=$APP_DEBUG\" >> .env
+echo APP_DEBUG=$APP_DEBUG >> .env
 echo APP_LOG=$APP_LOG >> .env
 echo APP_NAME=\"$APP_NAME\" >> .env
 echo APP_URL=\"$APP_URL\" >> .env
@@ -37,14 +37,21 @@ echo CMS_ASSET_CACHE=$CMS_ASSET_CACHE >> .env
 echo CMS_LINK_POLICY=$CMS_LINK_POLICY >> .env
 echo CMS_ENABLE_CSRF=$CMS_ENABLE_CSRF >> .env
 
+# Change env file ownership
+chown www-data:www-data /var/www/.env
+
 # Cache application routes
 php artisan route:clear
 
 # Clear configuration cache
 php artisan config:clear
+# php artisan config:cache
 
 # Create the public folder
 php artisan october:mirror public --relative
+
+# Change public folder ownership
+# chown -R www-data:www-data /var/www/public
 
 # Run any DB migrations
 php artisan october:up
