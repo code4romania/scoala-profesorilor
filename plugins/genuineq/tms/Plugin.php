@@ -8,7 +8,7 @@ use Genuineq\Tms\Models\School;
 use Genuineq\Tms\Models\Teacher;
 use Genuineq\Tms\Classes\PeriodicTasks;
 use RainLab\Notify\Classes\Notifier;
-use Log;
+use Mail;
 
 class Plugin extends PluginBase
 {
