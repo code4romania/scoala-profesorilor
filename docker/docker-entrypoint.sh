@@ -37,24 +37,17 @@ echo APP_ENV=$APP_ENV > .env
 # echo CMS_LINK_POLICY=$CMS_LINK_POLICY >> .env
 # echo CMS_ENABLE_CSRF=$CMS_ENABLE_CSRF >> .env
 
-# Change .env ownership
-chown www-data:www-data .env
-
 # Cache application routes
 php artisan route:clear
 
-# Clear & cache configuration cache
+# Clear configuration cache
 php artisan config:clear
-# php artisan config:cache
 
 # Create the public folder
 php artisan october:mirror public --relative
 
-# Change public folder ownership
-# chown -R www-data:www-data /var/www/public
-
 # Run any DB migrations
-# php artisan october:up
+#php artisan october:up
 
 # Reinstall plugins
 php artisan plugin:refresh genuineq.user
