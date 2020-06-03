@@ -67,7 +67,7 @@ div.dataTables_wrapper div {
       -webkit-box-pack: end;
       .page-item {
         &.active .page-link:focus {
-          background-color: #4285f4;
+          background-color: $primary-color;
         }
         .page-link:focus {
           -webkit-box-shadow: none;

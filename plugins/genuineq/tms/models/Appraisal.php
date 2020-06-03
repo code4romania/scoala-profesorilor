@@ -159,6 +159,21 @@ class Appraisal extends Model
     }
 
     /**
+     * Function that extracts the avegage
+     *  grade of the appraisal.
+     */
+    public function getAverageAttribute()
+    {
+        $average = 0;
+
+        $average += ($this->grade_1) ? ($this->grade_1) : (0);
+        $average += ($this->grade_2) ? ($this->grade_2) : (0);
+        $average += ($this->grade_3) ? ($this->grade_3) : (0);
+
+        return $average/3;
+    }
+
+    /**
      * Function that extracts the frontend display
      *  for the appraisal status.
      */

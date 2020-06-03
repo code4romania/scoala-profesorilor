@@ -84,6 +84,20 @@ class SchoolDashboard extends ComponentBase
         $this->prepareDistributedCostsData($activeSemesterId);
         $this->prepareTeacherSenioritiesData();
         $this->prepareSkillMatrixData();
+        $this->prepareDatatableData();
+    }
+
+    /**
+     * Loads all the needed school report data.
+     */
+    public function onSchoolViewReports()
+    {
+        /** Force authentication in case user is not authenticated. */
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        $this->prepareDatatableData();
     }
 
     /**
@@ -120,6 +134,7 @@ class SchoolDashboard extends ComponentBase
         $this->prepareDistributedCostsData($activeSemesterId);
         $this->prepareTeacherSenioritiesData();
         $this->prepareSkillMatrixData();
+        $this->prepareDatatableData();
     }
 
     /**
@@ -303,7 +318,7 @@ class SchoolDashboard extends ComponentBase
     }
 
     /**
-     * Extract the bufet totals for a specified semester.
+     * Extract the budget totals for a specified semester.
      */
     protected function prepareDistributedCostsData($semesterId)
     {
@@ -338,7 +353,7 @@ class SchoolDashboard extends ComponentBase
     }
 
     /**
-     * Extract the bufet totals for a specified semester.
+     * Extract the budget totals for a specified semester.
      */
     protected function prepareDistributedCostsCompareData($activeSemesterId, $secondSemesterId)
     {
@@ -503,5 +518,75 @@ class SchoolDashboard extends ComponentBase
 
         $this->page['skillSemesters'] = $skillSemesters;
         $this->page['skillSemestersLabels'] = $skillSemestersLabels;
+    }
+
+    /**
+     * Extract the teachers data for the school datatable.
+     */
+    protected function prepareDatatableData()
+    {
+        $this->page['schoolDatatableHeaders'] = [
+            'name' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_name'),
+            'identifier' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_identifier'),
+            'email' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_email'),
+            'phone' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_phone'),
+            'seniority' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_seniority'),
+            'skill_1' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_skill_1'),
+            'skill_grade_1' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_skill_grade_1'),
+            'skill_2' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_skill_2'),
+            'skill_grade_2' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_skill_grade_2'),
+            'skill_3' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_skill_3'),
+            'skill_grade_3' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_skill_grade_3'),
+            'skill_grades_average' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_skill_grades_average'),
+        ];
+
+        /** Extarct the school */
+        $school = Auth::getUser()->profile;
+
+        /** Extract the data for all the school teachers */
+        $schoolDatatableLines = [];
+        foreach ($school->teachers as $key => $teacher) {
+            /** Get the teacher appraisal. */
+            $appraisal = $school->getActiveAppraisal($teacher->id);
+
+            $schoolDatatableLines[] = [
+                0 => $teacher->name,
+                1 => ($teacher->user) ? ($teacher->user->identifier) : (''),
+                2 => ($teacher->user) ? ($teacher->user->email) : (''),
+                3 => $teacher->phone,
+                4 => $teacher->seniority,
+                5 => ($appraisal->firstSkill) ? ($appraisal->firstSkill->name) : (''),
+                6 => $appraisal->grade_1,
+                7 => ($appraisal->secondSkill) ? ($appraisal->secondSkill->name) : (''),
+                8 => $appraisal->grade_2,
+                9 => ($appraisal->thirdSkill) ? ($appraisal->thirdSkill->name) : (''),
+                10 => $appraisal->grade_3,
+                11 => $appraisal->average
+            ];
+        }
+        $this->page['schoolDatatableLines'] = $schoolDatatableLines;
+    }
+
+    /**
+     * Function that returns values used for the datatable sorting.
+     */
+    public static function getDatatableSortingTypes()
+    {
+        return [
+            Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.name_asc') => 'name asc',
+            Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.name_desc') => 'name desc',
+            Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.identifier_asc') => 'identifier asc',
+            Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.identifier_desc') => 'identifier desc',
+            Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.birthdate_asc') => 'birth_date asc',
+            Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.birthdate_desc') => 'birth_date desc',
+
+            Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.email_asc') => 'email asc',
+            Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.email_desc') => 'email desc',
+
+            Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.credits_asc') => 'credits asc',
+            Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.credits_desc') => 'credits desc',
+            Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.price_asc') => 'price asc',
+            Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.price_desc') => 'price desc',
+        ];
     }
 }

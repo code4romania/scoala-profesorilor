@@ -5,49 +5,51 @@ description = "Displays the teacher seniorities graphic"
 <canvas id="teacherSeniorities"></canvas>
 
 <script type="text/javascript">
-    var ctxP = document.getElementById("teacherSeniorities").getContext('2d');
+    $( document ).ready(function() {
+        var ctxP = document.getElementById("teacherSeniorities").getContext('2d');
 
-    var myPieChart = new Chart(ctxP, {
-        plugins: [ChartDataLabels],
-        type: 'pie',
-        data: {
-            labels: ["{{ senioritiesLabels[1] }}", "{{ senioritiesLabels[2] }}", "{{ senioritiesLabels[3] }}", "{{ senioritiesLabels[4] }}", "{{ senioritiesLabels[5] }}"],
-            datasets: [{
-                data: [{{ seniorities[1] }}, {{ seniorities[2] }}, {{ seniorities[3] }}, {{ seniorities[4] }}, {{ seniorities[5] }}],
-                backgroundColor: ["#4C025E", "#00D857", "#33b5e5", "#fb3", "#2e2e2e"],
-                hoverBackgroundColor: ["#25002f", "#006c2b", "#09c", "#f80", "#212121"]
-            }]
-        },
-        options: {
-            responsive: true,
-            legend: {
-                position: 'bottom',
-                labels: {
-                    padding: 20,
-                    boxWidth: 10
-                }
+        var myPieChart = new Chart(ctxP, {
+            plugins: [ChartDataLabels],
+            type: 'pie',
+            data: {
+                labels: ["{{ senioritiesLabels[1] }}", "{{ senioritiesLabels[2] }}", "{{ senioritiesLabels[3] }}", "{{ senioritiesLabels[4] }}", "{{ senioritiesLabels[5] }}"],
+                datasets: [{
+                    data: [{{ seniorities[1] }}, {{ seniorities[2] }}, {{ seniorities[3] }}, {{ seniorities[4] }}, {{ seniorities[5] }}],
+                    backgroundColor: ["#4C025E", "#00D857", "#33b5e5", "#fb3", "#2e2e2e"],
+                    hoverBackgroundColor: ["#25002f", "#006c2b", "#09c", "#f80", "#212121"]
+                }]
             },
-            plugins: {
-                datalabels: {
-                    formatter: (value, ctx) => {
-                        let sum = 0;
-                        let dataArr = ctx.chart.data.datasets[0].data;
-                        dataArr.map(data => {
-                            sum += data;
-                        });
-                        let percentage = (value * 100 / sum).toFixed(2) + "%";
-                        return percentage;
-                    },
-                    color: 'white',
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'bottom',
                     labels: {
-                        title: {
-                                font: {
-                                    size: '16'
+                        padding: 20,
+                        boxWidth: 10
+                    }
+                },
+                plugins: {
+                    datalabels: {
+                        formatter: (value, ctx) => {
+                            let sum = 0;
+                            let dataArr = ctx.chart.data.datasets[0].data;
+                            dataArr.map(data => {
+                                sum += data;
+                            });
+                            let percentage = (value * 100 / sum).toFixed(2) + "%";
+                            return percentage;
+                        },
+                        color: 'white',
+                        labels: {
+                            title: {
+                                    font: {
+                                        size: '16'
+                                }
                             }
                         }
                     }
                 }
             }
-        }
+        });
     });
 </script>

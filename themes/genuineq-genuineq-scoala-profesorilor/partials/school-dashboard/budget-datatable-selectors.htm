@@ -1,0 +1,53 @@
+description = "Displays the selectors for the school teachers datatable"
+
+[viewBag]
+==
+
+<div class="row bg-white rounded d-flex align-items-center py-2">
+
+    <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 text-center text-sm-left text-md-left text-lg-left text-xl-left">
+        <select name="year" class="browser-default custom-select border border-white shadow-none rounded-0" id="schoolYears">
+            {% for key, value in schoolYears %}
+                <option value="{{ value }}">{{ key }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 text-center text-sm-left text-md-left text-lg-left text-xl-left">
+        <select name="semester" class="browser-default custom-select border border-white shadow-none rounded-0" id="schoolSemesters">
+            {% for key, value in schoolSemesters %}
+                <option value="{{ value }}">{{ key }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 text-center text-sm-left text-md-left text-lg-left text-xl-left">
+        <button type="button" id="distributed-costs-compare" class="btn btn-outline-secondary btn-sm waves-effect rounded">{{ 'school-dashboard.distributed-costs.compare'|_ }}</button>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 text-center text-sm-left text-md-left text-lg-left text-xl-left">
+        <button type="button" id="distributed-costs-reset" class="btn btn-outline-primary btn-sm waves-effect rounded" data-request="onSchoolCostDistributionReset" data-request-update="'school-dashboard/graph-distributed-costs': '#costsDistribution'">{{ 'school-dashboard.distributed-costs.reset'|_ }}</button>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $('#distributed-costs-compare').on('click', function () {
+        var $year = $('#schoolYears').val();
+        var $semester = $('#schoolSemesters').val();
+
+        $.request(
+            'onSchoolCostDistributionCompare',
+            {
+                update: {
+                    'school-dashboard/graph-distributed-costs': '#costsDistribution'
+                },
+                data: {
+                    year: $year,
+                    semester: $semester
+                }
+            }
+        );
+
+    });
+</script>

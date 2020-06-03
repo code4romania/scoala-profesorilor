@@ -554,6 +554,21 @@
                 'compare_semester' => ['0' => 'Luna 1', '1' => 'Luna 2', '2' => 'Luna 3', '3' => 'Luna 4', '4' => 'Luna 5', '5' => 'Luna 6'],
                 'first_semester_distributed_costs_label' => 'Semestrul 1 ',
                 'second_semester_distributed_costs_label' => 'Semestru 2 ',
+
+                'datatable_name' => 'Nume',
+                'datatable_identifier' => 'CNP',
+                'datatable_birthdate' => 'Data Nastere',
+                'datatable_email' => 'Email',
+                'datatable_phone' => 'Telefon',
+                'datatable_address' => 'Adresa',
+                'datatable_seniority' => 'Senioritate',
+                'datatable_skill_1' => 'Competenta 1 (C1)',
+                'datatable_skill_grade_1' => 'Nota C1',
+                'datatable_skill_2' => 'Competenta 2 (C2)',
+                'datatable_skill_grade_2' => 'Nota C2',
+                'datatable_skill_3' => 'Competenta 3 (C3)',
+                'datatable_skill_grade_3' => 'Nota C3',
+                'datatable_skill_grades_average' => 'Medie competente',
             ],
 
             'validation' => [

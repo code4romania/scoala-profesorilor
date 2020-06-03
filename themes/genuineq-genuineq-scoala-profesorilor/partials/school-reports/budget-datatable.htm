@@ -1,0 +1,74 @@
+description = "Displays the school teachers datatable"
+
+[viewBag]
+==
+
+<div class="table-responsive">
+    <table id="school-teachers-datatable" class="table table-striped table-sm" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                {% for schoolDatatableHeader in schoolDatatableHeaders %}
+                    <th class="th-sm">{{ schoolDatatableHeader }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for schoolDatatableLine in schoolDatatableLines %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    {% for data in schoolDatatableLine %}
+                        <td>{{ data }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <th>#</th>
+                {% for schoolDatatableHeader in schoolDatatableHeaders %}
+                    <th>{{ schoolDatatableHeader }}</th>
+                {% endfor %}
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-colvis-1.6.2/b-flash-1.6.2/b-html5-1.6.2/b-print-1.6.2/kt-2.5.2/r-2.2.5/rr-1.2.7/sc-2.0.2/sp-1.1.1/sl-1.3.1/datatables.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#school-teachers-datatable').DataTable({
+            dom: '<"row view-filter"<"col-sm-12"<"float-none float-sm-left float-md-left float-lg-left float-xl-left my-2"l><"float-none float-sm-right float-md-right float-lg-right float-xl-right my-2"f><"clearfix">><"col-sm-12"<"float-none float-sm-left float-md-left float-lg-left float-xl-left my-2"B><"clearfix">>>t<"row view-pager"<"col-12"<"text-center"p>>>',
+            buttons: [
+                { extend: 'copyHtml5', text: 'Copiaza continutul', className: 'btn-sm mx-2 rounded' },
+                { extend: 'excelHtml5', text: 'Exporta XLXS', className: 'btn-sm mx-2 rounded' },
+                { extend: 'csvHtml5', text: 'Exporta CSV', className: 'btn-sm mx-2 rounded' }
+            ],
+            lengthMenu: [ [5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "Toate"] ],
+            processing: true,
+            pagingType: 'full_numbers',
+            language: {
+                'search': 'Cauta',
+                'lengthMenu': "Numar randuri: _MENU_",
+                'paginate': {
+                    'first':    '«',
+                    'previous': '‹',
+                    'next':     '›',
+                    'last':     '»'
+                },
+                'aria': {
+                    'paginate': {
+                        'first':    'Prima',
+                        'previous': 'Ultima',
+                        'next':     'Inainte',
+                        'last':     'Inapoi'
+                    }
+                }
+            }
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>

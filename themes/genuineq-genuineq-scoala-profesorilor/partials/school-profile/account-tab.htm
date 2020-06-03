@@ -221,22 +221,24 @@ description = "Displays the tab containing all the school account data"
 
 <script type="text/javascript">
 
-    $('#school_inspectorate_id').autocomplete({
-        source: {{ inspectorates|raw }},
-        highlightClass: 'text-danger',
-        treshold: 1
-    });
+    $( document ).ready(function() {
+        $('#school_inspectorate_id').autocomplete({
+            source: {{ inspectorates|raw }},
+            highlightClass: 'text-danger',
+            treshold: 1
+        });
 
-    $('#school_address_id').autocomplete({
-        source: {{ addresses|raw }},
-        highlightClass: 'text-danger',
-        treshold: 1
-    });
+        $('#school_address_id').autocomplete({
+            source: {{ addresses|raw }},
+            highlightClass: 'text-danger',
+            treshold: 1
+        });
 
-    $('#school_avatar').on('change',function(event){
-        if (event.target.files.length) {
-            $(this).next('.custom-file-label').html(event.target.files[0].name);
-        }
-    })
+        $('#school_avatar').on('change',function(event){
+            if (event.target.files.length) {
+                $(this).next('.custom-file-label').html(event.target.files[0].name);
+            }
+        })
+    });
 
 </script>
