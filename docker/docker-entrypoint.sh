@@ -51,14 +51,10 @@ php artisan config:cache
 php artisan october:mirror public --relative
 
 # Change public folder ownership
-# chown -R www-data:www-data /var/www/public
+chown -R www-data:www-data /var/www/public
 
 # Run any DB migrations
 php artisan october:up
-
-# Reinstall plugins
-# php artisan plugin:refresh genuineq.user
-# php artisan plugin:refresh genuineq.tms
 
 # Start cron
 service cron start
