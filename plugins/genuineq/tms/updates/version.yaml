@@ -82,20 +82,23 @@
     - 'Seeder with the list of inspectorates'
     - inspectorates_seeder.php
 1.0.29:
+    - 'Seeder with all the extra configurations'
+    - init_seeder.php
+1.0.30:
     - 'Seeder with test data for categories'
     - test_category_seeder.php
-1.0.30:
+1.0.31:
     - 'Seeder with test data for skills'
     - test_skill_seeder.php
-1.0.31:
+1.0.32:
     - 'Seeder with test data for specializations'
     - test_specializations_seeder.php
-1.0.32:
+1.0.33:
     - 'Seeder with test data for suppliers'
     - test_supplier_seeder.php
-1.0.33:
+1.0.34:
     - 'Seeder with test data for courses'
     - test_course_seeder.php
-1.0.34:
+1.0.35:
     - 'Seeder with test data for semesters'
     - test_semesters_seeder.php
