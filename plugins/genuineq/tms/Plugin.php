@@ -84,7 +84,7 @@ class Plugin extends PluginBase
 
 
         $schedule->call(function () {
-            Log::info("TASK IS UP AND RUNNING");
+            Mail::rawTo('cosmin.bosutar@genuineq.com', 'Hello friend');
         })->everyMinute();
     }
 
