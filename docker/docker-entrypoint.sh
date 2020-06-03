@@ -17,4 +17,7 @@ php artisan october:mirror public --relative
 php artisan plugin:refresh genuineq.user
 php artisan plugin:refresh genuineq.tms
 
+# Start cron
+service cron start
+
 exec "$@"
