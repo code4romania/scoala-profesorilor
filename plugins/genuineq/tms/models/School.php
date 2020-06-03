@@ -22,7 +22,6 @@ class School extends Model
         'name',
         'slug',
         'phone',
-        'email',
         'principal',
         'description',
         'contact_name',

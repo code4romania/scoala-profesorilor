@@ -74,7 +74,6 @@ class TestSemesterSeeder extends Seeder
                         'name' => $name,
                         'slug' => str_slug($name, '-'),
                         'phone' => $faker->tollFreePhoneNumber(),
-                        'email' => $faker->companyEmail(),
                         'principal' => $faker->name(),
                         'inspectorate_id' => $faker->numberBetween($min = 1, $max = 47),
                         'address_id' => $faker->numberBetween($min = 1, $max = 13851),
