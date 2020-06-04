@@ -192,12 +192,12 @@ class LearningPlanTest extends PluginTestCase
     {
         /** Create new teacher */
         $teacher = Teacher::create([
-            'name' => 'test-teacher-name-' . $index,
-            'slug' => 'test-teacher-slug-' . $index,
+            'name' => 'test-learningPlan-teacher-name-' . $index,
+            'slug' => 'test-learningPlan-teacher-slug-' . $index,
             'phone' => '072222222' . $index,
             'birth_date' => '1987-10-2' . $index,
             'address_id' => $index,
-            'description' => 'test-teacher-description-' . $index,
+            'description' => 'test-learningPlan-teacher-description-' . $index,
             'user_id' => $index,
             'seniority_level_id' => $index,
             'status' => 1,

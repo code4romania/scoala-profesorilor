@@ -197,9 +197,9 @@ class TeacherTest extends PluginTestCase
     {
         /** Create new address */
         $address = Address::create([
-            'name' => 'test-address-name-'  .$index,
-            'diacritic' => 'test-address-diacritic-name-' . $index,
-            'county' => 'test-address-county-name-' . $index,
+            'name' => 'test-school-address-name-'  .$index,
+            'diacritic' => 'test-school-address-diacritic-name-' . $index,
+            'county' => 'test-school-address-county-name-' . $index,
             'auto' => 'X' . $index,
             'zip' => '0000' . $index,
             'population' => (777 + $index),
@@ -233,7 +233,7 @@ class TeacherTest extends PluginTestCase
         /** Create new teacher */
         $teacher = Teacher::create([
             'name' => 'test-teacher-name-' . $index,
-            'slug' => 'test-teacher-slug- . $index',
+            'slug' => 'test-teacher-slug-' . $index,
             'phone' => '072222222' . $index,
             'birth_date' => '1987-10-2' . $index,
             'address_id' => $addressId,

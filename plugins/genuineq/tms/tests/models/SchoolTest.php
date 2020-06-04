@@ -162,7 +162,7 @@ class SchoolTest extends PluginTestCase
         $this->assertEquals(1, $school->status);
 
         /** Validate address name */
-        $this->assertEquals('test-address-name-1, test-address-county-name-1', $school->address_name);
+        $this->assertEquals(($address_1->name . ', ' . $address_1->county), $school->address_name);
     }
 
 
@@ -192,7 +192,7 @@ class SchoolTest extends PluginTestCase
         $this->assertEquals(1, $school->status);
 
         /** Validate date format */
-        $this->assertEquals('test-inspectorate-name-1', $school->inspectorate_name);
+        $this->assertEquals($inspectorate_1->name, $school->inspectorate_name);
     }
 
 
@@ -232,9 +232,9 @@ class SchoolTest extends PluginTestCase
     {
         /** Create new inspectorate */
         $inspectorate = Inspectorate::create([
-            'name' => 'test-inspectorate-name-' . $index,
-            'diacritic' => 'test-inspectorate-diacritic-name-' . $index,
-            'description' => 'test-inspectorate-description-' . $index,
+            'name' => 'test-school-inspectorate-name-' . $index,
+            'diacritic' => 'test-school-inspectorate-diacritic-name-' . $index,
+            'description' => 'test-school-inspectorate-description-' . $index,
         ]);
 
         return $inspectorate;
@@ -247,9 +247,9 @@ class SchoolTest extends PluginTestCase
     {
         /** Create new address */
         $address = Address::create([
-            'name' => 'test-address-name-'  .$index,
-            'diacritic' => 'test-address-diacritic-name-' . $index,
-            'county' => 'test-address-county-name-' . $index,
+            'name' => 'test-school-address-name-'  .$index,
+            'diacritic' => 'test-school-address-diacritic-name-' . $index,
+            'county' => 'test-school-address-county-name-' . $index,
             'auto' => 'X' . $index,
             'zip' => '0000' . $index,
             'population' => (777 + $index),

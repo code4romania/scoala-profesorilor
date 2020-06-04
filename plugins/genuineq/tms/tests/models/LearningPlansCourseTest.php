@@ -129,17 +129,17 @@ class LearningPlansCourseTest extends PluginTestCase
     {
         /** Create new course */
         $course = Course::create([
-            'name' => 'test-course-name-' . $indexId,
-            'slug' => 'test-course-slug-' . $indexId,
+            'name' => 'test-LearningPlansCourse-course-name-' . $indexId,
+            'slug' => 'test-LearningPlansCourse-course-slug-' . $indexId,
             'supplier_id' => $indexId,
             'duration' => 5.6 + $indexId,
-            'address' => 'test-course-address-' . $indexId,
+            'address' => 'test-LearningPlansCourse-course-address-' . $indexId,
             'start_date' => '2020-05-0' . $indexId,
             'end_date' => '2020-05-0' . ($indexId + 2),
             'accredited' => 0,
             'credits' => 0,
             'price' => 100 + $indexId,
-            'description' => 'test-course-description-' . $indexId,
+            'description' => 'test-LearningPlansCourse-course-description-' . $indexId,
             'status' => 1
         ]);
 

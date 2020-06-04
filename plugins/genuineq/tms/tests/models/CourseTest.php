@@ -13,20 +13,20 @@ class CourseTest extends PluginTestCase
         /** Create a supplier */
         $supplier = $this->helper__createSupplier(1);
         /** Create new course */
-        $course = $this->helper__createCourse($supplier->id);
+        $course = $this->helper__createCourse(1, $supplier->id);
 
         /* Validate created course */
-        $this->assertEquals('test-course-name', $course->name);
-        $this->assertEquals('test-course-slug', $course->slug);
+        $this->assertEquals('test-course-name-1', $course->name);
+        $this->assertEquals('test-course-slug-1', $course->slug);
         $this->assertEquals($supplier->id, $course->supplier_id);
-        $this->assertEquals(5.6, $course->duration);
-        $this->assertEquals('test-course-address', $course->address);
+        $this->assertEquals(6.6, $course->duration);
+        $this->assertEquals('test-course-address-1', $course->address);
         $this->assertEquals('2020-05-01', $course->start_date);
-        $this->assertEquals('2020-05-02', $course->end_date);
+        $this->assertEquals('2020-05-01', $course->end_date);
         $this->assertEquals(0, $course->accredited);
         $this->assertEquals(0, $course->credits);
-        $this->assertEquals(100, $course->price);
-        $this->assertEquals('test-course-description', $course->description);
+        $this->assertEquals(101, $course->price);
+        $this->assertEquals('test-course-description-1', $course->description);
         $this->assertEquals(1, $course->status);
     }
 
@@ -36,20 +36,20 @@ class CourseTest extends PluginTestCase
         /** Create a supplier */
         $supplier = $this->helper__createSupplier(2);
         /** Create new course */
-        $course = $this->helper__createCourse($supplier->id);
+        $course = $this->helper__createCourse(2, $supplier->id);
 
         /* Validate created course */
-        $this->assertEquals('test-course-name', $course->name);
-        $this->assertEquals('test-course-slug', $course->slug);
+        $this->assertEquals('test-course-name-2', $course->name);
+        $this->assertEquals('test-course-slug-2', $course->slug);
         $this->assertEquals($supplier->id, $course->supplier_id);
-        $this->assertEquals(5.6, $course->duration);
-        $this->assertEquals('test-course-address', $course->address);
-        $this->assertEquals('2020-05-01', $course->start_date);
+        $this->assertEquals(7.6, $course->duration);
+        $this->assertEquals('test-course-address-2', $course->address);
+        $this->assertEquals('2020-05-02', $course->start_date);
         $this->assertEquals('2020-05-02', $course->end_date);
         $this->assertEquals(0, $course->accredited);
         $this->assertEquals(0, $course->credits);
-        $this->assertEquals(100, $course->price);
-        $this->assertEquals('test-course-description', $course->description);
+        $this->assertEquals(102, $course->price);
+        $this->assertEquals('test-course-description-2', $course->description);
         $this->assertEquals(1, $course->status);
 
         /** Create a new supplier */
@@ -91,20 +91,20 @@ class CourseTest extends PluginTestCase
         /** Create a supplier */
         $supplier = $this->helper__createSupplier(4);
         /** Create new course */
-        $course = $this->helper__createCourse($supplier->id);
+        $course = $this->helper__createCourse(3, $supplier->id);
 
         /* Validate created course */
-        $this->assertEquals('test-course-name', $course->name);
-        $this->assertEquals('test-course-slug', $course->slug);
+        $this->assertEquals('test-course-name-3', $course->name);
+        $this->assertEquals('test-course-slug-3', $course->slug);
         $this->assertEquals($supplier->id, $course->supplier_id);
-        $this->assertEquals(5.6, $course->duration);
-        $this->assertEquals('test-course-address', $course->address);
-        $this->assertEquals('2020-05-01', $course->start_date);
-        $this->assertEquals('2020-05-02', $course->end_date);
+        $this->assertEquals(8.6, $course->duration);
+        $this->assertEquals('test-course-address-3', $course->address);
+        $this->assertEquals('2020-05-03', $course->start_date);
+        $this->assertEquals('2020-05-03', $course->end_date);
         $this->assertEquals(0, $course->accredited);
         $this->assertEquals(0, $course->credits);
-        $this->assertEquals(100, $course->price);
-        $this->assertEquals('test-course-description', $course->description);
+        $this->assertEquals(103, $course->price);
+        $this->assertEquals('test-course-description-3', $course->description);
         $this->assertEquals(1, $course->status);
 
         /** Save the ID */
@@ -125,25 +125,25 @@ class CourseTest extends PluginTestCase
         /** Create a supplier */
         $supplier = $this->helper__createSupplier(5);
         /** Create new course */
-        $course = $this->helper__createCourse($supplier->id);
+        $course = $this->helper__createCourse(4, $supplier->id);
 
         /* Validate created course */
-        $this->assertEquals('test-course-name', $course->name);
-        $this->assertEquals('test-course-slug', $course->slug);
+        $this->assertEquals('test-course-name-4', $course->name);
+        $this->assertEquals('test-course-slug-4', $course->slug);
         $this->assertEquals($supplier->id, $course->supplier_id);
-        $this->assertEquals(5.6, $course->duration);
-        $this->assertEquals('test-course-address', $course->address);
-        $this->assertEquals('2020-05-01', $course->start_date);
-        $this->assertEquals('2020-05-02', $course->end_date);
+        $this->assertEquals(9.6, $course->duration);
+        $this->assertEquals('test-course-address-4', $course->address);
+        $this->assertEquals('2020-05-04', $course->start_date);
+        $this->assertEquals('2020-05-04', $course->end_date);
         $this->assertEquals(0, $course->accredited);
         $this->assertEquals(0, $course->credits);
-        $this->assertEquals(100, $course->price);
-        $this->assertEquals('test-course-description', $course->description);
+        $this->assertEquals(104, $course->price);
+        $this->assertEquals('test-course-description-4', $course->description);
         $this->assertEquals(1, $course->status);
 
         /** Validate date format */
-        $this->assertEquals('01.05.2020', $course->startDate());
-        $this->assertEquals('02.05.2020', $course->endDate());
+        $this->assertEquals('04.05.2020', $course->startDate());
+        $this->assertEquals('04.05.2020', $course->endDate());
     }
 
 
@@ -152,20 +152,20 @@ class CourseTest extends PluginTestCase
         /** Create a supplier */
         $supplier = $this->helper__createSupplier(6);
         /** Create new course */
-        $course = $this->helper__createCourse($supplier->id);
+        $course = $this->helper__createCourse(5, $supplier->id);
 
         /* Validate created course */
-        $this->assertEquals('test-course-name', $course->name);
-        $this->assertEquals('test-course-slug', $course->slug);
+        $this->assertEquals('test-course-name-5', $course->name);
+        $this->assertEquals('test-course-slug-5', $course->slug);
         $this->assertEquals($supplier->id, $course->supplier_id);
-        $this->assertEquals(5.6, $course->duration);
-        $this->assertEquals('test-course-address', $course->address);
-        $this->assertEquals('2020-05-01', $course->start_date);
-        $this->assertEquals('2020-05-02', $course->end_date);
+        $this->assertEquals(10.6, $course->duration);
+        $this->assertEquals('test-course-address-5', $course->address);
+        $this->assertEquals('2020-05-05', $course->start_date);
+        $this->assertEquals('2020-05-05', $course->end_date);
         $this->assertEquals(0, $course->accredited);
         $this->assertEquals(0, $course->credits);
-        $this->assertEquals(100, $course->price);
-        $this->assertEquals('test-course-description', $course->description);
+        $this->assertEquals(105, $course->price);
+        $this->assertEquals('test-course-description-5', $course->description);
         $this->assertEquals(1, $course->status);
 
         /** Validate 0 categories */
@@ -188,20 +188,20 @@ class CourseTest extends PluginTestCase
         /** Create a supplier */
         $supplier = $this->helper__createSupplier(7);
         /** Create new course */
-        $course = $this->helper__createCourse($supplier->id);
+        $course = $this->helper__createCourse(6, $supplier->id);
 
         /* Validate created course */
-        $this->assertEquals('test-course-name', $course->name);
-        $this->assertEquals('test-course-slug', $course->slug);
+        $this->assertEquals('test-course-name-6', $course->name);
+        $this->assertEquals('test-course-slug-6', $course->slug);
         $this->assertEquals($supplier->id, $course->supplier_id);
-        $this->assertEquals(5.6, $course->duration);
-        $this->assertEquals('test-course-address', $course->address);
-        $this->assertEquals('2020-05-01', $course->start_date);
-        $this->assertEquals('2020-05-02', $course->end_date);
+        $this->assertEquals(11.6, $course->duration);
+        $this->assertEquals('test-course-address-6', $course->address);
+        $this->assertEquals('2020-05-06', $course->start_date);
+        $this->assertEquals('2020-05-06', $course->end_date);
         $this->assertEquals(0, $course->accredited);
         $this->assertEquals(0, $course->credits);
-        $this->assertEquals(100, $course->price);
-        $this->assertEquals('test-course-description', $course->description);
+        $this->assertEquals(106, $course->price);
+        $this->assertEquals('test-course-description-6', $course->description);
         $this->assertEquals(1, $course->status);
 
         /** Validate default color */
@@ -235,21 +235,21 @@ class CourseTest extends PluginTestCase
     /**
      * Created an course object and return's it
      */
-    protected function helper__createCourse($supplierId)
+    protected function helper__createCourse($index, $supplierId)
     {
         /** Create new course */
         $course = Course::create([
-            'name' => 'test-course-name',
-            'slug' => 'test-course-slug',
+            'name' => 'test-course-name-' . $index,
+            'slug' => 'test-course-slug-' . $index,
             'supplier_id' => $supplierId,
-            'duration' => 5.6,
-            'address' => 'test-course-address',
-            'start_date' => '2020-05-01',
-            'end_date' => '2020-05-02',
+            'duration' => 5.6 + $index,
+            'address' => 'test-course-address-' . $index,
+            'start_date' => '2020-05-0' . $index,
+            'end_date' => '2020-05-0' . $index,
             'accredited' => 0,
             'credits' => 0,
-            'price' => 100,
-            'description' => 'test-course-description',
+            'price' => 100 + $index,
+            'description' => 'test-course-description-' . $index,
             'status' => 1
         ]);
 
@@ -263,11 +263,11 @@ class CourseTest extends PluginTestCase
     {
         /** Create new category */
         $category = Category::create([
-            'name' => 'test-category-name-' . $index,
-            'slug' => 'test-category-slug-' . $index,
+            'name' => 'test-course-category-name-' . $index,
+            'slug' => 'test-course-category-slug-' . $index,
             'color' => '#FACFA' . $index,
-            'icon' => 'test-category-icon-' . $index,
-            'description' => 'test-category-description-' . $index,
+            'icon' => 'test-course-category-icon-' . $index,
+            'description' => 'test-course-category-description-' . $index,
         ]);
 
         return $category;
@@ -280,11 +280,11 @@ class CourseTest extends PluginTestCase
     {
         /** Create new supplier */
         $supplier = Supplier::create([
-            'name' => 'test-supplier-name-' . $index,
-            'slug' => 'test-supplier-slug-' . $index,
+            'name' => 'test-coursesupplier-name-' . $index,
+            'slug' => 'test-coursesupplier-slug-' . $index,
             'email' => 'supplier@email.com-' . $index,
             'phone' => '072222222' . $index,
-            'description' => 'test-supplier-description-' . $index,
+            'description' => 'test-course-supplier-description-' . $index,
         ]);
 
         return $supplier;

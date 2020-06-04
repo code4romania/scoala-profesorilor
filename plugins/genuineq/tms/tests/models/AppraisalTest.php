@@ -127,7 +127,7 @@ class AppraisalTest extends PluginTestCase
         /** Create a teacher */
         $teacher_8 = $this->helper__createTeacher(8);
         /** Create a skill 1 */
-        $skill_1 = $this->helper__createSkill(11);
+        $skill_1 = $this->helper__createSkill(10);
         /** Create a skill 2 */
         $skill_2 = $this->helper__createSkill(11);
         /** Create a skill 3 */
@@ -198,7 +198,7 @@ class AppraisalTest extends PluginTestCase
         $this->assertEquals('new', $appraisal->status);
 
         /** Validate school name */
-        $this->assertEquals($school_1->name, $appraisal->school_name);
+        $this->assertEquals($school_9->name, $appraisal->school_name);
     }
 
 
@@ -235,7 +235,7 @@ class AppraisalTest extends PluginTestCase
         $this->assertEquals('new', $appraisal->status);
 
         /** Validate teacher name */
-        $this->assertEquals($teacher_2->name, $appraisal->teacher_name);
+        $this->assertEquals($teacher_12->name, $appraisal->teacher_name);
     }
 
 
@@ -351,18 +351,18 @@ class AppraisalTest extends PluginTestCase
     {
         /** Create new school */
         $school = School::create([
-            'name' => 'test-school-name-' . $indexId,
-            'slug' => 'test-school-slug-' . $indexId,
+            'name' => 'test-appraisal-school-name-' . $indexId,
+            'slug' => 'test-appraisal-school-slug-' . $indexId,
             'phone' => '072222222' . $indexId,
-            'principal' => 'test-school-principal-' . $indexId,
+            'principal' => 'test-appraisal-school-principal-' . $indexId,
             'inspectorate_id' => $indexId,
             'address_id' => $indexId,
-            'description' => 'test-school-description-' . $indexId,
+            'description' => 'test-appraisal-school-description-' . $indexId,
             'user_id' => $indexId,
             'contact_name' => 'test-school-contact-name-' . $indexId,
             'contact_email' => 'contact@email.com-' . $indexId,
             'contact_phone' => '073333333' . $indexId,
-            'contact_role' => 'test-school-role-' . $indexId,
+            'contact_role' => 'test-appraisal-school-role-' . $indexId,
             'status'=> 1,
         ]);
 
@@ -377,12 +377,12 @@ class AppraisalTest extends PluginTestCase
     {
         /** Create new teacher */
         $teacher = Teacher::create([
-            'name' => 'test-teacher-name-' . $indexId,
-            'slug' => 'test-teacher-slug-' . $indexId,
+            'name' => 'test-appraisal-teacher-name-' . $indexId,
+            'slug' => 'test-appraisal-teacher-slug-' . $indexId,
             'phone' => '072222222' . $indexId,
             'birth_date' => '1987-10-2' . $indexId,
             'address_id' => $indexId,
-            'description' => 'test-teacher-description-' . $indexId,
+            'description' => 'test-appraisal-teacher-description-' . $indexId,
             'user_id' => $indexId,
             'seniority_level_id' => $indexId,
             'status' => 1,
@@ -399,8 +399,8 @@ class AppraisalTest extends PluginTestCase
     {
         /** Create new skill */
         $skill = Skill::create([
-            'name' => 'test-skill-name-' . $indexId,
-            'slug' => 'test-skill-slug-' . $indexId,
+            'name' => 'test-appraisal-skill-name-' . $indexId,
+            'slug' => 'test-appraisal-skill-slug-' . $indexId,
             'description' => 'test-skill-description-' . $indexId,
         ]);
 
