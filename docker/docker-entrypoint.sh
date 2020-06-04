@@ -52,7 +52,6 @@ php artisan october:mirror public --relative
 
 # Change public folder ownership
 chown -R www-data:www-data /var/www
-find . -type d \( -path './plugins' -or  -path './storage' -or  -path './themes' -or  -path './plugins/*' -or  -path './storage/*' -or  -path './themes/*'  -or  -path './plugins/*/*' -or  -path './storage/*/*' -or  -path './themes/*/*' \) -exec chmod g+ws {}
 
 # Make log file
 touch system.log
