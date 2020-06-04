@@ -1,12 +1,12 @@
 columns:
     name:
-        label: 'genuineq.tms::lang.inspectotate.label.name'
+        label: 'genuineq.tms::lang.inspectorate.label.name'
         type: text
         searchable: true
         sortable: true
 
     diacritic:
-        label: 'genuineq.tms::lang.inspectotate.label.diacritic'
+        label: 'genuineq.tms::lang.inspectorate.label.diacritic'
         type: text
         searchable: true
         sortable: true

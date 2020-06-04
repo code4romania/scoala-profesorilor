@@ -357,7 +357,7 @@ return [
                 'password_confirmation_required_with' => 'Confirmarea parolei este obligatorie',
             ],
             'message' => [
-                'registration_disabled' => 'Inregistratile sunt momentan dezactivate',
+                'registration_disabled' => 'Inregistrarile sunt momentan dezactivate',
                 'registration_throttled' => 'Prea multe incercari de inregistrare nereusite. Va rugam sa incercati mai tarziu',
                 'activation_email_sent' => 'Un email de activare a fost trimis catre adresa de email specificata',
                 'registration_successful' => 'Inregistrare cu succes',

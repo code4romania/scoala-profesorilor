@@ -146,14 +146,14 @@
         ],
     ],
 
-    'inspectotate' => [
+    'inspectorate' => [
         'label' => [
             'name' => 'Name',
             'diacritic' => 'Diacritics',
             'description' => 'Description',
         ],
 
-        'backend-menu' => 'Inspectotates',
+        'backend-menu' => 'Inspectorates',
     ],
 
     'school' => [
@@ -386,7 +386,7 @@
                 'phone_max' => 'Lungimea maxima a numarului de telefon al profesorului este de 15 caractere',
                 'birth_date_date' => 'Data specificata nu este formatata corect. Folosit formatul dd/mm/yyyy',
                 'address_id_numeric' => 'Adresa specificata nu exista in lista de adrese posibile',
-                'seniority_level_id_numeric' => 'Nuvelul de senioritate specificat nu exista in lista de valori posibile',
+                'seniority_level_id_numeric' => 'Nivelul de senioritate specificat nu exista in lista de valori posibile',
                 'school_level_id_numeric' => 'Nivelul scolii specificat nu exista in lista de valori posibile',
                 'contract_type_id_numeric' => 'Tipul de contract specificat nu exista in lista de valori posibile',
                 'description_string' => 'Descrierea trebuie sa fie de tip string',
@@ -416,7 +416,7 @@
                 'phone_max' => 'Lungimea maxima a numarului de telefon al profesorului este de 15 caractere',
                 'birth_date_date' => 'Data specificata nu este formatata corect. Folosit formatul dd/mm/yyyy',
                 'address_id_numeric' => 'Adresa specificata nu exista in lista de adrese posibile',
-                'seniority_level_id_numeric' => 'Nuvelul de senioritate specificat nu exista in lista de valori posibile',
+                'seniority_level_id_numeric' => 'Nivelul de senioritate specificat nu exista in lista de valori posibile',
                 'school_level_id_numeric' => 'Nivelul scolii specificat nu exista in lista de valori posibile',
                 'contract_type_id_numeric' => 'Tipul de contract specificat nu exista in lista de valori posibile',
                 'description_string' => 'Descrierea trebuie sa fie de tip string',
@@ -453,14 +453,14 @@
                 'email_update_successful' => 'Adresa de email a fost actualizata cu succes',
                 'password_update_successful' => 'Parola a fost actualizata cu succes',
                 'teachers_import_successful_1' => ' profesori au fost adaugati cu succes si pentru ',
-                'teachers_import_successful_2' => ' au aparut eroari',
+                'teachers_import_successful_2' => ' au aparut erori',
                 'teachers_import_failed' => 'Nu a fost specificat un fisier.',
                 'teachers_import_sheet_skipped' => 'Sheet-ul urmator nu a fost parcurs: ',
-                'teachers_import_failed' => 'Import-ul a esut.',
+                'teachers_import_failed' => 'Import-ul a esuat.',
                 'teachers_import_association_successful' => 'Profesorul a fost asociat cu succes',
                 'teachers_import_association_exists' => 'Profesorul este deja asociat',
                 'teachers_import_add_successful' => 'Profesorul a fost adaugat cu succes',
-                'not_exists' => 'Profesorul specificat nu exista sau nu sunteti asociet cu el',
+                'not_exists' => 'Profesorul specificat nu exista sau nu sunteti asociat cu el',
             ],
         ],
 
@@ -513,13 +513,13 @@
                 'not_allowed' => 'Nu aveti acces la evaluarea ceruta',
                 'not_exists' => 'Evaluarea ceruta nu exista',
                 'empty_objectives' => 'Obiectivele nu pot sa fie goale',
-                'save_successfull' => "Schimbarile au fost salvate cu succes",
-                'objectives_set_successfull' => "Obiectivele au fost stabilite cu succes",
-                'objectives_approved_successfull' => "Obiectivele au fost aprobate cu succes",
-                'skills_set_successfull' => "Skill-urile au fost stabilite cu succes",
-                'close_successfull' => "Evaluarea a fost inchisa cu succes",
+                'save_successful' => "Schimbarile au fost salvate cu succes",
+                'objectives_set_successful' => "Obiectivele au fost stabilite cu succes",
+                'objectives_approved_successful' => "Obiectivele au fost aprobate cu succes",
+                'skills_set_successful' => "Skill-urile au fost stabilite cu succes",
+                'close_successful' => "Evaluarea a fost inchisa cu succes",
                 'invalid_grade' => "Notele pot sa fie intre 1 si 10",
-                'teacher_not_exists' => 'Profesorul specificat nu exista sau nu sunteti asociet cu el',
+                'teacher_not_exists' => 'Profesorul specificat nu exista sau nu sunteti asociat cu el',
             ],
         ],
 

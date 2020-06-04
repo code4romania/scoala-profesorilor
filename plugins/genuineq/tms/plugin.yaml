@@ -64,8 +64,8 @@ navigation:
                 url: genuineq/tms/addresses
                 icon: icon-map-marker
             side-menu-item2:
-                label: 'genuineq.tms::lang.inspectotate.backend-menu'
-                url: genuineq/tms/inspectotate
+                label: 'genuineq.tms::lang.inspectorate.backend-menu'
+                url: genuineq/tms/inspectorate
                 icon: icon-institution
             side-menu-item3:
                 label: 'genuineq.tms::lang.specialization.backend-menu'

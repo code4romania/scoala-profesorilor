@@ -1,0 +1,10 @@
+name: Inspectorate
+form: $/genuineq/tms/models/inspectorate/fields.yaml
+modelClass: Genuineq\Tms\Models\Inspectorate
+defaultRedirect: genuineq/tms/inspectorate
+create:
+    redirect: 'genuineq/tms/inspectorate/update/:id'
+    redirectClose: genuineq/tms/inspectorate
+update:
+    redirect: genuineq/tms/inspectorate
+    redirectClose: genuineq/tms/inspectorate

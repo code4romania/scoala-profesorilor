@@ -3,7 +3,7 @@
 use Backend\Classes\Controller;
 use BackendMenu;
 
-class Inspectotate extends Controller
+class Inspectorate extends Controller
 {
     public $implement = [
         'Backend\Behaviors\ListController',

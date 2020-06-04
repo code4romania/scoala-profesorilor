@@ -1,6 +1,6 @@
 list: $/genuineq/tms/models/inspectorate/columns.yaml
 modelClass: Genuineq\Tms\Models\Inspectorate
-title: Inspectotate
+title: Inspectorate
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true
 showCheckboxes: true
@@ -9,4 +9,4 @@ toolbar:
     buttons: list_toolbar
     search:
         prompt: 'backend::lang.list.search_prompt'
-recordUrl: 'genuineq/tms/inspectotate/update/:id'
+recordUrl: 'genuineq/tms/inspectorate/update/:id'

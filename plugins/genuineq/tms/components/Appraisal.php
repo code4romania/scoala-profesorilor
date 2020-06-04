@@ -139,7 +139,7 @@ class Appraisal extends ComponentBase
         $appraisal->objectives = post('objectives');
         $appraisal->save();
 
-        Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.save_successfull'));
+        Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.save_successful'));
 
         /** Extract the appraisal. */
         $this->page['appraisal'] = $appraisal;
@@ -191,7 +191,7 @@ class Appraisal extends ComponentBase
         $appraisal->status = 'objectives-set';
         $appraisal->save();
 
-        Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.objectives_set_successfull'));
+        Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.objectives_set_successful'));
 
         Event::fire(
             'genuineq.tms.teacher.appraisal.objectives.set',
@@ -356,7 +356,7 @@ class Appraisal extends ComponentBase
         }
         $appraisal->save();
 
-        Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.save_successfull'));
+        Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.save_successful'));
 
         /** Extract the appraisal. */
         $this->page['appraisal'] = $appraisal;
@@ -413,7 +413,7 @@ class Appraisal extends ComponentBase
         $appraisal->status = 'objectives-approved';
         $appraisal->save();
 
-        Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.objectives_approved_successfull'));
+        Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.objectives_approved_successful'));
 
         Event::fire(
             'genuineq.tms.school.appraisal.objectives.approve',
@@ -481,7 +481,7 @@ class Appraisal extends ComponentBase
         $appraisal->status = 'skills-set';
         $appraisal->save();
 
-        Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.skills_set_successfull'));
+        Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.skills_set_successful'));
 
         Event::fire(
             'genuineq.tms.school.appraisal.skills.set',
@@ -548,7 +548,7 @@ class Appraisal extends ComponentBase
         $appraisal->status = 'closed';
         $appraisal->save();
 
-        Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.close_successfull'));
+        Flash::success(Lang::get('genuineq.tms::lang.component.appraisal.message.close_successful'));
 
         Event::fire(
             'genuineq.tms.school.appraisal.evaluation.closed',
