@@ -4,5 +4,23 @@ author: genuineq
 homepage: https://www.genuineq.com
 code: genuineq-scoala-profesorilor
 require:
-    - RainLab.Pages
+    - RainLab.Builder
     - RainLab.Blog
+    - RainLab.Pages
+    - RainLab.Notify
+    - RainLab.Translate
+    - Rahman.Faker
+    - GinoPane.AwesomeIconsList
+    - GinoPane.AwesomeSocialLinks
+    - GinoPane.AwesomeCategories
+    - GinoPane.BlogTimeToRead
+    - Bedard.BlogTags
+    - JanVince.SmallExtensions
+    - Genuineq.Https
+    - Genuineq.User
+    - Genuineq.UserAccessLog
+    - Martin.SSButtons
+    - RainLab.MailChimp
+    - VojtaSvoboda.Brands
+    - Martin.SimpleGoogleAnalytics
+    - Genuineq.Tms
