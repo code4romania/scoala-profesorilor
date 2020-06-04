@@ -68,7 +68,7 @@ You may also watch these introductory videos for [beginners](https://vimeo.com/7
 
 ## Development Team
 
-Scoala Profesorilor was developed by [Civic Labs](https://civiclabs.ro/en) in collaboration with [Fundația Didactica Sibiu](https://scoalafinlandezasibiu.ro/) and [Genuineq](https://www.linkedin.com/company/genuineq/).
+Scoala Profesorilor was developed by [Civic Labs](https://civiclabs.ro/en) in collaboration with [Fundația Didactica Sibiu](https://scoalafinlandezasibiu.ro/) and [Genuineq](https://www.genuineq.com/).
 
 The maintenance of Scoala Profesorilor is lead by [Code for Romania](https://code4.ro/en/), along with many wonderful people that dedicate their time to help support and grow the community.
 
