@@ -72,15 +72,6 @@ Scoala Profesorilor was developed by [Civic Labs](https://civiclabs.ro/en) in co
 
 The maintenance of Scoala Profesorilor is lead by [Code for Romania](https://code4.ro/en/), along with many wonderful people that dedicate their time to help support and grow the community.
 
-## Contact
-
-You can communicate with us using the following mediums:
-
-* [Follow us on Twitter](https://twitter.com/octobercms) for announcements and updates.
-* [Follow us on Facebook](https://facebook.com/octobercms) for announcements and updates.
-* [Join the Official Forum](https://octobercms.com/forum) to engage with the community.
-* [Join us on Discord](https://octobercms.com/chat) to chat with us.
-
 ## License
 
 The Scoala Profesorilor platform is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
