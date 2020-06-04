@@ -17,8 +17,6 @@ class CreateAccessLogTable extends Migration
 			$table->increments('id');
 
 			$table->integer('user_id')->unsigned()->nullable();
-			$table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
-
 			$table->string('ip_address')->nullable();
 
 			$table->timestamps();
@@ -27,13 +25,7 @@ class CreateAccessLogTable extends Migration
 
 	public function down()
 	{
-		DB::statement("SET foreign_key_checks = 0");
-		Schema::table('user_access_log', function($table)
-		{
-			$table->dropForeign('user_access_log_user_id_foreign');
-		});
 		Schema::dropIfExists('user_access_log');
-		DB::statement("SET foreign_key_checks = 1");
 	}
 
 }
