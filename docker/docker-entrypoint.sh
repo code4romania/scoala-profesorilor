@@ -38,7 +38,7 @@ echo CMS_LINK_POLICY=$CMS_LINK_POLICY >> .env
 echo CMS_ENABLE_CSRF=$CMS_ENABLE_CSRF >> .env
 
 # Change env file ownership
-chown www-data:www-data /var/www/.env
+# chown www-data:www-data /var/www/.env
 
 # Run any DB migrations
 php artisan october:up
@@ -48,13 +48,12 @@ php artisan route:clear
 
 # Clear and cache application configuration
 php artisan config:clear
-php artisan config:cache
 
 # Create the public folder
 php artisan october:mirror public --relative
 
 # Change public folder ownership
-chown -R www-data:www-data /var/www/public
+# chown -R www-data:www-data /var/www/public
 
 # Start cron
 service cron start
