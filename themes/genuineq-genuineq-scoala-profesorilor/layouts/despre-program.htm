@@ -126,3 +126,10 @@ use Genuineq\Tms\Models\Course;
 <!--/.Latest Courses-->
 
 {% partial 'footer' %}
+
+{% if not user %}
+    {% partial 'signing/login-modal' %}
+    {% partial 'signing/signup-school-modal' %}
+    {% partial 'signing/signup-teacher-modal' %}
+    {% partial 'signing/signup-select-modal' %}
+{% endif %}
