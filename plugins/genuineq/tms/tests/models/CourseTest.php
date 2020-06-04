@@ -34,7 +34,7 @@ class CourseTest extends PluginTestCase
     public function test__updateCourse()
     {
         /** Create a supplier */
-        $supplier = $this->helper__createSupplier(1);
+        $supplier = $this->helper__createSupplier(2);
         /** Create new course */
         $course = $this->helper__createCourse($supplier->id);
 
@@ -53,7 +53,7 @@ class CourseTest extends PluginTestCase
         $this->assertEquals(1, $course->status);
 
         /** Create a new supplier */
-        $newSupplier = $this->helper__createSupplier(2);
+        $newSupplier = $this->helper__createSupplier(3);
 
         /** Update course */
         $course->name = 'new-test-course-name';
@@ -89,7 +89,7 @@ class CourseTest extends PluginTestCase
     public function test__deleteCourse()
     {
         /** Create a supplier */
-        $supplier = $this->helper__createSupplier(1);
+        $supplier = $this->helper__createSupplier(4);
         /** Create new course */
         $course = $this->helper__createCourse($supplier->id);
 
@@ -123,7 +123,7 @@ class CourseTest extends PluginTestCase
     public function test__dateFormat()
     {
         /** Create a supplier */
-        $supplier = $this->helper__createSupplier(1);
+        $supplier = $this->helper__createSupplier(5);
         /** Create new course */
         $course = $this->helper__createCourse($supplier->id);
 
@@ -150,7 +150,7 @@ class CourseTest extends PluginTestCase
     public function test__categoriesCount()
     {
         /** Create a supplier */
-        $supplier = $this->helper__createSupplier(1);
+        $supplier = $this->helper__createSupplier(6);
         /** Create new course */
         $course = $this->helper__createCourse($supplier->id);
 
@@ -186,7 +186,7 @@ class CourseTest extends PluginTestCase
     public function test__courseColor()
     {
         /** Create a supplier */
-        $supplier = $this->helper__createSupplier(1);
+        $supplier = $this->helper__createSupplier(7);
         /** Create new course */
         $course = $this->helper__createCourse($supplier->id);
 
