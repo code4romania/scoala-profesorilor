@@ -265,7 +265,7 @@ class CourseTest extends PluginTestCase
         $category = Category::create([
             'name' => 'test-course-category-name-' . $index,
             'slug' => 'test-course-category-slug-' . $index,
-            'color' => '#FACFA' . $index,
+            'color' => 'FACFA' . $index,
             'icon' => 'test-course-category-icon-' . $index,
             'description' => 'test-course-category-description-' . $index,
         ]);
