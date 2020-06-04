@@ -53,9 +53,6 @@ php artisan october:mirror public --relative
 # Change public folder ownership
 chown -R www-data:www-data /var/www
 
-# Make log file
-touch system.log
-
 # Start cron
 service cron start
 
