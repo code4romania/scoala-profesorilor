@@ -94,9 +94,9 @@ WORKDIR /var/www
 #Install project dependencies
 RUN composer install --no-interaction --no-dev --prefer-dist --no-scripts \
     && composer dump-autoload -o \
-    && composer clearcache
-    # && chown -R www-data:www-data /var/www \
-    # && find . -type d \( -path './plugins' -or  -path './storage' -or  -path './themes' -or  -path './plugins/*' -or  -path './storage/*' -or  -path './themes/*' \) -exec chmod g+ws {} \;
+    && composer clearcache \
+    && chown -R www-data:www-data /var/www \
+    && find . -type d \( -path './plugins' -or  -path './storage' -or  -path './themes' -or  -path './plugins/*' -or  -path './storage/*' -or  -path './themes/*' \) -exec chmod g+ws {} \;
 
 EXPOSE 443 80
 

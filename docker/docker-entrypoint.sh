@@ -37,9 +37,6 @@ echo CMS_ASSET_CACHE=$CMS_ASSET_CACHE >> .env
 echo CMS_LINK_POLICY=$CMS_LINK_POLICY >> .env
 echo CMS_ENABLE_CSRF=$CMS_ENABLE_CSRF >> .env
 
-# Change env file ownership
-# chown www-data:www-data /var/www/.env
-
 # Run any DB migrations
 php artisan october:up
 
@@ -54,7 +51,11 @@ php artisan config:clear
 php artisan october:mirror public --relative
 
 # Change public folder ownership
-# chown -R www-data:www-data /var/www/public
+chown -R www-data:www-data /var/www
+find . -type d \( -path './plugins' -or  -path './storage' -or  -path './themes' -or  -path './plugins/*' -or  -path './storage/*' -or  -path './themes/*'  -or  -path './plugins/*/*' -or  -path './storage/*/*' -or  -path './themes/*/*' \) -exec chmod g+ws {}
+
+# Make log file
+touch system.log
 
 # Start cron
 service cron start
