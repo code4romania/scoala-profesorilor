@@ -50,11 +50,11 @@ class AppraisalTest extends PluginTestCase
         /** Create a teacher */
         $teacher_4 = $this->helper__createTeacher(4);
         /** Create a skill 1 */
-        $skill_1 = $this->helper__createSkill(1);
+        $skill_1 = $this->helper__createSkill(4);
         /** Create a skill 2 */
-        $skill_2 = $this->helper__createSkill(2);
+        $skill_2 = $this->helper__createSkill(5);
         /** Create a skill 3 */
-        $skill_3 = $this->helper__createSkill(3);
+        $skill_3 = $this->helper__createSkill(6);
 
         /** Create new appraisal */
         $appraisal = $this->helper__createAppraisal($school_3->id, $teacher_4->id, $skill_1->id, $skill_2->id, $skill_3->id);
@@ -80,11 +80,11 @@ class AppraisalTest extends PluginTestCase
         /** Create a teacher */
         $teacher_6 = $this->helper__createTeacher(6);
         /** Create a skill 1 */
-        $skill_4 = $this->helper__createSkill(4);
+        $skill_4 = $this->helper__createSkill(7);
         /** Create a skill 2 */
-        $skill_5 = $this->helper__createSkill(5);
+        $skill_5 = $this->helper__createSkill(8);
         /** Create a skill 3 */
-        $skill_6 = $this->helper__createSkill(6);
+        $skill_6 = $this->helper__createSkill(9);
 
         /** Update appraisal */
         $appraisal->school_id = $school_5->id;
@@ -127,11 +127,11 @@ class AppraisalTest extends PluginTestCase
         /** Create a teacher */
         $teacher_8 = $this->helper__createTeacher(8);
         /** Create a skill 1 */
-        $skill_1 = $this->helper__createSkill(1);
+        $skill_1 = $this->helper__createSkill(11);
         /** Create a skill 2 */
-        $skill_2 = $this->helper__createSkill(2);
+        $skill_2 = $this->helper__createSkill(11);
         /** Create a skill 3 */
-        $skill_3 = $this->helper__createSkill(3);
+        $skill_3 = $this->helper__createSkill(12);
 
         /** Create new appraisal */
         $appraisal = $this->helper__createAppraisal($school_7->id, $teacher_8->id, $skill_1->id, $skill_2->id, $skill_3->id);
@@ -172,11 +172,11 @@ class AppraisalTest extends PluginTestCase
         /** Create a teacher */
         $teacher_10 = $this->helper__createTeacher(10);
         /** Create a skill 1 */
-        $skill_1 = $this->helper__createSkill(1);
+        $skill_1 = $this->helper__createSkill(13);
         /** Create a skill 2 */
-        $skill_2 = $this->helper__createSkill(2);
+        $skill_2 = $this->helper__createSkill(14);
         /** Create a skill 3 */
-        $skill_3 = $this->helper__createSkill(3);
+        $skill_3 = $this->helper__createSkill(15);
 
         /** Create new appraisal */
         $appraisal = $this->helper__createAppraisal($school_9->id, $teacher_10->id, $skill_1->id, $skill_2->id, $skill_3->id);
@@ -209,11 +209,11 @@ class AppraisalTest extends PluginTestCase
         /** Create a teacher */
         $teacher_12 = $this->helper__createTeacher(12);
         /** Create a skill 1 */
-        $skill_1 = $this->helper__createSkill(1);
+        $skill_1 = $this->helper__createSkill(16);
         /** Create a skill 2 */
-        $skill_2 = $this->helper__createSkill(2);
+        $skill_2 = $this->helper__createSkill(17);
         /** Create a skill 3 */
-        $skill_3 = $this->helper__createSkill(3);
+        $skill_3 = $this->helper__createSkill(18);
 
         /** Create new appraisal */
         $appraisal = $this->helper__createAppraisal($school_11->id, $teacher_12->id, $skill_1->id, $skill_2->id, $skill_3->id);
@@ -246,11 +246,11 @@ class AppraisalTest extends PluginTestCase
         /** Create a teacher */
         $teacher_14 = $this->helper__createTeacher(14);
         /** Create a skill 1 */
-        $skill_1 = $this->helper__createSkill(1);
+        $skill_1 = $this->helper__createSkill(19);
         /** Create a skill 2 */
-        $skill_2 = $this->helper__createSkill(2);
+        $skill_2 = $this->helper__createSkill(20);
         /** Create a skill 3 */
-        $skill_3 = $this->helper__createSkill(3);
+        $skill_3 = $this->helper__createSkill(21);
 
         /** Create new appraisal */
         $appraisal = $this->helper__createAppraisal($school_13->id, $teacher_14->id, $skill_1->id, $skill_2->id, $skill_3->id);
@@ -283,11 +283,11 @@ class AppraisalTest extends PluginTestCase
         /** Create a teacher */
         $teacher_16 = $this->helper__createTeacher(16);
         /** Create a skill 1 */
-        $skill_1 = $this->helper__createSkill(1);
+        $skill_1 = $this->helper__createSkill(22);
         /** Create a skill 2 */
-        $skill_2 = $this->helper__createSkill(2);
+        $skill_2 = $this->helper__createSkill(23);
         /** Create a skill 3 */
-        $skill_3 = $this->helper__createSkill(3);
+        $skill_3 = $this->helper__createSkill(24);
 
         /** Create new appraisal */
         $appraisal = $this->helper__createAppraisal($school_15->id, $teacher_16->id, $skill_1->id, $skill_2->id, $skill_3->id);
@@ -320,23 +320,23 @@ class AppraisalTest extends PluginTestCase
     /**
      * Created an appraisal object and return's it
      */
-    protected function helper__createAppraisal($index, $schoolId, $teacherId, $firstSkillId, $secondSkillId, $thirdSkillId)
+    protected function helper__createAppraisal($schoolId, $teacherId, $firstSkillId, $secondSkillId, $thirdSkillId)
     {
         /** Create new learningPlan */
         $appraisal = Appraisal::create([
             'school_id' => $schoolId,
             'teacher_id' => $teacherId,
-            'objectives' => 'test-appraisal-objectives-' . $index,
+            'objectives' => 'test-appraisal-objectives',
             'skill_1_id' => $firstSkillId,
             'grade_1' => 1,
             'skill_2_id' => $secondSkillId,
             'grade_2' => 2,
             'skill_3_id' => $thirdSkillId,
             'grade_3' => 3,
-            'notes_objectives_set' => 'test-appraisal-notes-objectives-set-' . $index,
-            'notes_objectives_approved' => 'test-appraisal-notes-objectives-approved-' . $index,
-            'notes_skills_set' => 'test-appraisal-notes-skills-set-' . $index,
-            'notes_evaluation_opened' => 'test-appraisal-notes-evaluation-opened-' . $index,
+            'notes_objectives_set' => 'test-appraisal-notes-objectives-set',
+            'notes_objectives_approved' => 'test-appraisal-notes-objectives-approved',
+            'notes_skills_set' => 'test-appraisal-notes-skills-set',
+            'notes_evaluation_opened' => 'test-appraisal-notes-evaluation-opened',
             'status' => 'new',
         ]);
 

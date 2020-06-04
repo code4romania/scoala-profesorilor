@@ -16,21 +16,21 @@ class SchoolTest extends PluginTestCase
         $address_1 = $this->helper__createAdress(1);
 
         /** Create new school */
-        $school = $this->helper__createSchool($inspectorate_1->id, $address_1->id, /**userId*/1);
+        $school = $this->helper__createSchool(1, $inspectorate_1->id, $address_1->id, /**userId*/1);
 
         /* Validate created school */
-        $this->assertEquals('test-school-name', $school->name);
-        $this->assertEquals('test-school-slug', $school->slug);
-        $this->assertEquals('0722222222', $school->phone);
-        $this->assertEquals('test-school-principal', $school->principal);
+        $this->assertEquals('test-school-name-1', $school->name);
+        $this->assertEquals('test-school-slug-1', $school->slug);
+        $this->assertEquals('0722222221', $school->phone);
+        $this->assertEquals('test-school-principal-1', $school->principal);
         $this->assertEquals($inspectorate_1->id, $school->inspectorate_id);
         $this->assertEquals($address_1->id, $school->address_id);
-        $this->assertEquals('test-school-description', $school->description);
+        $this->assertEquals('test-school-description-1', $school->description);
         $this->assertEquals(/**userId*/1, $school->user_id);
-        $this->assertEquals('test-school-contact-name', $school->contact_name);
-        $this->assertEquals('contact@email.com', $school->contact_email);
-        $this->assertEquals('0733333333', $school->contact_phone);
-        $this->assertEquals('test-school-role', $school->contact_role);
+        $this->assertEquals('test-school-contact-name-1', $school->contact_name);
+        $this->assertEquals('contact@email.com-1', $school->contact_email);
+        $this->assertEquals('0733333331', $school->contact_phone);
+        $this->assertEquals('test-school-role-1', $school->contact_role);
         $this->assertEquals(1, $school->status);
     }
 
@@ -38,32 +38,32 @@ class SchoolTest extends PluginTestCase
     public function test__updateSchool()
     {
         /** Create a inspectorate */
-        $inspectorate_1 = $this->helper__createInspectorate(1);
+        $inspectorate_1 = $this->helper__createInspectorate(2);
         /** Create a address */
-        $address_1 = $this->helper__createAdress(1);
+        $address_1 = $this->helper__createAdress(2);
 
         /** Create new school */
-        $school = $this->helper__createSchool($inspectorate_1->id, $address_1->id, /**userId*/1);
+        $school = $this->helper__createSchool(2, $inspectorate_1->id, $address_1->id, /**userId*/1);
 
         /* Validate created school */
-        $this->assertEquals('test-school-name', $school->name);
-        $this->assertEquals('test-school-slug', $school->slug);
+        $this->assertEquals('test-school-name-2', $school->name);
+        $this->assertEquals('test-school-slug-2', $school->slug);
         $this->assertEquals('0722222222', $school->phone);
-        $this->assertEquals('test-school-principal', $school->principal);
+        $this->assertEquals('test-school-principal-2', $school->principal);
         $this->assertEquals($inspectorate_1->id, $school->inspectorate_id);
         $this->assertEquals($address_1->id, $school->address_id);
-        $this->assertEquals('test-school-description', $school->description);
+        $this->assertEquals('test-school-description-2', $school->description);
         $this->assertEquals(/**userId*/1, $school->user_id);
-        $this->assertEquals('test-school-contact-name', $school->contact_name);
-        $this->assertEquals('contact@email.com', $school->contact_email);
-        $this->assertEquals('0733333333', $school->contact_phone);
-        $this->assertEquals('test-school-role', $school->contact_role);
+        $this->assertEquals('test-school-contact-name-2', $school->contact_name);
+        $this->assertEquals('contact@email.com-2', $school->contact_email);
+        $this->assertEquals('0733333332', $school->contact_phone);
+        $this->assertEquals('test-school-role-2', $school->contact_role);
         $this->assertEquals(1, $school->status);
 
         /** Create a inspectorate */
-        $inspectorate_2 = $this->helper__createInspectorate(1);
+        $inspectorate_2 = $this->helper__createInspectorate(3);
         /** Create a address */
-        $address_2 = $this->helper__createAdress(1);
+        $address_2 = $this->helper__createAdress(3);
 
         /** Update school */
         $school->name = 'new-test-school-name';
@@ -101,26 +101,26 @@ class SchoolTest extends PluginTestCase
     public function test__deleteSchool()
     {
         /** Create a inspectorate */
-        $inspectorate_1 = $this->helper__createInspectorate(1);
+        $inspectorate_1 = $this->helper__createInspectorate(4);
         /** Create a address */
-        $address_1 = $this->helper__createAdress(1);
+        $address_1 = $this->helper__createAdress(4);
 
         /** Create new school */
-        $school = $this->helper__createSchool($inspectorate_1->id, $address_1->id, /**userId*/1);
+        $school = $this->helper__createSchool(4, $inspectorate_1->id, $address_1->id, /**userId*/1);
 
         /* Validate created school */
-        $this->assertEquals('test-school-name', $school->name);
-        $this->assertEquals('test-school-slug', $school->slug);
-        $this->assertEquals('0722222222', $school->phone);
-        $this->assertEquals('test-school-principal', $school->principal);
+        $this->assertEquals('test-school-name-4', $school->name);
+        $this->assertEquals('test-school-slug-4', $school->slug);
+        $this->assertEquals('0722222224', $school->phone);
+        $this->assertEquals('test-school-principal-4', $school->principal);
         $this->assertEquals($inspectorate_1->id, $school->inspectorate_id);
         $this->assertEquals($address_1->id, $school->address_id);
-        $this->assertEquals('test-school-description', $school->description);
+        $this->assertEquals('test-school-description-4', $school->description);
         $this->assertEquals(/**userId*/1, $school->user_id);
-        $this->assertEquals('test-school-contact-name', $school->contact_name);
-        $this->assertEquals('contact@email.com', $school->contact_email);
-        $this->assertEquals('0733333333', $school->contact_phone);
-        $this->assertEquals('test-school-role', $school->contact_role);
+        $this->assertEquals('test-school-contact-name-4', $school->contact_name);
+        $this->assertEquals('contact@email.com-4', $school->contact_email);
+        $this->assertEquals('0733333334', $school->contact_phone);
+        $this->assertEquals('test-school-role-4', $school->contact_role);
         $this->assertEquals(1, $school->status);
 
         /** Save the ID */
@@ -139,26 +139,26 @@ class SchoolTest extends PluginTestCase
     public function test__addressName()
     {
         /** Create a inspectorate */
-        $inspectorate_1 = $this->helper__createInspectorate(1);
+        $inspectorate_1 = $this->helper__createInspectorate(5);
         /** Create a address */
-        $address_1 = $this->helper__createAdress(1);
+        $address_1 = $this->helper__createAdress(5);
 
         /** Create new school */
-        $school = $this->helper__createSchool($inspectorate_1->id, $address_1->id, /**userId*/1);
+        $school = $this->helper__createSchool(5, $inspectorate_1->id, $address_1->id, /**userId*/1);
 
         /* Validate created school */
-        $this->assertEquals('test-school-name', $school->name);
-        $this->assertEquals('test-school-slug', $school->slug);
-        $this->assertEquals('0722222222', $school->phone);
-        $this->assertEquals('test-school-principal', $school->principal);
+        $this->assertEquals('test-school-name-5', $school->name);
+        $this->assertEquals('test-school-slug-5', $school->slug);
+        $this->assertEquals('0722222225', $school->phone);
+        $this->assertEquals('test-school-principal-5', $school->principal);
         $this->assertEquals($inspectorate_1->id, $school->inspectorate_id);
         $this->assertEquals($address_1->id, $school->address_id);
-        $this->assertEquals('test-school-description', $school->description);
+        $this->assertEquals('test-school-description-5', $school->description);
         $this->assertEquals(/**userId*/1, $school->user_id);
-        $this->assertEquals('test-school-contact-name', $school->contact_name);
-        $this->assertEquals('contact@email.com', $school->contact_email);
-        $this->assertEquals('0733333333', $school->contact_phone);
-        $this->assertEquals('test-school-role', $school->contact_role);
+        $this->assertEquals('test-school-contact-name-5', $school->contact_name);
+        $this->assertEquals('contact@email.com-5', $school->contact_email);
+        $this->assertEquals('0733333335', $school->contact_phone);
+        $this->assertEquals('test-school-role-5', $school->contact_role);
         $this->assertEquals(1, $school->status);
 
         /** Validate address name */
@@ -169,26 +169,26 @@ class SchoolTest extends PluginTestCase
     public function test__inspectorateName()
     {
         /** Create a inspectorate */
-        $inspectorate_1 = $this->helper__createInspectorate(1);
+        $inspectorate_1 = $this->helper__createInspectorate(6);
         /** Create a address */
-        $address_1 = $this->helper__createAdress(1);
+        $address_1 = $this->helper__createAdress(6);
 
         /** Create new school */
-        $school = $this->helper__createSchool($inspectorate_1->id, $address_1->id, /**userId*/1);
+        $school = $this->helper__createSchool(6, $inspectorate_1->id, $address_1->id, /**userId*/1);
 
         /* Validate created school */
-        $this->assertEquals('test-school-name', $school->name);
-        $this->assertEquals('test-school-slug', $school->slug);
-        $this->assertEquals('0722222222', $school->phone);
-        $this->assertEquals('test-school-principal', $school->principal);
+        $this->assertEquals('test-school-name-6', $school->name);
+        $this->assertEquals('test-school-slug-6', $school->slug);
+        $this->assertEquals('0722222226', $school->phone);
+        $this->assertEquals('test-school-principal-6', $school->principal);
         $this->assertEquals($inspectorate_1->id, $school->inspectorate_id);
         $this->assertEquals($address_1->id, $school->address_id);
-        $this->assertEquals('test-school-description', $school->description);
+        $this->assertEquals('test-school-description-6', $school->description);
         $this->assertEquals(/**userId*/1, $school->user_id);
-        $this->assertEquals('test-school-contact-name', $school->contact_name);
-        $this->assertEquals('contact@email.com', $school->contact_email);
-        $this->assertEquals('0733333333', $school->contact_phone);
-        $this->assertEquals('test-school-role', $school->contact_role);
+        $this->assertEquals('test-school-contact-name-6', $school->contact_name);
+        $this->assertEquals('contact@email.com-6', $school->contact_email);
+        $this->assertEquals('0733333336', $school->contact_phone);
+        $this->assertEquals('test-school-role-6', $school->contact_role);
         $this->assertEquals(1, $school->status);
 
         /** Validate date format */
@@ -203,22 +203,22 @@ class SchoolTest extends PluginTestCase
     /**
      * Created an school object and return's it
      */
-    protected function helper__createSchool($inspectorateId, $addressId, $userId)
+    protected function helper__createSchool($index, $inspectorateId, $addressId, $userId)
     {
         /** Create new school */
         $school = School::create([
-            'name' => 'test-school-name',
-            'slug' => 'test-school-slug',
-            'phone' => '0722222222',
-            'principal' => 'test-school-principal',
+            'name' => 'test-school-name-' . $index,
+            'slug' => 'test-school-slug-' . $index,
+            'phone' => '072222222' . $index,
+            'principal' => 'test-school-principal-' . $index,
             'inspectorate_id' => $inspectorateId,
             'address_id' => $addressId,
-            'description' => 'test-school-description',
+            'description' => 'test-school-description-' . $index,
             'user_id' => $userId,
-            'contact_name' => 'test-school-contact-name',
-            'contact_email' => 'contact@email.com',
-            'contact_phone' => '0733333333',
-            'contact_role' => 'test-school-role',
+            'contact_name' => 'test-school-contact-name-' . $index,
+            'contact_email' => 'contact@email.com-' . $index,
+            'contact_phone' => '073333333' . $index,
+            'contact_role' => 'test-school-role-' . $index,
             'status'=> 1,
         ]);
 

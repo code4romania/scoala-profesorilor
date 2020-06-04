@@ -29,9 +29,9 @@ class LearningPlansCourseTest extends PluginTestCase
     {
         /** Create learning plan */
 
-        $learningPlan_1 = $this->helper__createLearningPlan(1);
+        $learningPlan_1 = $this->helper__createLearningPlan(2);
         /** Create a course */
-        $course_1 = $this->helper__createCourse(1);
+        $course_1 = $this->helper__createCourse(2);
         /** Create new learningPlansCourse */
         $learningPlansCourse = $this->helper__createLearningPlansCourse($learningPlan_1->id, $course_1->id);
 
@@ -42,9 +42,9 @@ class LearningPlansCourseTest extends PluginTestCase
         $this->assertEquals('proposed', $learningPlansCourse->status);
 
         /** Create learning plan */
-        $learningPlan_2 = $this->helper__createLearningPlan(2);
+        $learningPlan_2 = $this->helper__createLearningPlan(3);
         /** Create a course */
-        $course_2 = $this->helper__createCourse(2);
+        $course_2 = $this->helper__createCourse(3);
 
         /** Update learningPlansCourse */
         $learningPlansCourse->learning_plan_id = $learningPlan_2->id;
@@ -63,9 +63,9 @@ class LearningPlansCourseTest extends PluginTestCase
     public function test__deleteLearningPlansCourse()
     {
         /** Create learning plan */
-        $learningPlan_1 = $this->helper__createLearningPlan(1);
+        $learningPlan_1 = $this->helper__createLearningPlan(4);
         /** Create a course */
-        $course_1 = $this->helper__createCourse(1);
+        $course_1 = $this->helper__createCourse(4);
         /** Create new learningPlansCourse */
         $learningPlansCourse = $this->helper__createLearningPlansCourse($learningPlan_1->id, $course_1->id);
 

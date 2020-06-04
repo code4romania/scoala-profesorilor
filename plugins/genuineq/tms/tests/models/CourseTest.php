@@ -208,16 +208,16 @@ class CourseTest extends PluginTestCase
         $this->assertEquals('#4C025E', $course->color);
 
         /** Create a category */
-        $category_1 = $this->helper__createCategory(1);
+        $category_1 = $this->helper__createCategory(2);
         /** Create a category */
-        $category_5 = $this->helper__createCategory(5);
+        $category_5 = $this->helper__createCategory(4);
 
         /** Attach the category */
         $course->categories()->attach($category_1);
         $course->reloadRelations();
 
         /** Validate default color */
-        $this->assertEquals('#facfa1', $course->color);
+        $this->assertEquals('#facfa2', $course->color);
 
         /** Attach the category */
         $course->categories()->attach($category_5);
