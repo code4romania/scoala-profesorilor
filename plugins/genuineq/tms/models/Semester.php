@@ -13,6 +13,14 @@ class Semester extends Model
 
     protected $dates = ['deleted_at'];
 
+    /**
+     * @var array The attributes that are mass assignable.
+     */
+    protected $fillable = [
+        'semester',
+        'year',
+    ];
+
 
     /**
      * @var string The database table used by the model.

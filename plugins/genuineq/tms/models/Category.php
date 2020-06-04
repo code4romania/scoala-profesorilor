@@ -13,6 +13,16 @@ class Category extends Model
 
     protected $dates = ['deleted_at'];
 
+    /**
+     * @var array The attributes that are mass assignable.
+     */
+    protected $fillable = [
+        'name',
+        'slug',
+        'color',
+        'icon',
+        'description'
+    ];
 
     /**
      * @var string The database table used by the model.

@@ -16,6 +16,27 @@ class Appraisal extends Model
 
     protected $dates = ['deleted_at'];
 
+    /**
+     * @var array The attributes that are mass assignable.
+     */
+    protected $fillable = [
+        'school_id',
+        'teacher_id',
+        'semester_id',
+        'objectives',
+        'skill_1_id',
+        'grade_1',
+        'skill_2_id',
+        'grade_2',
+        'skill_3_id',
+        'grade_3',
+        'notes_objectives_set',
+        'notes_objectives_approved',
+        'notes_skills_set',
+        'notes_evaluation_opened',
+        'status',
+    ];
+
 
     /**
      * @var string The database table used by the model.

@@ -16,6 +16,23 @@ class Course extends Model
 
     protected $dates = ['deleted_at'];
 
+    /**
+     * @var array The attributes that are mass assignable.
+     */
+    protected $fillable = [
+        'name',
+        'slug',
+        'supplier_id',
+        'duration',
+        'address',
+        'start_date',
+        'end_date',
+        'accredited',
+        'credits',
+        'price',
+        'description',
+        'status'
+    ];
 
     /**
      * @var string The database table used by the model.

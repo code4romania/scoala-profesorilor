@@ -24,12 +24,11 @@ class Teacher extends Model
         'slug',
         'phone',
         'birth_date',
+        'address_id',
         'description',
         'user_id',
-        'address_id',
         'seniority_level_id',
-        'school_level_id',
-        'contract_type_id',
+        'status',
     ];
 
     /**

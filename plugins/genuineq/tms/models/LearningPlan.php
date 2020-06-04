@@ -15,6 +15,15 @@ class LearningPlan extends Model
 
     protected $dates = ['deleted_at'];
 
+    /**
+     * @var array The attributes that are mass assignable.
+     */
+    protected $fillable = [
+        'teacher_id',
+        'semester_id',
+        'status',
+    ];
+
 
     /**
      * @var string The database table used by the model.

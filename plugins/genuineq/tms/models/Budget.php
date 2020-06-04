@@ -20,6 +20,17 @@ class Budget extends Model
 
     protected $dates = ['deleted_at'];
 
+    /**
+     * @var array The attributes that are mass assignable.
+     */
+    protected $fillable = [
+        'semester_id',
+        'budgetable_id',
+        'budgetable_type',
+        'budget',
+        'status',
+    ];
+
 
     /**
      * @var string The database table used by the model.

@@ -23,14 +23,15 @@ class School extends Model
         'slug',
         'phone',
         'principal',
+        'inspectorate_id',
+        'address_id',
         'description',
+        'user_id',
         'contact_name',
         'contact_email',
         'contact_phone',
         'contact_role',
-        'user_id',
-        'address_id',
-        'inspectorate_id',
+        'status',
     ];
 
     /**
