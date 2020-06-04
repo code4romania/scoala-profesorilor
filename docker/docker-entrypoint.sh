@@ -37,7 +37,7 @@ echo CMS_ASSET_CACHE=$CMS_ASSET_CACHE >> .env
 echo CMS_LINK_POLICY=$CMS_LINK_POLICY >> .env
 echo CMS_ENABLE_CSRF=$CMS_ENABLE_CSRF >> .env
 
-# Run any DB migrations
+# Run any new DB migrations
 php artisan october:up
 
 # Clear cache for application routes
