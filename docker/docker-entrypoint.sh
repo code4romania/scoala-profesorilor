@@ -43,10 +43,10 @@ chown www-data:www-data /var/www/.env
 # Run any DB migrations
 php artisan october:up
 
-# Cache application routes
+# Clear cache for application routes
 php artisan route:clear
 
-# Clear configuration cache
+# Clear and cache application configuration
 php artisan config:clear
 php artisan config:cache
 
