@@ -3052,7 +3052,7 @@ this.dependantUpdateTimers={}
 this.init()}
 FilterWidget.DEFAULTS={optionsHandler:null,updateHandler:null}
 FilterWidget.prototype.getPopoverTemplate=function(){return'                                                                                                       \
-                <form>                                                                                                 \
+                <form id="filterPopover-{{ scopeName }}">                                                              \
                     <input type="hidden" name="scopeName"  value="{{ scopeName }}" />                                  \
                     <div id="controlFilterPopover" class="control-filter-popover control-filter-box-popover --range">  \
                         <div class="filter-search loading-indicator-container size-input-text">                        \
@@ -3062,10 +3062,7 @@ FilterWidget.prototype.getPopoverTemplate=function(){return'                    
                                 name="search"                                                                          \
                                 autocomplete="off"                                                                     \
                                 class="filter-search-input form-control icon search popup-allow-focus"                 \
-                                data-request="{{ optionsHandler }}"                                                    \
-                                data-load-indicator-opaque                                                             \
-                                data-load-indicator                                                                    \
-                                data-track-input />                                                                    \
+                                data-search />                                                                         \
                             <div class="filter-items">                                                                 \
                                 <ul>                                                                                   \
                                     {{#available}}                                                                     \
@@ -3115,7 +3112,8 @@ $(event.relatedTarget).on('ajaxDone','#controlFilterPopover input.filter-search-
 $(event.relatedTarget).on('click','#controlFilterPopover [data-filter-action="apply"]',function(e){e.preventDefault()
 self.filterScope()})
 $(event.relatedTarget).on('click','#controlFilterPopover [data-filter-action="clear"]',function(e){e.preventDefault()
-self.filterScope(true)})})
+self.filterScope(true)})
+$(event.relatedTarget).on('input','#controlFilterPopover input[data-search]',function(e){self.searchQuery($(this))});})
 this.$el.on('hide.oc.popover','a.filter-scope',function(){var $scope=$(this)
 self.pushOptions(self.activeScopeName)
 self.activeScopeName=null
@@ -3230,6 +3228,17 @@ this.updateScopeSetting(this.$activeScope,0)}
 this.pushOptions(scopeName);this.isActiveScopeDirty=true;this.$activeScope.data('oc.popover').hide()}
 FilterWidget.prototype.getLang=function(name,defaultValue){if($.oc===undefined||$.oc.lang===undefined){return defaultValue}
 return $.oc.lang.get(name,defaultValue)}
+FilterWidget.prototype.searchQuery=function($el){if(this.dataTrackInputTimer!==undefined){window.clearTimeout(this.dataTrackInputTimer)}
+var self=this
+this.dataTrackInputTimer=window.setTimeout(function(){var
+lastValue=$el.data('oc.lastvalue'),thisValue=$el.val()
+if(lastValue!==undefined&&lastValue==thisValue){return}
+$el.data('oc.lastvalue',thisValue)
+if(self.lastDataTrackInputRequest){self.lastDataTrackInputRequest.abort()}
+var data={scopeName:self.activeScopeName,search:thisValue}
+$.oc.stripeLoadIndicator.show()
+self.lastDataTrackInputRequest=self.$el.request(self.options.optionsHandler,{data:data}).success(function(data){self.filterAvailable(self.activeScopeName,data.options.available)
+self.toggleFilterButtons()}).always(function(){$.oc.stripeLoadIndicator.hide()})},300)}
 var old=$.fn.filterWidget
 $.fn.filterWidget=function(option){var args=arguments,result
 this.each(function(){var $this=$(this)
@@ -3243,7 +3252,7 @@ $.fn.filterWidget.Constructor=FilterWidget
 $.fn.filterWidget.noConflict=function(){$.fn.filterWidget=old
 return this}
 $(document).render(function(){$('[data-control="filterwidget"]').filterWidget();})}(window.jQuery);+function($){"use strict";var FilterWidget=$.fn.filterWidget.Constructor;var overloaded_init=FilterWidget.prototype.init;FilterWidget.prototype.init=function(){overloaded_init.apply(this)
-this.initRegion()
+this.ignoreTimezone=this.$el.children().get(0).hasAttribute('data-ignore-timezone');this.initRegion()
 this.initFilterDate()}
 FilterWidget.prototype.initFilterDate=function(){var self=this
 this.$el.on('show.oc.popover','a.filter-scope-date',function(event){self.initDatePickers($(this).hasClass('range'))
@@ -3269,7 +3278,7 @@ if($scope.hasClass('range')){self.displayPopoverRange($scope)}
 else{self.displayPopoverDate($scope)}
 $scope.addClass('filter-scope-open')})}
 FilterWidget.prototype.getPopoverDateTemplate=function(){return'                                                                                                        \
-                <form>                                                                                                  \
+                <form id="controlFilterPopoverDate-{{ scopeName }}">                                                    \
                     <input type="hidden" name="scopeName" value="{{ scopeName }}" />                                    \
                     <div id="controlFilterPopoverDate" class="control-filter-popover control-filter-box-popover">       \
                         <div class="filter-search loading-indicator-container size-input-text">                         \
@@ -3295,7 +3304,7 @@ FilterWidget.prototype.getPopoverDateTemplate=function(){return'                
                 </form>                                                                                                 \
             '}
 FilterWidget.prototype.getPopoverRangeTemplate=function(){return'                                                                                                          \
-                <form>                                                                                                    \
+                <form id="controlFilterPopoverRange-{{ scopeName }}">                                                     \
                     <input type="hidden" name="scopeName" value="{{ scopeName }}" />                                      \
                     <div id="controlFilterPopoverDate" class="control-filter-popover control-filter-box-popover --range"> \
                         <div class="filter-search loading-indicator-container size-input-text">                           \
@@ -3378,7 +3387,9 @@ FilterWidget.prototype.initRegion=function(){this.locale=$('meta[name="backend-l
 this.timezone=$('meta[name="backend-timezone"]').attr('content')
 this.appTimezone=$('meta[name="app-timezone"]').attr('content')
 if(!this.appTimezone){this.appTimezone='UTC'}
-if(!this.timezone){this.timezone='UTC'}}}(window.jQuery);+function($){"use strict";var FilterWidget=$.fn.filterWidget.Constructor;var overloaded_init=FilterWidget.prototype.init;FilterWidget.prototype.init=function(){overloaded_init.apply(this)
+if(!this.timezone){this.timezone='UTC'}
+if(this.ignoreTimezone){this.appTimezone='UTC'
+this.timezone='UTC'}}}(window.jQuery);+function($){"use strict";var FilterWidget=$.fn.filterWidget.Constructor;var overloaded_init=FilterWidget.prototype.init;FilterWidget.prototype.init=function(){overloaded_init.apply(this)
 this.initFilterNumber()}
 FilterWidget.prototype.initFilterNumber=function(){var self=this
 this.$el.on('show.oc.popover','a.filter-scope-number',function(event){self.initNumberInputs($(this).hasClass('range'))
@@ -3403,7 +3414,7 @@ if($scope.hasClass('range')){self.displayPopoverNumberRange($scope)}
 else{self.displayPopoverNumber($scope)}
 $scope.addClass('filter-scope-open')})}
 FilterWidget.prototype.getPopoverNumberTemplate=function(){return'                                                                                                        \
-                <form>                                                                                                  \
+                <form id="filterPopoverNumber-{{ scopeName }}">                                                         \
                     <input type="hidden" name="scopeName" value="{{ scopeName }}" />                                    \
                     <div id="controlFilterPopoverNum" class="control-filter-popover control-filter-box-popover --range">\
                         <div class="filter-search loading-indicator-container size-input-text">                         \
@@ -3429,7 +3440,7 @@ FilterWidget.prototype.getPopoverNumberTemplate=function(){return'              
                 </form>                                                                                                 \
             '}
 FilterWidget.prototype.getPopoverNumberRangeTemplate=function(){return'                                                                                                            \
-                <form>                                                                                                      \
+                <form id="filterPopoverNumberRange-{{ scopeName }}">                                                        \
                     <input type="hidden" name="scopeName" value="{{ scopeName }}" />                                        \
                     <div id="controlFilterPopoverNum" class="control-filter-popover control-filter-box-popover --range">    \
                         <div class="filter-search loading-indicator-container size-input-text">                             \
@@ -4579,10 +4590,12 @@ this.$el.on('unmodified.oc.tab',function(ev){ev.preventDefault()
 self.unmodifyTab($(ev.target).closest('ul.nav-tabs > li, div.tab-content > div'))})
 this.$tabsContainer.on('shown.bs.tab','li',function(){$(window).trigger('oc.updateUi')
 var tabUrl=$('> a',this).data('tabUrl')
+if(!tabUrl&&$(this).parent('ul').is('[data-linkable]')){tabUrl=$('> a',this).attr('href')}
 if(tabUrl){window.history.replaceState({},'Tab link reference',tabUrl)}})
 if(this.options.slidable){this.$pagesContainer.touchwipe({wipeRight:function(){self.prev();},wipeLeft:function(){self.next();},preventDefaultEvents:false,min_move_x:60});}
 this.$tabsContainer.toolbar({scrollClassContainer:this.$el})
-this.updateClasses()}
+this.updateClasses()
+if(location.hash&&this.$tabsContainer.is('[data-linkable]')){$('li > a[href='+location.hash+']',this.$tabsContainer).tab('show')}}
 Tab.prototype.initTab=function(li){var
 $tabs=$('>li',this.$tabsContainer),tabIndex=$tabs.index(li),time=new Date().getTime(),targetId=this.tabId+'-tab-'+tabIndex+time,$anchor=$('a',li)
 $anchor.data('target','#'+targetId).attr('data-target','#'+targetId).attr('data-toggle','tab')
@@ -4946,6 +4959,11 @@ while(current){if(current.propertyName){result.push(current.propertyName)}
 current=current.parentSurface}
 result.reverse()
 return result.join('.')}
+Surface.prototype.findDependentProperties=function(propertyName){var dependents=[]
+for(var i in this.rawProperties){var property=this.rawProperties[i]
+if(!property.depends){continue}
+if(property.depends.indexOf(propertyName)!==-1){dependents.push(property.property)}}
+return dependents}
 Surface.prototype.mergeChildSurface=function(surface,mergeAfterRow){var rows=surface.tableContainer.querySelectorAll('table.inspector-fields > tbody > tr')
 surface.tableContainer=this.getRootSurface().tableContainer
 for(var i=rows.length-1;i>=0;i--){var row=rows[i]
@@ -5618,6 +5636,7 @@ select.appendChild(option)}
 DropdownEditor.prototype.createOptions=function(select,options){for(var value in options){this.createOption(select,options[value],value)}}
 DropdownEditor.prototype.initCustomSelect=function(){var select=this.getSelect()
 var options={dropdownCssClass:'ocInspectorDropdown'}
+if(this.propertyDefinition.emptyOption!==undefined){options.placeholder=this.propertyDefinition.emptyOption}
 if(this.propertyDefinition.placeholder!==undefined){options.placeholder=this.propertyDefinition.placeholder}
 options.templateResult=this.formatSelectOption
 options.templateSelection=this.formatSelectOption
@@ -5625,7 +5644,7 @@ options.escapeMarkup=function(m){return m}
 $(select).select2(options)
 if(!Modernizr.touchevents){this.indicatorContainer=$('.select2-container',this.containerCell)
 this.indicatorContainer.addClass('loading-indicator-container size-small')}}
-DropdownEditor.prototype.createPlaceholder=function(select){var placeholder=this.propertyDefinition.placeholder
+DropdownEditor.prototype.createPlaceholder=function(select){var placeholder=this.propertyDefinition.placeholder||this.propertyDefinition.emptyOption
 if(placeholder!==undefined&&!Modernizr.touchevents){this.createOption(select,null,null)}
 if(placeholder!==undefined&&Modernizr.touchevents){this.createOption(select,placeholder,null)}}
 DropdownEditor.prototype.getSelect=function(){return this.containerCell.querySelector('select')}
@@ -5642,7 +5661,7 @@ DropdownEditor.prototype.registerHandlers=function(){var select=this.getSelect()
 $(select).on('change',this.proxy(this.onSelectionChange))}
 DropdownEditor.prototype.onSelectionChange=function(){var select=this.getSelect()
 this.inspector.setPropertyValue(this.propertyDefinition.property,this.normalizeValue(select.value),this.initialization)}
-DropdownEditor.prototype.onInspectorPropertyChanged=function(property,value){if(!this.propertyDefinition.depends||this.propertyDefinition.depends.indexOf(property)===-1){return}
+DropdownEditor.prototype.onInspectorPropertyChanged=function(property){if(!this.propertyDefinition.depends||this.propertyDefinition.depends.indexOf(property)===-1){return}
 var dependencyValues=this.getDependencyValues()
 if(this.prevDependencyValues===undefined||this.prevDependencyValues!=dependencyValues){this.loadDynamicOptions()}}
 DropdownEditor.prototype.onExternalPropertyEditorHidden=function(){if(this.dynamicOptions){this.loadDynamicOptions(false)}}
@@ -5665,10 +5684,12 @@ this.createPlaceholder(select)
 this.createOptions(select,this.propertyDefinition.options)
 if(value===undefined){value=this.propertyDefinition.default}
 select.value=value}
-DropdownEditor.prototype.loadDynamicOptions=function(initialization){var currentValue=this.inspector.getPropertyValue(this.propertyDefinition.property),data=this.getRootSurface().getValues(),self=this,$form=$(this.getSelect()).closest('form')
+DropdownEditor.prototype.loadDynamicOptions=function(initialization){var currentValue=this.inspector.getPropertyValue(this.propertyDefinition.property),data=this.getRootSurface().getValues(),self=this,$form=$(this.getSelect()).closest('form'),dependents=this.inspector.findDependentProperties(this.propertyDefinition.property)
 if(currentValue===undefined){currentValue=this.propertyDefinition.default}
 var callback=function dropdownOptionsRequestDoneClosure(data){self.hideLoadingIndicator()
-self.optionsRequestDone(data,currentValue,true)}
+self.optionsRequestDone(data,currentValue,true)
+if(dependents.length>0){for(var i in dependents){var editor=self.inspector.findPropertyEditor(dependents[i])
+if(editor&&typeof editor.onInspectorPropertyChanged==='function'){editor.onInspectorPropertyChanged(self.propertyDefinition.property)}}}}
 if(this.propertyDefinition.depends){this.saveDependencyValues()}
 data['inspectorProperty']=this.getPropertyPath()
 data['inspectorClassName']=this.inspector.options.inspectorClass
@@ -6613,7 +6634,7 @@ for(var i=0,len=this.propertyDefinition.depends.length;i<len;i++){var property=t
 if(value===undefined){value='';}
 result+=property+':'+value+'-'}
 return result}
-AutocompleteEditor.prototype.onInspectorPropertyChanged=function(property,value){if(!this.propertyDefinition.depends||this.propertyDefinition.depends.indexOf(property)===-1){return}
+AutocompleteEditor.prototype.onInspectorPropertyChanged=function(property){if(!this.propertyDefinition.depends||this.propertyDefinition.depends.indexOf(property)===-1){return}
 this.clearAutoUpdateTimeout()
 if(this.prevDependencyValues===undefined||this.prevDependencyValues!=dependencyValues){this.autoUpdateTimeout=setTimeout(this.proxy(this.loadDynamicItems),200)}}
 AutocompleteEditor.prototype.clearAutoUpdateTimeout=function(){if(this.autoUpdateTimeout!==null){clearTimeout(this.autoUpdateTimeout)
