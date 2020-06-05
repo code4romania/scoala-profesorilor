@@ -41,13 +41,6 @@ The 'nginx', 'mysql' and 'phpmyadmin' images from laradock are used. The configu
         - RUN: php artisan october:up
             - This will run all new system migrations and plugin migrations
 
-## IMPORTANT
-
-1. Do not remove the following code line from the "modules/backend/routes.php" file: $this->app['url']->forceScheme("https");
-  - It is there to force all backend traffic over HTTPS when the application is running behind a proxy server/load balancer.
-  - Until a more permanent fix is found this line must be readded inside the "modules/backend/routes.php" file, after the "Event::fire('backend.beforeRoute');" line each time the CMS is upgraded as the file will be replaced.
-2. After first installation, the default ad in generated user must be DELETED from DB.
-
 ## Development daily docker commands:
 
 Docker build commands:
