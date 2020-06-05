@@ -1,5 +1,6 @@
 <?php namespace Genuineq\Https;
 
+use Event;
 use System\Classes\PluginBase;
 
 /**
@@ -21,6 +22,17 @@ class Plugin extends PluginBase
             'author'      => 'genuineq',
             'icon'        => 'icon-leaf'
         ];
+    }
+
+    public function boot()
+    {
+        Event::listen('backend.beforeRoute', function () {
+            $this->app['url']->forceScheme("https");
+        });
+
+        Event::listen('backend.route', function () {
+            $this->app['url']->forceScheme("https");
+        });
     }
 
 }
