@@ -12,7 +12,6 @@
         }
     ],
     "require": {
-        "alcea/cnp": "^2.1",
-        "fideloper/proxy": "^4.3"
+        "alcea/cnp": "^2.1"
     }
 }

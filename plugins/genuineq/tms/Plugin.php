@@ -222,13 +222,5 @@ class Plugin extends PluginBase
                 $profile->save();
             }
         });
-
-        \App::register('\Fideloper\Proxy\TrustedProxyServiceProvider');
-
-        // Add a new middleware to beginning of the stack.
-        $this->app['Illuminate\Contracts\Http\Kernel']->prependMiddleware('Genuineq\Tms\Middlewares\TrustProxies');
-
-        // Add a new middleware to end of the stack.
-        // $this->app['Illuminate\Contracts\Http\Kernel']->pushMiddleware('Path\To\Custom\Middleware');
     }
 }
