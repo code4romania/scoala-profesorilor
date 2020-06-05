@@ -23,16 +23,4 @@ class Plugin extends PluginBase
             'icon'        => 'icon-leaf'
         ];
     }
-
-    public function boot()
-    {
-        Event::listen('backend.beforeRoute', function () {
-            $this->app['url']->forceScheme("https");
-        });
-
-        Event::listen('backend.route', function () {
-            $this->app['url']->forceScheme("https");
-        });
-    }
-
 }
