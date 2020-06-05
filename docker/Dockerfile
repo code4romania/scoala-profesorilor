@@ -94,12 +94,16 @@ RUN chmod 777 /usr/local/bin/docker-entrypoint.sh \
 # Set working directory
 WORKDIR /var/www
 
+RUN cp /var/www/modules/backend/routes.php /var/routes1.php
+
 #Install project dependencies
 RUN composer install --no-interaction --no-dev --prefer-dist --no-scripts \
     && composer dump-autoload -o \
     && composer clearcache \
     && chown -R www-data:www-data /var/www \
     && find . -type d \( -path './plugins' -or  -path './storage' -or  -path './themes' -or  -path './plugins/*' -or  -path './storage/*' -or  -path './themes/*'  -or  -path './plugins/*/*' -or  -path './storage/*/*' -or  -path './themes/*/*' \) -exec chmod g+ws {} \;
+
+RUN cp /var/www/modules/backend/routes.php /var/routes2.php
 
 EXPOSE 443 80
 
