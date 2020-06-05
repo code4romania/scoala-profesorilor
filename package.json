@@ -40,7 +40,7 @@
     "@babel/register": "^7.5.5",
     "babel-plugin-module-resolver": "^3.2.0",
     "chai": "^4.2.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jsdom": "^15.1.1",
     "laravel-elixir": "^6.0.0-18",
     "mocha": "^6.2.0",
