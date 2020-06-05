@@ -45,7 +45,7 @@ php artisan route:clear
 
 # Clear and cache application configuration
 php artisan config:clear
-# php artisan config:cache
+php artisan config:cache
 
 # Create the public folder
 php artisan october:mirror public --relative
