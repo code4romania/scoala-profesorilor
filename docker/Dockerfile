@@ -43,7 +43,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 COPY ./bootstrap /var/www/bootstrap
 COPY ./config /var/www/config
 COPY ./modules /var/www/modules
-COPY ./modules/backend/routes.php /var/www/modules/backend/routes.php
+COPY ./modules/backend/routes.php /var/routes.php
 COPY ./plugins /var/www/plugins
 COPY ./tests /var/www/tests
 COPY ./themes /var/www/themes
