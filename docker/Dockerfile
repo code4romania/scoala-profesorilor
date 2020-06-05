@@ -51,7 +51,9 @@ COPY ./.htaccess /var/www/.htaccess
 COPY ./.jshintrc /var/www/.jshintrc
 COPY ./artisan /var/www/artisan
 COPY ./composer.json /var/www/composer.json
+COPY ./composer.lock /var/www/composer.lock
 COPY ./package.json /var/www/package.json
+COPY ./package.lock /var/www/package.lock
 COPY ./phpcs.xml /var/www/phpcs.xml
 COPY ./phpunit.xml /var/www/phpunit.xml
 COPY ./server.php /var/www/server.php

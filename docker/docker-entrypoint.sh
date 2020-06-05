@@ -37,25 +37,23 @@ echo CMS_ASSET_CACHE=$CMS_ASSET_CACHE >> .env
 echo CMS_LINK_POLICY=$CMS_LINK_POLICY >> .env
 echo CMS_ENABLE_CSRF=$CMS_ENABLE_CSRF >> .env
 
-cat ./modules/backend/routes.php
-
 # Run any new DB migrations
 php artisan october:up
-cat ./modules/backend/routes.php
+
 # Clear cache for application routes
 php artisan route:clear
-cat ./modules/backend/routes.php
+
 # Clear and cache application configuration
 php artisan config:clear
 # php artisan config:cache
-cat ./modules/backend/routes.php
+
 # Create the public folder
 php artisan october:mirror public --relative
-cat ./modules/backend/routes.php
+
 # Change public folder ownership
 chown -R www-data:www-data /var/www
-cat ./modules/backend/routes.php
+
 # Start cron
 service cron start
-cat ./modules/backend/routes.php
+
 exec "$@"
