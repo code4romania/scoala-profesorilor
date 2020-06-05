@@ -24,7 +24,7 @@ Laradock documentation can be found [here](https://github.com/laradock/laradock)
 
 For fast setup, Docker is needed.
 
-The 'nginx', 'mysql' and 'phpmyadmin' images from laradock are used. The configuration can be fount inside 'containers' folder. To start the local containders follow nexr steps:
+The 'nginx', 'mysql' and 'phpmyadmin' images from laradock are used. The configuration can be fount inside 'containers' folder. To start the local containders follow next steps:
     - Clone project locally
     - Add a new entry to you 'hosts' file:
         - EX: 127.0.0.1  scoalaprofesorilot.test
@@ -40,6 +40,13 @@ The 'nginx', 'mysql' and 'phpmyadmin' images from laradock are used. The configu
             - Windows: winpty docker-compose exec workspace bash
         - RUN: php artisan october:up
             - This will run all new system migrations and plugin migrations
+
+## IMPORTANT
+
+1. Do not remove the following code line from the "modules/backend/routes.php" file: $this->app['url']->forceScheme("https");
+  - It is there to force all backend traffic over HTTPS when the application is running behind a proxy server/load balancer.
+  - Until a more permanent fix is found this line must be readded inside the "modules/backend/routes.php" file, after the "Event::fire('backend.beforeRoute');" line each time the CMS is upgraded as the file will be replaced.
+2. After first installation, the default ad in generated user must be DELETED from DB.
 
 ## Development daily docker commands:
 
