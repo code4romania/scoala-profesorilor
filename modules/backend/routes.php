@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*****
  * Register Backend routes before all user routes.
  */
 App::before(function ($request) {
