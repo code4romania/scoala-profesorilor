@@ -98,12 +98,15 @@ RUN cp /var/www/modules/backend/routes.php /var/routes1.php
 
 #Install project dependencies
 RUN composer install --no-interaction --no-dev --prefer-dist --no-scripts \
+    && cp /var/www/modules/backend/routes.php /var/routes2.php \
     && composer dump-autoload -o \
+    && cp /var/www/modules/backend/routes.php /var/routes3.php \
     && composer clearcache \
+    && cp /var/www/modules/backend/routes.php /var/routes4.php \
     && chown -R www-data:www-data /var/www \
     && find . -type d \( -path './plugins' -or  -path './storage' -or  -path './themes' -or  -path './plugins/*' -or  -path './storage/*' -or  -path './themes/*'  -or  -path './plugins/*/*' -or  -path './storage/*/*' -or  -path './themes/*/*' \) -exec chmod g+ws {} \;
 
-RUN cp /var/www/modules/backend/routes.php /var/routes2.php
+RUN cp /var/www/modules/backend/routes.php /var/routes5.php
 
 EXPOSE 443 80
 
