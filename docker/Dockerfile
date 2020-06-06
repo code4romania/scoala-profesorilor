@@ -82,6 +82,8 @@ COPY ./storage/static /var/www/storage/static
 COPY ./docker/default /etc/nginx/sites-available/default
 # Copy php fpm configuration
 COPY ./docker/php-fpm.conf /etc/php/7.2/fpm/php-fpm.conf
+# Copy php configuration
+COPY ./docker/php.ini /etc/php/7.2/fpm/php.ini
 # Copy supervisord configuration
 COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
