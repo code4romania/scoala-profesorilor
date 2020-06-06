@@ -46,11 +46,11 @@ class TestSemesterSeeder extends Seeder
     private function addFakeSemesters()
     {
         $faker = Faker\Factory::create('ro_RO');
-        $totalYearsNumber = 5;
+        $totalYearsNumber = 10;
         $totalSemestersNumber = $totalYearsNumber * 2;
-        $totalSchoolsNumber = 10;
-        $totalTeachersNumber = 10;
-        $totalCoursesNumber = 100;
+        $totalSchoolsNumber = 34;
+        $totalTeachersNumber = 113;
+        $totalCoursesNumber = 300;
         $totalSpecializationsNumber = 23;
         $totalSkillsNumber = 30;
 

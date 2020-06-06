@@ -23,9 +23,10 @@ class TestCourseSeeder extends Seeder
         if (env('TMS_ADD_FAKE_COURSES', false)) {
             $faker = Faker\Factory::create();
 
-            $courseNumber = 100;
-            $totalCategoriesNumber = 12;
+            $courseNumber = 300;
+            $totalCategoriesNumber = 35;
             $totalSkillsNumber = 30;
+            $totalSuppliersNumber = 20;
             /**
              * Create courses
              */
@@ -39,7 +40,7 @@ class TestCourseSeeder extends Seeder
                     'name' => $name,
                     'slug' => str_slug($name, '-'),
                     'description' => $faker->paragraph($nbSentences = 80, $variableNbSentences = true),
-                    'supplier_id' => $faker->numberBetween($min = 1, $max = 10),
+                    'supplier_id' => $faker->numberBetween($min = 1, $max = $totalSuppliersNumber),
                     'accredited' => $accredited,
                     'credits' => $credits,
                     'address' => $faker->address(),

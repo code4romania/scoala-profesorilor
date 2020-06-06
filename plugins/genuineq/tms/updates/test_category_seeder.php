@@ -19,7 +19,7 @@ class TestCategorySeeder extends Seeder
         if (env('TMS_ADD_FAKE_CATEGORIES', false)) {
             $faker = Faker\Factory::create();
 
-            for ($i=0; $i < 12; $i++) {
+            for ($i=0; $i < 35; $i++) {
 
                 $name = $faker->sentence($nbWords = 3, $variableNbWords = true);
 
