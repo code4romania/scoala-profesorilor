@@ -74,4 +74,4 @@ The maintenance of Scoala Profesorilor is lead by [Code for Romania](https://cod
 
 ## License
 
-The Scoala Profesorilor platform is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The Scoala Profesorilor platform is an open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
