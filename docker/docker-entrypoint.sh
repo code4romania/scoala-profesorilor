@@ -50,6 +50,9 @@ php artisan config:cache
 # Create the public folder
 php artisan october:mirror public --relative
 
+# Create the media folder public link
+ln -s ../../../storage/app/media ./public/storage/app/media
+
 # Change public folder ownership
 chown -R www-data:www-data /var/www
 
