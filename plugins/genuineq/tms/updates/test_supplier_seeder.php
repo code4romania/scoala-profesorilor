@@ -21,7 +21,7 @@ class TestSupplierSeeder extends Seeder
         if (env('TMS_ADD_FAKE_SUPPLIERS', false)) {
             $faker = Faker\Factory::create('ro_RO');
 
-            for ($i=0; $i < 20; $i++) {
+            for ($i=0; $i < 10; $i++) {
 
                 $name = $faker->sentence($nbWords = 6, $variableNbWords = true);
 

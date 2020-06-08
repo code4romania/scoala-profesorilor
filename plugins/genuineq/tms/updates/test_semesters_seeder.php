@@ -46,11 +46,11 @@ class TestSemesterSeeder extends Seeder
     private function addFakeSemesters()
     {
         $faker = Faker\Factory::create('ro_RO');
-        $totalYearsNumber = 10;
+        $totalYearsNumber = 5;
         $totalSemestersNumber = $totalYearsNumber * 2;
-        $totalSchoolsNumber = 34;
-        $totalTeachersNumber = 113;
-        $totalCoursesNumber = 300;
+        $totalSchoolsNumber = 10;
+        $totalTeachersNumber = 10;
+        $totalCoursesNumber = 100;
         $totalSpecializationsNumber = 23;
         $totalSkillsNumber = 30;
 
@@ -148,7 +148,7 @@ class TestSemesterSeeder extends Seeder
                 /** Extract the teacher */
                 $teacher = Teacher::find($teacherNr);
 
-                /** Parte all teacher schools. */
+                /** Parse all teacher schools. */
                 foreach ($teacher->schools as $key => $school) {
                     /** Create a number of different courses. */
                     $coursesNumber = $faker->numberBetween($min = 1, $max = 6);
@@ -339,7 +339,6 @@ class TestSemesterSeeder extends Seeder
                     }
                 }
             }
-
         }
     }
 }
