@@ -66,7 +66,7 @@ class Appraisal extends ComponentBase
         $options = post();
         $options['teacher'] = post('teacherId');
         /* Extract the appraisals based on the received options. */
-        $this->teacherExtractAppraisals(/*options*/post(), post('teacherId'));
+        $this->teacherExtractAppraisals($options, post('teacherId'));
     }
 
     /***********************************************

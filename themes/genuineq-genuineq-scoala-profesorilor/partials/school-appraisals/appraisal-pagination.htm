@@ -2,43 +2,41 @@ description = "Displays the appraisals search pagination."
 
 [viewBag]
 ==
-{% if 1 < appraisalsPages %}
-    <ul class="pagination pg-darkgrey justify-content-center">
-        {% if 1 < appraisalsPage %}
-            <li class="page-item" data-page="{{ 1 }}" data-id="{{ teacher.id }}">
-                <a class="page-link appraisal-search-pagination" data-page="{{ 1 }}" data-id="{{ teacher.id }}">&Lang;</a>
+<ul class="pagination pg-darkgrey justify-content-center">
+    {% if 1 < appraisalsPage %}
+        <li class="page-item" data-page="{{ 1 }}" data-id="{{ teacher.id }}">
+            <a class="page-link appraisal-search-pagination" data-page="{{ 1 }}" data-id="{{ teacher.id }}">&Lang;</a>
+        </li>
+
+        <li class="page-item" data-page="{{ appraisalsPage - 1 }}" data-id="{{ teacher.id }}">
+            <a class="page-link appraisal-search-pagination" data-page="{{ appraisalsPage - 1 }}" data-id="{{ teacher.id }}">&lang;</a>
+        </li>
+    {% endif %}
+
+    {% set cells = 5 %}
+    {% for i in appraisalsPage..appraisalsPages if cells %}
+        {% if i == appraisalsPage %}
+            <li class="page-item active" data-page="{{ i }}" data-id="{{ teacher.id }}">
+                <a class="page-link appraisal-search-pagination" data-page="{{ i }}" data-id="{{ teacher.id }}">{{ i }}</a>
             </li>
-
-            <li class="page-item" data-page="{{ appraisalsPage - 1 }}" data-id="{{ teacher.id }}">
-                <a class="page-link appraisal-search-pagination" data-page="{{ appraisalsPage - 1 }}" data-id="{{ teacher.id }}">&lang;</a>
-            </li>
-        {% endif %}
-
-        {% set cells = 5 %}
-        {% for i in appraisalsPage..appraisalsPages if cells %}
-            {% if i == appraisalsPage %}
-                <li class="page-item active" data-page="{{ i }}" data-id="{{ teacher.id }}">
-                    <a class="page-link appraisal-search-pagination" data-page="{{ i }}" data-id="{{ teacher.id }}">{{ i }}</a>
-                </li>
-            {% else %}
-                <li class="page-item" data-page="{{ i }}" data-id="{{ teacher.id }}">
-                    <a class="page-link appraisal-search-pagination" data-page="{{ i }}" data-id="{{ teacher.id }}">{{ i }}</a>
-                </li>
-            {% endif %}
-            {% set cells = (cells - 1) %}
-        {% endfor %}
-
-        {% if appraisalsPage < appraisalsPages %}
-            <li class="page-item" data-page="{{ appraisalsPage + 1 }}" data-id="{{ teacher.id }}">
-                <a class="page-link appraisal-search-pagination" data-page="{{ appraisalsPage + 1 }}" data-id="{{ teacher.id }}">&rang;</a>
-            </li>
-
-            <li class="page-item" data-page="{{ appraisalsPages }}" data-id="{{ teacher.id }}">
-                <a class="page-link appraisal-search-pagination" data-page="{{ appraisalsPages }}" data-id="{{ teacher.id }}">&Rang;</a>
+        {% else %}
+            <li class="page-item" data-page="{{ i }}" data-id="{{ teacher.id }}">
+                <a class="page-link appraisal-search-pagination" data-page="{{ i }}" data-id="{{ teacher.id }}">{{ i }}</a>
             </li>
         {% endif %}
-    </ul>
-{% endif %}
+        {% set cells = (cells - 1) %}
+    {% endfor %}
+
+    {% if appraisalsPage < appraisalsPages %}
+        <li class="page-item" data-page="{{ appraisalsPage + 1 }}" data-id="{{ teacher.id }}">
+            <a class="page-link appraisal-search-pagination" data-page="{{ appraisalsPage + 1 }}" data-id="{{ teacher.id }}">&rang;</a>
+        </li>
+
+        <li class="page-item" data-page="{{ appraisalsPages }}" data-id="{{ teacher.id }}">
+            <a class="page-link appraisal-search-pagination" data-page="{{ appraisalsPages }}" data-id="{{ teacher.id }}">&Rang;</a>
+        </li>
+    {% endif %}
+</ul>
 
 <script type="text/javascript">
     $('.appraisal-search-pagination').on('click', function () {

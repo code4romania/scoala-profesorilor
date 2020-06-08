@@ -260,6 +260,7 @@ class Appraisal extends Model
             'perPage' => 12,
             'searchInput' => '',
             'teacher' => -1,
+            'school' => -1,
             'status' => -1,
             'year' => -1,
             'semester' => -1,
@@ -270,6 +271,13 @@ class Appraisal extends Model
         if ($teacher && (-1 != $teacher)) {
             $query->whereHas('teacher', function($q) use ($teacher){
                 $q->where('id', '=', $teacher);
+            });
+        }
+
+        /** Apply the school filter */
+        if ($school && (-1 != $school)) {
+            $query->whereHas('school', function($q) use ($school){
+                $q->where('id', '=', $school);
             });
         }
 

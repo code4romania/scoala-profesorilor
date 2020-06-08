@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\App;
 use Genuineq\Tms\Classes\PeriodicTasks;
 use Config;
 use Faker;
+use Log;
 
 class TestSemesterSeeder extends Seeder
 {
@@ -304,7 +305,7 @@ class TestSemesterSeeder extends Seeder
                         }
 
                         /** Add an appraisal */
-                        Appraisal::create([
+                        $appraisal = Appraisal::create([
                             'school_id' => $school->id,
                             'teacher_id' => $teacher->id,
                             'semester_id' => $activeSemester->id,
