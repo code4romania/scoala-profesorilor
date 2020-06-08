@@ -1,5 +1,6 @@
 <?php namespace Genuineq\User\Components;
 
+use Log;
 use URL;
 use Lang;
 use Auth;
@@ -13,14 +14,12 @@ use Validator;
 use Exception;
 use ValidationException;
 use ApplicationException;
-use October\Rain\Auth\AuthException;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
+use Genuineq\User\Classes\AuthException;
 use Genuineq\User\Models\User as UserModel;
 use Genuineq\User\Models\Settings as UserSettings;
 use Genuineq\User\Helpers\PluginConfig;
-
-use Log;
 
 /**
  * Login component
