@@ -190,6 +190,14 @@ class Teacher extends Model
         return $declinedRequests;
     }
 
+    /**
+     * Function that checks is a teacher has schools.
+     */
+    public function getHasSchoolsAttribute()
+    {
+        return (0 < $this->schools->count());
+    }
+
     /***********************************************
      ******************* Functions *****************
      ***********************************************/

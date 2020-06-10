@@ -67,7 +67,19 @@ class LearningPlan extends ComponentBase
             return $redirect;
         }
 
-        /** Check if an action was requested. */
+        /**
+         * Check if an action was requested.
+         *
+         * The translation:
+         *   a = action
+         *     -> If present in the URL => an action is performed
+         *   t = type
+         *     -> Holds the action type
+         *   sr = school rejects
+         *   sa = school accepts
+         *   tr = teacher rejects
+         *   ta = teacher accepts
+         */
         if (1 == get('a')) {
             if ('sr' == get('t')) {
                 $this->actionSchoolReject();
@@ -240,10 +252,18 @@ class LearningPlan extends ComponentBase
         /** Extract the learning plan. */
         $learningPlan = LearningPlanModel::find(post('learningPlanId'));
 
-        /** Delete the course from the learning plan. */
-        $learningPlan->courses->where('course_id', post('courseId'))->first()->delete();
+        /** Extract the learning plan course. */
+        $learningPlanCourse = $learningPlan->courses->where('course_id', post('courseId'))->first();
 
-        Flash::success(Lang::get('genuineq.tms::lang.component.learning-plan.message.course_deleted_successful'));
+        /** Validate that the school can delete the course. */
+        if (Auth::getUser()->profile->active_budget_id == $learningPlanCourse->school_budget_id) {
+            /** Delete the course from the learning plan. */
+            $learningPlanCourse->delete();
+
+            Flash::success(Lang::get('genuineq.tms::lang.component.learning-plan.message.course_deleted_successful'));
+        } else {
+            Flash::error(Lang::get('genuineq.tms::lang.component.learning-plan.message.school_course_deleted_not_allowed'));
+        }
 
         /** Extract the received courses filtering options */
         $options = [
@@ -399,7 +419,7 @@ class LearningPlan extends ComponentBase
             /** Extract the post data to validate. */
             $data['learning_plan_id'] = post('learningPlanId');
             $data['course_id'] = post('courseId');
-            $data['school_covered_costs'] = post('school_covered_costs');
+            $data['school_covered_costs'] = (post('school_covered_costs')) ? (post('school_covered_costs')) : (0);
             $data['teacher_budget_id'] = Auth::getUser()->profile->active_budget_id;
             if (post('school_covered_costs')) {
                 $data['teacher_covered_costs'] = Course::find(post('courseId'))->price - post('school_covered_costs');
@@ -407,14 +427,13 @@ class LearningPlan extends ComponentBase
                 $data['teacher_covered_costs'] = Course::find(post('courseId'))->price;
             }
 
-
             /** Extract the school. */
-            $school = Auth::getUser()->profile->schools->where('name', post('school'))->first();
+            $school = Auth::getUser()->profile->schools->where('slug', str_slug(post('school'), '-'))->first();
 
             if (!$school) {
                 Flash::error(Lang::get('genuineq.tms::lang.component.learning-plan.message.school_not_valid'));
             } else {
-                $data['school_budget_id'] = Auth::getUser()->profile->active_budget_id;
+                $data['school_budget_id'] = $school->active_budget_id;
                 /** Mark the course as proposed. */
                 $data['status'] = 'proposed';
 
@@ -425,9 +444,10 @@ class LearningPlan extends ComponentBase
                 $rules = [
                     'learning_plan_id' => 'required|numeric|exists:genuineq_tms_learning_plans,id',
                     'course_id' => 'required|numeric|exists:genuineq_tms_courses,id',
-                    'school_budget_id' => 'required|numeric|exists:genuineq_tms_schools,id',
+                    'school_budget_id' => 'required|numeric|exists:genuineq_tms_budgets,id',
                     'school_covered_costs' => 'present|numeric|max:' . $course->price,
                 ];
+
 
                 /** Construct the validation error messages. */
                 $messages = [
@@ -447,6 +467,7 @@ class LearningPlan extends ComponentBase
 
                 /** Apply the validation rules. */
                 $validation = Validator::make($data, $rules, $messages);
+
                 if ($validation->fails()) {
                     throw new ValidationException($validation);
                 }
@@ -465,7 +486,7 @@ class LearningPlan extends ComponentBase
                     ]
                 );
 
-                Flash::success(Lang::get('genuineq.tms::lang.component.learning-plan.message.course_added_successful'));
+                Flash::success(Lang::get('genuineq.tms::lang.component.learning-plan.message.request_added_successful'));
             }
         } else {
             /**

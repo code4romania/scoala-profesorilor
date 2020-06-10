@@ -119,6 +119,21 @@ description = "Displays the teacher profile forms"
             </div>
         </div>
 
+        {% if schoolTeacherProfile.has_schools %}
+            <div class="row pt-5">
+                <div class="col-12 bg-white rounded p-3">
+
+                    <h5 class="mb-3 font-weight-bold">{{ 'teacher.profile.schools'|_ }}</h5>
+
+                    <ul class="list-group">
+                        {% for school in schoolTeacherProfile.schools %}
+                            <li class="list-group-item">{{ school.name }}</li>
+                        {% endfor%}
+                    </ul>
+
+                </div>
+            </div>
+        {% endif %}
     </div>
 
     <div class="col-12 col-sm-5 offset-sm-2 col-md-5 offset-md-2 col-lg-5 offset-lg-2 col-xl-5 offset-xl-2">
