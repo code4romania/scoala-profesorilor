@@ -155,6 +155,8 @@ class LearningPlan extends ComponentBase
         } else {
             $data['teacher_covered_costs'] = Course::find(post('courseId'))->price;
         }
+        $data['transport_covered'] = (post('transport_covered')) ? (1) : (0);
+        $data['accommodation_covered'] = (post('accommodation_covered')) ? (1) : (0);
 
         /** Extract the school budget ID. */
         $data['school_budget_id'] = Auth::getUser()->profile->active_budget_id;

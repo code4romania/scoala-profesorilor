@@ -16,10 +16,10 @@ description = "Modal that specifies how a course is added to a learning plan"
             </div>
 
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-12">
-                        <form id="learning-plan-course-add-modal-form" data-request-validate data-request-flash>
+                <form id="learning-plan-course-add-modal-form" data-request-validate data-request-flash>
 
+                    <div class="row">
+                        <div class="col-12">
                             <div class="form-group">
                                 <div class="md-form">
                                     <input name="school_covered_costs" type="number" id="school_covered_costs" class="form-control">
@@ -27,20 +27,42 @@ description = "Modal that specifies how a course is added to a learning plan"
                                     <div class="small text-danger" data-validate-for="school_covered_costs"></div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
 
+                    <div class="row mb-2">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-check">
+                                <input name="transport_covered" type="checkbox" class="form-check-input" id="transport_covered">
+                                <label class="form-check-label" for="transport_covered">{{ 'learning-plans.learning-plan-course-add-modal.transport_covered'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="name"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-check">
+                                <input name="accommodation_covered" type="checkbox" class="form-check-input" id="accommodation_covered">
+                                <label class="form-check-label" for="accommodation_covered">{{ 'learning-plans.learning-plan-course-add-modal.accommodation_covered'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="name"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
                             <div class="form-check">
                                 <input name="mandatory" type="checkbox" class="form-check-input" id="mandatory">
                                 <label class="form-check-label" for="mandatory">{{ 'learning-plans.learning-plan-course-add-modal.mandatory'|_ }}</label>
                                 <div class="small text-danger" data-validate-for="name"></div>
                             </div>
-
-                            <input name="learningPlanId" id="learningPlanId" hidden>
-                            <input name="courseId" id="courseId" hidden>
-                            <input name="teacherId" id="teacherId" value="{{ learningPlan.teacher.id }}" hidden>
-
-                        </form>
+                        </div>
                     </div>
-                </div>
+
+                    <input name="learningPlanId" id="learningPlanId" hidden>
+                    <input name="courseId" id="courseId" hidden>
+                    <input name="teacherId" id="teacherId" value="{{ learningPlan.teacher.id }}" hidden>
+
+                </form>
 
                 <div class="row align-items-start d-none d-sm-flex d-md-flex d-lg-flex d-xl-flex">
                     <div class="col-12">
