@@ -38,7 +38,7 @@
                             {% if rememberLoginMode == 'ask' %}
                                 <div class="form-group">
                                     <div class="checkbox">
-                                    <label><input name="remember" type="checkbox" value="1">Stay logged in</label>
+                                    <label><input name="remember" type="checkbox" value="1">&nbsp;{{ 'login-modal.stay_logged_in'|_ }}</label>
                                     </div>
                                 </div>
                             {% endif %}
@@ -62,6 +62,15 @@
                         <p class="m-0">
                             {{ ('login-modal.footer.signup'|_)|raw }}
                             <a data-dismiss="modal" data-toggle="modal" href="#signup-select-modal" data-target="#signup-select-modal">{{'auth.signup-label'|_ }}</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row w-100">
+                    <div class="col-12 text-center">
+                        <p class="m-0">
+                            {{ ('login-modal.footer.password_restore'|_)|raw }}
+                            <a data-dismiss="modal" data-toggle="modal" href="#password-restore-modal" data-target="#password-restore-modal">{{'auth.password-restore-label'|_ }}</a>
                         </p>
                     </div>
                 </div>

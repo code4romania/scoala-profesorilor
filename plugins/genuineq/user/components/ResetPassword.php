@@ -1,13 +1,17 @@
 <?php namespace Genuineq\User\Components;
 
+use Log;
+use URL;
 use Auth;
 use Lang;
 use Mail;
+use Flash;
 use Validator;
 use ValidationException;
 use ApplicationException;
 use Cms\Classes\ComponentBase;
 use Genuineq\User\Models\User as UserModel;
+use Genuineq\User\Helpers\PluginConfig;
 
 /**
  * Password reset workflow
@@ -20,146 +24,149 @@ class ResetPassword extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => /*Reset Password*/'genuineq.user::lang.reset_password.reset_password',
-            'description' => /*Forgotten password form.*/'genuineq.user::lang.reset_password.reset_password_desc'
+            'name'        => 'genuineq.user::lang.component.password-reset.name',
+            'description' => 'genuineq.user::lang.component.password-reset.description'
         ];
     }
 
     public function defineProperties()
     {
-        return [
-            'paramCode' => [
-                'title'       => /*Reset Code Param*/'genuineq.user::lang.reset_password.code_param',
-                'description' => /*The page URL parameter used for the reset code*/'genuineq.user::lang.reset_password.code_param_desc',
-                'type'        => 'string',
-                'default'     => 'code'
-            ]
-        ];
+        return [];
     }
-
-    //
-    // Properties
-    //
 
     /**
-     * Returns the reset password code from the URL
-     * @return string
+     * Executed when this component is bound to a page or layout.
      */
-    public function code()
+    public function onRun()
     {
-        $routeParameter = $this->property('paramCode');
-
-        if ($code = $this->param($routeParameter)) {
-            return $code;
+        /** Check if an password reset code was supplied */
+        if ($code = get('reset')) {
+            $this->page['resetCode'] = $code;
         }
-
-        return get('reset');
     }
 
-    //
-    // AJAX
-    //
+    /***********************************************
+     **************** AJAX handlers ****************
+     ***********************************************/
 
     /**
      * Trigger the password reset email
      */
     public function onRestorePassword()
     {
-        $rules = [
-            'email' => 'required|email|between:6,255'
+        /** Extract the form data. */
+        $data = [
+            'email' => post('email'),
         ];
 
-        $validation = Validator::make(post(), $rules);
+        /** Construct the validation rules. */
+        $rules = [
+            'email' => 'required|email|between:6,255',
+        ];
+
+        /** Construct the validation error messages. */
+        $messages = [
+            'email.required' => Lang::get('genuineq.user::lang.component.password-reset.validation.login_required'),
+            'email.between' => Lang::get('genuineq.user::lang.component.password-reset.validation.login_between'),
+            'email.email' => Lang::get('genuineq.user::lang.component.password-reset.validation.login_email'),
+        ];
+
+        /** Apply the validation rules. */
+        $validation = Validator::make($data, $rules, $messages);
         if ($validation->fails()) {
             throw new ValidationException($validation);
         }
 
+        /** Search the user. */
         $user = UserModel::findByEmail(post('email'));
-        if (!$user || $user->is_guest) {
-            throw new ApplicationException(Lang::get(/*A user was not found with the given credentials.*/'genuineq.user::lang.account.invalid_user'));
+
+        if ($user) {
+            $this->sendPasswordResetEmail($user);
         }
 
-        $code = implode('!', [$user->id, $user->getResetPasswordCode()]);
-
-        $link = $this->makeResetUrl($code);
-
-        $data = [
-            'name' => $user->name,
-            'username' => $user->username,
-            'link' => $link,
-            'code' => $code
-        ];
-
-        Mail::send('genuineq.user::mail.restore', $data, function($message) use ($user) {
-            $message->to($user->email, $user->full_name);
-        });
+        Flash::success(Lang::get('genuineq.user::lang.component.password-reset.message.restore_successful'));
     }
 
     /**
      * Perform the password reset
      */
-    public function onResetPassword()
+    public function onResetPassword($code = null)
     {
-        $rules = [
-            'code'     => 'required',
-            'password' => 'required|between:' . UserModel::getMinPasswordLength() . ',255'
+        /** Extract the form data. */
+        $data = [
+            'code' => post('code'),
+            'password' => post('password'),
+            'password_confirmation' => post('password_confirmation'),
         ];
 
-        $validation = Validator::make(post(), $rules);
+        /** Extract the validation rules. */
+        $rules = [
+            'password' => 'required|between:' . PluginConfig::getMinPasswordLength() . ',' . PluginConfig::getMaxPasswordLength() . '|confirmed',
+            'password_confirmation' => 'required|required_with:password',
+        ];
+
+        /** Construct the validation error messages. */
+        $messages = [
+            'password.required' => Lang::get('genuineq.user::lang.component.password-reset.validation.password_required'),
+            'password.between' => Lang::get('genuineq.user::lang.component.password-reset.validation.password_between_s') . PluginConfig::getMinPasswordLength() . ' si ' . PluginConfig::getMaxPasswordLength() . Lang::get('genuineq.user::lang.component.password-reset.validation.password_between_e'),
+            'password.confirmed' => Lang::get('genuineq.user::lang.component.password-reset.validation.password_confirmed'),
+            'password_confirmation.required' => Lang::get('genuineq.user::lang.component.password-reset.validation.password_confirmation_required'),
+            'password_confirmation.required_with' => Lang::get('genuineq.user::lang.component.password-reset.validation.password_confirmation_required_with'),
+        ];
+
+        /** Apply the validation rules. */
+        $validation = Validator::make($data, $rules, $messages);
         if ($validation->fails()) {
             throw new ValidationException($validation);
         }
 
-        $errorFields = ['code' => Lang::get(/*Invalid activation code supplied.*/'genuineq.user::lang.account.invalid_activation_code')];
-
-        /*
-         * Break up the code parts
-         */
+        /** Break up the code parts. */
         $parts = explode('!', post('code'));
         if (count($parts) != 2) {
-            throw new ValidationException($errorFields);
+            throw new ApplicationException(Lang::get('genuineq.user::lang.component.password-reset.message.invalid_reset_code'));
         }
 
         list($userId, $code) = $parts;
 
         if (!strlen(trim($userId)) || !strlen(trim($code)) || !$code) {
-            throw new ValidationException($errorFields);
+            throw new ApplicationException(Lang::get('genuineq.user::lang.component.password-reset.message.invalid_reset_code'));
         }
 
         if (!$user = Auth::findUserById($userId)) {
-            throw new ValidationException($errorFields);
+            throw new ApplicationException(Lang::get('genuineq.user::lang.component.password-reset.message.invalid_reset_code'));
         }
 
         if (!$user->attemptResetPassword($code, post('password'))) {
-            throw new ValidationException($errorFields);
+            throw new ApplicationException(Lang::get('genuineq.user::lang.component.password-reset.message.invalid_reset_code'));
         }
+
+        Flash::success(Lang::get('genuineq.user::lang.component.password-reset.message.reset_successful'));
     }
 
-    //
-    // Helpers
-    //
+    /***********************************************
+     ******************* Helpers *******************
+     ***********************************************/
 
     /**
-     * Returns a link used to reset the user account.
-     * @return string
+     * Sends the password reset email to a user
+     * @param  User $user
+     * @return void
      */
-    protected function makeResetUrl($code)
+    protected function sendPasswordResetEmail($user)
     {
-        $params = [
-            $this->property('paramCode') => $code
+        /** Generate a password reset code. */
+        $code = implode('!', [$user->id, $user->getResetPasswordCode()]);
+        /** Create the password reset URL. */
+        $link = URL::to('/') . '?reset=' . $code;
+
+        $data = [
+            'name' => $user->name,
+            'username' => $user->username,
+            'link' => $link
         ];
 
-        if ($pageName = $this->property('resetPage')) {
-            $url = $this->pageUrl($pageName, $params);
-        }
-        else {
-            $url = $this->currentPageUrl($params);
-        }
-
-        if (strpos($url, $code) === false) {
-            $url .= '?reset=' . $code;
-        }
-
-        return $url;
+        Mail::send('genuineq.user::mail.restore', $data, function($message) use ($user) {
+            $message->to($user->email, $user->name);
+        });
     }
 }

@@ -143,7 +143,6 @@ return [
         'force_secure' => 'Force secure protocol',
         'force_secure_desc' => 'Always redirect the URL with the HTTPS schema',
         'invalid_user' => 'A user was not found with the given credentials',
-        'invalid_activation_code' => 'Invalid activation code supplied',
         'invalid_deactivation_pass' => 'The password you entered was invalid',
         'invalid_current_pass' => 'The current password you entered was invalid',
         'success_activation' => 'Successfully activated your account',
@@ -164,12 +163,6 @@ return [
         'new_password_confirm' => 'Confirm New Password',
         'update_requires_password' => 'Confirm password on update',
         'update_requires_password_comment' => 'Require the current password of the user when changing their profile.'
-    ],
-    'reset_password' => [
-        'reset_password' => 'Reset Password',
-        'reset_password_desc' => 'Forgotten password form',
-        'code_param' => 'Reset Code Param',
-        'code_param_desc' => 'The page URL parameter used for the reset code'
     ],
     'session' => [
         'session' => 'Session',
@@ -392,6 +385,27 @@ return [
                 'email_update_successful' => 'Adresa de email a fost actualizata cu succes',
                 'password_update_successful' => 'Parola a fost actualizata cu succes',
                 'email_notifications_update_successful' => 'Notificarile au fost actualizate cu succes',
+            ],
+        ],
+
+        'password-reset' => [
+            'name' => 'Reset Password',
+            'description' => 'Allows users to reset teir password',
+            'validation' => [
+                'email_required' => 'Adresa de email este obligatorie',
+                'email_between' => 'Adresa de email trebuie sa aiba intre 6 si 255 de caractere',
+                'email_email' => 'Adresa de email nu este valida',
+                'password_required' => 'Parola este obligatorie',
+                'password_between_s' => 'Parola trebuie sa aiba intre ',
+                'password_between_e' => ' caractere',
+                'password_confirmed' => 'Parolele nu se potrivesc',
+                'password_confirmation_required' => 'Confirmarea parolei este obligatorie',
+                'password_confirmation_required_with' => 'Confirmarea parolei este obligatorie',
+            ],
+            'message' => [
+                'restore_successful' => 'Daca adresa de email exista, un email de resetare a parolei a fost trimis',
+                'reset_successful' => 'Parola a fost schimbata cu succes',
+                'invalid_reset_code' => 'Codul de resetare a parolei nu este valid',
             ],
         ],
 

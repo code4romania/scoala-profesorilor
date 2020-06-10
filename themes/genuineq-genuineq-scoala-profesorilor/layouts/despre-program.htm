@@ -10,6 +10,8 @@ forceSecure = 0
 [register]
 forceSecure = 0
 
+[resetPassword]
+
 [session]
 security = "all"
 
@@ -132,4 +134,9 @@ use Genuineq\Tms\Models\Course;
     {% partial 'signing/signup-school-modal' %}
     {% partial 'signing/signup-teacher-modal' %}
     {% partial 'signing/signup-select-modal' %}
+    {% partial 'signing/password-restore-modal' %}
+
+    {% if resetCode %}
+        {% partial 'signing/password-reset-modal' %}
+    {% endif %}
 {% endif %}

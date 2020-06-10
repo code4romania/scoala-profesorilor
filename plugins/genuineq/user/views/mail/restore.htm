@@ -1,22 +1,12 @@
-subject = "Requested Password Reset"
+subject = "Schimbare parola"
 description = "User requests a password reset"
 ==
-Hello {{ name }}
+Buna {{ name }}
 
-Somebody has requested a password reset for your account, if this was not you, please ignore this email.
+Cineva a initiat o cerere de schimbare a parolei pentru contul tau. Daca nu ai fost tu, te rugam sa ignori acest email.
 
-Use this activation code to restore your password:
-
-{% partial 'promotion' body %}
-{{ code }}
-{% endpartial %}
-
-You can use the following link:
+Te rugam sa dai click pe link-ul de mai jos pentru a schimba parola:
 
 {% partial 'button' url=link type='positive' body %}
-Restore password
-{% endpartial %}
-
-{% partial 'subcopy' body %}
-    **This is an automatic message. Please do not reply to it.**
+Schimba parola
 {% endpartial %}

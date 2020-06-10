@@ -13,7 +13,6 @@ use Validator;
 use Exception;
 use ValidationException;
 use ApplicationException;
-use October\Rain\Auth\AuthException;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use Genuineq\User\Models\User as UserModel;

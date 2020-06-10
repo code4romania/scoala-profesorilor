@@ -16,7 +16,6 @@ use ValidationException;
 use ApplicationException;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
-use Genuineq\User\Classes\AuthException;
 use Genuineq\User\Models\User as UserModel;
 use Genuineq\User\Models\Settings as UserSettings;
 use Genuineq\User\Helpers\PluginConfig;
@@ -155,13 +154,13 @@ class Login extends ComponentBase
 
             /** Check if authentication was successful. */
             if (!$user) {
-                throw new AuthException(Lang::get('genuineq.user::lang.component.login.message.wrong_credentials'));
+                throw new ApplicationException(Lang::get('genuineq.user::lang.component.login.message.wrong_credentials'));
             }
 
             /** Check if the user is banned. */
             if ($user->isBanned()) {
                 Auth::logout();
-                throw new AuthException(Lang::get('genuineq.user::lang.component.login.message.banned'));
+                throw new ApplicationException(Lang::get('genuineq.user::lang.component.login.message.banned'));
             }
 
             /** Check if the user is NOT activated. */
@@ -173,7 +172,7 @@ class Login extends ComponentBase
 
                     Flash::success(Lang::get('genuineq.user::lang.component.login.message.activation_email_sent'));
                 }
-                throw new AuthException(Lang::get('genuineq.user::lang.component.login.message.not_active'));
+                throw new ApplicationException(Lang::get('genuineq.user::lang.component.login.message.not_active'));
             }
 
             /** Record IP address. */
