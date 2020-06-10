@@ -5,11 +5,11 @@ description = "Displays an appraisal as a card"
 <div class="card">
     <div class="card-header appraisal-{{ appraisal.status }}">
         <div class="row w-100 m-0">
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-left p-0 m-0">
-                <p class="small m-0 text-white">{{ 'appraisal.year'|_ }}:&nbsp;{{ appraisal.semester.year }}</p>
+            <div class="col-12 p-0 m-0">
+                <p class="small m-0 text-white">{{ 'appraisal.school'|_ }}:&nbsp;{{ appraisal.school.name }}</p>
             </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-right p-0 m-0">
-                <p class="small m-0 text-white">{{ 'appraisal.semester'|_ }}:&nbsp;{{ appraisal.semester.semester }}</p>
+            <div class="col-12 p-0 m-0">
+                <p class="small m-0 text-white">{{ 'appraisal.semester'|_ }}:&nbsp;{{ appraisal.semester_name }}</p>
             </div>
         </div>
     </div>

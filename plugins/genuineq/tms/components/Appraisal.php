@@ -243,7 +243,7 @@ class Appraisal extends ComponentBase
         $this->page['appraisal'] = $school->getActiveAppraisal(post('teacherId'));
 
         /** Extracts all the appraisals of specified teacher. */
-        $this->schoolExtractAppraisals(/*options*/[], post('teacherId'), $school);
+        $this->schoolExtractAppraisals(/*options*/['school' => $school->id, 'teacher' => post('teacherId')], post('teacherId'), $school);
 
         /** Extracts all the appraisals statics of specified teacher. */
         $this->schoolExtractSearchStatics(post('teacherId'));
@@ -371,9 +371,11 @@ class Appraisal extends ComponentBase
             'year' => post('appraisalYear'),
             'semester' => post('appraisalSemester'),
             'page' => post('newPage'),
+            'school' => $school->id,
+            'teacher' => post('teacherId'),
         ];
         /** Extracts all the appraisals of specified teacher. */
-        $this->schoolExtractAppraisals(/*options*/[], post('teacherId'), $school);
+        $this->schoolExtractAppraisals($options, post('teacherId'));
 
         /** Extract all the skills and create the source array. */
         $value = 0;
@@ -437,9 +439,11 @@ class Appraisal extends ComponentBase
             'year' => post('appraisalYear'),
             'semester' => post('appraisalSemester'),
             'page' => post('newPage'),
+            'school' => $school->id,
+            'teacher' => post('teacherId'),
         ];
         /** Extracts all the appraisals of specified teacher. */
-        $this->schoolExtractAppraisals(/*options*/[], post('teacherId'), $school);
+        $this->schoolExtractAppraisals($options, post('teacherId'));
 
         /** Extract all the skills and create the source array. */
         $value = 0;
@@ -505,9 +509,11 @@ class Appraisal extends ComponentBase
             'year' => post('appraisalYear'),
             'semester' => post('appraisalSemester'),
             'page' => post('newPage'),
+            'school' => $school->id,
+            'teacher' => post('teacherId'),
         ];
         /** Extracts all the appraisals of specified teacher. */
-        $this->schoolExtractAppraisals(/*options*/[], post('teacherId'), $school);
+        $this->schoolExtractAppraisals($options, post('teacherId'));
     }
 
     /**
@@ -572,9 +578,11 @@ class Appraisal extends ComponentBase
             'year' => post('appraisalYear'),
             'semester' => post('appraisalSemester'),
             'page' => post('newPage'),
+            'school' => $school->id,
+            'teacher' => post('teacherId'),
         ];
         /** Extracts all the appraisals of specified teacher. */
-        $this->schoolExtractAppraisals(/*options*/[], post('teacherId'), $school);
+        $this->schoolExtractAppraisals($options, post('teacherId'), $school);
     }
 
     /***********************************************
@@ -616,12 +624,12 @@ class Appraisal extends ComponentBase
     /**
      * Extract the requested appraisals.
      */
-    protected function schoolExtractAppraisals($options, $teacherId, $school)
+    protected function schoolExtractAppraisals($options, $teacherId)
     {
         /** Extract the teacher. */
         $this->page['teacher'] = Teacher::find($teacherId);
         /** Extract all appraisals for filtering. */
-        $this->page['appraisals'] = $school->schoolFilterAppraisals($options);
+        $this->page['appraisals'] = AppraisalModule::schoolFilterAppraisals($options);
         /** Extract the number of pages. */
         $this->page['appraisalsPages'] = $this->page['appraisals']->lastPage();
         /** Extract the current page. */
