@@ -40,9 +40,17 @@ class CourseImport extends \Backend\Models\ImportModel
                     $this->logWarning($row, Lang::get('genuineq.tms::lang.course.import-export.supplier_not_found') . $data['supplier_name']);
                 }
 
-                $data['slug'] = str_replace(' ', '-', strtolower($data['name']));
-
-                $course->fill($data);
+                $course->name = $data['name'];
+                $course->slug = str_replace(' ', '-', strtolower($data['name']));
+                $course->duration = $data['duration'];
+                $course->address = $data['address'];
+                $course->start_date = date('Y-m-d H:i:s', strtotime($data['start_date']));
+                $course->end_date = date('Y-m-d H:i:s', strtotime($data['end_date']));
+                $course->accredited = $data['accredited'];
+                $course->credits = $data['credits'];
+                $course->price = $data['price'];
+                $course->description = $data['description'];
+                $course->supplier_id = (array_key_exists('supplier_id', $data)) ? ($data['supplier_id']) : (null);
                 $course->save();
 
                 /** Extract the categories */
