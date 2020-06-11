@@ -15,13 +15,13 @@ scopes:
         scope: filterByGroup
 
     created_date:
-        label: genuineq.user::lang.user.created_at
+        label: genuineq.user::lang.users.created_at
         type: daterange
         conditions: created_at >= ':after' AND created_at <= ':before'
 
     activated:
         # Filter name
-        label: genuineq.user::lang.user.status_activated
+        label: genuineq.user::lang.users.status_activated
         # Filter type
         type: switch
         # SQL conditions
