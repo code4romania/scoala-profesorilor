@@ -9,7 +9,7 @@ use System\Classes\SettingsManager;
 use Illuminate\Foundation\AliasLoader;
 use Genuineq\User\Classes\UserRedirector;
 use Genuineq\User\Models\MailBlocker;
-use RainLab\User\Models\User;
+use Genuineq\User\Models\User;
 use RainLab\Notify\Classes\Notifier;
 use RainLab\Notify\NotifyRules\SaveDatabaseAction;
 
@@ -55,9 +55,7 @@ class Plugin extends PluginBase
             return $redirector;
         });
 
-        /*
-         * Apply user-based mail blocking
-         */
+        /** Apply user-based mail blocking */
         Event::listen('mailer.prepareSend', function($mailer, $view, $message) {
             return MailBlocker::filterMessage($view, $message);
         });
@@ -211,6 +209,7 @@ class Plugin extends PluginBase
             $action->addTableDefinition([
                 'label' => 'User notifications',
                 'class' => User::class,
+                'relation' => 'notifications',
                 'param' => 'user'
             ]);
         });
