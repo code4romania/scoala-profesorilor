@@ -428,6 +428,8 @@ class LearningPlan extends ComponentBase
             } else {
                 $data['teacher_covered_costs'] = Course::find(post('courseId'))->price;
             }
+            $data['transport_covered'] = (post('transport_covered')) ? (1) : (0);
+            $data['accommodation_covered'] = (post('accommodation_covered')) ? (1) : (0);
 
             /** Extract the school. */
             $school = Auth::getUser()->profile->schools->where('slug', str_slug(post('school'), '-'))->first();

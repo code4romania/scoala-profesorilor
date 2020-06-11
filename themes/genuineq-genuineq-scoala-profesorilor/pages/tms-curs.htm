@@ -77,7 +77,7 @@ use Genuineq\Tms\Models\Course;
                 <p class="my-1 font-weight-bold">{{ course.credits }} {{ 'course.credits'|_ }} <span class="mx-1">&vert;</span> {{ course.price }} {{ 'general.coin'|_ }}</p>
             </div>
 
-            {% if user %}
+            {% if user and 'teacher' == user.type %}
                 <div id="add-remove-course" class="col-auto ml-auto">
                     {% partial "teacher-learning-plans/learning-plan-course-add-remove-btn" %}
                 </div>

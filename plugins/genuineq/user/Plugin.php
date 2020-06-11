@@ -197,6 +197,12 @@ class Plugin extends PluginBase
             'genuineq.user.activate' => \Genuineq\User\NotifyRules\UserActivatedEvent::class,
             'genuineq.user.register' => \Genuineq\User\NotifyRules\UserRegisteredEvent::class
         ]);
+
+        Notifier::instance()->registerCallback(function($manager) {
+            $manager->registerGlobalParams([
+                'user' => Auth::getUser()
+            ]);
+        });
     }
 
     protected function extendSaveDatabaseAction()

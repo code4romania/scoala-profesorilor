@@ -198,6 +198,21 @@ class Teacher extends Model
         return (0 < $this->schools->count());
     }
 
+    /**
+     * Function that extracts the list of schools of the teacher.
+     */
+    protected function getSchoolsListAttribute()
+    {
+        /** Extact the teacher schools. */
+        $value = 0;
+        $schools = [];
+        foreach ($this->schools as $school) {
+            $schools[$school->name] = $value++;
+        }
+
+        return (count($schools)) ? (json_encode($schools)) : (null);
+    }
+
     /***********************************************
      ******************* Functions *****************
      ***********************************************/

@@ -16,10 +16,9 @@ description = "Modal that specifies how a course is added to a learning plan"
             </div>
 
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-12">
-                        <form id="learning-plan-course-add-modal-form" data-request="onTeacherLearningPlanCourseAdd" data-request-data="noSearch: 'true'" data-request-update="teacher-learning-plans/learning-plan-course-add-remove-btn: '#add-remove-course'" data-request-validate data-request-flash>
-
+                <form id="learning-plan-course-add-modal-form" data-request-data="noSearch: 'true'" data-request-validate data-request-flash>
+                    <div class="row">
+                        <div class="col-12">
                             <div class="form-group">
                                 <div class="md-form">
                                     <input name="school" type="text" id="school" class="form-control">
@@ -27,7 +26,29 @@ description = "Modal that specifies how a course is added to a learning plan"
                                     <div class="small text-danger" data-validate-for="school"></div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
 
+                    <div class="row mb-2">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-check">
+                                <input name="transport_covered" type="checkbox" class="form-check-input" id="transport_covered">
+                                <label class="form-check-label" for="transport_covered">{{ 'learning-plans.learning-plan-course-add-modal.transport_covered'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="name"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-check">
+                                <input name="accommodation_covered" type="checkbox" class="form-check-input" id="accommodation_covered">
+                                <label class="form-check-label" for="accommodation_covered">{{ 'learning-plans.learning-plan-course-add-modal.accommodation_covered'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="name"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
                             <div class="form-group">
                                 <div class="md-form">
                                     <input name="school_covered_costs" type="number" id="school_covered_costs" class="form-control">
@@ -35,19 +56,19 @@ description = "Modal that specifies how a course is added to a learning plan"
                                     <div class="small text-danger" data-validate-for="school_covered_costs"></div>
                                 </div>
                             </div>
-
-                            <input name="learningPlanId" id="learningPlanId" hidden>
-                            <input name="courseId" id="courseId" hidden>
-
-                        </form>
+                        </div>
                     </div>
-                </div>
 
-                <div class="row align-items-start d-none d-sm-flex d-md-flex d-lg-flex d-xl-flex">
-                    <div class="col-12">
-                        <button id="learning-plan-course-add-modal-add" type="submit" class="btn btl-lg btn-block btn-secondary rounded mt-3" data-dismiss="modal" data-toggle="modal">{{ 'teacher-learning-plans.learning-plan-course-add-modal.add'|_ }}</button>
+                    <input name="learningPlanId" id="learningPlanId" hidden>
+                    <input name="courseId" id="courseId" hidden>
+
+
+                    <div class="row align-items-start d-none d-sm-flex d-md-flex d-lg-flex d-xl-flex">
+                        <div class="col-12">
+                            <button id="learning-plan-course-add-modal-add" type="submit" class="btn btl-lg btn-block btn-secondary rounded mt-3">{{ 'teacher-learning-plans.learning-plan-course-add-modal.add'|_ }}</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
 
         </div>
@@ -55,13 +76,31 @@ description = "Modal that specifies how a course is added to a learning plan"
 
 </div>
 
+<script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
+
 <script type="text/javascript">
     $( document ).ready(function() {
         $('#school').autocomplete({
-            source: {{ schools|raw }},
+            source: {{ user.profile.schools_list|raw }},
             highlightClass: 'text-danger',
             treshold: 1
         });
+
+        $('#learning-plan-course-add-modal-form').on('submit', function () {
+            /* Close the learning plan add course modal. */
+            $('#learning-plan-course-add-modal').modal('hide');
+
+            /* Initiate the learning plan course add. */
+            $('#learning-plan-course-add-modal-form').request(
+                'onTeacherLearningPlanCourseAdd',
+                {
+                    update: { 'teacher-learning-plans/learning-plan-course-add-remove-btn': '#add-remove-course' },
+                    data: { 'noSearch': 'true' }
+                }
+            );
+
+            return false;
+        })
     });
 
     /* Function that saves the ID of the course that was clicked. */
