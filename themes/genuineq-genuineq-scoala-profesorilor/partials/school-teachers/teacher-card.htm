@@ -21,7 +21,9 @@ description = "Displays a teacher as a card"
         <h5 class="card-title text-center">
             <a class="stretched-link teacher-view" data-id="{{ teacher.id }}">
                 <p class="m-0">{{ teacher.name }}</p>
-                <small>{{ teacher.seniority_level.name }}</small>
+                <small>{{ teacher.seniority_level.name }}</small><br/>
+                <small>{{ 'school-teachers.teacher-courses-number'|_ }}:&nbsp;{{ teacher.active_learning_plan.courses.count() }}</small><br/>
+                <small>{{ 'school-teachers.teacher-budget'|_ }}:&nbsp;{{ teacher.active_budget.budget }}&nbsp;{{ 'general.coin'|_ }}</small><br/>
                 <br/>
                 <a class="btn btn-md btn-secondary mt-4 py-2 z-depth-0 waves-effect rounded teacher-view" type="button" data-id="{{ teacher.id }}">{{ 'teacher.card.view'|_ }}</a>
             </a>
