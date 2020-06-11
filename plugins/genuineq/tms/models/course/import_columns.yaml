@@ -2,9 +2,6 @@ columns:
     name:
         label: 'genuineq.tms::lang.course.label.name'
         type: text
-    supplier:
-        label: 'genuineq.tms::lang.course.label.supplier'
-        type: text
     duration:
         label: 'genuineq.tms::lang.course.label.duration'
         type: number
@@ -28,4 +25,13 @@ columns:
         type: number
     description:
         label: 'genuineq.tms::lang.course.label.description'
+        type: text
+    supplier_name:
+        label: 'genuineq.tms::lang.course.label.supplier_name'
+        type: text
+    categories_names:
+        label: 'genuineq.tms::lang.course.label.categories_names'
+        type: text
+    skills_names:
+        label: 'genuineq.tms::lang.course.label.skills_names'
         type: text

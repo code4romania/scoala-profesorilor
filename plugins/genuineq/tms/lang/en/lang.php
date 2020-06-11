@@ -49,6 +49,9 @@
             'categories' => 'Categories',
             'skills' => 'Skills',
             'supplier' => 'Supplier',
+            'supplier_name' => 'Supplier Name',
+            'categories_names' => 'Categories Names',
+            'skills_names' => 'Skills Names',
         ],
 
         'comment' => [
@@ -83,6 +86,8 @@
 
         'import-export' => [
             'supplier_not_found' => 'Supplier not found: ',
+            'category_not_found' => 'Category not found: ',
+            'skill_not_found' => 'Skill not found: ',
             'import_label' => 'Import',
             'export_label' => 'Export',
         ]

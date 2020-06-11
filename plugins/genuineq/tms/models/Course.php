@@ -102,6 +102,48 @@ class Course extends Model
         return $color;
     }
 
+    /**
+     * Function that extracts the supplier name
+     */
+    public function getSupplierNameAttribute()
+    {
+        return ($this->supplier) ? ($this->supplier->name) : ('');
+    }
+
+    /**
+     * Function that extracts the categories names
+     */
+    public function getCategoriesNamesAttribute()
+    {
+        $categoriesNames = '';
+        foreach ($this->categories as $key => $category) {
+            if ('' == $categoriesNames) {
+                $categoriesNames = $category->name;
+            } else {
+                $categoriesNames .= ', ' . $category->name;
+            }
+        }
+
+        return $categoriesNames;
+    }
+
+    /**
+     * Function that extracts the skills names
+     */
+    public function getSkillsNamesAttribute()
+    {
+        $skillsNames = '';
+        foreach ($this->skills as $key => $skill) {
+            if ('' == $skillsNames) {
+                $skillsNames = $skill->name;
+            } else {
+                $skillsNames .= ', ' . $skill->name;
+            }
+        }
+
+        return $skillsNames;
+    }
+
     /***********************************************
      ******************* Functions *****************
      ***********************************************/
