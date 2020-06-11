@@ -363,7 +363,7 @@ class SchoolTeacherProfile extends ComponentBase
     }
 
     /**
-     * Update the teacher profile.
+     * Update the teacher-school link.
      */
     public function onSchoolTeacherProfileLinkUpdate()
     {

@@ -1,13 +1,12 @@
-subject = "An account has been created for you"
+subject = "Informare cont"
 description = "Invite a new user to the website"
 ==
-Hello {{ name }}
+Buna {{ teacher_name }}
 
-A user account has been created for you. Please use the following login and password to sign in:
+Un cont a fost creat pentru tine pe aceasta adresa de email de catre scoala {{ school_name }}.
 
-{% partial 'panel' body %}
-- Login: `{{ login }}`
-- Password: `{{ password|raw }}`
+Te rugam sa dai click pe link-ul de mai jos pentru a schimba parola:
+
+{% partial 'button' url=link type='positive' body %}
+Schimba parola
 {% endpartial %}
-
-After signing in you should change your password as soon as possible.

@@ -130,6 +130,11 @@ class SchoolTeacher
                 'password' => str_random(16),
             ]);
 
+            /** Activate the new created teacher user. */
+            $user->is_activated = true;
+            $user->activated_at = $user->freshTimestamp();
+            $user->forceSave();
+
             /** Add the user to the teacher group. */
             $user->addGroup(UserGroup::getGroup('teacher'));
 
@@ -171,10 +176,8 @@ class SchoolTeacher
             $appraisal->teacher_id = $teacher->id;
             $appraisal->save();
 
-            /** Send activation email if the activation is configured to be performed by the user */
-            if (UserSettings::ACTIVATE_USER == UserSettings::get('activate_mode')) {
-                self::sendActivationEmail($user);
-            }
+            /** Send activation email. */
+            self::sendActivationEmail($user, $school);
 
             return [
                 'value' => 1,
@@ -253,6 +256,11 @@ class SchoolTeacher
                 'password' => str_random(16),
             ]);
 
+            /** Activate the new created teacher user. */
+            $user->is_activated = true;
+            $user->activated_at = $user->freshTimestamp();
+            $user->forceSave();
+
             /** Add the user to the teacher group. */
             $user->addGroup(UserGroup::getGroup('teacher'));
 
@@ -293,10 +301,8 @@ class SchoolTeacher
             $appraisal->teacher_id = $teacher->id;
             $appraisal->save();
 
-            /** Send activation email if the activation is configured to be performed by the user */
-            if (UserSettings::ACTIVATE_USER == UserSettings::get('activate_mode')) {
-                self::sendActivationEmail($user);
-            }
+            /** Send activation email. */
+            self::sendActivationEmail($user, $school);
 
             return true;
         }
@@ -307,24 +313,25 @@ class SchoolTeacher
      ***********************************************/
 
     /**
-     * Sends the activation email to a user
-     * @param  User $user
+     * Sends the teacher activation email
+     * @param  Genuineq\User\Models\User $user
+     * @param  Genuineq\Tms\Models\School $school
      * @return void
      */
-    public static function sendActivationEmail($user)
+    public static function sendActivationEmail($user, $school)
     {
-        /** Generate an activation code. */
-        $code = implode('!', [$user->id, $user->getActivationCode()]);
-        /** Create the activation URL. */
-        $link = URL::to('/') . '?activate=' . $code;
+        /** Generate a password reset code. */
+        $code = implode('!', [$user->id, $user->getResetPasswordCode()]);
+        /** Create the password reset URL. */
+        $link = URL::to('/') . '?reset=' . $code;
 
         $data = [
-            'name' => $user->name,
-            'link' => $link,
-            'code' => $code
+            'teacher_name' => $user->name,
+            'school_name' => $school->name,
+            'link' => $link
         ];
 
-        Mail::send('genuineq.user::mail.activate', $data, function($message) use ($user) {
+        Mail::send('genuineq.user::mail.invite', $data, function($message) use ($user) {
             $message->to($user->email, $user->name);
         });
     }
