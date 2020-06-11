@@ -1,6 +1,6 @@
 <?php return [
     /** The minimum length of characters required for user passwords. */
-    'minPasswordLength' => 8,
+    'minPasswordLength' => 9,
 
     /** The maximum length of user passwords. */
     'maxPasswordLength' => 255,
