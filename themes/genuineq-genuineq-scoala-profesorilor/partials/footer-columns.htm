@@ -24,12 +24,12 @@ code = "main-menu"
             <hr class="w-100 clearfix d-sm-none">
 
             <!--Second column-->
-            <div class="col-lg-3 col-md-6 ml-auto">
+            <div class="col-lg-2 col-md-6 ml-auto">
                 {% if staticMenu.totalItems %}
                     <!-- Links -->
                     <ul class="list-unstyled">
                         {% for menuItem in staticMenu.menuItems %}
-                            <li><a href="{{ menuItem.url }} "><span style="font-size: 12px;">{{ menuItem.title }}</span></a></li>
+                            <li><a href="{{ menuItem.url }} "><span style="font-size: 14px;">{{ menuItem.title }}</span></a></li>
                         {% endfor %}
                     </ul>
                     <!-- Links -->
@@ -40,18 +40,12 @@ code = "main-menu"
             <hr class="w-100 clearfix d-sm-none">
 
             <!--Third column-->
-            <div class="col-lg-3 col-md-6 ml-auto">
+            <div class="col-lg-2 col-md-6 ml-auto">
                 <ul class="list-unstyled">
-                    <li><a style="font-size: 12px;" href="{{ 'tms-blog'|page }}">Blog</a></li>
-                    <li><a style="font-size: 12px;" href="{{ 'tms-partners'|page }}">Parteneri</a></li>
-                    <li><a style="font-size: 12px;" href="{{ 'termeni-si-conditii'|staticPage  }}">Termeni și Condiții</li>
-                    <li><a style="font-size: 12px;" href="{{ 'politica-de-confidentialitate'|staticPage  }}">Politica de Confidențialitate</a></li>
-                    <li><span style="font-size: 12px;">{{ 'footer.incubation'|_ }}</span></li>
-                    <li>
-                        <a href="https://www.civiclabs.ro" target="_blank">
-                            <img src="{{ 'assets/img/svg/civic-labs.svg'|theme }}" class="bg-white p-1" width="120" alt="Civic Labs">
-                        </a>
-                    </li>
+                    <li><a style="font-size: 14px;" href="{{ 'tms-blog'|page }}">Blog</a></li>
+                    <li><a style="font-size: 14px;" href="{{ 'tms-partners'|page }}">Parteneri</a></li>
+                    <li><a style="font-size: 14px;" href="{{ 'termeni-si-conditii'|staticPage  }}">Termeni și Condiții</li>
+                    <li><a style="font-size: 14px;" href="{{ 'politica-de-confidentialitate'|staticPage  }}">Politica de Confidențialitate</a></li>
                 </ul>
             </div>
             <!--/.Third column-->
@@ -59,7 +53,7 @@ code = "main-menu"
             <hr class="w-100 clearfix d-sm-none">
 
             <!--Fourth column-->
-            <div class="col-lg-3 col-md-6 ml-auto">
+            <div class="col-lg-2 col-md-6 ml-auto">
                 {% content 'footer-contact-data.htm' %}
                 <ul class="list-unstyled">
                     <li>
@@ -73,6 +67,26 @@ code = "main-menu"
                 </ul>
             </div>
             <!--/.Fourth column-->
+
+            <!--Fifth column-->
+            <div class="col-lg-3 col-md-6 ml-auto">
+                <ul class="list-unstyled">
+                    <li><span>{{ 'footer.incubation'|_ }}</span></li>
+                    <li>
+                        <a href="https://www.civiclabs.ro" target="_blank">
+                            <img src="{{ 'assets/img/svg/civic-labs.svg'|theme }}" class="p-1" width="120" alt="Civic Labs">
+                        </a>
+                    </li>
+
+                    <li><span>{{ 'footer.financing'|_ }}</span></li>
+                    <li>
+                        <a href="https://fundatia-vodafone.ro" target="_blank">
+                            <img src="{{ 'assets/img/svg/vodafone-white.svg'|theme }}" class="p-1" width="120" alt="Fundația Vodafone România">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!--/.Fifth column-->
 
         </div>
     </div>
