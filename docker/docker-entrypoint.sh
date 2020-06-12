@@ -47,11 +47,11 @@ php artisan route:clear
 php artisan config:clear
 php artisan config:cache
 
-# Clean public folder
-rm -R ./public
-
 # Create the public folder
 php artisan october:mirror public --relative
+
+# Remove the media folder public link if exists
+rm -f ./public/storage/app/media
 
 # Create the media folder public link
 ln -s ../../../storage/app/media ./public/storage/app/media
