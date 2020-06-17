@@ -17,6 +17,7 @@ class BuilderTableCreateGenuineqTmsSchools extends Migration
             $table->string('principal', 50)->nullable()->comment = "The name of the principal of the school.";
             $table->integer('inspectorate_id')->nullable()->unsigned();
             $table->integer('address_id')->nullable()->unsigned();
+            $table->text('detailed_address')->nullable()->comment = "The detailed address of the school.";
             $table->text('description')->nullable()->comment = "The description of the school.";
             $table->integer('user_id')->unsigned()->nullable();
             $table->string('contact_name', 50)->nullable()->comment = "The name of the contact person of the school.";
