@@ -51,3 +51,9 @@
 
 // Modules
 @import "modules/timeline";
+
+// TMS theme specific styles
+@import "tms/appraisal";
+@import "tms/modal";
+@import "tms/navbar";
+@import "tms/video";
