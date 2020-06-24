@@ -15,7 +15,7 @@ code = "main-menu"
 
             <!--First column-->
             <div class="col-lg-3 col-md-6">
-                <a href="#">
+                <a href="{{ url('/') }}">
                     <img src="{{ 'assets/img/svg/logo-white.svg'|theme }}" height="70" alt="logo">
                 </a>
             </div>
@@ -71,6 +71,13 @@ code = "main-menu"
             <!--Fifth column-->
             <div class="col-lg-3 col-md-6 ml-auto">
                 <ul class="list-unstyled">
+                    <li><span style="font-size: 12px;">{{ 'footer.lauched'|_ }}</span></li>
+                    <li>
+                        <a href="https://www.civiclabs.ro" target="_blank">
+                            <img src="{{ 'assets/img/svg/fundatia-didactica.svg'|theme }}" class="p-1" width="120" alt="Civic Labs">
+                        </a>
+                    </li>
+
                     <li><span style="font-size: 12px;">{{ 'footer.incubation'|_ }}</span></li>
                     <li>
                         <a href="https://www.civiclabs.ro" target="_blank">
