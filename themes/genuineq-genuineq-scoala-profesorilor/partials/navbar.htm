@@ -25,7 +25,7 @@ code = "main-menu"
                 {% if staticMenu.totalItems %}
                     {% for menuItem in staticMenu.menuItems %}
                         <li class="nav-item h-100 {% if menuItem.isActive %} active {% endif %}">
-                            <a class="nav-link" href="{{ menuItem.url }} ">
+                            <a class="nav-link tms-navbar-menu-item" href="{{ menuItem.url }} ">
                                 {{ menuItem.title }}
                                 {% if this.page.title == menuItem.title %} <span class="sr-only">(current)</span>{% endif %}
                             </a>
@@ -40,8 +40,8 @@ code = "main-menu"
 
                 {% if not user %}
                     <li class="nav-item h-100">
-                        <button type="button" class="btn btn-sm align-middle btn-outline-black z-depth-0 rounded ml-0" data-toggle="modal" data-target="#login-modal">{{'auth.login-label'|_ }}</button>
-                        <button type="button" class="btn btn-sm btn-success z-depth-0 rounded" data-toggle="modal" data-target="#signup-select-modal">{{'auth.signup-label'|_ }}</button>
+                        <button type="button" class="btn btn-sm tms-navbar-button align-middle btn-outline-black z-depth-0 rounded ml-0" data-toggle="modal" data-target="#login-modal">{{'auth.login-label'|_ }}</button>
+                        <button type="button" class="btn btn-sm tms-navbar-button btn-success z-depth-0 rounded" data-toggle="modal" data-target="#signup-select-modal">{{'auth.signup-label'|_ }}</button>
                     </li>
                 {% else %}
                     <li class="nav-item h-100">
