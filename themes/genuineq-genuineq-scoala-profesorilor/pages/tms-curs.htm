@@ -91,29 +91,27 @@ use Genuineq\Tms\Models\Course;
         <div class="row align-middle">
             <div class="col-12 col-sm-12 col-md-7 col-lg-8">
                 <h4 class="mb-3 font-weight-bold">{{ 'course.description-title'|_ }}</h4>
-                <p>{{ course.description }}</p>
+                <p class="text-justify">{{ course.description }}</p>
             </div>
 
             <div class="col-12 col-sm-12 col-md-5 col-lg-4">
                 <h4 class="mb-3 pt-3 pt-md-0 pt-lg-0 font-weight-bold">{{ 'course.skills-title'|_ }}</h4>
-                <ul>
+                <ul class="text-justify">
                     {% for skill in course.skills %}
                         <li><p>{{ skill.name }} &colon; {{ skill.description }}</p></li>
                     {% endfor %}
                 </ul>
 
-                <div class="row justify-content-center">
-                    {% for category in course.categories %}
-                        <div class="col-10 mb-4">
-                            {% partial "category-card"
-                                category=category
-                                detailsPage=categoryPage
-                                detailsKeyColumn=categoryKeyColumn
-                                detailsUrlParameter=categoryUrlParameter
-                            %}
-                        </div>
-                    {% endfor %}
-                </div>
+                {% for category in course.categories %}
+                    <div class="col-12 mb-4 p-0">
+                        {% partial "category-card"
+                            category=category
+                            detailsPage=categoryPage
+                            detailsKeyColumn=categoryKeyColumn
+                            detailsUrlParameter=categoryUrlParameter
+                        %}
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -127,7 +125,7 @@ use Genuineq\Tms\Models\Course;
             <div class="col-12 col-sm-12 col-md-7 col-lg-8">
                 <h4 class="mb-3 font-weight-bold">{{ 'course.supplier.title'|_ }}</h4>
                 <p class="font-weight-bold">{{ course.supplier.name }}</p>
-                <p>{{ course.supplier.description }}</p>
+                <p class="text-justify">{{ course.supplier.description }}</p>
             </div>
 
             <div class="col-12">

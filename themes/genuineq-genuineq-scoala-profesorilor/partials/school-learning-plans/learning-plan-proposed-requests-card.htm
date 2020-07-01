@@ -25,9 +25,11 @@ description = "Displays a request course as a card"
     </div>
     <div class="card-body">
 
-        <small class="card-text">{{ course.supplier.name }}</small>
+        <p class="card-text">{{ course.supplier.name }}</p>
 
-        <h5 class="card-title font-weight-bold">{{ course.name }}</h5>
+        <div class="align-items-center d-flex tms-card-max-lines">
+            <h5 class="card-title font-weight-bold">{{ course.name }}</h5>
+        </div>
 
         <p class="card-text text-truncate">{{ course.description }}</p>
 
@@ -45,11 +47,11 @@ description = "Displays a request course as a card"
 
         <div class="row">
             <div class="col-12 col-sm-6 col-md-6 col-lg-6">
-                <a class="btn btn-sm btn-outline-primary mt-3 py-2 z-depth-0 waves-effect rounded proposed-requests-decline" type="button" data-course-id="{{ course.id }}" data-learning-plan-id="{{ teacher.active_learning_plan.id }}">{{ 'learning-plans.learning-plan-proposed-requests.decline'|_ }}</a>
+                <a class="btn btn-sm btn-outline-primary mt-3 py-2 z-depth-0 waves-effect rounded btn-block proposed-requests-decline" type="button" data-course-id="{{ course.id }}" data-learning-plan-id="{{ teacher.active_learning_plan.id }}">{{ 'learning-plans.learning-plan-proposed-requests.decline'|_ }}</a>
             </div>
 
             <div class="col-12 col-sm-6 col-md-6 col-lg-6">
-                <a class="btn btn-sm btn-secondary mt-3 py-2 z-depth-0 waves-effect rounded proposed-requests-accept" type="button" data-course-id="{{ course.id }}" data-learning-plan-id="{{ teacher.active_learning_plan.id }}">{{ 'learning-plans.learning-plan-proposed-requests.accept'|_ }}</a>
+                <a class="btn btn-sm btn-secondary mt-3 py-2 z-depth-0 waves-effect rounded btn-block proposed-requests-accept" type="button" data-course-id="{{ course.id }}" data-learning-plan-id="{{ teacher.active_learning_plan.id }}">{{ 'learning-plans.learning-plan-proposed-requests.accept'|_ }}</a>
             </div>
         </div>
 

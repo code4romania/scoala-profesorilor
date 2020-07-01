@@ -3,6 +3,7 @@ description = "Displays a learning plan course as a card"
 [viewBag]
 ==
 <div class="card">
+
     <div class="card-header" style="background-color: {{ learningPlanCourse.color }} !important;">
         <div class="row w-100 m-0">
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-left p-0 m-0">
@@ -20,11 +21,15 @@ description = "Displays a learning plan course as a card"
                 {% endif %}
             </div>
         </div>
+
     </div>
     <div class="card-body">
-        <small class="card-text">{{ learningPlanCourse.supplier.name }}</small>
 
-        <h5 class="card-title font-weight-bold">{{ learningPlanCourse.name }}</h5>
+        <p class="card-text text-truncate m-0">{{ learningPlanCourse.supplier.name }}</p>
+
+        <div class="align-items-center d-flex tms-card-max-lines">
+            <h5 class="card-title font-weight-bold">{{ learningPlanCourse.name }}</h5>
+        </div>
 
         <p class="card-text text-truncate">{{ learningPlanCourse.description }}</p>
 
@@ -39,6 +44,8 @@ description = "Displays a learning plan course as a card"
                 {% endfor %}
             </span>
         </small>
-        <button type="button" class="btn btn-outline-primary waves-effect rounded" data-toggle="modal" data-target="#learning-plan-course-add-modal" data-learning-plan-id="{{ learningPlan.id }}" data-course-id="{{ learningPlanCourse.id }}">{{ 'learning-plans.learning-plan-course-card.add_course'|_ }}</button>
+
+        <button type="button" class="btn btn-outline-primary waves-effect rounded mt-3 btn-block" data-toggle="modal" data-target="#learning-plan-course-add-modal" data-learning-plan-id="{{ learningPlan.id }}" data-course-id="{{ learningPlanCourse.id }}">{{ 'learning-plans.learning-plan-course-card.add_course'|_ }}</button>
+
     </div>
 </div>

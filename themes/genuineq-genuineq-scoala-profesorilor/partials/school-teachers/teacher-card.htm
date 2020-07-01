@@ -3,10 +3,10 @@ description = "Displays a teacher as a card"
 [viewBag]
 ==
 <!-- Card -->
-<div class="card">
+<div class="card rounded">
 
     <!-- Card image -->
-    <div class="view overlay d-flex bg-white">
+    <div class="view overlay d-flex bg-white rounded">
         <img src="{{ (teacher.user.getAvatarThumb()) ? (teacher.user.getAvatarThumb(50)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="card-img-top my-auto rounded-circle z-depth-0" alt="{{ teacher.name }}" height="150">
         <a class="teacher-view" data-id="{{ teacher.id }}">
             <div class="mask rgba-white-slight"></div>
@@ -25,7 +25,8 @@ description = "Displays a teacher as a card"
                 <small>{{ 'school-teachers.teacher-courses-number'|_ }}:&nbsp;{{ teacher.active_learning_plan.courses.count() }}</small><br/>
                 <small>{{ 'school-teachers.teacher-budget'|_ }}:&nbsp;{{ teacher.active_budget.budget }}&nbsp;{{ 'general.coin'|_ }}</small><br/>
                 <br/>
-                <a class="btn btn-md btn-secondary mt-4 py-2 z-depth-0 waves-effect rounded teacher-view" type="button" data-id="{{ teacher.id }}">{{ 'teacher.card.view'|_ }}</a>
+
+                <a class="btn btn-md btn-secondary mt-4 py-2 z-depth-0 waves-effect rounded btn-block teacher-view" type="button" data-id="{{ teacher.id }}">{{ 'teacher.card.view'|_ }}</a>
             </a>
         </h5>
         <!-- /.Title -->

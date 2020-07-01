@@ -1,10 +1,4 @@
 /* Necessary for full page carousel*/
-
-/* Carousel*/
-.carousel {
-    height: 50%;
-}
-
 @media (max-width: 776px) {
     .carousel {
         height: 100%;

@@ -31,15 +31,12 @@ domain = "auto"
 production = 1
 ==
 <?php
-use Genuineq\Tms\Models\Course;
+    use Genuineq\Tms\Models\Course;
 
     function onStart()
     {
         /* Extract the latest 3 courses. */
         $this['courses'] = Course::where('status', 1)->orderBy('created_at', 'desc')->take(3)->get();
-
-        /* Assets for carousel-half-page partial. */
-        $this->addCss('assets/css/carousel-half-page.css');
     }
 ?>
 ==
@@ -47,7 +44,7 @@ use Genuineq\Tms\Models\Course;
 {% partial 'navbar' %}
 
 <!--Intro Section-->
-{% partial "carousel-half-page" %}
+{% partial "carousel-full-page" %}
 <!--/.Intro Section-->
 
 <!--About Program-->
@@ -80,7 +77,6 @@ use Genuineq\Tms\Models\Course;
 {variable name="usTitle" label="Title" tab="About us" type="text"}{/variable}
 {variable name="usContent" label="Content" tab="About us" type="richeditor"}{/variable}
 {variable name="usImageLabel" label="Image text" tab="About us" type="text"}{/variable}
-{variable name="usImage" label="Image" tab="About us" type="mediafinder" mode="image"}{/variable}
 
 <section class="bg-white py-5">
     <div class="container">
@@ -97,7 +93,7 @@ use Genuineq\Tms\Models\Course;
 
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-center">
                 <p class="wow fadeInRight font-bold text-uppercase">{{ usImageLabel }}</p>
-                <img src="{{ usImage|media }}" class="img-fluid">
+                <img src="{{ 'assets/img/svg/vodafone-red.svg'|theme }}" class="p-1 img-fluid" alt="Fundația Vodafone România">
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@ description = "Displays a carousel that has more items per page"
     <div class="carousel-inner carousel-inner-{{ id }} row w-100 mx-auto" role="listbox">
 
         {% for learningPlanCourse in learningPlanCourses %}
-            <div class="carousel-item carousel-item-{{ id }} col-12 col-sm-6 col-md-3 col-lg-3 py-2 {{ loop.first ? 'active' : '' }}">
+            <div class="carousel-item carousel-item-{{ id }} col-12 col-sm-6 col-md-4 col-lg-4 py-2 {{ loop.first ? 'active' : '' }}">
                 {% partial "school-learning-plans/learning-plan-proposed-requests-card" course=learningPlanCourse.course %}
             </div>
         {% endfor %}
@@ -16,11 +16,11 @@ description = "Displays a carousel that has more items per page"
     </div>
 
     <!--Controls-->
-    <a class="carousel-control-prev carousel-control-bg-invert" href="#carousel-multiple-courses-{{ id }}" role="button" data-slide="prev">
+    <a class="tms-carousel-control-prev carousel-control-prev carousel-control-bg-invert" href="#carousel-multiple-courses-{{ id }}" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">{{ 'carousel.previous'|_ }}</span>
     </a>
-    <a class="carousel-control-next carousel-control-bg-invert" href="#carousel-multiple-courses-{{ id }}" role="button" data-slide="next">
+    <a class="tms-carousel-control-next carousel-control-next carousel-control-bg-invert" href="#carousel-multiple-courses-{{ id }}" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">{{ 'carousel.next'|_ }}</span>
     </a>

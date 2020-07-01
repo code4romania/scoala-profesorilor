@@ -23,22 +23,26 @@ allowedUserGroups[] = "school"
 ==
 
 <div class="containter-fluid" style="background-image: url({{ 'background-school.jpg'|media }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
-    <div class="row m-0">
-        <div class="col-12 col-sm-6 offset-sm-3 col-md-4 offset-md-4 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4 bg-white">
-            <div class="row">
-                <div class="col-12 text-center">
+    <div class="full-bg-img">
+        <div class="mask rgba-black-strong">
+            <div class="row m-0">
+                <div class="col-12 col-sm-6 offset-sm-3 col-md-4 offset-md-4 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4 bg-white">
+                    <div class="row">
+                        <div class="col-12 text-center">
 
-                    <img src="{{ (user.getAvatarThumb()) ? (user.getAvatarThumb(150)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="rounded-circle" alt="avatar" height="150">
+                            <img src="{{ (user.getAvatarThumb()) ? (user.getAvatarThumb(150)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="rounded-circle" alt="avatar" height="150">
 
-                </div>
-            </div>
+                        </div>
+                    </div>
 
-            <div class="row">
-                <div class="col-12 text-center">
+                    <div class="row">
+                        <div class="col-12 text-center">
 
-                    <p class="m-0">{{ profile.name }}</p>
-                    <p class="m-0">{{ profileAddress }}</p>
+                            <p class="m-0">{{ profile.name }}</p>
+                            <p class="m-0">{{ profileAddress }}</p>
 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
