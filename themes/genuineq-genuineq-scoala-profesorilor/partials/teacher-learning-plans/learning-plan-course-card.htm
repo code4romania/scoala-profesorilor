@@ -4,6 +4,7 @@ description = "Displays a learning plan course as a card"
 ==
 <div class="card">
     <div class="card-header" style="background-color: {{ learningPlanCourse.color }} !important;">
+
         <div class="row w-100 m-0">
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-left p-0 m-0">
                 {% if 1 == learningPlanCourse.accredited %}
@@ -20,11 +21,14 @@ description = "Displays a learning plan course as a card"
                 {% endif %}
             </div>
         </div>
+
     </div>
     <div class="card-body">
-        <small class="card-text">{{ learningPlanCourse.supplier.name }}</small>
+        <p class="card-text text-truncate">{{ learningPlanCourse.supplier.name }}</p>
 
-        <h5 class="card-title font-weight-bold">{{ learningPlanCourse.name }}</h5>
+        <div class="align-items-center d-flex tms-card-max-lines">
+            <h5 class="card-title font-weight-bold">{{ learningPlanCourse.name }}</h5>
+        </div>
 
         <p class="card-text text-truncate">{{ learningPlanCourse.description }}</p>
 
@@ -39,10 +43,11 @@ description = "Displays a learning plan course as a card"
                 {% endfor %}
             </span>
         </small>
+
         {% if schools %}
-            <button type="button" class="btn btn-outline-primary waves-effect rounded" data-toggle="modal" data-target="#learning-plan-course-add-modal" data-learning-plan-id="{{ learningPlan.id }}" data-course-id="{{ learningPlanCourse.id }}">{{ 'learning-plans.learning-plan-course-card.add_course'|_ }}</button>
+            <button type="button" class="btn btn-outline-primary waves-effect mt-3 rounded btn-block" data-toggle="modal" data-target="#learning-plan-course-add-modal" data-learning-plan-id="{{ learningPlan.id }}" data-course-id="{{ learningPlanCourse.id }}">{{ 'learning-plans.learning-plan-course-card.add_course'|_ }}</button>
         {% else %}
-            <button type="button" class="btn btn-outline-primary waves-effect rounded learning-plan-add-course" data-learning-plan-id="{{ learningPlan.id }}" data-course-id="{{ learningPlanCourse.id }}">{{ 'learning-plans.learning-plan-course-card.add_course'|_ }}</button>
+            <button type="button" class="btn btn-outline-primary waves-effect mt-3 rounded btn-block learning-plan-add-course" data-learning-plan-id="{{ learningPlan.id }}" data-course-id="{{ learningPlanCourse.id }}">{{ 'learning-plans.learning-plan-course-card.add_course'|_ }}</button>
         {% endif %}
     </div>
 </div>

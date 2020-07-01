@@ -8,7 +8,7 @@ description = "Displays a carousel that has more items per page"
     <div class="carousel-inner row w-100 mx-auto" role="listbox">
 
         {% for learningPlanCourse in learningPlanCourses %}
-            <div class="carousel-item col-12 col-sm-6 col-md-3 col-lg-3 py-2 {{ loop.first ? 'active' : '' }}">
+            <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-4 py-2 {{ loop.first ? 'active' : '' }}">
                 {% partial "learning-plans/learning-plan-declined-requests-card" course=learningPlanCourse.course %}
             </div>
         {% endfor %}

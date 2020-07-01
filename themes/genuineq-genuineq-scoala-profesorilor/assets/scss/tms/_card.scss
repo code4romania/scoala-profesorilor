@@ -1,0 +1,7 @@
+.tms-card-max-lines {
+    display: block;/* or inline-block */
+    word-break: break-word;
+    height: $headings-line-height * 3rem;
+    max-height: $headings-line-height * 3rem;
+    line-height: $headings-line-height * 1rem;
+}

@@ -24,9 +24,6 @@ use Genuineq\Tms\Models\Course;
 
     function onStart()
     {
-        /* Assets for carousel-multiple-courses partial. */
-        $this->addCss('assets/css/carousel-multiple-courses.css');
-
         /* Extract all the course categories. */
         $categories = Course::whereSlug($this->param('slug'))->first()->categories;
         /* Extract all the categories of the selected Course. */

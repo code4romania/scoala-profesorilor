@@ -25,9 +25,11 @@ description = "Displays a request course as a card"
     </div>
     <div class="card-body">
 
-        <small class="card-text">{{ course.supplier.name }}</small>
+        <p class="card-text text-truncate m-0">{{ course.supplier.name }}</p>
 
-        <h5 class="card-title font-weight-bold">{{ course.name }}</h5>
+        <div class="align-items-center d-flex tms-card-max-lines">
+            <h5 class="card-title font-weight-bold">{{ course.name }}</h5>
+        </div>
 
         <p class="card-text text-truncate">{{ course.description }}</p>
 

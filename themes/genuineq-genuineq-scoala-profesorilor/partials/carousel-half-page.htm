@@ -20,14 +20,16 @@ description = "Displays a half page carousel."
         <div class="carousel-item active view hm-black-light" style="background-image: url({{ 'carousel-slide-1.jpg'|media }}); background-repeat: no-repeat; background-size: cover; background-position: center;">
             <!-- Caption -->
             <div class="full-bg-img flex-center white-text">
-                <ul class="animated fadeIn col-md-12">
-                    <li>
-                        <h3 class="mt-4 mb-5 font-bold">{{ 'carousel.firstSlideTitle'|_ }}</h3>
-                    </li>
-                    <li>
-                        <a href="{{ 'talent-manager-schools'|page }}" class="btn btn-success rounded" rel="nofollow">{{ 'carousel.firstSlideBtnText'|_ }}</a>
-                    </li>
-                </ul>
+                <div class="mask flex-center rgba-black-strong">
+                    <ul class="animated fadeIn col-md-12 list-unstyled">
+                        <li>
+                            <h3 class="mt-4 mb-5 font-bold">{{ 'carousel.firstSlideTitle'|_ }}</h3>
+                        </li>
+                        <li>
+                            <a href="{{ 'talent-manager-schools'|page }}" class="btn btn-success rounded" rel="nofollow">{{ 'carousel.firstSlideBtnText'|_ }}</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <!-- /.Caption -->
 
@@ -39,14 +41,16 @@ description = "Displays a half page carousel."
 
             <!-- Caption -->
             <div class="full-bg-img flex-center white-text">
-                <ul class="animated fadeIn col-md-12">
-                    <li>
-                        <h3 class="mt-4 mb-5 font-bold">{{ 'carousel.secondSlideTitle'|_ }}</h3>
-                    </li>
-                    <li>
-                        <a href="{{ 'despre-program'|staticPage  }}" class="btn btn-success rounded" rel="nofollow">{{ 'carousel.secondSlideBtnText'|_ }}</a>
-                    </li>
-                </ul>
+                <div class="mask flex-center rgba-black-strong">
+                    <ul class="animated fadeIn col-md-12 list-unstyled">
+                        <li>
+                            <h3 class="mt-4 mb-5 font-bold">{{ 'carousel.secondSlideTitle'|_ }}</h3>
+                        </li>
+                        <li>
+                            <a href="{{ 'despre-program'|staticPage  }}" class="btn btn-success rounded" rel="nofollow">{{ 'carousel.secondSlideBtnText'|_ }}</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <!-- /.Caption -->
 
@@ -58,14 +62,16 @@ description = "Displays a half page carousel."
 
             <!-- Caption -->
             <div class="full-bg-img flex-center white-text">
-                <ul class="animated fadeIn col-md-12">
-                    <li>
-                        <h3 class="mt-4 mb-5 font-bold">{{ 'carousel.thirdSlideTitle'|_ }}</h3>
-                    </li>
-                    <li>
-                        <a href="{{ 'despre-program'|staticPage  }}" class="btn btn-success rounded" rel="nofollow">{{ 'carousel.thirdSlideBtnText'|_ }}</a>
-                    </li>
-                </ul>
+                <div class="mask flex-center rgba-black-strong">
+                    <ul class="animated fadeIn col-md-12 list-unstyled">
+                        <li>
+                            <h3 class="mt-4 mb-5 font-bold">{{ 'carousel.thirdSlideTitle'|_ }}</h3>
+                        </li>
+                        <li>
+                            <a href="{{ 'despre-program'|staticPage  }}" class="btn btn-success rounded" rel="nofollow">{{ 'carousel.thirdSlideBtnText'|_ }}</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <!-- /.Caption -->
 
@@ -79,6 +85,7 @@ description = "Displays a half page carousel."
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">{{ 'carousel.previous'|_ }}</span>
     </a>
+
     <a class="carousel-control-next" href="#carousel-half-page" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">{{ 'carousel.next'|_ }}</span>

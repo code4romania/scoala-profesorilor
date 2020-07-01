@@ -3,7 +3,7 @@ description = "Displays a budget category as a card"
 [viewBag]
 ==
 <!-- Card -->
-<div class="card">
+<div class="card d-flex">
 
     <!-- Card image -->
     <div class="view overlay d-flex" style="background-color: {{ budgetCategory.color }} !important;height: 140px;">
@@ -12,12 +12,10 @@ description = "Displays a budget category as a card"
     <!-- /.Card image -->
 
     <!-- Card content -->
-    <div class="card-body">
+    <div class="card-body align-items-center d-flex tms-card-max-lines">
 
         <!-- Title -->
-        <h5 class="card-title text-center">
-            {{ budgetCategory.name }}
-        </h5>
+        <h5 class="card-title font-weight-bold my-0 mx-auto text-center">{{ str_limit(budgetCategory.name, 42) }}</h5>
         <!-- /.Title -->
 
     </div>
