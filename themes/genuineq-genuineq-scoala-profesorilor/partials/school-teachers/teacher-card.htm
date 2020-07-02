@@ -6,8 +6,8 @@ description = "Displays a teacher as a card"
 <div class="card rounded">
 
     <!-- Card image -->
-    <div class="view overlay d-flex bg-white rounded">
-        <img src="{{ (teacher.user.getAvatarThumb()) ? (teacher.user.getAvatarThumb(50)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="card-img-top my-auto rounded-circle z-depth-0" alt="{{ teacher.name }}" height="150">
+    <div class="view overlay d-block bg-white rounded pt-5">
+        <img src="{{ (teacher.user.getAvatarThumb()) ? (teacher.user.getAvatarThumb(150)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="mx-auto" alt="{{ teacher.name }}" height="150">
         <a class="teacher-view" data-id="{{ teacher.id }}">
             <div class="mask rgba-white-slight"></div>
         </a>

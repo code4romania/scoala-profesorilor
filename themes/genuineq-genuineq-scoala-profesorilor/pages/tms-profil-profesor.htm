@@ -18,6 +18,16 @@ forceSecure = 0
 
 [budgetComponent]
 ==
+<?php
+    function onStart()
+    {
+        /* Assets for croppie module. */
+        $this->addCss('assets/css/modules/croppie.css');
+        $this->addJs('assets/js/modules/croppie.min.js');
+    }
+?>
+==
+
 <div class="containter-fluid h-25" style="background-image: url({{ 'background-teacher.jpg'|media }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
     <div class="full-bg-img">
         <div class="mask rgba-black-strong">
@@ -79,44 +89,36 @@ forceSecure = 0
         </div>
 
         <div class="tab-pane fade" id="notifications-tab-body" role="tabpanel" aria-labelledby="notifications-tab-body">
-
             <div class="row my-5">
                 <div class="col-12" id="notifications-tab-content">
                     {% partial "teacher-profile/notifications-tab" %}
                 </div>
             </div>
-
         </div>
 
         <div class="tab-pane fade" id="learning-plan-tab-body" role="tabpanel" aria-labelledby="learning-plan-tab-body">
-
             <div class="row my-5">
                 <div class="col-12" id="learning-plan-tab-content">
                     {% partial "teacher-profile/learning-plan-tab" %}
                 </div>
             </div>
-
         </div>
 
         <div class="tab-pane fade" id="budget-tab-body" role="tabpanel" aria-labelledby="budget-tab-body">
-
             <div class="row my-5">
                 <div class="col-12" id="budget-tab-content">
                     {% partial "teacher-profile/budget-course-plan-tab" %}
                 </div>
             </div>
-
         </div>
 
         {% if profile.schools.count() %}
             <div class="tab-pane fade" id="appraisals-tab-body" role="tabpanel" aria-labelledby="appraisals-tab-body">
-
                 <div class="row my-5">
                     <div class="col-12" id="appraisals-tab-content">
                         {% partial "teacher-profile/appraisals-tab" %}
                     </div>
                 </div>
-
             </div>
         {% endif %}
 

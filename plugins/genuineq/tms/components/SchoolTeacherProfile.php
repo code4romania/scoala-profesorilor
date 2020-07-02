@@ -12,6 +12,7 @@ use Response;
 use Validator;
 use ValidationException;
 use ApplicationException;
+use \System\Models\File;
 use Cms\Classes\ComponentBase;
 use Maatwebsite\Excel\Facades\Excel;
 use Genuineq\Tms\Models\School;
@@ -475,8 +476,23 @@ class SchoolTeacherProfile extends ComponentBase
         /** Extract the user */
         $user = $teacher->user;
 
-        if (Input::hasFile('avatar')) {
-            $user->avatar = Input::file('avatar');
+        if (Input::has('avatar')) {
+            /**
+             * The received data will be structured like following:
+             *  - data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAgAElEQVR4Xuy9.....
+             */
+            $avatarData = base64_decode(explode(",", explode(";", Input::get('avatar'))[1])[1]);
+            /** Create the file name. */
+            $avatarName = time() . '.png';
+
+            /** Check if an avatar already exists and delete it. */
+            if ($user->avatar) {
+                $user->avatar->delete();
+            }
+
+            /** Attach the new avatar. */
+            $user->avatar = new File();
+            $user->avatar->fromData($avatarData, $avatarName);
             $user->save();
 
             Flash::success(Lang::get('genuineq.tms::lang.component.school-teacher-profile.message.avatar_update_successful'));

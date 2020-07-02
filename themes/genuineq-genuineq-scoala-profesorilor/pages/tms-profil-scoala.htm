@@ -21,6 +21,15 @@ allowedUserGroups[] = "school"
 
 [schoolDashboardComponent]
 ==
+<?php
+    function onStart()
+    {
+        /* Assets for croppie module. */
+        $this->addCss('assets/css/modules/croppie.css');
+        $this->addJs('assets/js/modules/croppie.min.js');
+    }
+?>
+==
 
 <div class="containter-fluid" style="background-image: url({{ 'background-school.jpg'|media }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
     <div class="full-bg-img">
@@ -79,16 +88,14 @@ allowedUserGroups[] = "school"
     </div>
 </div>
 
+<div class="container">
+    <div class="tab-content" id="myTabContent">
 
-<div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="account-tab-body" role="tabpanel" aria-labelledby="account-tab-body">
-        <div class="container">
+        <div class="tab-pane fade show active" id="account-tab-body" role="tabpanel" aria-labelledby="account-tab-body">
             {% partial "school-profile/account-tab" %}
         </div>
-    </div>
 
-    <div class="tab-pane fade" id="teachers-tab-body" role="tabpanel" aria-labelledby="teachers-tab-body">
-        <div class="container">
+        <div class="tab-pane fade" id="teachers-tab-body" role="tabpanel" aria-labelledby="teachers-tab-body">
             <div class="row my-5">
                 <div class="col-12" id="teachers-tab-content">
                     {% partial "school-profile/teachers-tab" %}
@@ -96,11 +103,7 @@ allowedUserGroups[] = "school"
             </div>
         </div>
 
-    </div>
-
-    <div class="tab-pane fade" id="dashboard-tab-body" role="tabpanel" aria-labelledby="dashboard-tab-body">
-
-        <div class="container">
+        <div class="tab-pane fade" id="dashboard-tab-body" role="tabpanel" aria-labelledby="dashboard-tab-body">
             <div class="row my-5">
                 <div class="col-12" id="dashboard-tab-content">
                     {% partial "school-profile/dashboard-tab" %}
@@ -108,23 +111,17 @@ allowedUserGroups[] = "school"
             </div>
         </div>
 
-    </div>
-
-    <div class="tab-pane fade" id="courses-tab-body" role="tabpanel" aria-labelledby="courses-tab-body">
-
-        <div class="container">
-            <div class="row my-5">
-                <div class="col-12" id="courses-tab-content">
-                    {% partial "school-profile/courses-tab" %}
+        <div class="tab-pane fade" id="courses-tab-body" role="tabpanel" aria-labelledby="courses-tab-body">
+            <div class="container">
+                <div class="row my-5">
+                    <div class="col-12" id="courses-tab-content">
+                        {% partial "school-profile/courses-tab" %}
+                    </div>
                 </div>
             </div>
         </div>
 
-    </div>
-
-    <div class="tab-pane fade" id="notifications-tab-body" role="tabpanel" aria-labelledby="notifications-tab-body">
-
-        <div class="container">
+        <div class="tab-pane fade" id="notifications-tab-body" role="tabpanel" aria-labelledby="notifications-tab-body">
             <div class="row my-5">
                 <div class="col-12" id="notifications-tab-content">
                     {% partial "school-profile/notifications-tab" %}
@@ -132,11 +129,7 @@ allowedUserGroups[] = "school"
             </div>
         </div>
 
-    </div>
-
-    <div class="tab-pane fade" id="reports-tab-body" role="tabpanel" aria-labelledby="reports-tab-body">
-
-        <div class="container-fluid">
+        <div class="tab-pane fade" id="reports-tab-body" role="tabpanel" aria-labelledby="reports-tab-body">
             <div class="row my-5">
                 <div class="col-12" id="reports-tab-content">
                     {% partial "school-profile/reports-tab" %}
@@ -146,7 +139,6 @@ allowedUserGroups[] = "school"
 
     </div>
 </div>
-
 
 <script type="text/javascript">
     $('.learning-plan-course-search-pagination').on('click', function () {

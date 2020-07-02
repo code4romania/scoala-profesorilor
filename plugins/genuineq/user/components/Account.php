@@ -13,6 +13,7 @@ use Validator;
 use Exception;
 use ValidationException;
 use ApplicationException;
+use \System\Models\File;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use Genuineq\User\Models\User as UserModel;
@@ -76,15 +77,30 @@ class Account extends ComponentBase
         /** Extract the user */
         $user = Auth::getUser();
 
-        if (Input::hasFile('avatar')) {
-            $user->avatar = Input::file('avatar');
+        if (Input::has('avatar')) {
+            /**
+             * The received data will be structured like following:
+             *  - data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAgAElEQVR4Xuy9.....
+             */
+            $avatarData = base64_decode(explode(",", explode(";", Input::get('avatar'))[1])[1]);
+            /** Create the file name. */
+            $avatarName = time() . '.png';
+
+            /** Check if an avatar already exists and delete it. */
+            if ($user->avatar) {
+                $user->avatar->delete();
+            }
+
+            /** Attach the new avatar. */
+            $user->avatar = new File();
+            $user->avatar->fromData($avatarData, $avatarName);
             $user->save();
 
             Flash::success(Lang::get('genuineq.user::lang.component.account.message.avatar_update_successful'));
             return Redirect::refresh();
         }
 
-        Flash::success(Lang::get('genuineq.user::lang.component.account.message.avatar_update_failed'));
+        Flash::error(Lang::get('genuineq.user::lang.component.account.message.avatar_update_failed'));
     }
 
     /**

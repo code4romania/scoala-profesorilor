@@ -142,20 +142,11 @@ description = "Displays the tab containing all the school account data"
                     </div>
                 </div>
 
-                <form method="POST" data-request="onAvatarUpdate" data-request-validate data-request-flash data-request-files>
+                <form method="POST">
                     <div class="form-group">
                         <div class="md-form">
                             <input name="avatar" type="file" class="custom-file-input" id="school_avatar">
                             <label class="custom-file-label" for="school_avatar">{{ 'school.profile.form.photo.label'|_ }}</label>
-                            <div class="small text-danger" data-validate-for="avatar"></div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
-                            <div class="md-form m-0">
-                                <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'school.profile.form.photo.save'|_ }}</button>
-                            </div>
                         </div>
                     </div>
                 </form>
@@ -216,6 +207,8 @@ description = "Displays the tab containing all the school account data"
 
     </div>
 </div>
+
+{% partial "image-crop" avatarId='school_avatar' eventHandler='onAvatarUpdate' %}
 
 <script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
 
