@@ -92,7 +92,9 @@ allowedUserGroups[] = "school"
     <div class="tab-content" id="myTabContent">
 
         <div class="tab-pane fade show active" id="account-tab-body" role="tabpanel" aria-labelledby="account-tab-body">
-            {% partial "school-profile/account-tab" %}
+            <div class="row my-5">
+                {% partial "school-profile/account-tab" %}
+            </div>
         </div>
 
         <div class="tab-pane fade" id="teachers-tab-body" role="tabpanel" aria-labelledby="teachers-tab-body">
