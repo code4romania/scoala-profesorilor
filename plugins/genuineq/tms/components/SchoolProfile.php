@@ -183,6 +183,47 @@ class SchoolProfile extends ComponentBase
     }
 
     /**
+     * Update the school profile detailed address
+     */
+    public function onSchoolProfileDetailedAddreddUpdate()
+    {
+        if (!Auth::check()) {
+            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        /** Extract the post data to validate. */
+        $data = post();
+
+        /** Extract the validation rules. */
+        $rules = [
+            'detailed_address' => 'string|nullable',
+        ];
+
+        /** Construct the validation error messages. */
+        $messages = [
+            'detailed_address.string' => Lang::get('genuineq.tms::lang.component.school-profile.validation.detailed_address_string'),
+        ];
+
+        /** Apply the validation rules. */
+        $validation = Validator::make($data, $rules, $messages);
+        if ($validation->fails()) {
+            throw new ValidationException($validation);
+        }
+
+        /** Extract the school profile */
+        $schoolProfile = Auth::getUser()->profile;
+
+        if ($schoolProfile) {
+            $schoolProfile->fill($data);
+            $schoolProfile->save();
+        } else {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-profile.message.detailed_address_update_failed'));
+        }
+
+        Flash::success(Lang::get('genuineq.tms::lang.component.school-profile.message.detailed_address_update_successful'));
+    }
+
+    /**
      * Update the school profile description
      */
     public function onSchoolProfileDescriptionUpdate()

@@ -25,6 +25,7 @@ class School extends Model
         'principal',
         'inspectorate_id',
         'address_id',
+        'detailed_address',
         'description',
         'user_id',
         'contact_name',
@@ -117,7 +118,8 @@ class School extends Model
      * Function that extracts the address name of the school.
      */
     public function getAddressNameAttribute(){
-        return ($this->address) ? ($this->address->name . ', ' . $this->address->county) : ('');
+        $generalAddress = ($this->address) ? ($this->address->name . ', ' . $this->address->county) : ('');
+        return ($this->detailed_address) ? ($this->detailed_address . ', ' . $generalAddress) : ($generalAddress);
     }
 
     /**

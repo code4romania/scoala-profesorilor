@@ -105,14 +105,14 @@ description = "Displays the tab containing all the school account data"
 
         <div class="row pt-5">
             <div class="col-12 bg-white rounded p-3">
-                <h5 class="mb-3 font-weight-bold">{{ 'school.profile.form.description.title'|_ }}</h5>
+                <h5 class="mb-3 font-weight-bold">{{ 'school.profile.form.address.title'|_ }}</h5>
 
-                <form method="POST" data-request="onSchoolProfileDescriptionUpdate" data-request-validate data-request-flash>
+                <form method="POST" data-request="onSchoolProfileDetailedAddreddUpdate" data-request-validate data-request-flash>
                     <div class="form-group">
                         <div class="md-form">
-                            <textarea name="description" type="text" id="school_description" class="md-textarea form-control" rows="3">{{ profile.description }}</textarea>
-                            <label for="school_description">{{ 'school.profile.form.description.description'|_ }}</label>
-                            <div class="small text-danger" data-validate-for="description"></div>
+                            <textarea name="detailed_address" type="text" id="school_detailed_address" class="md-textarea form-control" rows="3">{{ profile.detailed_address }}</textarea>
+                            <label for="school_detailed_address">{{ 'school.profile.form.address.detailed_address'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="detailed_address"></div>
                         </div>
                     </div>
 
@@ -206,6 +206,30 @@ description = "Displays the tab containing all the school account data"
                     </div>
                 </form>
 
+            </div>
+        </div>
+
+        <div class="row pt-5">
+            <div class="col-12 bg-white rounded p-3">
+                <h5 class="mb-3 font-weight-bold">{{ 'school.profile.form.description.title'|_ }}</h5>
+
+                <form method="POST" data-request="onSchoolProfileDescriptionUpdate" data-request-validate data-request-flash>
+                    <div class="form-group">
+                        <div class="md-form">
+                            <textarea name="description" type="text" id="school_description" class="md-textarea form-control" rows="3">{{ profile.description }}</textarea>
+                            <label for="school_description">{{ 'school.profile.form.description.description'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="description"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
+                            <div class="md-form m-0">
+                                <button type="submit" class="btn btn-sm btn-block btn-secondary rounded m-0" data-attach-loading>{{'school.profile.form.description.save'|_ }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
 

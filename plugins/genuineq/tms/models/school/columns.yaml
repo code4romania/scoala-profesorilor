@@ -20,13 +20,13 @@ columns:
     address_name:
         label: 'genuineq.tms::lang.school.label.address'
         type: text
-        searchable: true
+        searchable: false
         sortable: true
 
     inspectorate_name:
         label: 'genuineq.tms::lang.school.label.inspectorate'
         type: text
-        searchable: true
+        searchable: false
         sortable: true
 
     status:

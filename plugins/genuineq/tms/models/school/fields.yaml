@@ -25,13 +25,6 @@ fields:
 
     user:
         label: 'genuineq.tms::lang.school.label.user'
-        nameFrom: email
-        span: left
-        required: 1
-        type: relation
-
-    user:
-        label: 'genuineq.tms::lang.school.label.user'
         nameFrom: 'concat(name, '', '', identifier)'
         descriptionFrom: 'concat(name, '', '', identifier)'
         select: 'concat(name, '', '', identifier)'
@@ -86,6 +79,12 @@ fields:
         span: right
         required: 1
         type: text
+
+    detailed_address:
+        label: 'genuineq.tms::lang.school.label.detailed_address'
+        size: tiny
+        span: full
+        type: textarea
 
     description:
         label: 'genuineq.tms::lang.school.label.description'
