@@ -25,21 +25,21 @@ Laradock documentation can be found [here](https://github.com/laradock/laradock)
 For fast setup, Docker is needed.
 
 The 'nginx', 'mysql' and 'phpmyadmin' images from laradock are used. The configuration can be fount inside 'containers' folder. To start the local containders follow next steps:
-    - Clone project locally
-    - Add a new entry to you 'hosts' file:
-        - EX: 127.0.0.1  scoalaprofesorilot.test
-    RUN: composer install && composer dump-autoload -o
+- Clone project locally
+- Add a new entry to you 'hosts' file:
+    - EX: 127.0.0.1  scoalaprofesorilot.test
+- RUN: composer install && composer dump-autoload -o
+- Go to <PROJECT_DIRECTORY>/containers
+- RUN: docker up -d nginx mysql phpmyadmin
+    - This will try to run the already containers and if containers don't exist it will create them
+- Check that al containers are runnin: docker ps
+- Create DB schema:
     - Go to <PROJECT_DIRECTORY>/containers
-    - RUN: docker up -d nginx mysql phpmyadmin
-      - This will try to run the already containers and if containers don't exist it will create them
-    - Check that al containers are runnin: docker ps
-    - Create DB schema:
-        - Go to <PROJECT_DIRECTORY>/containers
-        - Connect to 'workspace' container:
-            - Linux: docker-compose exec workspace bash
-            - Windows: winpty docker-compose exec workspace bash
-        - RUN: php artisan october:up
-            - This will run all new system migrations and plugin migrations
+    - Connect to 'workspace' container:
+        - Linux: docker-compose exec workspace bash
+        - Windows: winpty docker-compose exec workspace bash
+    - RUN: php artisan october:up
+        - This will run all new system migrations and plugin migrations
 
 ## Development daily docker commands:
 
