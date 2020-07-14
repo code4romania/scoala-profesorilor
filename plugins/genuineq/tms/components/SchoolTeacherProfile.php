@@ -650,8 +650,11 @@ class SchoolTeacherProfile extends ComponentBase
      */
     protected function extractTeachers($options)
     {
+        /** Send the current school. */
+        $this->page['school'] = Auth::getuser()->profile;
+
         /* Get the school teachers based on the received options. */
-        $this->page['teachers'] = Auth::getUser()->profile->filterTeachers($options);
+        $this->page['teachers'] = $this->page['school']->filterTeachers($options);
         /** Extract the number of pages. */
         $this->page['pages'] = $this->page['teachers']->lastPage();
         /** Extract the current page. */

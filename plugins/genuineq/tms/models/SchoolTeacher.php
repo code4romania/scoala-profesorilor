@@ -19,9 +19,9 @@ class SchoolTeacher extends Model
     public $belongsTo = [
         'contract_type' => 'Genuineq\Tms\Models\ContractType',
         'school_level' => 'Genuineq\Tms\Models\SchoolLevel',
-        'grade' => 'Genuineq\user\Models\Grade',
-        'specialization_1' => 'Genuineq\user\Models\Specialization',
-        'specialization_2' => 'Genuineq\user\Models\GradSpecializatione',
+        'grade' => 'Genuineq\Tms\Models\Grade',
+        'specialization_1' => 'Genuineq\Tms\Models\Specialization',
+        'specialization_2' => 'Genuineq\Tms\Models\Specialization',
     ];
 
     /**

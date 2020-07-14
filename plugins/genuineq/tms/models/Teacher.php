@@ -67,6 +67,7 @@ class Teacher extends Model
             'Genuineq\Tms\Models\LearningPlan',
             'order' => 'created_at desc',
         ],
+        'schoolConnections' => 'Genuineq\Tms\Models\SchoolTeacher'
     ];
 
     /**
@@ -77,6 +78,7 @@ class Teacher extends Model
             'Genuineq\Tms\Models\School',
             'table' => 'genuineq_tms_schools_teachers',
             'order' => 'name',
+            'pivot' => ['contract_type_id', 'school_level_id', 'grade_id', 'specialization_1_id', 'specialization_2_id'],
         ],
     ];
 
@@ -226,6 +228,13 @@ class Teacher extends Model
         $learningPlan = new LearningPlan();
         $learningPlan->teacher_id = $this->id;
         $learningPlan->save();
+    }
+
+    public function schoolSpecializations($schoolId)
+    {
+        $schoolConnection =  $this->schoolConnections->where('school_id', $schoolId)->first();
+
+        return $schoolConnection->specialization_1->name . ' / ' . $schoolConnection->specialization_2->name;
     }
 
     /***********************************************
