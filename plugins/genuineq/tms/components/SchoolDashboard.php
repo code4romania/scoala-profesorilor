@@ -83,6 +83,7 @@ class SchoolDashboard extends ComponentBase
         $this->prepareBudgetTotalData($activeSemesterId);
         $this->prepareDistributedCostsData($activeSemesterId);
         $this->prepareTeacherSenioritiesData();
+        $this->preparePaidCoursesData($activeSemesterId);
         $this->prepareSkillMatrixData();
         $this->prepareDatatableData();
     }
@@ -133,6 +134,7 @@ class SchoolDashboard extends ComponentBase
         $this->prepareBudgetTotalData($activeSemesterId);
         $this->prepareDistributedCostsData($activeSemesterId);
         $this->prepareTeacherSenioritiesData();
+        $this->preparePaidCoursesData($activeSemesterId);
         $this->prepareSkillMatrixData();
         $this->prepareDatatableData();
     }
@@ -315,6 +317,34 @@ class SchoolDashboard extends ComponentBase
 
         $this->page['seniorities'] = $seniorities;
         $this->page['senioritiesLabels'] = $senioritiesLabels;
+    }
+
+    /**
+     * Extract the total number of courses paid by teachers and the total
+     *  number of courses payed by the school for a specified semester.
+     */
+    protected function preparePaidCoursesData($semesterId)
+    {
+        /** Get the school. */
+        $school = Auth::getUser()->profile;
+        /** Extract the school budget. */
+        $schoolBudget = $school->budgets->where('semester_id', $semesterId)->first();
+
+        /** Get the total school paid courses. */
+        $this->page['schoolPaidCourses'] = $schoolBudget->schoolCourses->count();
+        /** Get the total teachers paid courses. */
+        $this->page['teachersPaidCourses'] = 0;
+
+        foreach ($school->teachers as $key => $teacher) {
+            /** Get the teacher budget. */
+            $teacherBudget = $teacher->budgets->where('semester_id', $semesterId)->first();
+
+            $this->page['teachersPaidCourses'] += $teacherBudget->teacherCourses->where('school_budget_id', $schoolBudget->id)->count();
+            $this->page['teachersPaidCourses'] += $teacherBudget->teacherCourses()->doesntHave('school_budget')->count();
+        }
+
+        $this->page['schoolPaidCoursesLabel'] = Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.school_paid_courses');
+        $this->page['teachersPaidCoursesLael'] = Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.teachers_paid_courses');
     }
 
     /**

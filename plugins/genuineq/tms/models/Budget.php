@@ -57,7 +57,6 @@ class Budget extends Model
         'teacherCourses' => [
             'Genuineq\Tms\Models\LearningPlansCourse',
             'key' => 'teacher_budget_id',
-
         ],
 
         'schoolCourses' => [

@@ -560,6 +560,8 @@
                 'teachers_spent_money' => 'Costuri profesori RON',
                 'school_budget' => 'Buget total scoala RON',
                 'teachers_budget' => 'Buget total profesori RON',
+                'school_paid_courses' => 'Cursuri platite de scoala',
+                'teachers_paid_courses' => 'Cursuri platite de profesori',
                 'first_semester' => ['0' => 'August', '1' => 'Septembrie', '2' => 'Octombrie', '3' => 'Noiembrie', '4' => 'Decembrie', '5' => 'Ianuarie'],
                 'second_semester' => ['0' => 'Februarie', '1' => 'Martie', '2' => 'Aprilie', '3' => 'Mai', '4' => 'Iunie', '5' => 'Iulie'],
                 'compare_semester' => ['0' => 'Luna 1', '1' => 'Luna 2', '2' => 'Luna 3', '3' => 'Luna 4', '4' => 'Luna 5', '5' => 'Luna 6'],

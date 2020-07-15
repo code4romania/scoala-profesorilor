@@ -38,7 +38,8 @@ class LearningPlansCourse extends Model
     public $belongsTo = [
         'learning_plan' => 'Genuineq\Tms\Models\LearningPlan',
         'course' => 'Genuineq\Tms\Models\Course',
-        'school' => 'Genuineq\Tms\Models\School',
+        'school_budget' => ['Genuineq\Tms\Models\Budget', 'key' => 'school_budget_id'],
+        'teacher_budget' => ['Genuineq\Tms\Models\Budget', 'key' => 'teacher_budget_id'],
     ];
 
     /**
