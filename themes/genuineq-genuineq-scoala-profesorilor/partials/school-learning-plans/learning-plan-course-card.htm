@@ -28,7 +28,7 @@ description = "Displays a learning plan course as a card"
         <p class="card-text text-truncate m-0">{{ learningPlanCourse.supplier.name }}</p>
 
         <div class="align-items-center d-flex tms-card-max-lines">
-            <h5 class="card-title font-weight-bold">{{ learningPlanCourse.name }}</h5>
+            <h5 class="card-title font-weight-bold">{{ str_limit(learningPlanCourse.name, 30) }}</h5>
         </div>
 
         <p class="card-text text-truncate">{{ learningPlanCourse.description }}</p>

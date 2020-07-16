@@ -28,21 +28,19 @@ forceSecure = 0
 ?>
 ==
 
-<div class="containter-fluid h-25" style="background-image: url({{ 'background-teacher.jpg'|media }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
-    <div class="full-bg-img">
-        <div class="mask rgba-black-strong">
-            <div class="row m-0">
-                <div class="col-12 col-sm-6 offset-sm-1 col-md-4 offset-md-2 col-lg-4 offset-lg-2 col-xl-4 offset-xl-2 bg-white h-100">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="text-center">
-                                <img src="{{ (user.getAvatarThumb()) ? (user.getAvatarThumb(150)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="rounded-circle" alt="avatar" height="150">
-                            </div>
+<div class="containter-fluid" style="background-image: url({{ 'background-teacher.jpg'|media }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+    <div class="mask rgba-black-strong">
+        <div class="row m-0">
+            <div class="col-12 col-sm-6 offset-sm-1 col-md-4 offset-md-2 col-lg-4 offset-lg-2 col-xl-4 offset-xl-2 bg-white h-100">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <img src="{{ (user.getAvatarThumb()) ? (user.getAvatarThumb(150)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="rounded-circle" alt="avatar" height="150">
                         </div>
-                        <div class="col-12">
-                            <div class="text-center">
-                                <p class="m-0">{{ user.profile.name }}</p>
-                            </div>
+                    </div>
+                    <div class="col-12 p-2">
+                        <div class="text-center">
+                            <p class="m-0">{{ user.profile.name }}</p>
                         </div>
                     </div>
                 </div>

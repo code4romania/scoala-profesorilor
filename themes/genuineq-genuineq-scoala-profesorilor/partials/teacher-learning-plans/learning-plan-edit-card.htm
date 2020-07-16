@@ -18,7 +18,7 @@ description = "Displays a editing learning plan course as a card"
 
             <br>
 
-            <h5 class="timeline-title font-weight-bold">{{ course.name }}</h5>
+            <h5 class="timeline-title font-weight-bold">{{ str_limit(course.name, 30) }}</h5>
         </div>
 
         <div class="timeline-body" style="background-color: {{ course.color }} !important;">

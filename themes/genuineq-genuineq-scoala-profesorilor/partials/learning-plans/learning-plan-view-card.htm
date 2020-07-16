@@ -10,7 +10,7 @@ description = "Displays a viewing learning plan course as a card"
     <div class="timeline-panel rounded p-0">
 
         <div class="timeline-heading p-2">
-            <h5 class="timeline-title font-weight-bold">{{ course.name }}</h5>
+            <h5 class="timeline-title font-weight-bold">{{ str_limit(course.name, 30) }}</h5>
         </div>
 
         <div class="timeline-body" style="background-color: {{ course.color }} !important;">
