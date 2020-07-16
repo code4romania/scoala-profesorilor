@@ -10,6 +10,7 @@ use Cms\Classes\ComponentBase;
 use Genuineq\Tms\Models\Course;
 use Genuineq\Tms\Models\Budget as BudgetModel;
 use Genuineq\Tms\Models\Category;
+use Genuineq\Tms\Models\Teacher;
 use Genuineq\User\Helpers\AuthRedirect;
 
 /**
@@ -175,8 +176,75 @@ class Budget extends ComponentBase
         $this->page['budgetCoursesCredits'] = $teacherBudgetCourses['total-credits'];
         $this->page['budgetCoursesHours'] = $teacherBudgetCourses['total-hours'];
 
-        /** Extracts all the budget  statics of specified teacher. */
+        /** Extract the data for the average seniority courses number. */
+        $this->teacherExtractAverageSeniorityCoursesNumber($options);
+
+        /** Extracts all the budget statics of specified teacher. */
         $this->teacherExtractSearchStatics(Auth::getUser()->profile->id);
+    }
+
+    /**
+     * Funtion that extracts the average number of courses from
+     *  teachers with a specific seniority level.
+     */
+    protected function teacherExtractAverageSeniorityCoursesNumber($options)
+    {
+        /** Extract the teacher. */
+        $teacher = Auth::getUser()->profile;
+
+        /** Define the default options. */
+        extract(array_merge([
+            'year' => -1,
+            'semester' => -1
+        ], $options));
+
+        /** Calculate the number of courses for the current teacher in the specified period. */
+        $teacherCoursesNumber = 0;
+
+        /** Extract the budgets for the specified period. */
+        $teacherBudgets = BudgetModel::where('budgetable_id', $teacher->id)->where('budgetable_type', $type);
+
+        /** Apply the budgets year filter */
+        if ($year && (-1 != $year)) {
+            $teacherBudgets = $teacherBudgets->whereHas('semester', function ($query) use ($year) { $query->where('year', $year); });
+        }
+
+        /** Apply the budgets semester filter */
+        if ($semester && (-1 != $semester)) {
+            $teacherBudgets = $teacherBudgets->whereHas('semester', function ($query) use ($semester) { $query->where('semester', $semester); });
+        }
+
+        foreach ($teacherBudgets->get() as $key => $teacherBudget) {
+            $this->page['budgetCoursesAverageTeacher'] += $teacherBudget->teacherCourses->count();
+        }
+
+
+        /** Extract all teachers IDs of a specific seniority. */
+        $seniorityTeachers = Teacher::ofSeniority($teacher->seniority_level_id)->where('id', '!=', $teacher->id)->get();
+
+        /**
+         * Calculate the average number of courses for all other
+         *  teachers of the same seniority in the specified period.
+         */
+        foreach ($seniorityTeachers as $key => $seniorityTeacher) {
+            /** Extract the budgets for the specified period. */
+            $budgets = BudgetModel::where('budgetable_id', $seniorityTeacher->id)->where('budgetable_type', $type);
+
+            /** Apply the budgets year filter */
+            if ($year && (-1 != $year)) {
+                $budgets = $budgets->whereHas('semester', function ($query) use ($year) { $query->where('year', $year); });
+            }
+
+            /** Apply the budgets semester filter */
+            if ($semester && (-1 != $semester)) {
+                $budgets = $budgets->whereHas('semester', function ($query) use ($semester) { $query->where('semester', $semester); });
+            }
+
+            foreach ($budgets->get() as $key => $budget) {
+                $this->page['budgetCoursesAverageTeachers'] += $budget->teacherCourses->count();
+            }
+        }
+        $this->page['budgetCoursesAverageTeachers'] = $this->page['budgetCoursesAverageTeachers'] / $seniorityTeachers->count();
     }
 
     /**

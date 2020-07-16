@@ -56,6 +56,14 @@ description = "Displays a a teacher's budget course summary"
                 </h1>
             </div>
 
+            {% if budgetCoursesAverageTeachers %}
+                <div class="col-12 col-sm-6 col-md-8 col-lg-8 col-xl-8 align-self-center text-center my-2">
+                    <p class="m-0">{{ 'teacher-budgets.budget-summary.average_courses'|_ }}:</p>
+                    <h1>
+                        <strong>{{ ((budgetCoursesAverageTeacher/budgetCoursesAverageTeachers) * 100)|number_format }}% ({{ budgetCoursesAverageTeacher }} {{ 'teacher-budgets.budget-summary.average_courses_link'|_ }} {{ budgetCoursesAverageTeachers }}) </strong>
+                    </h1>
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>

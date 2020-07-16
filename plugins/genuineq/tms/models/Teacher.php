@@ -216,6 +216,19 @@ class Teacher extends Model
     }
 
     /***********************************************
+     ********************* Scope *******************
+     ***********************************************/
+
+    /**
+     * Function that extracts the ID's of all teachers
+     *  that a have a specific seniority.
+     */
+    public function scopeOfSeniority($query, $seniorityLevelId)
+    {
+        return $query->where('seniority_level_id', $seniorityLevelId);
+    }
+
+    /***********************************************
      ******************* Functions *****************
      ***********************************************/
 
