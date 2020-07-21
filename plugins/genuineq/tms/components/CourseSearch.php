@@ -98,6 +98,11 @@ class CourseSearch extends ComponentBase
      */
     protected function extractCourses($options)
     {
+        if (Auth::check() && ('teacher' == Auth::getUser()->type)) {
+            /** Extract the learning plan ID. */
+            $options['learningPlan'] = Auth::getUser()->profile->active_learning_plan->id;
+        }
+
         if (!$this->property('category')) {
             $this->page['courses'] = Course::filterCourses($options);
         } else {

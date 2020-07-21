@@ -1,9 +1,10 @@
 <?php namespace Genuineq\Tms\Models;
 
-
+use Log;
 use Lang;
 use Model;
 use DateTime;
+use Genuineq\Tms\Models\LearningPlan;
 
 /**
  * Model
@@ -72,6 +73,10 @@ class Course extends Model
             'Genuineq\Tms\Models\Skill',
             'table' => 'genuineq_tms_courses_skills',
             'order' => 'name',
+        ],
+        'learningPlans' => [
+            'Genuineq\Tms\Models\LearningPlan',
+            'table' => 'genuineq_tms_learning_plans_courses',
         ],
     ];
 
@@ -194,9 +199,16 @@ class Course extends Model
             'category' => null,
             'searchInput' => '',
             'accreditation' => -1,
-            'sort' => 'name asc'
-
+            'sort' => 'name asc',
+            'learningPlan' => null
         ], $options));
+
+        if ($learningPlan && (-1 != $learningPlan)) {
+            /** Extract all the courses IDs from the specified learning plan. */
+            $coursesIds = LearningPlan::find($learningPlan)->courses()->select(['course_id'])->get()->toArray();
+            /** Exclude the courses from the specified learning plan. */
+            $query->orWhereNotIn('id', $coursesIds);
+        }
 
         /** Search the requested input */
         $query->where('status', 1);
