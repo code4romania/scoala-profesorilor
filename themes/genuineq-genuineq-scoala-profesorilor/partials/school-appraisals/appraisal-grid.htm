@@ -17,22 +17,32 @@ description = "Displays a grid of appraisals"
 
 
 <script type="text/javascript">
-    $('.appraisal-details').on('click', function () {
-        /* Extract the appraisal and teacher data. */
-        var $appraisalId = $(this).data('appraisalId');
-        var $teacherId = $(this).data('teacherId');
+    $(document).ready(function() {
+        $('.appraisal-details').on('click', function () {
+            /* Extract the appraisal and teacher data. */
+            var $appraisalId = $(this).data('appraisalId');
+            var $teacherId = $(this).data('teacherId');
 
-        $.request(
-            'onSchoolViewGetAppraisalDetails',
-            {
-                update: {
-                    'school-appraisals/appraisal-details': '#appraisalViewEditDetails'
-                },
-                data: {
-                    appraisalId: $appraisalId,
-                    teacherId: $teacherId
-                },
-            }
-        );
+            $.request(
+                'onSchoolViewGetAppraisalDetails',
+                {
+                    update: {
+                        'school-appraisals/appraisal-details': '#appraisalViewEditDetails'
+                    },
+                    data: {
+                        appraisalId: $appraisalId,
+                        teacherId: $teacherId
+                    },
+                }
+            );
+        });
+
+        $('.appraisal-details').click(function() {
+            $("html, body").animate({
+                scrollTop: 0
+            }, 1000);
+
+            return false;
+        });
     });
 </script>

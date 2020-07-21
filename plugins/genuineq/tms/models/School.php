@@ -67,9 +67,6 @@ class School extends Model
      * Learning plans course" relation
      */
     public $hasMany = [
-        'learning_plans_course' => [
-            'Genuineq\Tms\Models\LearningPlansCourse'
-        ],
         'appraisals' => [
             'Genuineq\Tms\Models\Appraisal',
             'order' => 'created_at desc'
