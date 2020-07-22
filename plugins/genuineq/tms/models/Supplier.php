@@ -51,6 +51,6 @@ class Supplier extends Model
      */
     public function getActiveCoursesAttribute()
     {
-        return $this->courses->whereDate('start_date', '>=', date('Y-m-d'))->get();
+        return $this->courses()->whereDate('start_date', '>=', date('Y-m-d'))->get();
     }
 }
