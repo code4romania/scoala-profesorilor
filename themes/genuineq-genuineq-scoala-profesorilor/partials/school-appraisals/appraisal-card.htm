@@ -66,12 +66,12 @@ description = "Displays an appraisal as a card"
             </div>
         {% endif %}
 
-        <button type="button" class="btn btn-outline-primary waves-effect rounded d-flex justify-content-center d-md-table mx-auto mt-3 appraisal-details" data-appraisal-id="{{ appraisal.id }}" data-teacher-id="{{ teacher.id }}">
-            {% if 'new' != appraisal.status %}
-                {{ 'appraisal.edit'|_ }}
-            {% else %}
+        <a href="#appraisalViewEditDetails" type="button" class="btn btn-outline-primary waves-effect rounded d-flex justify-content-center d-md-table mx-auto mt-3 appraisal-details" data-appraisal-id="{{ appraisal.id }}" data-teacher-id="{{ teacher.id }}">
+            {% if ('new' == appraisal.status) or ('skills-set' == appraisal.status) or ('closed' == appraisal.status) %}
                 {{ 'appraisal.view'|_ }}
+            {% else %}
+                {{ 'appraisal.edit'|_ }}
             {% endif %}
-        </button>
+        </a>
     </div>
 </div>

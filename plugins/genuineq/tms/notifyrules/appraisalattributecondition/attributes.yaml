@@ -13,17 +13,26 @@ attributes:
     grade_1:
         label: Grade 1
 
+    percentage_1:
+        label: Percentage 1
+
     skill_2_id:
         label: Skill 2 Id
 
     grade_2:
         label: Grade 2
 
+    percentage_2:
+        label: Percentage 2
+
     skill_3_id:
         label: Skill 3 Id
 
     grade_3:
         label: Grade 3
+
+    percentage_3:
+        label: Percentage 3
 
     notes_objectives_set:
         label: Notes objectives-set

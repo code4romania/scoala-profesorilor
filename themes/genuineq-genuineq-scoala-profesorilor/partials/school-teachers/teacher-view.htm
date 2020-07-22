@@ -7,8 +7,8 @@ description = "Displays a teacher"
 <h5 class="mb-3 mt-4 font-weight-bold">{{ 'teachers.teacher-view.title'|_ }}</h5>
 
 <div class="row bg-white rounded py-3 d-flex align-items-center">
-    <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2">
-        <img src="{{ (teacher.user.getAvatarThumb()) ? (teacher.user.getAvatarThumb(50)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="card-img-top my-auto rounded-circle z-depth-0" alt="{{ teacher.name }}" height="150">
+    <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 text-center">
+        <img src="{{ (teacher.user.getAvatarThumb()) ? (teacher.user.getAvatarThumb(150)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="my-2" alt="{{ teacher.name }}" height="150">
     </div>
 
     <div class="col-12 col-sm-12 col-md-9 col-lg-10 col-xl-10">

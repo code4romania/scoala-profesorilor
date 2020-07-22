@@ -304,6 +304,9 @@ class TestSemesterSeeder extends Seeder
                             $skills[] = $skill;
                         }
 
+                        $percentage_1 = $faker->numberBetween($min = 1, $max = 45);
+                        $percentage_2 = $faker->numberBetween($min = 1, $max = 45);
+
                         /** Add an appraisal */
                         $appraisal = Appraisal::create([
                             'school_id' => $school->id,
@@ -312,10 +315,13 @@ class TestSemesterSeeder extends Seeder
                             'objectives' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
                             'skill_1_id' => $skills[0],
                             'grade_1' => $faker->numberBetween($min = 1, $max = 10),
+                            'percentage_1' => $percentage_1,
                             'skill_2_id' => $skills[1],
                             'grade_2' => $faker->numberBetween($min = 1, $max = 10),
+                            'percentage_2' => $percentage_2,
                             'skill_3_id' => $skills[2],
                             'grade_3' => $faker->numberBetween($min = 1, $max = 10),
+                            'percentage_3' => (100 - ($percentage_1 + $percentage_2)),
                             'notes_objectives_set' => $faker->paragraph($nbSentences = 2, $variableNbSentences = true),
                             'notes_objectives_approved' => $faker->paragraph($nbSentences = 2, $variableNbSentences = true),
                             'notes_skills_set' => $faker->paragraph($nbSentences = 2, $variableNbSentences = true),
@@ -324,13 +330,19 @@ class TestSemesterSeeder extends Seeder
                     } else {
                         $appraisal = $school->getActiveAppraisal($teacher->id);
 
+                        $percentage_1 = $faker->numberBetween($min = 1, $max = 45);
+                        $percentage_2 = $faker->numberBetween($min = 1, $max = 45);
+
                         $appraisal->objectives = $faker->paragraph($nbSentences = 3, $variableNbSentences = true);
                         $appraisal->skill_1_id = $skills[0];
                         $appraisal->grade_1 = $faker->numberBetween($min = 1, $max = 10);
+                        $appraisal->percentage_1 = $percentage_1;
                         $appraisal->skill_2_id = $skills[1];
                         $appraisal->grade_2 = $faker->numberBetween($min = 1, $max = 10);
+                        $appraisal->percentage_2 = $percentage_2;
                         $appraisal->skill_3_id = $skills[2];
                         $appraisal->grade_3 = $faker->numberBetween($min = 1, $max = 10);
+                        $appraisal->percentage_3 = 100 - ($percentage_1 + $percentage_2);
                         $appraisal->notes_objectives_set = $faker->paragraph($nbSentences = 2, $variableNbSentences = true);
                         $appraisal->notes_objectives_approved = $faker->paragraph($nbSentences = 2, $variableNbSentences = true);
                         $appraisal->notes_skills_set = $faker->paragraph($nbSentences = 2, $variableNbSentences = true);

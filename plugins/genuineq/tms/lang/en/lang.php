@@ -531,6 +531,7 @@
                 'close_successful' => "Evaluarea a fost inchisa cu succes",
                 'invalid_grade' => "Notele pot sa fie intre 1 si 10",
                 'teacher_not_exists' => 'Profesorul specificat nu exista sau nu sunteti asociat cu el',
+                'wrong_percentage' => 'Suma ponderilor trebuie sa fie egala cu 100',
             ],
         ],
 

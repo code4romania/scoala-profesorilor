@@ -17,10 +17,13 @@ class BuilderTableCreateGenuineqTmsAppraisals extends Migration
             $table->text('objectives')->nullable();
             $table->integer('skill_1_id')->unsigned()->nullable();
             $table->integer('grade_1')->unsigned()->nullable();
+            $table->integer('percentage_1')->unsigned()->default(34);
             $table->integer('skill_2_id')->unsigned()->nullable();
             $table->integer('grade_2')->unsigned()->nullable();
+            $table->integer('percentage_2')->unsigned()->default(33);
             $table->integer('skill_3_id')->unsigned()->nullable();
             $table->integer('grade_3')->unsigned()->nullable();
+            $table->integer('percentage_3')->unsigned()->default(33);
             $table->text('notes_objectives_set')->nullable();
             $table->text('notes_objectives_approved')->nullable();
             $table->text('notes_skills_set')->nullable();

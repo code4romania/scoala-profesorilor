@@ -324,12 +324,19 @@ class Appraisal extends ComponentBase
                 break;
 
             case 'objectives-approved':
+                if (100 !== (post('first_skill_percentage') + post('second_skill_percentage') + post('third_skill_percentage'))) {
+                    throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.wrong_percentage'));
+                }
+
                 $appraisal->objectives = post('objectives');
                 $appraisal->notes_objectives_approved = post('notes');
 
                 $appraisal->skill_1_id = Skill::whereName(post('first_skill'))->first()->id;
+                $appraisal->percentage_1 = post('first_skill_percentage');
                 $appraisal->skill_2_id = Skill::whereName(post('second_skill'))->first()->id;
+                $appraisal->percentage_2 = post('second_skill_percentage');
                 $appraisal->skill_3_id = Skill::whereName(post('third_skill'))->first()->id;
+                $appraisal->percentage_3 = post('third_skill_percentage');
                 break;
 
             case 'skills-set':
@@ -477,11 +484,18 @@ class Appraisal extends ComponentBase
             throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.not_exists'));
         }
 
+        if (100 !== (post('first_skill_percentage') + post('second_skill_percentage') + post('third_skill_percentage'))) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.wrong_percentage'));
+        }
+
         /** Save updated skills and notes. */
         $appraisal->notes_objectives_approved = post('notes');
         $appraisal->skill_1_id = Skill::whereName(post('first_skill'))->first()->id;
+        $appraisal->percentage_1 = post('first_skill_percentage');
         $appraisal->skill_2_id = Skill::whereName(post('second_skill'))->first()->id;
+        $appraisal->percentage_2 = post('second_skill_percentage');
         $appraisal->skill_3_id = Skill::whereName(post('third_skill'))->first()->id;
+        $appraisal->percentage_3 = post('third_skill_percentage');
         $appraisal->status = 'skills-set';
         $appraisal->save();
 

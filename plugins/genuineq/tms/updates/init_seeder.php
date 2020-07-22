@@ -1,14 +1,14 @@
 <?php namespace Genuineq\Tms\Updates;
 
 use Db;
-use October\Rain\Database\Updates\Seeder;
+use October\Rain\Database\Updates\Migration;
 
-class InitSeeder extends Seeder
+class InitSeeder extends Migration
 {
     /**
      * Populates system tables and dependency plugins tables.
      */
-    public function run()
+    public function up()
     {
         /** Populate system_settings table. */
         DB::table('system_settings')->delete();
@@ -209,5 +209,26 @@ class InitSeeder extends Seeder
         Db::table('rainlab_notify_rule_conditions')->insert(['id' => 28, 'class_name' => 'RainLab\Notify\Classes\CompoundCondition',         'config_data' => '{"condition_type":0,"condition":"true"}',                                                                                                          'condition_control_type' => null,   'rule_host_type' => 'any', 'rule_host_id' => 19,   'rule_parent_id' => null]);
         Db::table('rainlab_notify_rule_conditions')->insert(['id' => 29, 'class_name' => 'Genuineq\User\NotifyRules\UserAttributeCondition', 'config_data' => '{"subcondition":"email_notifications","operator":"is","value":"1","condition_text":"Email Notifications <span class=\\"operator\\">is</span> 1"}', 'condition_control_type' => 'text', 'rule_host_type' => 'any', 'rule_host_id' => null, 'rule_parent_id' => 28  ]);
         Db::table('rainlab_notify_rule_conditions')->insert(['id' => 30, 'class_name' => 'RainLab\Notify\Classes\CompoundCondition',         'config_data' => '{"condition_type":0,"condition":"true"}',                                                                                                          'condition_control_type' => null,   'rule_host_type' => 'any', 'rule_host_id' => 20,   'rule_parent_id' => null]);
+    }
+
+    public function down()
+    {
+        /** Populate rainlab_notify_rule_conditions table. */
+        DB::table('rainlab_notify_rule_conditions')->delete();
+
+        /** Populate rainlab_notify_rule_actions table. */
+        DB::table('rainlab_notify_rule_actions')->delete();
+
+        /** Populate rainlab_notify_notification_rules table. */
+        DB::table('rainlab_notify_notification_rules')->delete();
+
+        /** Populate system_mail_partials table. */
+        DB::table('system_mail_partials')->delete();
+
+        /** Populate system_mail_templates table. */
+        DB::table('system_mail_templates')->delete();
+
+        /** Populate system_settings table. */
+        DB::table('system_settings')->delete();
     }
 }
