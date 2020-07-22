@@ -136,7 +136,7 @@ use Genuineq\Tms\Models\Course;
                 <h5 class="mb-3 font-weight-bold">{{ 'course.supplier.courses.title'|_ }}</h5>
                 {% partial "carousel-multiple-courses"
                     id='supplier-courses'
-                    courses=course.supplier.courses
+                    courses=course.supplier.active_courses
                     detailsPage='tms-curs'
                     detailsKeyColumn='slug'
                     detailsUrlParameter='slug'

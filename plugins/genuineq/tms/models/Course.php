@@ -245,6 +245,9 @@ class Course extends Model
             $query->whereNotIn('id', $_courses);
         }
 
+        /** Filter out courses that are in the past. */
+        $query->whereDate('start_date', '>=', date('Y-m-d'));
+
         $page = ($query->paginate($perPage, $page)->lastPage() < $page) ? (1) : ($page);
 
         return $query->paginate($perPage, $page);

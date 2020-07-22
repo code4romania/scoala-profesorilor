@@ -41,4 +41,16 @@ class Supplier extends Model
      */
     public $rules = [
     ];
+
+    /***********************************************
+     ******************* Mutators ******************
+     ***********************************************/
+
+    /**
+     * Function that returns the active courses.
+     */
+    public function getActiveCoursesAttribute()
+    {
+        return $this->courses->whereDate('start_date', '>=', date('Y-m-d'))->get();
+    }
 }
