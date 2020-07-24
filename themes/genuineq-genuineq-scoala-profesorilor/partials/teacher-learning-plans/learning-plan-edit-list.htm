@@ -11,7 +11,9 @@ description = "Displays a learning plan as a list and the list of courses"
             <ul class="timeline timeline-horizontal m-0">
 
                 {% for key, learningPlanCourse in learningPlan.accepted_courses %}
-                    {% partial "teacher-learning-plans/learning-plan-edit-card" learningPlanCourse=learningPlanCourse course=learningPlanCourse.course index=loop.index %}
+                    {% if date(learningPlanCourse.course.start_date) >= date() %}
+                        {% partial "teacher-learning-plans/learning-plan-edit-card" learningPlanCourse=learningPlanCourse course=learningPlanCourse.course index=loop.index %}
+                    {% endif %}
                 {% endfor %}
 
             </ul>
