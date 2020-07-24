@@ -43,36 +43,51 @@ fields:
     firstSkill:
         label: 'genuineq.tms::lang.appraisal.label.first_skill'
         nameFrom: name
-        span: left
+        span: full
         required: 1
         type: relation
 
     grade_1:
         label: 'genuineq.tms::lang.appraisal.label.first_skill_grade'
+        span: left
+        type: number
+
+    percentage_1:
+        label: 'genuineq.tms::lang.appraisal.label.first_skill_percentage'
         span: right
         type: number
 
     secondSkill:
         label: 'genuineq.tms::lang.appraisal.label.second_skill'
         nameFrom: name
-        span: left
+        span: full
         required: 1
         type: relation
 
     grade_2:
         label: 'genuineq.tms::lang.appraisal.label.second_skill_grade'
+        span: left
+        type: number
+
+    percentage_2:
+        label: 'genuineq.tms::lang.appraisal.label.second_skill_percentage'
         span: right
         type: number
 
     thirdSkill:
         label: 'genuineq.tms::lang.appraisal.label.third_skill'
         nameFrom: name
-        span: left
+        span: full
         required: 1
         type: relation
 
     grade_3:
         label: 'genuineq.tms::lang.appraisal.label.third_skill_grade'
+        span: left
+        type: number
+
+    percentage_3:
+        label: 'genuineq.tms::lang.appraisal.label.third_skill_percentage'
         span: right
         type: number
 
