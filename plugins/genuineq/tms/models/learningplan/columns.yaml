@@ -8,20 +8,20 @@ columns:
     teacher_name:
         label: 'genuineq.tms::lang.learning-plan.label.teacher'
         type: text
-        searchable: true
-        sortable: true
+        searchable: false
+        sortable: false
 
     year:
         label: 'genuineq.tms::lang.learning-plan.label.year'
         type: number
-        searchable: true
-        sortable: true
+        searchable: false
+        sortable: false
 
     real_semester:
         label: 'genuineq.tms::lang.learning-plan.label.semester'
         type: number
-        searchable: true
-        sortable: true
+        searchable: false
+        sortable: false
 
     status:
         label: 'genuineq.tms::lang.learning-plan.label.status_list'

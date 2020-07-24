@@ -8,8 +8,8 @@ columns:
     budgetable_name:
         label: 'genuineq.tms::lang.budgets.label.budgetable_name'
         type: text
-        searchable: true
-        sortable: true
+        searchable: false
+        sortable: false
 
     budgetable_type:
         label: 'genuineq.tms::lang.budgets.label.budgetable_type'
@@ -20,8 +20,8 @@ columns:
     semester_name:
         label: 'genuineq.tms::lang.budgets.label.semester'
         type: text
-        searchable: true
-        sortable: true
+        searchable: false
+        sortable: false
 
     status:
         label: 'genuineq.tms::lang.budgets.label.status_list'

@@ -9,14 +9,14 @@ columns:
     learning_plan_name:
         label: 'genuineq.tms::lang.learning-plans-course.label.learning_plan_name'
         type: text
-        searchable: true
-        sortable: true
+        searchable: false
+        sortable: false
 
     course_name:
         label: 'genuineq.tms::lang.learning-plans-course.label.course_name'
         type: text
-        searchable: true
-        sortable: true
+        searchable: false
+        sortable: false
 
     school_covered_costs:
         label: 'genuineq.tms::lang.learning-plans-course.label.school_covered_costs'

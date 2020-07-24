@@ -8,17 +8,17 @@ columns:
     school_name:
         label: 'genuineq.tms::lang.appraisal.label.school'
         type: text
-        searchable: true
-        sortable: true
+        searchable: false
+        sortable: false
 
     teacher_name:
         label: 'genuineq.tms::lang.appraisal.label.teacher'
         type: text
-        searchable: true
-        sortable: true
+        searchable: false
+        sortable: false
 
     semester_name:
         label: 'genuineq.tms::lang.appraisal.label.semester'
         type: text
-        searchable: true
-        sortable: true
+        searchable: false
+        sortable: false

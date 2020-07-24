@@ -9,7 +9,7 @@ columns:
         label: 'genuineq.tms::lang.teacher.label.email'
         type: text
         searchable: false
-        sortable: true
+        sortable: false
 
     phone:
         label: 'genuineq.tms::lang.teacher.label.phone'
@@ -21,7 +21,7 @@ columns:
         label: 'genuineq.tms::lang.teacher.label.address'
         type: text
         searchable: false
-        sortable: true
+        sortable: false
 
     birth_date:
         label: 'genuineq.tms::lang.teacher.label.birth_date'
@@ -33,7 +33,7 @@ columns:
         label: 'genuineq.tms::lang.teacher.label.seniority'
         type: text
         searchable: false
-        sortable: true
+        sortable: false
 
     status:
         label: 'genuineq.tms::lang.course.label.status_list'
