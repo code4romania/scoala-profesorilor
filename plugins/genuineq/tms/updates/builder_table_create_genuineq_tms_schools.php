@@ -19,6 +19,7 @@ class BuilderTableCreateGenuineqTmsSchools extends Migration
             $table->integer('address_id')->nullable()->unsigned();
             $table->text('detailed_address')->nullable()->comment = "The detailed address of the school.";
             $table->text('description')->nullable()->comment = "The description of the school.";
+            $table->enum('type', ['public', 'private',])->default('public');
             $table->integer('user_id')->unsigned()->nullable();
             $table->string('contact_name', 50)->nullable()->comment = "The name of the contact person of the school.";
             $table->string('contact_email', 50)->nullable()->comment = "The email of the contact person of the school.";
