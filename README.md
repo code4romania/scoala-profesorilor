@@ -27,12 +27,20 @@ For fast setup, Docker is needed.
 The 'nginx', 'mysql' and 'phpmyadmin' images from laradock are used. The configuration can be fount inside 'containers' folder. To start the local containders follow next steps:
 - Clone project locally
 - Add a new entry to you 'hosts' file:
-    - EX: 127.0.0.1  scoalaprofesorilot.test
+    - EX: 127.0.0.1  scoalaprofesorilor.test
 - RUN: composer install && composer dump-autoload -o
 - Go to <PROJECT_DIRECTORY>/containers
-- RUN: docker up -d nginx mysql phpmyadmin
+- RUN: docker-compose up -d nginx mysql phpmyadmin
     - This will try to run the already containers and if containers don't exist it will create them
+    - Short version: docker-compose up -d
 - Check that al containers are runnin: docker ps
+- Open browser and go to localhost:8080
+    - Login with:
+        - Server: mysql
+        - User: root
+        - Pass: root
+- Create a new database and a new user for the application
+- Rename .env.example to .env and populate it with the right content
 - Create DB schema:
     - Go to <PROJECT_DIRECTORY>/containers
     - Connect to 'workspace' container:
@@ -40,6 +48,11 @@ The 'nginx', 'mysql' and 'phpmyadmin' images from laradock are used. The configu
         - Windows: winpty docker-compose exec workspace bash
     - RUN: php artisan october:up
         - This will run all new system migrations and plugin migrations
+- Access the application by oppening the browser and going to:
+    - Frontend: scoalaprofesorilor.test
+    - Backend: scoalaprofesorilor.test/backend
+        - User: admin
+        - Pass: admin
 
 ## Development daily docker commands:
 
