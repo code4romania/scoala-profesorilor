@@ -78,7 +78,7 @@ class SchoolTeacherProfile extends ComponentBase
 
         /** Force authentication in case user is not authenticated. */
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         $this->prepareVars();
@@ -95,7 +95,7 @@ class SchoolTeacherProfile extends ComponentBase
     public function onTeacherSearch()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /* Extract the school teachers based on the received options. */
@@ -108,7 +108,7 @@ class SchoolTeacherProfile extends ComponentBase
     public function onDisplayTeachers()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /* Get all the school teachers. */
@@ -124,7 +124,7 @@ class SchoolTeacherProfile extends ComponentBase
     public function onTeacherAdd()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         $data = [
@@ -174,7 +174,7 @@ class SchoolTeacherProfile extends ComponentBase
     public function onTeacherView()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         $school = Auth::getUser()->profile;
@@ -198,7 +198,7 @@ class SchoolTeacherProfile extends ComponentBase
     public function onTeacherEdit()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the requested teacher */
@@ -230,7 +230,7 @@ class SchoolTeacherProfile extends ComponentBase
     public function onTeacherRemove()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the school. */
@@ -290,7 +290,7 @@ class SchoolTeacherProfile extends ComponentBase
     public function onSchoolTeacherProfileUpdate()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the requested teacher */
@@ -369,7 +369,7 @@ class SchoolTeacherProfile extends ComponentBase
     public function onSchoolTeacherProfileLinkUpdate()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the requested teacher */
@@ -418,7 +418,7 @@ class SchoolTeacherProfile extends ComponentBase
     public function onSchoolTeacherProfileDescriptionUpdate()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the requested teacher */
@@ -463,7 +463,7 @@ class SchoolTeacherProfile extends ComponentBase
     public function onSchoolTeacherAvatarUpdate()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the requested teacher */
@@ -509,7 +509,7 @@ class SchoolTeacherProfile extends ComponentBase
     {
         $teacher = Teacher::find(post('teacherId'));
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the requested teacher */
@@ -557,7 +557,7 @@ class SchoolTeacherProfile extends ComponentBase
     public function onSchoolTeacherPasswordUpdate()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the requested teacher */
@@ -606,7 +606,7 @@ class SchoolTeacherProfile extends ComponentBase
      */
     public function onDownloadImportTemplate(){
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         return Redirect::to('tms-teachers-import-download');
@@ -617,7 +617,7 @@ class SchoolTeacherProfile extends ComponentBase
      */
     public function onTeachersImport(){
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Check if a file has beeen provided. */

@@ -46,7 +46,7 @@ class Notifications extends ComponentBase
     public function onViewNotifications()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         $this->prepareVars();
@@ -56,7 +56,7 @@ class Notifications extends ComponentBase
     public function onMarkAllNotificationsAsRead()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         Auth::getUser()->notifications()->applyUnread()->update(['read_at' => Carbon::now()]);
@@ -67,7 +67,7 @@ class Notifications extends ComponentBase
     public function onMarkNotificationAsRead()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         Auth::getUser()->notifications()->where('id', post('notificationId'))->update(['read_at' => Carbon::now()]);

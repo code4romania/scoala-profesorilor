@@ -49,7 +49,7 @@ class SchoolDashboard extends ComponentBase
     {
         /** Force authentication in case user is not authenticated. */
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         $this->prepareVars();
@@ -66,7 +66,7 @@ class SchoolDashboard extends ComponentBase
     {
         /** Force authentication in case user is not authenticated. */
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         $this->page['school'] = (Auth::check()) ? (Auth::getUser()->profile) : (null);
@@ -95,7 +95,7 @@ class SchoolDashboard extends ComponentBase
     {
         /** Force authentication in case user is not authenticated. */
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         $this->prepareDatatableData();
@@ -107,7 +107,7 @@ class SchoolDashboard extends ComponentBase
     public function onSchoolBudgetUpdate()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         if (0 > post('budget')) {
@@ -146,7 +146,7 @@ class SchoolDashboard extends ComponentBase
     {
         /** Force authentication in case user is not authenticated. */
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         $this->page['school'] = (Auth::check()) ? (Auth::getUser()->profile) : (null);
@@ -163,7 +163,7 @@ class SchoolDashboard extends ComponentBase
     {
         /** Force authentication in case user is not authenticated. */
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         $this->page['school'] = (Auth::check()) ? (Auth::getUser()->profile) : (null);

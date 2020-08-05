@@ -1,5 +1,6 @@
 <?php namespace Genuineq\Tms\Components;
 
+use Log;
 use Lang;
 use Auth;
 use Flash;
@@ -82,7 +83,7 @@ class TeacherProfile extends ComponentBase
 
         /** Force authentication in case user is not authenticated. */
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         $this->prepareVars();
@@ -98,7 +99,7 @@ class TeacherProfile extends ComponentBase
     public function onTeacherProfileUpdate()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the post data to validate. */
@@ -173,7 +174,7 @@ class TeacherProfile extends ComponentBase
     public function onTeacherProfileDescriptionUpdate()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the post data to validate. */
@@ -214,7 +215,7 @@ class TeacherProfile extends ComponentBase
     public function onTeacherProfileBudgetUpdate()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         if (0 > post('budget')) {

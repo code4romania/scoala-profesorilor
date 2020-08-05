@@ -235,9 +235,9 @@ class Login extends ComponentBase
             return Redirect::refresh();
         }
 
-        $redirectUrl = $this->pageUrl($page);
+        $redirectUrl = post('redirect', $this->pageUrl($page)) ;
 
-        return Redirect::to($redirectUrl);
+        return Redirect::$method($redirectUrl);
     }
 
     /**

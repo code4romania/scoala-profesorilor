@@ -47,7 +47,7 @@ class Budget extends ComponentBase
     {
         /** Force authentication in case user is not authenticated. */
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         $this->prepareVars();
@@ -69,7 +69,7 @@ class Budget extends ComponentBase
     {
         /** Force authentication in case user is not authenticated. */
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /* Extract the courses based on the received options. */
@@ -90,7 +90,7 @@ class Budget extends ComponentBase
     {
         /** Force authentication in case user is not authenticated. */
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract all the options. */
@@ -116,7 +116,7 @@ class Budget extends ComponentBase
     {
         /** Force authentication in case user is not authenticated. */
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /* Extract the courses based on the received options. */
@@ -138,7 +138,7 @@ class Budget extends ComponentBase
     {
         /** Force authentication in case user is not authenticated. */
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract all the options. */

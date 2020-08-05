@@ -123,7 +123,7 @@ class LearningPlan extends ComponentBase
     public function onLearningPlanEdit()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract all categories for filtering. */
@@ -143,7 +143,7 @@ class LearningPlan extends ComponentBase
     public function onSchoolLearningPlanCourseAdd()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the post data to validate. */
@@ -248,7 +248,7 @@ class LearningPlan extends ComponentBase
     public function onSchoolLearningPlanCourseRemove()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the learning plan. */
@@ -286,7 +286,7 @@ class LearningPlan extends ComponentBase
     public function onSchoolLearningPlanRequestAccept()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the learning plan. */
@@ -327,7 +327,7 @@ class LearningPlan extends ComponentBase
     public function onSchoolLearningPlanRequestDecline()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the learning plan. */
@@ -372,7 +372,7 @@ class LearningPlan extends ComponentBase
     public function onTeacherViewLearningPlan()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the learning plan. */
@@ -388,7 +388,7 @@ class LearningPlan extends ComponentBase
     public function onTeacherLearningPlanEdit()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract all categories for filtering. */
@@ -410,7 +410,7 @@ class LearningPlan extends ComponentBase
     public function onTeacherLearningPlanCourseAdd()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         if (post('school')) {
@@ -558,7 +558,7 @@ class LearningPlan extends ComponentBase
     public function onTeacherLearningPlanCourseRemove()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the learning plan. */
@@ -599,7 +599,7 @@ class LearningPlan extends ComponentBase
     public function onTeacherLearningPlanRequestAccept()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the course */
@@ -636,7 +636,7 @@ class LearningPlan extends ComponentBase
     public function onTeacherLearningPlanRequestDecline()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the course */

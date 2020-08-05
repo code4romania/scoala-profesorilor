@@ -71,7 +71,7 @@ class Account extends ComponentBase
     public function onAvatarUpdate()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the user */
@@ -109,7 +109,7 @@ class Account extends ComponentBase
     public function onEmailUpdate()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the form data. */
@@ -150,7 +150,7 @@ class Account extends ComponentBase
     public function onPasswordUpdate()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the form data. */
@@ -193,7 +193,7 @@ class Account extends ComponentBase
     public function onEmailNotificationsUpdate()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the user */

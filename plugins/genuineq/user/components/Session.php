@@ -1,5 +1,6 @@
 <?php namespace Genuineq\User\Components;
 
+use Log;
 use Lang;
 use Auth;
 use Event;
@@ -24,6 +25,11 @@ class Session extends ComponentBase
     const ALLOW_ALL = 'all';
     const ALLOW_GUEST = 'guest';
     const ALLOW_USER = 'user';
+
+    const SECURITY_SUCCESS           = 0;
+    const SECURITY_ERROR_NOT_GUEST   = -1;
+    const SECURITY_ERROR_NOT_USER    = -2;
+    const SECURITY_ERROR_WRONG_GROUP = -3;
 
     public function componentDetails()
     {
@@ -72,8 +78,11 @@ class Session extends ComponentBase
          *  specific dashboard if it's logged in or to the root URL in
          *  case of guest users.
          */
-        if (!$this->checkUserSecurity()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::accessDenied()));
+        $userSecurity = $this->checkUserSecurity();
+        if ((self::SECURITY_ERROR_NOT_GUEST == $userSecurity) || (self::SECURITY_ERROR_WRONG_GROUP == $userSecurity)) {
+            return Redirect::guest($this->pageUrl(AuthRedirect::accessDenied()));
+        } elseif (self::SECURITY_ERROR_NOT_USER == $userSecurity) {
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Make the user data available inside the page. */
@@ -119,7 +128,7 @@ class Session extends ComponentBase
     public function onLogout()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the user. */
@@ -154,7 +163,11 @@ class Session extends ComponentBase
 
     /**
      * Checks if the user can access this page based on the security rules
-     * @return bool
+     * @return integer One of the following:
+     *                      SECURITY_SUCCESS
+     *                      SECURITY_ERROR_NOT_GUEST
+     *                      SECURITY_ERROR_NOT_USER
+     *                      SECURITY_ERROR_WRONG_GROUP
      */
     protected function checkUserSecurity()
     {
@@ -163,22 +176,28 @@ class Session extends ComponentBase
         $isAuthenticated = Auth::check();
 
         if ($isAuthenticated) {
+            /** Check if only guests are allowed. */
             if ($allowedGroup == self::ALLOW_GUEST) {
-                return false;
+                /** User should not be authenticated. */
+                return self::SECURITY_ERROR_NOT_GUEST;
             }
 
+            /** Check 'user' has the right group. */
             if (!empty($allowedUserGroups)) {
                 $userGroups = Auth::getUser()->groups->lists('code');
                 if (!count(array_intersect($allowedUserGroups, $userGroups))) {
-                    return false;
+                    /** User doesn't have the right group. */
+                    return self::SECURITY_ERROR_WRONG_GROUP;
                 }
             }
         } else {
+            /** Check if only users are allowed. */
             if ($allowedGroup == self::ALLOW_USER) {
-                return false;
+                /** User should be authenticated. */
+                return self::SECURITY_ERROR_NOT_USER;
             }
         }
 
-        return true;
+        return self::SECURITY_SUCCESS;
     }
 }

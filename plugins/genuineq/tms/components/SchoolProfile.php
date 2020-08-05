@@ -83,7 +83,7 @@ class SchoolProfile extends ComponentBase
 
         /** Force authentication in case user is not authenticated. */
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         $this->prepareVars();
@@ -99,7 +99,7 @@ class SchoolProfile extends ComponentBase
     public function onSchoolProfileUpdate()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the post data to validate. */
@@ -188,7 +188,7 @@ class SchoolProfile extends ComponentBase
     public function onSchoolProfileDetailedAddreddUpdate()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the post data to validate. */
@@ -229,7 +229,7 @@ class SchoolProfile extends ComponentBase
     public function onSchoolProfileDescriptionUpdate()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the post data to validate. */

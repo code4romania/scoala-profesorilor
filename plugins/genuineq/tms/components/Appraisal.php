@@ -79,7 +79,7 @@ class Appraisal extends ComponentBase
     public function onTeacherAppraisalsView()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extracts all the appraisals of specified teacher. */
@@ -95,7 +95,7 @@ class Appraisal extends ComponentBase
     public function onTeacherViewGetAppraisalDetails()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         if (Auth::getUser()->profile->id != post('teacherId')) {
@@ -121,7 +121,7 @@ class Appraisal extends ComponentBase
     public function onTeacherSaveAppraisalObjectives()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         if (Auth::getUser()->profile->id != post('teacherId')) {
@@ -168,7 +168,7 @@ class Appraisal extends ComponentBase
     public function onTeacherSetAppraisalObjectives()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         if (Auth::getUser()->profile->id != post('teacherId')) {
@@ -228,7 +228,7 @@ class Appraisal extends ComponentBase
     public function onSchoolAppraisalEdit()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         $school = Auth::getUser()->profile;
@@ -262,7 +262,7 @@ class Appraisal extends ComponentBase
     public function onSchoolViewGetAppraisalDetails()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         /** Extract the requested teacher */
@@ -298,7 +298,7 @@ class Appraisal extends ComponentBase
     public function onSchoolSaveAppraisalObjectives()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         $school = Auth::getUser()->profile;
@@ -398,7 +398,7 @@ class Appraisal extends ComponentBase
     public function onSchoolApproveAppraisalObjectives()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         $school = Auth::getUser()->profile;
@@ -466,7 +466,7 @@ class Appraisal extends ComponentBase
     public function onSchoolSetAppraisalSkills()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         $school = Auth::getUser()->profile;
@@ -536,7 +536,7 @@ class Appraisal extends ComponentBase
     public function onSchoolAppraisalClose()
     {
         if (!Auth::check()) {
-            return Redirect::to($this->pageUrl(AuthRedirect::loginRequired()));
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
         $school = Auth::getUser()->profile;
