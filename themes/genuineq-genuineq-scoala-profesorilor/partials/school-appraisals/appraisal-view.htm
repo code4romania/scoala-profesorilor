@@ -130,7 +130,7 @@ description = "Displays an appraisal details"
 
 <div class="row ">
     <div class="col-12 text-center text-sm-right text-md-right text-lg-right text-xl-right p-0">
-        <a id="appraisal-edit" class="btn btn-md btn-secondary mx-0 my-2 py-2 z-depth-0 waves-effect rounded" type="button" data-teacher-id="{{ teacher.id }}">
+        <a id="appraisal-edit" class="btn btn-md btn-primary mx-0 my-2 py-2 z-depth-0 waves-effect rounded" type="button" data-teacher-id="{{ teacher.id }}">
             {% if ('new' == appraisal.status) or ('skills-set' == appraisal.status) or ('closed' == appraisal.status) %}
                 {{ 'appraisal.view'|_ }}
             {% else %}

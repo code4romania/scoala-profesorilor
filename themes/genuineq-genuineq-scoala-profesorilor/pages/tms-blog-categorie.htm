@@ -29,9 +29,13 @@ allowedUserGroups[] = "teacher"
 allowedUserGroups[] = "school"
 ==
 <div class="containter-fluid h-25" style="background-image: url({{ 'background-teacher.jpg'|media }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
-    <div class="row h-100 m-0 align-items-center">
-        <div class="col-12 text-center">
-            <h3 class="mt-4 mb-5 font-bold text-white">{{ 'blog.homepage.title'|_ }}</h3>
+    <div class="full-bg-img">
+        <div class="mask rgba-black-strong">
+            <div class="row h-100 m-0 align-items-center">
+                <div class="col-12 text-center">
+                    <h3 class="mt-4 mb-5 font-bold text-white">{{ 'blog.homepage.title'|_ }}</h3>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -167,7 +171,7 @@ allowedUserGroups[] = "school"
                             <div class="form-row">
                                 <div class="col-12">
                                     <div class="md-form m-0">
-                                        <button type="submit" class="btn btn-secondary btn-sm btn-block rounded m-0">{{ 'blog.newsletter_subscribe'|_ }}</button>
+                                        <button type="submit" class="btn btn-primary btn-sm btn-block rounded m-0">{{ 'blog.newsletter_subscribe'|_ }}</button>
                                     </div>
                                 </div>
                             </div>

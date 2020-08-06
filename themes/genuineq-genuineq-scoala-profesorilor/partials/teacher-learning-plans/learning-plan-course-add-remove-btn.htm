@@ -40,11 +40,11 @@ description = "Displays a add or remove button in the course page"
     </script>
 {% else %}
     {% if user.profile.has_schools %}
-        <a href="#" class="btn btn-sm btn-success z-depth-0 rounded m-0 learning-plan-add-course" type="button" data-toggle="modal" data-target="#learning-plan-course-add-modal" data-learning-plan-id="{{ learningPlan.id }}" data-course-id="{{ partialCourse.id }}">{{ 'teacher-learning-plans.learning-plan-course-add-remove.add'|_ }}</a>
+        <a href="#" class="btn btn-sm btn-primary z-depth-0 rounded m-0 learning-plan-add-course" type="button" data-toggle="modal" data-target="#learning-plan-course-add-modal" data-learning-plan-id="{{ learningPlan.id }}" data-course-id="{{ partialCourse.id }}">{{ 'teacher-learning-plans.learning-plan-course-add-remove.add'|_ }}</a>
 
         {% partial "teacher-learning-plans/learning-plan-course-add-modal" %}
     {% else %}
-        <a href="#" class="btn btn-sm btn-success z-depth-0 rounded m-0 learning-plan-add-course" type="button" data-learning-plan-id="{{ learningPlan.id }}" data-course-id="{{ partialCourse.id }}">{{ 'teacher-learning-plans.learning-plan-course-add-remove.add'|_ }}</a>
+        <a href="#" class="btn btn-sm btn-primary z-depth-0 rounded m-0 learning-plan-add-course" type="button" data-learning-plan-id="{{ learningPlan.id }}" data-course-id="{{ partialCourse.id }}">{{ 'teacher-learning-plans.learning-plan-course-add-remove.add'|_ }}</a>
 
         <script type="text/javascript">
             $('.learning-plan-add-course').on('click', function () {

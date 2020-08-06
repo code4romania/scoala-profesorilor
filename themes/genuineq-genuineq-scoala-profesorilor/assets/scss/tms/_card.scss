@@ -5,3 +5,7 @@
     max-height: $headings-line-height * 3rem;
     line-height: $headings-line-height * 1rem;
 }
+
+.tms-category-card-header {
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+}

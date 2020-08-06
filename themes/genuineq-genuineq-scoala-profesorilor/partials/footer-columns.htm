@@ -16,7 +16,7 @@ code = "main-menu"
             <!--First column-->
             <div class="col-lg-3 col-md-6">
                 <a href="{{ url('/') }}">
-                    <img src="{{ 'assets/img/svg/logo-white.svg'|theme }}" height="70" alt="logo">
+                    <img src="{{ 'assets/img/svg/logo-white.svg'|theme }}" height="130" alt="logo">
                 </a>
             </div>
             <!--/.First column-->
@@ -44,8 +44,8 @@ code = "main-menu"
                 <ul class="list-unstyled">
                     <li><a style="font-size: 14px;" href="{{ 'tms-blog'|page }}">Blog</a></li>
                     <li><a style="font-size: 14px;" href="{{ 'tms-partners'|page }}">Parteneri</a></li>
+                    <li><a style="font-size: 14px;" href="{{ 'scala-evaluare'|staticPage  }}">Ghid Evaluare</a></li>
                     <li><a style="font-size: 14px;" href="{{ 'termeni-si-conditii'|staticPage  }}">Termeni si Conditii</li>
-                    <li><a style="font-size: 14px;" href="{{ 'politica-de-confidentialitate'|staticPage  }}">Politica de Confidentialitate</a></li>
                     <li><a style="font-size: 14px;" href="{{ 'politica-de-cookie'|staticPage  }}">Politica de Cookie</a></li>
                 </ul>
             </div>
@@ -63,7 +63,7 @@ code = "main-menu"
                         {% endfor %}
                     </li>
                     <li>
-                        <a href="#" class="btn btn-sm btn-success z-depth-0 rounded d-none" type="button">{{ 'footer.call-to-action'|_ }}</a>
+                        <a href="#" class="btn btn-sm btn-secondary z-depth-0 rounded d-none" type="button">{{ 'footer.call-to-action'|_ }}</a>
                     </li>
                 </ul>
             </div>
@@ -101,7 +101,7 @@ code = "main-menu"
     <!--/.Footer links-->
 
     <!--Copyright-->
-    <div class="footer-copyright text-center primary-color-dark">
+    <div class="footer-copyright text-center bg-secondary">
         <div class="container-fluid py-3">
             © {{ 'now'|date('Y') }} {{ 'footer.copyright'|_ }}
         </div>

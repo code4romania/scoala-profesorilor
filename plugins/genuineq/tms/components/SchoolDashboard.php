@@ -378,8 +378,8 @@ class SchoolDashboard extends ComponentBase
         }
 
         $this->page['distributedCosts'] = [0 => array_values($distributedCosts)];
-        $this->page['distributedCostsColor'] = [0 => 'rgba(75, 192, 192, 0.2)'];
-        $this->page['distributedCostsBorderColor'] = [0 => 'rgba(75, 192, 192, 1)'];
+        $this->page['distributedCostsColor'] = [0 => 'rgba(230, 153, 131, 0.2)'];
+        $this->page['distributedCostsBorderColor'] = [0 => 'rgba(230, 153, 131, 1)'];
     }
 
     /**
@@ -439,8 +439,8 @@ class SchoolDashboard extends ComponentBase
             }
         }
         $this->page['distributedCosts'] = [0 => $this->page['distributedCosts'][0], 1 => array_values($distributedCosts)];
-        $this->page['distributedCostsColor'] = [0 => 'rgba(75, 192, 192, 0.2)', 1 => 'rgba(153, 102, 255, 0.2)'];
-        $this->page['distributedCostsBorderColor'] = [0 => 'rgba(75, 192, 192, 1)', 1 => 'rgba(153, 102, 255, 1)'];
+        $this->page['distributedCostsColor'] = [0 => 'rgba(230, 153, 131, 0.2)', 1 => 'rgba(134, 100, 91, 0.2)'];
+        $this->page['distributedCostsBorderColor'] = [0 => 'rgba(230, 153, 131, 1)', 1 => 'rgba(134, 100, 91, 1)'];
     }
 
     /**
@@ -524,20 +524,20 @@ class SchoolDashboard extends ComponentBase
             }
             $skillSemesters[$skill]['label'] = Skill::find($skill)->name;
             if (5 > $skill) {
-                $skillSemesters[$skill]['backgroundColor'] = 'rgba(' . $skill . ', ' . (215 + $skill) . ', ' . (75 + $skill) . ', 0.2)';
-                $skillSemesters[$skill]['borderColor'] = 'rgba(' . $skill . ', ' . (215 + $skill) . ', ' . (75 + $skill) . ', 1)';
+                $skillSemesters[$skill]['backgroundColor'] = 'rgba(' . (100 + $skill) . ', ' . (100 + $skill) . ', ' . $skill . ', 0.2)';
+                $skillSemesters[$skill]['borderColor'] = 'rgba(' . (100 + $skill) . ', ' . (100 + $skill) . ', ' . $skill . ', 1)';
             } elseif (10 > $skill) {
-                $skillSemesters[$skill]['backgroundColor'] = 'rgba(' . $skill . ', ' . (175 + $skill) . ', ' . (25 + $skill) . ', 0.2)';
-                $skillSemesters[$skill]['borderColor'] = 'rgba(' . $skill . ', ' . (175 + $skill) . ', ' . (25 + $skill) . ', 1)';
+                $skillSemesters[$skill]['backgroundColor'] = 'rgba(' . (113 + $skill) . ', ' . (100 + $skill) . ', ' . $skill . ', 0.2)';
+                $skillSemesters[$skill]['borderColor'] = 'rgba(' . (113 + $skill) . ', ' . (100 + $skill) . ', ' . $skill . ', 1)';
             } elseif (20 > $skill) {
-                $skillSemesters[$skill]['backgroundColor'] = 'rgba(' . $skill . ', ' . (115 + $skill) . ', ' . (55 + $skill) . ', 0.2)';
-                $skillSemesters[$skill]['borderColor'] = 'rgba(' . $skill . ', ' . (115 + $skill) . ', ' . (55 + $skill) . ', 1)';
+                $skillSemesters[$skill]['backgroundColor'] = 'rgba(' . (124 + $skill) . ', ' . (100 + $skill) . ', ' . $skill . ', 0.2)';
+                $skillSemesters[$skill]['borderColor'] = 'rgba(' . (124 + $skill) . ', ' . (100 + $skill) . ', ' . $skill . ', 1)';
             } elseif (50 > $skill) {
-                $skillSemesters[$skill]['backgroundColor'] = 'rgba(' . $skill . ', ' . (35 + $skill) . ', ' . (85 + $skill) . ', 0.2)';
-                $skillSemesters[$skill]['borderColor'] = 'rgba(' . $skill . ', ' . (35 + $skill) . ', ' . (85 + $skill) . ', 1)';
+                $skillSemesters[$skill]['backgroundColor'] = 'rgba(' . (135 + $skill) . ', ' . (100 + $skill) . ', ' . $skill . ', 0.2)';
+                $skillSemesters[$skill]['borderColor'] = 'rgba(' . (135 + $skill) . ', ' . (100 + $skill) . ', ' . $skill . ', 1)';
             } else {
-                $skillSemesters[$skill]['backgroundColor'] = 'rgba(153, 102, 255, 0.2)';
-                $skillSemesters[$skill]['borderColor'] = 'rgba(153, 102, 255, 1)';
+                $skillSemesters[$skill]['backgroundColor'] = 'rgba(146, 100, 91, 0.2)';
+                $skillSemesters[$skill]['borderColor'] = 'rgba(146, 100, 91, 1)';
             }
         }
 

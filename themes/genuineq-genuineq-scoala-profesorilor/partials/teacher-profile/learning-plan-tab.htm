@@ -10,7 +10,7 @@ description = "Displays the teacher's learning plan"
 
 
 {% if 0 < proposedRequests.count() %}
-    <div class="row py-5 mt-4 align-middle" style="background-color: #c7ffe7;">
+    <div class="row py-5 mt-4 align-middle" style="background-color: #F7F0CA;">
 
         <div class="col-12">
             <h5 class="mb-3 font-weight-bold">{{ 'teachers.teacher-view.proposed-requests'|_ }}&nbsp;{{ teacher.name }}</h5>
@@ -22,7 +22,7 @@ description = "Displays the teacher's learning plan"
 
 
 {% if 0 < schoolDeclinedRequests.count() %}
-    <div class="row py-5 align-middle" style="background-color: #ffbccb;">
+    <div class="row py-5 align-middle" style="background-color: #E898A6;">
 
         <div class="col-12">
             <h5 class="mb-3 font-weight-bold">{{ 'teachers.teacher-view.declined-requests'|_ }}&nbsp;{{ teacher.name }}</h5>
