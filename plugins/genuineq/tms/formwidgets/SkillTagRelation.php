@@ -1,16 +1,16 @@
 <?php namespace Genuineq\Tms\FormWidgets;
 
 use Backend\Classes\FormWidgetBase;
-use Genuineq\Tms\Models\Category;
+use Genuineq\Tms\Models\Skill;
 
 
-class CategoryTagRelation extends FormWidgetBase
+class SkillTagRelation extends FormWidgetBase
 {
     public function widgetDetails()
     {
         return [
-            'name' => 'CategoryTagRelation',
-            'description' => 'Fiels for adding categories in a tag style'
+            'name' => 'SkillTagRelation',
+            'description' => 'Fiels for adding skills in a tag style'
         ];
     }
 
@@ -19,14 +19,14 @@ class CategoryTagRelation extends FormWidgetBase
     {
         $this->prepareVars();
 
-        return $this->makePartial('categorytagrelation');
+        return $this->makePartial('skilltagrelation');
     }
 
 
     public function prepareVars()
     {
         $this->vars['id']             = $this->model->id;
-        $this->vars['fields']         = Category::all()->lists('name', 'id');
+        $this->vars['fields']         = Skill::all()->lists('name', 'id');
         $this->vars['name']           = $this->formField->getName() . '[]';
         $this->vars['selectedValues'] = (!empty($this->getLoadValue())) ? ($this->getLoadValue()) : ([]);
     }
@@ -34,7 +34,7 @@ class CategoryTagRelation extends FormWidgetBase
 
     public function loadAssets()
     {
-        $this->addCSs('css/categorytagrelation.css');
-        $this->addJs('js/categorytagrelation.js');
+        $this->addCSs('css/skilltagrelation.css');
+        $this->addJs('js/skilltagrelation.js');
     }
 }

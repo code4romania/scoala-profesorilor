@@ -48,6 +48,10 @@ class Plugin extends PluginBase
             'Genuineq\Tms\FormWidgets\CategoryTagRelation' => [
                 'label' => 'Category Tag Relation field',
                 'code' => 'categorytagrelation'
+            ],
+            'Genuineq\Tms\FormWidgets\SkillTagRelation' => [
+                'label' => 'Skill Tag Relation field',
+                'code' => 'skilltagrelation'
             ]
         ];
     }
