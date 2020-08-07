@@ -594,6 +594,27 @@ class LearningPlan extends ComponentBase
     }
 
     /**
+     * Function that marks a course as participated or not
+     */
+    public function onTeacherLearningPlanCourseParticipate()
+    {
+        if (!Auth::check()) {
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        /** Extract the learning plan. */
+        $learningPlan = LearningPlanModel::find(post('learningPlanId'));
+        /** Extract the clearning plan course. */
+        $learningPlanCourse = $learningPlan->courses->where('course_id', post('courseId'))->first();
+
+        /** Update the course participated property. */
+        $learningPlanCourse->participated = post('participated');
+        $learningPlanCourse->save();
+
+        Flash::success(Lang::get('genuineq.tms::lang.component.learning-plan.message.participation_updated_successful'));
+    }
+
+    /**
      * Function that accepts a request for a teacher.
      */
     public function onTeacherLearningPlanRequestAccept()

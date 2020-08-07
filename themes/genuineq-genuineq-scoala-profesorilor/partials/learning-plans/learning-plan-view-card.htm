@@ -10,7 +10,20 @@ description = "Displays a viewing learning plan course as a card"
     <div class="timeline-panel rounded p-0">
 
         <div class="timeline-heading p-2">
-            <h5 class="timeline-title font-weight-bold">{{ str_limit(course.name, 30) }}</h5>
+            <div class="container">
+                <div class="row">
+                    <div class="col pl-0 pb-4">
+                        <div class="round">
+                            <input type="checkbox" id="participated_{{ course.id }}" {% if learningPlanCourse.participated %} checked {% endif %} data-learning-plan-id="{{ learningPlan.id }}" data-course-id="{{ course.id }}" disabled/>
+                            <label for="participated_{{ course.id }}"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h5 class="timeline-title font-weight-bold">{{ str_limit(course.name, 30) }}</h5>
+                </div>
+            </div>
         </div>
 
         <div class="timeline-body" style="background-color: {{ course.color }} !important;">

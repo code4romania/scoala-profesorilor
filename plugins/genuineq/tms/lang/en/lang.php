@@ -512,6 +512,7 @@
                 'course_added_successful' => 'Cursul a fost adaugat cu succes',
                 'request_added_successful' => 'Cerere de curs creata cu succes',
                 'course_deleted_successful' => 'Cursul a fost sters cu succes',
+                'participation_updated_successful' => 'Participarea la curs a fost actualizata cu succes',
                 'school_course_deleted_not_allowed' => 'Nu puteti sa stergeti un curs adaugat de catre o alta scoala',
                 'school_not_valid' => 'Scoala selectata nu exista sau nu sunteti asociat cu ea',
                 'course_deleted_not_allowed' => 'Nu puteti sa stergeti un curs marcat ca obligatoriu de catre o scoala'

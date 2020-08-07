@@ -58,4 +58,24 @@ description = "Displays a learning plan as a list and the list of courses"
             }
         );
     });
+
+    $('.learning-plan-edit-card-participate').on('change', function () {
+        /* Extract the course and learning plan ID. */
+        var $courseId = $(this).data('courseId');
+        var $learningPlanId = $(this).data('learningPlanId');
+
+        /* Extract the value of the participated checkbox. */
+        var $participated = ($('#participated_' + $courseId).is(":checked")) ? (1) : (0);
+
+        $.request(
+            'onTeacherLearningPlanCourseParticipate',
+            {
+                data: {
+                    courseId: $courseId,
+                    learningPlanId: $learningPlanId,
+                    participated: $participated
+                },
+            }
+        );
+    });
 </script>

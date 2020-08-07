@@ -14,3 +14,10 @@
 html {
     scroll-behavior: smooth;
 }
+
+
+.ouline-none:focus,.ouline-none:active:focus,.ouline-none.active:focus,
+.ouline-none.focus,.ouline-none:active.focus,.ouline-none.active.focus {
+    outline:none;
+    box-shadow:none;
+}

@@ -10,15 +10,27 @@ description = "Displays a editing learning plan course as a card"
     <div class="timeline-panel rounded p-0">
 
         <div class="timeline-heading p-2">
-            {% if not learningPlanCourse.mandatory %}
-                <button type="button" class="close learning-plan-edit-card-remove" aria-label="{{ 'learning-plans.learning-plan-edit-card.close'|_ }}" data-learning-plan-id="{{ learningPlan.id }}" data-course-id="{{ course.id }}">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            {% endif %}
+            <div class="container">
+                <div class="row">
+                    <div class="col pl-0">
+                        <div class="round">
+                            <input type="checkbox" id="participated_{{ course.id }}" {% if learningPlanCourse.participated %} checked {% endif %} data-learning-plan-id="{{ learningPlan.id }}" data-course-id="{{ course.id }}" class="learning-plan-edit-card-participate"/>
+                            <label for="participated_{{ course.id }}"></label>
+                        </div>
+                    </div>
+                    {% if not learningPlanCourse.mandatory %}
+                        <div class="col pr-0">
+                            <button type="button" class="close learning-plan-edit-card-remove shadow-none m-0 pb-2 ouline-none" aria-label="{{ 'learning-plans.learning-plan-edit-card.close'|_ }}" data-learning-plan-id="{{ learningPlan.id }}" data-course-id="{{ course.id }}">
+                                <span class="ouline-none" aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
 
-            <br>
-
-            <h5 class="timeline-title font-weight-bold">{{ str_limit(course.name, 30) }}</h5>
+                <div class="row">
+                    <h5 class="timeline-title font-weight-bold">{{ str_limit(course.name, 30) }}</h5>
+                </div>
+            </div>
         </div>
 
         <div class="timeline-body" style="background-color: {{ course.color }} !important;">

@@ -22,6 +22,7 @@ class BuilderTableCreateGenuineqTmsLearningPlansCourses extends Migration
             $table->boolean('mandatory')->default(0)->comment = "Indicates if the course is mandatory or not.";
             $table->integer('requestable_id')->unsigned()->nullable();
             $table->string('requestable_type')->nullable();
+            $table->boolean('participated')->default(0)->comment = "Indicates if the teacher participated to the course or not.";
             $table->enum('status', ['proposed', 'accepted', 'declined',]);
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
