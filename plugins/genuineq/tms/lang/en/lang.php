@@ -181,6 +181,8 @@
             'status' => 'Status',
             'user' => 'User',
             'teachers' => 'Teachers',
+            'type' => 'Tip',
+            'type_list' => 'Public/Privat',
         ],
 
         'backend-menu' => 'Schools',

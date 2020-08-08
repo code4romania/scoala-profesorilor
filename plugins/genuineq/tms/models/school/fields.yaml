@@ -56,6 +56,14 @@ fields:
             0: Archived
             1: Active
 
+    type:
+        label: 'genuineq.tms::lang.school.label.type'
+        span: right
+        type: dropdown
+        options:
+            public: Public
+            private: Privat
+
     contact_name:
         label: 'genuineq.tms::lang.school.label.contact_name'
         span: left
