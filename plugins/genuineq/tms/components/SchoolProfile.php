@@ -67,6 +67,12 @@ class SchoolProfile extends ComponentBase
             $addresses[$address->name . ', ' . $address->county] = $address->id;
         }
         $this->page['addresses'] = json_encode($addresses);
+
+        /* Construct school types*/
+        $this->page['schoolTypes'] = [
+            'Public' => 'public',
+            'Privat' => 'private'
+        ];
     }
 
     /**
@@ -173,7 +179,12 @@ class SchoolProfile extends ComponentBase
         $schoolProfile = Auth::getUser()->profile;
 
         if ($schoolProfile) {
+            Log::info('Data='.print_r($data,true));
+
             $schoolProfile->fill($data);
+            
+            Log::info('Data='.print_r($schoolProfile,true));
+
             $schoolProfile->save();
         } else {
             throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-profile.message.profile_update_failed'));

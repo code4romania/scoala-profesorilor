@@ -33,6 +33,7 @@ class School extends Model
         'contact_phone',
         'contact_role',
         'status',
+        'type',
     ];
 
     /**

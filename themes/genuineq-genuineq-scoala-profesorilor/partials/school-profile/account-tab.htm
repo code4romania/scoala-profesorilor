@@ -91,6 +91,16 @@ description = "Displays the tab containing all the school account data"
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <div class="md-form">
+                            <select name="type" class="browser-default custom-select border shadow-none ">
+                                {% for key, value in schoolTypes %}
+                                    <option value="{{ value }}" {% if value == profile.type %} selected {% endif %}>{{ key }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="form-row">
                         <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
                             <div class="md-form m-0">

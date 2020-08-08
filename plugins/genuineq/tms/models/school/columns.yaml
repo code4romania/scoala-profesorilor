@@ -33,3 +33,8 @@ columns:
         label: 'genuineq.tms::lang.school.label.status_list'
         type: number
         sortable: true
+
+    type:
+        label: 'genuineq.tms::lang.school.label.type_list'
+        type: text
+        sortable: true
