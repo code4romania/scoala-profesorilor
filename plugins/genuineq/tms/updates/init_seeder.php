@@ -12,11 +12,12 @@ class InitSeeder extends Migration
     {
         /** Populate system_settings table. */
         DB::table('system_settings')->delete();
-        Db::table('system_settings')->insert(['item' => 'backend_brand_settings',           'value' => '{"app_name":"Scoala Profesorilor","app_tagline":"Scoala Profesorilor","primary_color":"#4c025e","secondary_color":"#00d857","accent_color":"#f1f1f1","menu_mode":"inline","custom_css":""}']);
+        Db::table('system_settings')->insert(['item' => 'backend_brand_settings',           'value' => '{"app_name":"Scoala Profesorilor","app_tagline":"Scoala Profesorilor","primary_color":"#9a4877","secondary_color":"#4c3949","accent_color":"#f1f1f1","menu_mode":"inline","custom_css":""}']);
         Db::table('system_settings')->insert(['item' => 'rainlab_builder_settings',         'value' => '{"author_name":"genuineq","author_namespace":"Genuineq"}']);
         Db::table('system_settings')->insert(['item' => 'user_settings',                    'value' => '{"require_activation":"0","activate_mode":"user","use_throttle":"1","block_persistence":"0","allow_registration":"1","login_attribute":"email","remember_login":"never","min_password_length":8,"use_register_throttle":"1"}']);
         Db::table('system_settings')->insert(['item' => 'ginopane_awesomesociallinks',      'value' => '{"links":[{"icon":"fab fa-facebook-f","name":"facebook","link":"https:\/\/www.facebook.com\/%C8%98coala-Profesorilor-100101075067282\/"},{"icon":"fab fa-linkedin-in","name":"linkedin","link":"https:\/\/www.linkedin.com\/company\/%C8%99coala-profesorilor\/"},{"icon":"fab fa-instagram","name":"instagram","link":"https:\/\/www.instagram.com\/scoala_profesorilor\/"}]}']);
         Db::table('system_settings')->insert(['item' => 'system_log_settings',              'value' => '{"log_events":"1","log_requests":"1","log_theme":"1"}']);
+        Db::table('system_settings')->insert(['item' => 'system_mail_brand_settings',       'value' => '{"body_bg":"#9a4877","content_bg":"#f1f1f1","content_inner_bg":"#ffffff","button_text_color":"#fff","button_primary_bg":"#9a4877","button_positive_bg":"#9a4877","button_negative_bg":"#4c3949","header_color":"#ffffff","heading_color":"#2f3133","text_color":"#000000","link_color":"#9a4877","footer_color":"#ffffff","body_border_color":"#edeff2","subcopy_border_color":"#edeff2","table_border_color":"#edeff2","panel_bg":"#edeff2","promotion_bg":"#fff","promotion_border_color":"#9ba2ab"}']);
 
         /** Populate system_mail_templates table. */
         DB::table('system_mail_templates')->delete();
