@@ -215,7 +215,15 @@ class Course extends Model
 
         if ($searchInput) {
             /** Search the requested input */
-            $query->where('name', 'like', "%${searchInput}%");
+            $query->where(function($query) use ($searchInput){
+                $query->orWhere('name', 'like', "%" . $searchInput . "%");
+                $query->orWhere('address', 'like', "%" . $searchInput . "%");
+                $query->orWhere(function($query) use ($searchInput){
+                    $query->whereHas('supplier', function($q) use ($searchInput){
+                        $q->where('name', 'like', "%". $searchInput ."%");
+                    });
+                });
+            });
         }
 
         if ($category && (-1 != $category)) {
@@ -250,6 +258,9 @@ class Course extends Model
 
         $page = ($query->paginate($perPage, $page)->lastPage() < $page) ? (1) : ($page);
 
+        Log::info("Sql: ".$query->toSql());
+        Log::info("Sql: ".print_r($query->getBindings(),true));
+        
         return $query->paginate($perPage, $page);
     }
 
