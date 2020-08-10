@@ -60,6 +60,17 @@ description = "Displays an appraisal as a card"
             </div>
         {% endif %}
 
+        {% if 0 != appraisal.average %}
+            <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-3">
+                <div class="form-group">
+                    <div class="md-form my-1">
+                        <input type="text" id="average" class="form-control" value="{{ appraisal.average }}" readonly>
+                        <label for="average">{{ 'teacher_appraisal.appraisal_view.average'|_ }}</label>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
         <a href="#appraisalViewEditDetails" type="button" class="btn btn-outline-primary waves-effect rounded d-flex justify-content-center d-md-table mx-auto mt-3 appraisal-details" data-appraisal-id="{{ appraisal.id }}" data-teacher-id="{{ teacher.id }}">
             {% if 'new' == appraisal.status %}
                 {{ 'appraisal.edit'|_ }}

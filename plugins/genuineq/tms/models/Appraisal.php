@@ -178,18 +178,17 @@ class Appraisal extends Model
     }
 
     /**
-     * Function that extracts the avegage
-     *  grade of the appraisal.
+     * Function that extracts the avegage grade of the appraisal.
      */
     public function getAverageAttribute()
     {
         $average = 0;
 
-        $average += ($this->grade_1) ? ($this->grade_1) : (0);
-        $average += ($this->grade_2) ? ($this->grade_2) : (0);
-        $average += ($this->grade_3) ? ($this->grade_3) : (0);
+        $average += (($this->percentage_1 / 100) * ($this->grade_1) ? ((('percentage' == $this->evaluation_type_1) ? ($this->grade_1 / 100) : ($this->grade_1))) : (0));
+        $average += (($this->percentage_2 / 100) * ($this->grade_2) ? ((('percentage' == $this->evaluation_type_2) ? ($this->grade_2 / 100) : ($this->grade_2))) : (0));
+        $average += (($this->percentage_3 / 100) * ($this->grade_3) ? ((('percentage' == $this->evaluation_type_3) ? ($this->grade_3 / 100) : ($this->grade_3))) : (0));
 
-        return $average/3;
+        return round(($average / 3), 2);
     }
 
     /**
