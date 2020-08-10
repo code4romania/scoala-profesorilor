@@ -157,6 +157,17 @@ description = "Displays an appraisal details"
                             </div>
                         {% endif %}
 
+                        {% if 0 != appraisal.average %}
+                            <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-3">
+                                <div class="form-group">
+                                    <div class="md-form my-1">
+                                        <input type="text" id="average" class="form-control" value="{{ appraisal.average }}" readonly>
+                                        <label for="average">{{ 'teacher_appraisal.appraisal_view.average'|_ }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
                     </div>
 
                 </form>

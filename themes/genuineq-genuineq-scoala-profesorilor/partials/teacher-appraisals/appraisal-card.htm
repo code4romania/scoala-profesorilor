@@ -61,13 +61,15 @@ description = "Displays an appraisal as a card"
         {% endif %}
 
         {% if 0 != appraisal.average %}
-            <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-3">
-                <div class="form-group">
-                    <div class="md-form my-1">
-                        <input type="text" id="average" class="form-control" value="{{ appraisal.average }}" readonly>
-                        <label for="average">{{ 'teacher_appraisal.appraisal_view.average'|_ }}</label>
-                    </div>
+            <div class="row my-2">
+                <div class="col-10">
+                    <small class="card-text">{{ 'teacher_appraisal.appraisal_view.average'|_ }}:</small>
                 </div>
+                {% if appraisal.third_skill_grade %}
+                    <div class="col-2">
+                        <small class="card-text pull-right border">&nbsp;{{ appraisal.average }}&nbsp;</small>
+                    </div>
+                {% endif %}
             </div>
         {% endif %}
 
