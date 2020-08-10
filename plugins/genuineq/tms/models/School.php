@@ -82,7 +82,15 @@ class School extends Model
             'Genuineq\Tms\Models\Teacher',
             'table' => 'genuineq_tms_schools_teachers',
             'order' => 'name',
-            'pivot' => ['contract_type_id', 'school_level_id', 'grade_id', 'specialization_1_id', 'specialization_2_id'],
+            'pivot' => [
+                'contract_type_id',
+                'school_level_1_id',
+                'school_level_2_id',
+                'school_level_3_id',
+                'grade_id',
+                'specialization_1_id',
+                'specialization_2_id'
+            ],
         ],
     ];
 

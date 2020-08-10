@@ -138,7 +138,9 @@ class SchoolTeacherProfile extends ComponentBase
             'address' => post('school_teacher_add_address_id'),
             'seniority_level' => post('school_teacher_add_seniority_level_id'),
             /** Link data */
-            'school_level' => post('school_teacher_add_school_level_id'),
+            'school_level_1' => post('school_teacher_add_school_level_1_id'),
+            'school_level_2' => post('school_teacher_add_school_level_2_id'),
+            'school_level_3' => post('school_teacher_add_school_level_3_id'),
             'contract_type' => post('school_teacher_add_contract_type_id'),
             'grade' => post('school_teacher_add_grade_id'),
             'specialization_1' => post('school_teacher_add_specialization_1_id'),
@@ -216,8 +218,9 @@ class SchoolTeacherProfile extends ComponentBase
         $this->page['schoolTeacherLink'] = $teacher->pivot;
         $this->page['schoolTeacherProfileAddress'] = ($teacher->address) ? ($teacher->address->name . ', ' . $teacher->address->county) : (null);
         $this->page['schoolTeacherProfileSeniorityLevel'] = ($teacher->seniority_level) ? ($teacher->seniority_level->name) : (null);
-
-        $this->page['schoolTeacherProfileSchoolLevel'] = ($teacher->pivot->school_level_id) ? (SchoolLevel::find($teacher->pivot->school_level_id)->name) : (null);
+        $this->page['schoolTeacherProfileSchoolLevel1'] = ($teacher->pivot->school_level_1_id) ? (SchoolLevel::find($teacher->pivot->school_level_1_id)->name) : (null);
+        $this->page['schoolTeacherProfileSchoolLevel2'] = ($teacher->pivot->school_level_2_id) ? (SchoolLevel::find($teacher->pivot->school_level_2_id)->name) : (null);
+        $this->page['schoolTeacherProfileSchoolLevel3'] = ($teacher->pivot->school_level_3_id) ? (SchoolLevel::find($teacher->pivot->school_level_3_id)->name) : (null);
         $this->page['schoolTeacherProfileContractType'] = ($teacher->pivot->contract_type_id) ? (ContractType::find($teacher->pivot->contract_type_id)->name) : (null);
         $this->page['schoolTeacherProfileGrade'] = ($teacher->pivot->grade_id) ? (Grade::find($teacher->pivot->grade_id)->name) : (null);
         $this->page['schoolTeacherProfileSpecialization_1'] = ($teacher->pivot->specialization_1_id) ? (Specialization::find($teacher->pivot->specialization_1_id)->name) : (null);
@@ -383,8 +386,18 @@ class SchoolTeacherProfile extends ComponentBase
         $schoolTeacherLink = $teacher->pivot;
 
         /** Extract the school level ID. */
-        if (post('school_level_id')) {
-            $schoolTeacherLink->school_level_id = SchoolLevel::whereName(post('school_level_id'))->first()->id;
+        if (post('school_level_1_id')) {
+            $schoolTeacherLink->school_level_1_id = SchoolLevel::whereName(post('school_level_1_id'))->first()->id;
+        }
+
+        /** Extract the school level ID. */
+        if (post('school_level_2_id')) {
+            $schoolTeacherLink->school_level_2_id = SchoolLevel::whereName(post('school_level_2_id'))->first()->id;
+        }
+
+        /** Extract the school level ID. */
+        if (post('school_level_3_id')) {
+            $schoolTeacherLink->school_level_3_id = SchoolLevel::whereName(post('school_level_3_id'))->first()->id;
         }
 
         /** Extract the contract type ID. */

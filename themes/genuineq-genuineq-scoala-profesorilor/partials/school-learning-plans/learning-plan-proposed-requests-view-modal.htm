@@ -1,0 +1,102 @@
+description = "Modal that displays the details of a requested course"
+
+[viewBag]
+==
+
+<div class="modal fade" id="learning-plan-proposed-requests-view-modal" tabindex="-1" role="dialog" aria-labelledby="learning-plan-proposed-requests-view-modal" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title w-100">{{ 'learning-plans.learning-plan-proposed-requests-view-modal.title'|_ }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'learning-plans.learning-plan-proposed-requests-view-modal.close'|_ }}">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="form-group">
+                            <div class="md-form">
+                                <input name="school_covered_costs" type="number" id="school_covered_costs" class="form-control" disabled>
+                                <label for="school_covered_costs">{{ 'learning-plans.learning-plan-proposed-requests-view-modal.school_covered_costs'|_ }}</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="form-group">
+                            <div class="md-form">
+                                <input name="teacher_covered_costs" type="number" id="teacher_covered_costs" class="form-control" disabled>
+                                <label for="teacher_covered_costs">{{ 'learning-plans.learning-plan-proposed-requests-view-modal.teacher_covered_costs'|_ }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="form-check">
+                            <input name="transport_covered" type="checkbox" class="form-check-input" id="transport_covered" disabled>
+                            <label class="form-check-label" for="transport_covered">{{ 'learning-plans.learning-plan-proposed-requests-view-modal.transport_covered'|_ }}</label>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="form-check">
+                            <input name="accommodation_covered" type="checkbox" class="form-check-input" id="accommodation_covered" disabled>
+                            <label class="form-check-label" for="accommodation_covered">{{ 'learning-plans.learning-plan-proposed-requests-view-modal.accommodation_covered'|_ }}</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row align-items-start d-none d-sm-flex d-md-flex d-lg-flex d-xl-flex">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                        <a class="btn btn-lg btn-block btn-outline-primary mt-3 py-2 z-depth-0 waves-effect rounded proposed-requests-decline" id="btnDeclineRequest" type="button"  data-dismiss="modal" data-toggle="modal">{{ 'learning-plans.learning-plan-proposed-requests-view-modal.decline'|_ }}</a>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                        <a class="btn btn-lg btn-block btn-primary mt-3 py-2 z-depth-0 waves-effect rounded proposed-requests-accept" id="btnAcceptRequest" type="button"  data-dismiss="modal" data-toggle="modal">{{ 'learning-plans.learning-plan-proposed-requests-view-modal.accept'|_ }}</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        /* Function populated the modal with the data to diplay. */
+        $('#learning-plan-proposed-requests-view-modal').on('show.bs.modal', function (event) {
+            /* Set course-id and learning-plan-id data attributes. */
+            $('#btnDeclineRequest').data('courseId', $(event.relatedTarget).data('courseId'));
+            $('#btnDeclineRequest').data('learningPlanId', $(event.relatedTarget).data('learningPlanId'));
+
+            /* Set course-id and learning-plan-id data attributes. */
+            $('#btnAcceptRequest').data('courseId', $(event.relatedTarget).data('courseId'));
+            $('#btnAcceptRequest').data('learningPlanId', $(event.relatedTarget).data('learningPlanId'));
+
+            /* Set input values. */
+            $('#school_covered_costs').val($(event.relatedTarget).data('schoolCoveredCosts'));
+            $('#teacher_covered_costs').val($(event.relatedTarget).data('teacherCoveredCosts'));
+
+            /* Set checkbox values. */
+            if ($(event.relatedTarget).data('transportCovered')) {
+                $('#transport_covered').prop('checked', true);
+            }
+            if ($(event.relatedTarget).data('accommodationCovered')) {
+                $('#accommodation_covered').prop('checked', true);
+            }
+
+            /* MDBOOTSTRAP Limitation: Trigger change value to move all input labels up. */
+            $('#school_covered_costs').change();
+            $('#teacher_covered_costs').change();
+        });
+    });
+</script>

@@ -47,13 +47,21 @@ fields:
         required: 1
         type: relation
 
-    grade_1:
-        label: 'genuineq.tms::lang.appraisal.label.first_skill_grade'
+    evaluation_type_1:
+        label: 'genuineq.tms::lang.school.label.first_skill_evaluation_type'
         span: left
-        type: number
+        type: dropdown
+        options:
+            grade: Grade
+            percentage: Percentage
 
     percentage_1:
         label: 'genuineq.tms::lang.appraisal.label.first_skill_percentage'
+        span: right
+        type: number
+
+    grade_1:
+        label: 'genuineq.tms::lang.appraisal.label.first_skill_grade'
         span: right
         type: number
 
@@ -64,13 +72,21 @@ fields:
         required: 1
         type: relation
 
-    grade_2:
-        label: 'genuineq.tms::lang.appraisal.label.second_skill_grade'
+    evaluation_type_2:
+        label: 'genuineq.tms::lang.school.label.second_skill_evaluation_type'
         span: left
-        type: number
+        type: dropdown
+        options:
+            grade: Grade
+            percentage: Percentage
 
     percentage_2:
         label: 'genuineq.tms::lang.appraisal.label.second_skill_percentage'
+        span: right
+        type: number
+
+    grade_2:
+        label: 'genuineq.tms::lang.appraisal.label.second_skill_grade'
         span: right
         type: number
 
@@ -81,13 +97,21 @@ fields:
         required: 1
         type: relation
 
-    grade_3:
-        label: 'genuineq.tms::lang.appraisal.label.third_skill_grade'
+    evaluation_type_3:
+        label: 'genuineq.tms::lang.school.label.third_skill_evaluation_type'
         span: left
-        type: number
+        type: dropdown
+        options:
+            grade: Grade
+            percentage: Percentage
 
     percentage_3:
         label: 'genuineq.tms::lang.appraisal.label.third_skill_percentage'
+        span: right
+        type: number
+
+    grade_3:
+        label: 'genuineq.tms::lang.appraisal.label.third_skill_grade'
         span: right
         type: number
 

@@ -257,7 +257,11 @@ class Course extends Model
         $query->whereDate('start_date', '>=', date('Y-m-d'));
 
         $page = ($query->paginate($perPage, $page)->lastPage() < $page) ? (1) : ($page);
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> b9c786c710607e110a473f0caa3eead9334627b5
         return $query->paginate($perPage, $page);
     }
 

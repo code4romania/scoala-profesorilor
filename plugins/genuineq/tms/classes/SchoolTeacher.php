@@ -162,7 +162,9 @@ class SchoolTeacher
                 $school,
                 [
                     'contract_type_id' => (ContractType::whereName($newData['contract_type'])->first()) ? (ContractType::whereName($newData['contract_type'])->first()->id) : (null),
-                    'school_level_id' => (SchoolLevel::whereName($newData['school_level'])->first()) ? (SchoolLevel::whereName($newData['school_level'])->first()->id) : (null),
+                    'school_level_1_id' => (SchoolLevel::whereName($newData['school_level_1'])->first()) ? (SchoolLevel::whereName($newData['school_level_1'])->first()->id) : (null),
+                    'school_level_2_id' => (SchoolLevel::whereName($newData['school_level_2'])->first()) ? (SchoolLevel::whereName($newData['school_level_2'])->first()->id) : (null),
+                    'school_level_3_id' => (SchoolLevel::whereName($newData['school_level_3'])->first()) ? (SchoolLevel::whereName($newData['school_level_3'])->first()->id) : (null),
                     'grade_id' => (Grade::whereName($newData['grade'])->first()) ? (Grade::whereName($newData['grade'])->first()->id) : (null),
                     'specialization_1_id' => (Specialization::whereName($newData['specialization_1'])->first()) ? (Specialization::whereName($newData['specialization_1'])->first()->id) : (null),
                     'specialization_2_id' => (Specialization::whereName($newData['specialization_2'])->first()) ? (Specialization::whereName($newData['specialization_2'])->first()->id) : (null),
@@ -287,7 +289,9 @@ class SchoolTeacher
                 $school,
                 [
                     'contract_type_id' => (ContractType::whereName($newData['contract_type'])->first()) ? (ContractType::whereName($newData['contract_type'])->first()->id) : (null),
-                    'school_level_id' => (SchoolLevel::whereName($newData['school_level'])->first()) ? (SchoolLevel::whereName($newData['school_level'])->first()->id) : (null),
+                    'school_level_1_id' => (SchoolLevel::whereName($newData['school_level_1'])->first()) ? (SchoolLevel::whereName($newData['school_level_1'])->first()->id) : (null),
+                    'school_level_2_id' => (SchoolLevel::whereName($newData['school_level_2'])->first()) ? (SchoolLevel::whereName($newData['school_level_2'])->first()->id) : (null),
+                    'school_level_3_id' => (SchoolLevel::whereName($newData['school_level_3'])->first()) ? (SchoolLevel::whereName($newData['school_level_3'])->first()->id) : (null),
                     'grade_id' => (Grade::whereName($newData['grade'])->first()) ? (Grade::whereName($newData['grade'])->first()->id) : (null),
                     'specialization_1_id' => (Specialization::whereName($newData['specialization_1'])->first()) ? (Specialization::whereName($newData['specialization_1'])->first()->id) : (null),
                     'specialization_2_id' => (Specialization::whereName($newData['specialization_2'])->first()) ? (Specialization::whereName($newData['specialization_2'])->first()->id) : (null),

@@ -22,6 +22,18 @@ description = "Displays a request course as a card"
             </div>
         </div>
 
+        <a
+            class="stretched-link"
+            data-toggle="modal"
+            data-target="#learning-plan-proposed-requests-view-modal"
+            data-course-id="{{ course.id }}"
+            data-learning-plan-id="{{ teacher.active_learning_plan.id }}"
+            data-school-covered-costs="{{ learningPlanCourse.school_covered_costs }}"
+            data-transport-covered="{{ learningPlanCourse.transport_covered }}"
+            data-accommodation-covered="{{ learningPlanCourse.accommodation_covered }}"
+            data-teacher-covered-costs="{{ learningPlanCourse.teacher_covered_costs }}"
+        ></a>
+
     </div>
     <div class="card-body">
 
@@ -51,9 +63,21 @@ description = "Displays a request course as a card"
             </div>
 
             <div class="col-12 col-sm-6 col-md-6 col-lg-6">
-                <a class="btn btn-sm btn-secondary mt-3 py-2 z-depth-0 waves-effect rounded btn-block proposed-requests-accept" type="button" data-course-id="{{ course.id }}" data-learning-plan-id="{{ teacher.active_learning_plan.id }}">{{ 'learning-plans.learning-plan-proposed-requests.accept'|_ }}</a>
+                <a class="btn btn-sm btn-primary mt-3 py-2 z-depth-0 waves-effect rounded btn-block proposed-requests-accept" type="button" data-course-id="{{ course.id }}" data-learning-plan-id="{{ teacher.active_learning_plan.id }}">{{ 'learning-plans.learning-plan-proposed-requests.accept'|_ }}</a>
             </div>
         </div>
+
+        <a
+            class="stretched-link"
+            data-toggle="modal"
+            data-target="#learning-plan-proposed-requests-view-modal"
+            data-course-id="{{ course.id }}"
+            data-learning-plan-id="{{ teacher.active_learning_plan.id }}"
+            data-school-covered-costs="{{ learningPlanCourse.school_covered_costs }}"
+            data-teacher-covered-costs="{{ learningPlanCourse.teacher_covered_costs }}"
+            data-transport-covered="{{ learningPlanCourse.transport_covered }}"
+            data-accommodation-covered="{{ learningPlanCourse.accommodation_covered }}"
+        ></a>
 
     </div>
 </div>

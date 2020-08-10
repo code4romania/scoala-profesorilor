@@ -118,7 +118,7 @@ class Appraisal extends ComponentBase
     /**
      * Updates the objectives in a specified appraisal.
      */
-    public function onTeacherSaveAppraisalObjectives()
+    public function onTeacherAppraisalSave()
     {
         if (!Auth::check()) {
             return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
@@ -293,9 +293,9 @@ class Appraisal extends ComponentBase
     }
 
     /**
-     * Updates the objectives in a specified appraisal.
+     * Updates the specified appraisal.
      */
-    public function onSchoolSaveAppraisalObjectives()
+    public function onSchoolAppraisalSave()
     {
         if (!Auth::check()) {
             return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
@@ -333,10 +333,13 @@ class Appraisal extends ComponentBase
 
                 $appraisal->skill_1_id = Skill::whereName(post('first_skill'))->first()->id;
                 $appraisal->percentage_1 = post('first_skill_percentage');
+                $appraisal->evaluation_type_1 = post('first_skill_evaluation_type');
                 $appraisal->skill_2_id = Skill::whereName(post('second_skill'))->first()->id;
                 $appraisal->percentage_2 = post('second_skill_percentage');
+                $appraisal->evaluation_type_2 = post('second_skill_evaluation_type');
                 $appraisal->skill_3_id = Skill::whereName(post('third_skill'))->first()->id;
                 $appraisal->percentage_3 = post('third_skill_percentage');
+                $appraisal->evaluation_type_3 = post('third_skill_evaluation_type');
                 break;
 
             case 'skills-set':
@@ -344,9 +347,15 @@ class Appraisal extends ComponentBase
                 break;
 
             case 'evaluation-opened':
-                if ( (1 > post('first_skill_grade')) || (10 < post('first_skill_grade'))
-                    || (1 > post('second_skill_grade')) || (10 < post('second_skill_grade'))
-                    || (1 > post('third_skill_grade')) || (10 < post('third_skill_grade')) ) {
+                if (
+                    (1 > post('first_skill_grade')) || (1 > post('second_skill_grade')) || (1 > post('third_skill_grade')) ||
+                    (('grade' == post('first_skill_evaluation_type')) && (10 < post('first_skill_grade'))) ||
+                    (('grade' == post('second_skill_evaluation_type')) && (10 < post('second_skill_grade'))) ||
+                    (('grade' == post('third_skill_evaluation_type')) && (10 < post('third_skill_grade'))) ||
+                    (('percentage' == post('first_skill_evaluation_type')) && (100 < post('first_skill_grade'))) ||
+                    (('percentage' == post('second_skill_evaluation_type')) && (100 < post('second_skill_grade'))) ||
+                    (('percentage' == post('third_skill_evaluation_type')) && (100 < post('third_skill_grade')))
+                   ) {
                     throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.invalid_grade'));
                 }
 
@@ -554,9 +563,15 @@ class Appraisal extends ComponentBase
             throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.not_exists'));
         }
 
-        if ( (1 > post('first_skill_grade')) || (10 < post('first_skill_grade'))
-          || (1 > post('second_skill_grade')) || (10 < post('second_skill_grade'))
-          || (1 > post('third_skill_grade')) || (10 < post('third_skill_grade')) ) {
+        if (
+            (1 > post('first_skill_grade')) || (1 > post('second_skill_grade')) || (1 > post('third_skill_grade')) ||
+            (('grade' == post('first_skill_evaluation_type')) && (10 < post('first_skill_grade'))) ||
+            (('grade' == post('second_skill_evaluation_type')) && (10 < post('second_skill_grade'))) ||
+            (('grade' == post('third_skill_evaluation_type')) && (10 < post('third_skill_grade'))) ||
+            (('percentage' == post('first_skill_evaluation_type')) && (100 < post('first_skill_grade'))) ||
+            (('percentage' == post('second_skill_evaluation_type')) && (100 < post('second_skill_grade'))) ||
+            (('percentage' == post('third_skill_evaluation_type')) && (100 < post('third_skill_grade')))
+           ) {
             throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.invalid_grade'));
         }
 

@@ -14,7 +14,9 @@ class BuilderTableCreateGenuineqTmsSchoolsTeachers extends Migration
             $table->integer('teacher_id');
             $table->primary(['school_id','teacher_id'], 'genuineq_tms_schools_teachers_id');
             $table->integer('contract_type_id')->unsigned()->nullable();
-            $table->integer('school_level_id')->nullable()->unsigned();
+            $table->integer('school_level_1_id')->nullable()->unsigned();
+            $table->integer('school_level_2_id')->nullable()->unsigned();
+            $table->integer('school_level_3_id')->nullable()->unsigned();
             $table->integer('grade_id')->nullable()->unsigned();
             $table->integer('specialization_1_id')->nullable()->unsigned();
             $table->integer('specialization_2_id')->nullable()->unsigned();
