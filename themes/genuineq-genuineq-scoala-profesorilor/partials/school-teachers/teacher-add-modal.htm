@@ -104,9 +104,29 @@ description = "Modal that displays a form to create a new teacher."
                         <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
                                 <div class="md-form">
-                                    <input name="school_teacher_add_school_level_id" type="text" id="school_teacher_add_school_level_id" class="form-control">
-                                    <label for="school_teacher_add_school_level_id">{{ 'teacher.profile.school_level_id'|_ }}</label>
-                                    <div class="small text-danger" data-validate-for="school_teacher_add_school_level_id"></div>
+                                    <input name="school_teacher_add_school_level_1_id" type="text" id="school_teacher_add_school_level_1_id" class="form-control">
+                                    <label for="school_teacher_add_school_level_1_id">{{ ('teacher.profile.school_level_id'|_) ~ ' 1' }}</label>
+                                    <div class="small text-danger" data-validate-for="school_teacher_add_school_level_1_id"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <div class="md-form">
+                                    <input name="school_teacher_add_school_level_2_id" type="text" id="school_teacher_add_school_level_2_id" class="form-control">
+                                    <label for="school_teacher_add_school_level_2_id">{{ ('teacher.profile.school_level_id'|_) ~ ' 2' }}</label>
+                                    <div class="small text-danger" data-validate-for="school_teacher_add_school_level_2_id"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <div class="md-form">
+                                    <input name="school_teacher_add_school_level_3_id" type="text" id="school_teacher_add_school_level_3_id" class="form-control">
+                                    <label for="school_teacher_add_school_level_3_id">{{ ('teacher.profile.school_level_id'|_) ~ ' 3' }}</label>
+                                    <div class="small text-danger" data-validate-for="school_teacher_add_school_level_3_id"></div>
                                 </div>
                             </div>
                         </div>
@@ -188,7 +208,19 @@ description = "Modal that displays a form to create a new teacher."
             treshold: 1
         });
 
-        $('#school_teacher_add_school_level_id').autocomplete({
+        $('#school_teacher_add_school_level_1_id').autocomplete({
+            source: {{ schoolTeacherSchoolLevels|raw }},
+            highlightClass: 'text-danger',
+            treshold: 1
+        });
+
+        $('#school_teacher_add_school_level_2_id').autocomplete({
+            source: {{ schoolTeacherSchoolLevels|raw }},
+            highlightClass: 'text-danger',
+            treshold: 1
+        });
+
+        $('#school_teacher_add_school_level_3_id').autocomplete({
             source: {{ schoolTeacherSchoolLevels|raw }},
             highlightClass: 'text-danger',
             treshold: 1
@@ -239,5 +271,15 @@ description = "Modal that displays a form to create a new teacher."
 
             return false;
         })
+
+        $("#teacher-add-modal").on('shown.bs.modal', function(){
+            /* Hide the body scrollbar. */
+            document.body.style.overflow = "hidden";
+        });
+
+        $("#teacher-add-modal").on('hidden.bs.modal', function(){
+            /* Show the body scrollbar. */
+            document.body.style.overflow = "auto";
+        });
     });
 </script>
