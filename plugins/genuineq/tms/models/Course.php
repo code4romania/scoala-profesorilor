@@ -257,9 +257,6 @@ class Course extends Model
         $query->whereDate('start_date', '>=', date('Y-m-d'));
 
         $page = ($query->paginate($perPage, $page)->lastPage() < $page) ? (1) : ($page);
-
-        Log::info("Sql: ".$query->toSql());
-        Log::info("Sql: ".print_r($query->getBindings(),true));
         
         return $query->paginate($perPage, $page);
     }

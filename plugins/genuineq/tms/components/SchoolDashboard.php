@@ -12,6 +12,10 @@ use Genuineq\Tms\Models\Semester;
 use Genuineq\Tms\Models\SeniorityLevel;
 use Genuineq\User\Helpers\AuthRedirect;
 use Cms\Classes\ComponentBase;
+use Genuineq\Tms\Models\SchoolLevel;
+use Genuineq\Tms\Models\ContractType;
+use Genuineq\Tms\Models\Grade;
+use Genuineq\Tms\Models\Specialization;
 
 /**
  * School dashboard component
@@ -560,13 +564,24 @@ class SchoolDashboard extends ComponentBase
             'identifier' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_identifier'),
             'email' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_email'),
             'phone' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_phone'),
-            'seniority' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_seniority'),
+            'birth_date' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_birth_date'),
+            'description' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_description'),
+            'address' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_address'),
+            'seniority' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_seniority'),   
+            'school_level' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_school_level'), 
+            'contract_type' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_contract_type'), 
+            'grade' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_grade'), 
+            'specialization_1' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_specialization_1'), 
+            'specialization_2' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_specialization_2'),    
             'skill_1' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_skill_1'),
             'skill_grade_1' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_skill_grade_1'),
+            'skill_percentage_1' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_skill_percentage_1'),
             'skill_2' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_skill_2'),
             'skill_grade_2' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_skill_grade_2'),
+            'skill_percentage_2' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_skill_percentage_2'),
             'skill_3' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_skill_3'),
             'skill_grade_3' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_skill_grade_3'),
+            'skill_percentage_3' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_skill_percentage_3'),
             'skill_grades_average' => Lang::get('genuineq.tms::lang.component.school-dashboard.frontend.datatable_skill_grades_average'),
         ];
 
@@ -584,14 +599,25 @@ class SchoolDashboard extends ComponentBase
                 1 => ($teacher->user) ? ($teacher->user->identifier) : (''),
                 2 => ($teacher->user) ? ($teacher->user->email) : (''),
                 3 => $teacher->phone,
-                4 => $teacher->seniority,
-                5 => ($appraisal->firstSkill) ? ($appraisal->firstSkill->name) : (''),
-                6 => $appraisal->grade_1,
-                7 => ($appraisal->secondSkill) ? ($appraisal->secondSkill->name) : (''),
-                8 => $appraisal->grade_2,
-                9 => ($appraisal->thirdSkill) ? ($appraisal->thirdSkill->name) : (''),
-                10 => $appraisal->grade_3,
-                11 => $appraisal->average
+                4 => date("d.m.Y", strtotime($teacher->birth_date)),
+                5 => $teacher->description,
+                6 => $teacher->address->name.", ".$teacher->address->county,
+                7 => $teacher->seniority,
+                8 => ($teacher->pivot->school_level_id) ? (SchoolLevel::find($teacher->pivot->school_level_id)->name) : (null),
+                9 => ($teacher->pivot->contract_type_id) ? (ContractType::find($teacher->pivot->contract_type_id)->name) : (null),
+                10 => ($teacher->pivot->grade_id) ? (Grade::find($teacher->pivot->grade_id)->name) : (null),
+                11 => ($teacher->pivot->specialization_1_id) ? (Specialization::find($teacher->pivot->specialization_1_id)->name) : (null),
+                12 => ($teacher->pivot->specialization_2_id) ? (Specialization::find($teacher->pivot->specialization_2_id)->name) : (null),
+                13 => ($appraisal->firstSkill) ? ($appraisal->firstSkill->name) : (''),
+                14 => $appraisal->grade_1,
+                15 => $appraisal->percentage_1."%",
+                16 => ($appraisal->secondSkill) ? ($appraisal->secondSkill->name) : (''),
+                17 => $appraisal->grade_2,
+                18 => $appraisal->percentage_2."%",
+                19 => ($appraisal->thirdSkill) ? ($appraisal->thirdSkill->name) : (''),
+                20 => $appraisal->grade_3,
+                21 => $appraisal->percentage_3."%",
+                22 => round($appraisal->average, 2)
             ];
         }
         $this->page['schoolDatatableLines'] = $schoolDatatableLines;
