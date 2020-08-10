@@ -179,12 +179,7 @@ class SchoolProfile extends ComponentBase
         $schoolProfile = Auth::getUser()->profile;
 
         if ($schoolProfile) {
-            Log::info('Data='.print_r($data,true));
-
             $schoolProfile->fill($data);
-            
-            Log::info('Data='.print_r($schoolProfile,true));
-
             $schoolProfile->save();
         } else {
             throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-profile.message.profile_update_failed'));

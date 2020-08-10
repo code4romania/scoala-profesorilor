@@ -258,9 +258,6 @@ class Course extends Model
 
         $page = ($query->paginate($perPage, $page)->lastPage() < $page) ? (1) : ($page);
 
-        Log::info("Sql: ".$query->toSql());
-        Log::info("Sql: ".print_r($query->getBindings(),true));
-        
         return $query->paginate($perPage, $page);
     }
 
