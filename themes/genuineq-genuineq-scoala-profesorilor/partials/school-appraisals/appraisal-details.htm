@@ -304,7 +304,7 @@ description = "Displays an appraisal details"
             var $newPage = $('#appraisalSearchPagination > ul > li.active').data('page');
 
             $('#appraisalDetails').request(
-                'onSchoolSaveAppraisalObjectives',
+                'onSchoolAppraisalSave',
                 {
                     update: {
                         'school-appraisals/appraisal-details': '#appraisalViewEditDetails',

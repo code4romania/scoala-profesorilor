@@ -53,15 +53,10 @@ class Appraisal extends Model
         'teacher' => ['Genuineq\Tms\Models\Teacher'],
         'school' => ['Genuineq\Tms\Models\School'],
         'semester' => ['Genuineq\Tms\Models\Semester'],
-    ];
-
-    /**
-     * Skills relation
-     */
-    public $hasOne = [
-        'firstSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'id', 'otherKey' => 'skill_1_id'],
-        'secondSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'id', 'otherKey' => 'skill_2_id'],
-        'thirdSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'id', 'otherKey' => 'skill_3_id']
+        /** Skills relation */
+        'firstSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'skill_1_id'],
+        'secondSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'skill_2_id'],
+        'thirdSkill' => ['Genuineq\Tms\Models\Skill', 'key' => 'skill_3_id']
     ];
 
     /**
@@ -231,6 +226,18 @@ class Appraisal extends Model
             }
 
         return $val;
+    }
+
+    /**
+     * Function that extracts the frontend display
+     *  for the appraisal evaluation type.
+     */
+    public function getEvaluationTypesAttribute()
+    {
+        return [
+            'grade' => Lang::get('genuineq.tms::lang.appraisal.frontend.grade'),
+            'percentage' => Lang::get('genuineq.tms::lang.appraisal.frontend.percentage')
+        ];
     }
 
     /***********************************************
