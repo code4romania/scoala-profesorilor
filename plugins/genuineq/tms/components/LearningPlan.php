@@ -319,6 +319,8 @@ class LearningPlan extends ComponentBase
             $this->page['proposedRequests'] = Auth::getUser()->profile->getProposedLearningPlanRequests($this->page['teacher']->active_learning_plan->id);
             $this->page['teacherDeclinedRequests'] = $this->page['teacher']->declined_requests;
         }
+
+        Flash::success(Lang::get('genuineq.tms::lang.component.learning-plan.message.course_accepted_successful'));
     }
 
     /**
@@ -360,6 +362,8 @@ class LearningPlan extends ComponentBase
             $this->page['proposedRequests'] = Auth::getUser()->profile->getProposedLearningPlanRequests($this->page['teacher']->active_learning_plan->id);
             $this->page['teacherDeclinedRequests'] = $this->page['teacher']->declined_requests;
         }
+
+        Flash::success(Lang::get('genuineq.tms::lang.component.learning-plan.message.course_declined_successful'));
     }
 
     /***********************************************
