@@ -690,6 +690,7 @@ class SchoolTeacherProfile extends ComponentBase
     {
         /* Extract all the addresses and create the source array. */
         $value = 0;
+        $addresses = [];
         foreach (Address::all() as $address) {
             $addresses[$address->name . ', ' . $address->county] = $value++;
         }
@@ -697,6 +698,7 @@ class SchoolTeacherProfile extends ComponentBase
 
         /* Extract all the seniority levels and create the source array. */
         $value = 0;
+        $seniorityLevels = [];
         foreach (SeniorityLevel::all()->pluck('name') as $seniorityLevel) {
             $seniorityLevels[$seniorityLevel] = $value++;
         }
@@ -704,6 +706,7 @@ class SchoolTeacherProfile extends ComponentBase
 
         /* Extract all the school levels and create the source array. */
         $value = 0;
+        $schoolLevels = [];
         foreach (SchoolLevel::all()->pluck('name') as $schoolLevel) {
             $schoolLevels[$schoolLevel] = $value++;
         }
@@ -711,6 +714,7 @@ class SchoolTeacherProfile extends ComponentBase
 
         /* Extract all the contract types and create the source array. */
         $value = 0;
+        $contractTypes = [];
         foreach (ContractType::all()->pluck('name') as $contractType) {
             $contractTypes[$contractType] = $value++;
         }
@@ -718,6 +722,7 @@ class SchoolTeacherProfile extends ComponentBase
 
         /* Extract all the grades and create the source array. */
         $value = 0;
+        $grades = [];
         foreach (Grade::all()->pluck('name') as $grade) {
             $grades[$grade] = $value++;
         }
@@ -725,6 +730,7 @@ class SchoolTeacherProfile extends ComponentBase
 
         /* Extract all the specializations and create the source array. */
         $value = 0;
+        $specializations = [];
         foreach (Specialization::all()->pluck('name') as $specialization) {
             $specializations[$specialization] = $value++;
         }

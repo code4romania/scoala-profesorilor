@@ -56,6 +56,7 @@ class TeacherProfile extends ComponentBase
 
         /* Extract all the addresses and create the source array. */
         $value = 0;
+        $addresses = [];
         foreach (Address::all() as $address) {
             $addresses[$address->name . ', ' . $address->county] = $value++;
         }
@@ -63,6 +64,7 @@ class TeacherProfile extends ComponentBase
 
         /* Extract all the seniority levels and create the source array. */
         $value = 0;
+        $seniorityLevels = [];
         foreach (SeniorityLevel::all()->pluck('name') as $seniorityLevel) {
             $seniorityLevels[$seniorityLevel] = $value++;
         }

@@ -15,7 +15,14 @@ class Plugin extends PluginBase
     /**
      * @var array   Require the dependency plugins
      */
-    public $require = ['RainLab.Builder', 'RainLab.Translate', 'Genuineq.User', 'Genuineq.Https', 'RainLab.Notify', 'Rahman.Faker'];
+    public $require = [
+        'RainLab.Builder',
+        'RainLab.Translate',
+        'Genuineq.User',
+        'Genuineq.Https',
+        'RainLab.Notify',
+        'Rahman.Faker'
+    ];
 
     /**
      * @var boolean Determine if this plugin should have elevated privileges.
