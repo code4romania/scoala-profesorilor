@@ -2,6 +2,7 @@
 
 use Lang;
 use Model;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Genuineq\Tms\Models\LearningPlan;
 use Genuineq\Tms\Models\Budget;
@@ -251,16 +252,36 @@ class Teacher extends Model
         $learningPlan->save();
     }
 
+    /**
+     * Funtion that extracts the epcializations from a school connection.
+     */
     public function schoolSpecializations($schoolId)
     {
-        $schoolConnection =  $this->schoolConnections->where('school_id', $schoolId)->first();
+        $retVal = '';
+        $schoolConnection = $this->schoolConnections->where('school_id', $schoolId)->first();
 
-        return $schoolConnection->specialization_1->name . ' / ' . $schoolConnection->specialization_2->name;
+        if ($schoolConnection->specialization_1) {
+            $retVal .= $schoolConnection->specialization_1->name;
+        }
+
+        if ($schoolConnection->specialization_2) {
+            $retVal .= ' / ' . $schoolConnection->specialization_2->name;
+        }
+
+        return $retVal;
     }
 
     /***********************************************
      ******************** Events *******************
      ***********************************************/
+
+    /**
+     * Function that executed before the creation of an event;
+     */
+    public function beforeCreate()
+    {
+        $this->slug = str_slug($this->name, '-') . '-' . Carbon::now()->timestamp;
+    }
 
     /**
      * Create all dependencies;

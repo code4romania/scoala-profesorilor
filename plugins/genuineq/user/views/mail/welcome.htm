@@ -1,6 +1,19 @@
-subject = "Your account has been confirmed!"
-description = "User confirmed their account"
+subject = "Cont creat"
+description = "Inform user of the account creation."
 ==
-Hello {{ name }}
+Buna {{ name }},
 
-This is a message to inform you that your account has been activated successfully.
+Contul tau a fost creat cu succes.
+
+Pentru autentificare poti sa dai click pe link-ul de mai jos:
+
+{% partial 'button' url=login_link type='positive' body %}
+Catre platforma
+{% endpartial %}
+
+
+Pentru a schimbarea parolei poti sa dai click pe link-ul de mai jos:
+
+{% partial 'button' url=pass_reset_link type='positive' body %}
+Schimba parola
+{% endpartial %}

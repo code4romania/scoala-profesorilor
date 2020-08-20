@@ -19,6 +19,7 @@ use Cms\Classes\ComponentBase;
 use Genuineq\User\Models\User as UserModel;
 use Genuineq\User\Models\Settings as UserSettings;
 use Genuineq\User\Helpers\PluginConfig;
+use Genuineq\User\Helpers\EmailHelper;
 
 /**
  * Login component
@@ -168,7 +169,7 @@ class Login extends ComponentBase
                 Auth::logout();
 
                 if (UserSettings::ACTIVATE_USER == UserSettings::get('activate_mode')) {
-                    $this->sendActivationEmail($user);
+                    EmailHelper::sendActivationEmail($user);
 
                     Flash::success(Lang::get('genuineq.user::lang.component.login.message.activation_email_sent'));
                 }
@@ -194,29 +195,6 @@ class Login extends ComponentBase
     /***********************************************
      ******************* Helpers *******************
      ***********************************************/
-
-    /**
-     * Sends the activation email to a user
-     * @param  User $user
-     * @return void
-     */
-    protected function sendActivationEmail($user)
-    {
-        /** Generate an activation code. */
-        $code = implode('!', [$user->id, $user->getActivationCode()]);
-        /** Create the activation URL. */
-        $link = URL::to('/') . '?activate=' . $code;
-
-        $data = [
-            'name' => $user->name,
-            'link' => $link,
-            'code' => $code
-        ];
-
-        Mail::send('genuineq.user::mail.activate', $data, function($message) use ($user) {
-            $message->to($user->email, $user->name);
-        });
-    }
 
     /**
      * Redirect to the intended page based on the user type.

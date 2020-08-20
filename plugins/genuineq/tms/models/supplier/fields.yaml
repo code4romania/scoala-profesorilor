@@ -5,14 +5,6 @@ fields:
         type: text
         required: 1
 
-    slug:
-        label: 'genuineq.tms::lang.supplier.label.slug'
-        span: right
-        preset:
-            field: name
-            type: ''
-        type: text
-
     email:
         label: 'genuineq.tms::lang.supplier.label.email'
         span: left

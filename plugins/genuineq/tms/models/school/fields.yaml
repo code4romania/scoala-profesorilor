@@ -5,12 +5,6 @@ fields:
         required: 1
         type: text
 
-    slug:
-        label: 'genuineq.tms::lang.school.label.slug'
-        span: right
-        defaultFrom: name
-        type: text
-
     phone:
         label: 'genuineq.tms::lang.school.label.phone'
         span: left

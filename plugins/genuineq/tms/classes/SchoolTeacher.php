@@ -20,6 +20,7 @@ use Genuineq\Tms\Models\ContractType;
 use Genuineq\Tms\Models\SeniorityLevel;
 use Genuineq\Tms\Models\Specialization;
 use Genuineq\User\Models\Settings as UserSettings;
+use Genuineq\User\Helpers\EmailHelper;
 
 class SchoolTeacher
 {
@@ -148,7 +149,6 @@ class SchoolTeacher
             /** Populate the new user profile. */
             $teacher = $user->profile;
             $teacher->name = $newData['name'];
-            $teacher->slug = str_replace(' ', '-', strtolower($newData['name']));
             $teacher->phone = $newData['phone'];
             $teacher->birth_date = date('Y-m-d H:i:s', strtotime($newData['birth_date']));
             $teacher->address_id = ($address) ? ($address->id) : ('');
@@ -179,7 +179,7 @@ class SchoolTeacher
             $appraisal->save();
 
             /** Send activation email. */
-            self::sendActivationEmail($user, $school);
+            EmailHelper::sendNewUserEmail($user, $school);
 
             return [
                 'value' => 1,
@@ -275,7 +275,6 @@ class SchoolTeacher
             /** Populate the new user profile. */
             $teacher = $user->profile;
             $teacher->name = $newData['name'];
-            $teacher->slug = str_replace(' ', '-', strtolower($newData['name']));
             $teacher->phone = $newData['phone'];
             $teacher->birth_date = date('Y-m-d H:i:s', strtotime($newData['birth_date']));
             $teacher->address_id = ($address) ? ($address->id) : ('');
@@ -306,37 +305,9 @@ class SchoolTeacher
             $appraisal->save();
 
             /** Send activation email. */
-            self::sendActivationEmail($user, $school);
+            EmailHelper::sendNewUserEmail($user, $school);
 
             return true;
         }
-    }
-
-    /***********************************************
-     ******************* Helpers *******************
-     ***********************************************/
-
-    /**
-     * Sends the teacher activation email
-     * @param  Genuineq\User\Models\User $user
-     * @param  Genuineq\Tms\Models\School $school
-     * @return void
-     */
-    public static function sendActivationEmail($user, $school)
-    {
-        /** Generate a password reset code. */
-        $code = implode('!', [$user->id, $user->getResetPasswordCode()]);
-        /** Create the password reset URL. */
-        $link = URL::to('/') . '?reset=' . $code;
-
-        $data = [
-            'teacher_name' => $user->name,
-            'school_name' => $school->name,
-            'link' => $link
-        ];
-
-        Mail::send('genuineq.user::mail.invite', $data, function($message) use ($user) {
-            $message->to($user->email, $user->name);
-        });
     }
 }

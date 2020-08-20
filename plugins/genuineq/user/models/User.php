@@ -9,6 +9,7 @@ use October\Rain\Auth\Models\User as UserBase;
 use October\Rain\Auth\AuthException;
 use Genuineq\User\Models\Settings as UserSettings;
 use Genuineq\User\Helpers\PluginConfig;
+use Genuineq\User\Helpers\EmailHelper;
 
 class User extends UserBase
 {
@@ -234,7 +235,11 @@ class User extends UserBase
         $this->restorePurgedValues();
 
         if ($this->send_invite) {
-            $this->sendInvitation();
+            if ($this->is_activated) {
+                EmailHelper::sendWelcomeEmail($this);
+            } else {
+                EmailHelper::sendInviteEmail($this);
+            }
         }
 
         /** Fire global user creation event, */
@@ -464,15 +469,6 @@ class User extends UserBase
         }
 
         return $vars;
-    }
-
-    /**
-     * Sends an invitation to the user using template "genuineq.user::mail.invite".
-     * @return void
-     */
-    protected function sendInvitation()
-    {
-        Mail::sendTo($this, 'genuineq.user::mail.invite', $this->getNotificationVars());
     }
 
     /**

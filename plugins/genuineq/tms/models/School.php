@@ -1,6 +1,7 @@
 <?php namespace Genuineq\Tms\Models;
 
 use Model;
+use Carbon\Carbon;
 use Genuineq\Tms\Models\Teacher;
 use Genuineq\Tms\Models\Appraisal;
 use Genuineq\Tms\Models\Budget;
@@ -154,6 +155,14 @@ class School extends Model
     /***********************************************
      ******************** Events *******************
      ***********************************************/
+
+    /**
+     * Function that executed before the creation of an event;
+     */
+    public function beforeCreate()
+    {
+        $this->slug = str_slug($this->name, '-') . '-' . Carbon::now()->timestamp;
+    }
 
     /**
      * Create all dependencies;

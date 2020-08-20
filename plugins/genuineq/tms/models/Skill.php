@@ -43,4 +43,16 @@ class Skill extends Model
             'order' => 'name',
         ],
     ];
+
+    /***********************************************
+     ******************** Events *******************
+     ***********************************************/
+
+    /**
+     * Function that executed before the creation of an event;
+     */
+    public function beforeCreate()
+    {
+        $this->slug = str_slug($this->name, '-');
+    }
 }

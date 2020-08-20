@@ -20,6 +20,7 @@ use alcea\cnp\Cnp;
 use Genuineq\User\Models\User as UserModel;
 use Genuineq\User\Models\Settings as UserSettings;
 use Genuineq\User\Helpers\PluginConfig;
+use Genuineq\User\Helpers\EmailHelper;
 
 /**
  * Register component
@@ -193,7 +194,7 @@ class Register extends ComponentBase
 
             /** Send activation email if the activation is configured to be performed by the user */
             if (UserSettings::ACTIVATE_USER == UserSettings::get('activate_mode')) {
-                $this->sendActivationEmail($user);
+                EmailHelper::sendActivationEmail($user);
 
                 Flash::success(Lang::get('genuineq.user::lang.component.register.message.activation_email_sent'));
             }
@@ -253,29 +254,6 @@ class Register extends ComponentBase
     /***********************************************
      ******************* Helpers *******************
      ***********************************************/
-
-    /**
-     * Sends the activation email to a user
-     * @param  User $user
-     * @return void
-     */
-    protected function sendActivationEmail($user)
-    {
-        /** Generate an activation code. */
-        $code = implode('!', [$user->id, $user->getActivationCode()]);
-        /** Create the activation URL. */
-        $link = URL::to('/') . '?activate=' . $code;
-
-        $data = [
-            'name' => $user->name,
-            'link' => $link,
-            'code' => $code
-        ];
-
-        Mail::send('genuineq.user::mail.activate', $data, function($message) use ($user) {
-            $message->to($user->email, $user->name);
-        });
-    }
 
     /**
      * Checks if the force secure property is enabled and if so

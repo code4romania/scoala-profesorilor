@@ -20,7 +20,6 @@ class SchoolTest extends PluginTestCase
 
         /* Validate created school */
         $this->assertEquals('test-school-name-1', $school->name);
-        $this->assertEquals('test-school-slug-1', $school->slug);
         $this->assertEquals('0722222221', $school->phone);
         $this->assertEquals('test-school-principal-1', $school->principal);
         $this->assertEquals($inspectorate_1->id, $school->inspectorate_id);
@@ -47,7 +46,6 @@ class SchoolTest extends PluginTestCase
 
         /* Validate created school */
         $this->assertEquals('test-school-name-2', $school->name);
-        $this->assertEquals('test-school-slug-2', $school->slug);
         $this->assertEquals('0722222222', $school->phone);
         $this->assertEquals('test-school-principal-2', $school->principal);
         $this->assertEquals($inspectorate_1->id, $school->inspectorate_id);
@@ -83,7 +81,6 @@ class SchoolTest extends PluginTestCase
 
         /** Check school new values */
         $this->assertEquals('new-test-school-name', $school->name);
-        $this->assertEquals('new-test-school-slug', $school->slug);
         $this->assertEquals('0722222223', $school->phone);
         $this->assertEquals('new-test-school-principal', $school->principal);
         $this->assertEquals($inspectorate_2->id, $school->inspectorate_id);
@@ -110,7 +107,6 @@ class SchoolTest extends PluginTestCase
 
         /* Validate created school */
         $this->assertEquals('test-school-name-4', $school->name);
-        $this->assertEquals('test-school-slug-4', $school->slug);
         $this->assertEquals('0722222224', $school->phone);
         $this->assertEquals('test-school-principal-4', $school->principal);
         $this->assertEquals($inspectorate_1->id, $school->inspectorate_id);
@@ -148,7 +144,6 @@ class SchoolTest extends PluginTestCase
 
         /* Validate created school */
         $this->assertEquals('test-school-name-5', $school->name);
-        $this->assertEquals('test-school-slug-5', $school->slug);
         $this->assertEquals('0722222225', $school->phone);
         $this->assertEquals('test-school-principal-5', $school->principal);
         $this->assertEquals($inspectorate_1->id, $school->inspectorate_id);
@@ -178,7 +173,6 @@ class SchoolTest extends PluginTestCase
 
         /* Validate created school */
         $this->assertEquals('test-school-name-6', $school->name);
-        $this->assertEquals('test-school-slug-6', $school->slug);
         $this->assertEquals('0722222226', $school->phone);
         $this->assertEquals('test-school-principal-6', $school->principal);
         $this->assertEquals($inspectorate_1->id, $school->inspectorate_id);

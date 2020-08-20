@@ -4,6 +4,7 @@ use Log;
 use Lang;
 use Model;
 use DateTime;
+use Carbon\Carbon;
 use Genuineq\Tms\Models\LearningPlan;
 
 /**
@@ -79,6 +80,18 @@ class Course extends Model
             'table' => 'genuineq_tms_learning_plans_courses',
         ],
     ];
+
+    /***********************************************
+     ******************** Events *******************
+     ***********************************************/
+
+    /**
+     * Function that executed before the creation of an event;
+     */
+    public function beforeCreate()
+    {
+        $this->slug = str_slug($this->name, '-') . '-' . Carbon::now()->timestamp;
+    }
 
     /***********************************************
      ******************* Mutators ******************

@@ -41,7 +41,6 @@ class CourseImport extends \Backend\Models\ImportModel
                 }
 
                 $course->name = $data['name'];
-                $course->slug = str_replace(' ', '-', strtolower($data['name']));
                 $course->duration = $data['duration'];
                 $course->address = $data['address'];
                 $course->start_date = date('Y-m-d H:i:s', strtotime($data['start_date']));

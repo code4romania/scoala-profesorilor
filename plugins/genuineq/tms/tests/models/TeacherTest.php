@@ -19,7 +19,6 @@ class TeacherTest extends PluginTestCase
 
         /* Validate created teacher */
         $this->assertEquals('test-teacher-name-1', $teacher->name);
-        $this->assertEquals('test-teacher-slug-1', $teacher->slug);
         $this->assertEquals('0722222221', $teacher->phone);
         $this->assertEquals('1987-10-21', $teacher->birth_date);
         $this->assertEquals($address_1->id, $teacher->address_id);
@@ -40,7 +39,6 @@ class TeacherTest extends PluginTestCase
 
         /* Validate created teacher */
         $this->assertEquals('test-teacher-name-2', $teacher->name);
-        $this->assertEquals('test-teacher-slug-2', $teacher->slug);
         $this->assertEquals('0722222222', $teacher->phone);
         $this->assertEquals('1987-10-22', $teacher->birth_date);
         $this->assertEquals($address_1->id, $teacher->address_id);
@@ -68,7 +66,6 @@ class TeacherTest extends PluginTestCase
 
         /** Check teacher new values */
         $this->assertEquals('new-test-teacher-name', $teacher->name);
-        $this->assertEquals('new-test-teacher-slug', $teacher->slug);
         $this->assertEquals('0722222223', $teacher->phone);
         $this->assertEquals('1987-10-22', $teacher->birth_date);
         $this->assertEquals($address_2->id, $teacher->address_id);
@@ -89,7 +86,6 @@ class TeacherTest extends PluginTestCase
 
         /* Validate created teacher */
         $this->assertEquals('test-teacher-name-3', $teacher->name);
-        $this->assertEquals('test-teacher-slug-3', $teacher->slug);
         $this->assertEquals('0722222223', $teacher->phone);
         $this->assertEquals('1987-10-23', $teacher->birth_date);
         $this->assertEquals($address_1->id, $teacher->address_id);
@@ -122,7 +118,6 @@ class TeacherTest extends PluginTestCase
 
         /* Validate created teacher */
         $this->assertEquals('test-teacher-name-4', $teacher->name);
-        $this->assertEquals('test-teacher-slug-4', $teacher->slug);
         $this->assertEquals('0722222224', $teacher->phone);
         $this->assertEquals('1987-10-24', $teacher->birth_date);
         $this->assertEquals($address_1->id, $teacher->address_id);
@@ -147,7 +142,6 @@ class TeacherTest extends PluginTestCase
 
         /* Validate created teacher */
         $this->assertEquals('test-teacher-name-5', $teacher->name);
-        $this->assertEquals('test-teacher-slug-5', $teacher->slug);
         $this->assertEquals('0722222225', $teacher->phone);
         $this->assertEquals('1987-10-25', $teacher->birth_date);
         $this->assertEquals($address_1->id, $teacher->address_id);
@@ -172,7 +166,6 @@ class TeacherTest extends PluginTestCase
 
         /* Validate created teacher */
         $this->assertEquals('test-teacher-name-6', $teacher->name);
-        $this->assertEquals('test-teacher-slug-6', $teacher->slug);
         $this->assertEquals('0722222226', $teacher->phone);
         $this->assertEquals('1987-10-26', $teacher->birth_date);
         $this->assertEquals($address_1->id, $teacher->address_id);

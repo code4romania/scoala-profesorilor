@@ -1,11 +1,12 @@
-subject = "A new user has signed up"
-description = "Notify admins of a new sign up"
-layout = "system"
+subject = "Informare cont"
+description = "Invite a new user to the website"
 ==
-Hello {{ name }}
+Buna {{ teacher_name }}
 
-A new user has just signed up. Here are there details:
+Un cont a fost creat pentru tine pe aceasta adresa de email de catre scoala {{ school_name }}.
 
-- ID: `{{ id }}`
-- Name: `{{ name }}`
-- Email: `{{ email }}`
+Te rugam sa dai click pe link-ul de mai jos pentru a schimba parola:
+
+{% partial 'button' url=link type='positive' body %}
+Schimba parola
+{% endpartial %}

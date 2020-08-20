@@ -17,7 +17,6 @@ class CourseTest extends PluginTestCase
 
         /* Validate created course */
         $this->assertEquals('test-course-name-1', $course->name);
-        $this->assertEquals('test-course-slug-1', $course->slug);
         $this->assertEquals($supplier->id, $course->supplier_id);
         $this->assertEquals(6.6, $course->duration);
         $this->assertEquals('test-course-address-1', $course->address);
@@ -40,7 +39,6 @@ class CourseTest extends PluginTestCase
 
         /* Validate created course */
         $this->assertEquals('test-course-name-2', $course->name);
-        $this->assertEquals('test-course-slug-2', $course->slug);
         $this->assertEquals($supplier->id, $course->supplier_id);
         $this->assertEquals(7.6, $course->duration);
         $this->assertEquals('test-course-address-2', $course->address);
@@ -72,7 +70,6 @@ class CourseTest extends PluginTestCase
 
         /** Check course new values */
         $this->assertEquals('new-test-course-name', $course->name);
-        $this->assertEquals('new-test-course-slug', $course->slug);
         $this->assertEquals($newSupplier->id, $course->supplier_id);
         $this->assertEquals(6.5, $course->duration);
         $this->assertEquals('new-test-course-address', $course->address);
@@ -95,7 +92,6 @@ class CourseTest extends PluginTestCase
 
         /* Validate created course */
         $this->assertEquals('test-course-name-3', $course->name);
-        $this->assertEquals('test-course-slug-3', $course->slug);
         $this->assertEquals($supplier->id, $course->supplier_id);
         $this->assertEquals(8.6, $course->duration);
         $this->assertEquals('test-course-address-3', $course->address);
@@ -128,8 +124,7 @@ class CourseTest extends PluginTestCase
         $course = $this->helper__createCourse(4, $supplier->id);
 
         /* Validate created course */
-        $this->assertEquals('test-course-name-4', $course->name);
-        $this->assertEquals('test-course-slug-4', $course->slug);
+        $this->assertEquals('test-course-name-4', $course->name)
         $this->assertEquals($supplier->id, $course->supplier_id);
         $this->assertEquals(9.6, $course->duration);
         $this->assertEquals('test-course-address-4', $course->address);
@@ -156,7 +151,6 @@ class CourseTest extends PluginTestCase
 
         /* Validate created course */
         $this->assertEquals('test-course-name-5', $course->name);
-        $this->assertEquals('test-course-slug-5', $course->slug);
         $this->assertEquals($supplier->id, $course->supplier_id);
         $this->assertEquals(10.6, $course->duration);
         $this->assertEquals('test-course-address-5', $course->address);
@@ -192,7 +186,6 @@ class CourseTest extends PluginTestCase
 
         /* Validate created course */
         $this->assertEquals('test-course-name-6', $course->name);
-        $this->assertEquals('test-course-slug-6', $course->slug);
         $this->assertEquals($supplier->id, $course->supplier_id);
         $this->assertEquals(11.6, $course->duration);
         $this->assertEquals('test-course-address-6', $course->address);

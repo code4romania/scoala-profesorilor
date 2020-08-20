@@ -5,14 +5,6 @@ fields:
         type: text
         required: 1
 
-    slug:
-        label: 'genuineq.tms::lang.course.label.slug'
-        span: right
-        preset:
-            field: name
-            type: ''
-        type: text
-
     start_date:
         label: 'genuineq.tms::lang.course.label.date-start'
         mode: datetime

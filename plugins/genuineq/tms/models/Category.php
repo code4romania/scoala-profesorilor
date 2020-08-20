@@ -46,6 +46,18 @@ class Category extends Model
         ],
     ];
 
+    /***********************************************
+     ******************** Events *******************
+     ***********************************************/
+
+    /**
+     * Function that executed before the creation of an event;
+     */
+    public function beforeCreate()
+    {
+        $this->slug = str_slug($this->name, '-');
+    }
+
     /**
      * Function used for searching, filtering, sorting and paginating the school courses.
      *

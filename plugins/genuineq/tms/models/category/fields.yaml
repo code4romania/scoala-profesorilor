@@ -4,24 +4,20 @@ fields:
         span: left
         type: text
         required: 1
-    slug:
-        label: 'genuineq.tms::lang.category.label.slug'
-        span: right
-        preset:
-            field: name
-            type: ''
-        type: text
+
     color:
         label: 'genuineq.tms::lang.category.label.color'
         span: left
         type: colorpicker
         required: 1
+
     icon:
         label: 'genuineq.tms::lang.category.label.icon'
         mode: image
         imageWidth: '100'
         span: right
         type: mediafinder
+
     description:
         label: 'genuineq.tms::lang.category.label.description'
         size: small
