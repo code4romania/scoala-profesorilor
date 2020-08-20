@@ -124,7 +124,7 @@ class CourseTest extends PluginTestCase
         $course = $this->helper__createCourse(4, $supplier->id);
 
         /* Validate created course */
-        $this->assertEquals('test-course-name-4', $course->name)
+        $this->assertEquals('test-course-name-4', $course->name);
         $this->assertEquals($supplier->id, $course->supplier_id);
         $this->assertEquals(9.6, $course->duration);
         $this->assertEquals('test-course-address-4', $course->address);
