@@ -18,6 +18,9 @@ class CategoryTest extends PluginTestCase
         $this->assertEquals('#FACFAC', $category->color);
         $this->assertEquals('test-category-icon', $category->icon);
         $this->assertEquals('test-category-description', $category->description);
+
+        /** Delete category. */
+        $category->delete();
     }
 
     public function test__updateCategory()
@@ -34,7 +37,7 @@ class CategoryTest extends PluginTestCase
 
         /** Update category */
         $category->name = 'new-test-category-name';
-        // $category->slug = 'new-test-category-slug';
+        $category->slug = 'new-test-category-slug';
         $category->color = '#CAFCAF';
         $category->icon = 'new-test-category-icon';
         $category->description = 'new-test-category-description';
@@ -42,10 +45,13 @@ class CategoryTest extends PluginTestCase
 
         /** Check category new values */
         $this->assertEquals('new-test-category-name', $category->name);
-        // $this->assertEquals('new-test-category-slug', $category->slug);
+        $this->assertEquals('new-test-category-slug', $category->slug);
         $this->assertEquals('#CAFCAF', $category->color);
         $this->assertEquals('new-test-category-icon', $category->icon);
         $this->assertEquals('new-test-category-description', $category->description);
+
+        /** Delete category. */
+        $category->delete();
     }
 
     public function test__deleteCategory()

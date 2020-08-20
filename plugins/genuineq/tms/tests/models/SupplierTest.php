@@ -19,6 +19,9 @@ class SupplierTest extends PluginTestCase
         $this->assertEquals('0722222222', $supplier->phone);
         $this->assertEquals('test-supplier-description', $supplier->description);
         $this->assertEquals(1, $supplier->status);
+
+        /** Delete supplier. */
+        $supplier->delete();
     }
 
     public function test__updateSupplier()
@@ -50,6 +53,9 @@ class SupplierTest extends PluginTestCase
         $this->assertEquals('0733333333', $supplier->phone);
         $this->assertEquals('new-test-supplier-description', $supplier->description);
         $this->assertEquals(0, $supplier->status);
+
+        /** Delete supplier. */
+        $supplier->delete();
     }
 
     public function test__deleteSupplier()

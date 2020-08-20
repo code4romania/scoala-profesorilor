@@ -16,6 +16,9 @@ class SkillTest extends PluginTestCase
         $this->assertEquals('test-skill-name', $skill->name);
         // $this->assertEquals('test-skill-slug', $skill->slug);
         $this->assertEquals('test-skill-description', $skill->description);
+
+        /** Delete skill. */
+        $skill->delete();
     }
 
     public function test__updateSkill()
@@ -38,6 +41,9 @@ class SkillTest extends PluginTestCase
         $this->assertEquals('new-test-skill-name', $skill->name);
         // $this->assertEquals('new-test-skill-slug', $skill->slug);
         $this->assertEquals('new-test-skill-description', $skill->description);
+
+        /** Delete skill. */
+        $skill->delete();
     }
 
     public function test__deleteSkill()
