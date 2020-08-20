@@ -39,7 +39,7 @@ class SupplierTest extends PluginTestCase
 
         /** Update supplier */
         $supplier->name = 'new-test-supplier-name';
-        // $supplier->slug = 'new-test-supplier-slug';
+        $supplier->slug = 'new-test-supplier-slug';
         $supplier->email = 'new-supplier@email.com';
         $supplier->phone = '0733333333';
         $supplier->description = 'new-test-supplier-description';
@@ -48,7 +48,7 @@ class SupplierTest extends PluginTestCase
 
         /** Check supplier new values */
         $this->assertEquals('new-test-supplier-name', $supplier->name);
-        // $this->assertEquals('new-test-supplier-slug', $supplier->slug);
+        $this->assertEquals('new-test-supplier-slug', $supplier->slug);
         $this->assertEquals('new-supplier@email.com', $supplier->email);
         $this->assertEquals('0733333333', $supplier->phone);
         $this->assertEquals('new-test-supplier-description', $supplier->description);

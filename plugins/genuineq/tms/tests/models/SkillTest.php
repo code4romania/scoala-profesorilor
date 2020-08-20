@@ -33,13 +33,13 @@ class SkillTest extends PluginTestCase
 
         /** Update skill */
         $skill->name = 'new-test-skill-name';
-        // $skill->slug = 'new-test-skill-slug';
+        $skill->slug = 'new-test-skill-slug';
         $skill->description = 'new-test-skill-description';
         $skill->save();
 
         /** Check skill new values */
         $this->assertEquals('new-test-skill-name', $skill->name);
-        // $this->assertEquals('new-test-skill-slug', $skill->slug);
+        $this->assertEquals('new-test-skill-slug', $skill->slug);
         $this->assertEquals('new-test-skill-description', $skill->description);
 
         /** Delete skill. */
