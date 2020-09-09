@@ -102,3 +102,6 @@
 1.0.35:
     - 'Seeder with test data for semesters'
     - test_semesters_seeder.php
+1.0.36:
+    - 'Seeder with all cookie data'
+    - ocookie_seeder.php

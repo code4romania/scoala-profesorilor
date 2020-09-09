@@ -21,7 +21,8 @@ class Plugin extends PluginBase
         'Genuineq.User',
         'Genuineq.Https',
         'RainLab.Notify',
-        'Rahman.Faker'
+        'Rahman.Faker',
+        'AjayLulia.OCookie'
     ];
 
     /**
