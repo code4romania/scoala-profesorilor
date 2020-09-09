@@ -1,0 +1,56 @@
+
+
+fields:
+    display_position:
+        label: Display Position
+        type: dropdown
+        
+        span: auto
+        options:
+            top: Top
+            bottom: Bottom
+            left: Bottom Left
+            right: Bottom Right
+            floating: Floating
+            rounded: Floating Rounded
+    
+    button_text:
+        label: Button Text
+        availableColors: []
+        
+        span: auto
+    background_color:
+        label: Background Color
+        type: colorpicker
+        availableColors: []
+        
+        span: auto
+    text_color:
+        label: Text Color
+        type: colorpicker
+        availableColors: []            
+        
+        span: auto
+    link_color:
+        label: Link Color
+        type: colorpicker
+        availableColors: []            
+        
+        span: auto
+    button_background_color:
+        label: Button Background Color
+        type: colorpicker
+        availableColors: []            
+        
+        span: auto
+    button_text_color:
+        label: Button Text Color
+        type: colorpicker
+        availableColors: []            
+        
+        span: auto
+    cookie_content:
+        label: Cookie Content
+        type: textarea
+        size: tiny
+        
