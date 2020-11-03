@@ -27,7 +27,6 @@
         .form-control {
             padding-right: 44px;
         }
-
         .ml-btn {
             right: 4px;
             top: 50%;
@@ -37,10 +36,17 @@
     }
 
     &.field-multilingual-textarea {
+        textarea {
+            // increase padding on the right so that the textarea content does not overlap with the language button
+            padding-right: 30px;
+        }
+
         .ml-btn {
-            right: 11px;
+            right: 13px;
             top: 5px;
+            width: 24px;
             text-align: right;
+            padding-left: 4px;
         }
 
         .ml-dropdown-menu {
@@ -114,15 +120,13 @@
             }
         }
     }
+    .field-multilingual-text input.form-control {
+        padding-right: 44px;
+    }
+}
 
-    // .field-multilingual-richeditor {
-    //     .ml-btn {
-    //         top: 63px;
-    //         right: 25px;
-    //     }
-    //     .ml-dropdown-menu {
-    //         top: 94px !important;
-    //         right: 11px;
-    //     }
-    // }
+.help-block.before-field + .field-multilingual.field-multilingual-textarea {
+    .ml-btn {
+        top: -41px;
+    }
 }

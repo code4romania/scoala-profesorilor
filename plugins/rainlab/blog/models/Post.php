@@ -152,17 +152,20 @@ class Post extends Model
      * Sets the "url" attribute with a URL to this object.
      * @param string $pageName
      * @param Controller $controller
+     * @param array $params Override request URL parameters
      *
      * @return string
      */
-    public function setUrl($pageName, $controller)
+    public function setUrl($pageName, $controller, $params = [])
     {
-        $params = [
+        $params = array_merge([
             'id'   => $this->id,
-            'slug' => $this->slug
-        ];
+            'slug' => $this->slug,
+        ], $params);
 
-        $params['category'] = $this->categories->count() ? $this->categories->first()->slug : null;
+        if (empty($params['category'])) {
+            $params['category'] = $this->categories->count() ? $this->categories->first()->slug : null;
+        }
 
         // Expose published year, month and day as URL parameters.
         if ($this->published) {
@@ -188,6 +191,12 @@ class Post extends Model
     public static function formatHtml($input, $preview = false)
     {
         $result = Markdown::parse(trim($input));
+
+        // Check to see if the HTML should be cleaned from potential XSS
+        $user = BackendAuth::getUser();
+        if (!$user || !$user->hasAccess('backend.allow_unsafe_markdown')) {
+            $result = Html::clean($result);
+        }
 
         if ($preview) {
             $result = str_replace('<pre>', '<pre class="prettyprint">', $result);
