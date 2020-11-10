@@ -16,6 +16,13 @@ use RainLab\Notify\NotifyRules\SaveDatabaseAction;
 class Plugin extends PluginBase
 {
     /**
+     * @var array   Require the dependency plugins
+     */
+    public $require = [
+        'Multiwebinc.reCaptcha'
+    ];
+
+    /**
      * @var boolean Determine if this plugin should have elevated privileges.
      */
     public $elevated = true;
