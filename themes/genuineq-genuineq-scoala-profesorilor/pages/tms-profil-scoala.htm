@@ -60,31 +60,43 @@ allowedUserGroups[] = "school"
 
 <div class="container-fluid bg-white py-4">
     <div class="container">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="account-tab-nav" data-toggle="tab" href="#account-tab-body" role="tab" aria-controls="account-tab-body" aria-selected="true">{{ 'school.profile.tab.account'|_ }}</a>
-            </li>
+        <div class="row">
+            <ul class="nav nav-tabs col-12 col-lg-8 border-bottom-0" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active px-2 px-lg-3" id="account-tab-nav" data-toggle="tab" href="#account-tab-body" role="tab" aria-controls="account-tab-body" aria-selected="true">{{ 'school.profile.tab.account'|_ }}</a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" id="teachers-tab-nav" data-toggle="tab" href="#teachers-tab-body" role="tab" aria-controls="teachers-tab-body" aria-selected="false" data-request="onDisplayTeachers" data-request-update="school-profile/teachers-tab: '#teachers-tab-content'">{{ 'school.profile.tab.teachers'|_ }}</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link px-2 px-lg-3" id="teachers-tab-nav" data-toggle="tab" href="#teachers-tab-body" role="tab" aria-controls="teachers-tab-body" aria-selected="false" data-request="onDisplayTeachers" data-request-update="school-profile/teachers-tab: '#teachers-tab-content'">{{ 'school.profile.tab.teachers'|_ }}</a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" id="dashboard-tab-nav" data-toggle="tab" href="#dashboard-tab-body" role="tab" aria-controls="dashboard-tab-body" aria-selected="false" data-request="onSchoolDashboardView" data-request-update="school-profile/dashboard-tab: '#dashboard-tab-content'">{{ 'school.profile.tab.dashboard'|_ }}</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link px-2 px-lg-3" id="dashboard-tab-nav" data-toggle="tab" href="#dashboard-tab-body" role="tab" aria-controls="dashboard-tab-body" aria-selected="false" data-request="onSchoolDashboardView" data-request-update="school-profile/dashboard-tab: '#dashboard-tab-content'">{{ 'school.profile.tab.dashboard'|_ }}</a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" id="courses-tab-nav" data-toggle="tab" href="#courses-tab-body" role="tab" aria-controls="courses-tab-body" aria-selected="false" data-request="onSchoolViewCourses" data-request-update="school-profile/courses-tab: '#courses-tab-content'">{{ 'school.profile.tab.courses'|_ }}</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link px-2 px-lg-3" id="courses-tab-nav" data-toggle="tab" href="#courses-tab-body" role="tab" aria-controls="courses-tab-body" aria-selected="false" data-request="onSchoolViewCourses" data-request-update="school-profile/courses-tab: '#courses-tab-content'">{{ 'school.profile.tab.courses'|_ }}</a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" id="notifications-tab-nav" data-toggle="tab" href="#notifications-tab-body" role="tab" aria-controls="notifications-tab-body" aria-selected="false" data-request="onViewNotifications" data-request-update="school-profile/notifications-tab: '#notifications-tab-content'">{{ 'school.profile.tab.notifications'|_ }}</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link px-2 px-lg-3" id="notifications-tab-nav" data-toggle="tab" href="#notifications-tab-body" role="tab" aria-controls="notifications-tab-body" aria-selected="false" data-request="onViewNotifications" data-request-update="school-profile/notifications-tab: '#notifications-tab-content'">{{ 'school.profile.tab.notifications'|_ }}</a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" id="reports-tab-nav" data-toggle="tab" href="#reports-tab-body" role="tab" aria-controls="reports-tab-body" aria-selected="false" data-request="onSchoolViewReports" data-request-update="school-profile/reports-tab: '#reports-tab-content'">{{ 'school.profile.tab.reports'|_ }}</a>
-            </li>
-        </ul>
+                <li class="nav-item">
+                    <a class="nav-link px-2 px-lg-3" id="reports-tab-nav" data-toggle="tab" href="#reports-tab-body" role="tab" aria-controls="reports-tab-body" aria-selected="false" data-request="onSchoolViewReports" data-request-update="school-profile/reports-tab: '#reports-tab-content'">{{ 'school.profile.tab.reports'|_ }}</a>
+                </li>
+            </ul>
+            <div class="col-12 col-lg-4 d-flex align-items-lg-end flex-column mr-0 pr-0">
+                <p class="p-0 m-0 small">
+                    Ultima autentificare: {{ lastLogin }}
+                </p>
+                <p class="p-0 m-0 py-1 small">
+                    Numar autentificari esuate: {{ failedLogins }}
+                </p>
+            </div>
+            <div class="col-12 border-top m-0 p-0">
+            </div>
+        </div>
     </div>
 </div>
 

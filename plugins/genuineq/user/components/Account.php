@@ -183,7 +183,7 @@ class Account extends ComponentBase
         /** Extract the user */
         $user = Auth::getUser();
         if(!$user->checkPassword(post('accountCurrentPassword'))) {
-            throw new ValidationException(['accountCurrentPassword' => "Parola curenta este gresita."]);
+            throw new ValidationException(['accountCurrentPassword' => Lang::get('genuineq.user::lang.component.account.validation.account_current_password')]);
         }
 
         /** Update the password */

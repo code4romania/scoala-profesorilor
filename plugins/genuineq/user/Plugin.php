@@ -89,6 +89,16 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function registerReportWidgets()
+    {
+        return [
+            'Genuineq\User\ReportWidgets\UsersLoginLogging' => [
+                'label'   => 'genuineq.user::lang.reportwidgets.usersloginlogging.label',
+                'context' => 'dashboard',
+            ]
+        ];
+    }
+
     public function registerPermissions()
     {
         return [

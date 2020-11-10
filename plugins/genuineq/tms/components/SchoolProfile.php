@@ -15,6 +15,7 @@ use Genuineq\Tms\Models\School;
 use Genuineq\Tms\Models\Address;
 use Genuineq\Tms\Models\Inspectorate;
 use Genuineq\User\Helpers\AuthRedirect;
+use Genuineq\User\Models\UsersLoginLog;
 
 /**
  * School profile component
@@ -73,6 +74,13 @@ class SchoolProfile extends ComponentBase
             'Public' => 'public',
             'Privat' => 'private'
         ];
+
+        $last_login = UsersLoginLog::select('created_at')->where('type', 'Successful login')->where('email', Auth::getUser()->email)->orderBy('created_at', 'desc')->take(2)->get();
+        $this->page['lastLogin'] = $last_login[0]->created_at;
+
+        $failed_logins = UsersLoginLog::where('email', Auth::getUser()->email)->where('type', 'Unsuccessful login')->where('created_at', '>', $last_login[1]->created_at)->get();
+        if($failed_logins) $this->page['failedLogins'] = count($failed_logins);
+        else $this->page['failedLogins'] = 0;
     }
 
     /**

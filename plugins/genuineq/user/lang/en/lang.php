@@ -314,6 +314,7 @@ return [
                 'password_required' => 'Parola este obligatorie',
                 'password_between_s' => 'Parola trebuie sa aiba intre ',
                 'password_between_e' => ' de caractere',
+                'g-recaptcha-response_required' => 'Completati reCaptcha'
             ],
             'message' => [
                 'banned' => 'Ne pare rau, acest utilizator nu este blocat. Va rugam sa ne contactati pentru alte detalii',
@@ -374,6 +375,7 @@ return [
                 'account_mail_between' => 'Adresa de email trebuie sa aiba intre 6 si 255 de caractere',
                 'account_mail_email' => 'Adresa de email nu este valida',
                 'account_mail_unique' => 'Adresa de email este deja folosita',
+                'account_current_password' => 'Parola curenta este gresita',
                 'account_new_password_required' => 'Noua parola este obligatorie',
                 'account_new_password_between_s' => 'Noua parola trebuie sa aiba intre ',
                 'account_new_password_between_e' => ' caractere',
@@ -414,6 +416,19 @@ return [
         'notifications' => [
             'name' => 'Notifications',
             'description' => 'Displays user notifications',
+        ],
+    ],
+    'reportwidgets' => [
+        'usersloginlogging' => [
+            'title' => 'Log for every login and logout',
+            'title_default' => 'Users login log',
+            'label' => 'Users login log',
+            'title_validation' => 'Title is required',
+            'days_title' => 'Number of days to display data for',
+
+            'frontend' => [
+                'label_log' => 'Log for user logins and logouts'
+            ]
         ],
     ],
 ];

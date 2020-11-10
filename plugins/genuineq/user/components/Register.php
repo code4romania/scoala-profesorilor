@@ -140,7 +140,7 @@ class Register extends ComponentBase
             /** Construct the validation error messages. */
             $messages = [
                 'name.required' =>Lang::get('genuineq.user::lang.component.register.validation.name_required'),
-                'name.regex' =>Lang::get('genuineq.user::lang.component.register.validation.name_alpha'),
+                'name.regex' =>Lang::get('genuineq.user::lang.component.register.validation.name_regex'),
                 'email.required' => Lang::get('genuineq.user::lang.component.register.validation.email_required'),
                 'email.between' => Lang::get('genuineq.user::lang.component.register.validation.email_between'),
                 'email.email' => Lang::get('genuineq.user::lang.component.register.validation.email_email'),

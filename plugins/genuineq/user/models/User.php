@@ -14,6 +14,7 @@ use Genuineq\User\Helpers\EmailHelper;
 class User extends UserBase
 {
     use \October\Rain\Database\Traits\SoftDelete;
+    use \Jacob\Logbook\Traits\LogChanges;
 
     /**
      * @var string The database table used by the model.
@@ -36,6 +37,9 @@ class User extends UserBase
     public $attachOne = [
         'avatar' => \System\Models\File::class
     ];
+
+    public $logBookModelName = 'MyModelName';
+
 
     /**
      * @var array The attributes that are mass assignable.

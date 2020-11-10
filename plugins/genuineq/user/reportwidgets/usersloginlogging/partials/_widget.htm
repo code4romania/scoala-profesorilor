@@ -1,0 +1,89 @@
+<div class="report-widget">
+    <h3><?= e($this->property('title')) ?></h3>
+    <div class="layout-row">
+        <div id="Lists">
+            <div>
+                <table id="reportTable" class="table data" data-control="rowlink">
+                    <thead>
+                        <tr>
+                            <th class="sort-desc list-cell-name-type list-cell-type-text">
+                                <a href="#"> type </a>
+                            </th>
+                            <th class="sort-desc list-cell-name-name list-cell-type-text">
+                                <a href="#"> name </a>
+                            </th>
+                            <th class="sort-desc list-cell-name-email list-cell-type-text">
+                                <a href="#"> email </a>
+                            </th>
+                            <th class="sort-desc list-cell-name-email list-cell-type-text">
+                                <a href="#"> ip </a>
+                            </th>
+                            <th class="sort-desc active list-cell-name-created_at list-cell-type-datetime">
+                                <a href="#"> created_at </a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($loginRequestsLog as $logEntry): ?>
+                            <tr class="rowlink">
+                                <td class="list-cell-index-1 list-cell-name-type list-cell-type-text">
+                                    <?= $logEntry->type ?>
+                                </td>
+                                <td class="list-cell-index-2 list-cell-name-name list-cell-type-text">
+                                    <?= $logEntry->name ?>
+                                </td>
+                                <td class="list-cell-index-3 list-cell-name-email list-cell-type-text">
+                                    <?= $logEntry->email ?>
+                                </td>
+                                <td class="list-cell-index-4 list-cell-name-ip list-cell-type-text">
+                                    <?= $logEntry->ip_address ?>
+                                </td>
+                                <td class="list-cell-index-5 list-cell-name-created-at list-cell-type-datetime">
+                                    <time datetime="<?= $logEntry->created_at ?>" data-datetime-control="1"
+                                        data-format-alias="dateTimeLongMin"
+                                        data-disposable=""><?= $logEntry->created_at ?>
+                                  </time>
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+        $('#reportTable').DataTable({
+            dom: '<"row"<"col-12 col-md-6"><"col-12 col-md-6 text-right"f>t<"row"<"col-12 text-center"p>>',
+            lengthMenu: [
+                [5, 10, 25, 50, 100, -1],
+                [5, 10, 25, 50, 100, "All"]
+            ],
+            processing: true,
+            pagingType: 'full_numbers',
+            language: {
+                'zeroRecords': "No records",
+                'emptyPanes': "Empty panes",
+                'emptyTable': "No data",
+                'search': '',
+                'searchPlaceholder': "Search",
+                'lengthMenu': "Row numbers: _MENU_",
+                'paginate': {
+                    'first': '«',
+                    'previous': '‹',
+                    'next': '›',
+                    'last': '»'
+                },
+                'aria': {
+                    'paginate': {
+                        'first': "First",
+                        'previous': "Previous",
+                        'next': "Next",
+                        'last': "Last"
+                    }
+                }
+            }
+        });
+</script>

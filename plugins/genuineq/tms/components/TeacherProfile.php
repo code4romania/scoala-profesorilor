@@ -17,6 +17,7 @@ use Genuineq\Tms\Models\SeniorityLevel;
 use Genuineq\Tms\Models\SchoolLevel;
 use Genuineq\Tms\Models\ContractType;
 use Genuineq\User\Helpers\AuthRedirect;
+use Genuineq\User\Models\UsersLoginLog;
 
 /**
  * Teacher profile component
@@ -69,6 +70,14 @@ class TeacherProfile extends ComponentBase
             $seniorityLevels[$seniorityLevel] = $value++;
         }
         $this->page['seniorityLevels'] = json_encode($seniorityLevels);
+
+
+        $last_login = UsersLoginLog::select('created_at')->where('type', 'Successful login')->where('email', Auth::getUser()->email)->orderBy('created_at', 'desc')->take(2)->get();
+        $this->page['lastLogin'] = $last_login[0]->created_at;
+
+        $failed_logins = UsersLoginLog::where('email', Auth::getUser()->email)->where('type', 'Unsuccessful login')->where('created_at', '>', $last_login[1]->created_at)->get();
+        if($failed_logins) $this->page['failedLogins'] = count($failed_logins);
+        else $this->page['failedLogins'] = 0;
     }
 
     /**

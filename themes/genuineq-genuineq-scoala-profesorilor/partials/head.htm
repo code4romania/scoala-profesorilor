@@ -25,6 +25,7 @@ description = "Head"
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{{ 'assets/img/favicon/ms-icon-144x144.png'|theme }}">
     <meta name="theme-color" content="#ffffff">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ this.page.title }}</title>
 
@@ -42,5 +43,12 @@ description = "Head"
     {% placeholder head_scripts %}
 
     <script src="{{ ['assets/js/jquery.min.js']|theme }}"></script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 
 </head>

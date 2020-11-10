@@ -13,6 +13,7 @@ use Cms\Classes\ComponentBase;
 use Genuineq\User\Models\UserGroup;
 use Genuineq\User\Helpers\AuthRedirect;
 use Genuineq\User\Helpers\PluginConfig;
+use Genuineq\User\Models\UsersLoginLog;
 
 /**
  * User session
@@ -136,6 +137,14 @@ class Session extends ComponentBase
 
         /** logout the user. */
         Auth::logout();
+
+        /** Log the logout request. */
+        $log = new UsersLoginLog;
+        $log->type="Successful logout";
+        $log->name=$user->name;
+        $log->email=$user->email;
+        $log->ip_address=Request::ip();
+        $log->save();
 
         Flash::success(Lang::get('genuineq.user::lang.component.session.message.logout'));
 
