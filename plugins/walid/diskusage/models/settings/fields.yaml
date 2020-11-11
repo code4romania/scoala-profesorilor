@@ -1,0 +1,26 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    disks:
+        label: Disks
+        type: repeater
+        prompt: Add new disk
+        form:
+            fields:
+                name:
+                    type: text
+                    span: auto
+                    label: Disk name
+                    comment: Displayed as widget title
+                path:
+                    type: text
+                    span: auto
+                    label: Disk path
+                    comment: Full path to mounted disk
+                description:
+                    type: textarea
+                    span: auto
+                    label: Description
+                    comment: What is this hard disk is used for?
