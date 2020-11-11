@@ -1,0 +1,2 @@
+1.0.1: First version of Logs Widget
+1.0.2: Fix incompatibility with sql_mode=only_full_group_by
