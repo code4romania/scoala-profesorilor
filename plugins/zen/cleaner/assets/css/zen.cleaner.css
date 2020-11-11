@@ -1,0 +1,51 @@
+#ZenCleaner[v-cloak] {
+    display: none;
+}
+.zc-success {
+    font-weight: bold;
+    color: #2f9d00;
+}
+.zc-info-wrap {
+    margin-top: 10px;
+}
+.zc-info {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 3px;
+    font-size: 20px;
+    animation: fadein 300ms;
+}
+.zc-btn {
+    cursor: pointer;
+    font-size: 26px;
+}
+
+#ZenCleaner .process::before {
+    animation-name: rotation;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+        transform: scale(0.8,0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1,1);
+    }
+}
