@@ -167,23 +167,24 @@ class Login extends ComponentBase
             /** Authenticate the user. */
             $user = Auth::authenticate($credentials, $remember);
 
-            /** Create Log object for a login request. */
-            $log = new UsersLoginLog;
-
             /** Check if authentication was successful. */
             if (!$user) {
-                $log->type="Unsuccessful login";
-                $log->email=post('email');
-                $log->ip_address=Request::ip();
-                $log->save();
+                /** Log: Unsuccessful login */
+                UsersLoginLog::create([
+                    "type" => "Unsuccessful login",
+                    "email" => post('email'),
+                    "ip_address" => Request::ip(),
+                ]);
                 throw new ApplicationException(Lang::get('genuineq.user::lang.component.login.message.wrong_credentials'));
             }
             else {
-                $log->type="Successful login";
-                $log->name=$user->name;
-                $log->email=post('email');
-                $log->ip_address=Request::ip();
-                $log->save();
+                /** Log: Successful login */
+                UsersLoginLog::create([
+                    "type" => "Successful login",
+                    "name" => $user->name,
+                    "email" => post('email'),
+                    "ip_address" => Request::ip(),
+                ]);
             }
 
             /** Check if the user is banned. */

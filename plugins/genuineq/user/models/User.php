@@ -38,8 +38,7 @@ class User extends UserBase
         'avatar' => \System\Models\File::class
     ];
 
-    public $logBookModelName = 'MyModelName';
-
+    public $logBookModelName = 'User';
 
     /**
      * @var array The attributes that are mass assignable.

@@ -139,12 +139,13 @@ class Session extends ComponentBase
         Auth::logout();
 
         /** Log the logout request. */
-        $log = new UsersLoginLog;
-        $log->type="Successful logout";
-        $log->name=$user->name;
-        $log->email=$user->email;
-        $log->ip_address=Request::ip();
-        $log->save();
+        UsersLoginLog::create([
+            "type" => "Successful logout",
+            "name" => $user->name,
+            "email" => $user->email,
+            "ip_address" => Request::ip(),
+
+        ]);
 
         Flash::success(Lang::get('genuineq.user::lang.component.session.message.logout'));
 
