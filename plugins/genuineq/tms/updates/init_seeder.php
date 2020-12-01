@@ -11,7 +11,7 @@ class InitSeeder extends Migration
     public function up()
     {
         /** Populate system_settings table. */
-        Db::table('system_settings')->delete();
+        Db::table('system_settings')->truncate();
         Db::table('system_settings')->insert(['item' => 'backend_brand_settings',           'value' => '{"app_name":"Scoala Profesorilor","app_tagline":"Scoala Profesorilor","primary_color":"#9a4877","secondary_color":"#4c3949","accent_color":"#f1f1f1","menu_mode":"inline","custom_css":""}']);
         Db::table('system_settings')->insert(['item' => 'rainlab_builder_settings',         'value' => '{"author_name":"genuineq","author_namespace":"Genuineq"}']);
         Db::table('system_settings')->insert(['item' => 'user_settings',                    'value' => '{"require_activation":"0","activate_mode":"user","use_throttle":"1","block_persistence":"0","allow_registration":"1","login_attribute":"email","remember_login":"never","min_password_length":8,"use_register_throttle":"1"}']);
@@ -20,7 +20,7 @@ class InitSeeder extends Migration
         Db::table('system_settings')->insert(['item' => 'system_mail_brand_settings',       'value' => '{"body_bg":"#9a4877","content_bg":"#f1f1f1","content_inner_bg":"#ffffff","button_text_color":"#fff","button_primary_bg":"#9a4877","button_positive_bg":"#9a4877","button_negative_bg":"#4c3949","header_color":"#ffffff","heading_color":"#2f3133","text_color":"#000000","link_color":"#9a4877","footer_color":"#ffffff","body_border_color":"#edeff2","subcopy_border_color":"#edeff2","table_border_color":"#edeff2","panel_bg":"#edeff2","promotion_bg":"#fff","promotion_border_color":"#9ba2ab"}']);
 
         /** Populate system_mail_templates table. */
-        Db::table('system_mail_templates')->delete();
+        Db::table('system_mail_templates')->truncate();
         Db::table('system_mail_templates')->insert(['code' => 'genuineq.user::mail.activate',                 'subject' => NULL, 'description' => 'Activate a new user',                'content_html' => NULL, 'content_text' => NULL, 'layout_id' => 1, 'is_custom' => 0]);
         Db::table('system_mail_templates')->insert(['code' => 'genuineq.user::mail.welcome',                  'subject' => NULL, 'description' => 'User confirmed their account',       'content_html' => NULL, 'content_text' => NULL, 'layout_id' => 1, 'is_custom' => 0]);
         Db::table('system_mail_templates')->insert(['code' => 'genuineq.user::mail.restore',                  'subject' => NULL, 'description' => 'User requests a password reset',     'content_html' => NULL, 'content_text' => NULL, 'layout_id' => 1, 'is_custom' => 0]);
@@ -43,7 +43,7 @@ class InitSeeder extends Migration
 
 
         /** Populate system_mail_partials table. */
-        Db::table('system_mail_partials')->delete();
+        Db::table('system_mail_partials')->truncate();
         Db::table('system_mail_partials')->insert([
             'name' => 'Header',
             'code' => 'header',
@@ -133,7 +133,7 @@ class InitSeeder extends Migration
         ]);
 
         /** Populate rainlab_notify_notification_rules table. */
-        Db::table('rainlab_notify_notification_rules')->delete();
+        Db::table('rainlab_notify_notification_rules')->truncate();
         Db::table('rainlab_notify_notification_rules')->insert(['id' => 1,  'name' => 'A teacher requested a course to a school => Notify school via email that a teacher requested a course',                     'code' => "", 'class_name' => 'Genuineq\Tms\NotifyRules\TeacherCourseRequestEvent',    'description' => 'A teacher requested a course to a school => Notify school via email that a teacher requested a course',                     'config_data' => null, 'condition_data' => null, 'is_enabled' => 1, 'is_custom' => 1]);
         Db::table('rainlab_notify_notification_rules')->insert(['id' => 2,  'name' => 'A teacher requested a course to a school => Notify school via database that a teacher requested a course',                  'code' => "", 'class_name' => 'Genuineq\Tms\NotifyRules\TeacherCourseRequestEvent',    'description' => 'A teacher requested a course to a school => Notify school via database that a teacher requested a course',                  'config_data' => null, 'condition_data' => null, 'is_enabled' => 1, 'is_custom' => 1]);
         Db::table('rainlab_notify_notification_rules')->insert(['id' => 3,  'name' => 'A teacher approved a course proposed by a school => Notify school via email that a teacher accepted a course proposal',     'code' => "", 'class_name' => 'Genuineq\Tms\NotifyRules\TeacherCourseApproveEvent',    'description' => 'A teacher approved a course proposed by a school => Notify school via email that a teacher accepted a course proposal',     'config_data' => null, 'condition_data' => null, 'is_enabled' => 1, 'is_custom' => 1]);
@@ -156,7 +156,7 @@ class InitSeeder extends Migration
         Db::table('rainlab_notify_notification_rules')->insert(['id' => 20, 'name' => 'A school closes an evaluation => Notify teacher via database that a school completed the appraisal',                        'code' => "", 'class_name' => 'Genuineq\Tms\NotifyRules\SchoolEvaluationClosedEvent',  'description' => 'A school closes an evaluation => Notify teacher via database that a school completed the appraisal',                        'config_data' => null, 'condition_data' => null, 'is_enabled' => 1, 'is_custom' => 1]);
 
         /** Populate rainlab_notify_rule_actions table. */
-        Db::table('rainlab_notify_rule_actions')->delete();
+        Db::table('rainlab_notify_rule_actions')->truncate();
         Db::table('rainlab_notify_rule_actions')->insert(['id' => 1,  'class_name' => 'RainLab\Notify\NotifyRules\SendMailTemplateAction', 'config_data' => '{"mail_template":"genuineq.tms::mail.teacher-course-request","send_to_mode":"user","send_to_custom":"","send_to_admin":"","reply_to_custom":"","action_text":"Send a message to user email address (if applicable) using template genuineq.tms::mail.teacher-course-request"}',       'rule_host_id' => 1 ]);
         Db::table('rainlab_notify_rule_actions')->insert(['id' => 2,  'class_name' => 'RainLab\Notify\NotifyRules\SaveDatabaseAction',     'config_data' => '{"related_object":"Genuineq\\\\User\\\\Models\\\\User@notifications","action_text":"Log event in the User notifications log"}',                                                                                                                                                             'rule_host_id' => 2 ]);
         Db::table('rainlab_notify_rule_actions')->insert(['id' => 3,  'class_name' => 'RainLab\Notify\NotifyRules\SendMailTemplateAction', 'config_data' => '{"mail_template":"genuineq.tms::mail.teacher-course-approve","send_to_mode":"user","send_to_custom":"","send_to_admin":"","reply_to_custom":"","action_text":"Send a message to user email address (if applicable) using template genuineq.tms::mail.teacher-course-approve"}',       'rule_host_id' => 3 ]);
@@ -179,7 +179,7 @@ class InitSeeder extends Migration
         Db::table('rainlab_notify_rule_actions')->insert(['id' => 20, 'class_name' => 'RainLab\Notify\NotifyRules\SaveDatabaseAction',     'config_data' => '{"related_object":"Genuineq\\\\User\\\\Models\\\\User@notifications","action_text":"Log event in the User notifications log"}',                                                                                                                                                             'rule_host_id' => 20]);
 
         /** Populate rainlab_notify_rule_conditions table. */
-        Db::table('rainlab_notify_rule_conditions')->delete();
+        Db::table('rainlab_notify_rule_conditions')->truncate();
         Db::table('rainlab_notify_rule_conditions')->insert(['id' => 1,  'class_name' => 'RainLab\Notify\Classes\CompoundCondition',         'config_data' => '{"condition_type":0,"condition":"true"}',                                                                                                          'condition_control_type' => null,   'rule_host_type' => 'any', 'rule_host_id' => 1,    'rule_parent_id' => null]);
         Db::table('rainlab_notify_rule_conditions')->insert(['id' => 2,  'class_name' => 'Genuineq\User\NotifyRules\UserAttributeCondition', 'config_data' => '{"subcondition":"email_notifications","operator":"is","value":"1","condition_text":"Email Notifications <span class=\\"operator\\">is</span> 1"}', 'condition_control_type' => 'text', 'rule_host_type' => 'any', 'rule_host_id' => null, 'rule_parent_id' => 1   ]);
         Db::table('rainlab_notify_rule_conditions')->insert(['id' => 3,  'class_name' => 'RainLab\Notify\Classes\CompoundCondition',         'config_data' => '{"condition_type":0,"condition":"true"}',                                                                                                          'condition_control_type' => null,   'rule_host_type' => 'any', 'rule_host_id' => 2,    'rule_parent_id' => null]);
@@ -212,31 +212,41 @@ class InitSeeder extends Migration
         Db::table('rainlab_notify_rule_conditions')->insert(['id' => 30, 'class_name' => 'RainLab\Notify\Classes\CompoundCondition',         'config_data' => '{"condition_type":0,"condition":"true"}',                                                                                                          'condition_control_type' => null,   'rule_host_type' => 'any', 'rule_host_id' => 20,   'rule_parent_id' => null]);
 
         /** Populate ajaylulia_ocookie_configuration table. */
-        Db::table('ajaylulia_ocookie_configuration')->delete();
+        Db::table('ajaylulia_ocookie_configuration')->truncate();
         Db::table('ajaylulia_ocookie_configuration')->insert(['id' => 1, 'display_position' => 'right', 'button_text' => 'Sunt de acord', 'background_color' => '#4c3949', 'text_color' => '#fff', 'link_color' => '#9a4877', 'button_background_color' => '#9a4877', 'button_text_color' => '#fff', 'cookie_content' => 'Pentru a-ti oferi o experienta buna de navigare, utilizam fisiere de tip cookie. Daca nu esti de acord cu utilizarea cookie-urilor, poti sa iti retragi consimtamantul prin modificarea setarilor din browser-ul tau. <a href="http:\/\/scoalaprofesorilor.ro\/politica-de-cookie">Politica de cookie</a>']);
+
+        DB::table('rainlab_translate_locales')->truncate();
+        Db::table('rainlab_translate_locales')->insert(['id' => 1, 'code' => 'en', 'name' => 'English',  'is_default' => 0, 'is_enabled' => 1, 'sort_order' => 1]);
+        Db::table('rainlab_translate_locales')->insert(['id' => 2, 'code' => 'ro', 'name' => 'Romanian', 'is_default' => 1, 'is_enabled' => 1, 'sort_order' => 2]);
     }
 
     public function down()
     {
-        /** Populate rainlab_notify_rule_conditions table. */
-        Db::table('rainlab_notify_rule_conditions')->delete();
+        /** Clear rainlab_translate_locales table. */
+        Db::table('rainlab_translate_locales')->truncate();
 
-        /** Populate rainlab_notify_rule_actions table. */
-        Db::table('rainlab_notify_rule_actions')->delete();
+        /** Clear ajaylulia_ocookie_configuration table. */
+        Db::table('ajaylulia_ocookie_configuration')->truncate();
 
-        /** Populate rainlab_notify_notification_rules table. */
-        Db::table('rainlab_notify_notification_rules')->delete();
+        /** Clear rainlab_notify_rule_conditions table. */
+        Db::table('rainlab_notify_rule_conditions')->truncate();
 
-        /** Populate system_mail_partials table. */
-        Db::table('system_mail_partials')->delete();
+        /** Clear rainlab_notify_rule_actions table. */
+        Db::table('rainlab_notify_rule_actions')->truncate();
 
-        /** Populate system_mail_templates table. */
-        Db::table('system_mail_templates')->delete();
+        /** Clear rainlab_notify_notification_rules table. */
+        Db::table('rainlab_notify_notification_rules')->truncate();
 
-        /** Populate system_settings table. */
-        Db::table('system_settings')->delete();
+        /** Clear system_mail_partials table. */
+        Db::table('system_mail_partials')->truncate();
 
-        /** Populate ajaylulia_ocookie_configuration table. */
-        Db::table('ajaylulia_ocookie_configuration')->delete();
+        /** Clear system_mail_templates table. */
+        Db::table('system_mail_templates')->truncate();
+
+        /** Clear system_settings table. */
+        Db::table('system_settings')->truncate();
+
+        /** Clear ajaylulia_ocookie_configuration table. */
+        Db::table('ajaylulia_ocookie_configuration')->truncate();
     }
 }

@@ -75,12 +75,18 @@ class SchoolProfile extends ComponentBase
             'Privat' => 'private'
         ];
 
-        $last_login = UsersLoginLog::select('created_at')->where('type', 'Successful login')->where('email', Auth::getUser()->email)->orderBy('created_at', 'desc')->take(2)->get();
-        $this->page['lastLogin'] = $last_login[0]->created_at;
+        /** Extract the last login date and time. */
+        $this->page['lastLogin'] = Auth::getUser()->last_login;
 
-        $failed_logins = UsersLoginLog::where('email', Auth::getUser()->email)->where('type', 'Unsuccessful login')->where('created_at', '>', $last_login[1]->created_at)->get();
-        if($failed_logins) $this->page['failedLogins'] = count($failed_logins);
-        else $this->page['failedLogins'] = 0;
+        /** Extract the previous login. */
+        $previousLogin = UsersLoginLog::where('email', Auth::getUser()->email)->where('type', 'Successful login')->where('created_at', '<', Auth::getUser()->last_login)->orderBy('created_at', 'desc')->first();
+
+        /** Extract the number of failed logins from last successfull login. */
+        if ($previousLogin) {
+            $this->page['failedLogins'] = UsersLoginLog::where('email', Auth::getUser()->email)->where('type', 'Unsuccessful login')->whereBetween('created_at', [$previousLogin->created_at, Auth::getUser()->last_login])->count();
+        } else {
+            $this->page['failedLogins'] = 0;
+        }
     }
 
     /**
