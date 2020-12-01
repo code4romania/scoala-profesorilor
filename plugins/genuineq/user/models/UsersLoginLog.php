@@ -10,7 +10,12 @@ class UsersLoginLog extends Model
     protected $table = 'users_login_log';
 
     /**
-     * @var string The primary key for the model.
+     * @var array The attributes that are mass assignable.
      */
-    protected $primaryKey = 'id';
+    protected $fillable = [
+        'type',
+        'name',
+        'email',
+        'ip_address'
+    ];
 }
