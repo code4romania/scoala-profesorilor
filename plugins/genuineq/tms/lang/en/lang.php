@@ -388,6 +388,7 @@
                 'detailed_address_update_successful' => 'Adresa detaliata a fost actualizata cu succes',
                 'detailed_address_update_failed' => 'Actualizarea adresei detaliate a esuat',
                 'login_required' => 'Trebuie sa fiti autentificat',
+                'delete_successful' => 'Contul a fost sters cu succes',
             ],
         ],
 
@@ -416,6 +417,7 @@
                 'profile_update_failed' => 'Actualizarea profilului a esuat',
                 'description_update_successful' => 'Descrierea a fost actualizata cu succes',
                 'budget_update_successful' => 'Bugetul a fost actualizat cu succes',
+                'delete_successful' => 'Contul a fost sters cu succes',
                 'description_update_failed' => 'Actualizarea descrierii a esuat',
                 'login_required' => 'Trebuie sa fiti autentificat',
             ],

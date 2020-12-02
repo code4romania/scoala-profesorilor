@@ -135,7 +135,7 @@ class Session extends ComponentBase
         /** Extract the user. */
         $user = Auth::getUser();
 
-        /** logout the user. */
+        /** Logout the user. */
         Auth::logout();
 
         /** Log the logout request. */

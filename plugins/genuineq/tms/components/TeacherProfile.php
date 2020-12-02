@@ -8,6 +8,7 @@ use Input;
 use Request;
 use Redirect;
 use Validator;
+use Carbon\Carbon;
 use ValidationException;
 use ApplicationException;
 use Cms\Classes\ComponentBase;
@@ -244,6 +245,59 @@ class TeacherProfile extends ComponentBase
         $budget->save();
 
         Flash::success(Lang::get('genuineq.tms::lang.component.teacher-profile.message.budget_update_successful'));
+    }
+
+    /**
+     * Delete the teacher.
+     */
+    public function onTeacherProfileDelete()
+    {
+        if (!Auth::check()) {
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        /** Extract the user. */
+        $user = Auth::getUser();
+        /** Extract the user profile. */
+        $profile = $user->profile;
+
+        /** Logout the user. */
+        Auth::logout();
+
+        /** Log the logout request. */
+        UsersLoginLog::create([
+            "type" => "Successful logout",
+            "name" => $user->name,
+            "email" => $user->email,
+            "ip_address" => Request::ip(),
+
+        ]);
+
+        /** Anonymize the user. */
+        $user->update([
+            'name' => 'name_' . Carbon::now()->timestamp,
+            'surname' => 'surname_' . Carbon::now()->timestamp,
+            'username' => 'username_' . Carbon::now()->timestamp,
+            'email' => 'email_' . Carbon::now()->timestamp . '@email.com',
+            'password' => str_random(32),
+            'identifier' => Carbon::now()->timestamp,
+            'created_ip_address' => '0.0.0.0',
+            'last_ip_address' => '0.0.0.0',
+        ]);
+
+        /** Anonimize the user profile. */
+        $profile->update([
+            'name' => 'name_' . Carbon::now()->timestamp,
+            'slug' => 'slug_' . Carbon::now()->timestamp,
+            'phone' => '111111111111111',
+            'birth_date' => '1111-11-11',
+            'address_id' => '0',
+            'description' => 'description_' . Carbon::now()->timestamp,
+        ]);
+
+        Flash::success(Lang::get('genuineq.tms::lang.component.teacher-profile.message.delete_successful'));
+
+        return Redirect::to($this->pageUrl('/'));
     }
 
     /***********************************************

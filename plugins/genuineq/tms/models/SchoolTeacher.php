@@ -8,12 +8,14 @@ use Model;
 class SchoolTeacher extends Model
 {
     use \October\Rain\Database\Traits\Validation;
-
     use \October\Rain\Database\Traits\SoftDelete;
-
     use \Jacob\Logbook\Traits\LogChanges;
 
-    protected $dates = ['deleted_at'];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
     /**
      * Address relation

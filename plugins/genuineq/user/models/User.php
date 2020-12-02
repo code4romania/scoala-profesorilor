@@ -46,7 +46,6 @@ class User extends UserBase
     protected $fillable = [
         'name',
         'surname',
-        'login',
         'username',
         'email',
         'password',
@@ -245,7 +244,7 @@ class User extends UserBase
             }
         }
 
-        /** Fire global user creation event, */
+        /** Fire global user creation event. */
         Event::fire('genuineq.user.created', [$this]);
     }
 
