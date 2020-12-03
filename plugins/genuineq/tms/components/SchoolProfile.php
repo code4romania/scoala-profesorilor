@@ -308,7 +308,6 @@ class SchoolProfile extends ComponentBase
             "name" => $user->name,
             "email" => $user->email,
             "ip_address" => Request::ip(),
-
         ]);
 
         /** Anonymize the user. */
