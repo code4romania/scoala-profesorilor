@@ -1,0 +1,16 @@
+1.0.1:
+    - First version of Logbook
+    - create_logs_table.php
+1.0.2:
+    - Fix error when changing properties from the LogChanges trait.
+1.0.3:
+    - Add undo button to form widget and add report widget.
+1.0.4:
+    - Update indexes for faster query results
+    - update_indexes_logs_table.php
+2.0.0:
+    - Add support for soft deleted models, cleanup code and drop support for php 7.0
+2.0.1:
+    - Remove php 7.4 property types
+2.0.2:
+    - Fix report widget

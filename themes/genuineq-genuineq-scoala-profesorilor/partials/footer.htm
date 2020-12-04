@@ -41,3 +41,12 @@ description = "Footer"
     const anchor = window.location.hash;
     $(`a[href="${anchor}"]`).tab('show');
 </script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".cookie_container").append('<div class="close_cookie"><span class="close_cookie_inner">x</span></div>');
+        $(".close_cookie").on("click", function(){
+            $(".cookie_container").remove();
+        })
+    });
+</script>

@@ -526,6 +526,17 @@ class Plugin extends PluginBase {
 
                 }
 
+                if(Settings::get('blog_custom_fields_repeater_file_allow')) {
+
+                    $repeaterFields['repeater_file'] = [
+                        'label' => ( Settings::get('blog_custom_fields_repeater_file_label') ? Settings::get('blog_custom_fields_repeater_file_label') : 'janvince.smallextensions::lang.labels.custom_fields_repeater_items.file' ),
+                        'type' => 'mediafinder',
+                        'mode' => 'file',
+                        'span' => 'right',
+                    ];
+
+                }
+
                 if(Settings::get('blog_custom_fields_repeater_description_allow')) {
 
                     $repeaterFields['repeater_description'] = [
@@ -775,7 +786,7 @@ class Plugin extends PluginBase {
     /**
      * New Twig functions
      */
-    if (Settings::get('twig_functions_allow')) {
+    if (Settings::get('twig_functions_allow') !== 0) {
 
         $twigExtensions['functions'] = [
 

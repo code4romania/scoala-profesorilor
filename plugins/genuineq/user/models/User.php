@@ -14,6 +14,7 @@ use Genuineq\User\Helpers\EmailHelper;
 class User extends UserBase
 {
     use \October\Rain\Database\Traits\SoftDelete;
+    use \Jacob\Logbook\Traits\LogChanges;
 
     /**
      * @var string The database table used by the model.
@@ -37,13 +38,14 @@ class User extends UserBase
         'avatar' => \System\Models\File::class
     ];
 
+    public $logBookModelName = 'User';
+
     /**
      * @var array The attributes that are mass assignable.
      */
     protected $fillable = [
         'name',
         'surname',
-        'login',
         'username',
         'email',
         'password',
@@ -242,7 +244,7 @@ class User extends UserBase
             }
         }
 
-        /** Fire global user creation event, */
+        /** Fire global user creation event. */
         Event::fire('genuineq.user.created', [$this]);
     }
 

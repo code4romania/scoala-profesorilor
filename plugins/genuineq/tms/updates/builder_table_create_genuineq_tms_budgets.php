@@ -16,9 +16,9 @@ class BuilderTableCreateGenuineqTmsBudgets extends Migration
             $table->string('budgetable_type');
             $table->double('budget', 10, 2)->default(0);
             $table->smallInteger('status')->default(1);
-            $table->timestamp('deleted_at')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

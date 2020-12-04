@@ -16,6 +16,13 @@ use RainLab\Notify\NotifyRules\SaveDatabaseAction;
 class Plugin extends PluginBase
 {
     /**
+     * @var array   Require the dependency plugins
+     */
+    public $require = [
+        'Multiwebinc.reCaptcha'
+    ];
+
+    /**
      * @var boolean Determine if this plugin should have elevated privileges.
      */
     public $elevated = true;
@@ -86,6 +93,16 @@ class Plugin extends PluginBase
             \Genuineq\User\Components\Login::class         => 'login',
             \Genuineq\User\Components\Register::class      => 'register',
             \Genuineq\User\Components\Notifications::class => 'notifications',
+        ];
+    }
+
+    public function registerReportWidgets()
+    {
+        return [
+            'Genuineq\User\ReportWidgets\UsersLoginLogging' => [
+                'label'   => 'genuineq.user::lang.reportwidgets.usersloginlogging.label',
+                'context' => 'dashboard',
+            ]
         ];
     }
 

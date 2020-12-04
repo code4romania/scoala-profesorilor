@@ -1,0 +1,73 @@
+{% if site_key is empty %}
+    <div class="alert alert-danger">
+        {{ 'multiwebinc.recaptcha::lang.errors.missing_site_key'|trans }}
+    </div>
+{% endif %}
+
+{# reCAPTCHA v3 #}
+{% if __SELF__.property('type') == 'v3' %}
+    <!-- reCAPTCHA v3 -->
+    {% if __SELF__.property('load_script') %}
+        <script src="https://www.google.com/recaptcha/api.js?render={{ site_key }}"></script>
+    {% endif %}
+    <script>
+        function getRecaptchaToken() {
+            grecaptcha.ready(function() {
+                grecaptcha.execute("{{ site_key }}", {action: "{{ __SELF__.property('action_name') }}"})
+                    .then(function(token) {
+                        document.getElementById('g-recaptcha-response').value = token;
+                    });
+            });
+        }
+
+        // Get recaptcha token once on page load, then reload it every two
+        // minutes to prevent it from timing out while the user fills out
+        // the form.
+        getRecaptchaToken();
+        window.setInterval(getRecaptchaToken, 120000);
+
+    </script>
+    <button type="submit" id="recaptcha_{{__SELF__.id}}" class="{{ __SELF__.property('button_class') }}" data-attach-loading>
+        {{ __SELF__.property('button_text') }}
+    </button>
+    <div class="form-error-message" data-validate-for="g-recaptcha-response"></div>
+    <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response" value="">
+{# reCAPTCHA v2 #}
+{% else %}
+    <!-- reCAPTCHA v2 -->
+    {% if __SELF__.property('load_script') %}
+        <script src="https://www.google.com/recaptcha/api.js?hl={{ lang }}" async defer></script>
+    {% endif %}
+    <script>
+        function submitRecaptchaForm() {
+            return new Promise(function(resolve, reject) {
+                var form = $("#recaptcha_{{__SELF__.id}}").closest("form");
+                if (!form[0].checkValidity()) {
+                    form[0].reportValidity();
+                }
+                else {
+                    form.submit();
+                }
+                grecaptcha.reset()
+            });
+        }
+    </script>
+    {% if __SELF__.property('type') == 'visible' %}
+        <div class="g-recaptcha" data-sitekey="{{ site_key }}"></div>
+        <div class="form-error-message" data-validate-for="g-recaptcha-response"></div>
+        <hr>
+        <button type="submit" class="{{ __SELF__.property('button_class') }}" data-attach-loading>
+            {{ __SELF__.property('button_text') }}
+        </button>
+
+    {% elseif __SELF__.property('type') == 'invisible' %}
+        <div class="form-error-message" data-validate-for="g-recaptcha-response"></div>
+        <button type="button" id="recaptcha_{{__SELF__.id}}" class="g-recaptcha {{ __SELF__.property('button_class') }}" data-sitekey="{{ site_key }}" data-callback='submitRecaptchaForm' data-attach-loading>
+            {{ __SELF__.property('button_text') }}
+        </button>
+    {% else %}
+        <div class="alert alert-danger">
+            {{ 'multiwebinc.recaptcha::lang.errors.invalid_type'|trans }}
+        </div>
+    {% endif %}
+{% endif %}

@@ -89,6 +89,14 @@ description = "Displays the teacher pofile forms"
                 <form method="POST" data-request="onPasswordUpdate" data-request-validate data-request-flash>
                     <div class="form-group">
                         <div class="md-form">
+                            <input name="accountCurrentPassword" type="password" id="teacher_accountCurrentPassword" class="form-control">
+                            <label for="teacher_accountCurrentPassword">{{ 'teacher.profile.form.account.current_password'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="accountCurrentPassword"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="md-form">
                             <input name="accountNewPassword" type="password" id="teacher_accountNewPassword" class="form-control">
                             <label for="teacher_accountNewPassword">{{ 'teacher.profile.form.account.new_password'|_ }}</label>
                             <div class="small text-danger" data-validate-for="accountNewPassword"></div>
@@ -112,6 +120,14 @@ description = "Displays the teacher pofile forms"
                     </div>
                 </form>
 
+            </div>
+        </div>
+
+        <div class="row pt-5">
+            <div class="col-12 bg-white rounded p-3">
+                <h5 class="mb-3 font-weight-bold">{{ 'teacher.profile.form.delete.title'|_ }}</h5>
+
+                <button type="button" class="btn btn-sm btn-block btn-danger rounded m-0" data-request="onTeacherProfileDelete" data-request-confirm="{{'teacher.profile.form.delete.confirmation'|_ }}" data-attach-loading>{{'teacher.profile.form.delete.delete'|_ }}</button>
             </div>
         </div>
 

@@ -2,7 +2,7 @@
 set -e
 
 # Create .env file from environment variables
-echo APP_ENV=$APP_ENV > .env
+echo APP_ENV=$APP_ENV >> .env
 echo APP_DEBUG=$APP_DEBUG >> .env
 echo APP_LOG=$APP_LOG >> .env
 echo APP_NAME=\"$APP_NAME\" >> .env
@@ -54,7 +54,7 @@ php artisan october:mirror public --relative
 rm -f ./public/storage/app/media
 
 # Create the media folder public link
-#ln -s ../../../storage/app/media ./public/storage/app/media
+ln -s ../../../storage/app/media ./public/storage/app/media
 
 # Change public folder ownership
 chown -R www-data:www-data /var/www

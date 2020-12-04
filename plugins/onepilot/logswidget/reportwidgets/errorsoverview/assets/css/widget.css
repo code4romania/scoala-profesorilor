@@ -1,0 +1,54 @@
+.onepilot-logswidget div.scoreboard {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.onepilot-logswidget div.scoreboard div.scoreboard-item {
+    flex-grow: 0;
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+.onepilot-logswidget div.scoreboard div.scoreboard-item.onepilot-presentation {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: #999;
+}
+
+.onepilot-logswidget div.scoreboard div.scoreboard-item.onepilot-presentation a {
+    color: #E6695F;
+    font-weight: bold;
+}
+
+.onepilot-logswidget .title-value p.increase:after,
+.onepilot-logswidget .title-value p.decrease:after {
+    content: "\f178";
+    display: inline-block;
+    width: 8px;
+    font-size: 13px;
+}
+
+.onepilot-logswidget .title-value p.increase:after {
+    transform: rotate(-45deg);
+}
+
+.onepilot-logswidget .title-value p.decrease:after {
+    transform: rotate(45deg);
+}
+
+.onepilot-logswidget .title-value p.equal:after {
+    content: "";
+}
+
+.onepilot-logswidget .logo-link {
+    float: right;
+}
+
+.onepilot-logswidget .logo-link svg {
+    width: 80px;
+    display: block;
+}

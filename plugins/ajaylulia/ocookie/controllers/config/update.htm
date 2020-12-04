@@ -1,0 +1,108 @@
+
+
+<?php if (!$this->fatalError): ?>
+
+    <?= Form::open(['class' => 'layout']) ?>
+
+    <div class="layout-row">
+        <h2 id="plugin_title"> oCookie</h2>
+        <div class="col-sm-4">
+            
+            <?= $this->formRender() ?>
+            <button
+            type="submit"
+            data-request="onSave"
+            data-request-data="redirect:0"
+            data-hotkey="ctrl+s, cmd+s"
+            data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
+            class="btn btn-primary">
+            <?= e(trans('backend::lang.form.save')) ?>
+        </button>
+        </div>
+        <div class="col-sm-8">
+            <style>#preview {background-image: url(<?php echo $preview; ?>)}</style>
+            <div id="preview">
+                    <div id="msgDiv">
+                            <button id="button">demo</button>            
+                            <p id="message">demo</a>.</p>                            
+                    </div>
+            </div>
+        </div>
+    </div>
+  </div>
+        </div>
+    <?= Form::close() ?>
+
+<?php else: ?>
+    <p class="flash-message static error"><?= e(trans($this->fatalError)) ?></p>
+    
+<?php endif ?>
+<script>
+$(function(){
+
+$('.field-colorpicker .custom-color span').attrchange({ 
+  trackValues: true, 
+  callback: function (e) {
+    var id = $(this).closest('.field-colorpicker').attr('id').split('-');
+    id = id[id.length - 1];
+    color = e.newValue.split(':');
+    color = color[1].replace(';', '');
+    renderDiv(id, color.substr(0, color.indexOf(')')+1));
+  }
+});
+
+
+$('.field-colorpicker .custom-color span').each(function(index,element){
+    var id = $(element).closest('.field-colorpicker').attr('id');
+    var color = $("#"+id+" .custom-color span").css('background');
+    id = $(element).closest('.field-colorpicker').attr('id').split('-');
+    id = id[id.length - 1];
+    renderDiv(id, color.substr(0, color.indexOf(')')+1));
+});
+$("#Form-field-Config-button_text, #Form-field-Config-cookie_content, #Form-field-Config-display_position").change(function(){
+    renderDiv();
+})
+function renderDiv(id="", data="") {
+    $("#button").html($("#Form-field-Config-button_text").val());
+    $("#message").html($("#Form-field-Config-cookie_content").val());
+
+    if(id=='text_color'){
+        $("#msgDiv #message").css({'color': data});
+    }
+    if(id=='background_color') {
+        $("#msgDiv").css({'background':data});
+    }
+    if(id=='button_background_color'){
+        $("#button").css({'background':data});
+    }
+    if(id=='button_text_color') {
+        $("#button").css({'color':data});
+    }
+    if(id=='link_color') {
+        $("#msgDiv #message a").css({'color':data});
+    }
+
+    // Select Box Postion Change
+    var position =$("#Form-field-Config-display_position").val();
+    if(position=='top'){
+        $("#msgDiv").removeClass().addClass('class_top');
+    }
+    if(position=='bottom'){
+        $("#msgDiv").removeClass().addClass('class_bottom');
+    }
+    if(position=='left'){
+        $("#msgDiv").removeClass().addClass('class_left');
+    }
+    if(position=='right'){
+        $("#msgDiv").removeClass().addClass('class_right');
+    }
+    if(position=='floating'){
+        $("#msgDiv").removeClass().addClass('class_floating');
+    }
+    if(position=='rounded') {
+        $("#msgDiv").removeClass().addClass('class_round');   
+    }
+}
+
+})
+</script>

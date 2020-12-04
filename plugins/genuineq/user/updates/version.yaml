@@ -5,3 +5,5 @@
     - create_mail_blockers_table.php
     - create_user_groups_table.php
     - seed_user_groups_table.php
+1.0.2:
+    - create_users_login_log_table.php

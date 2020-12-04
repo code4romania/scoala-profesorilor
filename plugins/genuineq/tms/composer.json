@@ -13,6 +13,6 @@
     ],
     "require": {
         "alcea/cnp": "^2.1",
-        "fideloper/proxy": "^4.3"
+        "maatwebsite/excel": "^3.1"
     }
 }

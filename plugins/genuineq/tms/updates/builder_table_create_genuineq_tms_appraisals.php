@@ -32,9 +32,9 @@ class BuilderTableCreateGenuineqTmsAppraisals extends Migration
             $table->text('notes_skills_set')->nullable();
             $table->text('notes_evaluation_opened')->nullable();
             $table->enum('status', ['new', 'objectives-set', 'objectives-approved', 'skills-set', 'evaluation-opened', 'closed',])->default('new');
-            $table->timestamp('deleted_at')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

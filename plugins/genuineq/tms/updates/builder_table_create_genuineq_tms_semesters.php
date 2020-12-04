@@ -13,12 +13,12 @@ class BuilderTableCreateGenuineqTmsSemesters extends Migration
             $table->increments('id')->unsigned();
             $table->smallInteger('semester')->unsigned();
             $table->integer('year')->unsigned();
-            $table->timestamp('deleted_at')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('genuineq_tms_semesters');

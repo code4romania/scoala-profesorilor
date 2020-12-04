@@ -8,6 +8,7 @@ use Input;
 use Request;
 use Redirect;
 use Validator;
+use Carbon\Carbon;
 use ValidationException;
 use ApplicationException;
 use Cms\Classes\ComponentBase;
@@ -15,6 +16,7 @@ use Genuineq\Tms\Models\School;
 use Genuineq\Tms\Models\Address;
 use Genuineq\Tms\Models\Inspectorate;
 use Genuineq\User\Helpers\AuthRedirect;
+use Genuineq\User\Models\UsersLoginLog;
 
 /**
  * School profile component
@@ -73,6 +75,19 @@ class SchoolProfile extends ComponentBase
             'Public' => 'public',
             'Privat' => 'private'
         ];
+
+        /** Extract the last login date and time. */
+        $this->page['lastLogin'] = Auth::getUser()->last_login;
+
+        /** Extract the previous login. */
+        $previousLogin = UsersLoginLog::where('email', Auth::getUser()->email)->where('type', 'Successful login')->where('created_at', '<', Auth::getUser()->last_login)->orderBy('created_at', 'desc')->first();
+
+        /** Extract the number of failed logins from last successfull login. */
+        if ($previousLogin) {
+            $this->page['failedLogins'] = UsersLoginLog::where('email', Auth::getUser()->email)->where('type', 'Unsuccessful login')->whereBetween('created_at', [$previousLogin->created_at, Auth::getUser()->last_login])->count();
+        } else {
+            $this->page['failedLogins'] = 0;
+        }
     }
 
     /**
@@ -268,6 +283,63 @@ class SchoolProfile extends ComponentBase
         }
 
         Flash::success(Lang::get('genuineq.tms::lang.component.school-profile.message.description_update_successful'));
+    }
+
+    /**
+     * Update the school profile description
+     */
+    public function onSchoolProfileDelete()
+    {
+        if (!Auth::check()) {
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        /** Extract the user. */
+        $user = Auth::getUser();
+        /** Extract the user profile. */
+        $profile = $user->profile;
+
+        /** Logout the user. */
+        Auth::logout();
+
+        /** Log the logout request. */
+        UsersLoginLog::create([
+            "type" => "Successful logout",
+            "name" => $user->name,
+            "email" => $user->email,
+            "ip_address" => Request::ip(),
+        ]);
+
+        /** Anonymize the user. */
+        $user->update([
+            'name' => 'name_' . Carbon::now()->timestamp,
+            'surname' => 'surname_' . Carbon::now()->timestamp,
+            'username' => 'username_' . Carbon::now()->timestamp,
+            'email' => 'email_' . Carbon::now()->timestamp . '@email.com',
+            'password' => str_random(32),
+            'identifier' => Carbon::now()->timestamp,
+            'created_ip_address' => '0.0.0.0',
+            'last_ip_address' => '0.0.0.0'
+        ]);
+
+        /** Anonimize the user profile. */
+        $profile->update([
+            'name' => 'name_' . carbon::now()->timestamp,
+            'slug' => 'slug_' . carbon::now()->timestamp,
+            'phone' => '222222222222222',
+            'principal' => 'principal_' . carbon::now()->timestamp,
+            'address_id' => 0,
+            'detailed_address' => 'detailed_address_' . carbon::now()->timestamp,
+            'description' => 'description_' . carbon::now()->timestamp,
+            'contact_name' => 'contact_name_' . carbon::now()->timestamp,
+            'contact_email' => 'contact_email_' . carbon::now()->timestamp . '@email.com',
+            'contact_phone' => '222222222222222',
+            'contact_role' => 'contact_role_' . carbon::now()->timestamp
+        ]);
+
+        Flash::success(Lang::get('genuineq.tms::lang.component.school-profile.message.delete_successful'));
+
+        return Redirect::to($this->pageUrl('/'));
     }
 
     /***********************************************

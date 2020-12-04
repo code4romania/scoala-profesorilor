@@ -8,6 +8,7 @@ use Input;
 use Request;
 use Redirect;
 use Validator;
+use Carbon\Carbon;
 use ValidationException;
 use ApplicationException;
 use Cms\Classes\ComponentBase;
@@ -17,6 +18,7 @@ use Genuineq\Tms\Models\SeniorityLevel;
 use Genuineq\Tms\Models\SchoolLevel;
 use Genuineq\Tms\Models\ContractType;
 use Genuineq\User\Helpers\AuthRedirect;
+use Genuineq\User\Models\UsersLoginLog;
 
 /**
  * Teacher profile component
@@ -69,6 +71,19 @@ class TeacherProfile extends ComponentBase
             $seniorityLevels[$seniorityLevel] = $value++;
         }
         $this->page['seniorityLevels'] = json_encode($seniorityLevels);
+
+        /** Extract the last login date and time. */
+        $this->page['lastLogin'] = Auth::getUser()->last_login;
+
+        /** Extract the previous login. */
+        $previousLogin = UsersLoginLog::where('email', Auth::getUser()->email)->where('type', 'Successful login')->where('created_at', '<', Auth::getUser()->last_login)->orderBy('created_at', 'desc')->first();
+
+        /** Extract the number of failed logins from last successfull login. */
+        if ($previousLogin) {
+            $this->page['failedLogins'] = UsersLoginLog::where('email', Auth::getUser()->email)->where('type', 'Unsuccessful login')->whereBetween('created_at', [$previousLogin->created_at, Auth::getUser()->last_login])->count();
+        } else {
+            $this->page['failedLogins'] = 0;
+        }
     }
 
     /**
@@ -230,6 +245,58 @@ class TeacherProfile extends ComponentBase
         $budget->save();
 
         Flash::success(Lang::get('genuineq.tms::lang.component.teacher-profile.message.budget_update_successful'));
+    }
+
+    /**
+     * Delete the teacher.
+     */
+    public function onTeacherProfileDelete()
+    {
+        if (!Auth::check()) {
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        /** Extract the user. */
+        $user = Auth::getUser();
+        /** Extract the user profile. */
+        $profile = $user->profile;
+
+        /** Logout the user. */
+        Auth::logout();
+
+        /** Log the logout request. */
+        UsersLoginLog::create([
+            "type" => "Successful logout",
+            "name" => $user->name,
+            "email" => $user->email,
+            "ip_address" => Request::ip(),
+        ]);
+
+        /** Anonymize the user. */
+        $user->update([
+            'name' => 'name_' . Carbon::now()->timestamp,
+            'surname' => 'surname_' . Carbon::now()->timestamp,
+            'username' => 'username_' . Carbon::now()->timestamp,
+            'email' => 'email_' . Carbon::now()->timestamp . '@email.com',
+            'password' => str_random(32),
+            'identifier' => Carbon::now()->timestamp,
+            'created_ip_address' => '0.0.0.0',
+            'last_ip_address' => '0.0.0.0',
+        ]);
+
+        /** Anonimize the user profile. */
+        $profile->update([
+            'name' => 'name_' . Carbon::now()->timestamp,
+            'slug' => 'slug_' . Carbon::now()->timestamp,
+            'phone' => '111111111111111',
+            'birth_date' => '1111-11-11',
+            'address_id' => '0',
+            'description' => 'description_' . Carbon::now()->timestamp,
+        ]);
+
+        Flash::success(Lang::get('genuineq.tms::lang.component.teacher-profile.message.delete_successful'));
+
+        return Redirect::to($this->pageUrl('/'));
     }
 
     /***********************************************

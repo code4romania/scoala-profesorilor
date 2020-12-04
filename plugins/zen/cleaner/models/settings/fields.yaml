@@ -1,0 +1,5 @@
+fields:
+    control_panel:
+        span: full
+        path: $/zen/cleaner/classes/Panel.php
+        type: partial

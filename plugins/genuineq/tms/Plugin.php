@@ -21,7 +21,8 @@ class Plugin extends PluginBase
         'Genuineq.User',
         'Genuineq.Https',
         'RainLab.Notify',
-        'Rahman.Faker'
+        'Rahman.Faker',
+        'AjayLulia.OCookie'
     ];
 
     /**
@@ -203,7 +204,6 @@ class Plugin extends PluginBase
 
     public function boot()
     {
-
         /** Extend the "Genuineq\User\Models\User" model. */
         User::extend(function($model) {
             /** Link "School" model to user model */
@@ -218,7 +218,7 @@ class Plugin extends PluginBase
             });
         });
 
-        /** Define listener of the "genuineq.user.created" event */
+        /** Define listener of the "genuineq.user.created" event. */
         Event::listen('genuineq.user.created', function ($user) {
             /** Create user profile based on user type. */
             if ('school' == $user->type) {
@@ -229,8 +229,5 @@ class Plugin extends PluginBase
                 $profile->save();
             }
         });
-
-        /** register middleware for trusted proxies */
-        $this->app['Illuminate\Contracts\Http\Kernel']->pushMiddleware('Genuineq\Tms\Middlewares\TrustProxies');
     }
 }

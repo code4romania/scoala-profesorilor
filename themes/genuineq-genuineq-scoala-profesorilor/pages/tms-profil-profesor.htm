@@ -51,29 +51,41 @@ forceSecure = 0
 
 <div class="container-fluid bg-white py-4">
     <div class="container">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="account-tab-nav" data-toggle="tab" href="#account-tab-body" role="tab" aria-controls="account-tab-body" aria-selected="true">{{ 'teacher.profile.tab.account'|_ }}</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" id="notifications-tab-nav" data-toggle="tab" href="#notifications-tab-body" role="tab" aria-controls="notifications-tab-body" aria-selected="false" data-request="onViewNotifications" data-request-update="teacher-profile/notifications-tab: '#notifications-tab-content'">{{ 'teacher.profile.tab.notifications'|_ }}</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" id="learning-plan-tab-nav" data-toggle="tab" href="#learning-plan-tab-body" role="tab" aria-controls="learning-plan-tab-body" aria-selected="false" data-request="onTeacherViewLearningPlan" data-request-update="teacher-profile/learning-plan-tab: '#learning-plan-tab-content'">{{ 'teacher.profile.tab.learning-plan'|_ }}</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" id="budget-tab-nav" data-toggle="tab" href="#budget-tab-body" role="tab" aria-controls="budget-tab-body" aria-selected="false" data-request="onTeacherViewBudget" data-request-update="teacher-profile/budget-course-plan-tab: '#budget-tab-content'">{{ 'teacher.profile.tab.budget'|_ }}</a>
-            </li>
-
-            {% if profile.schools.count() %}
+        <div class="row">
+            <ul class="nav nav-tabs col-12 col-lg-8 border-bottom-0" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link" id="appraisals-tab-nav" data-toggle="tab" href="#appraisals-tab-body" role="tab" aria-controls="appraisals-tab-body" aria-selected="false" data-request="onTeacherAppraisalsView" data-request-update="teacher-profile/appraisals-tab: '#appraisals-tab-content'">{{ 'teacher.profile.tab.appraisals'|_ }}</a>
+                    <a class="nav-link active px-2 px-lg-3" id="account-tab-nav" data-toggle="tab" href="#account-tab-body" role="tab" aria-controls="account-tab-body" aria-selected="true">{{ 'teacher.profile.tab.account'|_ }}</a>
                 </li>
-            {% endif %}
-        </ul>
+
+                <li class="nav-item">
+                    <a class="nav-link px-2 px-lg-3" id="notifications-tab-nav" data-toggle="tab" href="#notifications-tab-body" role="tab" aria-controls="notifications-tab-body" aria-selected="false" data-request="onViewNotifications" data-request-update="teacher-profile/notifications-tab: '#notifications-tab-content'">{{ 'teacher.profile.tab.notifications'|_ }}</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link px-2 px-lg-3" id="learning-plan-tab-nav" data-toggle="tab" href="#learning-plan-tab-body" role="tab" aria-controls="learning-plan-tab-body" aria-selected="false" data-request="onTeacherViewLearningPlan" data-request-update="teacher-profile/learning-plan-tab: '#learning-plan-tab-content'">{{ 'teacher.profile.tab.learning-plan'|_ }}</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link px-2 px-lg-3" id="budget-tab-nav" data-toggle="tab" href="#budget-tab-body" role="tab" aria-controls="budget-tab-body" aria-selected="false" data-request="onTeacherViewBudget" data-request-update="teacher-profile/budget-course-plan-tab: '#budget-tab-content'">{{ 'teacher.profile.tab.budget'|_ }}</a>
+                </li>
+
+                {% if profile.schools.count() %}
+                    <li class="nav-item">
+                        <a class="nav-link px-2 px-lg-3" id="appraisals-tab-nav" data-toggle="tab" href="#appraisals-tab-body" role="tab" aria-controls="appraisals-tab-body" aria-selected="false" data-request="onTeacherAppraisalsView" data-request-update="teacher-profile/appraisals-tab: '#appraisals-tab-content'">{{ 'teacher.profile.tab.appraisals'|_ }}</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <div class="col-12 col-lg-4 d-flex align-items-lg-end flex-column mr-0 pr-0">
+                <p class="p-0 m-0 small">
+                    Ultima autentificare: {{ lastLogin }}
+                </p>
+                <p class="p-0 m-0 py-1 small">
+                    Numar autentificari esuate: {{ failedLogins }}
+                </p>
+            </div>
+            <div class="col-12 border-top m-0 p-0">
+            </div>
+        </div>
     </div>
 </div>
 

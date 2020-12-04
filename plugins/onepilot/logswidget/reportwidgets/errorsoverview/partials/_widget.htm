@@ -1,0 +1,50 @@
+<div class="report-widget onepilot-logswidget">
+    <h3>Errors Overview</h3>
+    <div class="scoreboard">
+        <?php foreach ($errors as $label => $data): ?>
+        <div class="scoreboard-item title-value">
+            <h4><?= $label; ?></h4>
+            <p class="<?=
+                (($data['last'] > 0) ? 'negative ' : 'positive ') .
+                (($data['last'] > $data['previous'])
+                    ? 'increase'
+                    : (($data['last'] == $data['previous']) ? 'equal' : 'decrease'))
+                ?>"><?= $data['last'] ?? 0; ?></p>
+            <p class="description">previous <?= $label; ?>: <?= $data['previous'] ?? 0; ?></p>
+        </div>
+        <?php endforeach; ?>
+    </div>
+
+    <a href="<?= Backend::url('system/eventlogs') ?>">
+        Show system logs <i class="icon-angle-double-right"></i>
+    </a>
+
+    <a href="https://1pilot.io?utm_source=widget" target="_blank" rel="noopener"
+       data-toggle="tooltip"
+       data-placement="left"
+       data-delay="500"
+       title="Maintain total visibility of errors across all your sites in a central dashboard with 1Pilot.io"
+       class="logo-link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 117.65" width="100">
+            <defs>
+                <style>
+                    .cls-1 {fill: #ed6a5b;}
+                    .cls-2 {fill: #232855;}
+                </style>
+            </defs>
+            <path class="cls-1" d="M13.09,50.74,0,54.57V35.43L36.05,22.35l.12,90.13H12.7Z"></path>
+            <path class="cls-1" d="M440.61,90.62c16.55,0,16.42,22.35,0,22.35C424.44,113,424.19,90.62,440.61,90.62Z"></path>
+            <path class="cls-1" d="M466.91,112.48V26.05h24.32v86.43Z"></path>
+            <path class="cls-1" d="M552,114.57c-28.27,0-48-16.42-48-45.31,0-28.39,19.76-45.3,48-45.3s48,16.54,48,45.3S580.37,114.57,552,114.57Zm0-69.75c-14,0-23.58,10.12-23.58,24.44S538.14,93.71,552,93.71c14.33,0,23.58-10.12,23.58-24.45C575.55,54.45,566.3,44.82,552,44.82Z"></path>
+            <path class="cls-2" d="M75.28,89.14v23.34H50.84V26.05h42c23.22,0,34.7,14.57,34.7,31.48,0,17.66-11.61,31.36-34.7,31.61Zm0-20.62H92.81c6.79,0,10.25-4.93,10.25-10.61S99.48,47,92.81,47H75.28Z"></path>
+            <path class="cls-2" d="M138.37,112.48V26.05H162.7v86.43Z"></path>
+            <path class="cls-2" d="M204.67,26.05V91.73H246v20.75h-65.8V26.05Z"></path>
+            <path class="cls-2" d="M379,45.68H353.82V25.56h74.82V45.68H403.33V112H379Z"></path>
+            <path class="cls-2" d="M298.81,117.65a49.47,49.47,0,0,1-35-84.47,4,4,0,0,1,5.67,5.67,41.48,41.48,0,1,0,58.66,0,4,4,0,0,1,5.67-5.67,49.47,49.47,0,0,1-35,84.47Z"></path>
+            <path class="cls-2" d="M298.81,101A32.81,32.81,0,0,1,266,68.18a4,4,0,0,1,8,0,24.76,24.76,0,1,0,24.75-24.76,4,4,0,1,1,0-8,32.78,32.78,0,1,1,0,65.55Z"></path>
+            <path class="cls-2" d="M291.88,4.5l-7.67,7.67c-1.17-.35-9.45-2.78-12.29.06l18.35,18.35c3.05-3.06,0-12.24,0-12.24L298,10.62c3-3,4.5-10.62,4.5-10.62S295,1.43,291.88,4.5Z"></path>
+            <path class="cls-2" d="M281.1,27.51,275,21.4s-6.11,6.11-3.06,9.17S281.1,27.51,281.1,27.51Z"></path>
+            <path class="cls-1" d="M283.17,68.1a15.91,15.91,0,0,1,15.72,15.74A15.9,15.9,0,0,1,314.61,68.1a15.88,15.88,0,0,1-15.72-15.73A15.89,15.89,0,0,1,283.17,68.1Z"></path>
+        </svg>
+    </a>
+</div>

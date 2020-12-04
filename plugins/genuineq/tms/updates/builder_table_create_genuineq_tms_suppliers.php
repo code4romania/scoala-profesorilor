@@ -17,9 +17,9 @@ class BuilderTableCreateGenuineqTmsSuppliers extends Migration
             $table->string('phone', 12)->comment = "The contact phone of the supplier.";
             $table->text('description')->nullable()->comment = "The description of the supplier.";
             $table->smallInteger('status')->unsigned()->default(1)->comment = "The status of the supplier: 0-disabled, 1-enabled";
-            $table->timestamp('deleted_at')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

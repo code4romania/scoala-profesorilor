@@ -1,0 +1,22 @@
+<div class="report-widget">
+
+    <?php if ($error): ?>
+        <h3>Disk Usge</h3>
+        <p><?= $error ?></p>
+    <?php else: ?>
+    <h3><?= $disk['name'] ?></h3>
+    <p><?= $disk['description'] ?></p>
+    <p>Full path: <?= $disk['path'] ?></p>
+    <div
+        class="control-chart"
+        data-control="chart-pie"
+        data-size="250"
+        data-center-text="<?= $disk['total_space']['formatted'] ?>">
+
+        <ul>
+            <li>Free space <span><?= $disk['free_space']['formatted'] ?></span></li>
+            <li>Used space <span><?= $disk['used_space']['formatted'] ?></span></li>
+        </ul>
+    </div>
+    <?php endif; ?>
+</div>

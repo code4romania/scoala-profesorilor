@@ -1,0 +1,10 @@
+name: Configuration
+form: $/ajaylulia/ocookie/models/config/fields.yaml
+modelClass: AjayLulia\OCookie\Models\Config
+defaultRedirect: ajaylulia/ocookie/config
+create:
+    redirect: 'ajaylulia/ocookie/config/update/:id'
+    redirectClose: 'ajaylulia/ocookie/config/update/:id'
+update:
+    redirect: 'ajaylulia/ocookie/config/update/:id'
+    redirectClose: 'ajaylulia/ocookie/config/update/:id'

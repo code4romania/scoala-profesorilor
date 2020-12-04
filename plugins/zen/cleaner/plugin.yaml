@@ -1,0 +1,6 @@
+plugin:
+    name: 'zen.cleaner::lang.plugin.name'
+    description: 'zen.cleaner::lang.plugin.description'
+    author: 'Alexander Ablizin'
+    icon: oc-icon-trash
+    homepage: 'https://october-studio.ru'

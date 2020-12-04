@@ -1,0 +1,6 @@
+plugin:
+    name: Disk Usage
+    description: Report widget shows multiple disk usage
+    author: Walid
+    keywords: free disk usage space
+    icon: icon-database

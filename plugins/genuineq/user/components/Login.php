@@ -20,6 +20,9 @@ use Genuineq\User\Models\User as UserModel;
 use Genuineq\User\Models\Settings as UserSettings;
 use Genuineq\User\Helpers\PluginConfig;
 use Genuineq\User\Helpers\EmailHelper;
+use Multiwebinc\Recaptcha\Validators\RecaptchaValidator;
+use Genuineq\User\Models\UsersLoginLog;
+
 
 /**
  * Login component
@@ -107,16 +110,27 @@ class Login extends ComponentBase
     public function onLogin()
     {
         try {
-            /** Extract the post data to validate. */
+            /** Extract the credentials in order to authenticate. */
             $credentials = [
                 'email' => post('email'),
                 'password' => post('password'),
             ];
 
+            /** Extract the post data to validate. */
+            $data = [
+                'email' => post('email'),
+                'password' => post('password'),
+                'g-recaptcha-response' => post('g-recaptcha-response')
+            ];
+
             /** Construct the validation rules. */
             $rules = [
+                'g-recaptcha-response' => [
+                    'required',
+                    new RecaptchaValidator,
+                ],
                 'email' => 'required|email|between:6,255',
-                'password' => 'required|between:' . PluginConfig::getMinPasswordLength() . ',' . PluginConfig::getMaxPasswordLength(),
+                'password' => 'required',
             ];
 
             /** Construct the validation error messages. */
@@ -125,11 +139,11 @@ class Login extends ComponentBase
                 'email.between' => Lang::get('genuineq.user::lang.component.login.validation.login_between'),
                 'email.email' => Lang::get('genuineq.user::lang.component.login.validation.login_email'),
                 'password.required' => Lang::get('genuineq.user::lang.component.login.validation.password_required'),
-                'password.between' => Lang::get('genuineq.user::lang.component.login.validation.password_between_s') . PluginConfig::getMinPasswordLength() . ' si ' . PluginConfig::getMaxPasswordLength() . Lang::get('genuineq.user::lang.component.login.validation.password_between_e'),
+                'g-recaptcha-response.required' => Lang::get('genuineq.user::lang.component.login.validation.g-recaptcha-response_required'),
             ];
 
             /** Apply the validation rules. */
-            $validation = Validator::make($credentials, $rules, $messages);
+            $validation = Validator::make($data, $rules, $messages);
             if ($validation->fails()) {
                 throw new ValidationException($validation);
             }
@@ -155,7 +169,22 @@ class Login extends ComponentBase
 
             /** Check if authentication was successful. */
             if (!$user) {
+                /** Log: Unsuccessful login */
+                UsersLoginLog::create([
+                    "type" => "Unsuccessful login",
+                    "email" => post('email'),
+                    "ip_address" => Request::ip(),
+                ]);
                 throw new ApplicationException(Lang::get('genuineq.user::lang.component.login.message.wrong_credentials'));
+            }
+            else {
+                /** Log: Successful login */
+                UsersLoginLog::create([
+                    "type" => "Successful login",
+                    "name" => $user->name,
+                    "email" => post('email'),
+                    "ip_address" => Request::ip(),
+                ]);
             }
 
             /** Check if the user is banned. */

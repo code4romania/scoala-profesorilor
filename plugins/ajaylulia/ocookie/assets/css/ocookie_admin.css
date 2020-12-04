@@ -1,0 +1,100 @@
+#preview {
+    margin: 0 20px;
+    width: 50em;
+    border: 2px solid #ccc;
+    height: 30em;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+#plugin_title{
+    /* border-bottom: 2px solid #ccc; */
+    width: 25%;
+    line-height: 2;
+}
+#preview #msgDiv {}
+
+#preview .class_top {
+    height: 40px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    line-height: 2.5;
+}
+
+#preview .class_bottom {
+    height: 40px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    line-height: 2.5;
+}
+
+#preview .class_floating {
+    height: 40px;
+    position: absolute;
+    bottom: 0;
+    margin: 2% 2%;
+    width: 96%;
+    line-height: 2.5;
+}
+
+#preview .class_round {
+    height: 40px;
+    position: absolute;
+    bottom: 0;
+    margin: 2% 2%;
+    width: 96%;
+    line-height: 2.5;
+    border-radius: 3em;
+}
+
+#preview .class_left {
+    height: 5em;
+    position: absolute;
+    bottom: 0;
+    width: 40%;
+    bottom: 3%;
+    left: 2%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column-reverse;
+    height: auto;
+    align-items: center;
+}
+
+#preview .class_right {
+    height: 5em;
+    position: absolute;
+    bottom: 0;
+    width: 40%;
+    bottom: 3%;
+    right: 2%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column-reverse;
+    height: auto;
+    align-items: center;
+}
+
+#preview #message {
+    display: inline;
+    font-size: 10px;
+}
+
+#preview .class_top #message,
+#preview .class_bottom #message,
+#preview .class_floating #message,
+#preview .class_round #message {
+    margin: 0 0 0 6%;
+}
+
+#preview #button {
+
+    height: 26px;
+    font-size: 11px;
+    margin: 5px 10%;
+    border: none;
+    border-radius: 5px;
+    float: right;
+}

@@ -23,9 +23,9 @@ class BuilderTableCreateGenuineqTmsCourses extends Migration
             $table->double('price', 10, 2)->comment = "The total price of the course.";
             $table->text('description')->comment = "The description of the course.";
             $table->smallInteger('status')->default(1)->comment = "The status of the course: 0-disabled, 1-enabled";
-            $table->timestamp('deleted_at')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

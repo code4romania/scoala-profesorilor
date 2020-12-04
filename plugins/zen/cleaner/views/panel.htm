@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="/plugins/zen/cleaner/assets/css/zen.cleaner.css">
+<div id="ZenCleaner" v-cloak>
+    <div
+        :disabled="clean_process"
+        @click="dirCount()"
+        class="btn-lg btn-primary oc-icon-refresh zc-btn"
+        :class="{ process:clean_process }">
+        {{ "zen.cleaner::lang.clean_btn"|trans }}
+    </div>
+    <div class="zc-info-wrap">
+        <div v-if="dir_count||success" class="zc-info">
+            <div v-if="!success" class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" :style="progress">
+                </div>
+            </div>
+            <ul>
+                <li v-if="deleted_count"><strong>{{ "zen.cleaner::lang.deleted_count"|trans }}: </strong> ${ deleted_count } items</li>
+                <li v-if="deleted_size"><strong>{{ "zen.cleaner::lang.deleted_size"|trans }}: </strong> ${ deleted_size|sizeFormat }</li>
+                <li v-if="success"><span class="zc-success">{{ "zen.cleaner::lang.clean_success"|trans }}</span></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<script src="/plugins/zen/cleaner/assets/js/vue.min.js"></script>
+<script src="/plugins/zen/cleaner/assets/js/zen.cleaner.js"></script>

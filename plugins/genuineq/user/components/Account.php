@@ -1,5 +1,6 @@
 <?php namespace Genuineq\User\Components;
 
+use Log;
 use Lang;
 use Auth;
 use Mail;
@@ -13,6 +14,7 @@ use Validator;
 use Exception;
 use ValidationException;
 use ApplicationException;
+use Backend\Models\User;
 use \System\Models\File;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
@@ -137,7 +139,7 @@ class Account extends ComponentBase
         /** Extract the user */
         $user = Auth::getUser();
 
-        /** Update the enmail */
+        /** Update the email */
         $user->email = $data['accountEmail'];
         $user->save();
 
@@ -155,6 +157,7 @@ class Account extends ComponentBase
 
         /** Extract the form data. */
         $data = post();
+
 
         /** Extract the validation rules. */
         $rules = [
@@ -179,6 +182,9 @@ class Account extends ComponentBase
 
         /** Extract the user */
         $user = Auth::getUser();
+        if(!$user->checkPassword(post('accountCurrentPassword'))) {
+            throw new ValidationException(['accountCurrentPassword' => Lang::get('genuineq.user::lang.component.account.validation.account_current_password')]);
+        }
 
         /** Update the password */
         $user->password = $data['accountNewPassword'];

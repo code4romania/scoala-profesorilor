@@ -14,9 +14,9 @@ class BuilderTableCreateGenuineqTmsSkills extends Migration
             $table->string('name')->comment = "The name of the skill.";
             $table->string('slug')->unique()->comment = "The slug of the skill.";
             $table->text('description')->nullable()->comment = "The description of the skill.";
-            $table->timestamp('deleted_at')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

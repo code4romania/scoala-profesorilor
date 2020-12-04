@@ -4,6 +4,7 @@ use Str;
 use File;
 use Cms\Classes\Page;
 use Cms\Classes\Content;
+use System\Classes\PluginManager;
 use RainLab\Translate\Models\Message;
 use RainLab\Translate\Models\Locale as LocaleModel;
 use RainLab\Translate\Classes\Translator;
@@ -31,6 +32,46 @@ class EventRegistry
 
         // Handle URL translations
         $this->registerPageUrlTranslation($widget);
+
+        // Handle RainLab.Pages MenuItem translations
+        if (PluginManager::instance()->exists('RainLab.Pages')) {
+            $this->registerMenuItemTranslation($widget);
+        }
+    }
+
+    /**
+     * Translate RainLab.Pages MenuItem data
+     *
+     * @param Backend\Widgets\Form $widget
+     * @return void
+     */
+    public function registerMenuItemTranslation($widget)
+    {
+        if ($widget->model instanceof \RainLab\Pages\Classes\MenuItem) {
+            $defaultLocale = LocaleModel::getDefault();
+            $availableLocales = LocaleModel::listAvailable();
+            $fieldsToTranslate = ['title', 'url'];
+            
+            // Replace specified fields with multilingual versions
+            foreach ($fieldsToTranslate as $fieldName) {
+                $widget->fields[$fieldName]['type'] = 'mltext';
+                
+                foreach ($availableLocales as $code => $locale) {
+                    if (!$defaultLocale || $defaultLocale->code === $code) {
+                        continue;
+                    }
+                    
+                    // Add data locker fields for the different locales under the `viewBag[locale]` property
+                    $widget->fields["viewBag[locale][$code][$fieldName]"] = [
+                        'cssClass' => 'hidden',
+                        'attributes' => [
+                            'data-locale' => $code,
+                            'data-field-name' => $fieldName,
+                        ],
+                    ];
+                }
+            }
+        }
     }
 
     //
@@ -108,6 +149,15 @@ class EventRegistry
      */
     protected function processFormMLFields($fields, $model)
     {
+        $typesMap = [
+            'markdown'    => 'mlmarkdowneditor',
+            'mediafinder' => 'mlmediafinder',
+            'repeater'    => 'mlrepeater',
+            'richeditor'  => 'mlricheditor',
+            'text'        => 'mltext',
+            'textarea'    => 'mltextarea',
+        ];
+
         $translatable = array_flip($model->getTranslatableAttributes());
 
         /*
@@ -124,23 +174,8 @@ class EventRegistry
 
             $type = array_get($config, 'type', 'text');
 
-            if ($type == 'text') {
-                $fields[$name]['type'] = 'mltext';
-            }
-            elseif ($type == 'textarea') {
-                $fields[$name]['type'] = 'mltextarea';
-            }
-            elseif ($type == 'richeditor') {
-                $fields[$name]['type'] = 'mlricheditor';
-            }
-            elseif ($type == 'markdown') {
-                $fields[$name]['type'] = 'mlmarkdowneditor';
-            }
-            elseif ($type == 'repeater') {
-                $fields[$name]['type'] = 'mlrepeater';
-            }
-            elseif ($type == 'mediafinder') {
-                $fields[$name]['type'] = 'mlmediafinder';
+            if (array_key_exists($type, $typesMap)) {
+                $fields[$name]['type'] = $typesMap[$type];
             }
         }
 
