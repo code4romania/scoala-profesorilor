@@ -48,18 +48,18 @@ return [
 
         'sqlite' => [
             'driver'   => 'sqlite',
-            'database' => env('DB_DATABASE', 'storage/database.sqlite'),
+            'database' => 'storage/database.sqlite',
             'prefix'   => '',
         ],
 
         'mysql' => [
             'driver'     => 'mysql',
             'engine'     => 'InnoDB',
-            'host' => env('DB_HOST', 'mysql'),
-            'port' => env('DB_PORT', 3306),
-            'database' => env('DB_DATABASE', 'tms'),
-            'username' => env('DB_USERNAME', ''),
-            'password' => env('DB_PASSWORD', ''),
+            'host'       => env('DB_HOST', 'mysql'),
+            'port'       => env('DB_PORT', 3306),
+            'database'   => env('DB_DATABASE', 'tms'),
+            'username'   => env('DB_USERNAME', ''),
+            'password'   => env('DB_PASSWORD', ''),
             'charset'    => 'utf8mb4',
             'collation'  => 'utf8mb4_unicode_ci',
             'prefix'     => '',
@@ -68,8 +68,8 @@ return [
 
         'pgsql' => [
             'driver'   => 'pgsql',
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', 5432),
+            'host'     => env('DB_HOST', 'localhost'),
+            'port'     => env('DB_PORT', 5432),
             'database' => env('DB_DATABASE', 'database'),
             'username' => env('DB_USERNAME', ''),
             'password' => env('DB_PASSWORD', ''),
@@ -80,8 +80,8 @@ return [
 
         'sqlsrv' => [
             'driver'   => 'sqlsrv',
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', 5432),
+            'host'     => env('DB_HOST', 'localhost'),
+            'port'     => env('DB_PORT', 5432),
             'database' => env('DB_DATABASE', 'database'),
             'username' => env('DB_USERNAME', ''),
             'password' => env('DB_PASSWORD', ''),
@@ -116,12 +116,13 @@ return [
 
     'redis' => [
 
+        'client' => 'predis',
         'cluster' => false,
 
         'default' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'host'     => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', ''),
-            'port' => env('REDIS_PORT', 6379),
+            'port'     => env('REDIS_PORT', 6379),
             'database' => 0,
         ],
 

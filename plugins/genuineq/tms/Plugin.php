@@ -233,8 +233,5 @@ class Plugin extends PluginBase
                 $profile->save();
             }
         });
-
-        /** Register middleware for trusted proxies. */
-        $this->app['Illuminate\Contracts\Http\Kernel']->pushMiddleware('Genuineq\Tms\Middlewares\TrustProxies');
     }
 }

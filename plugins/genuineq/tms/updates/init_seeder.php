@@ -40,8 +40,6 @@ class InitSeeder extends Migration
         Db::table('system_mail_templates')->insert(['code' => 'genuineq.tms::mail.school-skills-set',         'subject' => NULL, 'description' => 'Skill-uri setate',                   'content_html' => NULL, 'content_text' => NULL, 'layout_id' => 1, 'is_custom' => 0]);
         Db::table('system_mail_templates')->insert(['code' => 'genuineq.tms::mail.school-evaluation-close',   'subject' => NULL, 'description' => 'Evaluare finalizata',                'content_html' => NULL, 'content_text' => NULL, 'layout_id' => 1, 'is_custom' => 0]);
 
-
-
         /** Populate system_mail_partials table. */
         Db::table('system_mail_partials')->truncate();
         Db::table('system_mail_partials')->insert([
