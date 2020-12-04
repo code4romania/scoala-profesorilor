@@ -7,7 +7,7 @@ class EmailHelper
 {
     /**
      * Sends the activation email to a user
-     * @param  User $user
+     * @param  Genuineq\User\Models\User $user
      * @return void
      */
     public static function sendActivationEmail($user)
@@ -53,7 +53,7 @@ class EmailHelper
 
     /**
      * Sends the welcome email to a user
-     * @param  User $user
+     * @param  Genuineq\User\Models\User $user
      * @return void
      */
     public static function sendWelcomeEmail($user)
@@ -76,7 +76,7 @@ class EmailHelper
 
     /**
      * Sends the invvite email to a user
-     * @param  User $user
+     * @param  Genuineq\User\Models\User $user
      * @return void
      */
     public static function sendInviteEmail($user)
