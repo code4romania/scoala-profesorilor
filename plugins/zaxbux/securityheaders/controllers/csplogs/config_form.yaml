@@ -1,0 +1,19 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: zaxbux.securityheaders::lang.forms.csplogs.name
+
+# Model Form Field configuration
+form: $/zaxbux/securityheaders/models/csplog/fields.yaml
+
+# Model Class name
+modelClass: Zaxbux\SecurityHeaders\Models\CSPLog
+
+# Default redirect location
+defaultRedirect: zaxbux/securityheaders/csplogs
+
+# Preview page
+preview:
+    title: zaxbux.securityheaders::lang.forms.csplogs.preview_title

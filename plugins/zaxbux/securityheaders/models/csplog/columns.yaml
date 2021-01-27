@@ -1,0 +1,31 @@
+# ===================================
+#  Column Definitions
+# ===================================
+
+columns:
+    created_at:
+        label: system::lang.event_log.created_at
+        searchable: true
+        width: 160px
+        type: timetense
+
+    action:
+        label: zaxbux.securityheaders::lang.columns.csplog.action
+        type: partial
+        path: action_column
+        searchable: true
+        width: 130px
+
+    document_uri:
+        label: zaxbux.securityheaders::lang.columns.csplog.document_uri
+        searchable: true
+        cssClass: column-break-word
+    
+    violated_directive:
+        label: zaxbux.securityheaders::lang.columns.csplog.violated_directive
+        searchable: true
+    
+    blocked_uri:
+        label: zaxbux.securityheaders::lang.columns.csplog.blocked_uri
+        searchable: true
+        cssClass: column-break-word
