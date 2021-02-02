@@ -3,6 +3,7 @@ server {
     listen [::]:80;
     
     server_tokens off;
+    add_header Host scoalaprofesorilor.ro;
 
     server_name www.scoalaprofesorilor.ro scoalaprofesorilor.ro;
     root /var/www/public;
