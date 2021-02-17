@@ -161,7 +161,7 @@ class Login extends ComponentBase
                     break;
             }
 
-            /** File the beforeAuthenticate event. */
+            /** Fire the beforeAuthenticate event. */
             Event::fire('genuineq.user.beforeAuthenticate', [$this, $credentials]);
 
             /** Authenticate the user. */
@@ -169,20 +169,26 @@ class Login extends ComponentBase
 
             /** Check if authentication was successful. */
             if (!$user) {
+                /** Sanitize email before saving to login log table */
+                $data['email'] = ltrim($data['email'], '=-@+');
+
                 /** Log: Unsuccessful login */
                 UsersLoginLog::create([
                     "type" => "Unsuccessful login",
-                    "email" => post('email'),
+                    "email" => $data['email'],
                     "ip_address" => Request::ip(),
                 ]);
                 throw new ApplicationException(Lang::get('genuineq.user::lang.component.login.message.wrong_credentials'));
             }
             else {
+                /** Sanitize email before saving to login log table */
+                $data['email'] = ltrim($data['email'], '=-@+');
+
                 /** Log: Successful login */
                 UsersLoginLog::create([
                     "type" => "Successful login",
                     "name" => $user->name,
-                    "email" => post('email'),
+                    "email" => $data['email'],
                     "ip_address" => Request::ip(),
                 ]);
             }

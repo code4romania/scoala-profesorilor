@@ -181,6 +181,11 @@ class Register extends ComponentBase
             /** Set the user type field. */
             $data['type'] = (post('cif')) ? ('school') : ('teacher');
 
+            /** Remove following characters from the start of the values: '#', '+', '-', '@' */
+            $data['name'] = ltrim($data['name'], '=-@+');
+            $data['email'] = ltrim($data['email'], '=-@+');
+            $data['identifier'] = ltrim($data['identifier'], '=-@+');
+
             /** Register user */
             Event::fire('genuineq.user.beforeRegister', [&$data]);
 
