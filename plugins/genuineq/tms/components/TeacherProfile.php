@@ -232,6 +232,9 @@ class TeacherProfile extends ComponentBase
             throw new ValidationException($validation);
         }
 
+        /** Sanitize description before update. */
+        $data['description'] = ltrim($data['description'], '=-@+');
+
         /** Extract the teacher profile */
         $teacherProfile = Auth::getUser()->profile;
 
