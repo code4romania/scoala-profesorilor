@@ -261,9 +261,12 @@ class TeacherProfile extends ComponentBase
             throw new ApplicationException(Lang::get('genuineq.tms::lang.component.teacher-profile.validation.invalid_budget'));
         }
 
+        /** Sanitize budget before update. */
+        $udpated_budget = ltrim(post('budget'), '=-@+');
+
         /** Extract the teacher profile budget and update it. */
         $budget = Auth::getUser()->profile->active_budget;
-        $budget->budget = post('budget');
+        $budget->budget = $udpated_budget;
         $budget->save();
 
         Flash::success(Lang::get('genuineq.tms::lang.component.teacher-profile.message.budget_update_successful'));

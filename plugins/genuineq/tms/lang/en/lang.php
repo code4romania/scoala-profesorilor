@@ -413,7 +413,7 @@
                 'school_level_id_numeric' => 'Nivelul scolii specificat nu exista in lista de valori posibile',
                 'contract_type_id_numeric' => 'Tipul de contract specificat nu exista in lista de valori posibile',
                 'description_string' => 'Descrierea trebuie sa fie de tip string',
-                'invalid_budget' => 'Bugetul trebuie sa minim 0'
+                'invalid_budget' => 'Bugetul trebuie sa fie minim 0'
             ],
             'message' => [
                 'profile_update_successful' => 'Profilul a fost actualizat cu succes',
