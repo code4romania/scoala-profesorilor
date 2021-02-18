@@ -139,6 +139,9 @@ class Account extends ComponentBase
         /** Extract the user */
         $user = Auth::getUser();
 
+        /** Trim dangerous characters from the email before saving. */
+        $data['accountEmail'] = ltrim($data['accountEmail'], '=-@+');
+
         /** Update the email */
         $user->email = $data['accountEmail'];
         $user->save();
