@@ -495,6 +495,9 @@ class SchoolTeacherProfile extends ComponentBase
             throw new ValidationException($validation);
         }
 
+        /** Sanitize description before update. */
+        $data['description'] = ltrim($data['description'], '=-@+');
+
         if ($teacher) {
             $teacher->fill($data);
             $teacher->save();
@@ -591,6 +594,9 @@ class SchoolTeacherProfile extends ComponentBase
 
         /** Extract the user */
         $user = $teacher->user;
+
+        /** Trim dangerous characters from the email before saving. */
+        $data['accountEmail'] = ltrim($data['accountEmail'], '=-@+');
 
         /** Update the enmail */
         $user->email = $data['accountEmail'];
