@@ -422,37 +422,65 @@ class SchoolTeacherProfile extends ComponentBase
 
         /** Extract the school level ID. */
         if (post('school_level_1_id')) {
-            $schoolTeacherLink->school_level_1_id = SchoolLevel::whereName(post('school_level_1_id'))->first()->id;
+            $school_level = SchoolLevel::whereName(ltrim(post('school_level_1_id'), '=-@+'))->first();
+            $schoolTeacherLink->school_level_1_id = ($school_level) ? ($school_level->id) : (0);
+            if($schoolTeacherLink->school_level_1_id == 0) {
+                throw new ValidationException(['school_level_1_id' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.school_level_1_id_invalid')]);
+            }
         }
 
         /** Extract the school level ID. */
         if (post('school_level_2_id')) {
-            $schoolTeacherLink->school_level_2_id = SchoolLevel::whereName(post('school_level_2_id'))->first()->id;
+            $school_level = SchoolLevel::whereName(ltrim(post('school_level_2_id'), '=-@+'))->first();
+            $schoolTeacherLink->school_level_2_id = ($school_level) ? ($school_level->id) : (0);
+            if($schoolTeacherLink->school_level_2_id == 0) {
+                throw new ValidationException(['school_level_2_id' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.school_level_2_id_invalid')]);
+            }
         }
 
         /** Extract the school level ID. */
         if (post('school_level_3_id')) {
-            $schoolTeacherLink->school_level_3_id = SchoolLevel::whereName(post('school_level_3_id'))->first()->id;
+            $school_level = SchoolLevel::whereName(ltrim(post('school_level_3_id'), '=-@+'))->first();
+            $schoolTeacherLink->school_level_3_id = ($school_level) ? ($school_level->id) : (0);
+            if($schoolTeacherLink->school_level_3_id == 0) {
+                throw new ValidationException(['school_level_3_id' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.school_level_3_id_invalid')]);
+            }
         }
 
         /** Extract the contract type ID. */
         if (post('contract_type_id')) {
-            $schoolTeacherLink->contract_type_id = ContractType::whereName(post('contract_type_id'))->first()->id;
+            $contract_type = ContractType::whereName(ltrim(post('contract_type_id'), '=-@+'))->first();
+            $schoolTeacherLink->contract_type_id = ($contract_type)? ($contract_type->id) : (0);
+            if($schoolTeacherLink->contract_type_id == 0) {
+                throw new ValidationException(['contract_type_id' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.contract_type_id_invalid')]);
+            }
         }
 
         /** Extract the contract type ID. */
         if (post('grade_id')) {
-            $schoolTeacherLink->grade_id = Grade::whereName(post('grade_id'))->first()->id;
+            $grade = Grade::whereName(ltrim(post('grade_id'), '=-@+'))->first();
+            $schoolTeacherLink->grade_id = ($grade) ? ($grade->id) : (0);
+            if($schoolTeacherLink->grade_id == 0) {
+                throw new ValidationException(['grade_id' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.grade_id_invalid')]);
+            }
         }
 
         /** Extract the contract type ID. */
         if (post('specialization_1_id')) {
-            $schoolTeacherLink->specialization_1_id = Specialization::whereName(post('specialization_1_id'))->first()->id;
+            $specialization_1 = Specialization::whereName(ltrim(post('specialization_1_id'), '=-@+'))->first();
+            $schoolTeacherLink->specialization_1_id = ($specialization_1) ? ($specialization_1->id) : (0);
+            if($schoolTeacherLink->specialization_1_id == 0) {
+                throw new ValidationException(['specialization_1_id' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.specialization_1_id_invalid')]);
+            }
         }
 
         /** Extract the contract type ID. */
         if (post('specialization_2_id')) {
-            $schoolTeacherLink->specialization_2_id = Specialization::whereName(post('specialization_2_id'))->first()->id;
+            $specialization_2 = Specialization::whereName(ltrim(post('specialization_2_id'), '=-@+'))->first();
+            $schoolTeacherLink->specialization_2_id = ($specialization_2) ? ($specialization_2->id) : (0);
+            if($schoolTeacherLink->specialization_2_id == 0) {
+                throw new ValidationException(['specialization_2_id' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.specialization_2_id_invalid')]);
+            }
         }
 
         $schoolTeacherLink->save();

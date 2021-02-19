@@ -457,6 +457,13 @@
                 'account_new_password_confirmed' => 'Parolele nu se potrivesc',
                 'account_new_password_confirmation_required' => 'Confirmarea noii parole este obligatorie',
                 'account_new_password_confirmation_required_with' => 'Confirmarea noii parole este obligatorie',
+                'school_level_1_id_invalid' => 'Nivelul Scolar specificat nu exista in lista de valori posibile',
+                'school_level_2_id_invalid' => 'Nivelul Scolar specificat nu exista in lista de valori posibile',
+                'school_level_3_id_invalid' => 'Nivelul Scolar specificat nu exista in lista de valori posibile',
+                'contract_type_id_invalid' => 'Tipul de colaborare specificat nu exista in lista de valori posibile',
+                'grade_id_invalid' => 'Nota specificata nu exista in lista de valori posibile',
+                'specialization_1_id_invalid' => 'Specializarea specificata nu exista in lista de valori posibile',
+                'specialization_2_id_invalid' => 'Specializarea specificata nu exista in lista de valori posibile',
 
                 'name_required' => 'Numele este obligatoriu',
                 'name_regex' => 'Numele poate contine doar litere, spatiu si caracterul -',
