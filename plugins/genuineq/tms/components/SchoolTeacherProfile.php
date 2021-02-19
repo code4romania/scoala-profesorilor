@@ -148,20 +148,9 @@ class SchoolTeacherProfile extends ComponentBase
         ];
 
         /** Trim dangerous characters from the form data. */
-        $data['name'] = ltrim($data['name'], '=-@+');
-        $data['email'] = ltrim($data['email'], '=-@+');
-        $data['identifier'] = ltrim($data['identifier'], '=-@+');
-        $data['phone'] = ltrim($data['phone'], '=-@+');
-        $data['birth_date'] = ltrim($data['birth_date'], '=-@+');
-        $data['description'] = ltrim($data['description'], '=-@+');
-        $data['seniority_level'] = ltrim($data['seniority_level'], '=-@+');
-        $data['school_level_1'] = ltrim($data['school_level_1'], '=-@+');
-        $data['school_level_2'] = ltrim($data['school_level_2'], '=-@+');
-        $data['school_level_3'] = ltrim($data['school_level_3'], '=-@+');
-        $data['contract_type'] = ltrim($data['contract_type'], '=-@+');
-        $data['grade'] = ltrim($data['grade'], '=-@+');
-        $data['specialization_1'] = ltrim($data['specialization_1'], '=-@+');
-        $data['specialization_2'] = ltrim($data['specialization_2'], '=-@+');
+        foreach($data as $key => $value) {
+            $data[$key] = ltrim($value, '@-+=');
+        }
 
         $result = SchoolTeacher::createSingleSchoolTeacher($data);
         switch ($result['value']) {
