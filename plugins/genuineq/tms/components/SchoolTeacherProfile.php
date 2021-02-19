@@ -323,11 +323,21 @@ class SchoolTeacherProfile extends ComponentBase
         $data = post();
         $data['slug'] = str_replace(' ', '-', strtolower($data['name']));
 
+        /** Trim address and seniority before getting their ids. */
+        $data['address_id'] = ltrim($data['address_id'], '=-@+');
+        $data['seniority_level_id'] = ltrim($data['seniority_level_id'], '=-@+');
+
         /** Extract the address ID. */
         if ($data['address_id']) {
             $fullAddress = explode(', ', $data['address_id']);
+            if(!array_key_exists(1, $fullAddress)) {
+                throw new ValidationException(['address_id' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.address_id_format')]);
+            }
             $address = Address::whereName($fullAddress[0])->whereCounty($fullAddress[1])->first();
-            $data['address_id'] = ($address) ? ($address->id) : ('');
+            $data['address_id'] = ($address) ? ($address->id) : (0);
+            if($data['address_id'] == 0) {
+                throw new ValidationException(['address_id' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.address_id_invalid')]);
+            }
         } else {
             unset($data['address_id']);
         }
@@ -335,7 +345,10 @@ class SchoolTeacherProfile extends ComponentBase
         /** Extract the seniority level ID. */
         if ($data['seniority_level_id']) {
             $seniorityLevel = SeniorityLevel::whereName($data['seniority_level_id'])->first();
-            $data['seniority_level_id'] = ($seniorityLevel) ? ($seniorityLevel->id) : ('');
+            $data['seniority_level_id'] = ($seniorityLevel) ? ($seniorityLevel->id) : (0);
+            if($data['seniority_level_id'] == 0) {
+                throw new ValidationException(['seniority_level_id' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.seniority_level_id_invalid')]);
+            }
         } else {
             unset($data['seniority_level_id']);
         }
@@ -371,6 +384,12 @@ class SchoolTeacherProfile extends ComponentBase
         if ($validation->fails()) {
             throw new ValidationException($validation);
         }
+
+        /** Trim dangerous characters from the form data. */
+        $data['name'] = ltrim($data['name'], '=-@+');
+        $data['phone'] = ltrim($data['phone'], '=-@+');
+        $data['birth_date'] = ltrim($data['birth_date'], '=-@+');
+        $data['slug'] = ltrim($data['slug'], '=-@+');
 
         if ($teacher) {
             $teacher->fill($data);
