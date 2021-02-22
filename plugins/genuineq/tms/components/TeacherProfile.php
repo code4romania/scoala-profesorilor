@@ -262,11 +262,11 @@ class TeacherProfile extends ComponentBase
         }
 
         /** Sanitize budget before update. */
-        $udpated_budget = ltrim(post('budget'), '=-@+');
+        $updated_budget = ltrim(post('budget'), '=-@+');
 
         /** Extract the teacher profile budget and update it. */
         $budget = Auth::getUser()->profile->active_budget;
-        $budget->budget = $udpated_budget;
+        $budget->budget = $updated_budget;
         $budget->save();
 
         Flash::success(Lang::get('genuineq.tms::lang.component.teacher-profile.message.budget_update_successful'));
