@@ -114,13 +114,16 @@ class SchoolDashboard extends ComponentBase
             return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
-        if (0 > post('budget')) {
+        /** Sanitize budget before update. */
+        $updated_budget = ltrim(post('budget'), '=-@+');
+
+        if (0 > $updated_budget) {
             throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-dashboard.validation.invalid_budget'));
         }
 
         /** Extract the teacher profile budget and update it. */
         $budget = Auth::getUser()->profile->active_budget;
-        $budget->budget = post('budget');
+        $budget->budget = $updated_budget;
         $budget->save();
 
         Flash::success(Lang::get('genuineq.tms::lang.component.school-dashboard.message.budget_update_successful'));

@@ -151,10 +151,10 @@ class SchoolTeacher
             $teacher->name = $newData['name'];
             $teacher->phone = $newData['phone'];
             $teacher->birth_date = date('Y-m-d H:i:s', strtotime($newData['birth_date']));
-            $teacher->address_id = ($address) ? ($address->id) : ('');
+            $teacher->address_id = ($address) ? ($address->id) : (null);
             $teacher->description = $newData['description'];
             $teacher->user_id = $user->id;
-            $teacher->seniority_level_id = ($seniorityLevel) ? ($seniorityLevel->id) : ('');
+            $teacher->seniority_level_id = ($seniorityLevel) ? ($seniorityLevel->id) : (null);
             $teacher->save();
 
             /** Make the school-teacher connection. */
@@ -199,6 +199,11 @@ class SchoolTeacher
     {
         /** Extarct the current school. */
         $school = Auth::user()->profile;
+
+        /** Sanitise data before creation. */
+        foreach($newData as $key => $value) {
+            $newData[$key] = ltrim($value, '@-+=');
+        }
 
         /** Check if the user already exists. */
         $user = User::whereEmail($newData['email'])->whereIdentifier($newData['identifier'])->first();
