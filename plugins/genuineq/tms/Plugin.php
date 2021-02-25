@@ -24,7 +24,7 @@ class Plugin extends PluginBase
         'RainLab.Notify',
         'Rahman.Faker',
         'AjayLulia.OCookie',
-        'ZachSchneider.SecurityHeaders'
+        'Zaxbux.SecurityHeaders'
     ];
 
     /**
