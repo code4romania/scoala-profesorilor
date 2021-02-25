@@ -23,7 +23,8 @@ class Plugin extends PluginBase
         'Genuineq.Https',
         'RainLab.Notify',
         'Rahman.Faker',
-        'AjayLulia.OCookie'
+        'AjayLulia.OCookie',
+        'ZachSchneider.SecurityHeaders'
     ];
 
     /**

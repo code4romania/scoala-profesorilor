@@ -105,3 +105,6 @@
 1.0.36:
     - 'Seeder with all cookie data'
     - ocookie_seeder.php
+1.0.37:
+    - 'Seeder with security headers data'
+    - security_headers_seeder.php
