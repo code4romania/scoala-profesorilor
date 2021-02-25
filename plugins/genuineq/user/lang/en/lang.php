@@ -270,6 +270,10 @@ return [
             'created_at' => 'Registered',
             'account' => 'Account',
         ],
+
+        'restore' => [
+            'password_restore_success' => 'If the user exists, a message email with password reset instructions has been sent.',
+        ],
     ],
 
     'component' => [

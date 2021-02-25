@@ -1,0 +1,28 @@
+description = "Landing page layout for in construction"
+
+[fontAwesomeCssLink]
+==
+<html>
+
+    <!-- Header -->
+    {% partial 'head' %}
+
+    <body>
+
+        {% flash %}
+            <p
+                data-control="flash-message"
+                class="flash-message fade {{ type }}"
+                data-interval="5">
+                {{ message }}
+            </p>
+        {% endflash %}
+
+
+        <!-- Page content -->
+        {% page %}
+
+
+    </body>
+
+</html>

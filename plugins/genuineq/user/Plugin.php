@@ -4,12 +4,14 @@ use App;
 use Auth;
 use Event;
 use Backend;
+use Redirect;
 use System\Classes\PluginBase;
 use System\Classes\SettingsManager;
 use Illuminate\Foundation\AliasLoader;
 use Genuineq\User\Classes\UserRedirector;
 use Genuineq\User\Models\MailBlocker;
 use Genuineq\User\Models\User;
+use Genuineq\User\Backend\Restore;
 use RainLab\Notify\Classes\Notifier;
 use RainLab\Notify\NotifyRules\SaveDatabaseAction;
 
@@ -36,6 +38,21 @@ class Plugin extends PluginBase
             'icon'        => 'icon-user',
             'homepage'    => 'https://www.genuineq.com'
         ];
+    }
+
+    public function boot()
+    {
+        Event::listen('backend.page.beforeDisplay', function (\Backend\Classes\Controller $backendController, string $action, array $params) {
+            try {
+                if (post('postback') && ('restore' === $action)) {
+                    Restore::initPasswordReset();
+
+                    return Redirect::refresh();
+                }
+            } catch (Exception $ex) {
+                Flash::error($ex->getMessage());
+            }
+        });
     }
 
     public function register()

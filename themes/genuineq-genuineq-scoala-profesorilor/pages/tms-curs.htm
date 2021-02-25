@@ -91,7 +91,7 @@ use Genuineq\Tms\Models\Course;
         <div class="row align-middle">
             <div class="col-12 col-sm-12 col-md-7 col-lg-8">
                 <h4 class="mb-3 font-weight-bold">{{ 'course.description-title'|_ }}</h4>
-                <p class="text-justify">{{ course.description }}</p>
+                <p class="text-justify">{{ course.description|raw }}</p>
             </div>
 
             <div class="col-12 col-sm-12 col-md-5 col-lg-4">

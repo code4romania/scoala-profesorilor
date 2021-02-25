@@ -114,13 +114,16 @@ class SchoolDashboard extends ComponentBase
             return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
 
-        if (0 > post('budget')) {
+        /** Sanitize budget before update. */
+        $updated_budget = ltrim(post('budget'), '=-@+');
+
+        if (0 > $updated_budget) {
             throw new ApplicationException(Lang::get('genuineq.tms::lang.component.school-dashboard.validation.invalid_budget'));
         }
 
         /** Extract the teacher profile budget and update it. */
         $budget = Auth::getUser()->profile->active_budget;
-        $budget->budget = post('budget');
+        $budget->budget = $updated_budget;
         $budget->save();
 
         Flash::success(Lang::get('genuineq.tms::lang.component.school-dashboard.message.budget_update_successful'));
@@ -606,7 +609,7 @@ class SchoolDashboard extends ComponentBase
                 3  => $teacher->phone,
                 4  => date("d.m.Y", strtotime($teacher->birth_date)),
                 5  => $teacher->description,
-                6  => $teacher->address->name.", ".$teacher->address->county,
+                6  => ($teacher->address) ? ($teacher->address->name.", ".$teacher->address->county) : (''),
                 7  => $teacher->seniority,
                 8  => ($teacher->pivot->school_level_1_id) ? (SchoolLevel::find($teacher->pivot->school_level_1_id)->name) : (null),
                 9  => ($teacher->pivot->school_level_2_id) ? (SchoolLevel::find($teacher->pivot->school_level_2_id)->name) : (null),
@@ -615,19 +618,19 @@ class SchoolDashboard extends ComponentBase
                 12 => ($teacher->pivot->grade_id) ? (Grade::find($teacher->pivot->grade_id)->name) : (null),
                 13 => ($teacher->pivot->specialization_1_id) ? (Specialization::find($teacher->pivot->specialization_1_id)->name) : (null),
                 14 => ($teacher->pivot->specialization_2_id) ? (Specialization::find($teacher->pivot->specialization_2_id)->name) : (null),
-                15 => ($appraisal->firstSkill) ? ($appraisal->firstSkill->name) : (''),
-                16 => ($appraisal->firstSkill) ? ($appraisal->evaluation_types[$appraisal->evaluation_type_1]) : (''),
-                17 => ($appraisal->firstSkill) ? ($appraisal->percentage_1."%") : (''),
-                18 => ($appraisal->firstSkill) ? ($appraisal->grade_1) : (''),
-                19 => ($appraisal->secondSkill) ? ($appraisal->secondSkill->name) : (''),
-                20 => ($appraisal->secondSkill) ? ($appraisal->evaluation_types[$appraisal->evaluation_type_2]) : (''),
-                21 => ($appraisal->secondSkill) ? ($appraisal->percentage_2."%") : (''),
-                22 => ($appraisal->secondSkill) ? ($appraisal->grade_2) : (''),
-                23 => ($appraisal->thirdSkill) ? ($appraisal->thirdSkill->name) : (''),
-                24 => ($appraisal->thirdSkill) ? ($appraisal->evaluation_types[$appraisal->evaluation_type_3]) : (''),
-                25 => ($appraisal->thirdSkill) ? ($appraisal->percentage_3."%") : (''),
-                26 => ($appraisal->thirdSkill) ? ($appraisal->grade_3) : (''),
-                27 => $appraisal->average
+                15 => ($appraisal) ? (($appraisal->firstSkill) ? ($appraisal->firstSkill->name) : ('')) : (''),
+                16 => ($appraisal) ? (($appraisal->firstSkill) ? ($appraisal->evaluation_types[$appraisal->evaluation_type_1]) : ('')) : (''),
+                17 => ($appraisal) ? (($appraisal->firstSkill) ? ($appraisal->percentage_1."%") : ('')) : (''),
+                18 => ($appraisal) ? (($appraisal->firstSkill) ? ($appraisal->grade_1) : ('')) : (''),
+                19 => ($appraisal) ? (($appraisal->secondSkill) ? ($appraisal->secondSkill->name) : ('')) : (''),
+                20 => ($appraisal) ? (($appraisal->secondSkill) ? ($appraisal->evaluation_types[$appraisal->evaluation_type_2]) : ('')) : (''),
+                21 => ($appraisal) ? (($appraisal->secondSkill) ? ($appraisal->percentage_2."%") : ('')) : (''),
+                22 => ($appraisal) ? (($appraisal->secondSkill) ? ($appraisal->grade_2) : ('')) : (''),
+                23 => ($appraisal) ? (($appraisal->thirdSkill) ? ($appraisal->thirdSkill->name) : ('')) : (''),
+                24 => ($appraisal) ? (($appraisal->thirdSkill) ? ($appraisal->evaluation_types[$appraisal->evaluation_type_3]) : ('')) : (''),
+                25 => ($appraisal) ? (($appraisal->thirdSkill) ? ($appraisal->percentage_3."%") : ('')) : (''),
+                26 => ($appraisal) ? (($appraisal->thirdSkill) ? ($appraisal->grade_3) : ('')) : (''),
+                27 => ($appraisal) ? ($appraisal->average) : ('')
             ];
         }
         $this->page['schoolDatatableLines'] = $schoolDatatableLines;

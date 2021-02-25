@@ -127,10 +127,14 @@ class SchoolProfile extends ComponentBase
         $data = post();
         $data['slug'] = str_replace(' ', '-', strtolower($data['name']));
 
+        /** Trim address and seniority before getting their ids. */
+        $data['address_id'] = ltrim($data['address_id'], '=-@+');
+        $data['inspectorate_id'] = ltrim($data['inspectorate_id'], '=-@+');
+
         /** Extract the inspectorate ID. */
         if ($data['inspectorate_id']) {
             $inspectorate = Inspectorate::whereName($data['inspectorate_id'])->first();
-            $data['inspectorate_id'] = ($inspectorate) ? ($inspectorate->id) : ('');
+            $data['inspectorate_id'] = ($inspectorate) ? ($inspectorate->id) : (null);
         } else {
             unset($data['inspectorate_id']);
         }
@@ -138,8 +142,11 @@ class SchoolProfile extends ComponentBase
         /** Extract the address ID. */
         if ($data['address_id']) {
             $fullAddress = explode(', ', $data['address_id']);
+            if(!array_key_exists(1, $fullAddress)) {
+                throw new ValidationException(['address_id' => Lang::get('genuineq.tms::lang.component.school-profile.validation.address_id_format')]);
+            }
             $address = Address::whereName($fullAddress[0])->whereCounty($fullAddress[1])->first();
-            $data['address_id'] = ($address) ? ($address->id) : ('');;
+            $data['address_id'] = ($address) ? ($address->id) : (null);
         } else {
             unset($data['address_id']);
         }
@@ -149,7 +156,6 @@ class SchoolProfile extends ComponentBase
             'name' => ['nullable', 'max:50', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
             'slug' => 'string|max:50|nullable',
             'phone' => ['nullable', 'max:15', 'regex:/^[0123456789 +]*$/i'],
-            'email' => 'string|max:50|email|nullable',
             'principal' => ['nullable', 'max:50', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
             'contact_name' => ['nullable', 'max:50', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
             'contact_email' => 'string|max:50|email|nullable',
@@ -166,9 +172,6 @@ class SchoolProfile extends ComponentBase
             'name.max' => Lang::get('genuineq.tms::lang.component.school-profile.validation.name_max'),
             'phone.regex' => Lang::get('genuineq.tms::lang.component.school-profile.validation.phone_regex'),
             'phone.max' => Lang::get('genuineq.tms::lang.component.school-profile.validation.phone_max'),
-            'email.string' => Lang::get('genuineq.tms::lang.component.school-profile.validation.email_string'),
-            'email.max' => Lang::get('genuineq.tms::lang.component.school-profile.validation.email_max'),
-            'email.email' => Lang::get('genuineq.tms::lang.component.school-profile.validation.email_email'),
             'principal.regex' => Lang::get('genuineq.tms::lang.component.school-profile.validation.principal_regex'),
             'principal.max' => Lang::get('genuineq.tms::lang.component.school-profile.validation.principal_max'),
             'contact_name.regex' => Lang::get('genuineq.tms::lang.component.school-profile.validation.contact_name_regex'),
@@ -189,6 +192,16 @@ class SchoolProfile extends ComponentBase
         if ($validation->fails()) {
             throw new ValidationException($validation);
         }
+
+        /** Trim dangerous characters from the form data. */
+        $data['name'] = ltrim($data['name'], '=-@+');
+        $data['phone'] = ltrim($data['phone'], '=-@+');
+        $data['slug'] = ltrim($data['slug'], '=-@+');
+        $data['principal'] = ltrim($data['principal'], '=-@+');
+        $data['contact_name'] = ltrim($data['contact_name'], '=-@+');
+        $data['contact_email'] = ltrim($data['contact_email'], '=-@+');
+        $data['contact_phone'] = ltrim($data['contact_phone'], '=-@+');
+        $data['contact_role'] = ltrim($data['contact_role'], '=-@+');
 
         /** Extract the school profile */
         $schoolProfile = Auth::getUser()->profile;
@@ -231,6 +244,9 @@ class SchoolProfile extends ComponentBase
             throw new ValidationException($validation);
         }
 
+        /** Trim dangerous characters from the form data. */
+        $data['detailed_address'] = ltrim($data['detailed_address'], '=-@+');
+
         /** Extract the school profile */
         $schoolProfile = Auth::getUser()->profile;
 
@@ -271,6 +287,9 @@ class SchoolProfile extends ComponentBase
         if ($validation->fails()) {
             throw new ValidationException($validation);
         }
+
+        /** Sanitize description before update. */
+        $data['description'] = ltrim($data['description'], '=-@+');
 
         /** Extract the school profile */
         $schoolProfile = Auth::getUser()->profile;

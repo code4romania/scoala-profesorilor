@@ -123,11 +123,18 @@ class TeacherProfile extends ComponentBase
         $data = post();
         $data['slug'] = str_replace(' ', '-', strtolower($data['name']));
 
+        /** Trim address and seniority before getting their ids. */
+        $data['address_id'] = ltrim($data['address_id'], '=-@+');
+        $data['seniority_level_id'] = ltrim($data['seniority_level_id'], '=-@+');
+
         /** Extract the address ID. */
         if ($data['address_id']) {
             $fullAddress = explode(', ', $data['address_id']);
+            if(!array_key_exists(1, $fullAddress)) {
+                throw new ValidationException(['address_id' => Lang::get('genuineq.tms::lang.component.teacher-profile.validation.address_id_format')]);
+            }
             $address = Address::whereName($fullAddress[0])->whereCounty($fullAddress[1])->first();
-            $data['address_id'] = ($address) ? ($address->id) : ('');
+            $data['address_id'] = ($address) ? ($address->id) : (null);
         } else {
             unset($data['address_id']);
         }
@@ -135,7 +142,7 @@ class TeacherProfile extends ComponentBase
         /** Extract the seniority level ID. */
         if ($data['seniority_level_id']) {
             $seniorityLevel = SeniorityLevel::whereName($data['seniority_level_id'])->first();
-            $data['seniority_level_id'] = ($seniorityLevel) ? ($seniorityLevel->id) : ('');
+            $data['seniority_level_id'] = ($seniorityLevel) ? ($seniorityLevel->id) : (null);
         } else {
             unset($data['seniority_level_id']);
         }
@@ -171,6 +178,12 @@ class TeacherProfile extends ComponentBase
         if ($validation->fails()) {
             throw new ValidationException($validation);
         }
+
+        /** Trim dangerous characters from the form data. */
+        $data['name'] = ltrim($data['name'], '=-@+');
+        $data['phone'] = ltrim($data['phone'], '=-@+');
+        $data['birth_date'] = ltrim($data['birth_date'], '=-@+');
+        $data['slug'] = ltrim($data['slug'], '=-@+');
 
         /** Extract the teacher profile */
         $teacherProfile = Auth::getUser()->profile;
@@ -213,6 +226,9 @@ class TeacherProfile extends ComponentBase
             throw new ValidationException($validation);
         }
 
+        /** Sanitize description before update. */
+        $data['description'] = ltrim($data['description'], '=-@+');
+
         /** Extract the teacher profile */
         $teacherProfile = Auth::getUser()->profile;
 
@@ -239,9 +255,12 @@ class TeacherProfile extends ComponentBase
             throw new ApplicationException(Lang::get('genuineq.tms::lang.component.teacher-profile.validation.invalid_budget'));
         }
 
+        /** Sanitize budget before update. */
+        $updated_budget = ltrim(post('budget'), '=-@+');
+
         /** Extract the teacher profile budget and update it. */
         $budget = Auth::getUser()->profile->active_budget;
-        $budget->budget = post('budget');
+        $budget->budget = $updated_budget;
         $budget->save();
 
         Flash::success(Lang::get('genuineq.tms::lang.component.teacher-profile.message.budget_update_successful'));

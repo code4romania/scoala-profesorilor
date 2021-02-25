@@ -7,6 +7,7 @@ use Genuineq\User\Models\User;
 use Genuineq\Tms\Models\School;
 use Genuineq\Tms\Models\Teacher;
 use Genuineq\Tms\Classes\PeriodicTasks;
+use Genuineq\Tms\Middleware\HostHeaderMiddleware;
 use RainLab\Notify\Classes\Notifier;
 use Mail;
 
@@ -22,7 +23,8 @@ class Plugin extends PluginBase
         'Genuineq.Https',
         'RainLab.Notify',
         'Rahman.Faker',
-        'AjayLulia.OCookie'
+        'AjayLulia.OCookie',
+        'Zaxbux.SecurityHeaders'
     ];
 
     /**
@@ -204,6 +206,9 @@ class Plugin extends PluginBase
 
     public function boot()
     {
+        /** Middleware */
+        $this->app['Illuminate\Contracts\Http\Kernel']->prependMiddleware(Middleware\HostHeaderMiddleware::class);
+
         /** Extend the "Genuineq\User\Models\User" model. */
         User::extend(function($model) {
             /** Link "School" model to user model */
