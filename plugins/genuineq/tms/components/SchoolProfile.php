@@ -134,10 +134,10 @@ class SchoolProfile extends ComponentBase
         /** Extract the inspectorate ID. */
         if ($data['inspectorate_id']) {
             $inspectorate = Inspectorate::whereName($data['inspectorate_id'])->first();
-            $data['inspectorate_id'] = ($inspectorate) ? ($inspectorate->id) : (0);
-            if($data['inspectorate_id'] == 0) {
-                throw new ValidationException(['inspectorate_id' => Lang::get('genuineq.tms::lang.component.school-profile.validation.inspectorate_id_invalid')]);
-            }
+            $data['inspectorate_id'] = ($inspectorate) ? ($inspectorate->id) : (null);
+            // if($data['inspectorate_id'] == 0) {
+            //     throw new ValidationException(['inspectorate_id' => Lang::get('genuineq.tms::lang.component.school-profile.validation.inspectorate_id_invalid')]);
+            // }
         } else {
             unset($data['inspectorate_id']);
         }
@@ -149,10 +149,10 @@ class SchoolProfile extends ComponentBase
                 throw new ValidationException(['address_id' => Lang::get('genuineq.tms::lang.component.school-profile.validation.address_id_format')]);
             }
             $address = Address::whereName($fullAddress[0])->whereCounty($fullAddress[1])->first();
-            $data['address_id'] = ($address) ? ($address->id) : (0);
-            if($data['address_id'] == 0) {
-                throw new ValidationException(['address_id' => Lang::get('genuineq.tms::lang.component.school-profile.validation.address_id_invalid')]);
-            }
+            $data['address_id'] = ($address) ? ($address->id) : (null);
+            // if($data['address_id'] == 0) {
+            //     throw new ValidationException(['address_id' => Lang::get('genuineq.tms::lang.component.school-profile.validation.address_id_invalid')]);
+            // }
         } else {
             unset($data['address_id']);
         }

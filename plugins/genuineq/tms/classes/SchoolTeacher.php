@@ -90,7 +90,7 @@ class SchoolTeacher
             $rules = [
                 'name' => ['required', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
                 'email' => 'required|between:6,255|email|unique:users',
-                'identifier' => 'required|unique:users',
+                'identifier' => 'required|unique:users'
             ];
 
             /** Construct the validation error messages. */
@@ -102,7 +102,7 @@ class SchoolTeacher
                 'email.email' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.email_email'),
                 'email.unique' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.email_unique'),
                 'identifier.required' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.sid_required'),
-                'identifier.unique' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.sid_unique'),
+                'identifier.unique' => Lang::get('genuineq.tms::lang.component.school-teacher-profile.validation.sid_unique')
             ];
 
             /** Apply the validation rules. */
@@ -142,7 +142,12 @@ class SchoolTeacher
 
             /** Get the address. */
             $fullAddress = explode(', ', $newData['address']);
-            $address = Address::where('name', $fullAddress[0])->where('county', $fullAddress[1])->first();
+            if(array_key_exists(1, $fullAddress)) {
+                $address = Address::where('name', $fullAddress[0])->where('county', $fullAddress[1])->first();
+            }
+            else {
+                $address = null;
+            }
             /** Get the seniority level */
             $seniorityLevel = SeniorityLevel::whereName($newData['seniority_level'])->first();
 
@@ -273,7 +278,12 @@ class SchoolTeacher
 
             /** Get the address. */
             $fullAddress = explode(', ', $newData['address']);
-            $address = Address::whereName($fullAddress[0])->whereCounty($fullAddress[1])->first();
+            if(array_key_exists(1, $fullAddress)) {
+                $address = Address::where('name', $fullAddress[0])->where('county', $fullAddress[1])->first();
+            }
+            else {
+                $address = null;
+            }
             /** Get the seniority level */
             $seniorityLevel = SeniorityLevel::whereName($newData['seniority_level'])->first();
 
@@ -282,10 +292,10 @@ class SchoolTeacher
             $teacher->name = $newData['name'];
             $teacher->phone = $newData['phone'];
             $teacher->birth_date = date('Y-m-d H:i:s', strtotime($newData['birth_date']));
-            $teacher->address_id = ($address) ? ($address->id) : ('');
+            $teacher->address_id = ($address) ? ($address->id) : (null);
             $teacher->description = $newData['description'];
             $teacher->user_id = $user->id;
-            $teacher->seniority_level_id = ($seniorityLevel) ? ($seniorityLevel->id) : ('');
+            $teacher->seniority_level_id = ($seniorityLevel) ? ($seniorityLevel->id) : (null);
             $teacher->save();
 
             /** Make the school-teacher connection. */

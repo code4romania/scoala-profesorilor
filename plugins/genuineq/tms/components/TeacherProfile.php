@@ -134,10 +134,7 @@ class TeacherProfile extends ComponentBase
                 throw new ValidationException(['address_id' => Lang::get('genuineq.tms::lang.component.teacher-profile.validation.address_id_format')]);
             }
             $address = Address::whereName($fullAddress[0])->whereCounty($fullAddress[1])->first();
-            $data['address_id'] = ($address) ? ($address->id) : (0);
-            if($data['address_id'] == 0) {
-                throw new ValidationException(['address_id' => Lang::get('genuineq.tms::lang.component.teacher-profile.validation.address_id_invalid')]);
-            }
+            $data['address_id'] = ($address) ? ($address->id) : (null);
         } else {
             unset($data['address_id']);
         }
@@ -145,10 +142,7 @@ class TeacherProfile extends ComponentBase
         /** Extract the seniority level ID. */
         if ($data['seniority_level_id']) {
             $seniorityLevel = SeniorityLevel::whereName($data['seniority_level_id'])->first();
-            $data['seniority_level_id'] = ($seniorityLevel) ? ($seniorityLevel->id) : (0);
-            if($data['seniority_level_id'] == 0) {
-                throw new ValidationException(['seniority_level_id' => Lang::get('genuineq.tms::lang.component.teacher-profile.validation.seniority_level_id_invalid')]);
-            }
+            $data['seniority_level_id'] = ($seniorityLevel) ? ($seniorityLevel->id) : (null);
         } else {
             unset($data['seniority_level_id']);
         }
