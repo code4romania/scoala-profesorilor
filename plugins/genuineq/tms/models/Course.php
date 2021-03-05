@@ -232,7 +232,7 @@ class Course extends Model
             'category' => null,
             'searchInput' => '',
             'accreditation' => -1,
-            'sort' => 'name asc',
+            'sort' => 'start_date asc',
             'learningPlan' => null
         ], $options));
 
