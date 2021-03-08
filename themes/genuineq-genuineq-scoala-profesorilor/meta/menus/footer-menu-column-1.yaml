@@ -5,7 +5,7 @@ items:
         type: static-page
         url: null
         code: ''
-        reference: despre-program
+        reference: despre-proiect
         cmsPage: null
         replace: 0
         viewBag:
