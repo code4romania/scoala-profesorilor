@@ -1,11 +1,11 @@
 name: main-menu
 items:
     -
-        title: 'Despre Program'
+        title: 'Despre Proiect'
         nesting: '0'
         type: static-page
         code: ''
-        reference: despre-program
+        reference: despre-proiect
         replace: '0'
         viewBag:
             isHidden: '0'

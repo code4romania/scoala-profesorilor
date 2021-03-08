@@ -1,4 +1,4 @@
-description = "despre-program page layout"
+description = "despre-proiect page layout"
 
 [staticPage]
 useContent = 0
@@ -47,31 +47,31 @@ production = 1
 {% partial "carousel-full-page" %}
 <!--/.Intro Section-->
 
-<!--About Program-->
-{variable name="programTitle" label="Title" tab="About program" type="text"}{/variable}
-{variable name="programContent" label="Content" tab="About program" type="richeditor"}{/variable}
-{variable name="programImage" label="Image" tab="About program" type="mediafinder" mode="image"}{/variable}
+<!--About Project-->
+{variable name="projectTitle" label="Title" tab="About project" type="text"}{/variable}
+{variable name="projectContent" label="Content" tab="About project" type="richeditor"}{/variable}
+{variable name="projectImage" label="Image" tab="About project" type="mediafinder" mode="image"}{/variable}
 
 <section class="bg-primary py-5">
     <div class="container">
         <div class="row">
             <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                <h3 class="mb-3 wow fadeInLeft font-bold text-white">{{ programTitle }}</h3>
+                <h3 class="mb-3 wow fadeInLeft font-bold text-white">{{ projectTitle }}</h3>
             </div>
         </div>
 
         <div class="row">
             <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                <small class="text-white wow fadeInLeft">{{ programContent|raw }}</small>
+                <small class="text-white wow fadeInLeft">{{ projectContent|raw }}</small>
             </div>
 
             <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                <img src="{{ programImage|media }}" class="img-fluid">
+                <img src="{{ projectImage|media }}" class="img-fluid">
             </div>
         </div>
     </div>
 </section>
-<!--/.About Program-->
+<!--/.About Project-->
 
 <!--About Us-->
 {variable name="usTitle" label="Title" tab="About us" type="text"}{/variable}
