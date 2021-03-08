@@ -1,0 +1,36 @@
+items:
+    -
+        title: 'Despre Proiect'
+        nesting: 0
+        type: static-page
+        url: null
+        code: ''
+        reference: despre-program
+        cmsPage: null
+        replace: 0
+        viewBag:
+            locale:
+                en:
+                    title: ''
+                    url: ''
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Cursuri
+        nesting: ''
+        type: cms-page
+        url: ''
+        code: ''
+        reference: talent-manager-schools
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            locale:
+                en:
+                    title: ''
+                    url: ''
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+name: footer-menu-column-1
