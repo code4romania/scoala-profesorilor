@@ -14,7 +14,7 @@ description = "Displays the learning plan course search form."
         <div class="input-group-append">
             <select name="sort" class="browser-default custom-select border border-white shadow-none rounded-0" id="learningPlanCourseSort">
                 {% for key, value in learningPlanCourseSortTypes %}
-                    <option value="{{ value }}">{{ key }}</option>
+                    <option value="{{ value }}"  {% if 'start_date asc' == value %} selected {% endif %}>{{ key }}</option>
                 {% endfor %}
             </select>
         </div>
