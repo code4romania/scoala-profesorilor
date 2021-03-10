@@ -7,7 +7,7 @@ description = "Displays a grid of budget categories"
     <div class="row">
 
         {% for budgetCategory in budgetCategories %}
-            <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-4">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-4">
                 {% partial "teacher-budgets/budget-category-card" budgetCategory=budgetCategory %}
             </div>
         {% endfor %}
