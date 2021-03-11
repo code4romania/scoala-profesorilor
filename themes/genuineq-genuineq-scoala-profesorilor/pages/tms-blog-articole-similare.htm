@@ -51,10 +51,13 @@ allowedUserGroups[] = "school"
 
                     <!--Post-->
                     <div class="post-wrapper" data-wow-delay="0.2s">
+
                         <!--Featured image -->
+                        {% if post.custom_fields.featured_image %}
                         <a href="{{ post.url }}">
                             <img src="{{ post.custom_fields.featured_image|media }}" class="img-fluid" alt="post-image">
                         </a>
+                        {% endif %}
 
                         <h6>
                             <img src="{{ 'assets/img/svg/icon-dot.svg'|theme }}" alt="author">&nbsp;{{ 'blog.author'|_ }}:&nbsp;{{ post.user.first_name }}&nbsp;{{ post.user.last_name }}
