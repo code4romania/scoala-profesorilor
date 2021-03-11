@@ -108,3 +108,5 @@
 1.0.37:
     - 'Seeder with security headers data'
     - security_headers_seeder.php
+1.0.38:
+    - 'Updated init_seeder with custom settings data (blog-post\futured_image) for SmallExtensions plugin'
