@@ -49,6 +49,12 @@ fields:
             condition: checked
         type: number
 
+    card_color:
+        label: 'genuineq.tms::lang.course.label.color'
+        span: left
+        type: colorpicker
+        required: 0
+
     status:
         label: 'genuineq.tms::lang.course.label.status_form'
         span: right

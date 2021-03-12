@@ -37,7 +37,8 @@ class Course extends Model
         'credits',
         'price',
         'description',
-        'status'
+        'status',
+        'card_color',
     ];
 
     /**
@@ -126,15 +127,21 @@ class Course extends Model
         /** Set a default color. */
         $color = "#4C025E";
 
-        /** Extract the colors of the course categories. */
-        $colors = $this->categories->pluck('color');
-        if ($colors->count()) {
-            $sum = 0;
-            foreach ($colors as $color) {
-                $sum += hexdec($color);
-            }
+        /** Check if the color was set at creation */
+        if ($this->card_color) {
+            $color = $this->card_color;
 
-            $color = '#' . dechex($sum / count($colors));
+        } else {
+            /** Extract the colors of the course categories. */
+            $colors = $this->categories->pluck('color');
+            if ($colors->count()) {
+                $sum = 0;
+                foreach ($colors as $color) {
+                    $sum += hexdec($color);
+                }
+
+                $color = '#' . dechex($sum / count($colors));
+            }
         }
 
         return $color;
