@@ -154,22 +154,7 @@ order_linkedin = 5
                 <div class="row">
                     <div class="col-12">
 
-                        <form id="subscribe-form" data-request="mailSignup::onSignup" data-request-update="'mailSignup::result': '#subscribe-form'" >
-                            <div class="form-group">
-                                <div class="md-form">
-                                    <input type="text" name="email" class="form-control">
-                                    <label for="email">{{ 'blog.newsletter_email'|_ }}</label>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="col-12">
-                                    <div class="md-form m-0">
-                                        <button type="submit" class="btn btn-primary btn-sm btn-block rounded m-0">{{ 'blog.newsletter_subscribe'|_ }}</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                        {% partial 'blog-subscription-form' %}
 
                     </div>
                 </div>
