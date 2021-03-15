@@ -164,7 +164,9 @@ allowedUserGroups[] = "school"
                 <div class="row">
                     <div class="col-12">
 
+                        {% if ('production' == APP_ENV) %}
                         {% partial 'blog-subscription-form' %}
+                        {% endif %}
 
                     </div>
                 </div>
