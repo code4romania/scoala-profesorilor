@@ -164,6 +164,7 @@ allowedUserGroups[] = "school"
                 <div class="row">
                     <div class="col-12">
 
+                        <!-- Blog Subscription Form - only show in production -->
                         {% if ('production' == APP_ENV) %}
                         {% partial 'blog-subscription-form' %}
                         {% endif %}
