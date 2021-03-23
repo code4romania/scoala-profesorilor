@@ -14,7 +14,7 @@ description = "Displays the course search form."
         <div class="input-group-append">
             <select name="sort" class="browser-default custom-select border border-white shadow-none rounded-0" id="learningPlanCourseSort">
                 {% for key, value in sortTypes %}
-                    <option value="{{ value }}">{{ key }}</option>
+                    <option value="{{ value }}" {% if 'start_date asc' == value %} selected {% endif %}>{{ key }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -23,7 +23,7 @@ description = "Displays the course search form."
             <div class="input-group-append">
                 <select name="category" class="browser-default custom-select border border-white shadow-none rounded-0" id="learningPlanCourseCategory">
                     {% for key, value in categories %}
-                        <option value="{{ value }}">{{ key }}</option>
+                        <option value="{{ value }}">{{ str_limit(key, 30) }}</option>
                     {% endfor %}
                 </select>
             </div>

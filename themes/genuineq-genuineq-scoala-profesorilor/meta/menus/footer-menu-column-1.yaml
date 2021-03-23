@@ -1,13 +1,18 @@
-name: main-menu
 items:
     -
         title: 'Despre Proiect'
-        nesting: '0'
+        nesting: 0
         type: static-page
+        url: null
         code: ''
         reference: despre-proiect
-        replace: '0'
+        cmsPage: null
+        replace: 0
         viewBag:
+            locale:
+                en:
+                    title: ''
+                    url: ''
             isHidden: '0'
             cssClass: ''
             isExternal: '0'
@@ -21,6 +26,11 @@ items:
         cmsPage: ''
         replace: ''
         viewBag:
+            locale:
+                en:
+                    title: ''
+                    url: ''
             isHidden: '0'
             cssClass: ''
             isExternal: '0'
+name: footer-menu-column-1

@@ -1,13 +1,15 @@
-;;
 description = "4 Column Footer"
 
 [viewBag]
 
 [staticMenu]
-code = "main-menu"
+code = "footer-menu-column-1"
+
+[staticMenu staticMenu2]
+code = "footer-menu-column-2"
 ==
 <!--Footer-->
-<footer class="page-footer bg-primary">
+<footer class="page-footer bg-primary mt-auto">
 
     <!--Footer links-->
     <div class="container text-center text-md-left py-3">
@@ -24,12 +26,12 @@ code = "main-menu"
             <hr class="w-100 clearfix d-sm-none">
 
             <!--Second column-->
-            <div class="col-lg-2 col-md-6 ml-auto">
+            <div class="col-lg-2 col-md-6 ml-0 pl-0">
                 {% if staticMenu.totalItems %}
                     <!-- Links -->
                     <ul class="list-unstyled">
                         {% for menuItem in staticMenu.menuItems %}
-                            <li><a href="{{ menuItem.url }} "><span style="font-size: 14px;">{{ menuItem.title }}</span></a></li>
+                            <li><a style="font-size: 14px" href="{{ menuItem.url }}">{{ menuItem.title }}</a></li>
                         {% endfor %}
                     </ul>
                     <!-- Links -->
@@ -40,15 +42,16 @@ code = "main-menu"
             <hr class="w-100 clearfix d-sm-none">
 
             <!--Third column-->
-            <div class="col-lg-2 col-md-6 ml-auto">
-                <ul class="list-unstyled">
-                    <li><a style="font-size: 14px;" href="{{ 'tms-blog'|page }}">Blog</a></li>
-                    <li><a style="font-size: 14px;" href="{{ 'tms-partners'|page }}">Parteneri</a></li>
-                    <li><a style="font-size: 14px;" href="{{ 'scala-evaluare'|staticPage }}">Ghid Evaluare</a></li>
-                    <li><a style="font-size: 14px;" href="{{ 'politica-de-confidentialitate'|staticPage }}">Politica de confidentialitate</a></li>
-                    <li><a style="font-size: 14px;" href="{{ 'termeni-si-conditii'|staticPage }}">Termeni si Conditii</li>
-                    <li><a style="font-size: 14px;" href="{{ 'politica-de-cookie'|staticPage  }}">Politica de Cookie</a></li>
-                </ul>
+            <div class="col-lg-2 col-md-6 mr-0 pr-0">
+                {% if staticMenu2.totalItems %}
+                    <!-- Links -->
+                    <ul class="list-unstyled">
+                        {% for menuItem in staticMenu2.menuItems %}
+                            <li><a style="font-size: 14px" href="{{ menuItem.url }} ">{{ menuItem.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    <!-- Links -->
+                {% endif %}
             </div>
             <!--/.Third column-->
 
@@ -71,7 +74,7 @@ code = "main-menu"
             <!--/.Fourth column-->
 
             <!--Fifth column-->
-            <div class="col-lg-3 col-md-6 ml-auto">
+            <div class="col-lg-2 col-md-6 ml-auto">
                 <ul class="list-unstyled">
                     <li><span style="font-size: 12px;">{{ 'footer.lauched'|_ }}</span></li>
                     <li>

@@ -1,0 +1,89 @@
+items:
+    -
+        title: Blog
+        type: cms-page
+        code: ''
+        reference: tms-blog
+        viewBag:
+            locale:
+                en:
+                    title: ''
+                    url: ''
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Parteneri
+        type: cms-page
+        code: ''
+        reference: tms-partners
+        viewBag:
+            locale:
+                en:
+                    title: ''
+                    url: ''
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Ghid Evaluare'
+        nesting: 0
+        type: static-page
+        code: ''
+        reference: scala-evaluare
+        replace: 0
+        viewBag:
+            locale:
+                en:
+                    title: ''
+                    url: ''
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Politica de Confidențialitate'
+        nesting: 0
+        type: static-page
+        code: ''
+        reference: politica-de-confidentialitate
+        replace: 0
+        viewBag:
+            locale:
+                en:
+                    title: ''
+                    url: ''
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Termeni și Condiții'
+        nesting: 0
+        type: static-page
+        code: ''
+        reference: termeni-si-conditii
+        replace: 0
+        viewBag:
+            locale:
+                en:
+                    title: ''
+                    url: ''
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Politica de cookie'
+        nesting: 0
+        type: static-page
+        code: ''
+        reference: politica-de-cookie
+        replace: 0
+        viewBag:
+            locale:
+                en:
+                    title: ''
+                    url: ''
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+
+name: footer-menu-column-2

@@ -26,6 +26,8 @@ direction = "desc"
 security = "all"
 allowedUserGroups[] = "teacher"
 allowedUserGroups[] = "school"
+
+[mailSignup]
 ==
 <div class="containter-fluid h-25" style="background-image: url({{ 'background-teacher.jpg'|media }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
     <div class="full-bg-img">
@@ -51,10 +53,13 @@ allowedUserGroups[] = "school"
 
                     <!--Post-->
                     <div class="post-wrapper" data-wow-delay="0.2s">
+
                         <!--Featured image -->
+                        {% if post.custom_fields.featured_image %}
                         <a href="{{ post.url }}">
                             <img src="{{ post.custom_fields.featured_image|media }}" class="img-fluid" alt="post-image">
                         </a>
+                        {% endif %}
 
                         <h6>
                             <img src="{{ 'assets/img/svg/icon-dot.svg'|theme }}" alt="author">&nbsp;{{ 'blog.author'|_ }}:&nbsp;{{ post.user.first_name }}&nbsp;{{ post.user.last_name }}
@@ -159,22 +164,10 @@ allowedUserGroups[] = "school"
                 <div class="row">
                     <div class="col-12">
 
-                        <form id="subscribe-form" data-request="mailSignup::onSignup" data-request-update="'mailSignup::result': '#subscribe-form'" >
-                            <div class="form-group">
-                                <div class="md-form">
-                                    <input type="text" name="email" class="form-control">
-                                    <label for="email">{{ 'blog.newsletter_email'|_ }}</label>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="col-12">
-                                    <div class="md-form m-0">
-                                        <button type="submit" class="btn btn-primary btn-sm btn-block rounded m-0">{{ 'blog.newsletter_subscribe'|_ }}</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                        <!-- Blog Subscription Form - only show in production -->
+                        {% if ('production' == APP_ENV) %}
+                        {% partial 'blog-subscription-form' %}
+                        {% endif %}
 
                     </div>
                 </div>

@@ -10,6 +10,7 @@ use Genuineq\Tms\Classes\PeriodicTasks;
 use Genuineq\Tms\Middleware\HostHeaderMiddleware;
 use RainLab\Notify\Classes\Notifier;
 use Mail;
+use alcea\cnp\Cnp;
 
 class Plugin extends PluginBase
 {
@@ -230,7 +231,10 @@ class Plugin extends PluginBase
                 $profile = new School(['contact_name' => $user->name, 'contact_email' => $user->email, 'user_id' => $user->id]);
                 $profile->save();
             } else {
-                $profile = new Teacher(['name' => $user->name, 'user_id' => $user->id]);
+                $cnp = new Cnp($user->identifier);
+                $birth_date = $cnp->getBirthDateFromCNP();
+
+                $profile = new Teacher(['name' => $user->name, 'user_id' => $user->id, 'birth_date' => $birth_date]);
                 $profile->save();
             }
         });

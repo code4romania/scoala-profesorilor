@@ -105,7 +105,6 @@ button_text = "submit"
                                 {% if recaptcha.property('type') == 'visible' %}
                                     <div class="g-recaptcha" data-sitekey="{{ site_key }}"></div>
                                     <div class="form-error-message" data-validate-for="g-recaptcha-response"></div>
-                                    <hr>
 
                                 {% elseif recaptcha.property('type') == 'invisible' %}
                                     <div class="form-error-message" data-validate-for="g-recaptcha-response"></div>
@@ -119,6 +118,9 @@ button_text = "submit"
                                 {% endif %}
                             {% endif %}
 
+                            <a href="javascript:grecaptcha.reset()">Refresh CAPTCHA</a>
+
+                            <hr>
 
                             <div class="form-row">
                                 <div class="col-12">

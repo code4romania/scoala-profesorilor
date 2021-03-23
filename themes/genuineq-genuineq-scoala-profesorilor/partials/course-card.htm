@@ -6,14 +6,14 @@ description = "Displays a course as a card"
     <div class="card-header" style="background-color: {{ course.color }} !important;">
 
         <div class="row w-100 m-0">
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-left p-0 m-0">
+            <div class="col-5 col-sm-5 col-md-6 col-lg-6 text-left p-0 m-0">
                 {% if 1 == course.accredited %}
                     <p class="small m-0 text-white"><img class="mr-1" src="{{ 'assets/img/svg/w-acknowledged.svg'|theme }}" alt="">  {{ 'course.acknowledged'|_ }}</p>
                 {% else %}
                     <p class="small m-0 text-white"><img class="mr-1" src="{{ 'assets/img/svg/w-unacknowledged.svg'|theme }}" alt="">  {{ 'course.unacknowledged'|_ }}</p>
                 {% endif %}
             </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-right p-0 m-0">
+            <div class="col-7 col-sm-7 col-md-6 col-lg-6 text-right p-0 m-0">
                 {% if 1 == course.accredited %}
                     <p class="small m-0 text-white">{{ course.credits }} {{ 'course.credits'|_ }} <span class="mx-1">&vert;</span> {{ course.price }} {{ 'general.coin'|_ }}</p>
                 {% else %}
@@ -29,7 +29,7 @@ description = "Displays a course as a card"
         <p class="card-text text-truncate m-0">{{ course.supplier.name }}</p>
 
         <div class="align-items-center d-flex tms-card-max-lines">
-            <h5 class="card-title font-weight-bold m-0">{{ str_limit(course.name, 30) }}</h5>
+            <h5 class="card-title font-weight-bold m-0">{{ str_limit(course.name, 90) }}</h5>
         </div>
 
         <p class="card-text text-truncate">{{ course.description }}</p>
