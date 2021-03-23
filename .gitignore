@@ -24,3 +24,5 @@ storage/framework/classes.php
 storage/framework/packages.php
 storage/framework/services.php
 containers/log/error.log
+containers/log/app_access.log
+containers/log/app_error.log
