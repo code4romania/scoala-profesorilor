@@ -91,14 +91,4 @@
 
 </div>
 
-<script type="text/javascript">
-    $("#signup-school-modal").on('shown.bs.modal', function(event){
-        /* Hide the body scrollbar. */
-        document.body.style.overflow = "hidden";
-    });
-
-    $("#signup-school-modal").on('hidden.bs.modal', function(){
-        /* Show the body scrollbar. */
-        document.body.style.overflow = "auto";
-    });
-</script>
+<script src="{{ ['assets/js/partials/auth/signup-school-modal.js']|theme }}"></script>
