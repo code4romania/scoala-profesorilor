@@ -103,13 +103,10 @@
     - 'Seeder with test data for semesters'
     - test_semesters_seeder.php
 1.0.36:
-    - 'Seeder with all cookie data'
-    - ocookie_seeder.php
-1.0.37:
     - 'Seeder with security headers data'
     - security_headers_seeder.php
-1.0.38:
+1.0.37:
     - 'Updated init_seeder with custom settings data (blog-post\futured_image) for SmallExtensions plugin'
-1.0.39:
+1.0.38:
     - 'Updated genuineq_tms_courses table with card_color column'
     - table_update_genuineq_tms_courses.php
