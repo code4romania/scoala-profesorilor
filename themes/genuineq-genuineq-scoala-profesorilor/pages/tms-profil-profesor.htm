@@ -136,19 +136,5 @@ forceSecure = 0
 </div>
 
 {% put scripts %}
-    <script type="text/javascript">
-        const tmsTeacherProfileAnchor = window.location.hash;
-        $(`a[href="${tmsTeacherProfileAnchor}"]`).tab('show');
-
-
-        $.request(
-            'onViewNotifications',
-            {
-                update: {
-                    'teacher-profile/notifications-tab': '#notifications-tab-content'
-                }
-            }
-        );
-
-    </script>
+    <script src="{{ ['assets/js/pages/tms-profil-profesor.js']|theme }}"></script>
 {% endput %}
