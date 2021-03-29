@@ -60,23 +60,9 @@ button_text = "submit"
                                 {% if recaptcha.property('load_script') %}
                                     <script src="https://www.google.com/recaptcha/api.js?render={{ site_key }}"></script>
                                 {% endif %}
-                                <script>
-                                    function getRecaptchaToken() {
-                                        grecaptcha.ready(function() {
-                                            grecaptcha.execute("{{ site_key }}", {action: "{{ recaptcha.property('action_name') }}"})
-                                                .then(function(token) {
-                                                    document.getElementById('g-recaptcha-response').value = token;
-                                                });
-                                        });
-                                    }
 
-                                    // Get recaptcha token once on page load, then reload it every two
-                                    // minutes to prevent it from timing out while the user fills out
-                                    // the form.
-                                    getRecaptchaToken();
-                                    window.setInterval(getRecaptchaToken, 120000);
+                                <script src="{{ ['assets/js/partials/auth/login-modal.js']|theme }}"></script>
 
-                                </script>
                                 <button type="submit" id="recaptcha_{{recaptcha.id}}" class="{{ recaptcha.property('button_class') }}" data-attach-loading>
                                     {{ recaptcha.property('button_text') }}
                                 </button>
@@ -88,20 +74,9 @@ button_text = "submit"
                                 {% if recaptcha.property('load_script') %}
                                     <script src="https://www.google.com/recaptcha/api.js?hl={{ lang }}" async defer></script>
                                 {% endif %}
-                                <script>
-                                    function submitRecaptchaForm() {
-                                        return new Promise(function(resolve, reject) {
-                                            var form = $("#recaptcha_{{recaptcha.id}}").closest("form");
-                                            if (!form[0].checkValidity()) {
-                                                form[0].reportValidity();
-                                            }
-                                            else {
-                                                form.submit();
-                                            }
-                                            grecaptcha.reset()
-                                        });
-                                    }
-                                </script>
+
+                                <script src="{{ ['assets/js/partials/auth/login-modal.js']|theme }}"></script>
+
                                 {% if recaptcha.property('type') == 'visible' %}
                                     <div class="g-recaptcha" data-sitekey="{{ site_key }}"></div>
                                     <div class="form-error-message" data-validate-for="g-recaptcha-response"></div>
@@ -160,15 +135,4 @@ button_text = "submit"
 
 </div>
 <!-- Central Modal Small -->
-
-<script type="text/javascript">
-    $("#login-modal").on('shown.bs.modal', function(){
-        /* Hide the body scrollbar. */
-        document.body.style.overflow = "hidden";
-    });
-
-    $("#login-modal").on('hidden.bs.modal', function(){
-        /* Show the body scrollbar. */
-        document.body.style.overflow = "auto";
-    });
-</script>
+<script src="{{ ['assets/js/partials/auth/login-modal.js']|theme }}"></script>
