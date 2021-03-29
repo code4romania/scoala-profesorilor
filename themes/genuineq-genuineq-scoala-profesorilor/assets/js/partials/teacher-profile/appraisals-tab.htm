@@ -1,0 +1,18 @@
+description = "Displays the teacher's appraisal"
+
+[viewBag]
+==
+
+<div id="appraisalViewEditDetails"></div>
+
+<!--Courses Section-->
+{% partial "teacher-appraisals/appraisal-search-form" %}
+
+<h5 class="mb-3 font-weight-bold">{{ 'teacher-profile.appraisals-tab.title'|_ }}</h5>
+
+<div id="appraisalSearchResults">
+    {% partial "teacher-appraisals/appraisal-grid" %}
+</div>
+<div id="appraisalSearchPagination">
+    {% partial "teacher-appraisals/appraisal-pagination" %}
+</div>

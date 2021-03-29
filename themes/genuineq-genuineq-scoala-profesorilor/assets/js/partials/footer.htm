@@ -1,0 +1,52 @@
+description = "Footer"
+
+[viewBag]
+==
+{% partial 'footer-columns' %}
+
+<script src="{{ [
+        'assets/js/popper.min.js',
+        'assets/js/bootstrap.min.js',
+        'assets/js/modules/bootstrap-datepicker.min.js',
+        'assets/js/modules/bootstrap-datepicker.ro.min.js',
+        'assets/js/mdb.min.js',
+        'assets/js/app.js'
+    ]|theme }}">
+</script>
+
+{% framework extras %}
+{% scripts %}
+
+<script type="text/javascript">
+    $(document).on('ajaxSetup', function(event, context) {
+        // Enable AJAX handling of Flash messages on all AJAX requests
+        context.options.flash = true
+
+        // Enable the StripeLoadIndicator on all AJAX requests
+        context.options.loading = $.oc.stripeLoadIndicator
+
+        // Handle Error Messages by triggering a flashMsg of type error
+        context.options.handleErrorMessage = function(message) {
+            $.oc.flashMsg({ text: message, class: 'error' })
+        }
+
+        // Handle Flash Messages by triggering a flashMsg of the message type
+        context.options.handleFlashMessage = function(message, type) {
+            $.oc.flashMsg({ text: message, class: type })
+        }
+    })
+</script>
+
+<script type="text/javascript">
+    const anchor = window.location.hash;
+    $(`a[href="${anchor}"]`).tab('show');
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".cookie_container").append('<div class="close_cookie"><span class="close_cookie_inner">x</span></div>');
+        $(".close_cookie").on("click", function(){
+            $(".cookie_container").remove();
+        })
+    });
+</script>

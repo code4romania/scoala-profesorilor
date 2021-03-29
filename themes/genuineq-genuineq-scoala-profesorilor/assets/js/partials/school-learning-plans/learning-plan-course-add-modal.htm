@@ -1,0 +1,115 @@
+description = "Modal that specifies how a course is added to a learning plan"
+
+[viewBag]
+==
+
+<div class="modal fade" id="learning-plan-course-add-modal" tabindex="-1" role="dialog" aria-labelledby="learning-plan-course-add-modal" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title w-100">{{ 'learning-plans.learning-plan-course-add-modal.title'|_ }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'learning-plans.learning-plan-course-add-modal.close'|_ }}">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form id="learning-plan-course-add-modal-form" data-request-validate data-request-flash>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <div class="md-form">
+                                    <input name="school_covered_costs" type="number" id="school_covered_costs" class="form-control">
+                                    <label for="school_covered_costs">{{ 'learning-plans.learning-plan-course-add-modal.school_covered_costs'|_ }}</label>
+                                    <div class="small text-danger" data-validate-for="school_covered_costs"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-check">
+                                <input name="transport_covered" type="checkbox" class="form-check-input" id="transport_covered">
+                                <label class="form-check-label" for="transport_covered">{{ 'learning-plans.learning-plan-course-add-modal.transport_covered'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="name"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-check">
+                                <input name="accommodation_covered" type="checkbox" class="form-check-input" id="accommodation_covered">
+                                <label class="form-check-label" for="accommodation_covered">{{ 'learning-plans.learning-plan-course-add-modal.accommodation_covered'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="name"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input name="mandatory" type="checkbox" class="form-check-input" id="mandatory">
+                                <label class="form-check-label" for="mandatory">{{ 'learning-plans.learning-plan-course-add-modal.mandatory'|_ }}</label>
+                                <div class="small text-danger" data-validate-for="name"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input name="learningPlanId" id="learningPlanId" hidden>
+                    <input name="courseId" id="courseId" hidden>
+                    <input name="teacherId" id="teacherId" value="{{ learningPlan.teacher.id }}" hidden>
+
+                </form>
+
+                <div class="row align-items-start d-none d-sm-flex d-md-flex d-lg-flex d-xl-flex">
+                    <div class="col-12">
+                        <button id="learning-plan-course-add-modal-add" type="button" class="btn btn-lg btn-block btn-primary rounded mt-3" data-dismiss="modal" data-toggle="modal">{{ 'learning-plans.learning-plan-course-add-modal.add'|_ }}</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        /* Function that saves the ID of the course that was clicked. */
+        $('#learning-plan-course-add-modal').on('show.bs.modal', function (event) {
+            $('#courseId').val($(event.relatedTarget).data('courseId'));
+            $('#learningPlanId').val($(event.relatedTarget).data('learningPlanId'));
+        });
+
+        $('#learning-plan-course-add-modal-add').on('click', function () {
+            /* Extract the search form input data for the update. */
+            var $learningPlanCourseSearchInput = $('#learningPlanCourseSearchInput').val();
+            var $learningPlanCourseSort = $('#learningPlanCourseSort').val();
+            var $learningPlanCourseCategory = $('#learningPlanCourseCategory').val();
+            var $learningPlanCourseAccreditation = $('#learningPlanCourseAccreditation').val();
+            /* Extract the active page. */
+            var $newPage = $('#learningPlanCourseSearchPagination > ul > li.active').data('page');
+
+            $('#learning-plan-course-add-modal-form').request(
+                'onSchoolLearningPlanCourseAdd',
+                {
+                    update: {
+                        'school-learning-plans/learning-plan-edit-list': '#learningPlanCardList',
+                        'school-learning-plans/learning-plan-course-grid': '#learningPlanCourseSearchResults',
+                        'school-learning-plans/learning-plan-course-pagination': '#learningPlanCourseSearchPagination'
+                    },
+                    data: {
+                        learningPlanCourseSearchInput: $learningPlanCourseSearchInput,
+                        learningPlanCourseSort: $learningPlanCourseSort,
+                        learningPlanCourseCategory: $learningPlanCourseCategory,
+                        learningPlanCourseAccreditation: $learningPlanCourseAccreditation,
+                        page: $newPage,
+                    },
+                }
+            );
+        });
+    });
+</script>

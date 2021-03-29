@@ -1,0 +1,55 @@
+description = "Displays the teacher search pagination."
+
+[viewBag]
+==
+<ul class="pagination pg-darkgrey justify-content-center">
+    {% if 1 < page %}
+        <li class="page-item" data-page="{{ 1 }}">
+            <a class="page-link teacher-search-pagination" data-page="{{ 1 }}">&Lang;</a>
+        </li>
+
+        <li class="page-item" data-page="{{ page - 1 }}">
+            <a class="page-link teacher-search-pagination" data-page="{{ page - 1 }}">&lang;</a>
+        </li>
+    {% endif %}
+
+    {% set cells = 5 %}
+    {% for i in page..pages if cells %}
+        {% if i == page %}
+            <li class="page-item active" data-page="{{ i }}">
+                <a class="page-link teacher-search-pagination" data-page="{{ i }}">{{ i }}</a>
+            </li>
+        {% else %}
+            <li class="page-item" data-page="{{ i }}">
+                <a class="page-link teacher-search-pagination" data-page="{{ i }}">{{ i }}</a>
+            </li>
+        {% endif %}
+        {% set cells = (cells - 1) %}
+    {% endfor %}
+
+    {% if page < pages %}
+        <li class="page-item" data-page="{{ page + 1 }}">
+            <a class="page-link teacher-search-pagination" data-page="{{ page + 1 }}">&rang;</a>
+        </li>
+
+        <li class="page-item" data-page="{{ pages }}">
+            <a class="page-link teacher-search-pagination" data-page="{{ pages }}">&Rang;</a>
+        </li>
+    {% endif %}
+</ul>
+
+<script type="text/javascript">
+    $('.teacher-search-pagination').on('click', function () {
+        /* Extract the clicked page. */
+        var $newPage = $(this).data('page');
+
+        /* Select the teacher select form and send the request */
+        $('#teacherSearchForm').request(
+            'onTeacherSearch',
+            {
+                update: {'school-teachers/teacher-grid': '#teacherSearchResults', 'school-teachers/teacher-search-pagination': '#teacherSearchPagination'},
+                data: {page: $newPage}
+            }
+        );
+    });
+</script>

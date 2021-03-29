@@ -1,0 +1,110 @@
+description = "Modal that displays a crop mechanism for a image"
+
+[viewBag]
+==
+
+<div class="modal fade" id="crop-image-modal-{{ avatarId }}" tabindex="-1" role="dialog" aria-labelledby="crop-image-modal-{{ avatarId }}" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title w-100">{{ 'crop-image.title'|_ }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'crop-image.close'|_ }}">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div id="crop-image-{{ avatarId }}"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <button class="btn btn-lg btn-block btn-primary rounded mt-3 crop-image-btn-{{ avatarId }}" data-dismiss="modal">{{ 'crop-image.add'|_ }}</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        /* Global variable for croppie instance. */
+        var $imageCrop_{{ avatarId }} = null;
+
+        /** Function that creates a croppie instance. */
+        function createCoppieInstance() {
+            $imageCrop_{{ avatarId }} = $('#crop-image-{{ avatarId }}').croppie({
+                enableExif: true,
+                enableZoom: true,
+                viewport: {
+                    width: 200,
+                    height: 200,
+                    type: 'circle'
+                },
+                boundary: {
+                    width: 300,
+                    height: 300
+                }
+            });
+        }
+
+        /** Event listener for "change" event on file input field. */
+        $('#{{ avatarId }}').on('change', function() {
+            var reader = new FileReader();
+
+            if(this.files[0]){
+                /* Create croppie instance. */
+                createCoppieInstance();
+            }
+
+            reader.onload = function(event) {
+                /* Bind image to croppie. */
+                $imageCrop_{{ avatarId }}.croppie('bind', {
+                    url: event.target.result
+                });
+            }
+
+            /* Open modal only when a file is selected. */
+            if(this.files[0]){
+                reader.readAsDataURL(this.files[0]);
+                /* Display image crop modal. */
+                $('#crop-image-modal-{{ avatarId }}').modal('show');
+            }
+        });
+
+        /** Event listener for "click" event on crop button. */
+        $('.crop-image-btn-{{ avatarId }}').click(function(event) {
+            $imageCrop_{{ avatarId }}.croppie('result', {
+                type: 'canvas',
+                size: 'viewport'
+            }).then(function(response) {
+                /* Close the crop image modal. */
+                $('#crop-image-modal-{{ avatarId }}').modal('hide');
+
+                /* Destroy croppie instance. */
+                 $('#crop-image-{{ avatarId }}').croppie('destroy');
+
+                /* Send image to server. */
+                $.request(
+                    '{{ eventHandler }}',
+                    {
+                        {% if schoolTeacherId %}
+                            data: { 'avatar': response, 'teacherId': {{ schoolTeacherId }} }
+                        {% else %}
+                            data: { 'avatar': response }
+                        {% endif %}
+                    }
+                );
+            });
+        });
+    });
+</script>

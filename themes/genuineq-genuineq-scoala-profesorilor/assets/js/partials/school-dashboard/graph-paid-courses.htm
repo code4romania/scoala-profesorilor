@@ -1,0 +1,55 @@
+description = "Displays the paid courses graphic"
+
+[viewBag]
+==
+<canvas id="paidCourses"></canvas>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        var ctxP = document.getElementById("paidCourses").getContext('2d');
+
+        var myPieChart = new Chart(ctxP, {
+            plugins: [ChartDataLabels],
+            type: 'pie',
+            data: {
+                labels: ["{{ schoolPaidCoursesLabel }}", "{{ teachersPaidCoursesLael }}"],
+                datasets: [{
+                    data: [{{ schoolPaidCourses }}, {{ teachersPaidCourses }}],
+                    backgroundColor: ["#e898a6", "#86645b"],
+                    hoverBackgroundColor: ["#CA7A88", "#68463D"]
+                }]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 20,
+                        boxWidth: 10
+                    }
+                },
+                plugins: {
+                    datalabels: {
+                        formatter: (value, ctx) => {
+                            let sum = 0;
+                            let dataArr = ctx.chart.data.datasets[0].data;
+                            dataArr.map(data => {
+                                sum += data;
+                            });
+                            let percentage = (value * 100 / sum).toFixed(2) + "%";
+                            return percentage;
+                        },
+                        color: 'white',
+                        labels: {
+                            title: {
+                                    font: {
+                                        size: '16'
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>

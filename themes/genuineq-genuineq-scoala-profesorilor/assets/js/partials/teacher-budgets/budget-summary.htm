@@ -1,0 +1,69 @@
+description = "Displays a a teacher's budget course summary"
+
+[viewBag]
+==
+<div class="row bg-white rounded py-3 mb-5 d-flex align-items-center">
+    <div class="col-12">
+        <h5 class="mb-3 font-weight-bold text-center text-sm-left text-md-left text-lg-left text-xl-left">{{ 'teacher-budgets.budget-summary.title'|_ }}</h5>
+
+        <div class="row align-items-center">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 align-self-center text-center my-2">
+                <p class="m-0">{{ 'teacher-budgets.budget-summary.courses_number'|_ }}:</p>
+                <h1>
+                    <strong>{{ budgetCoursesNumber }}</strong>
+                </h1>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 align-self-center text-center my-2">
+                <p class="m-0">{{ 'teacher-budgets.budget-summary.categories_number'|_ }}:</p>
+                <h1>
+                    <strong>{{ budgetCategoriesNumber }}</strong>
+                </h1>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 align-self-center text-center my-2">
+                <p class="m-0">{{ 'teacher-budgets.budget-summary.accredited'|_ }}:</p>
+                <h1>
+                    <strong>{{ budgetCoursesAccredited }}</strong>
+                </h1>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 align-self-center text-center my-2">
+                <p class="m-0">{{ 'teacher-budgets.budget-summary.credits'|_ }}:</p>
+                <h1>
+                    <strong>{{ budgetCoursesCredits }}</strong>
+                </h1>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 align-self-center text-center my-2">
+                <p class="m-0">{{ 'teacher-budgets.budget-summary.hours'|_ }}:</p>
+                <h1>
+                    <strong>{{ budgetCoursesHours }}</strong>
+                </h1>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 align-self-center text-center my-2">
+                <p class="m-0">{{ 'teacher-budgets.budget-summary.costs_supported'|_ }}:</p>
+                <h1>
+                    <strong>{{ budgetCoursesSupported }} {{ 'general.coin'|_ }}</strong>
+                </h1>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 align-self-center text-center my-2">
+                <p class="m-0">{{ 'teacher-budgets.budget-summary.costs_discounted'|_ }}:</p>
+                <h1>
+                    <strong>{{ budgetCoursesDiscounted }} {{ 'general.coin'|_ }}</strong>
+                </h1>
+            </div>
+
+            {% if budgetCoursesAverageTeachers %}
+                <div class="col-12 col-sm-6 col-md-8 col-lg-8 col-xl-8 align-self-center text-center my-2">
+                    <p class="m-0">{{ 'teacher-budgets.budget-summary.average_courses'|_ }}:</p>
+                    <h1>
+                        <strong>{{ ((budgetCoursesAverageTeacher/budgetCoursesAverageTeachers) * 100)|number_format }}% ({{ budgetCoursesAverageTeacher }} {{ 'teacher-budgets.budget-summary.average_courses_link'|_ }} {{ budgetCoursesAverageTeachers }}) </strong>
+                    </h1>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

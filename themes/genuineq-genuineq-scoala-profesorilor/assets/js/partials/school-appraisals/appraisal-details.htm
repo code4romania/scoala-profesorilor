@@ -1,0 +1,330 @@
+description = "Displays an appraisal details"
+
+[viewBag]
+==
+{% if appraisal %}
+    <div class="container p-0 my-4">
+        <div class="row bg-white rounded d-flex align-items-center py-4 appraisal-details-content">
+
+            <div class="col-12 co-sm-6 col-md-6 col-lg-6 col-xl-6 text-center text-sm-left text-md-left text-lg-left text-xl-left">
+                <h5 class="font-weight-bold my-1 mx-0">{{ 'appraisal.year'|_ }}:&nbsp;{{ appraisal.semester.year }}&nbsp;&nbsp;&nbsp;{{ 'appraisal.semester'|_ }}:&nbsp;{{ appraisal.semester.semester }}</h5>
+            </div>
+
+            <div class="col-12 co-sm-6 col-md-6 col-lg-6 col-xl-6 text-center text-sm-right text-md-right text-lg-right text-xl-right">
+                <h5 class="font-weight-bold my-1 mx-0">{{ 'appraisal.status'|_ }}:&nbsp;{{ appraisal.frontend_status }}</h5>
+            </div>
+
+            <div class="col-12 mt-2">
+                <form id="appraisalDetails" method="POST" data-request-validate data-request-flash>
+
+                    <div class="form-group my-2">
+                        <label for="appraisal_objectives">{{ 'school_appraisal.appraisal_view.objectives'|_ }}</label>
+                        <textarea
+                            name="objectives"
+                            type="text"
+                            id="appraisal_objectives"
+                            {% if ('new' == appraisal.status) or ('objectives-set' == appraisal.status) %}
+                                class="md-textarea form-control"
+                            {% else %}
+                                class="md-textarea form-control border-0"
+                                style="background-color: transparent;"
+                            {% endif %}
+
+                            rows="5"
+                            {% if 'objectives-set' != appraisal.status %}
+                                readonly
+                            {% endif %}
+                        >
+                            {{ appraisal.objectives }}
+                        </textarea>
+                        <div class="small text-danger" data-validate-for="appraisal_objectives"></div>
+                    </div>
+
+                    <div class="row align-items-top pb-2" id="appraisalDetailsSkills">
+                        {% partial "school-appraisals/appraisal-details-skills" %}
+                    </div>
+
+
+                    {% if 'objectives-set' == appraisal.status %}
+
+                        <div class="form-group">
+                            <label for="notes_objectives_set">{{ 'school_appraisal.appraisal_view.objectives_set_notes'|_ }}</label>
+                            <textarea name="notes" type="text" id="notes_objectives_set" class="md-textarea form-control" rows="5">{{ appraisal.notes_objectives_set }}</textarea>
+                            <div class="small text-danger" data-validate-for="notes"></div>
+                        </div>
+
+                    {% elseif 'objectives-approved' == appraisal.status %}
+
+                        {% if appraisal.notes_objectives_set %}
+                            <div class="form-group">
+                                <label for="notes_objectives_set">{{ 'school_appraisal.appraisal_view.objectives_set_notes'|_ }}</label>
+                                <textarea type="text" id="notes_objectives_set" class="md-textarea form-control" rows="5" readonly>{{ appraisal.notes_objectives_set }}</textarea>
+                            </div>
+                        {% endif %}
+
+                        <div class="form-group">
+                            <label for="notes_objectives_approved">{{ 'school_appraisal.appraisal_view.objectives_approved_notes'|_ }}</label>
+                            <textarea name="notes" type="text" id="notes_objectives_approved" class="md-textarea form-control" rows="5">{{ appraisal.notes_objectives_approved }}</textarea>
+                            <div class="small text-danger" data-validate-for="notes_objectives_approved"></div>
+                        </div>
+
+                    {% elseif 'skills-set' == appraisal.status %}
+
+                        {% if appraisal.notes_objectives_set %}
+                            <div class="form-group">
+                                <label for="notes_objectives_set">{{ 'school_appraisal.appraisal_view.objectives_set_notes'|_ }}</label>
+                                <textarea type="text" id="notes_objectives_set" class="md-textarea form-control" rows="5" readonly>{{ appraisal.notes_objectives_set }}</textarea>
+                            </div>
+                        {% endif %}
+
+                        {% if appraisal.notes_objectives_approved %}
+                            <div class="form-group">
+                                <label for="notes_objectives_approved">{{ 'school_appraisal.appraisal_view.objectives_approved_notes'|_ }}</label>
+                                <textarea type="text" id="notes_objectives_approved" class="md-textarea form-control" rows="5" readonly>{{ appraisal.notes_objectives_approved }}</textarea>
+                            </div>
+                        {% endif %}
+
+                        <div class="form-group">
+                            <label for="notes_skills_set">{{ 'school_appraisal.appraisal_view.skills_set_notes'|_ }}</label>
+                            <textarea name="notes" type="text" id="notes_skills_set" class="md-textarea form-control" rows="5">{{ appraisal.notes_skills_set }}</textarea>
+                            <div class="small text-danger" data-validate-for="notes_skills_set"></div>
+                        </div>
+
+                    {% elseif 'evaluation-opened' == appraisal.status %}
+
+                        {% if appraisal.notes_objectives_set %}
+                            <div class="form-group">
+                                <label for="notes_objectives_set">{{ 'school_appraisal.appraisal_view.objectives_set_notes'|_ }}</label>
+                                <textarea type="text" id="notes_objectives_set" class="md-textarea form-control" rows="5" readonly>{{ appraisal.notes_objectives_set }}</textarea>
+                            </div>
+                        {% endif %}
+
+                        {% if appraisal.notes_objectives_approved %}
+                            <div class="form-group">
+                                <label for="notes_objectives_approved">{{ 'school_appraisal.appraisal_view.objectives_approved_notes'|_ }}</label>
+                                <textarea type="text" id="notes_objectives_approved" class="md-textarea form-control" rows="5" readonly>{{ appraisal.notes_objectives_approved }}</textarea>
+                            </div>
+                        {% endif %}
+
+                        {% if appraisal.notes_skills_set %}
+                            <div class="form-group">
+                                <label for="notes_skills_set">{{ 'school_appraisal.appraisal_view.skills_set_notes'|_ }}</label>
+                                <textarea type="text" id="notes_skills_set" class="md-textarea form-control" rows="5" readonly>{{ appraisal.notes_skills_set }}</textarea>
+                            </div>
+                        {% endif %}
+
+                        <div class="form-group">
+                            <label for="notes_evaluation_opened">{{ 'school_appraisal.appraisal_view.evaluation_opened_notes'|_ }}</label>
+                            <textarea name="notes" type="text" id="notes_evaluation_opened" class="md-textarea form-control" rows="5">{{ appraisal.notes_evaluation_opened }}</textarea>
+                            <div class="small text-danger" data-validate-for="notes_skills_set"></div>
+                        </div>
+
+                    {% else %}
+
+                        {% if appraisal.notes_objectives_set %}
+                            <div class="form-group">
+                                <label for="notes_objectives_set">{{ 'school_appraisal.appraisal_view.objectives_set_notes'|_ }}</label>
+                                <textarea type="text" id="notes_objectives_set" class="md-textarea form-control" rows="5" readonly>{{ appraisal.notes_objectives_set }}</textarea>
+                            </div>
+                        {% endif %}
+
+                        {% if appraisal.notes_objectives_approved %}
+                            <div class="form-group">
+                                <label for="notes_objectives_approved">{{ 'school_appraisal.appraisal_view.objectives_approved_notes'|_ }}</label>
+                                <textarea type="text" id="notes_objectives_approved" class="md-textarea form-control" rows="5" readonly>{{ appraisal.notes_objectives_approved }}</textarea>
+                            </div>
+                        {% endif %}
+
+                        {% if appraisal.notes_skills_set %}
+                            <div class="form-group">
+                                <label for="notes_skills_set">{{ 'school_appraisal.appraisal_view.skills_set_notes'|_ }}</label>
+                                <textarea type="text" id="notes_skills_set" class="md-textarea form-control" rows="5" readonly>{{ appraisal.notes_skills_set }}</textarea>
+                            </div>
+                        {% endif %}
+
+                        {% if appraisal.notes_evaluation_opened %}
+                            <div class="form-group">
+                                <label for="notes_evaluation_opened">{{ 'school_appraisal.appraisal_view.evaluation_opened_notes'|_ }}</label>
+                                <textarea type="text" id="notes_evaluation_opened" class="md-textarea form-control" rows="5" readonly>{{ appraisal.notes_evaluation_opened }}</textarea>
+                            </div>
+                        {% endif %}
+
+                    {% endif %}
+
+                </form>
+            </div>
+
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 mt-3">
+                {% if 'objectives-set' == appraisal.status %}
+                    <button type="button" class="btn btn-outline-primary waves-effect rounded d-flex justify-content-center d-md-table mx-auto mt-3 appraisal-approve-objectives" data-appraisal-id="{{ appraisal.id }}" data-teacher-id="{{ teacher.id }}">{{ 'appraisal.approve_objectives'|_ }}</button>
+                {% elseif 'objectives-approved' == appraisal.status %}
+                    <button type="button" class="btn btn-outline-primary waves-effect rounded d-flex justify-content-center d-md-table mx-auto mt-3 appraisal-set-skills" data-appraisal-id="{{ appraisal.id }}" data-teacher-id="{{ teacher.id }}">{{ 'appraisal.set_skills'|_ }}</button>
+                {% elseif 'evaluation-opened' == appraisal.status %}
+                    <button type="button" class="btn btn-outline-primary waves-effect rounded d-flex justify-content-center d-md-table mx-auto mt-3 appraisal-close" data-appraisal-id="{{ appraisal.id }}" data-teacher-id="{{ teacher.id }}">{{ 'appraisal.close'|_ }}</button>
+                {% endif %}
+            </div>
+
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 mt-3">
+                {% if ('objectives-set' == appraisal.status) or ('objectives-approved' == appraisal.status) or ('evaluation-opened' == appraisal.status) %}
+                    <button type="button" class="btn btn-outline-secondary waves-effect rounded d-flex justify-content-center d-md-table mx-auto mt-3 appraisal-save" data-appraisal-id="{{ appraisal.id }}" data-teacher-id="{{ teacher.id }}">{{ 'appraisal.save'|_ }}</button>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        /* MDBOOTSTRAP Limitation: Trigger change value to move all input labels up. */
+        $('input.form-control').change();
+        $('textarea.form-control').change();
+        $('input.custom-file-input').change();
+
+        {% if 'objectives-set' == appraisal.status %}
+            $('.appraisal-approve-objectives').on('click', function () {
+                /* Extract the appraisal and teacher data. */
+                var $appraisalId = $(this).data('appraisalId');
+                var $teacherId = $(this).data('teacherId');
+
+                /* Extract the search form input data for the update. */
+                var $appraisalSearchInput = $('#appraisalSearchInput').val();
+                var $appraisalSort = $('#appraisalSort').val();
+                var $appraisalStatus = $('#appraisalStatus').val();
+                var $appraisalYear = $('#appraisalYear').val();
+                var $appraisalSemester = $('#appraisalSemester').val();
+                var $newPage = $('#appraisalSearchPagination > ul > li.active').data('page');
+
+                $('#appraisalDetails').request(
+                    'onSchoolApproveAppraisalObjectives',
+                    {
+                        update: {
+                            'school-appraisals/appraisal-details': '#appraisalViewEditDetails',
+                            'school-appraisals/appraisal-details-skills': '#appraisalDetailsSkills',
+                            'school-appraisals/appraisal-grid': '#appraisalSearchResults',
+                            'school-appraisals/appraisal-pagination': '#appraisalSearchPagination'
+                        },
+                        data: {
+                            appraisalId: $appraisalId,
+                            teacherId: $teacherId,
+                            appraisalSearchInput: $appraisalSearchInput,
+                            appraisalSort: $appraisalSort,
+                            appraisalStatus: $appraisalStatus,
+                            appraisalYear: $appraisalYear,
+                            appraisalSemester: $appraisalSemester,
+                            newPage: $newPage
+                        },
+                    }
+                );
+            });
+        {% elseif 'objectives-approved' == appraisal.status %}
+            $('.appraisal-set-skills').on('click', function () {
+                /* Extract the appraisal and teacher data. */
+                var $appraisalId = $(this).data('appraisalId');
+                var $teacherId = $(this).data('teacherId');
+
+                /* Extract the search form input data for the update. */
+                var $appraisalSearchInput = $('#appraisalSearchInput').val();
+                var $appraisalSort = $('#appraisalSort').val();
+                var $appraisalStatus = $('#appraisalStatus').val();
+                var $appraisalYear = $('#appraisalYear').val();
+                var $appraisalSemester = $('#appraisalSemester').val();
+                var $newPage = $('#appraisalSearchPagination > ul > li.active').data('page');
+
+                $('#appraisalDetails').request(
+                    'onSchoolSetAppraisalSkills',
+                    {
+                        update: {
+                            'school-appraisals/appraisal-details': '#appraisalViewEditDetails',
+                            'school-appraisals/appraisal-details-skills': '#appraisalDetailsSkills',
+                            'school-appraisals/appraisal-grid': '#appraisalSearchResults',
+                            'school-appraisals/appraisal-pagination': '#appraisalSearchPagination'
+                        },
+                        data: {
+                            appraisalId: $appraisalId,
+                            teacherId: $teacherId,
+                            appraisalSearchInput: $appraisalSearchInput,
+                            appraisalSort: $appraisalSort,
+                            appraisalStatus: $appraisalStatus,
+                            appraisalYear: $appraisalYear,
+                            appraisalSemester: $appraisalSemester,
+                            newPage: $newPage
+                        },
+                    }
+                );
+            });
+        {% elseif 'evaluation-opened' == appraisal.status %}
+            $('.appraisal-close').on('click', function () {
+                /* Extract the appraisal and teacher data. */
+                var $appraisalId = $(this).data('appraisalId');
+                var $teacherId = $(this).data('teacherId');
+
+                /* Extract the search form input data for the update. */
+                var $appraisalSearchInput = $('#appraisalSearchInput').val();
+                var $appraisalSort = $('#appraisalSort').val();
+                var $appraisalStatus = $('#appraisalStatus').val();
+                var $appraisalYear = $('#appraisalYear').val();
+                var $appraisalSemester = $('#appraisalSemester').val();
+                var $newPage = $('#appraisalSearchPagination > ul > li.active').data('page');
+
+                $('#appraisalDetails').request(
+                    'onSchoolAppraisalClose',
+                    {
+                        update: {
+                            'school-appraisals/appraisal-details': '#appraisalViewEditDetails',
+                            'school-appraisals/appraisal-details-skills': '#appraisalDetailsSkills',
+                            'school-appraisals/appraisal-grid': '#appraisalSearchResults',
+                            'school-appraisals/appraisal-pagination': '#appraisalSearchPagination'
+                        },
+                        data: {
+                            appraisalId: $appraisalId,
+                            teacherId: $teacherId,
+                            appraisalSearchInput: $appraisalSearchInput,
+                            appraisalSort: $appraisalSort,
+                            appraisalStatus: $appraisalStatus,
+                            appraisalYear: $appraisalYear,
+                            appraisalSemester: $appraisalSemester,
+                            newPage: $newPage
+                        },
+                    }
+                );
+            });
+        {% endif %}
+
+        $('.appraisal-save').on('click', function () {
+            /* Extract the appraisal and teacher data. */
+            var $appraisalId = $(this).data('appraisalId');
+            var $teacherId = $(this).data('teacherId');
+
+            /* Extract the search form input data for the update. */
+            var $appraisalSearchInput = $('#appraisalSearchInput').val();
+            var $appraisalSchools = $('#appraisalSchools').val();
+            var $appraisalSort = $('#appraisalSort').val();
+            var $appraisalStatus = $('#appraisalStatus').val();
+            var $appraisalYear = $('#appraisalYear').val();
+            var $appraisalSemester = $('#appraisalSemester').val();
+            var $newPage = $('#appraisalSearchPagination > ul > li.active').data('page');
+
+            $('#appraisalDetails').request(
+                'onSchoolAppraisalSave',
+                {
+                    update: {
+                        'school-appraisals/appraisal-details': '#appraisalViewEditDetails',
+                        'school-appraisals/appraisal-details-skills': '#appraisalDetailsSkills',
+                        'school-appraisals/appraisal-grid': '#appraisalSearchResults',
+                        'school-appraisals/appraisal-pagination': '#appraisalSearchPagination'
+                    },
+                    data: {
+                        appraisalId: $appraisalId,
+                        teacherId: $teacherId,
+                        appraisalSearchInput: $appraisalSearchInput,
+                        appraisalSchools: $appraisalSchools,
+                        appraisalSort: $appraisalSort,
+                        appraisalStatus: $appraisalStatus,
+                        appraisalYear: $appraisalYear,
+                        appraisalSemester: $appraisalSemester,
+                        newPage: $newPage
+                    },
+                }
+            );
+        });
+    </script>
+{% endif %}

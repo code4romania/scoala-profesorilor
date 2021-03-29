@@ -1,0 +1,28 @@
+description = "Displays the school's notifications"
+
+[viewBag]
+==
+<h5 class="mb-3 font-weight-bold">{{ 'school-profile.notifications-tab.title'|_ }}</h5>
+
+<div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="email_notifications" {% if session.user.email_notifications %} checked {% endif %}>
+    <label class="custom-control-label" for="email_notifications">{{ 'school-profile.notifications-tab.title'|_ }}</label>
+</div>
+
+<div id="notificationsList">
+    {% partial "school-notifications/list" %}
+</div>
+
+<script type="text/javascript">
+    $('#email_notifications').on('change', function () {
+        var $emailNotifications = ($('#email_notifications').prop('checked')) ? (1) : (0);
+
+        $.request(
+            'onEmailNotificationsUpdate',
+            {
+                update: {'course-grid': '#courseSearchResults', 'course-search-pagination': '#courseSearchPagination'},
+                data: {emailNotifications: $emailNotifications}
+            }
+        );
+    });
+</script>

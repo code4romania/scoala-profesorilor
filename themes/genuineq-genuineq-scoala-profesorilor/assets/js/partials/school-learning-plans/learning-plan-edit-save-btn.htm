@@ -1,0 +1,25 @@
+description = "Displays a learning plan save button"
+
+[viewBag]
+==
+<div class="row ">
+    <div class="col-12 text-center text-sm-right text-md-right text-lg-right text-xl-right p-0">
+        <a id="learning-plan-save" class="btn btn-md btn-primary mx-0 my-2 py-2 z-depth-0 waves-effect rounded" type="button" data-id="{{ learningPlan.teacher.id }}">{{ 'learning-plans.learning-plan-edit-save-btn.save'|_ }}</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#learning-plan-save').on('click', function () {
+        /* Extract the clicked teacher ID. */
+        var $teacherId = $(this).data('id');
+
+        /* Send the view request */
+        $.request(
+            'onTeacherView',
+            {
+                update: {'school-teachers/teacher-view': '#teachers-tab-content'},
+                data: {teacherId: $teacherId}
+            }
+        );
+    });
+</script>

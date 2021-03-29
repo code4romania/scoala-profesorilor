@@ -1,0 +1,67 @@
+description = "Displays the course search form."
+
+[viewBag]
+==
+<form id="courseSearchForm">
+    <div id="courseSearchFormContent" class="input-group mb-3">
+
+        <div class="input-group-prepend">
+            <span class="input-group-text md-addon border border-white bg-white"><i class="fa fa-search"></i></span>
+        </div>
+
+        <input name="searchInput" id="learningPlanCourseSearchInput" type="text" class="form-control border border-white shadow-none" placeholder="{{ 'search.placeholder'|_ }}" aria-label="{{ 'search.placeholder'|_ }}">
+
+        <div class="input-group-append">
+            <select name="sort" class="browser-default custom-select border border-white shadow-none rounded-0" id="learningPlanCourseSort">
+                {% for key, value in sortTypes %}
+                    <option value="{{ value }}" {% if 'start_date asc' == value %} selected {% endif %}>{{ key }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        {% if categories %}
+            <div class="input-group-append">
+                <select name="category" class="browser-default custom-select border border-white shadow-none rounded-0" id="learningPlanCourseCategory">
+                    {% for key, value in categories %}
+                        <option value="{{ value }}">{{ str_limit(key, 30) }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        {% endif %}
+
+        <div class="input-group-append">
+            <select name="accreditation" class="browser-default custom-select border border-white shadow-none rounded-0" id="learningPlanCourseAccreditation">
+                {% for key, value in accreditations %}
+                    <option value="{{ value }}">{{ key }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+    </div>
+</form>
+
+<script type="text/javascript">
+    function courseSearchFormSubmit(){
+        /* Extract the active page. */
+        var $newPage = $('#courseSearchPagination > ul > li.active').data('page');
+
+        /* Select the course select form and send the request */
+        $('#courseSearchForm').request(
+            'onCourseSearch',
+            {
+                update: {'course-grid': '#courseSearchResults', 'course-search-pagination': '#courseSearchPagination'},
+                data: {page: $newPage}
+            }
+        );
+    }
+
+    $('#courseSearchFormContent').on('change', 'select', function () {
+        courseSearchFormSubmit();
+    });
+
+    $('#courseSearchForm').on('submit', function () {
+        courseSearchFormSubmit();
+
+        return false;
+    })
+</script>

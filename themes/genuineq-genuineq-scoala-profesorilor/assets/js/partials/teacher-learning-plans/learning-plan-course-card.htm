@@ -1,0 +1,53 @@
+description = "Displays a learning plan course as a card"
+
+[viewBag]
+==
+<div class="card">
+    <div class="card-header" style="background-color: {{ learningPlanCourse.color }} !important;">
+
+        <div class="row w-100 m-0">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-left p-0 m-0">
+                {% if 1 == learningPlanCourse.accredited %}
+                    <p class="small m-0 text-white"><img class="mr-1" src="{{ 'assets/img/svg/w-acknowledged.svg'|theme }}" alt="">  {{ 'course.acknowledged'|_ }}</p>
+                {% else %}
+                    <p class="small m-0 text-white"><img class="mr-1" src="{{ 'assets/img/svg/w-unacknowledged.svg'|theme }}" alt="">  {{ 'course.unacknowledged'|_ }}</p>
+                {% endif %}
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-right p-0 m-0">
+                {% if 1 == learningPlanCourse.accredited %}
+                    <p class="small m-0 text-white">{{ learningPlanCourse.credits }} {{ 'course.credits'|_ }} <span class="mx-1">&vert;</span> {{ learningPlanCourse.price }} {{ 'general.coin'|_ }}</p>
+                {% else %}
+                    <p class="small m-0 text-white">{{ learningPlanCourse.price }} {{ 'general.coin'|_ }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+    <div class="card-body">
+        <p class="card-text text-truncate">{{ learningPlanCourse.supplier.name }}</p>
+
+        <div class="align-items-center d-flex tms-card-max-lines">
+            <h5 class="card-title font-weight-bold">{{ str_limit(learningPlanCourse.name, 90) }}</h5>
+        </div>
+
+        <p class="card-text text-truncate">{{ learningPlanCourse.description }}</p>
+
+        <small class="card-text align-middle"><img class="mr-1" src="{{ 'assets/img/svg/calendar.svg'|theme }}" alt=""> {{ learningPlanCourse.startDate() }} <span class="mx-1">&ndash;</span> {{ learningPlanCourse.endDate() }}</small><br>
+        <small class="card-text align-middle d-block text-truncate">{{ 'course.domain'|_ }}<span class="mr-1">&colon;</span>
+            <span style="color: {{ learningPlanCourse.color }} !important;">
+                {% for category in learningPlanCourse.categories %}
+                    {{ category.name }}
+                    {% if learningPlanCourse.categories.last() != category %}
+                        <span class="mr-1">&comma;</span>
+                    {% endif %}
+                {% endfor %}
+            </span>
+        </small>
+
+        {% if schools %}
+            <button type="button" class="btn btn-outline-primary waves-effect mt-3 rounded btn-block" data-toggle="modal" data-target="#learning-plan-course-add-modal" data-learning-plan-id="{{ learningPlan.id }}" data-course-id="{{ learningPlanCourse.id }}">{{ 'learning-plans.learning-plan-course-card.add_course'|_ }}</button>
+        {% else %}
+            <button type="button" class="btn btn-outline-primary waves-effect mt-3 rounded btn-block learning-plan-add-course" data-learning-plan-id="{{ learningPlan.id }}" data-course-id="{{ learningPlanCourse.id }}">{{ 'learning-plans.learning-plan-course-card.add_course'|_ }}</button>
+        {% endif %}
+    </div>
+</div>

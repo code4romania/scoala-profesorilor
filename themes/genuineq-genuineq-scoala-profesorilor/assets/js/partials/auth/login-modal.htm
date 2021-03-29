@@ -1,0 +1,174 @@
+[viewBag]
+
+[recaptcha]
+type = "visible"
+load_script = 1
+action_name = "submitForm"
+button_text = "submit"
+==
+<!-- Central Modal Small -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true">
+
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title w-100" id="login-modal">{{ 'login-modal.title'|_ }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+
+                        <form method="POST" data-request="onLogin" data-request-validate data-request-flash>
+                            <div class="form-group">
+                                <div class="md-form">
+                                    <input name="email" type="text" id="userSigninLogin" class="form-control">
+                                    <label for="userSigninLogin">{{ 'login-modal.email'|_ }}</label>
+                                    <div class="small text-danger" data-validate-for="email"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="md-form">
+                                    <input name="password" type="password" id="userSigninPassword" class="form-control">
+                                    <label for="userSigninPassword">{{ 'login-modal.password'|_ }}</label>
+                                    <div class="small text-danger" data-validate-for="password"></div>
+                                </div>
+                            </div>
+
+                            {% if rememberLoginMode == 'ask' %}
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                    <label><input name="remember" type="checkbox" value="1">&nbsp;{{ 'login-modal.stay_logged_in'|_ }}</label>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            {% if site_key is empty %}
+                                <div class="alert alert-danger">
+                                    {{ 'multiwebinc.recaptcha::lang.errors.missing_site_key'|trans }}
+                                </div>
+                            {% endif %}
+
+                            {# reCAPTCHA v3 #}
+                            {% if recaptcha.property('type') == 'v3' %}
+                                <!-- reCAPTCHA v3 -->
+                                {% if recaptcha.property('load_script') %}
+                                    <script src="https://www.google.com/recaptcha/api.js?render={{ site_key }}"></script>
+                                {% endif %}
+                                <script>
+                                    function getRecaptchaToken() {
+                                        grecaptcha.ready(function() {
+                                            grecaptcha.execute("{{ site_key }}", {action: "{{ recaptcha.property('action_name') }}"})
+                                                .then(function(token) {
+                                                    document.getElementById('g-recaptcha-response').value = token;
+                                                });
+                                        });
+                                    }
+
+                                    // Get recaptcha token once on page load, then reload it every two
+                                    // minutes to prevent it from timing out while the user fills out
+                                    // the form.
+                                    getRecaptchaToken();
+                                    window.setInterval(getRecaptchaToken, 120000);
+
+                                </script>
+                                <button type="submit" id="recaptcha_{{recaptcha.id}}" class="{{ recaptcha.property('button_class') }}" data-attach-loading>
+                                    {{ recaptcha.property('button_text') }}
+                                </button>
+                                <div class="form-error-message" data-validate-for="g-recaptcha-response"></div>
+                                <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response" value="">
+                            {# reCAPTCHA v2 #}
+                            {% else %}
+                                <!-- reCAPTCHA v2 -->
+                                {% if recaptcha.property('load_script') %}
+                                    <script src="https://www.google.com/recaptcha/api.js?hl={{ lang }}" async defer></script>
+                                {% endif %}
+                                <script>
+                                    function submitRecaptchaForm() {
+                                        return new Promise(function(resolve, reject) {
+                                            var form = $("#recaptcha_{{recaptcha.id}}").closest("form");
+                                            if (!form[0].checkValidity()) {
+                                                form[0].reportValidity();
+                                            }
+                                            else {
+                                                form.submit();
+                                            }
+                                            grecaptcha.reset()
+                                        });
+                                    }
+                                </script>
+                                {% if recaptcha.property('type') == 'visible' %}
+                                    <div class="g-recaptcha" data-sitekey="{{ site_key }}"></div>
+                                    <div class="form-error-message" data-validate-for="g-recaptcha-response"></div>
+
+                                {% elseif recaptcha.property('type') == 'invisible' %}
+                                    <div class="form-error-message" data-validate-for="g-recaptcha-response"></div>
+                                    <button type="button" id="recaptcha_{{recaptcha.id}}" class="g-recaptcha {{ recaptcha.property('button_class') }}" data-sitekey="{{ site_key }}" data-callback='submitRecaptchaForm' data-attach-loading>
+                                        {{ recaptcha.property('button_text') }}
+                                    </button>
+                                {% else %}
+                                    <div class="alert alert-danger">
+                                        {{ 'multiwebinc.recaptcha::lang.errors.invalid_type'|trans }}
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+
+                            <a href="javascript:grecaptcha.reset()">Refresh CAPTCHA</a>
+
+                            <hr>
+
+                            <div class="form-row">
+                                <div class="col-12">
+                                    <div class="md-form m-0">
+                                        <button type="submit" class="btn btn-lg btn-block btn-primary rounded m-0" data-attach-loading>{{'auth.login-label'|_ }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="row w-100">
+                    <div class="col-12 text-center">
+                        <p class="m-0">
+                            {{ ('login-modal.footer.signup'|_)|raw }}
+                            <a data-dismiss="modal" data-toggle="modal" href="#signup-select-modal" data-target="#signup-select-modal">{{'auth.signup-label'|_ }}</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row w-100">
+                    <div class="col-12 text-center">
+                        <p class="m-0">
+                            {{ ('login-modal.footer.password_restore'|_)|raw }}
+                            <a data-dismiss="modal" data-toggle="modal" href="#password-restore-modal" data-target="#password-restore-modal">{{'auth.password-restore-label'|_ }}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!-- Central Modal Small -->
+
+<script type="text/javascript">
+    $("#login-modal").on('shown.bs.modal', function(){
+        /* Hide the body scrollbar. */
+        document.body.style.overflow = "hidden";
+    });
+
+    $("#login-modal").on('hidden.bs.modal', function(){
+        /* Show the body scrollbar. */
+        document.body.style.overflow = "auto";
+    });
+</script>

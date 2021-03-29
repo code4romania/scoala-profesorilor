@@ -1,0 +1,31 @@
+description = "Displays a grid of teachers"
+
+[viewBag]
+==
+<div class="row">
+    {% for teacher in teachers %}
+        <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-4">
+            {% partial "school-teachers/teacher-card" teacher=teacher %}
+        </div>
+    {% endfor %}
+</div>
+
+{% partial "school-teachers/teacher-import-btn" %}
+{% partial "school-teachers/teacher-import-modal" %}
+{% partial "school-teachers/teacher-add-modal" %}
+
+<script type="text/javascript">
+    $('.teacher-view').on('click', function () {
+        /* Extract the clicked teacher ID. */
+        var $teacherId = $(this).data('id');
+
+        /* Send the view request */
+        $.request(
+            'onTeacherView',
+            {
+                update: {'school-teachers/teacher-view': '#teachers-tab-content'},
+                data: {teacherId: $teacherId}
+            }
+        );
+    });
+</script>

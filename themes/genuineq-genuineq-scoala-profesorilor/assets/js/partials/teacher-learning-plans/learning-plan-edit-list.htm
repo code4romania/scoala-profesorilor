@@ -1,0 +1,81 @@
+description = "Displays a learning plan as a list and the list of courses"
+
+[viewBag]
+==
+<div class="row py-3">
+    <div class="col-12">
+
+        <h5 class="mb-3 font-weight-bold text-center text-sm-left text-md-left text-lg-left text-xl-left">{{ 'learning-plans.learning-plan.title'|_ }}</h5>
+
+        <div class="d-inline-block w-100" style="overflow-y:auto;">
+            <ul class="timeline timeline-horizontal m-0">
+
+                {% for key, learningPlanCourse in learningPlan.accepted_courses %}
+                    {% if date(learningPlanCourse.course.start_date) >= date() %}
+                        {% partial "teacher-learning-plans/learning-plan-edit-card" learningPlanCourse=learningPlanCourse course=learningPlanCourse.course index=loop.index %}
+                    {% endif %}
+                {% endfor %}
+
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('.learning-plan-edit-card-remove').on('click', function () {
+        /* Extract the course and learning plan ID. */
+        var $courseId = $(this).data('courseId');
+        var $learningPlanId = $(this).data('learningPlanId');
+
+        /* Extract the search form input data for the update. */
+        var $learningPlanCourseSearchInput = $('#learningPlanCourseSearchInput').val();
+        var $learningPlanCourseSort = $('#learningPlanCourseSort').val();
+        var $learningPlanCourseCategory = $('#learningPlanCourseCategory').val();
+        var $learningPlanCourseAccreditation = $('#learningPlanCourseAccreditation').val();
+
+        /* Extract the active page. */
+        var $newPage = $('#learningPlanCourseSearchPagination > ul > li.active').data('page');
+
+        $.request(
+            'onTeacherLearningPlanCourseRemove',
+            {
+                confirm: "{{ 'learning-plans.learning-plan-edit-list.confirm'|_ }}",
+                update: {
+                    'teacher-learning-plans/learning-plan-edit-list': '#learningPlanCardList',
+                    'teacher-learning-plans/learning-plan-course-grid': '#learningPlanCourseSearchResults',
+                    'teacher-learning-plans/learning-plan-course-pagination': '#learningPlanCourseSearchPagination'
+                },
+                data: {
+                    courseId: $courseId,
+                    learningPlanId: $learningPlanId,
+                    learningPlanCourseSearchInput: $learningPlanCourseSearchInput,
+                    learningPlanCourseSort: $learningPlanCourseSort,
+                    learningPlanCourseCategory: $learningPlanCourseCategory,
+                    learningPlanCourseAccreditation: $learningPlanCourseAccreditation,
+                    page: $newPage,
+                },
+            }
+        );
+    });
+
+    $('.learning-plan-edit-card-participate').on('change', function () {
+        /* Extract the course and learning plan ID. */
+        var $courseId = $(this).data('courseId');
+        var $learningPlanId = $(this).data('learningPlanId');
+
+        /* Extract the value of the participated checkbox. */
+        var $participated = ($('#participated_' + $courseId).is(":checked")) ? (1) : (0);
+
+        $.request(
+            'onTeacherLearningPlanCourseParticipate',
+            {
+                data: {
+                    courseId: $courseId,
+                    learningPlanId: $learningPlanId,
+                    participated: $participated
+                },
+            }
+        );
+    });
+</script>

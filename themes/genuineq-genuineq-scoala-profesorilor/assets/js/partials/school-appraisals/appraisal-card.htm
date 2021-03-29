@@ -1,0 +1,90 @@
+description = "Displays an appraisal as a card"
+
+[viewBag]
+==
+<div class="card">
+    <div class="card-header appraisal-{{ appraisal.status }}">
+        <div class="row w-100 m-0">
+            <div class="col-12 p-0 m-0">
+                <p class="small m-0 text-white">{{ 'appraisal.school'|_ }}:&nbsp;{{ appraisal.school.name }}</p>
+            </div>
+            <div class="col-12 p-0 m-0">
+                <p class="small m-0 text-white">{{ 'appraisal.semester'|_ }}:&nbsp;{{ appraisal.semester_name }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <h5 class="card-title font-weight-bold m-0">{{ 'appraisal.status'|_ }}:&nbsp;{{ appraisal.frontend_status }}</h5>
+            </div>
+        </div>
+
+        <div class="row my-3">
+            <div class="col-12">
+                <small class="card-text">{{ 'appraisal.objectives'|_ }}:</small>
+                <p class="card-text text-truncate">{{ appraisal.objectives }}</p>
+            </div>
+        </div>
+
+        {% if appraisal.firstSkill %}
+            <div class="row my-2">
+                <div class="col-10">
+                    <small class="card-text">{{ appraisal.first_skill_name }}:</small>
+                </div>
+                {% if appraisal.first_skill_grade %}
+                    <div class="col-2">
+                        <small class="card-text pull-right border">&nbsp;{{ appraisal.first_skill_grade }}&nbsp;</small>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if appraisal.secondSkill %}
+            <div class="row my-2">
+                <div class="col-10">
+                    <small class="card-text">{{ appraisal.second_skill_name }}:</small>
+                </div>
+                {% if appraisal.second_skill_grade %}
+                    <div class="col-2">
+                        <small class="card-text pull-right border">&nbsp;{{ appraisal.second_skill_grade }}&nbsp;</small>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if appraisal.thirdSkill %}
+            <div class="row my-2">
+                <div class="col-10">
+                    <small class="card-text">{{ appraisal.third_skill_name }}:</small>
+                </div>
+                {% if appraisal.third_skill_grade %}
+                    <div class="col-2">
+                        <small class="card-text pull-right border">&nbsp;{{ appraisal.third_skill_grade }}&nbsp;</small>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if 0 != appraisal.average %}
+            <div class="row my-2">
+                <div class="col-10">
+                    <small class="card-text">{{ 'teacher_appraisal.appraisal_view.average'|_ }}:</small>
+                </div>
+                {% if appraisal.third_skill_grade %}
+                    <div class="col-2">
+                        <small class="card-text pull-right border">&nbsp;{{ appraisal.average }}&nbsp;</small>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <a href="#appraisalViewEditDetails" type="button" class="btn btn-outline-primary waves-effect rounded d-flex justify-content-center d-md-table mx-auto mt-3 appraisal-details" data-appraisal-id="{{ appraisal.id }}" data-teacher-id="{{ teacher.id }}">
+            {% if ('new' == appraisal.status) or ('skills-set' == appraisal.status) or ('closed' == appraisal.status) %}
+                {{ 'appraisal.view'|_ }}
+            {% else %}
+                {{ 'appraisal.edit'|_ }}
+            {% endif %}
+        </a>
+    </div>
+</div>

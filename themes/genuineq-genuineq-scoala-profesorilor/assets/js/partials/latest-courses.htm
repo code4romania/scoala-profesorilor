@@ -1,0 +1,13 @@
+description = "Displays the last 3 added courses"
+
+[viewBag]
+==
+<?php
+    use Genuineq\Tms\Models\Course;
+
+    function onStart()
+    {
+        $this['courses'] = Course::orderBy('created_at', 'desc')->take(3)->get() ;
+    }
+?>
+==

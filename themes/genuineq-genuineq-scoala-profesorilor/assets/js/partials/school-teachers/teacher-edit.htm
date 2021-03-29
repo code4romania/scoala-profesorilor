@@ -1,0 +1,353 @@
+description = "Displays the teacher profile forms"
+
+[viewBag]
+==
+{% partial "school-teachers/teacher-remove" teacher=schoolTeacherProfile %}
+
+<h5 class="mb-3 mt-4 font-weight-bold">{{ 'teachers.teacher-view.title'|_ }}</h5>
+
+<div class="row">
+    <div class="col-12 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+
+        <div class="row">
+            <div class="col-12 bg-white rounded p-3">
+
+                <h5 class="mb-3 font-weight-bold">{{ 'teacher.profile.form.profile.title'|_ }}</h5>
+
+                <form method="POST" data-request="onSchoolTeacherProfileUpdate" data-request-data="teacherId: '{{ schoolTeacherProfile.id }}'" data-request-validate data-request-flash>
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="name" type="text" id="school_teacher_name" class="form-control" value="{{ schoolTeacherProfile.name }}">
+                            <label for="school_teacher_name">{{ 'teacher.profile.form.profile.name'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="name"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="phone" type="text" id="school_teacher_phone" class="form-control" value="{{ schoolTeacherProfile.phone }}">
+                            <label for="school_teacher_phone">{{ 'teacher.profile.form.profile.phone'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="phone"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="birth_date" type="text" id="school_teacher_birth_date" class="form-control" value="{{ schoolTeacherProfile.formated_birth_date }}">
+                            <label for="school_teacher_birth_date">{{ 'teacher.profile.form.profile.birth_date'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="birth_date"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="address_id" type="text" id="school_teacher_address_id" class="form-control" value="{{ schoolTeacherProfileAddress }}">
+                            <label for="school_teacher_address_id">{{ 'teacher.profile.form.profile.address_id'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="address_id"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="seniority_level_id" type="text" id="school_teacher_seniority_level_id" class="form-control" value="{{ schoolTeacherProfileSeniorityLevel }}">
+                            <label for="school_teacher_seniority_level_id">{{ 'teacher.profile.form.profile.seniority_level_id'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="seniority_level_id"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
+                            <div class="md-form m-0">
+                                <button type="submit" class="btn btn-sm btn-block btn-primary rounded m-0" data-attach-loading>{{'teacher.profile.form.profile.save'|_ }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="row pt-5">
+            <div class="col-12 bg-white rounded p-3">
+
+                <h5 class="mb-3 font-weight-bold">{{ 'teacher.profile.form.account.title'|_ }}</h5>
+
+                <form method="POST" data-request="onSchoolTeacherEmailUpdate" data-request-data="teacherId: '{{ schoolTeacherProfile.id }}'" data-request-validate data-request-flash>
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="accountEmail" type="text" id="school_teacher_accountEmail" class="form-control" value="{{ schoolTeacherUser.email }}">
+                            <label for="school_teacher_accountEmail">{{ 'teacher.profile.form.account.email'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="accountEmail"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
+                            <div class="md-form m-0">
+                                <button type="submit" class="btn btn-sm btn-block btn-primary rounded m-0" data-attach-loading>{{'teacher.profile.form.profile.save'|_ }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <form method="POST" data-request="onSchoolTeacherPasswordUpdate" data-request-data="teacherId: '{{ schoolTeacherProfile.id }}'" data-request-validate data-request-flash>
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="accountNewPassword" type="password" id="school_teacher_accountNewPassword" class="form-control">
+                            <label for="school_teacher_accountNewPassword">{{ 'teacher.profile.form.account.new_password'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="accountNewPassword"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="accountNewPassword_confirmation" type="password" id="school_teacher_accountNewPassword_confirmation" class="form-control">
+                            <label for="school_teacher_accountNewPassword_confirmation">{{ 'teacher.profile.form.account.re_new_password'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="accountNewPassword_confirmation"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
+                            <div class="md-form m-0">
+                                <button type="submit" class="btn btn-sm btn-block btn-primary rounded m-0" data-attach-loading>{{'teacher.profile.form.profile.save'|_ }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        {% if schoolTeacherProfile.has_schools %}
+            <div class="row pt-5">
+                <div class="col-12 bg-white rounded p-3">
+
+                    <h5 class="mb-3 font-weight-bold">{{ 'teacher.profile.schools'|_ }}</h5>
+
+                    <ul class="list-group">
+                        {% for school in schoolTeacherProfile.schools %}
+                            <li class="list-group-item">{{ school.name }}</li>
+                        {% endfor%}
+                    </ul>
+
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="col-12 col-sm-5 offset-sm-2 col-md-5 offset-md-2 col-lg-5 offset-lg-2 col-xl-5 offset-xl-2">
+
+        <div class="row">
+            <div class="col-12 bg-white rounded p-3">
+
+                <h5 class="mb-3 font-weight-bold">{{ 'teacher.profile.form.photo.title'|_ }}</h5>
+                <small>{{ 'teacher.profile.form.photo.description'|_ }}</small>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <img src="{{ (schoolTeacherUser.getAvatarThumb()) ? (schoolTeacherUser.getAvatarThumb(150)) : ('assets/img/svg/no-avatar.svg'|theme) }}" class="rounded-circle" alt="avatar" height="150">
+                        </div>
+                    </div>
+                </div>
+
+                <form method="POST">
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="avatar" type="file" class="custom-file-input" id="school_teacher_avatar">
+                            <label class="custom-file-label" for="school_teacher_avatar">{{ 'teacher.profile.form.photo.label'|_ }}</label>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="row pt-5">
+            <div class="col-12 bg-white rounded p-3">
+
+                <h5 class="mb-3 font-weight-bold">{{ 'teacher.profile.form.description.title'|_ }}</h5>
+
+                <form method="POST" data-request="onSchoolTeacherProfileDescriptionUpdate" data-request-data="teacherId: '{{ schoolTeacherProfile.id }}'" data-request-validate data-request-flash>
+                    <div class="form-group">
+                        <div class="md-form">
+                            <textarea name="description" type="text" id="school_teacher_description" class="md-textarea form-control" rows="3">{{ schoolTeacherProfile.description }}</textarea>
+                            <label for="school_teacher_description">{{ 'teacher.profile.form.description.description'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="description"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
+                            <div class="md-form m-0">
+                                <button type="submit" class="btn btn-sm btn-block btn-primary rounded m-0" data-attach-loading>{{'teacher.profile.form.description.save'|_ }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="row pt-5">
+            <div class="col-12 bg-white rounded p-3">
+
+                <h5 class="mb-3 font-weight-bold">{{ 'teacher.profile.form.profile.title'|_ }}</h5>
+
+                <form method="POST" data-request="onSchoolTeacherProfileLinkUpdate" data-request-data="teacherId: '{{ schoolTeacherProfile.id }}'" data-request-validate data-request-flash>
+
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="school_level_1_id" type="text" id="school_teacher_school_level_1_id" class="form-control" value="{{ schoolTeacherProfileSchoolLevel1 }}">
+                            <label for="school_teacher_school_level_1_id">{{ ('teacher.profile.form.profile.school_level_id'|_) ~ ' 1' }}</label>
+                            <div class="small text-danger" data-validate-for="school_level_1_id"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="school_level_2_id" type="text" id="school_teacher_school_level_2_id" class="form-control" value="{{ schoolTeacherProfileSchoolLevel2 }}">
+                            <label for="school_teacher_school_level_2_id">{{ ('teacher.profile.form.profile.school_level_id'|_) ~ ' 2' }}</label>
+                            <div class="small text-danger" data-validate-for="school_level_2_id"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="school_level_3_id" type="text" id="school_teacher_school_level_3_id" class="form-control" value="{{ schoolTeacherProfileSchoolLevel3 }}">
+                            <label for="school_teacher_school_level_3_id">{{ ('teacher.profile.form.profile.school_level_id'|_) ~ ' 3' }}</label>
+                            <div class="small text-danger" data-validate-for="school_level_3_id"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="contract_type_id" type="text" id="school_teacher_contract_type_id" class="form-control" value="{{ schoolTeacherProfileContractType }}">
+                            <label for="school_teacher_contract_type_id">{{ 'teacher.profile.form.profile.contract_type_id'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="contract_type_id"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="grade_id" type="text" id="school_teacher_grade_id" class="form-control" value="{{ schoolTeacherProfileGrade }}">
+                            <label for="school_teacher_grade_id">{{ 'teacher.profile.form.profile.grade_id'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="grade_id"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="specialization_1_id" type="text" id="school_teacher_specialization_1_id" class="form-control" value="{{ schoolTeacherProfileSpecialization_1 }}">
+                            <label for="school_teacher_specialization_1_id">{{ 'teacher.profile.form.profile.specialization_1_id'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="specialization_1_id"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input name="specialization_2_id" type="text" id="school_teacher_specialization_2_id" class="form-control" value="{{ schoolTeacherProfileSpecialization_2 }}">
+                            <label for="school_teacher_specialization_2_id">{{ 'teacher.profile.form.profile.specialization_2_id'|_ }}</label>
+                            <div class="small text-danger" data-validate-for="specialization_2_id"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-12 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-4 offset-lg-8 col-xl-4 offset-xl-8">
+                            <div class="md-form m-0">
+                                <button type="submit" class="btn btn-sm btn-block btn-primary rounded m-0" data-attach-loading>{{'teacher.profile.form.profile.save'|_ }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% partial "image-crop" avatarId='school_teacher_avatar' eventHandler='onSchoolTeacherAvatarUpdate' schoolTeacherId=schoolTeacherProfile.id %}
+
+<script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
+
+<script type="text/javascript">
+
+    $( document ).ready(function() {
+        $('#teachers-tab-content').on('ajaxUpdate', function() {
+            /* MDBOOTSTRAP Limitation: Trigger change value to move all input labels up. */
+            $('input.form-control').change();
+            $('textarea.form-control').change();
+            $('input.custom-file-input').change();
+        })
+
+        $('#school_teacher_address_id').autocomplete({
+            source: {{ schoolTeacherAddresses|raw }},
+            highlightClass: 'text-danger',
+            treshold: 1
+        });
+
+        $('#school_teacher_seniority_level_id').autocomplete({
+            source: {{ schoolTeacherSeniorityLevels|raw }},
+            highlightClass: 'text-danger',
+            treshold: 1
+        });
+
+        $('#school_teacher_school_level_1_id').autocomplete({
+            source: {{ schoolTeacherSchoolLevels|raw }},
+            highlightClass: 'text-danger',
+            treshold: 1
+        });
+
+        $('#school_teacher_school_level_2_id').autocomplete({
+            source: {{ schoolTeacherSchoolLevels|raw }},
+            highlightClass: 'text-danger',
+            treshold: 1
+        });
+
+        $('#school_teacher_school_level_3_id').autocomplete({
+            source: {{ schoolTeacherSchoolLevels|raw }},
+            highlightClass: 'text-danger',
+            treshold: 1
+        });
+
+        $('#school_teacher_contract_type_id').autocomplete({
+            source: {{ schoolTeacherContractTypes|raw }},
+            highlightClass: 'text-danger',
+            treshold: 1
+        });
+
+        $('#school_teacher_grade_id').autocomplete({
+            source: {{ schoolTeacherGrades|raw }},
+            highlightClass: 'text-danger',
+            treshold: 1
+        });
+
+        $('#school_teacher_specialization_1_id').autocomplete({
+            source: {{ schoolTeacherSpecializations|raw }},
+            highlightClass: 'text-danger',
+            treshold: 1
+        });
+
+        $('#school_teacher_specialization_2_id').autocomplete({
+            source: {{ schoolTeacherSpecializations|raw }},
+            highlightClass: 'text-danger',
+            treshold: 1
+        });
+
+        $('#school_teacher_birth_date').datepicker({
+            format: "dd-mm-yyyy",
+            weekStart: 1,
+            language: "ro",
+            todayHighlight: true
+        });
+
+        $('#school_teacher_avatar').on('change',function(event){
+            if (event.target.files.length) {
+                $(this).next('.custom-file-label').html(event.target.files[0].name);
+            }
+        })
+    });
+
+</script>

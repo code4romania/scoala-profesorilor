@@ -1,0 +1,22 @@
+description = "Displays a teacher's appraisal"
+
+[viewBag]
+==
+
+<div id="appraisalViewEditDetails">
+    {% partial "school-appraisals/appraisal-details" %}
+</div>
+
+{% partial "school-appraisals/appraisal-edit-save-btn" %}
+
+<!--Courses Section-->
+{% partial "school-appraisals/appraisal-search-form" %}
+
+<h5 class="mb-3 font-weight-bold">{{ 'school-profile.appraisals-tab.title'|_ }}</h5>
+
+<div id="appraisalSearchResults">
+    {% partial "school-appraisals/appraisal-grid" %}
+</div>
+<div id="appraisalSearchPagination">
+    {% partial "school-appraisals/appraisal-pagination" %}
+</div>

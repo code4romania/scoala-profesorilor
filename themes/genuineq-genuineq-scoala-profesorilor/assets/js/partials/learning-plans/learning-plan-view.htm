@@ -1,0 +1,23 @@
+description = "Displays a learning plan as a list"
+
+[viewBag]
+==
+<div class="row py-3">
+    <div class="col-12">
+
+        <h5 class="mb-1 font-weight-bold text-center text-sm-left text-md-left text-lg-left text-xl-left">{{ 'learning-plans.learning-plan.title'|_ }}</h5>
+
+        <div class="d-inline-block w-100 ccc" style="overflow-y:auto;">
+            <ul class="timeline timeline-horizontal m-0">
+
+                {% for key, learningPlanCourse in learningPlan.accepted_courses %}
+                    {% if date(learningPlanCourse.course.start_date) >= date() %}
+                        {% partial "learning-plans/learning-plan-view-card" learningPlanCourse=learningPlanCourse course=learningPlanCourse.course index=loop.index %}
+                    {% endif %}
+                {% endfor %}
+
+            </ul>
+        </div>
+
+    </div>
+</div>

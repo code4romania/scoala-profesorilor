@@ -1,0 +1,77 @@
+description = "Displays a grid of courses"
+
+[viewBag]
+==
+
+<div class="container p-0 my-4">
+    <div class="row">
+
+        {% for course in courses %}
+            <div class="col-12 col-sm-12 col-md-6 col-xl-4 mb-4">
+                {% partial "course-card"
+                    course=course
+                    detailsPage="tms-curs"
+                    detailsKeyColumn="slug"
+                    detailsUrlParameter="slug"
+                %}
+            </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% if ((true == pagination) and (1 < courses.lastPage)) %}
+    <nav>
+        <ul class="pagination pg-primary justify-content-center">
+            {% if courses.currentPage > 1 %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ this.page.baseFileName|page({ (pageParam): (courses.currentPage-1) }) }}">
+                        <span aria-hidden="true">&lang;</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            {% for page in 1..courses.lastPage %}
+                <li class="page-item {{ courses.currentPage == page ? 'active' : null }}">
+                    <a class="page-link" href="{{ this.page.baseFileName|page({ (pageParam): page }) }}">{{ page }}</a>
+                </li>
+            {% endfor %}
+
+            {% if courses.lastPage > courses.currentPage %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ this.page.baseFileName|page({ (pageParam): (courses.currentPage+1) }) }}">
+                        <span aria-hidden="true">&rang;</span>
+                    </a>
+                </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+{% elseif ((true == rawPagination) and (1 < courses.lastPage)) %}
+    <nav>
+        <ul class="pagination pg-primary justify-content-center">
+            {% if courses.currentPage() > 1 %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ courses.previousPageUrl() }}">
+                        <span aria-hidden="true">&lang;</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            {% for page in 1..courses.lastPage() %}
+                <li class="page-item {{ courses.currentPage() == page ? 'active' : null }}">
+                    <a class="page-link" href="{{ courses.url(page) }}">{{ page }}</a>
+                </li>
+            {% endfor %}
+
+            {% if courses.lastPage() > courses.currentPage() %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ courses.nextPageUrl() }}">
+                        <span aria-hidden="true">&rang;</span>
+                    </a>
+                </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+{% endif %}

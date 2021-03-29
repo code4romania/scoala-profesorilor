@@ -1,0 +1,33 @@
+description = "Displays the teacher's learning plan"
+
+[viewBag]
+==
+{% partial "teacher-learning-plans/learning-plan-summary" teacher=learningPlan.teacher %}
+
+{% partial "learning-plans/learning-plan-view" learningPlan=learningPlan %}
+
+{% partial "teacher-learning-plans/learning-plan-edit-btn" learningPlan=learningPlan displayDivId='learning-plan-tab-content' %}
+
+
+{% if 0 < proposedRequests.count() %}
+    <div class="row py-5 mt-4 align-middle" style="background-color: #F7F0CA;">
+
+        <div class="col-12">
+            <h5 class="mb-3 font-weight-bold">{{ 'teachers.teacher-view.proposed-requests'|_ }}&nbsp;{{ teacher.name }}</h5>
+            {% partial "teacher-learning-plans/learning-plan-proposed-requests-slider" id='teacher-proposed-requests' learningPlanCourses=proposedRequests %}
+        </div>
+
+    </div>
+{% endif %}
+
+
+{% if 0 < schoolDeclinedRequests.count() %}
+    <div class="row py-5 align-middle" style="background-color: #E898A6;">
+
+        <div class="col-12">
+            <h5 class="mb-3 font-weight-bold">{{ 'teachers.teacher-view.declined-requests'|_ }}&nbsp;{{ teacher.name }}</h5>
+            {% partial "learning-plans/learning-plan-declined-requests-slider" id='teacher-declined-requests' learningPlanCourses=schoolDeclinedRequests %}
+        </div>
+
+    </div>
+{% endif %}

@@ -1,0 +1,25 @@
+description = "Displays a budget category as a card"
+
+[viewBag]
+==
+<!-- Card -->
+<div class="card d-flex">
+
+    <!-- Card image -->
+    <div class="view overlay d-flex" style="background-color: {{ budgetCategory.color }} !important;height: 140px;">
+        <img class="card-img-top my-auto h-100" src="{{ (budgetCategory.icon) ? (budgetCategory.icon|media) : ('assets/img/svg/category.svg'|theme) }}" alt="">
+    </div>
+    <!-- /.Card image -->
+
+    <!-- Card content -->
+    <div class="card-body align-items-center d-flex tms-card-max-lines">
+
+        <!-- Title -->
+        <h5 class="card-title font-weight-bold my-0 mx-auto text-center">{{ str_limit(budgetCategory.name, 75) }}</h5>
+        <!-- /.Title -->
+
+    </div>
+    <!-- /.Card content -->
+
+</div>
+<!-- /.Card -->

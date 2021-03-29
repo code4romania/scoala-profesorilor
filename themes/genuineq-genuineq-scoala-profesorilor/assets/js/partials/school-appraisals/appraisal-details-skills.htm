@@ -1,0 +1,199 @@
+description = "Displays an appraisal details skills"
+
+[viewBag]
+==
+{% if 'new' != appraisal.status and 'objectives-set' != appraisal.status %}
+    <div class="col-12 mt-3">
+        <div class="md-form my-1">
+            <input name="first_skill" type="text" id="first_skill" class="form-control" value="{{ appraisal.first_skill_name }}" {% if 'objectives-approved' != appraisal.status %} readonly {% endif %}>
+            <label for="first_skill">{{ 'school_appraisal.appraisal_view.skill'|_ }}</label>
+            <div class="small text-danger" data-validate-for="first_skill"></div>
+            <small id="first_skill_help" class="form-text text-muted">{{ appraisal.first_skill_description }}</small>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-3">
+        <div class="form-group">
+            <div class="md-form my-1">
+                <select
+                    {% if 'objectives-approved' != appraisal.status %} name="" {% else %} name="first_skill_evaluation_type" {% endif %}
+                    class="browser-default custom-select border-top-0 border-right-0 border-left-0 shadow-none rounded-0"
+                    id="first_skill_evaluation_type"
+                    {% if 'objectives-approved' != appraisal.status %} disabled {% endif %}
+                >
+                    {% for key, value in appraisal.evaluation_types %}
+                        <option value="{{ key }}" {% if key == appraisal.evaluation_type_1 %} selected {% endif %}>{{ value }}</option>
+                    {% endfor %}
+                </select>
+                {% if 'objectives-approved' != appraisal.status %}
+                    <input type="hidden" name="first_skill_evaluation_type" value="{{ appraisal.evaluation_type_1 }}" />
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-3">
+        <div class="form-group">
+            <div class="md-form my-1">
+                <input name="first_skill_percentage" type="text" id="first_skill_percentage" class="form-control" value="{{ appraisal.percentage_1 }}" {% if 'objectives-approved' != appraisal.status %} readonly {% endif %}>
+                <label for="first_skill_percentage">{{ 'teacher_appraisal.appraisal_view.percentage'|_ }}</label>
+                <div class="small text-danger" data-validate-for="first_skill_percentage"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-3">
+        <div class="form-group">
+            <div class="md-form my-1">
+                <input name="first_skill_grade" type="number" id="first_skill_grade" class="form-control" value="{{ appraisal.first_skill_grade }}" min="1" {% if 'percentage' == appraisal.evaluation_type_1 %} max="100" {% else %} max='10' {% endif %} {% if 'evaluation-opened' != appraisal.status %} readonly {% endif %}>
+                <label for="first_skill_grade">{{ 'school_appraisal.appraisal_view.grade'|_ }}</label>
+                <div class="small text-danger" data-validate-for="first_skill_grade"></div>
+                <small id="first_skill_grade_help" class="form-text text-muted">{{ 'school_appraisal.appraisal_view.grade_help_text' }}</small>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-12 mt-3">
+        <div class="md-form my-1">
+            <input name="second_skill" type="text" id="second_skill" class="form-control" value="{{ appraisal.second_skill_name }}" {% if 'objectives-approved' != appraisal.status %} readonly {% endif %}>
+            <label for="second_skill">{{ 'school_appraisal.appraisal_view.skill'|_ }}</label>
+            <div class="small text-danger" data-validate-for="second_skill"></div>
+            <small id="second_skill_help" class="form-text text-muted">{{ appraisal.second_skill_description }}</small>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-3">
+        <div class="form-group">
+            <div class="md-form my-1">
+                <select
+                    {% if 'objectives-approved' != appraisal.status %} name="" {% else %} name="second_skill_evaluation_type" {% endif %}
+                    class="browser-default custom-select border-top-0 border-right-0 border-left-0 shadow-none rounded-0"
+                    id="second_skill_evaluation_type"
+                    {% if 'objectives-approved' != appraisal.status %} disabled {% endif %}
+                >
+                    {% for key, value in appraisal.evaluation_types %}
+                        <option value="{{ key }}" {% if key == appraisal.evaluation_type_2 %} selected {% endif %}>{{ value }}</option>
+                    {% endfor %}
+                </select>
+                {% if 'objectives-approved' != appraisal.status %}
+                    <input type="hidden" name="second_skill_evaluation_type" value="{{ appraisal.evaluation_type_2 }}" />
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-3">
+        <div class="form-group">
+            <div class="md-form my-1">
+                <input name="second_skill_percentage" type="text" id="second_skill_percentage" class="form-control" value="{{ appraisal.percentage_2 }}" {% if 'objectives-approved' != appraisal.status %} readonly {% endif %}>
+                <label for="second_skill_percentage">{{ 'teacher_appraisal.appraisal_view.percentage'|_ }}</label>
+                <div class="small text-danger" data-validate-for="second_skill_percentage"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-3">
+        <div class="form-group">
+            <div class="md-form my-1">
+                <input name="second_skill_grade" type="number" id="second_skill_grade" class="form-control" value="{{ appraisal.second_skill_grade }}" min="1" {% if 'percentage' == appraisal.evaluation_type_2 %} max="100" {% else %} max='10' {% endif %} {% if 'evaluation-opened' != appraisal.status %} readonly {% endif %}>
+                <label for="second_skill_grade">{{ 'school_appraisal.appraisal_view.grade'|_ }}</label>
+                <div class="small text-danger" data-validate-for="second_skill_grade"></div>
+                <small id="second_skill_grade_help" class="form-text text-muted">{{ 'school_appraisal.appraisal_view.grade_help_text' }}</small>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-12 mt-3">
+        <div class="md-form my-1">
+            <input name="third_skill" type="text" id="third_skill" class="form-control" value="{{ appraisal.third_skill_name }}" {% if 'objectives-approved' != appraisal.status %} readonly {% endif %}>
+            <label for="third_skill">{{ 'school_appraisal.appraisal_view.skill'|_ }}</label>
+            <div class="small text-danger" data-validate-for="third_skill"></div>
+            <small id="third_skill_help" class="form-text text-muted">{{ appraisal.third_skill_description }}</small>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-3">
+        <div class="form-group">
+            <div class="md-form my-1">
+                <select
+                    {% if 'objectives-approved' != appraisal.status %} name="" {% else %} name="third_skill_evaluation_type" {% endif %}
+                    class="browser-default custom-select border-top-0 border-right-0 border-left-0 shadow-none rounded-0"
+                    id="third_skill_evaluation_type"
+                    {% if 'objectives-approved' != appraisal.status %} disabled {% endif %}
+                >
+                    {% for key, value in appraisal.evaluation_types %}
+                        <option value="{{ key }}" {% if key == appraisal.evaluation_type_3 %} selected {% endif %}>{{ value }}</option>
+                    {% endfor %}
+                </select>
+                {% if 'objectives-approved' != appraisal.status %}
+                    <input type="hidden" name="third_skill_evaluation_type" value="{{ appraisal.evaluation_type_3 }}" />
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-3">
+        <div class="form-group">
+            <div class="md-form my-1">
+                <input name="third_skill_percentage" type="text" id="third_skill_percentage" class="form-control" value="{{ appraisal.percentage_3 }}" {% if 'objectives-approved' != appraisal.status %} readonly {% endif %}>
+                <label for="third_skill_percentage">{{ 'teacher_appraisal.appraisal_view.percentage'|_ }}</label>
+                <div class="small text-danger" data-validate-for="third_skill_percentage"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-3">
+        <div class="form-group">
+            <div class="md-form my-1">
+                <input name="third_skill_grade" type="number" id="third_skill_grade" class="form-control" value="{{ appraisal.third_skill_grade }}" min="1" {% if 'percentage' == appraisal.evaluation_type_3 %} max="100" {% else %} max='10' {% endif %} {% if 'evaluation-opened' != appraisal.status %} readonly {% endif %}>
+                <label for="third_skill_grade">{{ 'school_appraisal.appraisal_view.grade'|_ }}</label>
+                <div class="small text-danger" data-validate-for="third_skill_grade"></div>
+                <small id="third_skill_grade_help" class="form-text text-muted">{{ 'school_appraisal.appraisal_view.grade_help_text' }}</small>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% if 0 != appraisal.average %}
+    <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-3">
+        <div class="form-group">
+            <div class="md-form my-1">
+                <input type="text" id="average" class="form-control" value="{{ appraisal.average }}" readonly>
+                <label for="average">{{ 'teacher_appraisal.appraisal_view.average'|_ }}</label>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        /* MDBOOTSTRAP Limitation: Trigger change value to move all input labels up. */
+        $('input.form-control').change();
+        $('textarea.form-control').change();
+        $('input.custom-file-input').change();
+
+        {% if 'objectives-approved' == appraisal.status %}
+            $('#first_skill').autocomplete({
+                source: {{ skills|raw }},
+                highlightClass: 'text-danger',
+                treshold: 1
+            });
+
+            $('#second_skill').autocomplete({
+                source: {{ skills|raw }},
+                highlightClass: 'text-danger',
+                treshold: 1
+            });
+
+            $('#third_skill').autocomplete({
+                source: {{ skills|raw }},
+                highlightClass: 'text-danger',
+                treshold: 1
+            });
+        {% endif %}
+    });
+</script>
