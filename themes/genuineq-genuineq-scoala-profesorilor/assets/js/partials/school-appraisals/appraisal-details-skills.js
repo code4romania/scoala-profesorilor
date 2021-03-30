@@ -1,10 +1,7 @@
 $( document ).ready(function() {
     let jsScript = $('#appraisal-details-skills');
-    console.log(jsScript);
     let appraisal = jsScript.attr('data-appraisal');
-    console.log(appraisal);
     let skills = jsScript.attr('data-skills');
-    console.log(skills);
 
     /* MDBOOTSTRAP Limitation: Trigger change value to move all input labels up. */
     $('input.form-control').change();
