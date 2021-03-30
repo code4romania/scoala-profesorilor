@@ -169,31 +169,4 @@ description = "Displays an appraisal details skills"
 
 <script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
 
-<script type="text/javascript">
-    $( document ).ready(function() {
-        /* MDBOOTSTRAP Limitation: Trigger change value to move all input labels up. */
-        $('input.form-control').change();
-        $('textarea.form-control').change();
-        $('input.custom-file-input').change();
-
-        {% if 'objectives-approved' == appraisal.status %}
-            $('#first_skill').autocomplete({
-                source: {{ skills|raw }},
-                highlightClass: 'text-danger',
-                treshold: 1
-            });
-
-            $('#second_skill').autocomplete({
-                source: {{ skills|raw }},
-                highlightClass: 'text-danger',
-                treshold: 1
-            });
-
-            $('#third_skill').autocomplete({
-                source: {{ skills|raw }},
-                highlightClass: 'text-danger',
-                treshold: 1
-            });
-        {% endif %}
-    });
-</script>
+<script id="appraisal-details-skills" data-appraisal="{{appraisal}}" data-skills="{{skills}}" src="{{ ['assets/js/partials/school-appraisals/appraisal-details-skills.js']|theme }}"></script>
