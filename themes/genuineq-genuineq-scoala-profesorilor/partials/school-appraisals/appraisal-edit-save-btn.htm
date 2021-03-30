@@ -8,18 +8,4 @@ description = "Displays a appraisal save button"
     </div>
 </div>
 
-<script type="text/javascript">
-    $('#appraisal-save').on('click', function () {
-        /* Extract the clicked teacher ID. */
-        var $teacherId = $(this).data('id');
-
-        /* Send the view request */
-        $.request(
-            'onTeacherView',
-            {
-                update: {'school-teachers/teacher-view': '#teachers-tab-content'},
-                data: {teacherId: $teacherId}
-            }
-        );
-    });
-</script>
+<script src="{{ ['assets/js/partials/school-appraisals/appraisal-edit-save-btn.js']|theme }}"></script>
