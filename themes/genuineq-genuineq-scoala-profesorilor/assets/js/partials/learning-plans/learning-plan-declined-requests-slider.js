@@ -1,5 +1,5 @@
 $(document).ready( () => {
-    let jsScript = $('script[src*=learning-plan-declined-requests-slider]');
+    let jsScript = $("#learning-plan-declined-requests-slider");
 
     let id = jsScript.attr('data-id');
 
