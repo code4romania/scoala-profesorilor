@@ -79,18 +79,4 @@ description = "Displays a teacher"
 
 {% partial "school-appraisals/appraisal-view" learningPlan=teacher.active_learning_plan %}
 
-<script type="text/javascript">
-    $('#teacher-edit').on('click', function () {
-        /* Extract the clicked teacher ID. */
-        var $teacherId = $(this).data('id');
-
-        /* Send the view request */
-        $.request(
-            'onTeacherEdit',
-            {
-                update: {'school-teachers/teacher-edit': '#teachers-tab-content'},
-                data: {teacherId: $teacherId}
-            }
-        );
-    });
-</script>
+<script src="{{ ['assets/js/partials/school-teachers/teacher-view.js']|theme }}"></script>
