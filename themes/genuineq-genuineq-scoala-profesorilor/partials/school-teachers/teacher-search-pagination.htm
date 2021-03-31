@@ -38,18 +38,4 @@ description = "Displays the teacher search pagination."
     {% endif %}
 </ul>
 
-<script type="text/javascript">
-    $('.teacher-search-pagination').on('click', function () {
-        /* Extract the clicked page. */
-        var $newPage = $(this).data('page');
-
-        /* Select the teacher select form and send the request */
-        $('#teacherSearchForm').request(
-            'onTeacherSearch',
-            {
-                update: {'school-teachers/teacher-grid': '#teacherSearchResults', 'school-teachers/teacher-search-pagination': '#teacherSearchPagination'},
-                data: {page: $newPage}
-            }
-        );
-    });
-</script>
+<script src="{{ ['assets/js/partials/school-teachers/teacher-search-pagination.js']|theme }}"></script>
