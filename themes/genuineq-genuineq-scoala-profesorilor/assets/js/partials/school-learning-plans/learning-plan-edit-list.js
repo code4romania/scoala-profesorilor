@@ -1,29 +1,8 @@
-description = "Displays a learning plan as a list and the list of courses"
-
-[viewBag]
-==
-<div class="row py-3">
-    <div class="col-12">
-
-        <h5 class="mb-3 font-weight-bold text-center text-sm-left text-md-left text-lg-left text-xl-left">{{ 'learning-plans.learning-plan.title'|_ }}</h5>
-
-        <div class="d-inline-block w-100" style="overflow-y:auto;">
-            <ul class="timeline timeline-horizontal m-0">
-
-                {% for key, learningPlanCourse in learningPlan.accepted_courses %}
-                    {% if date(learningPlanCourse.course.start_date) >= date() %}
-                        {% partial "school-learning-plans/learning-plan-edit-card" learningPlanCourse=learningPlanCourse course=learningPlanCourse.course index=loop.index %}
-                    {% endif %}
-                {% endfor %}
-
-            </ul>
-        </div>
-
-    </div>
-</div>
-
-<script type="text/javascript">
+$(document).ready( () => {
     $('.learning-plan-edit-card-remove').on('click', function () {
+        let jsScript = $("#learning-plan-edit-list");
+        let confirmMessage = jsScript.attr("data-confirmMessage");
+
         /* Extract the course and learning plan ID. */
         var $courseId = $(this).data('courseId');
         var $learningPlanId = $(this).data('learningPlanId');
@@ -40,7 +19,7 @@ description = "Displays a learning plan as a list and the list of courses"
         $.request(
             'onSchoolLearningPlanCourseRemove',
             {
-                confirm: "{{ 'learning-plans.learning-plan-edit-list.confirm'|_ }}",
+                confirm: confirmMessage,
                 update: {
                     'school-learning-plans/learning-plan-edit-list': '#learningPlanCardList',
                     'school-learning-plans/learning-plan-course-grid': '#learningPlanCourseSearchResults',
@@ -58,4 +37,4 @@ description = "Displays a learning plan as a list and the list of courses"
             }
         );
     });
-</script>
+})
