@@ -3,8 +3,6 @@ $(document).ready( () => {
         /* Extract the clicked page. */
         var $newPage = $(this).data('page');
 
-        console.log("search-pagination");
-
         /* Select the teacher select form and send the request */
         $('#teacherSearchForm').request(
             'onTeacherSearch',
