@@ -241,33 +241,5 @@ description = "Displays the teacher pofile forms"
 {% put scripts %}
     <script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
 
-    <script type="text/javascript">
-        $( document ).ready(function() {
-            $('#teacher_address_id').autocomplete({
-                source: {{ addresses|raw }},
-                highlightClass: 'text-danger',
-                treshold: 1
-            });
-
-            $('#teacher_seniority_level_id').autocomplete({
-                source: {{ seniorityLevels|raw }},
-                highlightClass: 'text-danger',
-                treshold: 1
-            });
-
-            $('#teacher_birth_date').datepicker({
-                format: "dd-mm-yyyy",
-                weekStart: 1,
-                language: "ro",
-                todayHighlight: true
-            });
-
-            $('#teacher_avatar').on('change',function(event){
-                if (event.target.files.length) {
-                    $(this).next('.custom-file-label').html(event.target.files[0].name);
-                }
-            })
-        });
-
-    </script>
+    <script id="teacher-account-tab" data-seniorityLevels="{{seniorityLevels}}" data-addresses="{{addresses}}" src="{{ ['assets/js/partials/teacher-profile/account-tab.js']|theme }}"></script>
 {% endput %}

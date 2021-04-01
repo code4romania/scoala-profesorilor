@@ -187,99 +187,13 @@ description = "Modal that displays a form to create a new teacher."
 
 <script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
 
-<script type="text/javascript">
-    $( document ).ready(function() {
-        $('#teachers-tab-content').on('ajaxUpdate', function() {
-            /* MDBOOTSTRAP Limitation: Trigger change value to move all input labels up. */
-            $('input.form-control').change();
-            $('textarea.form-control').change();
-            $('input.custom-file-input').change();
-        })
-
-        $('#school_teacher_add_address_id').autocomplete({
-            source: {{ schoolTeacherAddresses|raw }},
-            highlightClass: 'text-danger',
-            treshold: 1
-        });
-
-        $('#school_teacher_add_seniority_level_id').autocomplete({
-            source: {{ schoolTeacherSeniorityLevels|raw }},
-            highlightClass: 'text-danger',
-            treshold: 1
-        });
-
-        $('#school_teacher_add_school_level_1_id').autocomplete({
-            source: {{ schoolTeacherSchoolLevels|raw }},
-            highlightClass: 'text-danger',
-            treshold: 1
-        });
-
-        $('#school_teacher_add_school_level_2_id').autocomplete({
-            source: {{ schoolTeacherSchoolLevels|raw }},
-            highlightClass: 'text-danger',
-            treshold: 1
-        });
-
-        $('#school_teacher_add_school_level_3_id').autocomplete({
-            source: {{ schoolTeacherSchoolLevels|raw }},
-            highlightClass: 'text-danger',
-            treshold: 1
-        });
-
-        $('#school_teacher_add_contract_type_id').autocomplete({
-            source: {{ schoolTeacherContractTypes|raw }},
-            highlightClass: 'text-danger',
-            treshold: 1
-        });
-
-        $('#school_teacher_add_grade_id').autocomplete({
-            source: {{ schoolTeacherGrades|raw }},
-            highlightClass: 'text-danger',
-            treshold: 1
-        });
-
-        $('#school_teacher_add_specialization_1_id').autocomplete({
-            source: {{ schoolTeacherSpecializations|raw }},
-            highlightClass: 'text-danger',
-            treshold: 1
-        });
-
-        $('#school_teacher_add_specialization_2_id').autocomplete({
-            source: {{ schoolTeacherSpecializations|raw }},
-            highlightClass: 'text-danger',
-            treshold: 1
-        });
-
-        $('#school_teacher_add_birth_date').datepicker({
-            format: "dd-mm-yyyy",
-            weekStart: 1,
-            language: "ro",
-            todayHighlight: true
-        });
-
-        $('#schoolTeacherAdd').on('submit', function () {
-            /* Close the teacher add modal. */
-            $('#teacher-add-modal').modal('hide');
-
-            /* Initiate the teacher add. */
-            $('#schoolTeacherAdd').request(
-                'onTeacherAdd',
-                {
-                    update: {'school-profile/teachers-tab': '#teachers-tab-content'},
-                }
-            );
-
-            return false;
-        });
-
-        $("#teacher-add-modal").on('shown.bs.modal', function(){
-            /* Hide the body scrollbar. */
-            document.body.style.overflow = "hidden";
-        });
-
-        $("#teacher-add-modal").on('hidden.bs.modal', function(){
-            /* Show the body scrollbar. */
-            document.body.style.overflow = "auto";
-        });
-    });
+<script
+    id="teacher-add-modal"
+    data-schoolTeacherAddresses = "{{schoolTeacherAddresses}}"
+    data-schoolTeacherSeniorityLevels = "{{schoolTeacherSeniorityLevels}}"
+    data-schoolTeacherSchoolLevels = "{{schoolTeacherSchoolLevels}}"
+    data-schoolTeacherContractTypes = "{{schoolTeacherContractTypes}}"
+    data-schoolTeacherGrades = "{{schoolTeacherGrades}}"
+    data-schoolTeacherSpecializations = "{{schoolTeacherSpecializations}}"
+    src="{{ ['assets/js/partials/school-teachers/teacher-add-modal.js']|theme }}">
 </script>

@@ -78,34 +78,4 @@ description = "Modal that specifies how a course is added to a learning plan"
 
 <script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
 
-<script type="text/javascript">
-    $( document ).ready(function() {
-        $('#school').autocomplete({
-            source: {{ user.profile.schools_list|raw }},
-            highlightClass: 'text-danger',
-            treshold: 1
-        });
-
-        $('#learning-plan-course-add-modal-form').on('submit', function () {
-            /* Close the learning plan add course modal. */
-            $('#learning-plan-course-add-modal').modal('hide');
-
-            /* Initiate the learning plan course add. */
-            $('#learning-plan-course-add-modal-form').request(
-                'onTeacherLearningPlanCourseAdd',
-                {
-                    update: { 'teacher-learning-plans/learning-plan-course-add-remove-btn': '#add-remove-course' },
-                    data: { 'noSearch': 'true' }
-                }
-            );
-
-            return false;
-        })
-    });
-
-    /* Function that saves the ID of the course that was clicked. */
-    $('#learning-plan-course-add-modal').on('show.bs.modal', function (event) {
-        $('#courseId').val($(event.relatedTarget).data('courseId'));
-        $('#learningPlanId').val($(event.relatedTarget).data('learningPlanId'));
-    });
-</script>
+<script id="learning-plan-course-add-modal" data-schools="{{user.profile.schools_list|raw}}" src="{{ ['assets/js/partials/teacher-learning-plans/learning-plan-course-add-modal.js']|theme }}"></script>

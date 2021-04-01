@@ -4,6 +4,89 @@ description = "Displays the distributed costs graphic"
 ==
 <canvas id="barChart"></canvas>
 
+<script
+    id="graph-distributedCosts"
+    data-distributedLabels = "
+        {
+            '0':'{{ distributedLabels['0'] }}',
+            '1':'{{ distributedLabels['1'] }}',
+            '2':'{{ distributedLabels['2'] }}',
+            '3':'{{ distributedLabels['3'] }}',
+            '4':'{{ distributedLabels['4'] }}',
+            '5':'{{ distributedLabels['5'] }}'
+        }"
+    data-distributedCosts = "
+        {
+            '0':{
+                '0':'{{ distributedCosts['0'] }}',
+                '1':'{{ distributedCosts['1'] }}',
+                '2':'{{ distributedCosts['2'] }}',
+                '3':'{{ distributedCosts['3'] }}',
+                '4':'{{ distributedCosts['4'] }}',
+                '5':'{{ distributedCosts['5'] }}',
+            },
+            '1':{
+                '0':'{{ distributedCosts['0'] }}',
+                '1':'{{ distributedCosts['1'] }}',
+                '2':'{{ distributedCosts['2'] }}',
+                '3':'{{ distributedCosts['3'] }}',
+                '4':'{{ distributedCosts['4'] }}',
+                '5':'{{ distributedCosts['5'] }}',
+            },
+            '2':{
+                '0':'{{ distributedCosts['0'] }}',
+                '1':'{{ distributedCosts['1'] }}',
+                '2':'{{ distributedCosts['2'] }}',
+                '3':'{{ distributedCosts['3'] }}',
+                '4':'{{ distributedCosts['4'] }}',
+                '5':'{{ distributedCosts['5'] }}',
+            },
+            '3':{
+                '0':'{{ distributedCosts['0'] }}',
+                '1':'{{ distributedCosts['1'] }}',
+                '2':'{{ distributedCosts['2'] }}',
+                '3':'{{ distributedCosts['3'] }}',
+                '4':'{{ distributedCosts['4'] }}',
+                '5':'{{ distributedCosts['5'] }}',
+            },
+            '4':{
+                '0':'{{ distributedCosts['0'] }}',
+                '1':'{{ distributedCosts['1'] }}',
+                '2':'{{ distributedCosts['2'] }}',
+                '3':'{{ distributedCosts['3'] }}',
+                '4':'{{ distributedCosts['4'] }}',
+                '5':'{{ distributedCosts['5'] }}',
+            },
+            '5':{
+                '0':'{{ distributedCosts['0'] }}',
+                '1':'{{ distributedCosts['1'] }}',
+                '2':'{{ distributedCosts['2'] }}',
+                '3':'{{ distributedCosts['3'] }}',
+                '4':'{{ distributedCosts['4'] }}',
+                '5':'{{ distributedCosts['5'] }}',
+            },
+        }"
+    data-distributedCostsColor = "
+        {
+            '0':'{{ distributedCostsColor['0'] }}',
+            '1':'{{ distributedCostsColor['1'] }}',
+            '2':'{{ distributedCostsColor['2'] }}',
+            '3':'{{ distributedCostsColor['3'] }}',
+            '4':'{{ distributedCostsColor['4'] }}',
+            '5':'{{ distributedCostsColor['5'] }}'
+        }"
+    data-distributedCostsBorderColor = "
+        {
+            '0':'{{ distributedCostsBorderColor['0'] }}',
+            '1':'{{ distributedCostsBorderColor['1'] }}',
+            '2':'{{ distributedCostsBorderColor['2'] }}',
+            '3':'{{ distributedCostsBorderColor['3'] }}',
+            '4':'{{ distributedCostsBorderColor['4'] }}',
+            '5':'{{ distributedCostsBorderColor['5'] }}'
+        }"
+    src="{{ ['assets/js/partials/school-dashboard/graph-teacher-seniorites.js']|theme }}">
+</script>
+
 <script type="text/javascript">
     $( document ).ready(function() {
         var ctxB = document.getElementById("barChart").getContext('2d');
@@ -18,12 +101,12 @@ description = "Displays the distributed costs graphic"
                             label: '{{ distributedCostsLabel }}',
                             data: [{{ distributedCosts[loop.index0]['0'] }}, {{ distributedCosts[loop.index0]['1'] }}, {{ distributedCosts[loop.index0]['2'] }}, {{ distributedCosts[loop.index0]['3'] }}, {{ distributedCosts[loop.index0]['4'] }}, {{ distributedCosts[loop.index0]['5'] }}],
                             backgroundColor: [
-                                '{{ distributedCostsColor[loop.index0] }}',
-                                '{{ distributedCostsColor[loop.index0] }}',
-                                '{{ distributedCostsColor[loop.index0] }}',
-                                '{{ distributedCostsColor[loop.index0] }}',
-                                '{{ distributedCostsColor[loop.index0] }}',
-                                '{{ distributedCostsColor[loop.index0] }}'
+                                '0':'{{ distributedCostsColor[loop.index0] }}',
+                                '1':'{{ distributedCostsColor[loop.index0] }}',
+                                '2':'{{ distributedCostsColor[loop.index0] }}',
+                                '3':'{{ distributedCostsColor[loop.index0] }}',
+                                '4':'{{ distributedCostsColor[loop.index0] }}',
+                                '5':'{{ distributedCostsColor[loop.index0] }}'
                             ],
                             borderColor: [
                                 '{{ distributedCostsBorderColor[loop.index0] }}',
