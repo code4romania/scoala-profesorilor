@@ -9,6 +9,12 @@ $( document ).ready(function() {
 
     var ctxB = document.getElementById("barChart").getContext('2d');
 
+    /** Construnct the graph labels. */
+    let labels = [];
+    for (const [key, value] of Object.entries(distributedLabels)) {
+        labels.push(distributedLabels[key]);
+    }
+
     /** Construnct the graph datasets. */
     let datasets = [];
     for (const [key, value] of Object.entries(distributedCostsLabels)) {
@@ -45,7 +51,7 @@ $( document ).ready(function() {
     var myBarChart = new Chart(ctxB, {
         type: 'bar',
         data: {
-            labels: [ distributedLabels['0'], distributedLabels['1'], distributedLabels['2'], distributedLabels['3'], distributedLabels['4'], distributedLabels['5'] ],
+            labels: labels,
             datasets: datasets
         },
         options: {
