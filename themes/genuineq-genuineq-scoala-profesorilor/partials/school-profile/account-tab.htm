@@ -254,6 +254,8 @@ description = "Displays the tab containing all the school account data"
     </div>
 </div>
 
+{{inspectorates|raw}}
+
 
 {% partial "image-crop" avatarId='school_avatar' eventHandler='onAvatarUpdate' %}
 
@@ -261,7 +263,7 @@ description = "Displays the tab containing all the school account data"
 
 <script
     id="school-account-tab"
-    data-inspectorates="{{inspectorates}}"
-    data-addresses="{{addresses}}"
+    data-inspectorates='{{ inspectorates|raw }}'
+    data-addresses='{{ addresses|raw }}'
     src="{{ ['assets/js/partials/school-profile/account-tab.js']|theme }}">
 </script>
