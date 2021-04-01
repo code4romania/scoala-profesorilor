@@ -5,131 +5,70 @@ description = "Displays the distributed costs graphic"
 <canvas id="barChart"></canvas>
 
 <script
-    id="graph-distributedCosts"
-    data-distributedLabels = "
+    id="graph-distributed-costs"
+    data-distributedLabels = '
         {
-            '0':'{{ distributedLabels['0'] }}',
-            '1':'{{ distributedLabels['1'] }}',
-            '2':'{{ distributedLabels['2'] }}',
-            '3':'{{ distributedLabels['3'] }}',
-            '4':'{{ distributedLabels['4'] }}',
-            '5':'{{ distributedLabels['5'] }}'
-        }"
-    data-distributedCosts = "
+            {% for distributedCostsLabel in distributedLabels %}
+                {% if not loop.last %}
+                    "{{ loop.index0 }}":"{{ distributedLabels[loop.index0] }}",
+                {% else %}
+                    "{{ loop.index0 }}":"{{ distributedLabels[loop.index0] }}"
+                {% endif %}
+            {% endfor %}
+        }'
+    data-distributedCostsLabels = '
         {
-            '0':{
-                '0':'{{ distributedCosts['0'] }}',
-                '1':'{{ distributedCosts['1'] }}',
-                '2':'{{ distributedCosts['2'] }}',
-                '3':'{{ distributedCosts['3'] }}',
-                '4':'{{ distributedCosts['4'] }}',
-                '5':'{{ distributedCosts['5'] }}',
-            },
-            '1':{
-                '0':'{{ distributedCosts['0'] }}',
-                '1':'{{ distributedCosts['1'] }}',
-                '2':'{{ distributedCosts['2'] }}',
-                '3':'{{ distributedCosts['3'] }}',
-                '4':'{{ distributedCosts['4'] }}',
-                '5':'{{ distributedCosts['5'] }}',
-            },
-            '2':{
-                '0':'{{ distributedCosts['0'] }}',
-                '1':'{{ distributedCosts['1'] }}',
-                '2':'{{ distributedCosts['2'] }}',
-                '3':'{{ distributedCosts['3'] }}',
-                '4':'{{ distributedCosts['4'] }}',
-                '5':'{{ distributedCosts['5'] }}',
-            },
-            '3':{
-                '0':'{{ distributedCosts['0'] }}',
-                '1':'{{ distributedCosts['1'] }}',
-                '2':'{{ distributedCosts['2'] }}',
-                '3':'{{ distributedCosts['3'] }}',
-                '4':'{{ distributedCosts['4'] }}',
-                '5':'{{ distributedCosts['5'] }}',
-            },
-            '4':{
-                '0':'{{ distributedCosts['0'] }}',
-                '1':'{{ distributedCosts['1'] }}',
-                '2':'{{ distributedCosts['2'] }}',
-                '3':'{{ distributedCosts['3'] }}',
-                '4':'{{ distributedCosts['4'] }}',
-                '5':'{{ distributedCosts['5'] }}',
-            },
-            '5':{
-                '0':'{{ distributedCosts['0'] }}',
-                '1':'{{ distributedCosts['1'] }}',
-                '2':'{{ distributedCosts['2'] }}',
-                '3':'{{ distributedCosts['3'] }}',
-                '4':'{{ distributedCosts['4'] }}',
-                '5':'{{ distributedCosts['5'] }}',
-            },
-        }"
-    data-distributedCostsColor = "
+            {% for distributedCostsLabel in distributedCostsLabels %}
+                {% if not loop.last %}
+                    "{{ loop.index0 }}":"{{ distributedCostsLabels[loop.index0] }}",
+                {% else %}
+                    "{{ loop.index0 }}":"{{ distributedCostsLabels[loop.index0] }}"
+                {% endif %}
+            {% endfor %}
+        }'
+    data-distributedCosts = '
         {
-            '0':'{{ distributedCostsColor['0'] }}',
-            '1':'{{ distributedCostsColor['1'] }}',
-            '2':'{{ distributedCostsColor['2'] }}',
-            '3':'{{ distributedCostsColor['3'] }}',
-            '4':'{{ distributedCostsColor['4'] }}',
-            '5':'{{ distributedCostsColor['5'] }}'
-        }"
-    data-distributedCostsBorderColor = "
+            {% for distributedCostsLabel in distributedCostsLabels %}
+                {% if not loop.last %}
+                    "{{ loop.index0 }}":{
+                        "0":"{{ distributedCosts[loop.index0]['0'] }}",
+                        "1":"{{ distributedCosts[loop.index0]['1'] }}",
+                        "2":"{{ distributedCosts[loop.index0]['2'] }}",
+                        "3":"{{ distributedCosts[loop.index0]['3'] }}",
+                        "4":"{{ distributedCosts[loop.index0]['4'] }}",
+                        "5":"{{ distributedCosts[loop.index0]['5'] }}"
+                    },
+                {% else %}
+                    "{{ loop.index0 }}":{
+                        "0":"{{ distributedCosts[loop.index0]['0'] }}",
+                        "1":"{{ distributedCosts[loop.index0]['1'] }}",
+                        "2":"{{ distributedCosts[loop.index0]['2'] }}",
+                        "3":"{{ distributedCosts[loop.index0]['3'] }}",
+                        "4":"{{ distributedCosts[loop.index0]['4'] }}",
+                        "5":"{{ distributedCosts[loop.index0]['5'] }}"
+                    }
+                {% endif %}
+            {% endfor %}
+        }'
+    data-distributedCostsColor = '
         {
-            '0':'{{ distributedCostsBorderColor['0'] }}',
-            '1':'{{ distributedCostsBorderColor['1'] }}',
-            '2':'{{ distributedCostsBorderColor['2'] }}',
-            '3':'{{ distributedCostsBorderColor['3'] }}',
-            '4':'{{ distributedCostsBorderColor['4'] }}',
-            '5':'{{ distributedCostsBorderColor['5'] }}'
-        }"
-    src="{{ ['assets/js/partials/school-dashboard/graph-teacher-seniorites.js']|theme }}">
-</script>
-
-<script type="text/javascript">
-    $( document ).ready(function() {
-        var ctxB = document.getElementById("barChart").getContext('2d');
-
-        var myBarChart = new Chart(ctxB, {
-            type: 'bar',
-            data: {
-                labels: ["{{ distributedLabels['0'] }}", "{{ distributedLabels['1'] }}", "{{ distributedLabels['2'] }}", "{{ distributedLabels['3'] }}", "{{ distributedLabels['4'] }}", "{{ distributedLabels['5'] }}"],
-                datasets: [
-                    {% for distributedCostsLabel in distributedCostsLabels %}
-                        {
-                            label: '{{ distributedCostsLabel }}',
-                            data: [{{ distributedCosts[loop.index0]['0'] }}, {{ distributedCosts[loop.index0]['1'] }}, {{ distributedCosts[loop.index0]['2'] }}, {{ distributedCosts[loop.index0]['3'] }}, {{ distributedCosts[loop.index0]['4'] }}, {{ distributedCosts[loop.index0]['5'] }}],
-                            backgroundColor: [
-                                '0':'{{ distributedCostsColor[loop.index0] }}',
-                                '1':'{{ distributedCostsColor[loop.index0] }}',
-                                '2':'{{ distributedCostsColor[loop.index0] }}',
-                                '3':'{{ distributedCostsColor[loop.index0] }}',
-                                '4':'{{ distributedCostsColor[loop.index0] }}',
-                                '5':'{{ distributedCostsColor[loop.index0] }}'
-                            ],
-                            borderColor: [
-                                '{{ distributedCostsBorderColor[loop.index0] }}',
-                                '{{ distributedCostsBorderColor[loop.index0] }}',
-                                '{{ distributedCostsBorderColor[loop.index0] }}',
-                                '{{ distributedCostsBorderColor[loop.index0] }}',
-                                '{{ distributedCostsBorderColor[loop.index0] }}',
-                                '{{ distributedCostsBorderColor[loop.index0] }}'
-                            ],
-                            borderWidth: 1
-                        },
-                    {% endfor %}
-                ]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
-    });
+            {% for distributedCostsLabel in distributedCostsLabels %}
+                {% if not loop.last %}
+                    "{{ loop.index0 }}":"{{ distributedCostsColor[loop.index0] }}",
+                {% else %}
+                    "{{ loop.index0 }}":"{{ distributedCostsColor[loop.index0] }}"
+                {% endif %}
+            {% endfor %}
+        }'
+    data-distributedCostsBorderColor = '
+        {
+            {% for distributedCostsLabel in distributedCostsLabels %}
+                {% if not loop.last %}
+                    "{{ loop.index0 }}":"{{ distributedCostsBorderColor[loop.index0] }}",
+                {% else %}
+                    "{{ loop.index0 }}":"{{ distributedCostsBorderColor[loop.index0] }}"
+                {% endif %}
+            {% endfor %}
+        }'
+    src="{{ ['assets/js/partials/school-dashboard/graph-distributed-costs.js']|theme }}">
 </script>
