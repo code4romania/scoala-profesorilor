@@ -5,9 +5,6 @@ $( document ).ready(function() {
     let schoolSpentMoney = jsScript.attr("data-schoolSpentMoney");
     let teachersSpentMoney = jsScript.attr("data-teachersSpentMoney");
 
-    console.log(schoolSpentMoney);
-    console.log(teachersSpentMoney);
-
     var ctxP = document.getElementById("spentMoney").getContext('2d');
 
     var myPieChart = new Chart(ctxP, {
