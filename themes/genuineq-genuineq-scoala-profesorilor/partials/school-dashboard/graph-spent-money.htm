@@ -4,4 +4,12 @@ description = "Displays the school spent money graphic"
 ==
 <canvas id="spentMoney"></canvas>
 
-<script id="graph-spent-money" data-schoolSpentMoneyLabel="{{schoolSpentMoneyLabel}}" data-teachersSpentMoneyLabel="{{teachersSpentMoneyLabel}}" data-schoolSpentMoney="{{schoolSpentMoney}}" data-teachersSpentMoney="{{teachersSpentMoney}}" src="{{ ['assets/js/partials/school-dashboard/graph-spent-money.js']|theme }}"></script>
+<script
+    type="text/javascript"
+    id="graph-spent-money"
+    data-schoolSpentMoneyLabel="{{ schoolSpentMoneyLabel }}"
+    data-teachersSpentMoneyLabel="{{ teachersSpentMoneyLabel }}"
+    data-schoolSpentMoney="{{ schoolSpentMoney }}"
+    data-teachersSpentMoney="{{ teachersSpentMoney }}"
+    src="{{ 'assets/js/partials/school-dashboard/graph-spent-money.js'|theme }}">
+</script>

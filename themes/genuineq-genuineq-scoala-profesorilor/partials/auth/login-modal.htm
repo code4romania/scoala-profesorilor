@@ -58,10 +58,10 @@ button_text = "submit"
                             {% if recaptcha.property('type') == 'v3' %}
                                 <!-- reCAPTCHA v3 -->
                                 {% if recaptcha.property('load_script') %}
-                                    <script src="https://www.google.com/recaptcha/api.js?render={{ site_key }}"></script>
+                                    <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?render={{ site_key }}"></script>
                                 {% endif %}
 
-                                <script src="{{ ['assets/js/partials/auth/login-modal.js']|theme }}"></script>
+                                <script type="text/javascript" src="{{ 'assets/js/partials/auth/login-modal.js'|theme }}"></script>
 
                                 <button type="submit" id="recaptcha_{{recaptcha.id}}" class="{{ recaptcha.property('button_class') }}" data-attach-loading>
                                     {{ recaptcha.property('button_text') }}
@@ -72,10 +72,10 @@ button_text = "submit"
                             {% else %}
                                 <!-- reCAPTCHA v2 -->
                                 {% if recaptcha.property('load_script') %}
-                                    <script src="https://www.google.com/recaptcha/api.js?hl={{ lang }}" async defer></script>
+                                    <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl={{ lang }}" async defer></script>
                                 {% endif %}
 
-                                <script src="{{ ['assets/js/partials/auth/login-modal.js']|theme }}"></script>
+                                <script type="text/javascript" src="{{ 'assets/js/partials/auth/login-modal.js'|theme }}"></script>
 
                                 {% if recaptcha.property('type') == 'visible' %}
                                     <div class="g-recaptcha" data-sitekey="{{ site_key }}"></div>
@@ -135,4 +135,4 @@ button_text = "submit"
 
 </div>
 <!-- Central Modal Small -->
-<script src="{{ ['assets/js/partials/auth/login-modal.js']|theme }}"></script>
+<script type="text/javascript" src="{{ 'assets/js/partials/auth/login-modal.js'|theme }}"></script>

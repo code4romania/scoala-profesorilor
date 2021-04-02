@@ -4,4 +4,11 @@ description = "Displays the budget allocation graphic"
 ==
 <canvas id="spentBudget"></canvas>
 
-<script id="graph-spent-budget" data-budgetTotalLabel="{{budgetTotalLabel}}" data-budgetSpentLabel="{{budgetSpentLabel}}" data-budgetTotal="{{budgetTotal}}" data-budgetSpent="{{budgetSpent}}" src="{{ ['assets/js/partials/school-dashboard/graph-spent-budget.js']|theme }}"></script>
+<script
+    type="text/javascript"
+    id="graph-spent-budget"
+    data-budgetTotalLabel="{{ budgetTotalLabel }}"
+    data-budgetSpentLabel="{{ budgetSpentLabel }}"  data-budgetTotal="{{ budgetTotal }}"
+    data-budgetSpent="{{ budgetSpent }}"
+    src="{{ 'assets/js/partials/school-dashboard/graph-spent-budget.js'|theme }}">
+</script>

@@ -5,6 +5,7 @@ description = "Displays the distributed costs graphic"
 <canvas id="barChart"></canvas>
 
 <script
+    type="text/javascript"
     id="graph-distributed-costs"
     data-distributedLabels = '
         {
@@ -70,5 +71,5 @@ description = "Displays the distributed costs graphic"
                 {% endif %}
             {% endfor %}
         }'
-    src="{{ ['assets/js/partials/school-dashboard/graph-distributed-costs.js']|theme }}">
+    src="{{ 'assets/js/partials/school-dashboard/graph-distributed-costs.js'|theme }}">
 </script>
