@@ -8,18 +8,4 @@ description = "Displays a learning plan edit button"
     </div>
 </div>
 
-<script type="text/javascript">
-    $('#learning-plan-edit').on('click', function () {
-        /* Extract the clicked learning plan ID. */
-        var $learningPlanId = $(this).data('id');
-
-        /* Send the view request */
-        $.request(
-            'onLearningPlanEdit',
-            {
-                update: {'school-learning-plans/learning-plan-edit': '#teachers-tab-content'},
-                data: {learningPlanId: $learningPlanId}
-            }
-        );
-    });
-</script>
+<script src="{{ ['assets/js/partials/school-learning-plans/learning-plan-edit-btn.js']|theme }}"></script>

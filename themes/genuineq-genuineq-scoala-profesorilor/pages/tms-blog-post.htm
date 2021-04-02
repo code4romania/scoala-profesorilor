@@ -94,14 +94,19 @@ order_linkedin = 5
                     </h6>
 
                     <!--Featured image -->
+                    {% if post.custom_fields.featured_image %}
                     <div class="view overlay hm-white-light z-depth-1-half rounded mb-2">
                         <img src="{{ post.custom_fields.featured_image|media }}" class="img-fluid" alt="post-image">
                     </div>
+                    {% endif %}
 
                     <br>
 
                     <!--Post content-->
-                    {{ post.content|raw }}
+                    <div class="blog-post-content">
+                    {{ post.content_html | raw }}
+                    </div>
+
                 </div>
                 <!--/.Post-->
 
@@ -149,22 +154,10 @@ order_linkedin = 5
                 <div class="row">
                     <div class="col-12">
 
-                        <form id="subscribe-form" data-request="mailSignup::onSignup" data-request-update="'mailSignup::result': '#subscribe-form'" >
-                            <div class="form-group">
-                                <div class="md-form">
-                                    <input type="text" name="email" class="form-control">
-                                    <label for="email">{{ 'blog.newsletter_email'|_ }}</label>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="col-12">
-                                    <div class="md-form m-0">
-                                        <button type="submit" class="btn btn-primary btn-sm btn-block rounded m-0">{{ 'blog.newsletter_subscribe'|_ }}</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                        <!-- Blog Subscription Form - only show in production -->
+                        {% if ('production' == APP_ENV) %}
+                        {% partial 'blog-subscription-form' %}
+                        {% endif %}
 
                     </div>
                 </div>

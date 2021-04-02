@@ -1,9 +1,9 @@
 fields:
     name:
         label: 'genuineq.tms::lang.course.label.name'
-        span: left
-        type: text
+        span: full
         required: 1
+        type: text
 
     start_date:
         label: 'genuineq.tms::lang.course.label.date-start'
@@ -12,35 +12,43 @@ fields:
         type: datepicker
         required: 1
 
+    duration:
+        label: 'genuineq.tms::lang.course.label.duration'
+        span: auto
+        type: number
+        required: 1
+
     end_date:
         label: 'genuineq.tms::lang.course.label.date-end'
         mode: datetime
-        span: right
+        span: auto
+        required: 1
         type: datepicker
-        required: 1
-
-    duration:
-        label: 'genuineq.tms::lang.course.label.duration'
-        span: left
-        type: number
-        required: 1
 
     price:
         label: 'genuineq.tms::lang.course.label.price'
         span: right
         type: number
         required: 1
+    status:
+        label: 'genuineq.tms::lang.course.label.status_form'
+        options:
+            1: Active
+            0: Archived
+        showSearch: true
+        span: auto
+        type: dropdown
 
     accredited:
         label: 'genuineq.tms::lang.course.label.accredited'
-        span: left
+        span: right
         cssClass: my-auto
         type: checkbox
         comment: 'genuineq.tms::lang.course.comment.accredited'
 
     credits:
         label: 'genuineq.tms::lang.course.label.credits'
-        span: auto
+        span: right
         disabled: 1
         dependsOn: {  }
         trigger:
@@ -48,14 +56,6 @@ fields:
             field: accredited
             condition: checked
         type: number
-
-    status:
-        label: 'genuineq.tms::lang.course.label.status_form'
-        span: right
-        type: dropdown
-        options:
-            0: Archived
-            1: Active
 
     address:
         label: 'genuineq.tms::lang.course.label.address'
@@ -87,3 +87,9 @@ fields:
         nameFrom: name
         span: left
         type: skilltagrelation
+
+    card_color:
+        label: 'genuineq.tms::lang.course.label.color'
+        span: auto
+        type: colorpicker
+        required: 0

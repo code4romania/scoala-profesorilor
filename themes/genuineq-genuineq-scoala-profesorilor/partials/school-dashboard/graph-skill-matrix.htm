@@ -4,37 +4,75 @@ description = "Displays the skill matrix graphic"
 ==
 <canvas id="skillMatrix"></canvas>
 
-<script type="text/javascript">
-    $( document ).ready(function() {
-        var ctxL = document.getElementById("skillMatrix").getContext('2d');
+<script
+    id="graph-skill-matrix"
+    data-skillSemestersLabels = '
+        {
+            {% for skillSemestersLabel in skillSemestersLabels %}
+                {% if not loop.last %}
+                    "{{ loop.index0 }}":"{{ skillSemestersLabel }}",
+                {% else %}
+                    "{{ loop.index0 }}":"{{ skillSemestersLabel }}"
+                {% endif %}
+            {% endfor %}
+        }'
+    data-skillSemestersNames = '
+        {
+            {% for skillSemester in skillSemesters %}
+                {% if not loop.last %}
+                    "{{ loop.index0 }}":"{{ skillSemester['label'] }}",
+                {% else %}
+                    "{{ loop.index0 }}":"{{ skillSemester['label'] }}"
+                {% endif %}
+            {% endfor %}
+        }'
+    data-skillSemestersValues = '
+        {
+            {% for skillSemester in skillSemesters %}
+                {% if not loop.last %}
+                    "{{ loop.index0 }}":{
+                        {% for skillValue in skillSemester['values'] %}
+                            {% if not loop.last %}
+                                "{{ loop.index0 }}":"{{ skillValue }}",
+                            {% else %}
+                                "{{ loop.index0 }}":"{{ skillValue }}"
+                            {% endif %}
 
-        var myLineChart = new Chart(ctxL, {
-            type: 'line',
-            data: {
-                labels: [
-                    {% for skillSemestersLabel in skillSemestersLabels %}
-                        "{{ skillSemestersLabel }}",
-                    {% endfor %}
-                ],
-                datasets: [
-                    {% for skillSemester in skillSemesters %}
-                        {
-                            label: "{{ skillSemester['label'] }}",
-                            data: [
-                                {% for skillValue in skillSemester['values'] %}
-                                    {{ skillValue }},
-                                {% endfor %}
-                            ],
-                            backgroundColor: [ "{{ skillSemester['backgroundColor'] }}", ],
-                            borderColor: [ "{{ skillSemester['borderColor'] }}", ],
-                            borderWidth: 2
-                        },
-                    {% endfor %}
-                ]
-            },
-            options: {
-                responsive: true
-            }
-        });
-    });
+                        {% endfor %}
+                    },
+                {% else %}
+                    "{{ loop.index0 }}":{
+                        {% for skillValue in skillSemester['values'] %}
+                            {% if not loop.last %}
+                                "{{ loop.index0 }}":"{{ skillValue }}",
+                            {% else %}
+                                "{{ loop.index0 }}":"{{ skillValue }}"
+                            {% endif %}
+
+                        {% endfor %}
+                    }
+                {% endif %}
+            {% endfor %}
+        }'
+    data-skillSemestersBackgroundColors = '
+        {
+            {% for skillSemester in skillSemesters %}
+                {% if not loop.last %}
+                    "{{ loop.index0 }}":"{{ skillSemester['backgroundColor'] }}",
+                {% else %}
+                    "{{ loop.index0 }}":"{{ skillSemester['backgroundColor'] }}"
+                {% endif %}
+            {% endfor %}
+        }'
+    data-skillSemestersBorderColor = '
+        {
+            {% for skillSemester in skillSemesters %}
+                {% if not loop.last %}
+                    "{{ loop.index0 }}":"{{ skillSemester['borderColor'] }}",
+                {% else %}
+                    "{{ loop.index0 }}":"{{ skillSemester['borderColor'] }}"
+                {% endif %}
+            {% endfor %}
+        }'
+    src="{{ ['assets/js/partials/school-dashboard/graph-skill-matrix.js']|theme }}">
 </script>

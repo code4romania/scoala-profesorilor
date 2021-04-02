@@ -14,7 +14,7 @@ description = "Displays the learning plan course search form."
         <div class="input-group-append">
             <select name="sort" class="browser-default custom-select border border-white shadow-none rounded-0" id="learningPlanCourseSort">
                 {% for key, value in learningPlanCourseSortTypes %}
-                    <option value="{{ value }}">{{ key }}</option>
+                    <option value="{{ value }}"  {% if 'start_date asc' == value %} selected {% endif %}>{{ key }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -22,7 +22,7 @@ description = "Displays the learning plan course search form."
         <div class="input-group-append">
             <select name="category" class="browser-default custom-select border border-white shadow-none rounded-0" id="learningPlanCourseCategory">
                 {% for key, value in learningPlanCourseCategories %}
-                    <option value="{{ value }}">{{ key }}</option>
+                    <option value="{{ value }}">{{ str_limit(key, 30) }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -38,33 +38,4 @@ description = "Displays the learning plan course search form."
     </div>
 </form>
 
-<script type="text/javascript">
-    function learningPlanCourseSearchFormSubmit(){
-        /* Extract the clicked page. */
-        var $newPage = $('#learningPlanCourseSearchPagination > ul > li.active').data('page');
-        /* Extract the active learning plan ID. */
-        var $learningPlanId = $('#learningPlanCourseSearchPagination > ul > li.active').data('id');
-
-        /* Select the course select form and send the request */
-        $('#learningPlanCourseSearchForm').request(
-            'onLearningPlanCourseSearch',
-            {
-                update: {
-                    'teacher-learning-plans/learning-plan-course-grid': '#learningPlanCourseSearchResults',
-                    'teacher-learning-plans/learning-plan-course-pagination': '#learningPlanCourseSearchPagination'
-                },
-                data: {page: $newPage, learningPlanId: $learningPlanId}
-            }
-        );
-    }
-
-    $('#learningPlanCourseSearchFormContent').on('change', 'select', function () {
-        learningPlanCourseSearchFormSubmit();
-    });
-
-    $('#learningPlanCourseSearchForm').on('submit', function () {
-        learningPlanCourseSearchFormSubmit();
-
-        return false;
-    })
-</script>
+<script src="{{ ['assets/js/partials/teacher-learning-plans/learning-plan-course-search-form.js']|theme }}"></script>

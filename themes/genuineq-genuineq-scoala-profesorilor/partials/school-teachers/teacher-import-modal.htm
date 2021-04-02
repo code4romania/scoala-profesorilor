@@ -52,10 +52,4 @@ description = "Modal that specifies how to import teachers for a school"
 
 </div>
 
-<script>
-    $('#import_file').on('change',function(event){
-        if (event.target.files.length) {
-            $(this).next('.custom-file-label').html(event.target.files[0].name);
-        }
-    })
-</script>
+<script src="{{ ['assets/js/partials/school-teachers/teacher-import-modal.js']|theme }}"></script>

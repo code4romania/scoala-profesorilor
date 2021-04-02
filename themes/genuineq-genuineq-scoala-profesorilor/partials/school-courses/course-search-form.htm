@@ -23,7 +23,7 @@ description = "Displays the school course search form."
         <div class="input-group-append">
             <select name="category" class="browser-default custom-select border border-white shadow-none rounded-0" id="coursesCategories">
                 {% for key, value in coursesCategories %}
-                    <option value="{{ value }}">{{ key }}</option>
+                    <option value="{{ value }}">{{ str_limit(key, 30) }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -39,32 +39,4 @@ description = "Displays the school course search form."
     </div>
 </form>
 
-<script type="text/javascript">
-    function courseSearchFormSubmit(){
-        /* Extract the clicked page. */
-        var $newPage = $('#courseSearchPagination > ul > li.active').data('page');
-
-        /* Select the course select form and send the request */
-        $('#courseSearchForm').request(
-            'onSchoolCourseSearch',
-            {
-                update: {
-                    'school-courses/course-grid': '#courseSearchResults',
-                    'school-courses/course-pagination': '#courseSearchPagination',
-                    'school-courses/course-summary': '#courseSummary'
-                },
-                data: { page: $newPage }
-            }
-        );
-    }
-
-    $('#courseSearchFormContent').on('change', 'select', function () {
-        courseSearchFormSubmit();
-    });
-
-    $('#courseSearchForm').on('submit', function () {
-        courseSearchFormSubmit();
-
-        return false;
-    })
-</script>
+<script src="{{ ['assets/js/partials/school-courses/course-search-form.js']|theme }}"></script>

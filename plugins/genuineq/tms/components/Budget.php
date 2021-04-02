@@ -244,7 +244,7 @@ class Budget extends ComponentBase
                 $this->page['budgetCoursesAverageTeachers'] += $budget->teacherCourses->count();
             }
         }
-        $this->page['budgetCoursesAverageTeachers'] = $this->page['budgetCoursesAverageTeachers'] / $seniorityTeachers->count();
+        $this->page['budgetCoursesAverageTeachers'] = ($seniorityTeachers->count() > 0) ? ($this->page['budgetCoursesAverageTeachers'] / $seniorityTeachers->count()) : (0);
     }
 
     /**

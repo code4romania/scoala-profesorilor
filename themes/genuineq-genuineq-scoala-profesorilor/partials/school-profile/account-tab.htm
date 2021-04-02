@@ -254,31 +254,13 @@ description = "Displays the tab containing all the school account data"
     </div>
 </div>
 
-
 {% partial "image-crop" avatarId='school_avatar' eventHandler='onAvatarUpdate' %}
 
 <script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
 
-<script type="text/javascript">
-
-    $( document ).ready(function() {
-        $('#school_inspectorate_id').autocomplete({
-            source: {{ inspectorates|raw }},
-            highlightClass: 'text-danger',
-            treshold: 1
-        });
-
-        $('#school_address_id').autocomplete({
-            source: {{ addresses|raw }},
-            highlightClass: 'text-danger',
-            treshold: 1
-        });
-
-        $('#school_avatar').on('change',function(event){
-            if (event.target.files.length) {
-                $(this).next('.custom-file-label').html(event.target.files[0].name);
-            }
-        })
-    });
-
+<script
+    id="school-account-tab"
+    data-inspectorates='{{ inspectorates|raw }}'
+    data-addresses='{{ addresses|raw }}'
+    src="{{ ['assets/js/partials/school-profile/account-tab.js']|theme }}">
 </script>

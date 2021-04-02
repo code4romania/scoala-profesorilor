@@ -46,18 +46,4 @@ description = "Modal allows to update the budget"
 
 </div>
 
-<script type="text/javascript">
-    $('#school-budget-update-modal-add').on('click', function () {
-
-        $('#school-budget-update-modal-form').request(
-            'onSchoolBudgetUpdate',
-            {
-                update: {
-                    'school-dashboard/budget-active': '#budgetStatus',
-                    'school-profile/dashboard-tab': '#dashboard-tab-content'
-                },
-            }
-        );
-
-    });
-</script>
+<script src="{{ ['assets/js/partials/school-dashboard/budget-update-modal.js']|theme }}"></script>

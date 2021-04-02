@@ -13,16 +13,4 @@ description = "Displays the school's notifications"
     {% partial "school-notifications/list" %}
 </div>
 
-<script type="text/javascript">
-    $('#email_notifications').on('change', function () {
-        var $emailNotifications = ($('#email_notifications').prop('checked')) ? (1) : (0);
-
-        $.request(
-            'onEmailNotificationsUpdate',
-            {
-                update: {'course-grid': '#courseSearchResults', 'course-search-pagination': '#courseSearchPagination'},
-                data: {emailNotifications: $emailNotifications}
-            }
-        );
-    });
-</script>
+<script src="{{ ['assets/js/partials/school-profile/notifications-tab.js']|theme }}"></script>

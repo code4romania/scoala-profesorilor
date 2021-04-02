@@ -155,7 +155,13 @@ class SchoolTeacher
             $teacher = $user->profile;
             $teacher->name = $newData['name'];
             $teacher->phone = $newData['phone'];
-            $teacher->birth_date = date('Y-m-d H:i:s', strtotime($newData['birth_date']));
+            if($newData['birth_date']) {
+                $teacher->birth_date = date('Y-m-d H:i:s', strtotime($newData['birth_date']));
+            } else {
+                $cnp = new Cnp($data['identifier']);
+                $birth_date = $cnp->getBirthDateFromCNP();
+                $teacher->birth_date = $birth_date;
+            }
             $teacher->address_id = ($address) ? ($address->id) : (null);
             $teacher->description = $newData['description'];
             $teacher->user_id = $user->id;
@@ -291,7 +297,13 @@ class SchoolTeacher
             $teacher = $user->profile;
             $teacher->name = $newData['name'];
             $teacher->phone = $newData['phone'];
-            $teacher->birth_date = date('Y-m-d H:i:s', strtotime($newData['birth_date']));
+            if($newData['birth_date']) {
+                $teacher->birth_date = date('Y-m-d H:i:s', strtotime($newData['birth_date']));
+            } else {
+                $cnp = new Cnp($data['identifier']);
+                $birth_date = $cnp->getBirthDateFromCNP();
+                $teacher->birth_date = $birth_date;
+            }
             $teacher->address_id = ($address) ? ($address->id) : (null);
             $teacher->description = $newData['description'];
             $teacher->user_id = $user->id;

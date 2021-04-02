@@ -14,7 +14,7 @@ description = "Displays the course search form."
         <div class="input-group-append">
             <select name="sort" class="browser-default custom-select border border-white shadow-none rounded-0" id="learningPlanCourseSort">
                 {% for key, value in sortTypes %}
-                    <option value="{{ value }}">{{ key }}</option>
+                    <option value="{{ value }}" {% if 'start_date asc' == value %} selected {% endif %}>{{ key }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -23,7 +23,7 @@ description = "Displays the course search form."
             <div class="input-group-append">
                 <select name="category" class="browser-default custom-select border border-white shadow-none rounded-0" id="learningPlanCourseCategory">
                     {% for key, value in categories %}
-                        <option value="{{ value }}">{{ key }}</option>
+                        <option value="{{ value }}">{{ str_limit(key, 30) }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -40,28 +40,4 @@ description = "Displays the course search form."
     </div>
 </form>
 
-<script type="text/javascript">
-    function courseSearchFormSubmit(){
-        /* Extract the active page. */
-        var $newPage = $('#courseSearchPagination > ul > li.active').data('page');
-
-        /* Select the course select form and send the request */
-        $('#courseSearchForm').request(
-            'onCourseSearch',
-            {
-                update: {'course-grid': '#courseSearchResults', 'course-search-pagination': '#courseSearchPagination'},
-                data: {page: $newPage}
-            }
-        );
-    }
-
-    $('#courseSearchFormContent').on('change', 'select', function () {
-        courseSearchFormSubmit();
-    });
-
-    $('#courseSearchForm').on('submit', function () {
-        courseSearchFormSubmit();
-
-        return false;
-    })
-</script>
+<script src="{{ ['assets/js/partials/course-search-form.js']|theme }}"></script>
