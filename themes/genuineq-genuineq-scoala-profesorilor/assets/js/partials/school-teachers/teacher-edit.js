@@ -1,11 +1,11 @@
 $( document ).ready(function() {
     let jsScript = $("#teacher-edit");
-    let schoolTeacherAddresses = jsScript.attr("data-schoolTeacherAddresses");
-    let schoolTeacherSeniorityLevels = jsScript.attr("data-schoolTeacherSeniorityLevels");
-    let schoolTeacherSchoolLevels = jsScript.attr("data-schoolTeacherSchoolLevels");
-    let schoolTeacherContractTypes = jsScript.attr("data-schoolTeacherContractTypes");
-    let schoolTeacherGrades = jsScript.attr("data-schoolTeacherGrades");
-    let schoolTeacherSpecializations = jsScript.attr("data-schoolTeacherSpecializations");
+    let schoolTeacherAddresses = JSON.parse(jsScript.attr("data-schoolTeacherAddresses"));
+    let schoolTeacherSeniorityLevels = JSON.parse(jsScript.attr("data-schoolTeacherSeniorityLevels"));
+    let schoolTeacherSchoolLevels = JSON.parse(jsScript.attr("data-schoolTeacherSchoolLevels"));
+    let schoolTeacherContractTypes = JSON.parse(jsScript.attr("data-schoolTeacherContractTypes"));
+    let schoolTeacherGrades = JSON.parse(jsScript.attr("data-schoolTeacherGrades"));
+    let schoolTeacherSpecializations = JSON.parse(jsScript.attr("data-schoolTeacherSpecializations"));
 
     $('#teachers-tab-content').on('ajaxUpdate', function() {
         /* MDBOOTSTRAP Limitation: Trigger change value to move all input labels up. */
