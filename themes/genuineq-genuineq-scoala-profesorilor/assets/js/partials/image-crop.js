@@ -1,11 +1,15 @@
-
 $( document ).ready(function() {
+    let jsScript = $("#image-crop");
+    let avatarId = jsScript.attr("data-avatarId");
+    let eventHandler = jsScript.attr("data-eventHandler");
+    let schoolTeacherId = jsScript.attr("data-schoolTeacherId");
+
     /* Global variable for croppie instance. */
-    var $imageCrop_{{ avatarId }} = null;
+    window['imageCrop_' + avatarId] = null;
 
     /** Function that creates a croppie instance. */
     function createCoppieInstance() {
-        $imageCrop_{{ avatarId }} = $('#crop-image-{{ avatarId }}').croppie({
+        window['imageCrop_' + avatarId] = $('#crop-image-' + avatarId).croppie({
             enableExif: true,
             enableZoom: true,
             viewport: {
@@ -21,7 +25,7 @@ $( document ).ready(function() {
     }
 
     /** Event listener for "change" event on file input field. */
-    $('#{{ avatarId }}').on('change', function() {
+    $('#' + avatarId).on('change', function() {
         var reader = new FileReader();
 
         if(this.files[0]){
@@ -31,7 +35,7 @@ $( document ).ready(function() {
 
         reader.onload = function(event) {
             /* Bind image to croppie. */
-            $imageCrop_{{ avatarId }}.croppie('bind', {
+            window['imageCrop_' + avatarId].croppie('bind', {
                 url: event.target.result
             });
         }
@@ -40,33 +44,38 @@ $( document ).ready(function() {
         if(this.files[0]){
             reader.readAsDataURL(this.files[0]);
             /* Display image crop modal. */
-            $('#crop-image-modal-{{ avatarId }}').modal('show');
+            $('#crop-image-modal-' + avatarId).modal('show');
         }
     });
 
     /** Event listener for "click" event on crop button. */
-    $('.crop-image-btn-{{ avatarId }}').click(function(event) {
-        $imageCrop_{{ avatarId }}.croppie('result', {
+    $('.crop-image-btn-' + avatarId).click(function(event) {
+        window['imageCrop_' + avatarId].croppie('result', {
             type: 'canvas',
             size: 'viewport'
         }).then(function(response) {
             /* Close the crop image modal. */
-            $('#crop-image-modal-{{ avatarId }}').modal('hide');
+            $('#crop-image-modal-' + avatarId).modal('hide');
 
             /* Destroy croppie instance. */
-                $('#crop-image-{{ avatarId }}').croppie('destroy');
+                $('#crop-image-' + avatarId).croppie('destroy');
 
             /* Send image to server. */
-            $.request(
-                '{{ eventHandler }}',
-                {
-                    {% if schoolTeacherId %}
-                        data: { 'avatar': response, 'teacherId': {{ schoolTeacherId }} }
-                    {% else %}
+            if(schoolTeacherId) {
+                $.request(
+                    eventHandler,
+                    {
+                        data: { 'avatar': response, 'teacherId': schoolTeacherId }
+                    }
+                )
+            } else {
+                $.request(
+                    eventHandler,
+                    {
                         data: { 'avatar': response }
-                    {% endif %}
-                }
-            );
+                    }
+                )
+            }
         });
     });
 });
