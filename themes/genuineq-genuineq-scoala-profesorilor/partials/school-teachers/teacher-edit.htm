@@ -273,6 +273,7 @@ description = "Displays the teacher profile forms"
 <script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
 
 <script
+    type="text/javascript"
     id="teacher-edit"
     data-schoolTeacherAddresses = '{{ schoolTeacherAddresses|raw }}'
     data-schoolTeacherSeniorityLevels = '{{ schoolTeacherSeniorityLevels|raw }}'
@@ -280,5 +281,5 @@ description = "Displays the teacher profile forms"
     data-schoolTeacherContractTypes = '{{ schoolTeacherContractTypes|raw }}'
     data-schoolTeacherGrades = '{{ schoolTeacherGrades|raw }}'
     data-schoolTeacherSpecializations = '{{ schoolTeacherSpecializations|raw }}'
-    src="{{ ['assets/js/partials/school-teachers/teacher-edit.js']|theme }}">
+    src="{{ 'assets/js/partials/school-teachers/teacher-edit.js'|theme }}">
 </script>

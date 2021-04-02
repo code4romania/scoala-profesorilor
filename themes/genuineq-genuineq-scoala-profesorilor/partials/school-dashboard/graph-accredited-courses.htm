@@ -4,4 +4,12 @@ description = "Displays the accredited courses graphic"
 ==
 <canvas id="accreditedCourses"></canvas>
 
-<script id="graph-accredited-courses" data-accreditedLabel="{{accreditedCoursesLabel}}" data-noncreditedLabel="{{noncreditedCoursesLabel}}" data-accreditedCourses="{{accreditedCourses}}" data-noncreditedCourses="{{noncreditedCourses}}" src="{{ ['assets/js/partials/school-dashboard/graph-accredited-courses.js']|theme }}"></script>
+<script
+    type="text/javascript"
+    id="graph-accredited-courses"
+    data-accreditedLabel="{{ accreditedCoursesLabel }}"
+    data-noncreditedLabel="{{ noncreditedCoursesLabel }}"
+    data-accreditedCourses="{{ accreditedCourses }}"
+    data-noncreditedCourses="{{ noncreditedCourses }}"
+    src="{{ 'assets/js/partials/school-dashboard/graph-accredited-courses.js'|theme }}">
+</script>

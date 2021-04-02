@@ -5,6 +5,7 @@ description = "Displays the skill matrix graphic"
 <canvas id="skillMatrix"></canvas>
 
 <script
+    type="text/javascript"
     id="graph-skill-matrix"
     data-skillSemestersLabels = '
         {
@@ -74,5 +75,5 @@ description = "Displays the skill matrix graphic"
                 {% endif %}
             {% endfor %}
         }'
-    src="{{ ['assets/js/partials/school-dashboard/graph-skill-matrix.js']|theme }}">
+    src="{{ 'assets/js/partials/school-dashboard/graph-skill-matrix.js'|theme }}">
 </script>

@@ -4,4 +4,12 @@ description = "Displays the paid courses graphic"
 ==
 <canvas id="paidCourses"></canvas>
 
-<script id="graph-paid-courses" data-schoolPaidCoursesLabel="{{schoolPaidCoursesLabel}}" data-teachersPaidCoursesLabel="{{teachersPaidCoursesLael}}" data-schoolPaidCourses="{{schoolPaidCourses}}" data-teachersPaidCourses="{{teachersPaidCourses}}" src="{{ ['assets/js/partials/school-dashboard/graph-paid-courses.js']|theme }}"></script>
+<script
+    type="text/javascript"
+    id="graph-paid-courses"
+    data-schoolPaidCoursesLabel="{{ schoolPaidCoursesLabel }}"
+    data-teachersPaidCoursesLabel="{{ teachersPaidCoursesLael }}"
+    data-schoolPaidCourses="{{ schoolPaidCourses }}"
+    data-teachersPaidCourses="{{ teachersPaidCourses }}"
+    src="{{ 'assets/js/partials/school-dashboard/graph-paid-courses.js'|theme }}">
+</script>

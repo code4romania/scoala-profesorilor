@@ -1,5 +1,6 @@
 $( document ).ready(function() {
     let jsScript = $("#teacher-account-tab");
+
     let addresses = JSON.parse(jsScript.attr("data-addresses"));
     let seniorityLevels = JSON.parse(jsScript.attr("data-seniorityLevels"));
 

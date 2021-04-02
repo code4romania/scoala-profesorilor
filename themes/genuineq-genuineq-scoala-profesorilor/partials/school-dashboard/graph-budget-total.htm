@@ -4,4 +4,12 @@ description = "Displays the budget total graphic"
 ==
 <canvas id="budgetTotal"></canvas>
 
-<script id="graph-budget-total" data-schoolLabel="{{schoolBudgetLabel}}" data-teachersLabel="{{teachersBudgetLabel}}" data-schoolBudget="{{schoolBudget}}" data-teachersBudget="{{teachersBudget}}" src="{{ ['assets/js/partials/school-dashboard/graph-budget-total.js']|theme }}"></script>
+<script
+    type="text/javascript"
+    id="graph-budget-total"
+    data-schoolLabel="{{ schoolBudgetLabel }}"
+    data-teachersLabel="{{ teachersBudgetLabel }}"
+    data-schoolBudget="{{ schoolBudget }}"
+    data-teachersBudget="{{ teachersBudget }}"
+    src="{{ 'assets/js/partials/school-dashboard/graph-budget-total.js'|theme }}">
+</script>
