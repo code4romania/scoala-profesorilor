@@ -1,21 +1,12 @@
 $( document ).ready(function() {
-    let jsScript = $("#teacher-add-modal");
-    let tt1 = jsScript.attr("data-schoolTeacherAddresses")
-    let tt2 = jsScript.attr("data-schoolTeacherSeniorityLevels")
-    let tt3 = jsScript.attr("data-schoolTeacherSchoolLevels")
-    console.log(tt1);
-    console.log(tt2);
-    console.log(tt3);
+    let jsScript = $("#teacher-add-modal-script");
+
     let schoolTeacherAddresses = JSON.parse(jsScript.attr("data-schoolTeacherAddresses"));
     let schoolTeacherSeniorityLevels = JSON.parse(jsScript.attr("data-schoolTeacherSeniorityLevels"));
     let schoolTeacherSchoolLevels = JSON.parse(jsScript.attr("data-schoolTeacherSchoolLevels"));
     let schoolTeacherContractTypes = JSON.parse(jsScript.attr("data-schoolTeacherContractTypes"));
     let schoolTeacherGrades = JSON.parse(jsScript.attr("data-schoolTeacherGrades"));
     let schoolTeacherSpecializations = JSON.parse(jsScript.attr("data-schoolTeacherSpecializations"));
-
-    console.log(schoolTeacherAddresses);
-    console.log(schoolTeacherSeniorityLevels);
-    console.log(schoolTeacherContractTypes);
 
     $('#teachers-tab-content').on('ajaxUpdate', function() {
         /* MDBOOTSTRAP Limitation: Trigger change value to move all input labels up. */
