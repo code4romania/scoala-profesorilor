@@ -1,9 +1,7 @@
 $( document ).ready(function() {
-    let jsScript = $("#learning-plan-course-add-modal");
-    let schools = JSON.parse(jsScript.attr("data-schools"));
+    let jsScript = $("#learning-plan-edit-add-modal-script");
 
-    console.log(schools);
-    console.log("add-modal");
+    let schools = JSON.parse(jsScript.attr("data-schools"));
 
     $('#school').autocomplete({
         source: schools,
