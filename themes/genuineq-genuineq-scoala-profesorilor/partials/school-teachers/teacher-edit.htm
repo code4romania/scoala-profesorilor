@@ -274,11 +274,11 @@ description = "Displays the teacher profile forms"
 
 <script
     id="teacher-edit"
-    data-schoolTeacherAddresses = "{{schoolTeacherAddresses}}"
-    data-schoolTeacherSeniorityLevels = "{{schoolTeacherSeniorityLevels}}"
-    data-schoolTeacherSchoolLevels = "{{schoolTeacherSchoolLevels}}"
-    data-schoolTeacherContractTypes = "{{schoolTeacherContractTypes}}"
-    data-schoolTeacherGrades = "{{schoolTeacherGrades}}"
-    data-schoolTeacherSpecializations = "{{schoolTeacherSpecializations}}"
+    data-schoolTeacherAddresses = '{{ schoolTeacherAddresses|raw }}'
+    data-schoolTeacherSeniorityLevels = '{{ schoolTeacherSeniorityLevels|raw }}'
+    data-schoolTeacherSchoolLevels = '{{ schoolTeacherSchoolLevels|raw }}'
+    data-schoolTeacherContractTypes = '{{ schoolTeacherContractTypes|raw }}'
+    data-schoolTeacherGrades = '{{ schoolTeacherGrades|raw }}'
+    data-schoolTeacherSpecializations = '{{ schoolTeacherSpecializations|raw }}'
     src="{{ ['assets/js/partials/school-teachers/teacher-edit.js']|theme }}">
 </script>

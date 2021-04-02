@@ -1,11 +1,7 @@
 $( document ).ready(function() {
     let jsScript = $("#teacher-account-tab");
-    let addresses = jsScript.attr("data-addresses");
-    let seniorityLevels = jsScript.attr("data-seniorityLevels");
-
-    console.log(addresses);
-    console.log(seniorityLevels);
-    console.log("account-tab");
+    let addresses = JSON.parse(jsScript.attr("data-addresses"));
+    let seniorityLevels = JSON.parse(jsScript.attr("data-seniorityLevels"));
 
     $('#teacher_address_id').autocomplete({
         source: addresses,
