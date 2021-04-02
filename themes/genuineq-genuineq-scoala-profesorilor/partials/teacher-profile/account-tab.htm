@@ -241,5 +241,5 @@ description = "Displays the teacher pofile forms"
 {% put scripts %}
     <script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
 
-    <script id="teacher-account-tab" data-seniorityLevels="{{seniorityLevels}}" data-addresses="{{addresses}}" src="{{ ['assets/js/partials/teacher-profile/account-tab.js']|theme }}"></script>
+    <script id="teacher-account-tab" data-seniorityLevels='{{ seniorityLevels|raw }}' data-addresses='{{ addresses|raw }}' src="{{ ['assets/js/partials/teacher-profile/account-tab.js']|theme }}"></script>
 {% endput %}
