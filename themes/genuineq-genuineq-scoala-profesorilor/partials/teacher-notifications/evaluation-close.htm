@@ -5,7 +5,7 @@ description = "Displays a evaluation close notification"
 
 <div class="row my-3 py-2 bg-white rounded d-flex align-items-center">
     <div class="col-12">
-        <button type="button" class="close learning-plan-edit-card-remove" data-request="onMarkNotificationAsRead" data-request-data="notificationId: '{{ notification.id }}'" data-request-update="{'teacher-notifications/list': '#notificationsList', 'navbar-notifications': '#notificationsSummary'}"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="btn-mark-as-read-notification close learning-plan-edit-card-remove" data-notification-id="{{ notification.id }}"><span aria-hidden="true">&times;</span></button>
     </div>
 
     <div class="col-12">

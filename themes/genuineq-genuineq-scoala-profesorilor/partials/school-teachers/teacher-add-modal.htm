@@ -185,11 +185,13 @@ description = "Modal that displays a form to create a new teacher."
 
 </div>
 
-<script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
+<script nonce="{{ csp_nonce }}" type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
 
 <script
+    nonce="{{ csp_nonce }}"
+    data-cspNonce="{{ csp_nonce }}"
     type="text/javascript"
-    id="teacher-add-modal-script"
+    id="partial-teacher-add-modal"
     data-schoolTeacherAddresses = '{{ schoolTeacherAddresses|raw }}'
     data-schoolTeacherSeniorityLevels = '{{ schoolTeacherSeniorityLevels|raw }}'
     data-schoolTeacherSchoolLevels = '{{ schoolTeacherSchoolLevels|raw }}'

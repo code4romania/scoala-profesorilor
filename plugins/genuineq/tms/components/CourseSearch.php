@@ -86,6 +86,9 @@ class CourseSearch extends ComponentBase
     {
         /* Extract the courses based on the received options. */
         $this->extractCourses(/*options*/post());
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
 

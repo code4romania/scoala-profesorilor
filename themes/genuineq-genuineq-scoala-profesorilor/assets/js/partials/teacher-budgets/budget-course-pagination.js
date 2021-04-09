@@ -1,5 +1,10 @@
 $(document).ready( () => {
     $('.budget-course-search-pagination').on('click', function () {
+        let jsScript = $("#partial-budget-course-pagination");
+
+        /* Extract the "nonce" script attribute. */
+        let cspNonce = jsScript.attr("data-cspNonce");
+
         /* Extract the clicked page. */
         var $newPage = $(this).data('page');
 
@@ -13,7 +18,10 @@ $(document).ready( () => {
                     'teacher-budgets/budget-course-grid': '#budgetCourseSearchResults',
                     'teacher-budgets/budget-course-pagination': '#budgetCourseSearchPagination',
                 },
-                data: { page: $newPage }
+                data: {
+                    page: $newPage,
+                    nonce: cspNonce
+                }
             }
         );
     });

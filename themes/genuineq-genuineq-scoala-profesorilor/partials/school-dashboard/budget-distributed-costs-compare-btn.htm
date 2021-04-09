@@ -26,9 +26,15 @@ description = "Displays the year and semester dropdows that allows comparison of
     </div>
 
     <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 text-center text-sm-left text-md-left text-lg-left text-xl-left">
-        <button type="button" id="distributed-costs-reset" class="btn btn-outline-secondary btn-sm waves-effect rounded" data-request="onSchoolCostDistributionReset" data-request-update="'school-dashboard/graph-distributed-costs': '#costsDistribution'">{{ 'school-dashboard.distributed-costs.reset'|_ }}</button>
+        <button type="button" id="distributed-costs-reset" class="btn btn-outline-secondary btn-sm waves-effect rounded">{{ 'school-dashboard.distributed-costs.reset'|_ }}</button>
     </div>
 
 </div>
 
-<script type="text/javascript" src="{{ 'assets/js/partials/school-dashboard/budget-distributed-costs-compare-btn.js'|theme }}"></script>
+<script
+    nonce="{{ csp_nonce }}"
+    data-cspNonce="{{ csp_nonce }}"
+    type="text/javascript"
+    id="partial-budget-distributed-costs-compare-btn"
+    src="{{ 'assets/js/partials/school-dashboard/budget-distributed-costs-compare-btn.js'|theme }}">
+</script>

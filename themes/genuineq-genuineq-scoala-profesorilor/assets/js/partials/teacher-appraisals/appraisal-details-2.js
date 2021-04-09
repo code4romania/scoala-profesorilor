@@ -1,5 +1,10 @@
 $(document).ready( () => {
     $('.appraisal-set-objectives').on('click', function () {
+        let jsScript = $("#partial-appraisal-details-2");
+
+        /* Extract the "nonce" script attribute. */
+        let cspNonce = jsScript.attr("data-cspNonce");
+
         /* Extract the appraisal and teacher data. */
         var $appraisalId = $(this).data('appraisalId');
         var $teacherId = $(this).data('teacherId');
@@ -30,13 +35,19 @@ $(document).ready( () => {
                     appraisalStatus: $appraisalStatus,
                     appraisalYear: $appraisalYear,
                     appraisalSemester: $appraisalSemester,
-                    newPage: $newPage
+                    newPage: $newPage,
+                    nonce: cspNonce
                 },
             }
         );
     });
 
     $('.appraisal-save-objectives').on('click', function () {
+        let jsScript = $("#partial-appraisal-details-2");
+
+        /* Extract the "nonce" script attribute. */
+        let cspNonce = jsScript.attr("data-cspNonce");
+
         /* Extract the appraisal and teacher data. */
         var $appraisalId = $(this).data('appraisalId');
         var $teacherId = $(this).data('teacherId');
@@ -67,7 +78,8 @@ $(document).ready( () => {
                     appraisalStatus: $appraisalStatus,
                     appraisalYear: $appraisalYear,
                     appraisalSemester: $appraisalSemester,
-                    newPage: $newPage
+                    newPage: $newPage,
+                    nonce: cspNonce
                 },
             }
         );

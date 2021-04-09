@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    let jsScript = $("#teacher-add-modal-script");
+    let jsScript = $("#partial-teacher-add-modal");
 
     let schoolTeacherAddresses = JSON.parse(jsScript.attr("data-schoolTeacherAddresses"));
     let schoolTeacherSeniorityLevels = JSON.parse(jsScript.attr("data-schoolTeacherSeniorityLevels"));
@@ -77,6 +77,11 @@ $( document ).ready(function() {
     });
 
     $('#schoolTeacherAdd').on('submit', function () {
+        let jsScript = $("#partial-teacher-add-modal");
+
+        /* Extract the "nonce" script attribute. */
+        let cspNonce = jsScript.attr("data-cspNonce");
+
         /* Close the teacher add modal. */
         $('#teacher-add-modal').modal('hide');
 
@@ -85,6 +90,7 @@ $( document ).ready(function() {
             'onTeacherAdd',
             {
                 update: {'school-profile/teachers-tab': '#teachers-tab-content'},
+                data: {nonce: cspNonce}
             }
         );
 

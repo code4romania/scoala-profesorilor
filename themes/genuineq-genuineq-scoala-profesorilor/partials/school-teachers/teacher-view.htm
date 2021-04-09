@@ -79,4 +79,10 @@ description = "Displays a teacher"
 
 {% partial "school-appraisals/appraisal-view" learningPlan=teacher.active_learning_plan %}
 
-<script type="text/javascript" src="{{ 'assets/js/partials/school-teachers/teacher-view.js'|theme }}"></script>
+<script
+    nonce="{{ csp_nonce }}"
+    data-cspNonce="{{ csp_nonce }}"
+    type="text/javascript"
+    id="partial-teacher-view"
+    src="{{ 'assets/js/partials/school-teachers/teacher-view.js'|theme }}">
+    </script>

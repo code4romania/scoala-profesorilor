@@ -5,8 +5,9 @@ description = "Displays the skill matrix graphic"
 <canvas id="skillMatrix"></canvas>
 
 <script
+    nonce="{{ csp_nonce }}"
     type="text/javascript"
-    id="graph-skill-matrix"
+    id="partial-graph-skill-matrix"
     data-skillSemestersLabels = '
         {
             {% for skillSemestersLabel in skillSemestersLabels %}

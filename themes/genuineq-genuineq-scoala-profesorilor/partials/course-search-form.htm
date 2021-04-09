@@ -40,4 +40,10 @@ description = "Displays the course search form."
     </div>
 </form>
 
-<script type="text/javascript" src="{{ 'assets/js/partials/course-search-form.js'|theme }}"></script>
+<script
+    nonce="{{ csp_nonce }}"
+    data-cspNonce="{{ csp_nonce }}"
+    type="text/javascript"
+    id="partial-course-search-form"
+    src="{{ 'assets/js/partials/course-search-form.js'|theme }}">
+</script>

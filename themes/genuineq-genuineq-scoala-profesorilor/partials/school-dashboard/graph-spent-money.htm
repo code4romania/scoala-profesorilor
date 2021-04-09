@@ -5,8 +5,9 @@ description = "Displays the school spent money graphic"
 <canvas id="spentMoney"></canvas>
 
 <script
+    nonce="{{ csp_nonce }}"
     type="text/javascript"
-    id="graph-spent-money"
+    id="partial-graph-spent-money"
     data-schoolSpentMoneyLabel="{{ schoolSpentMoneyLabel }}"
     data-teachersSpentMoneyLabel="{{ teachersSpentMoneyLabel }}"
     data-schoolSpentMoney="{{ schoolSpentMoney }}"

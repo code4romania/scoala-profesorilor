@@ -38,4 +38,10 @@ description = "Displays the course search pagination."
     {% endif %}
 </ul>
 
-<script type="text/javascript" src="{{ 'assets/js/partials/course-search-pagination.js'|theme }}"></script>
+<script
+    nonce="{{ csp_nonce }}"
+    data-cspNonce="{{ csp_nonce }}"
+    type="text/javascript"
+    id="partial-course-search-pagination"
+    src="{{ 'assets/js/partials/course-search-pagination.js'|theme }}">
+</script>

@@ -1,5 +1,5 @@
 $(document).ready( () => {
-    let jsScript = $('#appraisal-details');
+    let jsScript = $("#partial-appraisal-details");
     let appraisal = jsScript.attr('data-appraisal');
 
     /* MDBOOTSTRAP Limitation: Trigger change value to move all input labels up. */
@@ -9,6 +9,11 @@ $(document).ready( () => {
 
     if ('objectives-set' == appraisal.status) {
         $('.appraisal-approve-objectives').on('click', function () {
+            let jsScript = $("#partial-appraisal-details");
+
+            /* Extract the "nonce" script attribute. */
+            let cspNonce = jsScript.attr("data-cspNonce");
+
             /* Extract the appraisal and teacher data. */
             var $appraisalId = $(this).data('appraisalId');
             var $teacherId = $(this).data('teacherId');
@@ -38,13 +43,19 @@ $(document).ready( () => {
                         appraisalStatus: $appraisalStatus,
                         appraisalYear: $appraisalYear,
                         appraisalSemester: $appraisalSemester,
-                        newPage: $newPage
+                        newPage: $newPage,
+                        nonce: cspNonce
                     },
                 }
             );
         });
     } else if ('objectives-approved' == appraisal.status) {
         $('.appraisal-set-skills').on('click', function () {
+
+            let jsScript = $("#partial-appraisal-details");
+
+            /* Extract the "nonce" script attribute. */
+            let cspNonce = jsScript.attr("data-cspNonce");
             /* Extract the appraisal and teacher data. */
             var $appraisalId = $(this).data('appraisalId');
             var $teacherId = $(this).data('teacherId');
@@ -74,13 +85,19 @@ $(document).ready( () => {
                         appraisalStatus: $appraisalStatus,
                         appraisalYear: $appraisalYear,
                         appraisalSemester: $appraisalSemester,
-                        newPage: $newPage
+                        newPage: $newPage,
+                        nonce: cspNonce
                     },
                 }
             );
         });
     } else if ('evaluation-opened' == appraisal.status) {
         $('.appraisal-close').on('click', function () {
+            let jsScript = $("#partial-appraisal-details");
+
+            /* Extract the "nonce" script attribute. */
+            let cspNonce = jsScript.attr("data-cspNonce");
+
             /* Extract the appraisal and teacher data. */
             var $appraisalId = $(this).data('appraisalId');
             var $teacherId = $(this).data('teacherId');
@@ -110,7 +127,8 @@ $(document).ready( () => {
                         appraisalStatus: $appraisalStatus,
                         appraisalYear: $appraisalYear,
                         appraisalSemester: $appraisalSemester,
-                        newPage: $newPage
+                        newPage: $newPage,
+                        nonce: cspNonce
                     },
                 }
             );
@@ -118,6 +136,11 @@ $(document).ready( () => {
     }
 
     $('.appraisal-save').on('click', function () {
+        let jsScript = $("#partial-appraisal-details");
+
+        /* Extract the "nonce" script attribute. */
+        let cspNonce = jsScript.attr("data-cspNonce");
+
         /* Extract the appraisal and teacher data. */
         var $appraisalId = $(this).data('appraisalId');
         var $teacherId = $(this).data('teacherId');
@@ -149,7 +172,8 @@ $(document).ready( () => {
                     appraisalStatus: $appraisalStatus,
                     appraisalYear: $appraisalYear,
                     appraisalSemester: $appraisalSemester,
-                    newPage: $newPage
+                    newPage: $newPage,
+                    nonce: cspNonce
                 },
             }
         );

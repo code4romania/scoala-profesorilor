@@ -1,5 +1,9 @@
 $( document ).ready(function() {
-    let jsScript = $("#learning-plan-course-add-modal-script");
+    let jsScript = $("#partial-learning-plan-course-add-modal-script");
+
+    /* Extract the "nonce" script attribute. */
+    let cspNonce = jsScript.attr("data-cspNonce");
+
     let schools = JSON.parse(jsScript.attr("data-schools"));
 
     $('#school').autocomplete({
@@ -16,8 +20,11 @@ $( document ).ready(function() {
         $('#learning-plan-course-add-modal-form').request(
             'onTeacherLearningPlanCourseAdd',
             {
-                update: { 'teacher-learning-plans/learning-plan-course-add-remove-btn': '#add-remove-course' },
-                data: { 'noSearch': 'true' }
+                update: {'teacher-learning-plans/learning-plan-course-add-remove-btn': '#add-remove-course'},
+                data: {
+                    noSearch: 'true',
+                    nonce: cspNonce
+                }
             }
         );
 

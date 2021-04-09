@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    let jsScript = $('#graph-skill-matrix');
+    let jsScript = $('#partial-graph-skill-matrix');
 
     let skillSemestersLabels = JSON.parse(jsScript.attr('data-skillSemestersLabels'));
     let skillSemestersNames = JSON.parse(jsScript.attr('data-skillSemestersNames'));

@@ -1,4 +1,9 @@
 function courseSearchFormSubmit(){
+    let jsScript = $("#partial-course-search-form");
+
+    /* Extract the "nonce" script attribute. */
+    let cspNonce = jsScript.attr("data-cspNonce");
+
     /* Extract the clicked page. */
     var $newPage = $('#courseSearchPagination > ul > li.active').data('page');
 
@@ -11,7 +16,10 @@ function courseSearchFormSubmit(){
                 'school-courses/course-pagination': '#courseSearchPagination',
                 'school-courses/course-summary': '#courseSummary'
             },
-            data: { page: $newPage }
+            data: {
+                page: $newPage,
+                nonce: cspNonce
+            }
         }
     );
 }

@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    let jsScript = $("#carousel-multiple-courses");
+    let jsScript = $("#partial-carousel-multiple-courses");
     let id = jsScript.attr("data-id");
 
     $('#carousel-multiple-courses-' + id).on('slide.bs.carousel', function (e) {

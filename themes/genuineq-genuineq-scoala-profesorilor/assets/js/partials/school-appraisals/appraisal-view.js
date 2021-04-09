@@ -5,6 +5,11 @@ $(document).ready( () => {
     $('input.custom-file-input').change();
 
     $('#appraisal-edit').on('click', function () {
+        let jsScript = $("#partial-appraisal-view");
+
+        /* Extract the "nonce" script attribute. */
+        let cspNonce = jsScript.attr("data-cspNonce");
+
         /* Extract the appraisal and teacher data. */
         var $appraisalId = $(this).data('appraisalId');
         var $teacherId = $(this).data('teacherId');
@@ -15,7 +20,8 @@ $(document).ready( () => {
             {
                 update: {'school-appraisals/appraisal-edit': '#teachers-tab-content'},
                 data: {
-                    teacherId: $teacherId
+                    teacherId: $teacherId,
+                    nonce: cspNonce
                 }
             }
         );

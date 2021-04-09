@@ -1,6 +1,10 @@
 $(document).ready( () => {
     $('.learning-plan-edit-card-remove').on('click', function () {
-        let jsScript = $("#learning-plan-edit-list");
+        let jsScript = $("#partial-learning-plan-edit-list");
+
+        /* Extract the "nonce" script attribute. */
+        let cspNonce = jsScript.attr("data-cspNonce");
+
         let confirmMessage = jsScript.attr("data-confirmMessage");
 
         /* Extract the course and learning plan ID. */
@@ -33,6 +37,7 @@ $(document).ready( () => {
                     learningPlanCourseCategory: $learningPlanCourseCategory,
                     learningPlanCourseAccreditation: $learningPlanCourseAccreditation,
                     page: $newPage,
+                    nonce: cspNonce
                 },
             }
         );

@@ -80,6 +80,9 @@ class Budget extends ComponentBase
                 'sortBy' => 'teacher_covered_costs'
             ]
         );
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -102,6 +105,9 @@ class Budget extends ComponentBase
 
         /* Extract the courses based on the received options. */
         $this->teacherExtractActiveSemesterBudgetCourses($options);
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /***********************************************
@@ -128,6 +134,9 @@ class Budget extends ComponentBase
                 'sortBy' => 'school_covered_costs'
             ]
         );
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -150,6 +159,9 @@ class Budget extends ComponentBase
 
         /* Extract the courses based on the received options. */
         $this->schoolExtractCourses($options);
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
 

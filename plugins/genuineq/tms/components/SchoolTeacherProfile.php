@@ -100,6 +100,12 @@ class SchoolTeacherProfile extends ComponentBase
 
         /* Extract the school teachers based on the received options. */
         $this->extractTeachers(/*options*/post());
+
+        /** Prepare the static data. */
+        $this->prepareAutocompleteVars();
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -116,6 +122,9 @@ class SchoolTeacherProfile extends ComponentBase
 
         /** Prepare the static data. */
         $this->prepareAutocompleteVars();
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -173,6 +182,9 @@ class SchoolTeacherProfile extends ComponentBase
 
         /* Get all the school teachers. */
         $this->extractTeachers(/*options*/[]);
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -197,6 +209,9 @@ class SchoolTeacherProfile extends ComponentBase
         $this->page['proposedRequests'] = $school->getProposedLearningPlanRequests($teacher->active_learning_plan->id);
         $this->page['teacherDeclinedRequests'] = $teacher->declined_requests;
         $this->page['contractType'] = ($teacher->pivot->contract_type_id) ? (ContractType::find($teacher->pivot->contract_type_id)->name) : (null);
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -230,6 +245,9 @@ class SchoolTeacherProfile extends ComponentBase
         $this->page['schoolTeacherProfileGrade'] = ($teacher->pivot->grade_id) ? (Grade::find($teacher->pivot->grade_id)->name) : (null);
         $this->page['schoolTeacherProfileSpecialization_1'] = ($teacher->pivot->specialization_1_id) ? (Specialization::find($teacher->pivot->specialization_1_id)->name) : (null);
         $this->page['schoolTeacherProfileSpecialization_2'] = ($teacher->pivot->specialization_2_id) ? (Specialization::find($teacher->pivot->specialization_2_id)->name) : (null);
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -290,6 +308,9 @@ class SchoolTeacherProfile extends ComponentBase
 
         /* Get all the school teachers. */
         $this->extractTeachers(/*options*/[]);
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -675,7 +696,8 @@ class SchoolTeacherProfile extends ComponentBase
     /**
      * Prepares the download of a teachers import file template
      */
-    public function onDownloadImportTemplate(){
+    public function onDownloadImportTemplate()
+    {
         if (!Auth::check()) {
             return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }
@@ -686,7 +708,8 @@ class SchoolTeacherProfile extends ComponentBase
     /**
      * Imports a list of teachers and assign them to the current school
      */
-    public function onTeachersImport(){
+    public function onTeachersImport()
+    {
         if (!Auth::check()) {
             return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
         }

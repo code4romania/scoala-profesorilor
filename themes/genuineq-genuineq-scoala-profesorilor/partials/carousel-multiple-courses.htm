@@ -33,4 +33,10 @@ description = "Displays a carousel that has more items per page"
 </div>
 <!--/.Carousel Wrapper-->
 
-<script type="text/javascript" id="carousel-multiple-courses" data-id="{{ id }}" src="{{ 'assets/js/partials/carousel-multiple-courses.js'|theme }}"></script>
+<script
+    nonce="{{ csp_nonce }}"
+    type="text/javascript"
+    id="partial-carousel-multiple-courses"
+    data-id="{{ id }}"
+    src="{{ 'assets/js/partials/carousel-multiple-courses.js'|theme }}">
+</script>

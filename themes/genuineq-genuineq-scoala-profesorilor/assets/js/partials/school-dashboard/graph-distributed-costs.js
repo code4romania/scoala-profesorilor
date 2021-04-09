@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    let jsScript = $('#graph-distributed-costs');
+    let jsScript = $('#partial-graph-distributed-costs');
 
     let distributedLabels = JSON.parse(jsScript.attr('data-distributedLabels'));
     let distributedCostsLabels = JSON.parse(jsScript.attr('data-distributedCostsLabels'));

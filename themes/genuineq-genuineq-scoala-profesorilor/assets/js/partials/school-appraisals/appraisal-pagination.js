@@ -1,5 +1,10 @@
 $(document).ready( () => {
     $('.appraisal-search-pagination').on('click', function () {
+        let jsScript = $("#partial-appraisal-pagination");
+
+        /* Extract the "nonce" script attribute. */
+        let cspNonce = jsScript.attr("data-cspNonce");
+
         /* Extract the clicked page. */
         var $newPage = $(this).data('page');
         /* Extract the active teacher plan ID. */
@@ -7,7 +12,7 @@ $(document).ready( () => {
 
         /* Select the course select form and send the request */
         $('#appraisalSearchForm').request(
-            'onAppraisalSearch',
+            'onSchoolAppraisalSearch',
             {
                 update: {
                     'school-appraisals/appraisal-grid': '#appraisalSearchResults',
@@ -15,7 +20,8 @@ $(document).ready( () => {
                 },
                 data: {
                     page: $newPage,
-                    teacherId: $teacherId
+                    teacherId: $teacherId,
+                    nonce: cspNonce
                 }
             }
         );

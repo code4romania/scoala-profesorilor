@@ -51,6 +51,9 @@ class Notifications extends ComponentBase
 
         $this->prepareVars();
         $this->page['notifications'] = Auth::getUser()->notifications()->applyUnread()->get();
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     public function onMarkAllNotificationsAsRead()
@@ -62,6 +65,9 @@ class Notifications extends ComponentBase
         Auth::getUser()->notifications()->applyUnread()->update(['read_at' => Carbon::now()]);
 
         $this->page['notifications'] = Auth::getUser()->notifications()->applyUnread()->get();
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     public function onMarkNotificationAsRead()
@@ -74,6 +80,9 @@ class Notifications extends ComponentBase
 
         $this->page['notifications'] = Auth::getUser()->notifications()->applyUnread()->get();
         $this->page['hasNotifications'] = Auth::getUser()->notifications()->applyUnread()->count();
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /***********************************************

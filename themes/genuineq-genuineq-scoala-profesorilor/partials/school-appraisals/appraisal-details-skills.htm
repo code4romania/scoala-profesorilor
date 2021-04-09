@@ -167,10 +167,12 @@ description = "Displays an appraisal details skills"
     </div>
 {% endif %}
 
-<script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
+<script nonce="{{ csp_nonce }}" type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
 
-<script type="text/javascript"
-    id="appraisal-details-skills"
+<script
+    nonce="{{ csp_nonce }}"
+    type="text/javascript"
+    id="partial-appraisal-details-skills"
     data-appraisal="{{ appraisal }}"
     data-skills="{{ skills }}"
     src="{{ 'assets/js/partials/school-appraisals/appraisal-details-skills.js'|theme }}">

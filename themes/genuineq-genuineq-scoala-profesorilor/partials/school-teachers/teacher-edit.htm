@@ -270,11 +270,12 @@ description = "Displays the teacher profile forms"
 
 {% partial "image-crop" avatarId='school_teacher_avatar' eventHandler='onSchoolTeacherAvatarUpdate' schoolTeacherId=schoolTeacherProfile.id %}
 
-<script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
+<script nonce="{{ csp_nonce }}" type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
 
 <script
+    nonce="{{ csp_nonce }}"
     type="text/javascript"
-    id="teacher-edit"
+    id="partial-teacher-edit"
     data-schoolTeacherAddresses = '{{ schoolTeacherAddresses|raw }}'
     data-schoolTeacherSeniorityLevels = '{{ schoolTeacherSeniorityLevels|raw }}'
     data-schoolTeacherSchoolLevels = '{{ schoolTeacherSchoolLevels|raw }}'

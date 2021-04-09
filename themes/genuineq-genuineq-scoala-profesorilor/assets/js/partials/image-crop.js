@@ -1,5 +1,6 @@
 $( document ).ready(function() {
-    let jsScript = $("#image-crop");
+    let jsScript = $("#partial-image-crop");
+
     let avatarId = jsScript.attr("data-avatarId");
     let eventHandler = jsScript.attr("data-eventHandler");
     let schoolTeacherId = jsScript.attr("data-schoolTeacherId");
@@ -65,7 +66,10 @@ $( document ).ready(function() {
                 $.request(
                     eventHandler,
                     {
-                        data: { 'avatar': response, 'teacherId': schoolTeacherId }
+                        data: {
+                            'avatar': response,
+                            'teacherId': schoolTeacherId
+                        }
                     }
                 )
             } else {

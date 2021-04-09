@@ -14,4 +14,10 @@ description = "Displays a grid of teachers"
 {% partial "school-teachers/teacher-import-modal" %}
 {% partial "school-teachers/teacher-add-modal" %}
 
-<script type="text/javascript" src="{{ 'assets/js/partials/school-teachers/teacher-grid.js'|theme }}"></script>
+<script
+    nonce="{{ csp_nonce }}"
+    data-cspNonce="{{ csp_nonce }}"
+    type="text/javascript"
+    id="partial-teacher-grid"
+    src="{{ 'assets/js/partials/school-teachers/teacher-grid.js'|theme }}">
+</script>

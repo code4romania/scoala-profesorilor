@@ -1,5 +1,10 @@
 $(document).ready( () => {
     $('.learning-plan-add-course').on('click', function () {
+        let jsScript = $("#partial-learning-plan-course-grid");
+
+        /* Extract the "nonce" script attribute. */
+        let cspNonce = jsScript.attr("data-cspNonce");
+
         /* Extract the course and learning plan data. */
         var $courseId = $(this).data('courseId');
         var $learningPlanId = $(this).data('learningPlanId');
@@ -27,6 +32,7 @@ $(document).ready( () => {
                     learningPlanCourseCategory: $learningPlanCourseCategory,
                     learningPlanCourseAccreditation: $learningPlanCourseAccreditation,
                     page: $newPage,
+                    nonce: cspNonce
                 },
             }
         );

@@ -76,11 +76,22 @@ description = "Modal that specifies how a course is added to a learning plan"
 
 </div>
 
-<script type="text/javascript" src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}"></script>
+<script
+    nonce="{{ csp_nonce }}"
+    data-cspNonce="{{ csp_nonce }}"
+    type="text/javascript"
+    src="{{ 'assets/js/bootstrap-4-autocomplete.js'|theme }}">
+</script>
 
 <script
+    nonce="{{ csp_nonce }}"
+    data-cspNonce="{{ csp_nonce }}"
     type="text/javascript"
-    id="learning-plan-course-add-modal-script"
-    data-schools='{{ user.profile.schools_list|raw }}'
+    id="partial-learning-plan-course-add-modal-script"
+    {% if schools %}
+        data-schools='{{ schools|raw }}'
+    {% else %}
+        data-schools='{{ user.profile.schools_list|raw }}'
+    {% endif %}
     src="{{ 'assets/js/partials/teacher-learning-plans/learning-plan-course-add-modal.js'|theme }}">
 </script>

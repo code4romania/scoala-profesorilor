@@ -4,6 +4,14 @@ description = "Displays a learning plan save button"
 ==
 <div class="row ">
     <div class="col-12 text-center text-sm-right text-md-right text-lg-right text-xl-right p-0">
-        <a id="learning-plan-save" class="btn btn-md btn-primary mx-0 my-2 py-2 z-depth-0 waves-effect rounded" type="button" data-request="onTeacherViewLearningPlan" data-request-update="teacher-profile/learning-plan-tab: '#learning-plan-tab-content'">{{ 'learning-plans.learning-plan-edit-save-btn.save'|_ }}</a>
+        <a id="learning-plan-save" class="btn btn-md btn-primary mx-0 my-2 py-2 z-depth-0 waves-effect rounded" type="button">{{ 'learning-plans.learning-plan-edit-save-btn.save'|_ }}</a>
     </div>
 </div>
+
+<script
+    nonce="{{ csp_nonce }}"
+    data-cspNonce="{{ csp_nonce }}"
+    type="text/javascript"
+    id="partial-learning-plan-edit-save-btn"
+    src="{{ 'assets/js/partials/teacher-learning-plans/learning-plan-edit-save-btn.js'|theme }}">
+</script>

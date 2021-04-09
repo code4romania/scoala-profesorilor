@@ -153,7 +153,7 @@ class LearningPlan extends Model
      *  has a specific course.
      */
     public function hasCourse($courseId){
-        return ($this->realCourses->where('id', $courseId)->count()) ? (true) : (false);
+        return ($this->courses()->whereCourseId($courseId)->count()) ? (true) : (false);
     }
 
     /**

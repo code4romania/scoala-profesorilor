@@ -31,8 +31,10 @@ description = "Displays a carousel that has more items per page"
 {% partial "school-learning-plans/learning-plan-proposed-requests-view-modal" %}
 
 <script
+    nonce="{{ csp_nonce }}"
+    data-cspNonce="{{ csp_nonce }}"
     type="text/javascript"
-    id="learning-plan-proposed-requests-slider"
+    id="partial-learning-plan-proposed-requests-slider"
     data-id="{{ id }}"
     src="{{ 'assets/js/partials/school-learning-plans/learning-plan-proposed-requests-slider.js'|theme }}">
 </script>

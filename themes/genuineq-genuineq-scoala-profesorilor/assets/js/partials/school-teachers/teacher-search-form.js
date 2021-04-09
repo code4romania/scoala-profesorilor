@@ -1,4 +1,9 @@
 function teacherSearchFormSubmit(){
+    let jsScript = $("#partial-teacher-search-form");
+
+    /* Extract the "nonce" script attribute. */
+    let cspNonce = jsScript.attr("data-cspNonce");
+
     /* Extract the clicked page. */
     var $newPage = $('#teacherSearchPagination > ul > li.active').data('page');
 
@@ -6,8 +11,14 @@ function teacherSearchFormSubmit(){
     $('#teacherSearchForm').request(
         'onTeacherSearch',
         {
-            update: {'school-teachers/teacher-grid': '#teacherSearchResults', 'school-teachers/teacher-search-pagination': '#teacherSearchPagination'},
-            data: {page: $newPage}
+            update: {
+                'school-teachers/teacher-grid': '#teacherSearchResults',
+                'school-teachers/teacher-search-pagination': '#teacherSearchPagination'
+            },
+            data: {
+                page: $newPage,
+                nonce: cspNonce
+            }
         }
     );
 }
