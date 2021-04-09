@@ -5,8 +5,9 @@ description = "Displays the paid courses graphic"
 <canvas id="paidCourses"></canvas>
 
 <script
+    nonce="{{ csp_nonce }}"
     type="text/javascript"
-    id="graph-paid-courses"
+    id="partial-graph-paid-courses"
     data-schoolPaidCoursesLabel="{{ schoolPaidCoursesLabel }}"
     data-teachersPaidCoursesLabel="{{ teachersPaidCoursesLael }}"
     data-schoolPaidCourses="{{ schoolPaidCourses }}"

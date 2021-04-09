@@ -5,8 +5,9 @@ description = "Displays the finaced teachers graphic"
 <canvas id="financedTeachers"></canvas>
 
 <script
+    nonce="{{ csp_nonce }}"
     type="text/javascript"
-    id="graph-financed-teachers"
+    id="partial-graph-financed-teachers"
     data-teachersFiancedLabel="{{ teachersFiancedLabel }}"
     data-teachersNotFiancedLabel="{{ teachersNotFiancedLabel }}"
     data-teachersFianced="{{ teachersFianced }}"

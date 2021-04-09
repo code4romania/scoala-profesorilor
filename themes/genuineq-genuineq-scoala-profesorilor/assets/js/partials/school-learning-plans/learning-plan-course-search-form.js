@@ -1,4 +1,9 @@
 function learningPlanCourseSearchFormSubmit(){
+    let jsScript = $("#partial-learning-plan-course-search-form");
+
+    /* Extract the "nonce" script attribute. */
+    let cspNonce = jsScript.attr("data-cspNonce");
+
     /* Extract the clicked page. */
     var $newPage = $('#learningPlanCourseSearchPagination > ul > li.active').data('page');
     /* Extract the active learning plan ID. */
@@ -14,7 +19,8 @@ function learningPlanCourseSearchFormSubmit(){
             },
             data: {
                 page: $newPage,
-                learningPlanId: $learningPlanId
+                learningPlanId: $learningPlanId,
+                nonce: cspNonce
             }
         }
     );

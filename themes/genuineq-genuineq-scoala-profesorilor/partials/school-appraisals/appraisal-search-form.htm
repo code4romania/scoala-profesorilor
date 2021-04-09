@@ -46,4 +46,10 @@ description = "Displays the appraisal search form."
     </div>
 </form>
 
-<script type="text/javascript" src="{{ 'assets/js/partials/school-appraisals/appraisal-search-form.js'|theme }}"></script>
+<script
+    nonce="{{ csp_nonce }}"
+    data-cspNonce="{{ csp_nonce }}"
+    type="text/javascript"
+    id="partial-appraisal-search-form"
+    src="{{ 'assets/js/partials/school-appraisals/appraisal-search-form.js'|theme }}">
+</script>

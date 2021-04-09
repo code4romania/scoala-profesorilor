@@ -54,24 +54,28 @@ class Appraisal extends ComponentBase
      ***********************************************/
 
     /***********************************************
-     ******************* Common *******************
+     ****************** Teacher ********************
      ***********************************************/
 
     /**
      * Searches, filters, orders and paginates appraisals
      *  based on the post options.
      */
-    public function onAppraisalSearch()
+    public function onTeacherAppraisalSearch()
     {
-        $options = post();
-        $options['teacher'] = post('teacherId');
-        /* Extract the appraisals based on the received options. */
-        $this->teacherExtractAppraisals($options, post('teacherId'));
-    }
+        if (!Auth::check()) {
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
+        }
 
-    /***********************************************
-     ****************** Teacher ********************
-     ***********************************************/
+        $options = post();
+        $options['teacher'] = Auth::getUser()->profile->id;
+
+        /* Extract the appraisals based on the received options. */
+        $this->teacherExtractAppraisals($options, Auth::getUser()->profile->id);
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
+    }
 
     /**
      * Extracts all the appraisals of specified teacher.
@@ -87,6 +91,9 @@ class Appraisal extends ComponentBase
 
         /** Extracts all the appraisals statics of specified teacher. */
         $this->teacherExtractSearchStatics(Auth::getUser()->profile->id);
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -113,6 +120,9 @@ class Appraisal extends ComponentBase
         $this->page['appraisal'] = $appraisal;
         /** Extract the teacher. */
         $this->page['teacher'] = Teacher::find(post('teacherId'));
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -157,8 +167,12 @@ class Appraisal extends ComponentBase
             'semester' => post('appraisalSemester'),
             'page' => post('newPage'),
         ];
+
         /** Extracts all the appraisals of specified teacher. */
         $this->teacherExtractAppraisals($options, Auth::getUser()->profile->id);
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -216,11 +230,44 @@ class Appraisal extends ComponentBase
 
         /** Extracts all the appraisals of specified teacher. */
         $this->teacherExtractAppraisals($options, Auth::getUser()->profile->id);
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /***********************************************
      ****************** School *********************
      ***********************************************/
+
+
+    /**
+     * Searches, filters, orders and paginates appraisals
+     *  based on the post options.
+     */
+    public function onSchoolAppraisalSearch()
+    {
+        if (!Auth::check()) {
+            return Redirect::guest($this->pageUrl(AuthRedirect::loginRequired()));
+        }
+
+        $school = Auth::getUser()->profile;
+        /** Extract the requested teacher */
+        $teacher = $school->teachers->where('id', post('teacherId'))->first();
+
+        if (!$teacher) {
+            throw new ApplicationException(Lang::get('genuineq.tms::lang.component.appraisal.message.teacher_not_exists'));
+        }
+
+        $options = post();
+        $options['teacher'] = post('teacherId');
+        $options['school'] = $school->id;
+
+        /** Extracts all the appraisals of specified teacher. */
+        $this->schoolExtractAppraisals($options, post('teacherId'), $school);
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
+    }
 
     /**
      * Extracts all the appraisals of specified teacher.
@@ -254,6 +301,9 @@ class Appraisal extends ComponentBase
             $skills[$skill] = $value++;
         }
         $this->page['skills'] = json_encode($skills);
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -290,6 +340,9 @@ class Appraisal extends ComponentBase
             $skills[$skill] = $value++;
         }
         $this->page['skills'] = json_encode($skills);
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -399,6 +452,9 @@ class Appraisal extends ComponentBase
             $skills[$skill] = $value++;
         }
         $this->page['skills'] = json_encode($skills);
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -467,6 +523,9 @@ class Appraisal extends ComponentBase
             $skills[$skill] = $value++;
         }
         $this->page['skills'] = json_encode($skills);
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -537,6 +596,9 @@ class Appraisal extends ComponentBase
         ];
         /** Extracts all the appraisals of specified teacher. */
         $this->schoolExtractAppraisals($options, post('teacherId'));
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -612,6 +674,9 @@ class Appraisal extends ComponentBase
         ];
         /** Extracts all the appraisals of specified teacher. */
         $this->schoolExtractAppraisals($options, post('teacherId'), $school);
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /***********************************************

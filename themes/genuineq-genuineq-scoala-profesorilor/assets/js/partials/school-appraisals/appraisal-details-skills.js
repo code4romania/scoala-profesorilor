@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    let jsScript = $('#appraisal-details-skills');
+    let jsScript = $('#partial-appraisal-details-skills');
     let appraisal = jsScript.attr('data-appraisal');
     let skills = jsScript.attr('data-skills');
 

@@ -1,5 +1,6 @@
 $( document ).ready(function() {
-    let jsScript = $("#graph-paid-courses");
+    let jsScript = $("#partial-graph-paid-courses");
+
     let schoolPaidCoursesLabel = jsScript.attr("data-schoolPaidCoursesLabel");
     let teachersPaidCoursesLabel = jsScript.attr("data-teachersPaidCoursesLabel");
     let schoolPaidCourses = jsScript.attr("data-schoolPaidCourses");
@@ -33,7 +34,7 @@ $( document ).ready(function() {
                         let sum = 0;
                         let dataArr = ctx.chart.data.datasets[0].data;
                         dataArr.map(data => {
-                            sum += data;
+                            sum += parseInt(data);
                         });
                         let percentage = (value * 100 / sum).toFixed(2) + "%";
                         return percentage;
@@ -41,8 +42,8 @@ $( document ).ready(function() {
                     color: 'white',
                     labels: {
                         title: {
-                                font: {
-                                    size: '16'
+                            font: {
+                                size: '16'
                             }
                         }
                     }

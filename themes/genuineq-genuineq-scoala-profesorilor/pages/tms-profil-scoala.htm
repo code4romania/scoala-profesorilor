@@ -67,23 +67,23 @@ allowedUserGroups[] = "school"
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link px-2 px-lg-3" id="teachers-tab-nav" data-toggle="tab" href="#teachers-tab-body" role="tab" aria-controls="teachers-tab-body" aria-selected="false" data-request="onDisplayTeachers" data-request-update="school-profile/teachers-tab: '#teachers-tab-content'">{{ 'school.profile.tab.teachers'|_ }}</a>
+                    <a class="nav-link px-2 px-lg-3" id="teachers-tab-nav" data-toggle="tab" href="#teachers-tab-body" role="tab" aria-controls="teachers-tab-body" aria-selected="false">{{ 'school.profile.tab.teachers'|_ }}</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link px-2 px-lg-3" id="dashboard-tab-nav" data-toggle="tab" href="#dashboard-tab-body" role="tab" aria-controls="dashboard-tab-body" aria-selected="false" data-request="onSchoolDashboardView" data-request-update="school-profile/dashboard-tab: '#dashboard-tab-content'">{{ 'school.profile.tab.dashboard'|_ }}</a>
+                    <a class="nav-link px-2 px-lg-3" id="dashboard-tab-nav" data-toggle="tab" href="#dashboard-tab-body" role="tab" aria-controls="dashboard-tab-body" aria-selected="false">{{ 'school.profile.tab.dashboard'|_ }}</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link px-2 px-lg-3" id="courses-tab-nav" data-toggle="tab" href="#courses-tab-body" role="tab" aria-controls="courses-tab-body" aria-selected="false" data-request="onSchoolViewCourses" data-request-update="school-profile/courses-tab: '#courses-tab-content'">{{ 'school.profile.tab.courses'|_ }}</a>
+                    <a class="nav-link px-2 px-lg-3" id="courses-tab-nav" data-toggle="tab" href="#courses-tab-body" role="tab" aria-controls="courses-tab-body" aria-selected="false">{{ 'school.profile.tab.courses'|_ }}</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link px-2 px-lg-3" id="notifications-tab-nav" data-toggle="tab" href="#notifications-tab-body" role="tab" aria-controls="notifications-tab-body" aria-selected="false" data-request="onViewNotifications" data-request-update="school-profile/notifications-tab: '#notifications-tab-content'">{{ 'school.profile.tab.notifications'|_ }}</a>
+                    <a class="nav-link px-2 px-lg-3" id="notifications-tab-nav" data-toggle="tab" href="#notifications-tab-body" role="tab" aria-controls="notifications-tab-body" aria-selected="false">{{ 'school.profile.tab.notifications'|_ }}</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link px-2 px-lg-3" id="reports-tab-nav" data-toggle="tab" href="#reports-tab-body" role="tab" aria-controls="reports-tab-body" aria-selected="false" data-request="onSchoolViewReports" data-request-update="school-profile/reports-tab: '#reports-tab-content'">{{ 'school.profile.tab.reports'|_ }}</a>
+                    <a class="nav-link px-2 px-lg-3" id="reports-tab-nav" data-toggle="tab" href="#reports-tab-body" role="tab" aria-controls="reports-tab-body" aria-selected="false">{{ 'school.profile.tab.reports'|_ }}</a>
                 </li>
             </ul>
             <div class="col-12 col-lg-4 d-flex align-items-lg-end flex-column mr-0 pr-0">
@@ -155,5 +155,11 @@ allowedUserGroups[] = "school"
 </div>
 
 {% put scripts %}
-    <script type="text/javascript" src="{{ 'assets/js/pages/tms-profil-scoala.js'|theme }}"></script>
+    <script
+        nonce="{{ csp_nonce }}"
+        data-cspNonce="{{ csp_nonce }}"
+        type="text/javascript"
+        id="page-tms-profil-scoala"
+        src="{{ 'assets/js/pages/tms-profil-scoala.js'|theme }}">
+    </script>
 {% endput %}

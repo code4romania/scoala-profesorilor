@@ -50,4 +50,10 @@ description = "Displays the teacher search form."
     </div>
 </form>
 
-<script type="text/javascript" src="{{ 'assets/js/partials/school-teachers/teacher-search-form.js'|theme }}"></script>
+<script
+    nonce="{{ csp_nonce }}"
+    data-cspNonce="{{ csp_nonce }}"
+    type="text/javascript"
+    id="partial-teacher-search-form"
+    src="{{ 'assets/js/partials/school-teachers/teacher-search-form.js'|theme }}">
+</script>

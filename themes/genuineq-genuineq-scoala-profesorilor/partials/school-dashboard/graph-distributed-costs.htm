@@ -5,8 +5,9 @@ description = "Displays the distributed costs graphic"
 <canvas id="barChart"></canvas>
 
 <script
+    nonce="{{ csp_nonce }}"
     type="text/javascript"
-    id="graph-distributed-costs"
+    id="partial-graph-distributed-costs"
     data-distributedLabels = '
         {
             {% for distributedCostsLabel in distributedLabels %}

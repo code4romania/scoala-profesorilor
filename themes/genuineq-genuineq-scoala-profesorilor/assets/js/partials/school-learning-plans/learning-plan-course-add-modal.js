@@ -6,6 +6,11 @@ $( document ).ready(function() {
     });
 
     $('#learning-plan-course-add-modal-add').on('click', function () {
+        let jsScript = $("#partial-learning-plan-course-add-modal");
+
+        /* Extract the "nonce" script attribute. */
+        let cspNonce = jsScript.attr("data-cspNonce");
+
         /* Extract the search form input data for the update. */
         var $learningPlanCourseSearchInput = $('#learningPlanCourseSearchInput').val();
         var $learningPlanCourseSort = $('#learningPlanCourseSort').val();
@@ -28,6 +33,7 @@ $( document ).ready(function() {
                     learningPlanCourseCategory: $learningPlanCourseCategory,
                     learningPlanCourseAccreditation: $learningPlanCourseAccreditation,
                     page: $newPage,
+                    nonce: cspNonce
                 },
             }
         );

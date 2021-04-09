@@ -5,8 +5,9 @@ description = "Displays the accredited courses graphic"
 <canvas id="accreditedCourses"></canvas>
 
 <script
+    nonce="{{ csp_nonce }}"
     type="text/javascript"
-    id="graph-accredited-courses"
+    id="partial-graph-accredited-courses"
     data-accreditedLabel="{{ accreditedCoursesLabel }}"
     data-noncreditedLabel="{{ noncreditedCoursesLabel }}"
     data-accreditedCourses="{{ accreditedCourses }}"

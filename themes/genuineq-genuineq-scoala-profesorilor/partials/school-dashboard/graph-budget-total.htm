@@ -5,8 +5,9 @@ description = "Displays the budget total graphic"
 <canvas id="budgetTotal"></canvas>
 
 <script
+    nonce="{{ csp_nonce }}"
     type="text/javascript"
-    id="graph-budget-total"
+    id="partial-graph-budget-total"
     data-schoolLabel="{{ schoolBudgetLabel }}"
     data-teachersLabel="{{ teachersBudgetLabel }}"
     data-schoolBudget="{{ schoolBudget }}"

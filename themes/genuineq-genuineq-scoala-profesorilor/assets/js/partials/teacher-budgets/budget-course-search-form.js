@@ -1,4 +1,9 @@
-function budgetCourseSearchFormSubmit(){
+function budgetCourseSearchFormSubmit() {
+    let jsScript = $("#partial-budget-course-search-form");
+
+    /* Extract the "nonce" script attribute. */
+    let cspNonce = jsScript.attr("data-cspNonce");
+
     /* Extract the clicked page. */
     var $newPage = $('#budgetCourseSearchPagination > ul > li.active').data('page');
 
@@ -12,7 +17,10 @@ function budgetCourseSearchFormSubmit(){
                 'teacher-budgets/budget-course-grid': '#budgetCourseSearchResults',
                 'teacher-budgets/budget-course-pagination': '#budgetCourseSearchPagination',
             },
-            data: { page: $newPage }
+            data: {
+                page: $newPage,
+                nonce: cspNonce
+            }
         }
     );
 }

@@ -90,6 +90,9 @@ class SchoolDashboard extends ComponentBase
         $this->preparePaidCoursesData($activeSemesterId);
         $this->prepareSkillMatrixData();
         $this->prepareDatatableData();
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -103,6 +106,9 @@ class SchoolDashboard extends ComponentBase
         }
 
         $this->prepareDatatableData();
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -144,6 +150,9 @@ class SchoolDashboard extends ComponentBase
         $this->preparePaidCoursesData($activeSemesterId);
         $this->prepareSkillMatrixData();
         $this->prepareDatatableData();
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -161,6 +170,9 @@ class SchoolDashboard extends ComponentBase
         $this->page['schoolSemesters'] = Budget::getSchoolFilterSemesters(Auth::getUser()->profile->id);
 
         $this->prepareDistributedCostsCompareData(Auth::getUser()->profile->active_budget->semester_id, Semester::where('year', post('year'))->where('semester', post('semester'))->first()->id);
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -178,6 +190,9 @@ class SchoolDashboard extends ComponentBase
         $this->page['schoolSemesters'] = Budget::getSchoolFilterSemesters(Auth::getUser()->profile->id);
 
         $this->prepareDistributedCostsData(Auth::getUser()->profile->active_budget->semester_id);
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /***********************************************

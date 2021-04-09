@@ -1,5 +1,6 @@
 $( document ).ready(function() {
-    let jsScript = $("#graph-teacher-seniorities");
+    let jsScript = $("#partial-graph-teacher-seniorities");
+
     let senioritiesLabels1 = jsScript.attr("data-senioritiesLabels1");
     let senioritiesLabels2 = jsScript.attr("data-senioritiesLabels2");
     let senioritiesLabels3 = jsScript.attr("data-senioritiesLabels3");
@@ -39,7 +40,7 @@ $( document ).ready(function() {
                         let sum = 0;
                         let dataArr = ctx.chart.data.datasets[0].data;
                         dataArr.map(data => {
-                            sum += data;
+                            sum += parseInt(data);
                         });
                         let percentage = (value * 100 / sum).toFixed(2) + "%";
                         return percentage;
@@ -47,8 +48,8 @@ $( document ).ready(function() {
                     color: 'white',
                     labels: {
                         title: {
-                                font: {
-                                    size: '16'
+                            font: {
+                                size: '16'
                             }
                         }
                     }

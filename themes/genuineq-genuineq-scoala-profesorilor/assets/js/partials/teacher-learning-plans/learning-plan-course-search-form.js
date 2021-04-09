@@ -1,4 +1,9 @@
 function learningPlanCourseSearchFormSubmit(){
+    let jsScript = $("#partial-learning-plan-course-search-form");
+
+    /* Extract the "nonce" script attribute. */
+    let cspNonce = jsScript.attr("data-cspNonce");
+
     /* Extract the clicked page. */
     var $newPage = $('#learningPlanCourseSearchPagination > ul > li.active').data('page');
     /* Extract the active learning plan ID. */
@@ -12,7 +17,11 @@ function learningPlanCourseSearchFormSubmit(){
                 'teacher-learning-plans/learning-plan-course-grid': '#learningPlanCourseSearchResults',
                 'teacher-learning-plans/learning-plan-course-pagination': '#learningPlanCourseSearchPagination'
             },
-            data: {page: $newPage, learningPlanId: $learningPlanId}
+            data: {
+                page: $newPage,
+                learningPlanId: $learningPlanId,
+                nonce: cspNonce
+            }
         }
     );
 }

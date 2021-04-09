@@ -23,8 +23,10 @@ description = "Displays a learning plan as a list and the list of courses"
 </div>
 
 <script
+    nonce="{{ csp_nonce }}"
+    data-cspNonce="{{ csp_nonce }}"
     type="text/javascript"
-    id="learning-plan-edit-list"
+    id="partial-learning-plan-edit-list"
     data-confirmation="{{ 'learning-plans.learning-plan-edit-list.confirm'|_ }}"
     src="{{ 'assets/js/partials/teacher-learning-plans/learning-plan-edit-list.js'|theme }}">
 </script>

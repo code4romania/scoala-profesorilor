@@ -1,5 +1,6 @@
 $( document ).ready(function() {
-    let jsScript = $("#teacher-edit");
+    let jsScript = $("#partial-teacher-edit");
+
     let schoolTeacherAddresses = JSON.parse(jsScript.attr("data-schoolTeacherAddresses"));
     let schoolTeacherSeniorityLevels = JSON.parse(jsScript.attr("data-schoolTeacherSeniorityLevels"));
     let schoolTeacherSchoolLevels = JSON.parse(jsScript.attr("data-schoolTeacherSchoolLevels"));

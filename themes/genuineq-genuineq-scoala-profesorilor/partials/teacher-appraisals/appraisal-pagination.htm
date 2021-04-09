@@ -38,4 +38,10 @@ description = "Displays the appraisals search pagination."
     {% endif %}
 </ul>
 
-<script type="text/javascript" src="{{ 'assets/js/partials/teacher-appraisals/appraisal-pagination.js'|theme }}"></script>
+<script
+    nonce="{{ csp_nonce }}"
+    data-cspNonce="{{ csp_nonce }}"
+    type="text/javascript"
+    id="partial-appraisal-pagination"
+    src="{{ 'assets/js/partials/teacher-appraisals/appraisal-pagination.js'|theme }}">
+</script>

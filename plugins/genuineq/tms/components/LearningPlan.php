@@ -111,6 +111,9 @@ class LearningPlan extends ComponentBase
     {
         /* Extract the courses based on the received options. */
         $this->extractLearningPlanCourses(/*options*/post(), post('learningPlanId'));
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /***********************************************
@@ -135,6 +138,9 @@ class LearningPlan extends ComponentBase
 
         /** Get all the learning plan courses. */
         $this->extractLearningPlanCourses(/*options*/[], post('learningPlanId'));
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -240,6 +246,9 @@ class LearningPlan extends ComponentBase
 
         /* Extract the courses based on the received options. */
         $this->extractLearningPlanCourses($options, post('learningPlanId'));
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -278,6 +287,9 @@ class LearningPlan extends ComponentBase
 
         /* Extract the courses based on the received options. */
         $this->extractLearningPlanCourses($options, post('learningPlanId'));
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -319,6 +331,9 @@ class LearningPlan extends ComponentBase
             $this->page['proposedRequests'] = Auth::getUser()->profile->getProposedLearningPlanRequests($this->page['teacher']->active_learning_plan->id);
             $this->page['teacherDeclinedRequests'] = $this->page['teacher']->declined_requests;
         }
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
 
         Flash::success(Lang::get('genuineq.tms::lang.component.learning-plan.message.course_accepted_successful'));
     }
@@ -363,6 +378,9 @@ class LearningPlan extends ComponentBase
             $this->page['teacherDeclinedRequests'] = $this->page['teacher']->declined_requests;
         }
 
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
+
         Flash::success(Lang::get('genuineq.tms::lang.component.learning-plan.message.course_declined_successful'));
     }
 
@@ -384,6 +402,9 @@ class LearningPlan extends ComponentBase
 
         $this->page['proposedRequests'] = Auth::getUser()->profile->proposed_requests;
         $this->page['schoolDeclinedRequests'] = Auth::getUser()->profile->school_declined_requests;
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -403,6 +424,9 @@ class LearningPlan extends ComponentBase
         $this->page['learningPlanCourseSortTypes'] = Course::getSortingTypes();
         /** Extract the schools of the user. */
         $this->extractSchools();
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
 
         /** Get all the learning plan courses. */
         $this->extractLearningPlanCourses(/*options*/[], Auth::getUser()->profile->active_learning_plan->id);
@@ -554,6 +578,9 @@ class LearningPlan extends ComponentBase
         }
         /** Extract the schools of the user. */
         $this->extractSchools();
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -595,6 +622,9 @@ class LearningPlan extends ComponentBase
         }
         /** Extract the schools of the user. */
         $this->extractSchools();
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -653,6 +683,9 @@ class LearningPlan extends ComponentBase
             $this->page['proposedRequests'] = Auth::getUser()->profile->proposed_requests;
             $this->page['schoolDeclinedRequests'] = Auth::getUser()->profile->school_declined_requests;
         }
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /**
@@ -691,6 +724,9 @@ class LearningPlan extends ComponentBase
             $this->page['proposedRequests'] = Auth::getUser()->profile->proposed_requests;
             $this->page['schoolDeclinedRequests'] = Auth::getUser()->profile->school_declined_requests;
         }
+
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
     }
 
     /***********************************************

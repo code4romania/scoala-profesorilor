@@ -212,6 +212,9 @@ class Account extends ComponentBase
         $user->email_notifications = post('emailNotifications');
         $user->save();
 
+        /** Send the "nonce" attribute for ajax loaded scripts. */
+        $this->page['csp_nonce'] = post('nonce');
+
         Flash::success(Lang::get('genuineq.user::lang.component.account.message.email_notifications_update_successful'));
     }
 

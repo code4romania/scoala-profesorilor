@@ -1,5 +1,5 @@
 $(document).ready( () => {
-    let jsScript = $("#learning-plan-proposed-requests-slider");
+    let jsScript = $("#partial-learning-plan-proposed-requests-slider");
     let id = jsScript.attr("data-id");
 
     $('#carousel-multiple-courses-' + id).on('slide.bs.carousel', function (e) {
@@ -23,6 +23,11 @@ $(document).ready( () => {
 
 
     $('.proposed-requests-accept').on('click', function () {
+        let jsScript = $("#partial-learning-plan-proposed-requests-slider");
+
+        /* Extract the "nonce" script attribute. */
+        let cspNonce = jsScript.attr("data-cspNonce");
+
         /* Extract the course and learning plan ID. */
         var $courseId = $(this).data('courseId');
 
@@ -30,13 +35,21 @@ $(document).ready( () => {
             'onTeacherLearningPlanRequestAccept',
             {
                 update: {'teacher-profile/learning-plan-tab': '#learning-plan-tab-content'},
-                data: {courseId: $courseId},
+                data: {
+                    courseId: $courseId,
+                    nonce: cspNonce
+                }
             }
         );
     });
 
 
     $('.proposed-requests-decline').on('click', function () {
+        let jsScript = $("#partial-learning-plan-proposed-requests-slider");
+
+        /* Extract the "nonce" script attribute. */
+        let cspNonce = jsScript.attr("data-cspNonce");
+
         /* Extract the course and learning plan ID. */
         var $courseId = $(this).data('courseId');
 
@@ -44,7 +57,10 @@ $(document).ready( () => {
             'onTeacherLearningPlanRequestDecline',
             {
                 update: {'teacher-profile/learning-plan-tab': '#learning-plan-tab-content'},
-                data: {courseId: $courseId},
+                data: {
+                    courseId: $courseId,
+                    nonce: cspNonce
+                }
             }
         );
     });

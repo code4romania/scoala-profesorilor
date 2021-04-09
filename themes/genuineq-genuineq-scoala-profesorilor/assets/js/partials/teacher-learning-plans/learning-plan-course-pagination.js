@@ -1,5 +1,10 @@
 $(document).ready( () => {
     $('.learning-plan-course-search-pagination').on('click', function () {
+        let jsScript = $("#partial-learning-plan-course-pagination");
+
+        /* Extract the "nonce" script attribute. */
+        let cspNonce = jsScript.attr("data-cspNonce");
+
         /* Extract the clicked page. */
         var $newPage = $(this).data('page');
         /* Extract the clicked learning plan ID. */
@@ -15,7 +20,8 @@ $(document).ready( () => {
                 },
                 data: {
                     page: $newPage,
-                    learningPlanId: $learningPlanId
+                    learningPlanId: $learningPlanId,
+                    nonce: cspNonce
                 }
             }
         );

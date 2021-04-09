@@ -1,5 +1,6 @@
 $( document ).ready(function() {
-    let jsScript = $('#graph-budget-total');
+    let jsScript = $('#partial-graph-budget-total');
+
     let schoolBudgetLabel = jsScript.attr('data-schoolLabel');
     let teachersBudgetLabel = jsScript.attr('data-teachersLabel');
     let schoolBudget = jsScript.attr('data-schoolBudget');
@@ -33,7 +34,7 @@ $( document ).ready(function() {
                         let sum = 0;
                         let dataArr = ctx.chart.data.datasets[0].data;
                         dataArr.map(data => {
-                            sum += data;
+                            sum += parseInt(data);
                         });
                         let percentage = (value * 100 / sum).toFixed(2) + "%";
                         return percentage;
@@ -41,8 +42,8 @@ $( document ).ready(function() {
                     color: 'white',
                     labels: {
                         title: {
-                                font: {
-                                    size: '16'
+                            font: {
+                                size: '16'
                             }
                         }
                     }

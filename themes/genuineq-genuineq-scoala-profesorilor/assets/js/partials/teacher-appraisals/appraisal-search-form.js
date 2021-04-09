@@ -1,4 +1,9 @@
-function appraisalSearchFormSubmit(){
+function appraisalSearchFormSubmit() {
+    let jsScript = $("#partial-appraisal-search-form");
+
+    /* Extract the "nonce" script attribute. */
+    let cspNonce = jsScript.attr("data-cspNonce");
+
     /* Extract the clicked page. */
     var $newPage = $('#appraisalSearchPagination > ul > li.active').data('page');
     /* Extract the active teacher ID. */
@@ -6,7 +11,7 @@ function appraisalSearchFormSubmit(){
 
     /* Select the course select form and send the request */
     $('#appraisalSearchForm').request(
-        'onAppraisalSearch',
+        'onTeacherAppraisalSearch',
         {
             update: {
                 'teacher-appraisals/appraisal-grid': '#appraisalSearchResults',
@@ -14,7 +19,7 @@ function appraisalSearchFormSubmit(){
             },
             data: {
                 page: $newPage,
-                teacherId: $teacherId
+                nonce: cspNonce
             }
         }
     );
