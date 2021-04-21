@@ -22,9 +22,9 @@ class Plugin extends PluginBase
         'RainLab.Translate',
         'Genuineq.User',
         'Genuineq.Https',
+        'Genuineq.Cookie',
         'RainLab.Notify',
         'Rahman.Faker',
-        'AjayLulia.OCookie',
         'Zaxbux.SecurityHeaders'
     ];
 

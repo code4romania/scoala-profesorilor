@@ -110,3 +110,6 @@
 1.0.38:
     - 'Updated genuineq_tms_courses table with card_color column'
     - table_update_genuineq_tms_courses.php
+1.0.39:
+    - 'Created Genuineq "Cookie Popup" init seeder'
+    - init_genuineq_cookie_popup.php

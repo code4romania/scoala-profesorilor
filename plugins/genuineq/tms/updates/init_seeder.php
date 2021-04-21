@@ -210,10 +210,6 @@ class InitSeeder extends Migration
         Db::table('rainlab_notify_rule_conditions')->insert(['id' => 29, 'class_name' => 'Genuineq\User\NotifyRules\UserAttributeCondition', 'config_data' => '{"subcondition":"email_notifications","operator":"is","value":"1","condition_text":"Email Notifications <span class=\\"operator\\">is</span> 1"}', 'condition_control_type' => 'text', 'rule_host_type' => 'any', 'rule_host_id' => null, 'rule_parent_id' => 28  ]);
         Db::table('rainlab_notify_rule_conditions')->insert(['id' => 30, 'class_name' => 'RainLab\Notify\Classes\CompoundCondition',         'config_data' => '{"condition_type":0,"condition":"true"}',                                                                                                          'condition_control_type' => null,   'rule_host_type' => 'any', 'rule_host_id' => 20,   'rule_parent_id' => null]);
 
-        /** Populate ajaylulia_ocookie_configuration table. */
-        Db::table('ajaylulia_ocookie_configuration')->truncate();
-        Db::table('ajaylulia_ocookie_configuration')->insert(['id' => 1, 'display_position' => 'right', 'button_text' => 'Sunt de acord', 'background_color' => '#4c3949', 'text_color' => '#fff', 'link_color' => '#9a4877', 'button_background_color' => '#9a4877', 'button_text_color' => '#fff', 'cookie_content' => 'Pentru a-ti oferi o experienta buna de navigare, utilizam fisiere de tip cookie. Daca nu esti de acord cu utilizarea cookie-urilor, poti sa iti retragi consimtamantul prin modificarea setarilor din browser-ul tau. <a href="http:\/\/scoalaprofesorilor.ro\/politica-de-cookie">Politica de cookie</a>']);
-
         DB::table('rainlab_translate_locales')->truncate();
         Db::table('rainlab_translate_locales')->insert(['id' => 1, 'code' => 'en', 'name' => 'English',  'is_default' => 0, 'is_enabled' => 1, 'sort_order' => 1]);
         Db::table('rainlab_translate_locales')->insert(['id' => 2, 'code' => 'ro', 'name' => 'Romanian', 'is_default' => 1, 'is_enabled' => 1, 'sort_order' => 2]);
@@ -223,9 +219,6 @@ class InitSeeder extends Migration
     {
         /** Clear rainlab_translate_locales table. */
         Db::table('rainlab_translate_locales')->truncate();
-
-        /** Clear ajaylulia_ocookie_configuration table. */
-        Db::table('ajaylulia_ocookie_configuration')->truncate();
 
         /** Clear rainlab_notify_rule_conditions table. */
         Db::table('rainlab_notify_rule_conditions')->truncate();
@@ -244,8 +237,5 @@ class InitSeeder extends Migration
 
         /** Clear system_settings table. */
         Db::table('system_settings')->truncate();
-
-        /** Clear ajaylulia_ocookie_configuration table. */
-        Db::table('ajaylulia_ocookie_configuration')->truncate();
     }
 }

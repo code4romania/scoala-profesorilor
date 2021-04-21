@@ -1,0 +1,10 @@
+name: Configuration
+form: $/genuineq/cookie/models/config/fields.yaml
+modelClass: Genuineq\Cookie\Models\Config
+defaultRedirect: genuineq/cookie/config
+create:
+    redirect: 'genuineq/cookie/config/update/:id'
+    redirectClose: 'genuineq/cookie/config/update/:id'
+update:
+    redirect: 'genuineq/cookie/config/update/:id'
+    redirectClose: 'genuineq/cookie/config/update/:id'
