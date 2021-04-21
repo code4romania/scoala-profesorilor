@@ -68,7 +68,7 @@ class Plugin extends \System\Classes\PluginBase
 
         echo
             "<div class='cookie_container $add_class' style='display: none;'>
-                <button type='button' onclick='set_cookie();' class='cookie_btn'>$config->button_text</button>
+                <button type='button' id='accept_cookies' class='cookie_btn'>$config->button_text</button>
                 <p class='cookie_message'>$config->cookie_content</p>
             </div>";
     }
