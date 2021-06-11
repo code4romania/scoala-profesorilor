@@ -1,22 +1,11 @@
 items:
     -
-        title: Blog
-        type: cms-page
+        title: 'Intrebări frecvente'
+        nesting: 0
+        type: static-page
         code: ''
-        reference: tms-blog
-        viewBag:
-            locale:
-                en:
-                    title: ''
-                    url: ''
-            isHidden: '0'
-            cssClass: ''
-            isExternal: '0'
-    -
-        title: Parteneri
-        type: cms-page
-        code: ''
-        reference: tms-partners
+        reference: faq
+        replace: 0
         viewBag:
             locale:
                 en:
@@ -29,8 +18,10 @@ items:
         title: 'Ghid Evaluare'
         nesting: 0
         type: static-page
+        url: null
         code: ''
         reference: scala-evaluare
+        cmsPage: null
         replace: 0
         viewBag:
             locale:
@@ -44,8 +35,10 @@ items:
         title: 'Politica de Confidențialitate'
         nesting: 0
         type: static-page
+        url: null
         code: ''
         reference: politica-de-confidentialitate
+        cmsPage: null
         replace: 0
         viewBag:
             locale:
@@ -59,8 +52,10 @@ items:
         title: 'Termeni și Condiții'
         nesting: 0
         type: static-page
+        url: null
         code: ''
         reference: termeni-si-conditii
+        cmsPage: null
         replace: 0
         viewBag:
             locale:
@@ -74,8 +69,10 @@ items:
         title: 'Politica de cookie'
         nesting: 0
         type: static-page
+        url: null
         code: ''
         reference: politica-de-cookie
+        cmsPage: null
         replace: 0
         viewBag:
             locale:
@@ -85,5 +82,4 @@ items:
             isHidden: '0'
             cssClass: ''
             isExternal: '0'
-
 name: footer-menu-column-2
