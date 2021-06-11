@@ -1,0 +1,60 @@
+[staticPage]
+useContent = 1
+default = 0
+
+[login]
+forceSecure = 0
+
+[register]
+forceSecure = 0
+
+[resetPassword]
+
+[notifications]
+
+[linkList]
+facebook = 1
+linkedin = 1
+instagram = 1
+linkTarget = "_blank"
+
+[fontAwesomeCssLink]
+
+[simplegoogleanalytics]
+tracking_id = "UA-167759572-1"
+domain = "auto"
+
+[CSPNonce]
+==
+<html lang="en">
+    {% partial 'head' %}
+
+    <body class="bg-default min-vh-100 d-flex flex-column">
+        {% partial 'navbar' %}
+
+        {% flash %}
+            <p
+                data-control="flash-message"
+                class="flash-message fade {{ type }}"
+                data-interval="5">
+                {{ message }}
+            </p>
+        {% endflash %}
+
+        {% page %}
+
+        {% partial 'footer-landing-page' %}
+    </body>
+</html>
+
+{% if not user %}
+    {% partial 'auth/login-modal' %}
+    {% partial 'auth/signup-school-modal' %}
+    {% partial 'auth/signup-teacher-modal' %}
+    {% partial 'auth/signup-select-modal' %}
+    {% partial 'auth/password-restore-modal' %}
+
+    {% if resetCode %}
+        {% partial 'auth/password-reset-modal' %}
+    {% endif %}
+{% endif %}
