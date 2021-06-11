@@ -17,8 +17,8 @@ RUN apt-get update \
 RUN apt-get update \
     && add-apt-repository -y ppa:ondrej/php \
     && apt-get update \
-    && apt-get install -y php7.2-fpm php7.2-ctype php7.2-curl php7.2-xml php7.2-fileinfo php7.2-gd \
-                          php7.2-json php7.2-mbstring php7.2-mysql php7.2-sqlite3 php7.2-zip
+    && apt-get install -y php7.3-fpm php7.3-ctype php7.3-curl php7.3-xml php7.3-fileinfo php7.3-gd \
+                          php7.3-json php7.3-mbstring php7.3-mysql php7.3-sqlite3 php7.3-zip
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -80,9 +80,9 @@ COPY ./storage/static /var/www/storage/static
 # Copy nginx configuration
 COPY ./docker/default /etc/nginx/sites-available/default
 # Copy php fpm configuration
-COPY ./docker/php-fpm.conf /etc/php/7.2/fpm/php-fpm.conf
+COPY ./docker/php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
 # Copy php configuration
-COPY ./docker/php.ini /etc/php/7.2/fpm/php.ini
+COPY ./docker/php.ini /etc/php/7.3/fpm/php.ini
 # Copy supervisord configuration
 COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
@@ -95,19 +95,12 @@ RUN chmod 777 /usr/local/bin/docker-entrypoint.sh \
 # Set working directory
 WORKDIR /var/www
 
-RUN cp /var/www/modules/backend/routes.php /var/routes1.php
-
 #Install project dependencies
 RUN composer install --no-interaction --no-dev --prefer-dist --no-scripts \
-    && cp /var/www/modules/backend/routes.php /var/routes2.php \
     && composer dump-autoload -o \
-    && cp /var/www/modules/backend/routes.php /var/routes3.php \
     && composer clearcache \
-    && cp /var/www/modules/backend/routes.php /var/routes4.php \
     && chown -R www-data:www-data /var/www \
     && find . -type d \( -path './plugins' -or  -path './storage' -or  -path './themes' -or  -path './plugins/*' -or  -path './storage/*' -or  -path './themes/*'  -or  -path './plugins/*/*' -or  -path './storage/*/*' -or  -path './themes/*/*' \) -exec chmod g+ws {} \;
-
-RUN cp /var/www/modules/backend/routes.php /var/routes5.php
 
 EXPOSE 443 80
 
