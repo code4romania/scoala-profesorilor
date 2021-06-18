@@ -200,11 +200,11 @@ return [
         'ses_key_comment' => 'Voer SES API key in',
         'ses_secret' => 'SES secret',
         'ses_secret_comment' => 'Voer SES API secret key in',
+        'ses_region' => 'SES regio',
+        'ses_region_comment' => 'Voer SES regio in (bijv. us-east-1)',
         'sparkpost' => 'SparkPost',
         'sparkpost_secret' => 'SparkPost secret',
         'sparkpost_secret_comment' => 'Voer SparkPost API secret key in',
-        'ses_region' => 'SES regio',
-        'ses_region_comment' => 'Voer SES regio (bijv. us-east-1) in',
         'drivers_hint_header' => 'Stuurprogramma\'s niet geïnstalleerd',
         'drivers_hint_content' => 'Om deze e-mail methode te gebruiken moet de plugin ":plugin" zijn geïnstalleerd.',
     ],
@@ -252,7 +252,7 @@ return [
     'mail_brand' => [
         'menu_label' => 'E-mail branding',
         'menu_description' => 'Aanpassen van kleuren en weergave van e-mailsjablonen.',
-        'page_title' => 'Aanpaasen e-mailweergave',
+        'page_title' => 'Aanpassen e-mailweergave',
         'sample_template' => [
             'heading' => 'Kop',
             'paragraph' => 'Dit is een paragraaf gevuld met Lorem Ipsum en een link. Cumque dicta <a>doloremque eaque</a>, enim error laboriosam pariatur possimus tenetur veritatis voluptas.',

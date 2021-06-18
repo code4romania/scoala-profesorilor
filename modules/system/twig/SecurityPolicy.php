@@ -18,10 +18,22 @@ final class SecurityPolicy implements SecurityPolicyInterface
      * @var array List of forbidden methods.
      */
     protected $blockedMethods = [
+        // Prevent manipulating Twig itself
+        'getTwig',
+
+        // Prevent dynamic methods and props
         'addDynamicMethod',
         'addDynamicProperty',
+
+        // Prevent binding event logic
         'bindEvent',
         'bindEventOnce',
+
+        // Eloquent & Halcyon data modification
+        'insert',
+        'update',
+        'delete',
+        'write',
     ];
 
     /**

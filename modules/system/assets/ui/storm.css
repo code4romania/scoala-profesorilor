@@ -63,6 +63,14 @@ input[type="checkbox"],
 input[type="radio"] {box-sizing:border-box;padding:0}
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {height:auto}
+input[type="number"]:focus::-webkit-input-placeholder {margin-right:20px}
+input[type="number"]:focus::-moz-placeholder {margin-right:20px}
+input[type="number"]:focus:-ms-input-placeholder {margin-right:20px}
+input[type="number"]:focus::placeholder {margin-right:20px}
+input[type="number"]:hover::-webkit-input-placeholder {margin-right:20px}
+input[type="number"]:hover::-moz-placeholder {margin-right:20px}
+input[type="number"]:hover:-ms-input-placeholder {margin-right:20px}
+input[type="number"]:hover::placeholder {margin-right:20px}
 input[type="search"] {-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {-webkit-appearance:none}
@@ -4088,7 +4096,7 @@ html.cssanimations .cursor-loading-indicator.hide {display:none}
 .custom-checkbox input[type=radio],
 .custom-radio input[type=radio],
 .custom-checkbox input[type=checkbox],
-.custom-radio input[type=checkbox] {display:none}
+.custom-radio input[type=checkbox] {position:absolute;overflow:hidden;clip:rect(0 0 0 0);width:1px;margin:-1px;padding:0;border:0;opacity:0}
 .custom-checkbox label,
 .custom-radio label {display:inline-block;cursor:pointer;position:relative;padding-left:25px;margin-right:15px;margin-left:-20px;font-size:13px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
 .custom-checkbox label:before,
