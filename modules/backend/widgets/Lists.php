@@ -64,6 +64,12 @@ class Lists extends WidgetBase
     public $recordsPerPage;
 
     /**
+     * @var array Options for number of items per page.
+     */
+    public $perPageOptions;
+
+
+    /**
      * @var bool Shows the sorting options for each column.
      */
     public $showSorting = true;
@@ -199,6 +205,7 @@ class Lists extends WidgetBase
             'noRecordsMessage',
             'showPageNumbers',
             'recordsPerPage',
+            'perPageOptions',
             'showSorting',
             'defaultSort',
             'showCheckboxes',
@@ -1029,7 +1036,8 @@ class Lists extends WidgetBase
                 $value = $record->attributes[$columnName];
             // Load the value from the relationship counter if useRelationCount is specified
             } elseif ($column->relation && @$column->config['useRelationCount']) {
-                $value = $record->{"{$column->relation}_count"};
+                $countAttributeName = \Str::snake($column->relation);
+                $value = $record->{"{$countAttributeName}_count"};
             } else {
                 $value = $record->{$columnName};
             }
@@ -1689,7 +1697,7 @@ class Lists extends WidgetBase
      */
     protected function getSetupPerPageOptions()
     {
-        $perPageOptions = [20, 40, 80, 100, 120];
+        $perPageOptions = is_array($this->perPageOptions) ? $this->perPageOptions : [20, 40, 80, 100, 120];
         if (!in_array($this->recordsPerPage, $perPageOptions)) {
             $perPageOptions[] = $this->recordsPerPage;
         }

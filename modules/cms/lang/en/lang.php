@@ -100,7 +100,6 @@ return [
         'is_enabled' => 'Enable maintenance mode',
         'is_enabled_comment' => 'Select the page to show when maintenance mode is activated.',
         'hint' => 'Maintenance mode will display the maintenance page to visitors who are not signed in to the back-end area.',
-        'status_code' => 'Status Code'
     ],
     'page' => [
         'not_found_name' => "The page ':name' is not found",

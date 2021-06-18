@@ -16,7 +16,3 @@ fields:
     cms_page:
         type: dropdown
         cssClass: checkbox-align
-
-    status_code:
-        label: cms::lang.maintenance.status_code
-        type: number

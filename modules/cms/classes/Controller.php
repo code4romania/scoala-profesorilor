@@ -145,7 +145,7 @@ class Controller
             $url = Request::path();
         }
 
-        if (empty($url)) {
+        if (trim($url) === '') {
             $url = '/';
         }
 
@@ -166,12 +166,7 @@ class Controller
             !BackendAuth::getUser()
         ) {
             if (!Request::ajax()) {
-                if(MaintenanceSetting::get('status_code') == null) {
-                    $this->setStatusCode(503);
-                }
-                else {
-                    $this->setStatusCode(MaintenanceSetting::get('status_code'));
-                }
+                $this->setStatusCode(503);
             }
 
             $page = Page::loadCached($this->theme, MaintenanceSetting::get('cms_page'));
