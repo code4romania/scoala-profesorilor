@@ -1,6 +1,8 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 MAINTAINER genuineq
+
+ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
     && apt-get install -y locales \
@@ -12,12 +14,14 @@ ENV LC_ALL en_US.UTF-8
 
 # Install system dependencies
 RUN apt-get update \
-    && apt-get install -y nginx vim curl cron zip unzip git software-properties-common supervisor jq mysql-client-core-5.7 libjpeg-dev libpng-dev libpq-dev libsqlite3-dev libwebp-dev libzip-dev
+    && apt-get install -y nginx vim curl cron zip unzip git software-properties-common supervisor \
+                          jq mysql-client-core-5.7 libjpeg-dev libpng-dev libpq-dev libsqlite3-dev \
+                          libwebp-dev libzip-dev
 
-RUN apt-get update \
-    && add-apt-repository -y ppa:ondrej/php \
-    && apt-get update \
-    && apt-get install -y php7.3-fpm php7.3-ctype php7.3-curl php7.3-xml php7.3-fileinfo php7.3-gd \
+RUN apt-get update
+RUN add-apt-repository ppa:ondrej/php
+RUN apt-get update
+RUN apt-get install -y php7.3-fpm php7.3-ctype php7.3-curl php7.3-xml php7.3-fileinfo php7.3-gd \
                           php7.3-json php7.3-mbstring php7.3-mysql php7.3-sqlite3 php7.3-zip
 
 # Get latest Composer
