@@ -166,7 +166,12 @@ class Controller
             !BackendAuth::getUser()
         ) {
             if (!Request::ajax()) {
-                $this->setStatusCode(503);
+                if(MaintenanceSetting::get('status_code') == null) {
+                    $this->setStatusCode(503);
+                }
+                else {
+                    $this->setStatusCode(MaintenanceSetting::get('status_code'));
+                }
             }
 
             $page = Page::loadCached($this->theme, MaintenanceSetting::get('cms_page'));
