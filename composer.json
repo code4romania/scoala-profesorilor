@@ -1,41 +1,20 @@
 {
-    "name": "october/october",
-    "description": "October CMS",
-    "homepage": "https://octobercms.com",
+    "name": "civiclabs/scoalapofesorilor",
+    "description": "Scoala Pofesorilor",
+    "homepage": "https://scoalaprofesorilor.ro/",
     "type": "project",
     "keywords": ["october", "cms", "octobercms", "laravel"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Alexey Bobkov",
-            "email": "aleksey.bobkov@gmail.com",
-            "role": "Co-founder"
-        },
-        {
-            "name": "Samuel Georges",
-            "email": "daftspunky@gmail.com",
-            "role": "Co-founder"
-        },
-        {
-            "name": "Luke Towers",
-            "email": "octobercms@luketowers.ca",
-            "homepage": "https://luketowers.ca",
-            "role": "Maintainer"
+            "name": "Genuineq",
+            "email": "office@genuineq.com",
+            "role": "Developpent"
         }
     ],
-    "support": {
-        "paid": "https://octobercms.com/premium-support",
-        "issues": "https://github.com/octobercms/october/issues",
-        "forum": "https://octobercms.com/forum/",
-        "docs": "https://octobercms.com/docs/",
-        "source": "https://github.com/octobercms/october"
-    },
     "require": {
         "php": ">=7.2",
-        "october/rain": "1.1.*",
-        "october/system": "1.1.*",
-        "october/backend": "1.1.*",
-        "october/cms": "1.1.*",
+        "october/rain": "1.1.8",
         "laravel/framework": "~6.0",
         "wikimedia/composer-merge-plugin": "~2.0.1"
     },
@@ -74,10 +53,7 @@
         ]
     },
     "config": {
-        "preferred-install": "dist",
-        "platform": {
-            "php": "7.2"
-        }
+        "preferred-install": "dist"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
