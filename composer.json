@@ -15,9 +15,6 @@
     "require": {
         "php": ">=7.2",
         "october/rain": "1.1.8",
-        "october/system": "1.1.6",
-        "october/backend": "1.1.6",
-        "october/cms": "1.1.6",
         "laravel/framework": "~6.0",
         "wikimedia/composer-merge-plugin": "~2.0.1"
     },
