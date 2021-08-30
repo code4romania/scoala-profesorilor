@@ -19,7 +19,7 @@ description = "Displays an appraisal details"
 
                     <div class="form-group">
                         <label for="appraisal_objectives">{{ 'teacher_appraisal.appraisal_view.objectives'|_ }}</label>
-                        <textarea name="objectives" type="text" id="appraisal_objectives" class="md-textarea form-control" rows="5" {% if 'new' != appraisal.status %} readonly {% endif %}>{{ appraisal.objectives }}</textarea>
+                        <textarea name="objectives" type="text" id="appraisal_objectives" class="md-textarea form-control" rows="5" {% if 'new' != appraisal.status %} readonly {% endif %}>{{ appraisal.objectives|raw }}</textarea>
                         <div class="small text-danger" data-validate-for="appraisal_objectives"></div>
                     </div>
 
@@ -31,7 +31,7 @@ description = "Displays an appraisal details"
                                     <input name="first_skill" type="text" id="first_skill" class="form-control" value="{{ appraisal.first_skill_name }}" readonly>
                                     <label for="first_skill">{{ 'teacher_appraisal.appraisal_view.skill'|_ }}</label>
                                     <div class="small text-danger" data-validate-for="first_skill"></div>
-                                    <small id="first_skill_help" class="form-text text-muted">{{ appraisal.first_skill_description }}</small>
+                                    <small id="first_skill_help" class="form-text text-muted">{{ appraisal.first_skill_description|raw }}</small>
                                 </div>
                             </div>
 
@@ -75,7 +75,7 @@ description = "Displays an appraisal details"
                                     <input name="second_skill" type="text" id="second_skill" class="form-control" value="{{ appraisal.second_skill_name }}" readonly>
                                     <label for="second_skill">{{ 'teacher_appraisal.appraisal_view.skill'|_ }}</label>
                                     <div class="small text-danger" data-validate-for="second_skill"></div>
-                                    <small id="second_skill_help" class="form-text text-muted">{{ appraisal.second_skill_description }}</small>
+                                    <small id="second_skill_help" class="form-text text-muted">{{ appraisal.second_skill_description|raw }}</small>
                                 </div>
                             </div>
 
@@ -119,7 +119,7 @@ description = "Displays an appraisal details"
                                     <input name="third_skill" type="text" id="third_skill" class="form-control" value="{{ appraisal.third_skill_name }}" readonly>
                                     <label for="third_skill">{{ 'teacher_appraisal.appraisal_view.skill'|_ }}</label>
                                     <div class="small text-danger" data-validate-for="third_skill"></div>
-                                    <small id="third_skill_help" class="form-text text-muted">{{ appraisal.third_skill_description }}</small>
+                                    <small id="third_skill_help" class="form-text text-muted">{{ appraisal.third_skill_description|raw }}</small>
                                 </div>
                             </div>
 

@@ -171,7 +171,7 @@ description = "Displays the teacher pofile forms"
                 <form method="POST" data-request="onTeacherProfileDescriptionUpdate" data-request-validate data-request-flash>
                     <div class="form-group">
                         <div class="md-form">
-                            <textarea name="description" type="text" id="teacher_description" class="md-textarea form-control" rows="3">{{ profile.description }}</textarea>
+                            <textarea name="description" type="text" id="teacher_description" class="md-textarea form-control" rows="3">{{ profile.description|raw }}</textarea>
                             <label for="teacher_description">{{ 'teacher.profile.form.description.description'|_ }}</label>
                             <div class="small text-danger" data-validate-for="description"></div>
                         </div>

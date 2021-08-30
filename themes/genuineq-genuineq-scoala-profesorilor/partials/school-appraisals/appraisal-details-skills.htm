@@ -8,7 +8,7 @@ description = "Displays an appraisal details skills"
             <input name="first_skill" type="text" id="first_skill" class="form-control" value="{{ appraisal.first_skill_name }}" {% if 'objectives-approved' != appraisal.status %} readonly {% endif %}>
             <label for="first_skill">{{ 'school_appraisal.appraisal_view.skill'|_ }}</label>
             <div class="small text-danger" data-validate-for="first_skill"></div>
-            <small id="first_skill_help" class="form-text text-muted">{{ appraisal.first_skill_description }}</small>
+            <small id="first_skill_help" class="form-text text-muted">{{ appraisal.first_skill_description|raw }}</small>
         </div>
     </div>
 
@@ -48,7 +48,7 @@ description = "Displays an appraisal details skills"
                 <input name="first_skill_grade" type="number" id="first_skill_grade" class="form-control" value="{{ appraisal.first_skill_grade }}" min="1" {% if 'percentage' == appraisal.evaluation_type_1 %} max="100" {% else %} max='10' {% endif %} {% if 'evaluation-opened' != appraisal.status %} readonly {% endif %}>
                 <label for="first_skill_grade">{{ 'school_appraisal.appraisal_view.grade'|_ }}</label>
                 <div class="small text-danger" data-validate-for="first_skill_grade"></div>
-                <small id="first_skill_grade_help" class="form-text text-muted">{{ 'school_appraisal.appraisal_view.grade_help_text' }}</small>
+                <small id="first_skill_grade_help" class="form-text text-muted">{{ 'school_appraisal.appraisal_view.grade_help_text'|raw }}</small>
             </div>
         </div>
     </div>
@@ -59,7 +59,7 @@ description = "Displays an appraisal details skills"
             <input name="second_skill" type="text" id="second_skill" class="form-control" value="{{ appraisal.second_skill_name }}" {% if 'objectives-approved' != appraisal.status %} readonly {% endif %}>
             <label for="second_skill">{{ 'school_appraisal.appraisal_view.skill'|_ }}</label>
             <div class="small text-danger" data-validate-for="second_skill"></div>
-            <small id="second_skill_help" class="form-text text-muted">{{ appraisal.second_skill_description }}</small>
+            <small id="second_skill_help" class="form-text text-muted">{{ appraisal.second_skill_description|raw }}</small>
         </div>
     </div>
 
@@ -99,7 +99,7 @@ description = "Displays an appraisal details skills"
                 <input name="second_skill_grade" type="number" id="second_skill_grade" class="form-control" value="{{ appraisal.second_skill_grade }}" min="1" {% if 'percentage' == appraisal.evaluation_type_2 %} max="100" {% else %} max='10' {% endif %} {% if 'evaluation-opened' != appraisal.status %} readonly {% endif %}>
                 <label for="second_skill_grade">{{ 'school_appraisal.appraisal_view.grade'|_ }}</label>
                 <div class="small text-danger" data-validate-for="second_skill_grade"></div>
-                <small id="second_skill_grade_help" class="form-text text-muted">{{ 'school_appraisal.appraisal_view.grade_help_text' }}</small>
+                <small id="second_skill_grade_help" class="form-text text-muted">{{ 'school_appraisal.appraisal_view.grade_help_text'|raw }}</small>
             </div>
         </div>
     </div>
@@ -110,7 +110,7 @@ description = "Displays an appraisal details skills"
             <input name="third_skill" type="text" id="third_skill" class="form-control" value="{{ appraisal.third_skill_name }}" {% if 'objectives-approved' != appraisal.status %} readonly {% endif %}>
             <label for="third_skill">{{ 'school_appraisal.appraisal_view.skill'|_ }}</label>
             <div class="small text-danger" data-validate-for="third_skill"></div>
-            <small id="third_skill_help" class="form-text text-muted">{{ appraisal.third_skill_description }}</small>
+            <small id="third_skill_help" class="form-text text-muted">{{ appraisal.third_skill_description|raw }}</small>
         </div>
     </div>
 
@@ -150,7 +150,7 @@ description = "Displays an appraisal details skills"
                 <input name="third_skill_grade" type="number" id="third_skill_grade" class="form-control" value="{{ appraisal.third_skill_grade }}" min="1" {% if 'percentage' == appraisal.evaluation_type_3 %} max="100" {% else %} max='10' {% endif %} {% if 'evaluation-opened' != appraisal.status %} readonly {% endif %}>
                 <label for="third_skill_grade">{{ 'school_appraisal.appraisal_view.grade'|_ }}</label>
                 <div class="small text-danger" data-validate-for="third_skill_grade"></div>
-                <small id="third_skill_grade_help" class="form-text text-muted">{{ 'school_appraisal.appraisal_view.grade_help_text' }}</small>
+                <small id="third_skill_grade_help" class="form-text text-muted">{{ 'school_appraisal.appraisal_view.grade_help_text'|raw }}</small>
             </div>
         </div>
     </div>
