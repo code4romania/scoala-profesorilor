@@ -41,7 +41,7 @@ description = "Displays the teacher profile forms"
 
                     <div class="form-group">
                         <div class="md-form">
-                            <input name="address_id" type="text" id="school_teacher_address_id" class="form-control" value="{{ schoolTeacherProfileAddress }}">
+                            <input name="address_id" type="text" id="school_teacher_address_id" class="form-control" value="{{ schoolTeacherProfileAddress|raw }}">
                             <label for="school_teacher_address_id">{{ 'teacher.profile.form.profile.address_id'|_ }}</label>
                             <div class="small text-danger" data-validate-for="address_id"></div>
                         </div>
@@ -172,7 +172,7 @@ description = "Displays the teacher profile forms"
                 <form method="POST" data-request="onSchoolTeacherProfileDescriptionUpdate" data-request-data="teacherId: '{{ schoolTeacherProfile.id }}'" data-request-validate data-request-flash>
                     <div class="form-group">
                         <div class="md-form">
-                            <textarea name="description" type="text" id="school_teacher_description" class="md-textarea form-control" rows="3">{{ schoolTeacherProfile.description }}</textarea>
+                            <textarea name="description" type="text" id="school_teacher_description" class="md-textarea form-control" rows="3">{{ schoolTeacherProfile.description|raw }}</textarea>
                             <label for="school_teacher_description">{{ 'teacher.profile.form.description.description'|_ }}</label>
                             <div class="small text-danger" data-validate-for="description"></div>
                         </div>

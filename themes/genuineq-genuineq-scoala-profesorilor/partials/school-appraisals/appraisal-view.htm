@@ -29,7 +29,7 @@ description = "Displays an appraisal details"
                             <input name="first_skill" type="text" id="first_skill" class="form-control" value="{{ appraisal.first_skill_name }}" readonly>
                             <label for="first_skill">{{ 'teacher_appraisal.appraisal_view.grade'|_ }}</label>
                             <div class="small text-danger" data-validate-for="first_skill"></div>
-                            <small id="first_skill_help" class="form-text text-muted">{{ appraisal.first_skill_description }}</small>
+                            <small id="first_skill_help" class="form-text text-muted">{{ appraisal.first_skill_description|raw }}</small>
                         </div>
                     </div>
 
@@ -61,7 +61,7 @@ description = "Displays an appraisal details"
                                 <input name="first_skill_grade" type="text" id="first_skill_grade" class="form-control" value="{{ appraisal.first_skill_grade }}" readonly>
                                 <label for="first_skill_grade">{{ 'teacher_appraisal.appraisal_view.grade'|_ }}</label>
                                 <div class="small text-danger" data-validate-for="first_skill_grade"></div>
-                                <small id="first_skill_grade_help" class="form-text text-muted">{{ 'teacher_appraisal.appraisal_view.grade_help_text' }}</small>
+                                <small id="first_skill_grade_help" class="form-text text-muted">{{ 'teacher_appraisal.appraisal_view.grade_help_text'|raw }}</small>
                             </div>
                         </div>
                     </div>
@@ -74,7 +74,7 @@ description = "Displays an appraisal details"
                             <input name="second_skill" type="text" id="second_skill" class="form-control" value="{{ appraisal.second_skill_name }}" readonly>
                             <label for="second_skill">{{ 'teacher_appraisal.appraisal_view.grade'|_ }}</label>
                             <div class="small text-danger" data-validate-for="second_skill"></div>
-                            <small id="second_skill_help" class="form-text text-muted">{{ appraisal.second_skill_description }}</small>
+                            <small id="second_skill_help" class="form-text text-muted">{{ appraisal.second_skill_description|raw }}</small>
                         </div>
                     </div>
 
@@ -106,7 +106,7 @@ description = "Displays an appraisal details"
                                 <input name="second_skill_grade" type="text" id="second_skill_grade" class="form-control" value="{{ appraisal.second_skill_grade }}" readonly>
                                 <label for="second_skill_grade">{{ 'teacher_appraisal.appraisal_view.grade'|_ }}</label>
                                 <div class="small text-danger" data-validate-for="second_skill_grade"></div>
-                                <small id="second_skill_grade_help" class="form-text text-muted">{{ 'teacher_appraisal.appraisal_view.grade_help_text' }}</small>
+                                <small id="second_skill_grade_help" class="form-text text-muted">{{ 'teacher_appraisal.appraisal_view.grade_help_text'|raw }}</small>
                             </div>
                         </div>
                     </div>
@@ -119,7 +119,7 @@ description = "Displays an appraisal details"
                             <input name="third_skill" type="text" id="third_skill" class="form-control" value="{{ appraisal.third_skill_name }}" readonly>
                             <label for="third_skill">{{ 'teacher_appraisal.appraisal_view.grade'|_ }}</label>
                             <div class="small text-danger" data-validate-for="third_skill"></div>
-                            <small id="third_skill_help" class="form-text text-muted">{{ appraisal.third_skill_description }}</small>
+                            <small id="third_skill_help" class="form-text text-muted">{{ appraisal.third_skill_description|raw }}</small>
                         </div>
                     </div>
 
@@ -151,7 +151,7 @@ description = "Displays an appraisal details"
                                 <input name="third_skill_grade" type="text" id="third_skill_grade" class="form-control" value="{{ appraisal.third_skill_grade }}" readonly>
                                 <label for="third_skill_grade">{{ 'teacher_appraisal.appraisal_view.grade'|_ }}</label>
                                 <div class="small text-danger" data-validate-for="third_skill_grade"></div>
-                                <small id="third_skill_grade_help" class="form-text text-muted">{{ 'teacher_appraisal.appraisal_view.grade_help_text' }}</small>
+                                <small id="third_skill_grade_help" class="form-text text-muted">{{ 'teacher_appraisal.appraisal_view.grade_help_text'|raw }}</small>
                             </div>
                         </div>
                     </div>

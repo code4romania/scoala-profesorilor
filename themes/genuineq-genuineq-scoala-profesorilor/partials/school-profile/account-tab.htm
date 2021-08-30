@@ -77,7 +77,7 @@ description = "Displays the tab containing all the school account data"
 
                     <div class="form-group">
                         <div class="md-form">
-                            <input name="address_id" type="text" id="school_address_id" class="form-control" value="{{ profileAddress }}">
+                            <input name="address_id" type="text" id="school_address_id" class="form-control" value="{{ profileAddress|raw }}">
                             <label for="school_address_id">{{ 'school.profile.form.profile.address_id'|_ }}</label>
                             <div class="small text-danger" data-validate-for="address_id"></div>
                         </div>
@@ -112,7 +112,7 @@ description = "Displays the tab containing all the school account data"
                 <form method="POST" data-request="onSchoolProfileDetailedAddreddUpdate" data-request-validate data-request-flash>
                     <div class="form-group">
                         <div class="md-form">
-                            <textarea name="detailed_address" type="text" id="school_detailed_address" class="md-textarea form-control" rows="3">{{ profile.detailed_address }}</textarea>
+                            <textarea name="detailed_address" type="text" id="school_detailed_address" class="md-textarea form-control" rows="3">{{ profile.detailed_address|raw }}</textarea>
                             <label for="school_detailed_address">{{ 'school.profile.form.address.detailed_address'|_ }}</label>
                             <div class="small text-danger" data-validate-for="detailed_address"></div>
                         </div>
@@ -146,7 +146,7 @@ description = "Displays the tab containing all the school account data"
         <div class="row pt-5 pt-md-0 pt-lg-0 pt-lg-0">
             <div class="col-12 bg-white rounded p-3">
                 <h5 class="mb-3 font-weight-bold">{{ 'school.profile.form.photo.title'|_ }}</h5>
-                <small>{{ 'school.profile.form.photo.description'|_ }}</small>
+                <small>{{ ('school.profile.form.photo.description'|_)|raw }}</small>
 
                 <div class="row">
                     <div class="col-12">
@@ -234,7 +234,7 @@ description = "Displays the tab containing all the school account data"
                 <form method="POST" data-request="onSchoolProfileDescriptionUpdate" data-request-validate data-request-flash>
                     <div class="form-group">
                         <div class="md-form">
-                            <textarea name="description" type="text" id="school_description" class="md-textarea form-control" rows="3">{{ profile.description }}</textarea>
+                            <textarea name="description" type="text" id="school_description" class="md-textarea form-control" rows="3">{{ profile.description|raw }}</textarea>
                             <label for="school_description">{{ 'school.profile.form.description.description'|_ }}</label>
                             <div class="small text-danger" data-validate-for="description"></div>
                         </div>

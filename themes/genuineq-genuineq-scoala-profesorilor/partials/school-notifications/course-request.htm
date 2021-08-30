@@ -9,7 +9,7 @@ description = "Displays a course request notifications"
     </div>
 
     <div class="col-12">
-        Profesorul {{ notification.data['teacher_name'] }} a solicitat decontarea cursului {{ notification.data['course_name'] }} cu suma in valoare de {{ notification.data['school_covered_costs'] }} Ron iar aportul personal este in valoare de {{ notification.data['teacher_covered_costs'] }} Ron.
+        Profesorul {{ notification.data['teacher_name'] }} a solicitat decontarea cursului {{ notification.data['course_name'] }} cu suma în valoare de {{ notification.data['school_covered_costs'] }} {{ 'general.coin'|_ }} iar aportul personal este în valoare de {{ notification.data['teacher_covered_costs'] }} {{ 'general.coin'|_ }}.
     </div>
 
     <div class="col-6">

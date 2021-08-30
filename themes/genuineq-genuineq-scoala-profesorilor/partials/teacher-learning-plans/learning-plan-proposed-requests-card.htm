@@ -31,7 +31,7 @@ description = "Displays a request course as a card"
             <h5 class="card-title font-weight-bold">{{ str_limit(course.name, 90) }}</h5>
         </div>
 
-        <p class="card-text text-truncate">{{ course.description }}</p>
+        <p class="card-text text-truncate">{{ course.description|raw }}</p>
 
         <small class="card-text align-middle"><img class="mr-1" src="{{ 'assets/img/svg/calendar.svg'|theme }}" alt=""> {{ course.startDate() }} <span class="mx-1">&ndash;</span> {{ course.endDate() }}</small><br>
         <small class="card-text align-middle d-block text-truncate">{{ 'course.domain'|_ }}<span class="mr-1">&colon;</span>
