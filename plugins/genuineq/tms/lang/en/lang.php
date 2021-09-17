@@ -67,7 +67,7 @@
 
         'frontend' => [
             'all_courses' => 'Toate categoriile',
-            'all_accreditations' => 'Toate acreditarile',
+            'all_accreditations' => 'Toate acreditările',
             'accredited' => 'Acreditat',
             'not_accredited' => 'Neacreditat',
             'name_asc' => 'Nume Ascendent',
@@ -141,8 +141,8 @@
         'backend-menu' => 'Teachers',
 
         'frontend' => [
-            'all_seniority_levels' => 'Toate senioritatile',
-            'all_school_levels' => 'Toate nivelele școlare',
+            'all_seniority_levels' => 'Toate senioritățile',
+            'all_school_levels' => 'Toate nivelurile școlare',
             'all_contract_types' => 'Toate tipurile contractuale',
             'name_asc' => 'Nume Ascendent',
             'name_desc' => 'Nume Descendent',
