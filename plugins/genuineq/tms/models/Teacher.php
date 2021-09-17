@@ -412,7 +412,7 @@ class Teacher extends Model
     {
         /** Extract the list of seniority levels. */
         foreach (SeniorityLevel::all() as $seniorityLevel) {
-            $seniorityLevels[$seniorityLevel->name] = $seniorityLevel->id;
+            $seniorityLevels[$seniorityLevel->diacritic] = $seniorityLevel->id;
         }
 
         $seniorityLevels = array_reverse($seniorityLevels);
@@ -428,7 +428,7 @@ class Teacher extends Model
     {
         /** Extract the list of school levels. */
         foreach (SchoolLevel::all() as $schoolLevel) {
-            $schoolLevels[$schoolLevel->name] = $schoolLevel->id;
+            $schoolLevels[$schoolLevel->diacritic] = $schoolLevel->id;
         }
 
         $schoolLevels = array_reverse($schoolLevels);
@@ -444,7 +444,7 @@ class Teacher extends Model
     {
         /** Extract the list of contract types. */
         foreach (ContractType::all() as $contractType) {
-            $contractTypes[$contractType->name] = $contractType->id;
+            $contractTypes[$contractType->diacritic] = $contractType->id;
         }
 
         $contractTypes = array_reverse($contractTypes);
