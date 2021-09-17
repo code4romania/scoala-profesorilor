@@ -323,11 +323,11 @@ class SchoolDashboard extends ComponentBase
         ];
 
         $senioritiesLabels = [
-            1 => SeniorityLevel::find(1)->name,
-            2 => SeniorityLevel::find(2)->name,
-            3 => SeniorityLevel::find(3)->name,
-            4 => SeniorityLevel::find(4)->name,
-            5 => SeniorityLevel::find(5)->name,
+            1 => SeniorityLevel::find(1)->diacritic,
+            2 => SeniorityLevel::find(2)->diacritic,
+            3 => SeniorityLevel::find(3)->diacritic,
+            4 => SeniorityLevel::find(4)->diacritic,
+            5 => SeniorityLevel::find(5)->diacritic,
         ];
 
         /** Parse all teachers and count seniorities. */

@@ -581,7 +581,7 @@
             'frontend' => [
                 'budget_total' => 'Buget total RON',
                 'budget_spent' => 'Buget cheltuit RON',
-                'teachers_not_financed' => 'Profesori nefinantati',
+                'teachers_not_financed' => 'Profesori nefinanțați',
                 'teachers_financed' => 'Profesori finanțați',
                 'accredited_courses' => 'Cursuri acreditate',
                 'noncredited_courses' => 'Cursuri neacreditate',
