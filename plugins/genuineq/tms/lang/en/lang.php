@@ -67,7 +67,7 @@
 
         'frontend' => [
             'all_courses' => 'Toate categoriile',
-            'all_accreditations' => 'Toate acreditarile',
+            'all_accreditations' => 'Toate acreditările',
             'accredited' => 'Acreditat',
             'not_accredited' => 'Neacreditat',
             'name_asc' => 'Nume Ascendent',
@@ -141,8 +141,8 @@
         'backend-menu' => 'Teachers',
 
         'frontend' => [
-            'all_seniority_levels' => 'Toate senioritatile',
-            'all_school_levels' => 'Toate nivelele școlare',
+            'all_seniority_levels' => 'Toate senioritățile',
+            'all_school_levels' => 'Toate nivelurile școlare',
             'all_contract_types' => 'Toate tipurile contractuale',
             'name_asc' => 'Nume Ascendent',
             'name_desc' => 'Nume Descendent',
@@ -482,8 +482,8 @@
                 'description_update_successful' => 'Descrierea a fost actualizată cu succes',
                 'description_update_failed' => 'Actualizarea descrierii a eșuat',
                 'login_required' => 'Trebuie să fiți autentificat',
-                'avatar_update_successful' => 'Poză de profil a fost actualizată cu succes',
-                'avatar_update_failed' => 'Actualizarea pozei de profil a eșuat',
+                'avatar_update_successful' => 'Imaginea de profil a fost actualizată cu succes',
+                'avatar_update_failed' => 'Actualizarea imaginii de profil a eșuat',
                 'email_update_successful' => 'Adresa de email a fost actualizată cu succes',
                 'password_update_successful' => 'Parolă a fost actualizată cu succes',
                 'teachers_import_successful_1' => ' profesori au fost adăugați cu succes și pentru ',
@@ -581,7 +581,7 @@
             'frontend' => [
                 'budget_total' => 'Buget total RON',
                 'budget_spent' => 'Buget cheltuit RON',
-                'teachers_not_financed' => 'Profesori nefinantati',
+                'teachers_not_financed' => 'Profesori nefinanțați',
                 'teachers_financed' => 'Profesori finanțați',
                 'accredited_courses' => 'Cursuri acreditate',
                 'noncredited_courses' => 'Cursuri neacreditate',

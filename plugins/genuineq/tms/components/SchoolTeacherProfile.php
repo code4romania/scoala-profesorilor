@@ -780,7 +780,7 @@ class SchoolTeacherProfile extends ComponentBase
         /* Extract all the seniority levels and create the source array. */
         $value = 0;
         $seniorityLevels = [];
-        foreach (SeniorityLevel::all()->pluck('name') as $seniorityLevel) {
+        foreach (SeniorityLevel::all()->pluck('diacritic') as $seniorityLevel) {
             $seniorityLevels[$seniorityLevel] = $value++;
         }
         $this->page['schoolTeacherSeniorityLevels'] = json_encode($seniorityLevels);
@@ -788,7 +788,7 @@ class SchoolTeacherProfile extends ComponentBase
         /* Extract all the school levels and create the source array. */
         $value = 0;
         $schoolLevels = [];
-        foreach (SchoolLevel::all()->pluck('name') as $schoolLevel) {
+        foreach (SchoolLevel::all()->pluck('diacritic') as $schoolLevel) {
             $schoolLevels[$schoolLevel] = $value++;
         }
         $this->page['schoolTeacherSchoolLevels'] = json_encode($schoolLevels);
@@ -796,7 +796,7 @@ class SchoolTeacherProfile extends ComponentBase
         /* Extract all the contract types and create the source array. */
         $value = 0;
         $contractTypes = [];
-        foreach (ContractType::all()->pluck('name') as $contractType) {
+        foreach (ContractType::all()->pluck('diacritic') as $contractType) {
             $contractTypes[$contractType] = $value++;
         }
         $this->page['schoolTeacherContractTypes'] = json_encode($contractTypes);
@@ -804,7 +804,7 @@ class SchoolTeacherProfile extends ComponentBase
         /* Extract all the grades and create the source array. */
         $value = 0;
         $grades = [];
-        foreach (Grade::all()->pluck('name') as $grade) {
+        foreach (Grade::all()->pluck('diacritic') as $grade) {
             $grades[$grade] = $value++;
         }
         $this->page['schoolTeacherGrades'] = json_encode($grades);
@@ -812,7 +812,7 @@ class SchoolTeacherProfile extends ComponentBase
         /* Extract all the specializations and create the source array. */
         $value = 0;
         $specializations = [];
-        foreach (Specialization::all()->pluck('name') as $specialization) {
+        foreach (Specialization::all()->pluck('diacritic') as $specialization) {
             $specializations[$specialization] = $value++;
         }
         $this->page['schoolTeacherSpecializations'] = json_encode($specializations);
