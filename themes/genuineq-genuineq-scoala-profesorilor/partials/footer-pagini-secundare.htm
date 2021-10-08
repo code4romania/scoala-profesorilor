@@ -1,0 +1,124 @@
+description = "4 Column Footer"
+
+[viewBag]
+
+[staticMenu]
+code = "footer-menu-column-1"
+
+[staticMenu staticMenu2]
+code = "footer-menu-column-2"
+==
+<!--Footer-->
+<footer class="page-footer bg-primary mt-auto">
+
+    <!--Footer links-->
+    <div class="container text-center text-md-left py-3">
+        <div class="row">
+
+            <!--First column-->
+            <div class="col-lg-3 col-md-6">
+                <a href="{{ url('/') }}">
+                    <img src="{{ 'assets/img/svg/logo-white.svg'|theme }}" height="130" alt="logo">
+                </a>
+            </div>
+            <!--/.First column-->
+
+            <hr class="w-100 clearfix d-sm-none">
+
+            <!--Second column-->
+            <div class="col-lg-3 col-md-6 ml-0">
+                {% if staticMenu.totalItems %}
+                    <!-- Links -->
+                    <ul class="list-unstyled">
+                        {% for menuItem in staticMenu.menuItems %}
+                            <li><a style="font-size: 14px" href="{{ menuItem.url }}">{{ menuItem.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    <!-- Links -->
+                {% endif %}
+            </div>
+            <!--/.Second column-->
+
+            <hr class="w-100 clearfix d-sm-none">
+
+            <!--Third column-->
+            <div class="col-lg-3 col-md-6 mr-0 pr-0">
+                {% if staticMenu2.totalItems %}
+                    <!-- Links -->
+                    <ul class="list-unstyled">
+                        {% for menuItem in staticMenu2.menuItems %}
+                            <li><a style="font-size: 14px" href="{{ menuItem.url }} ">{{ menuItem.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    <!-- Links -->
+                {% endif %}
+            </div>
+            <!--/.Third column-->
+
+            <hr class="w-100 clearfix d-sm-none">
+
+            <!--Fourth column-->
+            <div class="col-lg-3 col-md-6 ml-auto">
+                {% content 'footer-contact-data.htm' %}
+                <ul class="list-unstyled">
+                    <li>
+                        {% for link in linkList.links %}
+                            <a class="mx-1" target="{{ linkList.linkTarget }}" href="{{ link.getLink }}" title="{{ link.getName }}"><i class="{{ link.getIcon }}"></i></a>
+                        {% endfor %}
+                    </li>
+                    <li>
+                        <a href="#" class="btn btn-sm btn-secondary z-depth-0 rounded d-none" type="button">{{ 'footer.call-to-action'|_ }}</a>
+                    </li>
+                </ul>
+            </div>
+            <!--/.Fourth column-->
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 d-flex justify-content-center">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="https://fundatia-vodafone.ro" target="_blank">
+                            <img src="{{ 'footer/vodafone-white.png'|media }}" class="p-1" width="120" alt="Fundația Vodafone România">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 d-flex justify-content-center">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="https://scoalafinlandezasibiu.ro/" target="_blank">
+                            <img src="{{ 'footer/fundatia-didactica.png'|media }}" class="p-1" width="120" alt="Fundația Didactica">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 d-flex justify-content-center">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="https://code4.ro/ro" target="_blank">
+                            <img src="{{ 'footer/logo_code4_tr.png'|media }}" class="p-1" width="120" alt="Code 4 Romania">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+    <!--/.Footer links-->
+
+    <!--Copyright-->
+    <div class="footer-copyright text-center bg-secondary">
+        <div class="container-fluid py-3">
+            © {{ 'now'|date('Y') }} {{ 'footer.copyright'|_ }}
+        </div>
+    </div>
+    <!--/.Copyright-->
+
+</footer>
+<!--/.Footer-->
